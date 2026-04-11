@@ -11,7 +11,7 @@ import (
 
 // ── UsingStringPtr ──
 
-func Test_Cov49_UsingStringPtr_Valid(t *testing.T) {
+func Test_UsingStringPtr_Valid(t *testing.T) {
 	// Arrange
 	s := `"hello"`
 	var result string
@@ -31,7 +31,7 @@ func Test_Cov49_UsingStringPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingStringPtr returns value -- valid string", actual)
 }
 
-func Test_Cov49_UsingStringPtr_Nil(t *testing.T) {
+func Test_UsingStringPtr_Nil(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -46,7 +46,7 @@ func Test_Cov49_UsingStringPtr_Nil(t *testing.T) {
 
 // ── UsingError ──
 
-func Test_Cov49_UsingError_Valid(t *testing.T) {
+func Test_UsingError_Valid(t *testing.T) {
 	// Arrange
 	errJson := errors.New(`"error_msg"`)
 	var result string
@@ -66,7 +66,7 @@ func Test_Cov49_UsingError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingError returns value -- valid json error", actual)
 }
 
-func Test_Cov49_UsingError_Nil(t *testing.T) {
+func Test_UsingError_Nil(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -81,7 +81,7 @@ func Test_Cov49_UsingError_Nil(t *testing.T) {
 
 // ── UsingBytesPointer ──
 
-func Test_Cov49_UsingBytesPointer_Valid(t *testing.T) {
+func Test_UsingBytesPointer_Valid(t *testing.T) {
 	// Arrange
 	bytes := []byte(`"test"`)
 	var result string
@@ -101,7 +101,7 @@ func Test_Cov49_UsingBytesPointer_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingBytesPointer returns value -- valid", actual)
 }
 
-func Test_Cov49_UsingBytesPointer_Nil(t *testing.T) {
+func Test_UsingBytesPointer_Nil(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -114,7 +114,7 @@ func Test_Cov49_UsingBytesPointer_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingBytesPointer returns error -- nil bytes", actual)
 }
 
-func Test_Cov49_UsingBytesPointerMust_Panics(t *testing.T) {
+func Test_UsingBytesPointerMust_Panics(t *testing.T) {
 	// Arrange
 	panicked := false
 
@@ -137,7 +137,7 @@ func Test_Cov49_UsingBytesPointerMust_Panics(t *testing.T) {
 
 // ── UsingBytesIf / UsingBytesPointerIf ──
 
-func Test_Cov49_UsingBytesIf_Skip(t *testing.T) {
+func Test_UsingBytesIf_Skip(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -156,7 +156,7 @@ func Test_Cov49_UsingBytesIf_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingBytesIf skips -- false flag", actual)
 }
 
-func Test_Cov49_UsingBytesIf_Process(t *testing.T) {
+func Test_UsingBytesIf_Process(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -175,7 +175,7 @@ func Test_Cov49_UsingBytesIf_Process(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingBytesIf processes -- true flag", actual)
 }
 
-func Test_Cov49_UsingBytesPointerIf_Skip(t *testing.T) {
+func Test_UsingBytesPointerIf_Skip(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -196,7 +196,7 @@ func Test_Cov49_UsingBytesPointerIf_Skip(t *testing.T) {
 
 // ── UsingSafeBytesMust ──
 
-func Test_Cov49_UsingSafeBytesMust_Empty(t *testing.T) {
+func Test_UsingSafeBytesMust_Empty(t *testing.T) {
 	// Arrange
 	panicked := false
 
@@ -217,7 +217,7 @@ func Test_Cov49_UsingSafeBytesMust_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingSafeBytesMust no panic -- empty bytes", actual)
 }
 
-func Test_Cov49_UsingSafeBytesMust_Valid(t *testing.T) {
+func Test_UsingSafeBytesMust_Valid(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -232,7 +232,7 @@ func Test_Cov49_UsingSafeBytesMust_Valid(t *testing.T) {
 
 // ── UsingStringOption / UsingStringIgnoreEmpty ──
 
-func Test_Cov49_UsingStringOption_IgnoreEmpty(t *testing.T) {
+func Test_UsingStringOption_IgnoreEmpty(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -251,7 +251,7 @@ func Test_Cov49_UsingStringOption_IgnoreEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingStringOption skips -- empty+ignore", actual)
 }
 
-func Test_Cov49_UsingStringIgnoreEmpty_Empty(t *testing.T) {
+func Test_UsingStringIgnoreEmpty_Empty(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -264,7 +264,7 @@ func Test_Cov49_UsingStringIgnoreEmpty_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingStringIgnoreEmpty skips -- empty", actual)
 }
 
-func Test_Cov49_UsingStringIgnoreEmpty_Valid(t *testing.T) {
+func Test_UsingStringIgnoreEmpty_Valid(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -285,7 +285,7 @@ func Test_Cov49_UsingStringIgnoreEmpty_Valid(t *testing.T) {
 
 // ── MapAnyToPointer ──
 
-func Test_Cov49_MapAnyToPointer_Valid(t *testing.T) {
+func Test_MapAnyToPointer_Valid(t *testing.T) {
 	// Arrange
 	type simple struct {
 		Name string `json:"Name"`
@@ -308,7 +308,7 @@ func Test_Cov49_MapAnyToPointer_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyToPointer returns struct -- valid map", actual)
 }
 
-func Test_Cov49_MapAnyToPointer_SkipEmpty(t *testing.T) {
+func Test_MapAnyToPointer_SkipEmpty(t *testing.T) {
 	// Arrange
 	type simple struct{ Name string }
 	var result simple
@@ -330,7 +330,7 @@ func Test_Cov49_MapAnyToPointer_SkipEmpty(t *testing.T) {
 
 // ── AnyToFieldsMap ──
 
-func Test_Cov49_AnyToFieldsMap_Valid(t *testing.T) {
+func Test_AnyToFieldsMap_Valid(t *testing.T) {
 	// Arrange
 	type simple struct {
 		Name string `json:"Name"`
@@ -354,7 +354,7 @@ func Test_Cov49_AnyToFieldsMap_Valid(t *testing.T) {
 
 // ── FromString / FromStringMust ──
 
-func Test_Cov49_FromString_Valid(t *testing.T) {
+func Test_FromString_Valid(t *testing.T) {
 	// Arrange
 	var result string
 
@@ -373,7 +373,7 @@ func Test_Cov49_FromString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromString returns value -- valid", actual)
 }
 
-func Test_Cov49_FromStringMust_Panics(t *testing.T) {
+func Test_FromStringMust_Panics(t *testing.T) {
 	// Arrange
 	panicked := false
 
@@ -396,7 +396,7 @@ func Test_Cov49_FromStringMust_Panics(t *testing.T) {
 
 // ── Serializer methods ──
 
-func Test_Cov49_Serialize_FromStringer(t *testing.T) {
+func Test_Serialize_FromStringer(t *testing.T) {
 	// Arrange
 	stringer := fmt.Stringer(simpleStringer{val: "hello"})
 
@@ -419,7 +419,7 @@ type simpleStringer struct{ val string }
 
 func (s simpleStringer) String() string { return s.val }
 
-func Test_Cov49_Serialize_ToBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToBytesSwallowErr(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToBytesSwallowErr("test")
 
@@ -429,7 +429,7 @@ func Test_Cov49_Serialize_ToBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToBytesSwallowErr returns bytes -- valid", actual)
 }
 
-func Test_Cov49_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToSafeBytesSwallowErr("test")
 
@@ -439,7 +439,7 @@ func Test_Cov49_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSafeBytesSwallowErr returns bytes -- valid", actual)
 }
 
-func Test_Cov49_Serialize_ToBytesErr(t *testing.T) {
+func Test_Serialize_ToBytesErr(t *testing.T) {
 	// Arrange & Act
 	result, err := corejson.Serialize.ToBytesErr("test")
 
@@ -455,7 +455,7 @@ func Test_Cov49_Serialize_ToBytesErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToBytesErr returns bytes -- valid", actual)
 }
 
-func Test_Cov49_Serialize_ToStringErr(t *testing.T) {
+func Test_Serialize_ToStringErr(t *testing.T) {
 	// Arrange & Act
 	result, err := corejson.Serialize.ToStringErr("test")
 
@@ -471,7 +471,7 @@ func Test_Cov49_Serialize_ToStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToStringErr returns string -- valid", actual)
 }
 
-func Test_Cov49_Serialize_ToPrettyStringErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringErr(t *testing.T) {
 	// Arrange
 	m := map[string]string{"a": "b"}
 
@@ -490,7 +490,7 @@ func Test_Cov49_Serialize_ToPrettyStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToPrettyStringErr returns string -- valid", actual)
 }
 
-func Test_Cov49_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToPrettyStringIncludingErr(map[string]string{"a": "b"})
 
@@ -500,7 +500,7 @@ func Test_Cov49_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToPrettyStringIncludingErr returns string -- valid", actual)
 }
 
-func Test_Cov49_Serialize_Pretty(t *testing.T) {
+func Test_Serialize_Pretty(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.Pretty(map[string]string{"a": "b"})
 
@@ -510,7 +510,7 @@ func Test_Cov49_Serialize_Pretty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Pretty returns formatted string -- valid", actual)
 }
 
-func Test_Cov49_Serialize_FromInteger64(t *testing.T) {
+func Test_Serialize_FromInteger64(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromInteger64(42)
 
@@ -526,7 +526,7 @@ func Test_Cov49_Serialize_FromInteger64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromInteger64 returns result -- valid int", actual)
 }
 
-func Test_Cov49_Serialize_FromBool(t *testing.T) {
+func Test_Serialize_FromBool(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromBool(true)
 
@@ -536,7 +536,7 @@ func Test_Cov49_Serialize_FromBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromBool returns result -- true", actual)
 }
 
-func Test_Cov49_Serialize_FromIntegers(t *testing.T) {
+func Test_Serialize_FromIntegers(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromIntegers([]int{1, 2, 3})
 
@@ -546,7 +546,7 @@ func Test_Cov49_Serialize_FromIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromIntegers returns result -- slice", actual)
 }
 
-func Test_Cov49_Serialize_FromBytes(t *testing.T) {
+func Test_Serialize_FromBytes(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromBytes([]byte("test"))
 
@@ -556,7 +556,7 @@ func Test_Cov49_Serialize_FromBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromBytes returns result -- bytes", actual)
 }
 
-func Test_Cov49_Serialize_FromStringsSpread(t *testing.T) {
+func Test_Serialize_FromStringsSpread(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromStringsSpread("a", "b")
 
@@ -568,7 +568,7 @@ func Test_Cov49_Serialize_FromStringsSpread(t *testing.T) {
 
 // ── JsonString function ──
 
-func Test_Cov49_JsonString_Valid(t *testing.T) {
+func Test_JsonString_Valid(t *testing.T) {
 	// Arrange
 	type simple struct {
 		Name string `json:"Name"`

@@ -10,7 +10,7 @@ import (
 
 // ===== AnyOnce.Deserialize coverage =====
 
-func Test_Cov10_AnyOnce_Deserialize_Success(t *testing.T) {
+func Test_AnyOnce_Deserialize_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return map[string]string{"a": "b"} })
 	var target map[string]string
@@ -25,7 +25,7 @@ func Test_Cov10_AnyOnce_Deserialize_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil due to code path", actual)
 }
 
-func Test_Cov10_AnyOnce_Deserialize_SerializeError(t *testing.T) {
+func Test_AnyOnce_Deserialize_SerializeError(t *testing.T) {
 	// Arrange
 	// Use a value that can't be marshalled (channel)
 	ch := make(chan int)
@@ -43,7 +43,7 @@ func Test_Cov10_AnyOnce_Deserialize_SerializeError(t *testing.T) {
 
 // ===== AnyErrorOnce.Deserialize coverage =====
 
-func Test_Cov10_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) {
 		return nil, errors.New("init error")
@@ -59,7 +59,7 @@ func Test_Cov10_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error from serialize", actual)
 }
 
-func Test_Cov10_AnyErrorOnce_Deserialize_Success(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) {
 		return map[string]string{"x": "y"}, nil
@@ -76,7 +76,7 @@ func Test_Cov10_AnyErrorOnce_Deserialize_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov10_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 	// Arrange
 	ch := make(chan int)
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) {
@@ -95,7 +95,7 @@ func Test_Cov10_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 
 // ===== IntegersOnce.IsEqual - hit currentMap[item] < 0 =====
 
-func Test_Cov10_IntegersOnce_IsEqual_FreqMismatch(t *testing.T) {
+func Test_IntegersOnce_IsEqual_FreqMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 1} })
 	// Same length but different frequencies: {1,1} vs {1,2}
@@ -110,7 +110,7 @@ func Test_Cov10_IntegersOnce_IsEqual_FreqMismatch(t *testing.T) {
 
 // ===== MapStringStringOnce.IsEqual - hit isMissing and value mismatch =====
 
-func Test_Cov10_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -124,7 +124,7 @@ func Test_Cov10_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for missing key", actual)
 }
 
-func Test_Cov10_MapStringStringOnce_IsEqual_ValueMismatch(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_ValueMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -140,7 +140,7 @@ func Test_Cov10_MapStringStringOnce_IsEqual_ValueMismatch(t *testing.T) {
 
 // ===== StringsOnce.IsEqual - hit currentMap[item] < 0 =====
 
-func Test_Cov10_StringsOnce_IsEqual_FreqMismatch(t *testing.T) {
+func Test_StringsOnce_IsEqual_FreqMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "a"} })
 
@@ -156,7 +156,7 @@ func Test_Cov10_StringsOnce_IsEqual_FreqMismatch(t *testing.T) {
 // Note: SplitN with n=2 returns at most 2, so len>2 is dead code.
 // But we can test the len==1 (no splitter found) path to cover the else.
 
-func Test_Cov10_StringOnce_SplitLeftRight_NoSplitter(t *testing.T) {
+func Test_StringOnce_SplitLeftRight_NoSplitter(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "nosplitter" })
 	left, right := o.SplitLeftRight(":")
@@ -169,7 +169,7 @@ func Test_Cov10_StringOnce_SplitLeftRight_NoSplitter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'nosplitter','', got '',''", actual)
 }
 
-func Test_Cov10_StringOnce_SplitLeftRight_WithSplitter(t *testing.T) {
+func Test_StringOnce_SplitLeftRight_WithSplitter(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "left:right" })
 	left, right := o.SplitLeftRight(":")
@@ -184,7 +184,7 @@ func Test_Cov10_StringOnce_SplitLeftRight_WithSplitter(t *testing.T) {
 
 // ===== JsonStringMust panic paths =====
 
-func Test_Cov10_StringsOnce_JsonStringMust_Success(t *testing.T) {
+func Test_StringsOnce_JsonStringMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a"} })
 	s := o.JsonStringMust()
@@ -197,7 +197,7 @@ func Test_Cov10_StringsOnce_JsonStringMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty json string", actual)
 }
 
-func Test_Cov10_MapStringStringOnce_JsonStringMust_Success(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}

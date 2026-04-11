@@ -10,7 +10,7 @@ import (
 
 // ── Result creation ──
 
-func Test_Cov2_NewResult_Serialize(t *testing.T) {
+func Test_NewResult_Serialize(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.Serialize(map[string]int{"a": 1})
 
@@ -28,7 +28,7 @@ func Test_Cov2_NewResult_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewResult.Serialize produces valid result -- map input", actual)
 }
 
-func Test_Cov2_Result_Methods(t *testing.T) {
+func Test_Result_Methods(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.Serialize("hello")
 
@@ -54,7 +54,7 @@ func Test_Cov2_Result_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result has no error -- valid input", actual)
 }
 
-func Test_Cov2_Result_Clone(t *testing.T) {
+func Test_Result_Clone(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.Serialize("hello")
 	cloned := result.Clone(false)
@@ -71,7 +71,7 @@ func Test_Cov2_Result_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result.Clone produces equal json -- valid", actual)
 }
 
-func Test_Cov2_Result_ClonePtr(t *testing.T) {
+func Test_Result_ClonePtr(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.Serialize("hello")
 	cloned := result.ClonePtr(false)
@@ -88,7 +88,7 @@ func Test_Cov2_Result_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result.ClonePtr returns non-nil -- valid", actual)
 }
 
-func Test_Cov2_Result_Nil_ClonePtr(t *testing.T) {
+func Test_Result_Nil_ClonePtr(t *testing.T) {
 	// Arrange
 	var result *corejson.Result
 	cloned := result.ClonePtr(false)
@@ -103,7 +103,7 @@ func Test_Cov2_Result_Nil_ClonePtr(t *testing.T) {
 
 // ── Serialize/Deserialize roundtrip ──
 
-func Test_Cov2_SerializeDeserialize_Roundtrip(t *testing.T) {
+func Test_SerializeDeserialize_Roundtrip(t *testing.T) {
 	// Arrange
 	type testStruct struct {
 		Name string
@@ -143,7 +143,7 @@ func Test_Cov2_SerializeDeserialize_Roundtrip(t *testing.T) {
 
 // ── AnyTo ──
 
-func Test_Cov2_AnyTo_SerializedJsonResult(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult(map[string]int{"a": 1})
 
@@ -163,7 +163,7 @@ func Test_Cov2_AnyTo_SerializedJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns valid -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_SerializedRaw(t *testing.T) {
+func Test_AnyTo_SerializedRaw(t *testing.T) {
 	// Arrange
 	rawBytes, err := corejson.AnyTo.SerializedRaw(map[string]string{"k": "v"})
 
@@ -181,7 +181,7 @@ func Test_Cov2_AnyTo_SerializedRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedRaw returns bytes -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_SerializedString(t *testing.T) {
+func Test_AnyTo_SerializedString(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.SerializedString(map[string]int{"a": 1})
 
@@ -199,7 +199,7 @@ func Test_Cov2_AnyTo_SerializedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedString returns json string -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_SafeJsonString(t *testing.T) {
+func Test_AnyTo_SafeJsonString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonString(map[string]int{"a": 1})
 
@@ -211,7 +211,7 @@ func Test_Cov2_AnyTo_SafeJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SafeJsonString returns non-empty -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_SafeJsonPrettyString(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString(map[string]int{"a": 1})
 
@@ -223,7 +223,7 @@ func Test_Cov2_AnyTo_SafeJsonPrettyString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SafeJsonPrettyString returns non-empty -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_JsonString(t *testing.T) {
+func Test_AnyTo_JsonString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString(map[string]int{"a": 1})
 
@@ -235,7 +235,7 @@ func Test_Cov2_AnyTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonString returns non-empty -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_JsonStringMust(t *testing.T) {
+func Test_AnyTo_JsonStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonStringMust(map[string]int{"a": 1})
 
@@ -247,7 +247,7 @@ func Test_Cov2_AnyTo_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonStringMust returns non-empty -- map input", actual)
 }
 
-func Test_Cov2_AnyTo_PrettyStringMust(t *testing.T) {
+func Test_AnyTo_PrettyStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.PrettyStringMust(map[string]int{"a": 1})
 
@@ -261,7 +261,7 @@ func Test_Cov2_AnyTo_PrettyStringMust(t *testing.T) {
 
 // ── Deserialize from bytes (BytesTo, not FromBytesTo) ──
 
-func Test_Cov2_DeserializeFromBytes_String(t *testing.T) {
+func Test_DeserializeFromBytes_String(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal("hello")
 	s, err := corejson.Deserialize.BytesTo.String(b)
@@ -280,7 +280,7 @@ func Test_Cov2_DeserializeFromBytes_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.String roundtrip -- hello", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_Integer(t *testing.T) {
+func Test_DeserializeFromBytes_Integer(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal(42)
 	val, err := corejson.Deserialize.BytesTo.Integer(b)
@@ -299,7 +299,7 @@ func Test_Cov2_DeserializeFromBytes_Integer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Integer roundtrip -- 42", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_Integer64(t *testing.T) {
+func Test_DeserializeFromBytes_Integer64(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal(int64(999))
 	val, err := corejson.Deserialize.BytesTo.Integer64(b)
@@ -318,7 +318,7 @@ func Test_Cov2_DeserializeFromBytes_Integer64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Integer64 roundtrip -- 999", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_MapAnyItem(t *testing.T) {
+func Test_DeserializeFromBytes_MapAnyItem(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal(map[string]any{"k": "v"})
 	m, err := corejson.Deserialize.BytesTo.MapAnyItem(b)
@@ -337,7 +337,7 @@ func Test_Cov2_DeserializeFromBytes_MapAnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.MapAnyItem roundtrip -- map", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_MapStringString(t *testing.T) {
+func Test_DeserializeFromBytes_MapStringString(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal(map[string]string{"k": "v"})
 	m, err := corejson.Deserialize.BytesTo.MapStringString(b)
@@ -356,7 +356,7 @@ func Test_Cov2_DeserializeFromBytes_MapStringString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.MapStringString roundtrip -- map", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_Bytes(t *testing.T) {
+func Test_DeserializeFromBytes_Bytes(t *testing.T) {
 	// Arrange
 	original := []byte{1, 2, 3}
 	b, _ := json.Marshal(original)
@@ -376,7 +376,7 @@ func Test_Cov2_DeserializeFromBytes_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Bytes roundtrip -- 3 bytes", actual)
 }
 
-func Test_Cov2_DeserializeFromBytes_Integers(t *testing.T) {
+func Test_DeserializeFromBytes_Integers(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal([]int{1, 2, 3})
 	val, err := corejson.Deserialize.BytesTo.Integers(b)
@@ -397,7 +397,7 @@ func Test_Cov2_DeserializeFromBytes_Integers(t *testing.T) {
 
 // ── Empty creators ──
 
-func Test_Cov2_Empty_Result(t *testing.T) {
+func Test_Empty_Result(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.Result()
 
@@ -409,7 +409,7 @@ func Test_Cov2_Empty_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Result returns empty -- no data", actual)
 }
 
-func Test_Cov2_Empty_ResultPtr(t *testing.T) {
+func Test_Empty_ResultPtr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultPtr()
 

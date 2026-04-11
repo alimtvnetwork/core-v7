@@ -8,7 +8,7 @@ import (
 
 // Test_Cov7_Within_StringRangeUint32_Overflow tests the overflow fallback in
 // within.StringRangeUint32 where finalInt > MaxInt32.
-func Test_Cov7_Within_StringRangeUint32_Overflow(t *testing.T) {
+func Test_Within_StringRangeUint32_Overflow(t *testing.T) {
 	// Arrange / Act
 	val, isInRange := corerange.Within.StringRangeUint32("2147483648") // MaxInt32 + 1
 

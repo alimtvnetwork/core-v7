@@ -13,7 +13,7 @@ import (
 // Hashset — Core operations
 // =============================================================================
 
-func Test_I8_HS01_IsEmpty(t *testing.T) {
+func Test_HS01_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_I8_HS01_IsEmpty", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -31,7 +31,7 @@ func Test_I8_HS01_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_I8_HS02_HasItems(t *testing.T) {
+func Test_HS02_HasItems(t *testing.T) {
 	safeTest(t, "Test_I8_HS02_HasItems", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -49,7 +49,7 @@ func Test_I8_HS02_HasItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HS03_HasAnyItem(t *testing.T) {
+func Test_HS03_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_I8_HS03_HasAnyItem", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -63,7 +63,7 @@ func Test_I8_HS03_HasAnyItem(t *testing.T) {
 	})
 }
 
-func Test_I8_HS04_Add(t *testing.T) {
+func Test_HS04_Add(t *testing.T) {
 	safeTest(t, "Test_I8_HS04_Add", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -78,7 +78,7 @@ func Test_I8_HS04_Add(t *testing.T) {
 	})
 }
 
-func Test_I8_HS05_AddBool(t *testing.T) {
+func Test_HS05_AddBool(t *testing.T) {
 	safeTest(t, "Test_I8_HS05_AddBool", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -97,7 +97,7 @@ func Test_I8_HS05_AddBool(t *testing.T) {
 	})
 }
 
-func Test_I8_HS06_AddPtr(t *testing.T) {
+func Test_HS06_AddPtr(t *testing.T) {
 	safeTest(t, "Test_I8_HS06_AddPtr", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -113,7 +113,7 @@ func Test_I8_HS06_AddPtr(t *testing.T) {
 	})
 }
 
-func Test_I8_HS07_AddPtrLock(t *testing.T) {
+func Test_HS07_AddPtrLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS07_AddPtrLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -129,7 +129,7 @@ func Test_I8_HS07_AddPtrLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS08_AddLock(t *testing.T) {
+func Test_HS08_AddLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS08_AddLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -144,7 +144,7 @@ func Test_I8_HS08_AddLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS09_AddNonEmpty(t *testing.T) {
+func Test_HS09_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_I8_HS09_AddNonEmpty", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -163,7 +163,7 @@ func Test_I8_HS09_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_I8_HS10_AddNonEmptyWhitespace(t *testing.T) {
+func Test_HS10_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_I8_HS10_AddNonEmptyWhitespace", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -182,7 +182,7 @@ func Test_I8_HS10_AddNonEmptyWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I8_HS11_AddIf(t *testing.T) {
+func Test_HS11_AddIf(t *testing.T) {
 	safeTest(t, "Test_I8_HS11_AddIf", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -201,7 +201,7 @@ func Test_I8_HS11_AddIf(t *testing.T) {
 	})
 }
 
-func Test_I8_HS12_AddIfMany(t *testing.T) {
+func Test_HS12_AddIfMany(t *testing.T) {
 	safeTest(t, "Test_I8_HS12_AddIfMany", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -220,7 +220,7 @@ func Test_I8_HS12_AddIfMany(t *testing.T) {
 	})
 }
 
-func Test_I8_HS13_AddFunc(t *testing.T) {
+func Test_HS13_AddFunc(t *testing.T) {
 	safeTest(t, "Test_I8_HS13_AddFunc", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -235,7 +235,7 @@ func Test_I8_HS13_AddFunc(t *testing.T) {
 	})
 }
 
-func Test_I8_HS14_AddFuncErr(t *testing.T) {
+func Test_HS14_AddFuncErr(t *testing.T) {
 	safeTest(t, "Test_I8_HS14_AddFuncErr", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -250,7 +250,7 @@ func Test_I8_HS14_AddFuncErr(t *testing.T) {
 	})
 }
 
-func Test_I8_HS15_AddWithWgLock(t *testing.T) {
+func Test_HS15_AddWithWgLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS15_AddWithWgLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -268,7 +268,7 @@ func Test_I8_HS15_AddWithWgLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS16_Adds(t *testing.T) {
+func Test_HS16_Adds(t *testing.T) {
 	safeTest(t, "Test_I8_HS16_Adds", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -283,7 +283,7 @@ func Test_I8_HS16_Adds(t *testing.T) {
 	})
 }
 
-func Test_I8_HS17_AddStrings(t *testing.T) {
+func Test_HS17_AddStrings(t *testing.T) {
 	safeTest(t, "Test_I8_HS17_AddStrings", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -298,7 +298,7 @@ func Test_I8_HS17_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_HS18_AddStringsLock(t *testing.T) {
+func Test_HS18_AddStringsLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS18_AddStringsLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -313,7 +313,7 @@ func Test_I8_HS18_AddStringsLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS19_AddCollection(t *testing.T) {
+func Test_HS19_AddCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HS19_AddCollection", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -333,7 +333,7 @@ func Test_I8_HS19_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_I8_HS20_AddCollections(t *testing.T) {
+func Test_HS20_AddCollections(t *testing.T) {
 	safeTest(t, "Test_I8_HS20_AddCollections", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -350,7 +350,7 @@ func Test_I8_HS20_AddCollections(t *testing.T) {
 	})
 }
 
-func Test_I8_HS21_AddHashsetItems(t *testing.T) {
+func Test_HS21_AddHashsetItems(t *testing.T) {
 	safeTest(t, "Test_I8_HS21_AddHashsetItems", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -370,7 +370,7 @@ func Test_I8_HS21_AddHashsetItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HS22_AddItemsMap(t *testing.T) {
+func Test_HS22_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_I8_HS22_AddItemsMap", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -387,7 +387,7 @@ func Test_I8_HS22_AddItemsMap(t *testing.T) {
 	})
 }
 
-func Test_I8_HS23_AddSimpleSlice(t *testing.T) {
+func Test_HS23_AddSimpleSlice(t *testing.T) {
 	safeTest(t, "Test_I8_HS23_AddSimpleSlice", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -407,7 +407,7 @@ func Test_I8_HS23_AddSimpleSlice(t *testing.T) {
 // Hashset — Query operations
 // =============================================================================
 
-func Test_I8_HS24_Has(t *testing.T) {
+func Test_HS24_Has(t *testing.T) {
 	safeTest(t, "Test_I8_HS24_Has", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -424,7 +424,7 @@ func Test_I8_HS24_Has(t *testing.T) {
 	})
 }
 
-func Test_I8_HS25_HasLock(t *testing.T) {
+func Test_HS25_HasLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS25_HasLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -438,7 +438,7 @@ func Test_I8_HS25_HasLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS26_HasAll(t *testing.T) {
+func Test_HS26_HasAll(t *testing.T) {
 	safeTest(t, "Test_I8_HS26_HasAll", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b", "c"})
@@ -455,7 +455,7 @@ func Test_I8_HS26_HasAll(t *testing.T) {
 	})
 }
 
-func Test_I8_HS27_HasAny(t *testing.T) {
+func Test_HS27_HasAny(t *testing.T) {
 	safeTest(t, "Test_I8_HS27_HasAny", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -472,7 +472,7 @@ func Test_I8_HS27_HasAny(t *testing.T) {
 	})
 }
 
-func Test_I8_HS28_HasAllStrings(t *testing.T) {
+func Test_HS28_HasAllStrings(t *testing.T) {
 	safeTest(t, "Test_I8_HS28_HasAllStrings", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -486,7 +486,7 @@ func Test_I8_HS28_HasAllStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_HS29_IsMissing(t *testing.T) {
+func Test_HS29_IsMissing(t *testing.T) {
 	safeTest(t, "Test_I8_HS29_IsMissing", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -503,7 +503,7 @@ func Test_I8_HS29_IsMissing(t *testing.T) {
 	})
 }
 
-func Test_I8_HS30_IsMissingLock(t *testing.T) {
+func Test_HS30_IsMissingLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS30_IsMissingLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -517,7 +517,7 @@ func Test_I8_HS30_IsMissingLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS31_IsAllMissing(t *testing.T) {
+func Test_HS31_IsAllMissing(t *testing.T) {
 	safeTest(t, "Test_I8_HS31_IsAllMissing", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -534,7 +534,7 @@ func Test_I8_HS31_IsAllMissing(t *testing.T) {
 	})
 }
 
-func Test_I8_HS32_Contains(t *testing.T) {
+func Test_HS32_Contains(t *testing.T) {
 	safeTest(t, "Test_I8_HS32_Contains", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -548,7 +548,7 @@ func Test_I8_HS32_Contains(t *testing.T) {
 	})
 }
 
-func Test_I8_HS33_IsEqual(t *testing.T) {
+func Test_HS33_IsEqual(t *testing.T) {
 	safeTest(t, "Test_I8_HS33_IsEqual", func() {
 		// Arrange
 		a := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -567,7 +567,7 @@ func Test_I8_HS33_IsEqual(t *testing.T) {
 // Hashset — List, Sort, JSON
 // =============================================================================
 
-func Test_I8_HS34_List(t *testing.T) {
+func Test_HS34_List(t *testing.T) {
 	safeTest(t, "Test_I8_HS34_List", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -581,7 +581,7 @@ func Test_I8_HS34_List(t *testing.T) {
 	})
 }
 
-func Test_I8_HS35_SortedList(t *testing.T) {
+func Test_HS35_SortedList(t *testing.T) {
 	safeTest(t, "Test_I8_HS35_SortedList", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"c", "a", "b"})
@@ -596,7 +596,7 @@ func Test_I8_HS35_SortedList(t *testing.T) {
 	})
 }
 
-func Test_I8_HS36_OrderedList(t *testing.T) {
+func Test_HS36_OrderedList(t *testing.T) {
 	safeTest(t, "Test_I8_HS36_OrderedList", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"c", "a"})
@@ -611,7 +611,7 @@ func Test_I8_HS36_OrderedList(t *testing.T) {
 	})
 }
 
-func Test_I8_HS37_ListPtrSortedAsc(t *testing.T) {
+func Test_HS37_ListPtrSortedAsc(t *testing.T) {
 	safeTest(t, "Test_I8_HS37_ListPtrSortedAsc", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"b", "a"})
@@ -626,7 +626,7 @@ func Test_I8_HS37_ListPtrSortedAsc(t *testing.T) {
 	})
 }
 
-func Test_I8_HS38_ListPtrSortedDsc(t *testing.T) {
+func Test_HS38_ListPtrSortedDsc(t *testing.T) {
 	safeTest(t, "Test_I8_HS38_ListPtrSortedDsc", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -641,7 +641,7 @@ func Test_I8_HS38_ListPtrSortedDsc(t *testing.T) {
 	})
 }
 
-func Test_I8_HS39_SimpleSlice(t *testing.T) {
+func Test_HS39_SimpleSlice(t *testing.T) {
 	safeTest(t, "Test_I8_HS39_SimpleSlice", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -656,7 +656,7 @@ func Test_I8_HS39_SimpleSlice(t *testing.T) {
 	})
 }
 
-func Test_I8_HS40_SafeStrings(t *testing.T) {
+func Test_HS40_SafeStrings(t *testing.T) {
 	safeTest(t, "Test_I8_HS40_SafeStrings", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -670,7 +670,7 @@ func Test_I8_HS40_SafeStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_HS41_Collection(t *testing.T) {
+func Test_HS41_Collection(t *testing.T) {
 	safeTest(t, "Test_I8_HS41_Collection", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -685,7 +685,7 @@ func Test_I8_HS41_Collection(t *testing.T) {
 	})
 }
 
-func Test_I8_HS42_String(t *testing.T) {
+func Test_HS42_String(t *testing.T) {
 	safeTest(t, "Test_I8_HS42_String", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -700,7 +700,7 @@ func Test_I8_HS42_String(t *testing.T) {
 	})
 }
 
-func Test_I8_HS43_StringLock(t *testing.T) {
+func Test_HS43_StringLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS43_StringLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -715,7 +715,7 @@ func Test_I8_HS43_StringLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS44_Json(t *testing.T) {
+func Test_HS44_Json(t *testing.T) {
 	safeTest(t, "Test_I8_HS44_Json", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -730,7 +730,7 @@ func Test_I8_HS44_Json(t *testing.T) {
 	})
 }
 
-func Test_I8_HS45_JsonModel(t *testing.T) {
+func Test_HS45_JsonModel(t *testing.T) {
 	safeTest(t, "Test_I8_HS45_JsonModel", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -745,7 +745,7 @@ func Test_I8_HS45_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_I8_HS46_MapStringAny(t *testing.T) {
+func Test_HS46_MapStringAny(t *testing.T) {
 	safeTest(t, "Test_I8_HS46_MapStringAny", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -760,7 +760,7 @@ func Test_I8_HS46_MapStringAny(t *testing.T) {
 	})
 }
 
-func Test_I8_HS47_JoinSorted(t *testing.T) {
+func Test_HS47_JoinSorted(t *testing.T) {
 	safeTest(t, "Test_I8_HS47_JoinSorted", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"b", "a"})
@@ -779,7 +779,7 @@ func Test_I8_HS47_JoinSorted(t *testing.T) {
 // Hashset — Remove, Clear, Dispose, Resize
 // =============================================================================
 
-func Test_I8_HS48_Remove(t *testing.T) {
+func Test_HS48_Remove(t *testing.T) {
 	safeTest(t, "Test_I8_HS48_Remove", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -794,7 +794,7 @@ func Test_I8_HS48_Remove(t *testing.T) {
 	})
 }
 
-func Test_I8_HS49_SafeRemove(t *testing.T) {
+func Test_HS49_SafeRemove(t *testing.T) {
 	safeTest(t, "Test_I8_HS49_SafeRemove", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -810,7 +810,7 @@ func Test_I8_HS49_SafeRemove(t *testing.T) {
 	})
 }
 
-func Test_I8_HS50_RemoveWithLock(t *testing.T) {
+func Test_HS50_RemoveWithLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS50_RemoveWithLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -825,7 +825,7 @@ func Test_I8_HS50_RemoveWithLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS51_Clear(t *testing.T) {
+func Test_HS51_Clear(t *testing.T) {
 	safeTest(t, "Test_I8_HS51_Clear", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -840,7 +840,7 @@ func Test_I8_HS51_Clear(t *testing.T) {
 	})
 }
 
-func Test_I8_HS52_Dispose(t *testing.T) {
+func Test_HS52_Dispose(t *testing.T) {
 	safeTest(t, "Test_I8_HS52_Dispose", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -855,7 +855,7 @@ func Test_I8_HS52_Dispose(t *testing.T) {
 	})
 }
 
-func Test_I8_HS53_Resize(t *testing.T) {
+func Test_HS53_Resize(t *testing.T) {
 	safeTest(t, "Test_I8_HS53_Resize", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(2)
@@ -871,7 +871,7 @@ func Test_I8_HS53_Resize(t *testing.T) {
 	})
 }
 
-func Test_I8_HS54_AddCapacities(t *testing.T) {
+func Test_HS54_AddCapacities(t *testing.T) {
 	safeTest(t, "Test_I8_HS54_AddCapacities", func() {
 		h := corestr.New.Hashset.Cap(5)
 		h.AddCapacities(10, 20)
@@ -879,7 +879,7 @@ func Test_I8_HS54_AddCapacities(t *testing.T) {
 	})
 }
 
-func Test_I8_HS55_ConcatNewHashsets(t *testing.T) {
+func Test_HS55_ConcatNewHashsets(t *testing.T) {
 	safeTest(t, "Test_I8_HS55_ConcatNewHashsets", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -895,7 +895,7 @@ func Test_I8_HS55_ConcatNewHashsets(t *testing.T) {
 	})
 }
 
-func Test_I8_HS56_ConcatNewHashsets_Empty(t *testing.T) {
+func Test_HS56_ConcatNewHashsets_Empty(t *testing.T) {
 	safeTest(t, "Test_I8_HS56_ConcatNewHashsets_Empty", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -910,7 +910,7 @@ func Test_I8_HS56_ConcatNewHashsets_Empty(t *testing.T) {
 	})
 }
 
-func Test_I8_HS57_ConcatNewStrings(t *testing.T) {
+func Test_HS57_ConcatNewStrings(t *testing.T) {
 	safeTest(t, "Test_I8_HS57_ConcatNewStrings", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -925,7 +925,7 @@ func Test_I8_HS57_ConcatNewStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_HS58_Filter(t *testing.T) {
+func Test_HS58_Filter(t *testing.T) {
 	safeTest(t, "Test_I8_HS58_Filter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"abc", "de", "f"})
@@ -940,7 +940,7 @@ func Test_I8_HS58_Filter(t *testing.T) {
 	})
 }
 
-func Test_I8_HS59_AddsUsingFilter(t *testing.T) {
+func Test_HS59_AddsUsingFilter(t *testing.T) {
 	safeTest(t, "Test_I8_HS59_AddsUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -957,7 +957,7 @@ func Test_I8_HS59_AddsUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_I8_HS60_AddsAnyUsingFilter(t *testing.T) {
+func Test_HS60_AddsAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_I8_HS60_AddsAnyUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -974,7 +974,7 @@ func Test_I8_HS60_AddsAnyUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_I8_HS61_IsEmptyLock(t *testing.T) {
+func Test_HS61_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS61_IsEmptyLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -988,7 +988,7 @@ func Test_I8_HS61_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS62_ListCopyLock(t *testing.T) {
+func Test_HS62_ListCopyLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS62_ListCopyLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1003,7 +1003,7 @@ func Test_I8_HS62_ListCopyLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS63_LengthLock(t *testing.T) {
+func Test_HS63_LengthLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS63_LengthLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1017,7 +1017,7 @@ func Test_I8_HS63_LengthLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS64_ParseInjectUsingJson(t *testing.T) {
+func Test_HS64_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_I8_HS64_ParseInjectUsingJson", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1034,7 +1034,7 @@ func Test_I8_HS64_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_I8_HS65_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_HS65_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_I8_HS65_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(1)
@@ -1050,7 +1050,7 @@ func Test_I8_HS65_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_I8_HS66_HasWithLock(t *testing.T) {
+func Test_HS66_HasWithLock(t *testing.T) {
 	safeTest(t, "Test_I8_HS66_HasWithLock", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1064,7 +1064,7 @@ func Test_I8_HS66_HasWithLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HS67_HasAllCollectionItems(t *testing.T) {
+func Test_HS67_HasAllCollectionItems(t *testing.T) {
 	safeTest(t, "Test_I8_HS67_HasAllCollectionItems", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -1082,14 +1082,14 @@ func Test_I8_HS67_HasAllCollectionItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HS68_MapStringAnyDiff(t *testing.T) {
+func Test_HS68_MapStringAnyDiff(t *testing.T) {
 	safeTest(t, "Test_I8_HS68_MapStringAnyDiff", func() {
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		_ = h.MapStringAnyDiff()
 	})
 }
 
-func Test_I8_HS69_WrapDoubleQuote(t *testing.T) {
+func Test_HS69_WrapDoubleQuote(t *testing.T) {
 	safeTest(t, "Test_I8_HS69_WrapDoubleQuote", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1105,7 +1105,7 @@ func Test_I8_HS69_WrapDoubleQuote(t *testing.T) {
 	})
 }
 
-func Test_I8_HS70_IsEquals_BothEmpty(t *testing.T) {
+func Test_HS70_IsEquals_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_I8_HS70_IsEquals_BothEmpty", func() {
 		// Arrange
 		a := corestr.New.Hashset.Cap(1)

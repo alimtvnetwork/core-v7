@@ -11,7 +11,7 @@ import (
 // HasIndex
 // ═══════════════════════════════════════════
 
-func Test_Cov2_HasIndex_Found(t *testing.T) {
+func Test_HasIndex_Found(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.HasIndex([]int{1, 2, 3}, 2)}
 
@@ -20,7 +20,7 @@ func Test_Cov2_HasIndex_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndex returns true -- found", actual)
 }
 
-func Test_Cov2_HasIndex_NotFound(t *testing.T) {
+func Test_HasIndex_NotFound(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.HasIndex([]int{1, 2, 3}, 99)}
 
@@ -29,7 +29,7 @@ func Test_Cov2_HasIndex_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndex returns false -- not found", actual)
 }
 
-func Test_Cov2_HasIndex_Empty(t *testing.T) {
+func Test_HasIndex_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.HasIndex([]int{}, 1)}
 
@@ -42,7 +42,7 @@ func Test_Cov2_HasIndex_Empty(t *testing.T) {
 // IsWithinIndexRange
 // ═══════════════════════════════════════════
 
-func Test_Cov2_IsWithinIndexRange_Within(t *testing.T) {
+func Test_IsWithinIndexRange_Within(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsWithinIndexRange(2, 5)}
 
@@ -51,7 +51,7 @@ func Test_Cov2_IsWithinIndexRange_Within(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsWithinIndexRange returns true -- within", actual)
 }
 
-func Test_Cov2_IsWithinIndexRange_Exact(t *testing.T) {
+func Test_IsWithinIndexRange_Exact(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsWithinIndexRange(4, 5)}
 
@@ -60,7 +60,7 @@ func Test_Cov2_IsWithinIndexRange_Exact(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsWithinIndexRange returns true -- exact last index", actual)
 }
 
-func Test_Cov2_IsWithinIndexRange_Beyond(t *testing.T) {
+func Test_IsWithinIndexRange_Beyond(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsWithinIndexRange(5, 5)}
 
@@ -73,7 +73,7 @@ func Test_Cov2_IsWithinIndexRange_Beyond(t *testing.T) {
 // LastIndex
 // ═══════════════════════════════════════════
 
-func Test_Cov2_LastIndex_Normal(t *testing.T) {
+func Test_LastIndex_Normal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.LastIndex(5)}
 
@@ -82,7 +82,7 @@ func Test_Cov2_LastIndex_Normal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LastIndex returns 4 -- length 5", actual)
 }
 
-func Test_Cov2_LastIndex_One(t *testing.T) {
+func Test_LastIndex_One(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.LastIndex(1)}
 
@@ -95,7 +95,7 @@ func Test_Cov2_LastIndex_One(t *testing.T) {
 // NameByIndex — remaining indexes
 // ═══════════════════════════════════════════
 
-func Test_Cov2_NameByIndex_Second(t *testing.T) {
+func Test_NameByIndex_Second(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.NameByIndex(1)}
 
@@ -104,7 +104,7 @@ func Test_Cov2_NameByIndex_Second(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameByIndex returns Second -- index 1", actual)
 }
 
-func Test_Cov2_NameByIndex_Fifth(t *testing.T) {
+func Test_NameByIndex_Fifth(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.NameByIndex(4)}
 

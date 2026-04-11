@@ -10,7 +10,7 @@ import (
 
 // ── GetFunc / GetFuncFullName / GetFuncName ──
 
-func Test_Cov2_GetFunc_NotNil(t *testing.T) {
+func Test_GetFunc_NotNil(t *testing.T) {
 	// Arrange
 	f := corefuncs.GetFunc(corefuncs.GetFuncName)
 
@@ -22,7 +22,7 @@ func Test_Cov2_GetFunc_NotNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetFunc returns nil -- returns non-nil for valid func", actual)
 }
 
-func Test_Cov2_GetFuncFullName_HasDot(t *testing.T) {
+func Test_GetFuncFullName_HasDot(t *testing.T) {
 	// Arrange
 	name := corefuncs.GetFuncFullName(corefuncs.GetFuncName)
 
@@ -34,7 +34,7 @@ func Test_Cov2_GetFuncFullName_HasDot(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetFuncFullName returns empty -- returns non-empty", actual)
 }
 
-func Test_Cov2_GetFuncName_Short(t *testing.T) {
+func Test_GetFuncName_Short(t *testing.T) {
 	// Arrange
 	name := corefuncs.GetFuncName(corefuncs.GetFuncName)
 
@@ -48,7 +48,7 @@ func Test_Cov2_GetFuncName_Short(t *testing.T) {
 
 // ── NamedActionFuncWrapper.Next ──
 
-func Test_Cov2_NamedAction_Next(t *testing.T) {
+func Test_NamedAction_Next(t *testing.T) {
 	// Arrange
 	var firstCalled, secondCalled bool
 	w1 := corefuncs.New.NamedAction("first", func(name string) {
@@ -75,7 +75,7 @@ func Test_Cov2_NamedAction_Next(t *testing.T) {
 
 // ── NamedActionFuncWrapper.Exec / AsActionReturnsErrorFunc ──
 
-func Test_Cov2_NamedAction_Exec(t *testing.T) {
+func Test_NamedAction_Exec(t *testing.T) {
 	// Arrange
 	var called bool
 	w := corefuncs.New.NamedAction("test", func(name string) {
@@ -91,7 +91,7 @@ func Test_Cov2_NamedAction_Exec(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NamedAction Exec -- called", actual)
 }
 
-func Test_Cov2_NamedAction_AsActionReturnsErrorFunc(t *testing.T) {
+func Test_NamedAction_AsActionReturnsErrorFunc(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.NamedAction("test", func(name string) {})
 	errFunc := w.AsActionReturnsErrorFunc()
@@ -107,7 +107,7 @@ func Test_Cov2_NamedAction_AsActionReturnsErrorFunc(t *testing.T) {
 
 // ── IsSuccessFuncWrapper ──
 
-func Test_Cov2_IsSuccess_Exec(t *testing.T) {
+func Test_IsSuccess_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.IsSuccess("check", func() bool { return true })
 
@@ -119,7 +119,7 @@ func Test_Cov2_IsSuccess_Exec(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSuccess Exec -- true", actual)
 }
 
-func Test_Cov2_IsSuccess_AsActionFunc(t *testing.T) {
+func Test_IsSuccess_AsActionFunc(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.IsSuccess("check", func() bool { return true })
 	w.AsActionFunc()()
@@ -132,7 +132,7 @@ func Test_Cov2_IsSuccess_AsActionFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSuccess AsActionFunc -- no panic", actual)
 }
 
-func Test_Cov2_IsSuccess_AsActionReturnsErrorFunc_Fail(t *testing.T) {
+func Test_IsSuccess_AsActionReturnsErrorFunc_Fail(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.IsSuccess("check", func() bool { return false })
 	err := w.AsActionReturnsErrorFunc()()
@@ -145,7 +145,7 @@ func Test_Cov2_IsSuccess_AsActionReturnsErrorFunc_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSuccess failure -- returns error", actual)
 }
 
-func Test_Cov2_IsSuccess_AsActionReturnsErrorFunc_Success(t *testing.T) {
+func Test_IsSuccess_AsActionReturnsErrorFunc_Success(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.IsSuccess("check", func() bool { return true })
 	err := w.AsActionReturnsErrorFunc()()
@@ -160,7 +160,7 @@ func Test_Cov2_IsSuccess_AsActionReturnsErrorFunc_Success(t *testing.T) {
 
 // ── ActionReturnsErrorFuncWrapper.Exec ──
 
-func Test_Cov2_ActionErr_Exec(t *testing.T) {
+func Test_ActionErr_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.ActionErr("test", func() error { return nil })
 	err := w.Exec()
@@ -173,7 +173,7 @@ func Test_Cov2_ActionErr_Exec(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ActionErr Exec -- nil error", actual)
 }
 
-func Test_Cov2_ActionErr_AsActionReturnsErrorFunc_Fail(t *testing.T) {
+func Test_ActionErr_AsActionReturnsErrorFunc_Fail(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.ActionErr("test", func() error { return errors.New("fail") })
 	err := w.AsActionReturnsErrorFunc()()
@@ -188,7 +188,7 @@ func Test_Cov2_ActionErr_AsActionReturnsErrorFunc_Fail(t *testing.T) {
 
 // ── ToLegacy conversions ──
 
-func Test_Cov2_InOutErrWrapperOf_ToLegacy(t *testing.T) {
+func Test_InOutErrWrapperOf_ToLegacy(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInOutErrWrapper[string, int](
 		"test", func(s string) (int, error) { return len(s), nil },
@@ -210,7 +210,7 @@ func Test_Cov2_InOutErrWrapperOf_ToLegacy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InOutErrWrapperOf returns error -- ToLegacy", actual)
 }
 
-func Test_Cov2_InActionErrWrapperOf_ToLegacy(t *testing.T) {
+func Test_InActionErrWrapperOf_ToLegacy(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInActionErrWrapper[string](
 		"test", func(s string) error { return nil },
@@ -226,7 +226,7 @@ func Test_Cov2_InActionErrWrapperOf_ToLegacy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InActionErrWrapperOf returns error -- ToLegacy", actual)
 }
 
-func Test_Cov2_InOutFuncWrapperOf_ToLegacy(t *testing.T) {
+func Test_InOutFuncWrapperOf_ToLegacy(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInOutWrapper[string, int](
 		"test", func(s string) int { return len(s) },
@@ -248,7 +248,7 @@ func Test_Cov2_InOutFuncWrapperOf_ToLegacy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InOutFuncWrapperOf returns correct value -- ToLegacy", actual)
 }
 
-func Test_Cov2_ResultDelegatingWrapperOf_ToLegacy(t *testing.T) {
+func Test_ResultDelegatingWrapperOf_ToLegacy(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewResultDelegatingWrapper[*string](
 		"test", func(t *string) error { return nil },
@@ -267,7 +267,7 @@ func Test_Cov2_ResultDelegatingWrapperOf_ToLegacy(t *testing.T) {
 
 // ── InOutErrFuncWrapper.Exec ──
 
-func Test_Cov2_LegacyInOutErr_Exec(t *testing.T) {
+func Test_LegacyInOutErr_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.LegacyInOutErr("test", func(input any) (any, error) {
 		return "ok", nil
@@ -290,7 +290,7 @@ func Test_Cov2_LegacyInOutErr_Exec(t *testing.T) {
 
 // ── ResultDelegatingFuncWrapper.Exec ──
 
-func Test_Cov2_LegacyResultDelegating_Exec(t *testing.T) {
+func Test_LegacyResultDelegating_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.New.LegacyResultDelegating("test", func(target any) error {
 		return nil
@@ -307,7 +307,7 @@ func Test_Cov2_LegacyResultDelegating_Exec(t *testing.T) {
 
 // ── SerializeOutputFuncWrapperOf.Exec ──
 
-func Test_Cov2_SerializeWrapper_Exec(t *testing.T) {
+func Test_SerializeWrapper_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewSerializeWrapper[string](
 		"json", func(s string) ([]byte, error) { return []byte(s), nil },
@@ -330,7 +330,7 @@ func Test_Cov2_SerializeWrapper_Exec(t *testing.T) {
 
 // ── InActionReturnsErrFuncWrapperOf.Exec / AsActionFunc ──
 
-func Test_Cov2_InActionErrWrapper_Exec(t *testing.T) {
+func Test_InActionErrWrapper_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInActionErrWrapper[string](
 		"validate", func(s string) error { return nil },
@@ -347,7 +347,7 @@ func Test_Cov2_InActionErrWrapper_Exec(t *testing.T) {
 
 // ── InOutErrFuncWrapperOf.Exec ──
 
-func Test_Cov2_InOutErrWrapperOf_Exec(t *testing.T) {
+func Test_InOutErrWrapperOf_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInOutErrWrapper[string, int](
 		"parse", func(s string) (int, error) { return len(s), nil },
@@ -370,7 +370,7 @@ func Test_Cov2_InOutErrWrapperOf_Exec(t *testing.T) {
 
 // ── InOutFuncWrapperOf.Exec ──
 
-func Test_Cov2_InOutFuncWrapperOf_Exec(t *testing.T) {
+func Test_InOutFuncWrapperOf_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewInOutWrapper[string, int](
 		"strlen", func(s string) int { return len(s) },
@@ -387,7 +387,7 @@ func Test_Cov2_InOutFuncWrapperOf_Exec(t *testing.T) {
 
 // ── ResultDelegatingFuncWrapperOf.Exec ──
 
-func Test_Cov2_ResultDelegatingWrapperOf_Exec(t *testing.T) {
+func Test_ResultDelegatingWrapperOf_Exec(t *testing.T) {
 	// Arrange
 	w := corefuncs.NewResultDelegatingWrapper[*string](
 		"bind", func(t *string) error { *t = "bound"; return nil },

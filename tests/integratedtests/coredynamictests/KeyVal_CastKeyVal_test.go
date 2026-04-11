@@ -10,7 +10,7 @@ import (
 
 // ── KeyVal.CastKeyVal nil receiver (line 134) ──
 
-func Test_Cov75_KeyVal_CastKeyVal_NilReceiver_I29(t *testing.T) {
+func Test_KeyVal_CastKeyVal_NilReceiver_I29(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -27,7 +27,7 @@ func Test_Cov75_KeyVal_CastKeyVal_NilReceiver_I29(t *testing.T) {
 
 // ── KeyVal.JsonParseSelfInject (line 300) ──
 
-func Test_Cov75_KeyVal_JsonParseSelfInject_I29(t *testing.T) {
+func Test_KeyVal_JsonParseSelfInject_I29(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "a", Value: "b"}
 	jsonResult := corejson.New(kv)
@@ -43,7 +43,7 @@ func Test_Cov75_KeyVal_JsonParseSelfInject_I29(t *testing.T) {
 
 // ── KeyValCollection operations ──
 
-func Test_Cov75_KeyValCollection_ParseInjectUsingJson_Valid_I29(t *testing.T) {
+func Test_KeyValCollection_ParseInjectUsingJson_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(3)
 	kvc.Add(coredynamic.KeyVal{Key: "k1", Value: "v1"})
@@ -64,7 +64,7 @@ func Test_Cov75_KeyValCollection_ParseInjectUsingJson_Valid_I29(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection ParseInjectUsingJson valid", expected)
 }
 
-func Test_Cov75_KeyValCollection_JsonParseSelfInject_I29(t *testing.T) {
+func Test_KeyValCollection_JsonParseSelfInject_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "x", Value: "y"})
@@ -79,7 +79,7 @@ func Test_Cov75_KeyValCollection_JsonParseSelfInject_I29(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection JsonParseSelfInject", expected)
 }
 
-func Test_Cov75_KeyValCollection_Serialize_Valid_I29(t *testing.T) {
+func Test_KeyValCollection_Serialize_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: "b"})
@@ -99,7 +99,7 @@ func Test_Cov75_KeyValCollection_Serialize_Valid_I29(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection Serialize valid", expected)
 }
 
-func Test_Cov75_KeyValCollection_JsonString_Valid_I29(t *testing.T) {
+func Test_KeyValCollection_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: "b"})
@@ -119,7 +119,7 @@ func Test_Cov75_KeyValCollection_JsonString_Valid_I29(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection JsonString valid", expected)
 }
 
-func Test_Cov75_KeyValCollection_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
+func Test_KeyValCollection_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})

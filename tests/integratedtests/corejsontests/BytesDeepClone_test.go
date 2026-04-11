@@ -9,7 +9,7 @@ import (
 
 // ── BytesDeepClone ──
 
-func Test_Cov4_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone(t *testing.T) {
 	// Arrange
 	original := []byte(`{"key":"value"}`)
 	cloned := corejson.BytesDeepClone(original)
@@ -34,7 +34,7 @@ func Test_Cov4_BytesDeepClone(t *testing.T) {
 
 // ── Result via NewPtr ──
 
-func Test_Cov4_Result_NewPtr(t *testing.T) {
+func Test_Result_NewPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr("hello")
 
@@ -53,7 +53,7 @@ func Test_Cov4_Result_NewPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result returns valid json -- NewPtr string", actual)
 }
 
-func Test_Cov4_Result_New_ValueType(t *testing.T) {
+func Test_Result_New_ValueType(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -73,7 +73,7 @@ func Test_Cov4_Result_New_ValueType(t *testing.T) {
 
 // ── BytesToString ──
 
-func Test_Cov4_BytesToString(t *testing.T) {
+func Test_BytesToString(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToString([]byte(`"hello"`))
 
@@ -85,7 +85,7 @@ func Test_Cov4_BytesToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString returns non-empty -- valid bytes", actual)
 }
 
-func Test_Cov4_BytesToString_Nil(t *testing.T) {
+func Test_BytesToString_Nil(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToString(nil)
 
@@ -99,7 +99,7 @@ func Test_Cov4_BytesToString_Nil(t *testing.T) {
 
 // ── JsonString (returns string, error) ──
 
-func Test_Cov4_JsonString(t *testing.T) {
+func Test_JsonString(t *testing.T) {
 	// Arrange
 	result, err := corejson.JsonString(map[string]string{"a": "1"})
 
@@ -119,7 +119,7 @@ func Test_Cov4_JsonString(t *testing.T) {
 
 // ── JsonStringOrErrMsg ──
 
-func Test_Cov4_JsonStringOrErrMsg(t *testing.T) {
+func Test_JsonStringOrErrMsg(t *testing.T) {
 	// Arrange
 	result := corejson.JsonStringOrErrMsg(map[string]string{"a": "1"})
 
@@ -133,7 +133,7 @@ func Test_Cov4_JsonStringOrErrMsg(t *testing.T) {
 
 // ── BytesCloneIf ──
 
-func Test_Cov4_BytesCloneIf_True(t *testing.T) {
+func Test_BytesCloneIf_True(t *testing.T) {
 	// Arrange
 	original := []byte("hello")
 	cloned := corejson.BytesCloneIf(true, original)
@@ -149,7 +149,7 @@ func Test_Cov4_BytesCloneIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns cloned bytes -- true flag", actual)
 }
 
-func Test_Cov4_BytesCloneIf_False(t *testing.T) {
+func Test_BytesCloneIf_False(t *testing.T) {
 	// Arrange
 	original := []byte("hello")
 	result := corejson.BytesCloneIf(false, original)
@@ -163,7 +163,7 @@ func Test_Cov4_BytesCloneIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns empty -- false flag", actual)
 }
 
-func Test_Cov4_BytesCloneIf_NilInput(t *testing.T) {
+func Test_BytesCloneIf_NilInput(t *testing.T) {
 	// Arrange
 	result := corejson.BytesCloneIf(true, nil)
 	// len(nil) == 0, so !isDeepClone || len == 0 → returns []byte{}
@@ -178,7 +178,7 @@ func Test_Cov4_BytesCloneIf_NilInput(t *testing.T) {
 
 // ── SimpleJsonBinder (round-trip) ──
 
-func Test_Cov4_SimpleJsonBinder(t *testing.T) {
+func Test_SimpleJsonBinder(t *testing.T) {
 	// Arrange
 	type testStruct struct {
 		Name string `json:"name"`
@@ -204,7 +204,7 @@ func Test_Cov4_SimpleJsonBinder(t *testing.T) {
 
 // ── Result PrettyJsonString ──
 
-func Test_Cov4_Result_PrettyJsonString(t *testing.T) {
+func Test_Result_PrettyJsonString(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(map[string]string{"key": "val"})
 	pretty := r.PrettyJsonString()

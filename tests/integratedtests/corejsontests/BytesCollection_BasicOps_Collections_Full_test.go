@@ -12,7 +12,7 @@ import (
 // BytesCollection — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov19_BytesCollection_BasicOps(t *testing.T) {
+func Test_BytesCollection_BasicOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(5)
 
@@ -28,7 +28,7 @@ func Test_Cov19_BytesCollection_BasicOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "basic filled checks failed", actual)
 }
 
-func Test_Cov19_BytesCollection_FirstLastOrDefault(t *testing.T) {
+func Test_BytesCollection_FirstLastOrDefault(t *testing.T) {
 	// Arrange
 	empty := corejson.NewBytesCollection.Empty()
 
@@ -45,7 +45,7 @@ func Test_Cov19_BytesCollection_FirstLastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "first/last wrong", actual)
 }
 
-func Test_Cov19_BytesCollection_TakeLimitSkip(t *testing.T) {
+func Test_BytesCollection_TakeLimitSkip(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(5)
 	c.Add([]byte(`"a"`)).Add([]byte(`"b"`)).Add([]byte(`"c"`)).Add([]byte(`"d"`))
@@ -71,7 +71,7 @@ func Test_Cov19_BytesCollection_TakeLimitSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "skip wrong", actual)
 }
 
-func Test_Cov19_BytesCollection_AddMethods(t *testing.T) {
+func Test_BytesCollection_AddMethods(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(10)
 	c.AddSkipOnNil(nil)
@@ -93,7 +93,7 @@ func Test_Cov19_BytesCollection_AddMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 7", actual)
 }
 
-func Test_Cov19_BytesCollection_GetAt(t *testing.T) {
+func Test_BytesCollection_GetAt(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`)).Add([]byte(`"b"`))
@@ -106,7 +106,7 @@ func Test_Cov19_BytesCollection_GetAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAt wrong", actual)
 }
 
-func Test_Cov19_BytesCollection_JsonResultAt(t *testing.T) {
+func Test_BytesCollection_JsonResultAt(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"hello"`))
@@ -120,7 +120,7 @@ func Test_Cov19_BytesCollection_JsonResultAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid result", actual)
 }
 
-func Test_Cov19_BytesCollection_UnmarshalAt(t *testing.T) {
+func Test_BytesCollection_UnmarshalAt(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"hello"`))
@@ -135,7 +135,7 @@ func Test_Cov19_BytesCollection_UnmarshalAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov19_BytesCollection_AddSerializerFunc(t *testing.T) {
+func Test_BytesCollection_AddSerializerFunc(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.AddSerializerFunc(nil)
@@ -149,7 +149,7 @@ func Test_Cov19_BytesCollection_AddSerializerFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_BytesCollection_AddSerializerFunctions(t *testing.T) {
+func Test_BytesCollection_AddSerializerFunctions(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.AddSerializerFunctions(
@@ -165,7 +165,7 @@ func Test_Cov19_BytesCollection_AddSerializerFunctions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_BytesCollection_AddAnyItems(t *testing.T) {
+func Test_BytesCollection_AddAnyItems(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(5)
 	err := c.AddAnyItems("a", "b")
@@ -178,7 +178,7 @@ func Test_Cov19_BytesCollection_AddAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov19_BytesCollection_AddAny(t *testing.T) {
+func Test_BytesCollection_AddAny(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	err := c.AddAny("hello")
@@ -191,7 +191,7 @@ func Test_Cov19_BytesCollection_AddAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov19_BytesCollection_AddsPtr(t *testing.T) {
+func Test_BytesCollection_AddsPtr(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(5)
 	r1 := corejson.NewResult.AnyPtr("a")
@@ -205,7 +205,7 @@ func Test_Cov19_BytesCollection_AddsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_BytesCollection_AddBytesCollection(t *testing.T) {
+func Test_BytesCollection_AddBytesCollection(t *testing.T) {
 	// Arrange
 	c1 := corejson.NewBytesCollection.UsingCap(2)
 	c1.Add([]byte(`"a"`))
@@ -221,7 +221,7 @@ func Test_Cov19_BytesCollection_AddBytesCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_BytesCollection_GetAtSafe(t *testing.T) {
+func Test_BytesCollection_GetAtSafe(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`))
@@ -240,7 +240,7 @@ func Test_Cov19_BytesCollection_GetAtSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for neg", actual)
 }
 
-func Test_Cov19_BytesCollection_GetAtSafePtr(t *testing.T) {
+func Test_BytesCollection_GetAtSafePtr(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -253,7 +253,7 @@ func Test_Cov19_BytesCollection_GetAtSafePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov19_BytesCollection_GetResultAtSafe(t *testing.T) {
+func Test_BytesCollection_GetResultAtSafe(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -269,7 +269,7 @@ func Test_Cov19_BytesCollection_GetResultAtSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov19_BytesCollection_GetAtSafeUsingLength(t *testing.T) {
+func Test_BytesCollection_GetAtSafeUsingLength(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -285,7 +285,7 @@ func Test_Cov19_BytesCollection_GetAtSafeUsingLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov19_BytesCollection_Strings(t *testing.T) {
+func Test_BytesCollection_Strings(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`)).Add([]byte(`"b"`))
@@ -299,7 +299,7 @@ func Test_Cov19_BytesCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_BytesCollection_StringsPtr(t *testing.T) {
+func Test_BytesCollection_StringsPtr(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -313,7 +313,7 @@ func Test_Cov19_BytesCollection_StringsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_BytesCollection_ClearDispose(t *testing.T) {
+func Test_BytesCollection_ClearDispose(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`))
@@ -329,7 +329,7 @@ func Test_Cov19_BytesCollection_ClearDispose(t *testing.T) {
 	c.Dispose()
 }
 
-func Test_Cov19_BytesCollection_PagesSize(t *testing.T) {
+func Test_BytesCollection_PagesSize(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
@@ -347,7 +347,7 @@ func Test_Cov19_BytesCollection_PagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0 for 0 size", actual)
 }
 
-func Test_Cov19_BytesCollection_GetPagedCollection(t *testing.T) {
+func Test_BytesCollection_GetPagedCollection(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ {
@@ -363,7 +363,7 @@ func Test_Cov19_BytesCollection_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
-func Test_Cov19_BytesCollection_GetPagedCollection_SmallPage(t *testing.T) {
+func Test_BytesCollection_GetPagedCollection_SmallPage(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`))
@@ -377,7 +377,7 @@ func Test_Cov19_BytesCollection_GetPagedCollection_SmallPage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 page", actual)
 }
 
-func Test_Cov19_BytesCollection_GetSinglePageCollection(t *testing.T) {
+func Test_BytesCollection_GetSinglePageCollection(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
@@ -397,7 +397,7 @@ func Test_Cov19_BytesCollection_GetSinglePageCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 for last page", actual)
 }
 
-func Test_Cov19_BytesCollection_JsonOps(t *testing.T) {
+func Test_BytesCollection_JsonOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -417,7 +417,7 @@ func Test_Cov19_BytesCollection_JsonOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
-func Test_Cov19_BytesCollection_CloneOps(t *testing.T) {
+func Test_BytesCollection_CloneOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`)).Add([]byte(`"b"`))
@@ -435,7 +435,7 @@ func Test_Cov19_BytesCollection_CloneOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected clone ptr", actual)
 }
 
-func Test_Cov19_BytesCollection_ClonePtr_Nil(t *testing.T) {
+func Test_BytesCollection_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var c *corejson.BytesCollection
 	cp := c.ClonePtr(true)
@@ -448,7 +448,7 @@ func Test_Cov19_BytesCollection_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov19_BytesCollection_InterfaceMethods(t *testing.T) {
+func Test_BytesCollection_InterfaceMethods(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
 	_ = c.AsJsonContractsBinder()
@@ -456,7 +456,7 @@ func Test_Cov19_BytesCollection_InterfaceMethods(t *testing.T) {
 	_ = c.AsJsonParseSelfInjector()
 }
 
-func Test_Cov19_BytesCollection_ParseInjectUsingJson(t *testing.T) {
+func Test_BytesCollection_ParseInjectUsingJson(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
 	jr := c.JsonPtr()
@@ -465,7 +465,7 @@ func Test_Cov19_BytesCollection_ParseInjectUsingJson(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov19_BytesCollection_InjectIntoAt(t *testing.T) {
+func Test_BytesCollection_InjectIntoAt(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`["a","b"]`))
 	target := corejson.NewResult.Any("x")
@@ -473,7 +473,7 @@ func Test_Cov19_BytesCollection_InjectIntoAt(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov19_BytesCollection_InjectIntoSameIndex(t *testing.T) {
+func Test_BytesCollection_InjectIntoSameIndex(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"hello"`))
 	r := corejson.NewResult.Any("x")
@@ -482,7 +482,7 @@ func Test_Cov19_BytesCollection_InjectIntoSameIndex(t *testing.T) {
 	_ = hasErr
 }
 
-func Test_Cov19_BytesCollection_InjectIntoSameIndex_Nil(t *testing.T) {
+func Test_BytesCollection_InjectIntoSameIndex_Nil(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	// Pass true nil variadic to hit the nil early return
 	var nilSlice []corejson.JsonParseSelfInjector
@@ -491,7 +491,7 @@ func Test_Cov19_BytesCollection_InjectIntoSameIndex_Nil(t *testing.T) {
 	_ = hasErr
 }
 
-func Test_Cov19_BytesCollection_UnmarshalIntoSameIndex(t *testing.T) {
+func Test_BytesCollection_UnmarshalIntoSameIndex(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"hello"`))
 	var s string
@@ -500,7 +500,7 @@ func Test_Cov19_BytesCollection_UnmarshalIntoSameIndex(t *testing.T) {
 	_ = hasErr
 }
 
-func Test_Cov19_BytesCollection_UnmarshalIntoSameIndex_Nil(t *testing.T) {
+func Test_BytesCollection_UnmarshalIntoSameIndex_Nil(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 
@@ -523,7 +523,7 @@ func Test_Cov19_BytesCollection_UnmarshalIntoSameIndex_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 error slot with nil skip", actual)
 }
 
-func Test_Cov19_BytesCollection_AddMapResults(t *testing.T) {
+func Test_BytesCollection_AddMapResults(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	mr.Add("k", corejson.NewResult.Any("v"))
@@ -538,7 +538,7 @@ func Test_Cov19_BytesCollection_AddMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_BytesCollection_AddRawMapResults(t *testing.T) {
+func Test_BytesCollection_AddRawMapResults(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.AddRawMapResults(map[string]corejson.Result{
@@ -553,7 +553,7 @@ func Test_Cov19_BytesCollection_AddRawMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_BytesCollection_AddJsoners(t *testing.T) {
+func Test_BytesCollection_AddJsoners(t *testing.T) {
 	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	r := corejson.NewResult.Any("x")
@@ -571,7 +571,7 @@ func Test_Cov19_BytesCollection_AddJsoners(t *testing.T) {
 // ResultsCollection — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov19_ResultsCollection_BasicOps(t *testing.T) {
+func Test_ResultsCollection_BasicOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 
@@ -587,7 +587,7 @@ func Test_Cov19_ResultsCollection_BasicOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "filled checks failed", actual)
 }
 
-func Test_Cov19_ResultsCollection_FirstLast(t *testing.T) {
+func Test_ResultsCollection_FirstLast(t *testing.T) {
 	// Arrange
 	e := corejson.NewResultsCollection.Empty()
 
@@ -604,7 +604,7 @@ func Test_Cov19_ResultsCollection_FirstLast(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov19_ResultsCollection_TakeLimitSkip(t *testing.T) {
+func Test_ResultsCollection_TakeLimitSkip(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 5; i++ {
@@ -628,7 +628,7 @@ func Test_Cov19_ResultsCollection_TakeLimitSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "skip wrong", actual)
 }
 
-func Test_Cov19_ResultsCollection_AddMethods(t *testing.T) {
+func Test_ResultsCollection_AddMethods(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.AddSkipOnNil(nil)
@@ -653,7 +653,7 @@ func Test_Cov19_ResultsCollection_AddMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 5", actual)
 }
 
-func Test_Cov19_ResultsCollection_Errors(t *testing.T) {
+func Test_ResultsCollection_Errors(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("ok"))
@@ -678,7 +678,7 @@ func Test_Cov19_ResultsCollection_Errors(t *testing.T) {
 	_ = c.GetErrorsAsSingle()
 }
 
-func Test_Cov19_ResultsCollection_GetAtSafe(t *testing.T) {
+func Test_ResultsCollection_GetAtSafe(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
@@ -697,7 +697,7 @@ func Test_Cov19_ResultsCollection_GetAtSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov19_ResultsCollection_PagingOps(t *testing.T) {
+func Test_ResultsCollection_PagingOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 10; i++ {
@@ -716,7 +716,7 @@ func Test_Cov19_ResultsCollection_PagingOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 4 pages", actual)
 }
 
-func Test_Cov19_ResultsCollection_ClearDispose(t *testing.T) {
+func Test_ResultsCollection_ClearDispose(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
 	c.Clear()
@@ -724,7 +724,7 @@ func Test_Cov19_ResultsCollection_ClearDispose(t *testing.T) {
 	c.Dispose()
 }
 
-func Test_Cov19_ResultsCollection_GetStrings(t *testing.T) {
+func Test_ResultsCollection_GetStrings(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
@@ -739,7 +739,7 @@ func Test_Cov19_ResultsCollection_GetStrings(t *testing.T) {
 	_ = c.GetStringsPtr()
 }
 
-func Test_Cov19_ResultsCollection_JsonOps(t *testing.T) {
+func Test_ResultsCollection_JsonOps(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
 	_ = c.JsonModel()
@@ -753,7 +753,7 @@ func Test_Cov19_ResultsCollection_JsonOps(t *testing.T) {
 	_ = c.Ptr()
 }
 
-func Test_Cov19_ResultsCollection_CloneOps(t *testing.T) {
+func Test_ResultsCollection_CloneOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
@@ -771,7 +771,7 @@ func Test_Cov19_ResultsCollection_CloneOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected clone ptr", actual)
 }
 
-func Test_Cov19_ResultsCollection_ClonePtr_Nil(t *testing.T) {
+func Test_ResultsCollection_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var c *corejson.ResultsCollection
 	cp := c.ClonePtr(true)
@@ -784,7 +784,7 @@ func Test_Cov19_ResultsCollection_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov19_ResultsCollection_SerializerMethods(t *testing.T) {
+func Test_ResultsCollection_SerializerMethods(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.AddSerializerFunc(nil)
@@ -801,7 +801,7 @@ func Test_Cov19_ResultsCollection_SerializerMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_ResultsCollection_AddMapResults(t *testing.T) {
+func Test_ResultsCollection_AddMapResults(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	mr.Add("k", corejson.NewResult.Any("v"))
@@ -816,7 +816,7 @@ func Test_Cov19_ResultsCollection_AddMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsCollection_AddResultsCollection(t *testing.T) {
+func Test_ResultsCollection_AddResultsCollection(t *testing.T) {
 	// Arrange
 	c1 := corejson.NewResultsCollection.Empty()
 	c1.Add(corejson.NewResult.Any("a"))
@@ -831,7 +831,7 @@ func Test_Cov19_ResultsCollection_AddResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsCollection_AddAnyItemsSlice(t *testing.T) {
+func Test_ResultsCollection_AddAnyItemsSlice(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.AddAnyItemsSlice([]any{"a", nil, "b"})
@@ -844,7 +844,7 @@ func Test_Cov19_ResultsCollection_AddAnyItemsSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_ResultsCollection_AddJsoners(t *testing.T) {
+func Test_ResultsCollection_AddJsoners(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	r := corejson.NewResult.Any("x")
@@ -858,7 +858,7 @@ func Test_Cov19_ResultsCollection_AddJsoners(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsCollection_UnmarshalAt(t *testing.T) {
+func Test_ResultsCollection_UnmarshalAt(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("hello"))
@@ -873,7 +873,7 @@ func Test_Cov19_ResultsCollection_UnmarshalAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov19_ResultsCollection_InjectIntoSameIndex(t *testing.T) {
+func Test_ResultsCollection_InjectIntoSameIndex(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
 	r := corejson.NewResult.Any("y")
@@ -882,7 +882,7 @@ func Test_Cov19_ResultsCollection_InjectIntoSameIndex(t *testing.T) {
 	_ = hasErr
 }
 
-func Test_Cov19_ResultsCollection_UnmarshalIntoSameIndex(t *testing.T) {
+func Test_ResultsCollection_UnmarshalIntoSameIndex(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("hello"))
 	var s string
@@ -895,7 +895,7 @@ func Test_Cov19_ResultsCollection_UnmarshalIntoSameIndex(t *testing.T) {
 // ResultsPtrCollection — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov19_ResultsPtrCollection_BasicOps(t *testing.T) {
+func Test_ResultsPtrCollection_BasicOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 
@@ -911,7 +911,7 @@ func Test_Cov19_ResultsPtrCollection_BasicOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_FirstLast(t *testing.T) {
+func Test_ResultsPtrCollection_FirstLast(t *testing.T) {
 	// Arrange
 	e := corejson.NewResultsPtrCollection.Default()
 
@@ -928,7 +928,7 @@ func Test_Cov19_ResultsPtrCollection_FirstLast(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_TakeLimitSkip(t *testing.T) {
+func Test_ResultsPtrCollection_TakeLimitSkip(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	for i := 0; i < 5; i++ {
@@ -952,7 +952,7 @@ func Test_Cov19_ResultsPtrCollection_TakeLimitSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "skip wrong", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_AddMethods(t *testing.T) {
+func Test_ResultsPtrCollection_AddMethods(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.AddSkipOnNil(nil)
@@ -976,7 +976,7 @@ func Test_Cov19_ResultsPtrCollection_AddMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 5", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_Errors(t *testing.T) {
+func Test_ResultsPtrCollection_Errors(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("ok"))
@@ -998,7 +998,7 @@ func Test_Cov19_ResultsPtrCollection_Errors(t *testing.T) {
 	_ = c.GetErrorsAsSingle()
 }
 
-func Test_Cov19_ResultsPtrCollection_PagingOps(t *testing.T) {
+func Test_ResultsPtrCollection_PagingOps(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	for i := 0; i < 10; i++ {
@@ -1017,7 +1017,7 @@ func Test_Cov19_ResultsPtrCollection_PagingOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_ClearDispose(t *testing.T) {
+func Test_ResultsPtrCollection_ClearDispose(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	c.Clear()
@@ -1025,7 +1025,7 @@ func Test_Cov19_ResultsPtrCollection_ClearDispose(t *testing.T) {
 	c.Dispose()
 }
 
-func Test_Cov19_ResultsPtrCollection_GetStrings(t *testing.T) {
+func Test_ResultsPtrCollection_GetStrings(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))
@@ -1040,7 +1040,7 @@ func Test_Cov19_ResultsPtrCollection_GetStrings(t *testing.T) {
 	_ = c.GetStringsPtr()
 }
 
-func Test_Cov19_ResultsPtrCollection_JsonOps(t *testing.T) {
+func Test_ResultsPtrCollection_JsonOps(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	_ = c.JsonModel()
@@ -1054,7 +1054,7 @@ func Test_Cov19_ResultsPtrCollection_JsonOps(t *testing.T) {
 	_ = c.Ptr()
 }
 
-func Test_Cov19_ResultsPtrCollection_Clone(t *testing.T) {
+func Test_ResultsPtrCollection_Clone(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))
@@ -1068,7 +1068,7 @@ func Test_Cov19_ResultsPtrCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected clone", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_Clone_Nil(t *testing.T) {
+func Test_ResultsPtrCollection_Clone_Nil(t *testing.T) {
 	// Arrange
 	var c *corejson.ResultsPtrCollection
 	cp := c.Clone(true)
@@ -1081,7 +1081,7 @@ func Test_Cov19_ResultsPtrCollection_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_UnmarshalAt(t *testing.T) {
+func Test_ResultsPtrCollection_UnmarshalAt(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("hello"))
@@ -1096,7 +1096,7 @@ func Test_Cov19_ResultsPtrCollection_UnmarshalAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_SerializerMethods(t *testing.T) {
+func Test_ResultsPtrCollection_SerializerMethods(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.AddSerializerFunc(nil)
@@ -1113,7 +1113,7 @@ func Test_Cov19_ResultsPtrCollection_SerializerMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_AddResultsCollection(t *testing.T) {
+func Test_ResultsPtrCollection_AddResultsCollection(t *testing.T) {
 	// Arrange
 	c1 := corejson.NewResultsPtrCollection.Default()
 	c1.Add(corejson.NewResult.AnyPtr("a"))
@@ -1128,7 +1128,7 @@ func Test_Cov19_ResultsPtrCollection_AddResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_AddJsoners(t *testing.T) {
+func Test_ResultsPtrCollection_AddJsoners(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	r := corejson.NewResult.Any("x")
@@ -1142,7 +1142,7 @@ func Test_Cov19_ResultsPtrCollection_AddJsoners(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov19_ResultsPtrCollection_GetAtSafe(t *testing.T) {
+func Test_ResultsPtrCollection_GetAtSafe(t *testing.T) {
 	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))

@@ -10,7 +10,7 @@ import (
 
 // ===== Result methods coverage =====
 
-func Test_I20_Result_CloneIf_True(t *testing.T) {
+func Test_Result_CloneIf_True(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any(map[string]string{"a": "1"})
 	cloned := r.CloneIf(true, true)
@@ -23,7 +23,7 @@ func Test_I20_Result_CloneIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cloned bytes", actual)
 }
 
-func Test_I20_Result_CloneIf_False(t *testing.T) {
+func Test_Result_CloneIf_False(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any(map[string]string{"a": "1"})
 	same := r.CloneIf(false, false)
@@ -36,7 +36,7 @@ func Test_I20_Result_CloneIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected same result", actual)
 }
 
-func Test_I20_Result_Clone_DeepClone(t *testing.T) {
+func Test_Result_Clone_DeepClone(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	c := r.Clone(true)
@@ -49,7 +49,7 @@ func Test_I20_Result_Clone_DeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_Clone_ShallowClone(t *testing.T) {
+func Test_Result_Clone_ShallowClone(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	c := r.Clone(false)
@@ -62,7 +62,7 @@ func Test_I20_Result_Clone_ShallowClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_Clone_Empty(t *testing.T) {
+func Test_Result_Clone_Empty(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Empty()
 	c := r.Clone(true)
@@ -75,7 +75,7 @@ func Test_I20_Result_Clone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Result_ClonePtr_Nil(t *testing.T) {
+func Test_Result_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	c := r.ClonePtr(true)
@@ -88,7 +88,7 @@ func Test_I20_Result_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Result_ClonePtr_Valid(t *testing.T) {
+func Test_Result_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	c := r.ClonePtr(true)
@@ -101,7 +101,7 @@ func Test_I20_Result_ClonePtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cloned ptr", actual)
 }
 
-func Test_I20_Result_PrettyJsonStringOrErrString_Nil(t *testing.T) {
+func Test_Result_PrettyJsonStringOrErrString_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	s := r.PrettyJsonStringOrErrString()
@@ -114,7 +114,7 @@ func Test_I20_Result_PrettyJsonStringOrErrString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty nil message", actual)
 }
 
-func Test_I20_Result_PrettyJsonStringOrErrString_HasError(t *testing.T) {
+func Test_Result_PrettyJsonStringOrErrString_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("test-err"))
 	s := r.PrettyJsonStringOrErrString()
@@ -127,7 +127,7 @@ func Test_I20_Result_PrettyJsonStringOrErrString_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error string", actual)
 }
 
-func Test_I20_Result_PrettyJsonStringOrErrString_Valid(t *testing.T) {
+func Test_Result_PrettyJsonStringOrErrString_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s := r.PrettyJsonStringOrErrString()
@@ -140,12 +140,12 @@ func Test_I20_Result_PrettyJsonStringOrErrString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected pretty json", actual)
 }
 
-func Test_I20_Result_HandleErrorWithMsg_NoError(t *testing.T) {
+func Test_Result_HandleErrorWithMsg_NoError(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("ok")
 	r.HandleErrorWithMsg("no-op") // Should not panic
 }
 
-func Test_I20_Result_HandleErrorWithMsg_Panic(t *testing.T) {
+func Test_Result_HandleErrorWithMsg_Panic(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("bad"))
 	defer func() {
@@ -160,7 +160,7 @@ func Test_I20_Result_HandleErrorWithMsg_Panic(t *testing.T) {
 	r.HandleErrorWithMsg("context message")
 }
 
-func Test_I20_Result_DeserializeMust_Success(t *testing.T) {
+func Test_Result_DeserializeMust_Success(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	var s string
@@ -174,7 +174,7 @@ func Test_I20_Result_DeserializeMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 }
 
-func Test_I20_Result_DeserializeMust_Panic(t *testing.T) {
+func Test_Result_DeserializeMust_Panic(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("err"))
 	defer func() {
@@ -190,7 +190,7 @@ func Test_I20_Result_DeserializeMust_Panic(t *testing.T) {
 	r.DeserializeMust(&s)
 }
 
-func Test_I20_Result_UnmarshalMust_Success(t *testing.T) {
+func Test_Result_UnmarshalMust_Success(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr(42)
 	var i int
@@ -204,20 +204,20 @@ func Test_I20_Result_UnmarshalMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
-func Test_I20_Result_SafeFieldsNames(t *testing.T) {
+func Test_Result_SafeFieldsNames(t *testing.T) {
 	r := corejson.NewResult.AnyPtr(map[string]string{"key": "val"})
 	names := r.SafeFieldsNames()
 	// May return empty due to DeserializedFieldsToMap behavior
 	_ = names
 }
 
-func Test_I20_Result_SafeDeserializedFieldsToMap(t *testing.T) {
+func Test_Result_SafeDeserializedFieldsToMap(t *testing.T) {
 	r := corejson.NewResult.AnyPtr(map[string]string{"k": "v"})
 	m := r.SafeDeserializedFieldsToMap()
 	_ = m
 }
 
-func Test_I20_Result_BytesError(t *testing.T) {
+func Test_Result_BytesError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	be := r.BytesError()
@@ -230,7 +230,7 @@ func Test_I20_Result_BytesError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Result_BytesError_Nil(t *testing.T) {
+func Test_Result_BytesError_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	be := r.BytesError()
@@ -243,7 +243,7 @@ func Test_I20_Result_BytesError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Result_Dispose(t *testing.T) {
+func Test_Result_Dispose(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	r.Dispose()
@@ -256,12 +256,12 @@ func Test_I20_Result_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected disposed", actual)
 }
 
-func Test_I20_Result_Dispose_Nil(t *testing.T) {
+func Test_Result_Dispose_Nil(t *testing.T) {
 	var r *corejson.Result
 	r.Dispose() // should not panic
 }
 
-func Test_I20_Result_NonPtr_Nil(t *testing.T) {
+func Test_Result_NonPtr_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	nr := r.NonPtr()
@@ -274,7 +274,7 @@ func Test_I20_Result_NonPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error in nonptr of nil", actual)
 }
 
-func Test_I20_Result_NonPtr_Valid(t *testing.T) {
+func Test_Result_NonPtr_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	nr := r.NonPtr()
@@ -287,7 +287,7 @@ func Test_I20_Result_NonPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_CombineErrorWithRefError_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefError_NoError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	err := r.CombineErrorWithRefError("ref")
@@ -300,7 +300,7 @@ func Test_I20_Result_CombineErrorWithRefError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Result_CombineErrorWithRefError_HasError(t *testing.T) {
+func Test_Result_CombineErrorWithRefError_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	err := r.CombineErrorWithRefError("ref1", "ref2")
@@ -313,7 +313,7 @@ func Test_I20_Result_CombineErrorWithRefError_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_CombineErrorWithRefString_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefString_NoError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	s := r.CombineErrorWithRefString("ref")
@@ -326,7 +326,7 @@ func Test_I20_Result_CombineErrorWithRefString_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Result_CloneError_NoError(t *testing.T) {
+func Test_Result_CloneError_NoError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 
@@ -338,7 +338,7 @@ func Test_I20_Result_CloneError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Result_CloneError_HasError(t *testing.T) {
+func Test_Result_CloneError_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 
@@ -350,7 +350,7 @@ func Test_I20_Result_CloneError_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_Ptr_ToPtr(t *testing.T) {
+func Test_Result_Ptr_ToPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	p := r.Ptr()
@@ -371,7 +371,7 @@ func Test_I20_Result_Ptr_ToPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_BothNil(t *testing.T) {
+func Test_Result_IsEqualPtr_BothNil(t *testing.T) {
 	// Arrange
 	var a, b *corejson.Result
 
@@ -383,7 +383,7 @@ func Test_I20_Result_IsEqualPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_OneNil(t *testing.T) {
+func Test_Result_IsEqualPtr_OneNil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("x")
 
@@ -395,7 +395,7 @@ func Test_I20_Result_IsEqualPtr_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_Same(t *testing.T) {
+func Test_Result_IsEqualPtr_Same(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("x")
 
@@ -407,7 +407,7 @@ func Test_I20_Result_IsEqualPtr_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal (same ptr)", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_DiffLength(t *testing.T) {
+func Test_Result_IsEqualPtr_DiffLength(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.AnyPtr("x")
 	b := corejson.NewResult.AnyPtr("xy")
@@ -420,7 +420,7 @@ func Test_I20_Result_IsEqualPtr_DiffLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_DiffError(t *testing.T) {
+func Test_Result_IsEqualPtr_DiffError(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.Ptr([]byte("x"), errors.New("e1"), "t")
 	b := corejson.NewResult.Ptr([]byte("x"), errors.New("e2"), "t")
@@ -433,7 +433,7 @@ func Test_I20_Result_IsEqualPtr_DiffError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
-func Test_I20_Result_IsEqualPtr_DiffType(t *testing.T) {
+func Test_Result_IsEqualPtr_DiffType(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.Ptr([]byte(`"x"`), nil, "typeA")
 	b := corejson.NewResult.Ptr([]byte(`"x"`), nil, "typeB")
@@ -446,7 +446,7 @@ func Test_I20_Result_IsEqualPtr_DiffType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
-func Test_I20_Result_IsEqual(t *testing.T) {
+func Test_Result_IsEqual(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.Any("hello")
 	b := corejson.NewResult.Any("hello")
@@ -459,7 +459,7 @@ func Test_I20_Result_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
-func Test_I20_Result_IsErrorEqual(t *testing.T) {
+func Test_Result_IsErrorEqual(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.ErrorPtr(errors.New("same"))
 
@@ -471,7 +471,7 @@ func Test_I20_Result_IsErrorEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
-func Test_I20_Result_IsErrorEqual_BothNil(t *testing.T) {
+func Test_Result_IsErrorEqual_BothNil(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.AnyPtr("ok")
 
@@ -483,7 +483,7 @@ func Test_I20_Result_IsErrorEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal (both nil)", actual)
 }
 
-func Test_I20_Result_IsErrorEqual_OnlyOneNil(t *testing.T) {
+func Test_Result_IsErrorEqual_OnlyOneNil(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.AnyPtr("ok")
 
@@ -497,7 +497,7 @@ func Test_I20_Result_IsErrorEqual_OnlyOneNil(t *testing.T) {
 
 // ===== Result serialization coverage =====
 
-func Test_I20_Result_Serialize_Nil(t *testing.T) {
+func Test_Result_Serialize_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	_, err := r.Serialize()
@@ -510,7 +510,7 @@ func Test_I20_Result_Serialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_Serialize_HasError(t *testing.T) {
+func Test_Result_Serialize_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	_, err := r.Serialize()
@@ -523,7 +523,7 @@ func Test_I20_Result_Serialize_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_Serialize_Valid(t *testing.T) {
+func Test_Result_Serialize_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	b, err := r.Serialize()
@@ -539,7 +539,7 @@ func Test_I20_Result_Serialize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_SerializeMust(t *testing.T) {
+func Test_Result_SerializeMust(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	b := r.SerializeMust()
@@ -552,7 +552,7 @@ func Test_I20_Result_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_SerializeSkipExistingIssues_HasIssues(t *testing.T) {
+func Test_Result_SerializeSkipExistingIssues_HasIssues(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	b, err := r.SerializeSkipExistingIssues()
@@ -565,7 +565,7 @@ func Test_I20_Result_SerializeSkipExistingIssues_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil,nil for issues", actual)
 }
 
-func Test_I20_Result_SerializeSkipExistingIssues_Valid(t *testing.T) {
+func Test_Result_SerializeSkipExistingIssues_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	b, err := r.SerializeSkipExistingIssues()
@@ -578,7 +578,7 @@ func Test_I20_Result_SerializeSkipExistingIssues_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_Result_UnmarshalSkipExistingIssues_HasIssues(t *testing.T) {
+func Test_Result_UnmarshalSkipExistingIssues_HasIssues(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	var s string
@@ -592,7 +592,7 @@ func Test_I20_Result_UnmarshalSkipExistingIssues_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for issues", actual)
 }
 
-func Test_I20_Result_UnmarshalSkipExistingIssues_Valid(t *testing.T) {
+func Test_Result_UnmarshalSkipExistingIssues_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	var s string
@@ -609,7 +609,7 @@ func Test_I20_Result_UnmarshalSkipExistingIssues_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 }
 
-func Test_I20_Result_UnmarshalSkipExistingIssues_Error(t *testing.T) {
+func Test_Result_UnmarshalSkipExistingIssues_Error(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingBytesTypePtr([]byte("not-json"), "test")
 	var s string
@@ -623,14 +623,14 @@ func Test_I20_Result_UnmarshalSkipExistingIssues_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error", actual)
 }
 
-func Test_I20_Result_UnmarshalResult(t *testing.T) {
+func Test_Result_UnmarshalResult(t *testing.T) {
 	inner := corejson.NewResult.Any("test")
 	outerBytes, _ := inner.Serialize()
 	outer := &corejson.Result{Bytes: outerBytes}
 	_, _ = outer.UnmarshalResult()
 }
 
-func Test_I20_Result_JsonModel_Nil(t *testing.T) {
+func Test_Result_JsonModel_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	m := r.JsonModel()
@@ -643,7 +643,7 @@ func Test_I20_Result_JsonModel_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error in model", actual)
 }
 
-func Test_I20_Result_JsonModelAny(t *testing.T) {
+func Test_Result_JsonModelAny(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	a := r.JsonModelAny()
@@ -656,7 +656,7 @@ func Test_I20_Result_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Result_Json_JsonPtr(t *testing.T) {
+func Test_Result_Json_JsonPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	j := r.Json()
@@ -673,7 +673,7 @@ func Test_I20_Result_Json_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected ptr", actual)
 }
 
-func Test_I20_Result_ParseInjectUsingJson_Success(t *testing.T) {
+func Test_Result_ParseInjectUsingJson_Success(t *testing.T) {
 	source := corejson.NewResult.AnyPtr(map[string]string{"a": "1"})
 	target := corejson.NewResult.AnyPtr(map[string]string{})
 	_, err := target.ParseInjectUsingJson(source)
@@ -681,7 +681,7 @@ func Test_I20_Result_ParseInjectUsingJson_Success(t *testing.T) {
 	_ = err
 }
 
-func Test_I20_Result_ParseInjectUsingJsonMust_Panic(t *testing.T) {
+func Test_Result_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	// Arrange
 	source := corejson.NewResult.ErrorPtr(errors.New("err"))
 	target := corejson.NewResult.AnyPtr("test")
@@ -698,7 +698,7 @@ func Test_I20_Result_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	target.ParseInjectUsingJsonMust(source)
 }
 
-func Test_I20_Result_AsJsonContractsBinder(t *testing.T) {
+func Test_Result_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	b := r.AsJsonContractsBinder()
@@ -711,7 +711,7 @@ func Test_I20_Result_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Result_AsJsoner(t *testing.T) {
+func Test_Result_AsJsoner(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	j := r.AsJsoner()
@@ -724,7 +724,7 @@ func Test_I20_Result_AsJsoner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Result_AsJsonParseSelfInjector(t *testing.T) {
+func Test_Result_AsJsonParseSelfInjector(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("test")
 	inj := r.AsJsonParseSelfInjector()
@@ -737,7 +737,7 @@ func Test_I20_Result_AsJsonParseSelfInjector(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Result_JsonParseSelfInject(t *testing.T) {
+func Test_Result_JsonParseSelfInject(t *testing.T) {
 	r := corejson.NewResult.Any(map[string]string{"a": "1"})
 	source := corejson.NewResult.AnyPtr(map[string]string{"b": "2"})
 	err := r.JsonParseSelfInject(source)
@@ -746,7 +746,7 @@ func Test_I20_Result_JsonParseSelfInject(t *testing.T) {
 
 // ===== Result other methods =====
 
-func Test_I20_Result_RawMust(t *testing.T) {
+func Test_Result_RawMust(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	b := r.RawMust()
@@ -759,7 +759,7 @@ func Test_I20_Result_RawMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_RawStringMust_Success(t *testing.T) {
+func Test_Result_RawStringMust_Success(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	s := r.RawStringMust()
@@ -772,7 +772,7 @@ func Test_I20_Result_RawStringMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Result_RawStringMust_Panic(t *testing.T) {
+func Test_Result_RawStringMust_Panic(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	defer func() {
@@ -787,7 +787,7 @@ func Test_I20_Result_RawStringMust_Panic(t *testing.T) {
 	r.RawStringMust()
 }
 
-func Test_I20_Result_RawErrString(t *testing.T) {
+func Test_Result_RawErrString(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	b, msg := r.RawErrString()
@@ -801,7 +801,7 @@ func Test_I20_Result_RawErrString(t *testing.T) {
 	_ = msg
 }
 
-func Test_I20_Result_RawPrettyString(t *testing.T) {
+func Test_Result_RawPrettyString(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	s, err := r.RawPrettyString()
@@ -817,7 +817,7 @@ func Test_I20_Result_RawPrettyString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Result_HandleError_Panic(t *testing.T) {
+func Test_Result_HandleError_Panic(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	defer func() {
@@ -832,7 +832,7 @@ func Test_I20_Result_HandleError_Panic(t *testing.T) {
 	r.HandleError()
 }
 
-func Test_I20_Result_MustBeSafe_Panic(t *testing.T) {
+func Test_Result_MustBeSafe_Panic(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	defer func() {
@@ -847,7 +847,7 @@ func Test_I20_Result_MustBeSafe_Panic(t *testing.T) {
 	r.MustBeSafe()
 }
 
-func Test_I20_Result_SafeNonIssueBytes(t *testing.T) {
+func Test_Result_SafeNonIssueBytes(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 
@@ -859,7 +859,7 @@ func Test_I20_Result_SafeNonIssueBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
+func Test_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 
@@ -871,7 +871,7 @@ func Test_I20_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Result_SafeValuesPtr(t *testing.T) {
+func Test_Result_SafeValuesPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 
@@ -883,7 +883,7 @@ func Test_I20_Result_SafeValuesPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_SafeValuesPtr_HasIssues(t *testing.T) {
+func Test_Result_SafeValuesPtr_HasIssues(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 
@@ -895,7 +895,7 @@ func Test_I20_Result_SafeValuesPtr_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Result_Values(t *testing.T) {
+func Test_Result_Values(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 
@@ -907,7 +907,7 @@ func Test_I20_Result_Values(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Result_Raw_Nil(t *testing.T) {
+func Test_Result_Raw_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	_, err := r.Raw()
@@ -920,7 +920,7 @@ func Test_I20_Result_Raw_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_MeaningfulError_EmptyBytes(t *testing.T) {
+func Test_Result_MeaningfulError_EmptyBytes(t *testing.T) {
 	// Arrange
 	r := &corejson.Result{Bytes: nil, TypeName: "Test"}
 	err := r.MeaningfulError()
@@ -933,7 +933,7 @@ func Test_I20_Result_MeaningfulError_EmptyBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for empty bytes", actual)
 }
 
-func Test_I20_Result_MeaningfulError_HasErrorAndBytes(t *testing.T) {
+func Test_Result_MeaningfulError_HasErrorAndBytes(t *testing.T) {
 	// Arrange
 	r := &corejson.Result{
 		Bytes:    []byte(`"test"`),
@@ -950,7 +950,7 @@ func Test_I20_Result_MeaningfulError_HasErrorAndBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Result_String_HasError(t *testing.T) {
+func Test_Result_String_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Create([]byte(`"x"`), errors.New("e"), "T")
 	s := r.String()
@@ -963,7 +963,7 @@ func Test_I20_Result_String_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty string with error", actual)
 }
 
-func Test_I20_Result_SafeBytesTypeName_Empty(t *testing.T) {
+func Test_Result_SafeBytesTypeName_Empty(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.EmptyPtr()
 
@@ -975,7 +975,7 @@ func Test_I20_Result_SafeBytesTypeName_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Result_BytesTypeName_Nil(t *testing.T) {
+func Test_Result_BytesTypeName_Nil(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 
@@ -989,7 +989,7 @@ func Test_I20_Result_BytesTypeName_Nil(t *testing.T) {
 
 // ===== anyTo coverage =====
 
-func Test_I20_AnyTo_SerializedRaw(t *testing.T) {
+func Test_AnyTo_SerializedRaw(t *testing.T) {
 	// Arrange
 	b, err := corejson.AnyTo.SerializedRaw("hello")
 
@@ -1001,7 +1001,7 @@ func Test_I20_AnyTo_SerializedRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_AnyTo_SerializedString(t *testing.T) {
+func Test_AnyTo_SerializedString(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.SerializedString("hello")
 
@@ -1013,7 +1013,7 @@ func Test_I20_AnyTo_SerializedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SerializedSafeString(t *testing.T) {
+func Test_AnyTo_SerializedSafeString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedSafeString("hello")
 
@@ -1025,7 +1025,7 @@ func Test_I20_AnyTo_SerializedSafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SerializedStringMust(t *testing.T) {
+func Test_AnyTo_SerializedStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedStringMust("hello")
 
@@ -1037,7 +1037,7 @@ func Test_I20_AnyTo_SerializedStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonString(t *testing.T) {
+func Test_AnyTo_SafeJsonString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonString("hello")
 
@@ -1049,7 +1049,7 @@ func Test_I20_AnyTo_SafeJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_String(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_String(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
 
@@ -1061,7 +1061,7 @@ func Test_I20_AnyTo_PrettyStringWithError_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":"b"}`))
 
@@ -1073,7 +1073,7 @@ func Test_I20_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected pretty string", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_Result(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_Result(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s, err := corejson.AnyTo.PrettyStringWithError(r)
@@ -1086,7 +1086,7 @@ func Test_I20_AnyTo_PrettyStringWithError_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s, err := corejson.AnyTo.PrettyStringWithError(r)
@@ -1099,7 +1099,7 @@ func Test_I20_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_ResultWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_ResultWithError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Create([]byte(`"x"`), errors.New("e"), "T")
 	_, err := corejson.AnyTo.PrettyStringWithError(r)
@@ -1112,7 +1112,7 @@ func Test_I20_AnyTo_PrettyStringWithError_ResultWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_ResultPtrWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_ResultPtrWithError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Ptr([]byte(`"x"`), errors.New("e"), "T")
 	_, err := corejson.AnyTo.PrettyStringWithError(r)
@@ -1125,7 +1125,7 @@ func Test_I20_AnyTo_PrettyStringWithError_ResultPtrWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringWithError_AnyItem(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_AnyItem(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError(42)
 
@@ -1137,7 +1137,7 @@ func Test_I20_AnyTo_PrettyStringWithError_AnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString("hi")
 
@@ -1149,7 +1149,7 @@ func Test_I20_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString([]byte(`{"a":"b"}`))
 
@@ -1161,7 +1161,7 @@ func Test_I20_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonPrettyString_Result(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_Result(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s := corejson.AnyTo.SafeJsonPrettyString(r)
@@ -1174,7 +1174,7 @@ func Test_I20_AnyTo_SafeJsonPrettyString_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonPrettyString_ResultPtr(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_ResultPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s := corejson.AnyTo.SafeJsonPrettyString(r)
@@ -1187,7 +1187,7 @@ func Test_I20_AnyTo_SafeJsonPrettyString_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_SafeJsonPrettyString_Any(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_Any(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString(42)
 
@@ -1199,7 +1199,7 @@ func Test_I20_AnyTo_SafeJsonPrettyString_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonString_String(t *testing.T) {
+func Test_AnyTo_JsonString_String(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString("hi")
 
@@ -1211,7 +1211,7 @@ func Test_I20_AnyTo_JsonString_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_I20_AnyTo_JsonString_Bytes(t *testing.T) {
+func Test_AnyTo_JsonString_Bytes(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString([]byte(`{"a":"b"}`))
 
@@ -1223,7 +1223,7 @@ func Test_I20_AnyTo_JsonString_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonString_Result(t *testing.T) {
+func Test_AnyTo_JsonString_Result(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s := corejson.AnyTo.JsonString(r)
@@ -1236,7 +1236,7 @@ func Test_I20_AnyTo_JsonString_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonString_ResultPtr(t *testing.T) {
+func Test_AnyTo_JsonString_ResultPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s := corejson.AnyTo.JsonString(r)
@@ -1249,7 +1249,7 @@ func Test_I20_AnyTo_JsonString_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonString_Any(t *testing.T) {
+func Test_AnyTo_JsonString_Any(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString(42)
 
@@ -1261,7 +1261,7 @@ func Test_I20_AnyTo_JsonString_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_String(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_String(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr("hi")
 
@@ -1273,7 +1273,7 @@ func Test_I20_AnyTo_JsonStringWithErr_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_Bytes(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_Bytes(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr([]byte(`"x"`))
 
@@ -1285,7 +1285,7 @@ func Test_I20_AnyTo_JsonStringWithErr_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_Result_NoError(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_Result_NoError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s, err := corejson.AnyTo.JsonStringWithErr(r)
@@ -1298,7 +1298,7 @@ func Test_I20_AnyTo_JsonStringWithErr_Result_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_Result_HasError(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_Result_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Create([]byte(`"x"`), errors.New("e"), "T")
 	_, err := corejson.AnyTo.JsonStringWithErr(r)
@@ -1311,7 +1311,7 @@ func Test_I20_AnyTo_JsonStringWithErr_Result_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_ResultPtr_NoError(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_ResultPtr_NoError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s, err := corejson.AnyTo.JsonStringWithErr(r)
@@ -1324,7 +1324,7 @@ func Test_I20_AnyTo_JsonStringWithErr_ResultPtr_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_ResultPtr_HasError(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_ResultPtr_HasError(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Ptr([]byte(`"x"`), errors.New("e"), "T")
 	_, err := corejson.AnyTo.JsonStringWithErr(r)
@@ -1337,7 +1337,7 @@ func Test_I20_AnyTo_JsonStringWithErr_ResultPtr_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_AnyTo_JsonStringWithErr_Any(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr_Any(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr(42)
 
@@ -1349,7 +1349,7 @@ func Test_I20_AnyTo_JsonStringWithErr_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_JsonStringMust(t *testing.T) {
+func Test_AnyTo_JsonStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonStringMust("hi")
 
@@ -1361,7 +1361,7 @@ func Test_I20_AnyTo_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_AnyTo_PrettyStringMust(t *testing.T) {
+func Test_AnyTo_PrettyStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.PrettyStringMust("hi")
 
@@ -1373,7 +1373,7 @@ func Test_I20_AnyTo_PrettyStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_AnyTo_UsingSerializer(t *testing.T) {
+func Test_AnyTo_UsingSerializer(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.UsingSerializer(nil)
 
@@ -1385,13 +1385,13 @@ func Test_I20_AnyTo_UsingSerializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for nil serializer", actual)
 }
 
-func Test_I20_AnyTo_SerializedFieldsMap(t *testing.T) {
+func Test_AnyTo_SerializedFieldsMap(t *testing.T) {
 	m, err := corejson.AnyTo.SerializedFieldsMap(map[string]string{"k": "v"})
 	_ = m
 	_ = err
 }
 
-func Test_I20_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
 
@@ -1403,7 +1403,7 @@ func Test_I20_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error result for nil", actual)
 }
 
-func Test_I20_AnyTo_SerializedJsonResult_Error_NilErr(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Error_NilErr(t *testing.T) {
 	// Arrange
 	var errNil error
 	r := corejson.AnyTo.SerializedJsonResult(errNil)
@@ -1418,7 +1418,7 @@ func Test_I20_AnyTo_SerializedJsonResult_Error_NilErr(t *testing.T) {
 
 // ===== Serializer coverage =====
 
-func Test_I20_Serializer_StringsApply(t *testing.T) {
+func Test_Serializer_StringsApply(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.StringsApply([]string{"a", "b"})
 
@@ -1430,7 +1430,7 @@ func Test_I20_Serializer_StringsApply(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromBytes(t *testing.T) {
+func Test_Serializer_FromBytes(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromBytes([]byte(`"test"`))
 
@@ -1442,7 +1442,7 @@ func Test_I20_Serializer_FromBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromStrings(t *testing.T) {
+func Test_Serializer_FromStrings(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromStrings([]string{"a"})
 
@@ -1454,7 +1454,7 @@ func Test_I20_Serializer_FromStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromStringsSpread(t *testing.T) {
+func Test_Serializer_FromStringsSpread(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromStringsSpread("a", "b")
 
@@ -1466,7 +1466,7 @@ func Test_I20_Serializer_FromStringsSpread(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromString(t *testing.T) {
+func Test_Serializer_FromString(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromString("hello")
 
@@ -1478,7 +1478,7 @@ func Test_I20_Serializer_FromString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromInteger(t *testing.T) {
+func Test_Serializer_FromInteger(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromInteger(42)
 
@@ -1490,7 +1490,7 @@ func Test_I20_Serializer_FromInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromInteger64(t *testing.T) {
+func Test_Serializer_FromInteger64(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromInteger64(64)
 
@@ -1502,7 +1502,7 @@ func Test_I20_Serializer_FromInteger64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromBool(t *testing.T) {
+func Test_Serializer_FromBool(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromBool(true)
 
@@ -1514,7 +1514,7 @@ func Test_I20_Serializer_FromBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_FromIntegers(t *testing.T) {
+func Test_Serializer_FromIntegers(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromIntegers([]int{1, 2})
 
@@ -1526,7 +1526,7 @@ func Test_I20_Serializer_FromIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_UsingAnyPtr(t *testing.T) {
+func Test_Serializer_UsingAnyPtr(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.UsingAnyPtr("test")
 
@@ -1538,7 +1538,7 @@ func Test_I20_Serializer_UsingAnyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_UsingAny(t *testing.T) {
+func Test_Serializer_UsingAny(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.UsingAny("test")
 
@@ -1550,7 +1550,7 @@ func Test_I20_Serializer_UsingAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_Raw(t *testing.T) {
+func Test_Serializer_Raw(t *testing.T) {
 	// Arrange
 	b, err := corejson.Serialize.Raw("test")
 
@@ -1562,7 +1562,7 @@ func Test_I20_Serializer_Raw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_Marshal(t *testing.T) {
+func Test_Serializer_Marshal(t *testing.T) {
 	// Arrange
 	b, err := corejson.Serialize.Marshal("test")
 
@@ -1574,7 +1574,7 @@ func Test_I20_Serializer_Marshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ApplyMust(t *testing.T) {
+func Test_Serializer_ApplyMust(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.ApplyMust("test")
 
@@ -1586,7 +1586,7 @@ func Test_I20_Serializer_ApplyMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_Serializer_ToBytesMust(t *testing.T) {
+func Test_Serializer_ToBytesMust(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToBytesMust("test")
 
@@ -1598,7 +1598,7 @@ func Test_I20_Serializer_ToBytesMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ToSafeBytesMust(t *testing.T) {
+func Test_Serializer_ToSafeBytesMust(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToSafeBytesMust("test")
 
@@ -1610,7 +1610,7 @@ func Test_I20_Serializer_ToSafeBytesMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ToSafeBytesSwallowErr(t *testing.T) {
+func Test_Serializer_ToSafeBytesSwallowErr(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToSafeBytesSwallowErr("test")
 
@@ -1622,7 +1622,7 @@ func Test_I20_Serializer_ToSafeBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ToBytesSwallowErr(t *testing.T) {
+func Test_Serializer_ToBytesSwallowErr(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToBytesSwallowErr("test")
 
@@ -1634,7 +1634,7 @@ func Test_I20_Serializer_ToBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ToBytesErr(t *testing.T) {
+func Test_Serializer_ToBytesErr(t *testing.T) {
 	// Arrange
 	b, err := corejson.Serialize.ToBytesErr("test")
 
@@ -1646,7 +1646,7 @@ func Test_I20_Serializer_ToBytesErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_Serializer_ToString(t *testing.T) {
+func Test_Serializer_ToString(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToString("test")
 
@@ -1658,7 +1658,7 @@ func Test_I20_Serializer_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Serializer_ToStringMust(t *testing.T) {
+func Test_Serializer_ToStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToStringMust("test")
 
@@ -1670,7 +1670,7 @@ func Test_I20_Serializer_ToStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Serializer_ToStringErr(t *testing.T) {
+func Test_Serializer_ToStringErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.Serialize.ToStringErr("test")
 
@@ -1682,7 +1682,7 @@ func Test_I20_Serializer_ToStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Serializer_ToPrettyStringErr(t *testing.T) {
+func Test_Serializer_ToPrettyStringErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.Serialize.ToPrettyStringErr("test")
 
@@ -1694,7 +1694,7 @@ func Test_I20_Serializer_ToPrettyStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Serializer_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serializer_ToPrettyStringIncludingErr(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToPrettyStringIncludingErr("test")
 
@@ -1706,7 +1706,7 @@ func Test_I20_Serializer_ToPrettyStringIncludingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_I20_Serializer_Pretty(t *testing.T) {
+func Test_Serializer_Pretty(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.Pretty("test")
 
@@ -1720,7 +1720,7 @@ func Test_I20_Serializer_Pretty(t *testing.T) {
 
 // ===== Deserializer coverage =====
 
-func Test_I20_Deserializer_UsingStringPtr_Nil(t *testing.T) {
+func Test_Deserializer_UsingStringPtr_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingStringPtr(nil, &s)
@@ -1733,7 +1733,7 @@ func Test_I20_Deserializer_UsingStringPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil bytes", actual)
 }
 
-func Test_I20_Deserializer_UsingStringPtr_Valid(t *testing.T) {
+func Test_Deserializer_UsingStringPtr_Valid(t *testing.T) {
 	// Arrange
 	str := `"hello"`
 	var s string
@@ -1750,7 +1750,7 @@ func Test_I20_Deserializer_UsingStringPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 }
 
-func Test_I20_Deserializer_UsingError_Nil(t *testing.T) {
+func Test_Deserializer_UsingError_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingError(nil, &s)
@@ -1763,7 +1763,7 @@ func Test_I20_Deserializer_UsingError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingError_Valid(t *testing.T) {
+func Test_Deserializer_UsingError_Valid(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingError(errors.New(`"hello"`), &s)
@@ -1776,7 +1776,7 @@ func Test_I20_Deserializer_UsingError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I20_Deserializer_UsingErrorWhichJsonResult_Nil(t *testing.T) {
+func Test_Deserializer_UsingErrorWhichJsonResult_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingErrorWhichJsonResult(nil, &s)
@@ -1789,7 +1789,7 @@ func Test_I20_Deserializer_UsingErrorWhichJsonResult_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_FromString(t *testing.T) {
+func Test_Deserializer_FromString(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.FromString(`"hi"`, &s)
@@ -1802,7 +1802,7 @@ func Test_I20_Deserializer_FromString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_FromStringMust(t *testing.T) {
+func Test_Deserializer_FromStringMust(t *testing.T) {
 	// Arrange
 	var s string
 	corejson.Deserialize.FromStringMust(`"hi"`, &s)
@@ -1815,7 +1815,7 @@ func Test_I20_Deserializer_FromStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_FromStringMust_Panic(t *testing.T) {
+func Test_Deserializer_FromStringMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -1831,7 +1831,7 @@ func Test_I20_Deserializer_FromStringMust_Panic(t *testing.T) {
 	corejson.Deserialize.FromStringMust("not-json", &s)
 }
 
-func Test_I20_Deserializer_UsingStringOption_IgnoreEmpty(t *testing.T) {
+func Test_Deserializer_UsingStringOption_IgnoreEmpty(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingStringOption(true, "", &s)
@@ -1844,7 +1844,7 @@ func Test_I20_Deserializer_UsingStringOption_IgnoreEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingStringIgnoreEmpty(t *testing.T) {
+func Test_Deserializer_UsingStringIgnoreEmpty(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingStringIgnoreEmpty("", &s)
@@ -1857,7 +1857,7 @@ func Test_I20_Deserializer_UsingStringIgnoreEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesPointer_Nil(t *testing.T) {
+func Test_Deserializer_UsingBytesPointer_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointer(nil, &s)
@@ -1870,7 +1870,7 @@ func Test_I20_Deserializer_UsingBytesPointer_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesPointer_Valid(t *testing.T) {
+func Test_Deserializer_UsingBytesPointer_Valid(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointer([]byte(`"hi"`), &s)
@@ -1883,7 +1883,7 @@ func Test_I20_Deserializer_UsingBytesPointer_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesPointerMust(t *testing.T) {
+func Test_Deserializer_UsingBytesPointerMust(t *testing.T) {
 	// Arrange
 	var s string
 	corejson.Deserialize.UsingBytesPointerMust([]byte(`"hi"`), &s)
@@ -1896,7 +1896,7 @@ func Test_I20_Deserializer_UsingBytesPointerMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesIf_Skip(t *testing.T) {
+func Test_Deserializer_UsingBytesIf_Skip(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesIf(false, []byte(`"x"`), &s)
@@ -1909,7 +1909,7 @@ func Test_I20_Deserializer_UsingBytesIf_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected skip", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesIf_Do(t *testing.T) {
+func Test_Deserializer_UsingBytesIf_Do(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesIf(true, []byte(`"x"`), &s)
@@ -1922,7 +1922,7 @@ func Test_I20_Deserializer_UsingBytesIf_Do(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'x'", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesPointerIf_Skip(t *testing.T) {
+func Test_Deserializer_UsingBytesPointerIf_Skip(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointerIf(false, []byte(`"x"`), &s)
@@ -1935,7 +1935,7 @@ func Test_I20_Deserializer_UsingBytesPointerIf_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected skip", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesPointerIf_Do(t *testing.T) {
+func Test_Deserializer_UsingBytesPointerIf_Do(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointerIf(true, []byte(`"x"`), &s)
@@ -1948,7 +1948,7 @@ func Test_I20_Deserializer_UsingBytesPointerIf_Do(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'x'", actual)
 }
 
-func Test_I20_Deserializer_UsingBytesMust(t *testing.T) {
+func Test_Deserializer_UsingBytesMust(t *testing.T) {
 	// Arrange
 	var s string
 	corejson.Deserialize.UsingBytesMust([]byte(`"hi"`), &s)
@@ -1961,13 +1961,13 @@ func Test_I20_Deserializer_UsingBytesMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_UsingSafeBytesMust_Empty(t *testing.T) {
+func Test_Deserializer_UsingSafeBytesMust_Empty(t *testing.T) {
 	var s string
 	corejson.Deserialize.UsingSafeBytesMust([]byte{}, &s)
 	// should skip
 }
 
-func Test_I20_Deserializer_UsingSafeBytesMust_Valid(t *testing.T) {
+func Test_Deserializer_UsingSafeBytesMust_Valid(t *testing.T) {
 	// Arrange
 	var s string
 	corejson.Deserialize.UsingSafeBytesMust([]byte(`"hi"`), &s)
@@ -1980,13 +1980,13 @@ func Test_I20_Deserializer_UsingSafeBytesMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_Deserializer_AnyToFieldsMap(t *testing.T) {
+func Test_Deserializer_AnyToFieldsMap(t *testing.T) {
 	m, err := corejson.Deserialize.AnyToFieldsMap(map[string]string{"k": "v"})
 	_ = m
 	_ = err
 }
 
-func Test_I20_Deserializer_MapAnyToPointer_SkipEmpty(t *testing.T) {
+func Test_Deserializer_MapAnyToPointer_SkipEmpty(t *testing.T) {
 	// Arrange
 	var s map[string]any
 	err := corejson.Deserialize.MapAnyToPointer(true, nil, &s)
@@ -1999,7 +1999,7 @@ func Test_I20_Deserializer_MapAnyToPointer_SkipEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_MapAnyToPointer_Valid(t *testing.T) {
+func Test_Deserializer_MapAnyToPointer_Valid(t *testing.T) {
 	// Arrange
 	var s map[string]any
 	err := corejson.Deserialize.MapAnyToPointer(false, map[string]any{"k": "v"}, &s)
@@ -2012,7 +2012,7 @@ func Test_I20_Deserializer_MapAnyToPointer_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I20_Deserializer_UsingDeserializerToOption_SkipNil(t *testing.T) {
+func Test_Deserializer_UsingDeserializerToOption_SkipNil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingDeserializerToOption(true, nil, &s)
@@ -2025,7 +2025,7 @@ func Test_I20_Deserializer_UsingDeserializerToOption_SkipNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingDeserializerToOption_NilNotSkip(t *testing.T) {
+func Test_Deserializer_UsingDeserializerToOption_NilNotSkip(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingDeserializerToOption(false, nil, &s)
@@ -2038,7 +2038,7 @@ func Test_I20_Deserializer_UsingDeserializerToOption_NilNotSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Deserializer_UsingDeserializerDefined_Nil(t *testing.T) {
+func Test_Deserializer_UsingDeserializerDefined_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingDeserializerDefined(nil, &s)
@@ -2051,7 +2051,7 @@ func Test_I20_Deserializer_UsingDeserializerDefined_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil (skip)", actual)
 }
 
-func Test_I20_Deserializer_UsingDeserializerFuncDefined_Nil(t *testing.T) {
+func Test_Deserializer_UsingDeserializerFuncDefined_Nil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingDeserializerFuncDefined(nil, &s)
@@ -2064,7 +2064,7 @@ func Test_I20_Deserializer_UsingDeserializerFuncDefined_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil func", actual)
 }
 
-func Test_I20_Deserializer_UsingDeserializerFuncDefined_Valid(t *testing.T) {
+func Test_Deserializer_UsingDeserializerFuncDefined_Valid(t *testing.T) {
 	// Arrange
 	var s string
 	fn := func(toPtr any) error { return nil }
@@ -2078,7 +2078,7 @@ func Test_I20_Deserializer_UsingDeserializerFuncDefined_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingJsonerToAny_SkipNil(t *testing.T) {
+func Test_Deserializer_UsingJsonerToAny_SkipNil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingJsonerToAny(true, nil, &s)
@@ -2091,7 +2091,7 @@ func Test_I20_Deserializer_UsingJsonerToAny_SkipNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingJsonerToAny_NilNotSkip(t *testing.T) {
+func Test_Deserializer_UsingJsonerToAny_NilNotSkip(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingJsonerToAny(false, nil, &s)
@@ -2104,7 +2104,7 @@ func Test_I20_Deserializer_UsingJsonerToAny_NilNotSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Deserializer_UsingJsonerToAnyMust_SkipNil(t *testing.T) {
+func Test_Deserializer_UsingJsonerToAnyMust_SkipNil(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingJsonerToAnyMust(true, nil, &s)
@@ -2117,7 +2117,7 @@ func Test_I20_Deserializer_UsingJsonerToAnyMust_SkipNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_Deserializer_UsingJsonerToAnyMust_NilNotSkip(t *testing.T) {
+func Test_Deserializer_UsingJsonerToAnyMust_NilNotSkip(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingJsonerToAnyMust(false, nil, &s)
@@ -2132,7 +2132,7 @@ func Test_I20_Deserializer_UsingJsonerToAnyMust_NilNotSkip(t *testing.T) {
 
 // ===== NewResult creator coverage =====
 
-func Test_I20_NewResult_UsingBytesError_Nil(t *testing.T) {
+func Test_NewResult_UsingBytesError_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingBytesError(nil)
 
@@ -2144,7 +2144,7 @@ func Test_I20_NewResult_UsingBytesError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_NewResult_UsingErrorStringPtr_NilPtr(t *testing.T) {
+func Test_NewResult_UsingErrorStringPtr_NilPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingErrorStringPtr(errors.New("e"), nil, "T")
 
@@ -2156,7 +2156,7 @@ func Test_I20_NewResult_UsingErrorStringPtr_NilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_NewResult_UsingErrorStringPtr_Valid(t *testing.T) {
+func Test_NewResult_UsingErrorStringPtr_Valid(t *testing.T) {
 	// Arrange
 	s := `"ok"`
 	r := corejson.NewResult.UsingErrorStringPtr(nil, &s, "T")
@@ -2169,7 +2169,7 @@ func Test_I20_NewResult_UsingErrorStringPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_NewResult_UsingTypePlusStringPtr_Nil(t *testing.T) {
+func Test_NewResult_UsingTypePlusStringPtr_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingTypePlusStringPtr("T", nil)
 
@@ -2181,7 +2181,7 @@ func Test_I20_NewResult_UsingTypePlusStringPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_NewResult_UsingTypePlusStringPtr_Empty(t *testing.T) {
+func Test_NewResult_UsingTypePlusStringPtr_Empty(t *testing.T) {
 	// Arrange
 	s := ""
 	r := corejson.NewResult.UsingTypePlusStringPtr("T", &s)
@@ -2194,7 +2194,7 @@ func Test_I20_NewResult_UsingTypePlusStringPtr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_NewResult_UsingTypePlusStringPtr_Valid(t *testing.T) {
+func Test_NewResult_UsingTypePlusStringPtr_Valid(t *testing.T) {
 	// Arrange
 	s := `"hello"`
 	r := corejson.NewResult.UsingTypePlusStringPtr("T", &s)
@@ -2207,7 +2207,7 @@ func Test_I20_NewResult_UsingTypePlusStringPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_NewResult_UsingStringPtr_Nil(t *testing.T) {
+func Test_NewResult_UsingStringPtr_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingStringPtr(nil)
 
@@ -2219,7 +2219,7 @@ func Test_I20_NewResult_UsingStringPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_NewResult_UsingStringPtr_Valid(t *testing.T) {
+func Test_NewResult_UsingStringPtr_Valid(t *testing.T) {
 	// Arrange
 	s := `"hello"`
 	r := corejson.NewResult.UsingStringPtr(&s)
@@ -2232,7 +2232,7 @@ func Test_I20_NewResult_UsingStringPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_NewResult_Many(t *testing.T) {
+func Test_NewResult_Many(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Many("a", "b", "c")
 
@@ -2244,7 +2244,7 @@ func Test_I20_NewResult_Many(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I20_NewResult_UsingJsoner_Nil(t *testing.T) {
+func Test_NewResult_UsingJsoner_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingJsoner(nil)
 
@@ -2256,7 +2256,7 @@ func Test_I20_NewResult_UsingJsoner_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_NewResult_UsingSerializerFunc_Nil(t *testing.T) {
+func Test_NewResult_UsingSerializerFunc_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingSerializerFunc(nil)
 
@@ -2268,7 +2268,7 @@ func Test_I20_NewResult_UsingSerializerFunc_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_NewResult_DeserializeUsingResult_HasIssues(t *testing.T) {
+func Test_NewResult_DeserializeUsingResult_HasIssues(t *testing.T) {
 	// Arrange
 	errResult := corejson.NewResult.ErrorPtr(errors.New("e"))
 	r := corejson.NewResult.DeserializeUsingResult(errResult)
@@ -2283,7 +2283,7 @@ func Test_I20_NewResult_DeserializeUsingResult_HasIssues(t *testing.T) {
 
 // ===== CastAny coverage =====
 
-func Test_I20_CastAny_FromToDefault_NilFrom(t *testing.T) {
+func Test_CastAny_FromToDefault_NilFrom(t *testing.T) {
 	// Arrange
 	var s string
 	// FromToDefault(nil, &s) → reflectionCasting returns (err, false) for nil,
@@ -2298,7 +2298,7 @@ func Test_I20_CastAny_FromToDefault_NilFrom(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error — nil serializes to null", actual)
 }
 
-func Test_I20_CastAny_FromToReflection(t *testing.T) {
+func Test_CastAny_FromToReflection(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.CastAny.FromToReflection(`"hello"`, &s)
@@ -2311,7 +2311,7 @@ func Test_I20_CastAny_FromToReflection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I20_CastAny_OrDeserializeTo(t *testing.T) {
+func Test_CastAny_OrDeserializeTo(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.CastAny.OrDeserializeTo(`"hello"`, &s)
@@ -2326,7 +2326,7 @@ func Test_I20_CastAny_OrDeserializeTo(t *testing.T) {
 
 // ===== Empty creator coverage =====
 
-func Test_I20_Empty_ResultWithErr(t *testing.T) {
+func Test_Empty_ResultWithErr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultWithErr("T", errors.New("e"))
 
@@ -2338,7 +2338,7 @@ func Test_I20_Empty_ResultWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_Empty_BytesCollection(t *testing.T) {
+func Test_Empty_BytesCollection(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollection()
 
@@ -2350,7 +2350,7 @@ func Test_I20_Empty_BytesCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_Empty_BytesCollectionPtr(t *testing.T) {
+func Test_Empty_BytesCollectionPtr(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollectionPtr()
 
@@ -2362,7 +2362,7 @@ func Test_I20_Empty_BytesCollectionPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_Empty_MapResults(t *testing.T) {
+func Test_Empty_MapResults(t *testing.T) {
 	// Arrange
 	mr := corejson.Empty.MapResults()
 
@@ -2376,7 +2376,7 @@ func Test_I20_Empty_MapResults(t *testing.T) {
 
 // ===== BytesToString / BytesToPrettyString =====
 
-func Test_I20_BytesToString_Empty(t *testing.T) {
+func Test_BytesToString_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToString(nil) != ""}
 
@@ -2385,7 +2385,7 @@ func Test_I20_BytesToString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_BytesToString_Valid(t *testing.T) {
+func Test_BytesToString_Valid(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToString([]byte("hi")) != "hi"}
 
@@ -2394,7 +2394,7 @@ func Test_I20_BytesToString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_BytesToPrettyString_Empty(t *testing.T) {
+func Test_BytesToPrettyString_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToPrettyString(nil) != ""}
 
@@ -2403,7 +2403,7 @@ func Test_I20_BytesToPrettyString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_BytesToPrettyString_Valid(t *testing.T) {
+func Test_BytesToPrettyString_Valid(t *testing.T) {
 	// Arrange
 	s := corejson.BytesToPrettyString([]byte(`{"a":"b"}`))
 
@@ -2417,7 +2417,7 @@ func Test_I20_BytesToPrettyString_Valid(t *testing.T) {
 
 // ===== BytesDeepClone / BytesCloneIf =====
 
-func Test_I20_BytesDeepClone_Empty(t *testing.T) {
+func Test_BytesDeepClone_Empty(t *testing.T) {
 	// Arrange
 	b := corejson.BytesDeepClone(nil)
 
@@ -2429,7 +2429,7 @@ func Test_I20_BytesDeepClone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_BytesDeepClone_Valid(t *testing.T) {
+func Test_BytesDeepClone_Valid(t *testing.T) {
 	// Arrange
 	b := corejson.BytesDeepClone([]byte("hi"))
 
@@ -2441,7 +2441,7 @@ func Test_I20_BytesDeepClone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_I20_BytesCloneIf_NoClone(t *testing.T) {
+func Test_BytesCloneIf_NoClone(t *testing.T) {
 	// Arrange
 	b := corejson.BytesCloneIf(false, []byte("hi"))
 
@@ -2453,7 +2453,7 @@ func Test_I20_BytesCloneIf_NoClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty (no clone)", actual)
 }
 
-func Test_I20_BytesCloneIf_Clone(t *testing.T) {
+func Test_BytesCloneIf_Clone(t *testing.T) {
 	// Arrange
 	b := corejson.BytesCloneIf(true, []byte("hi"))
 

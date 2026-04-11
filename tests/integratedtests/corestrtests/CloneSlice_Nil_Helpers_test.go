@@ -14,7 +14,7 @@ import (
 // CloneSlice / CloneSliceIf / AnyToString / Utility funcs
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov16_CloneSlice_Nil(t *testing.T) {
+func Test_CloneSlice_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSlice_Nil", func() {
 		// Arrange
 		result := corestr.CloneSlice(nil)
@@ -28,7 +28,7 @@ func Test_Cov16_CloneSlice_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CloneSlice_WithItems(t *testing.T) {
+func Test_CloneSlice_WithItems(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSlice_WithItems", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{"a", "b"})
@@ -48,7 +48,7 @@ func Test_Cov16_CloneSlice_WithItems(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CloneSliceIf_Empty(t *testing.T) {
+func Test_CloneSliceIf_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_Empty", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true)
@@ -62,7 +62,7 @@ func Test_Cov16_CloneSliceIf_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CloneSliceIf_NoClone(t *testing.T) {
+func Test_CloneSliceIf_NoClone(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_NoClone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(false, "a", "b")
@@ -76,7 +76,7 @@ func Test_Cov16_CloneSliceIf_NoClone(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CloneSliceIf_Clone(t *testing.T) {
+func Test_CloneSliceIf_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_Clone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true, "a", "b")
@@ -90,7 +90,7 @@ func Test_Cov16_CloneSliceIf_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AnyToString_Empty(t *testing.T) {
+func Test_AnyToString_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_Empty", func() {
 		// Arrange
 		s := corestr.AnyToString(false, "")
@@ -104,7 +104,7 @@ func Test_Cov16_AnyToString_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_WithFieldName", func() {
 		// Arrange
 		s := corestr.AnyToString(true, "hello")
@@ -118,7 +118,7 @@ func Test_Cov16_AnyToString_WithFieldName(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AnyToString_WithoutFieldName(t *testing.T) {
+func Test_AnyToString_WithoutFieldName(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_WithoutFieldName", func() {
 		// Arrange
 		s := corestr.AnyToString(false, "hello")
@@ -132,7 +132,7 @@ func Test_Cov16_AnyToString_WithoutFieldName(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AnyToString_Ptr(t *testing.T) {
+func Test_AnyToString_Ptr(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_Ptr", func() {
 		// Arrange
 		val := "hello"
@@ -147,7 +147,7 @@ func Test_Cov16_AnyToString_Ptr(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov16_AllIndividualStringsOfStringsLength_Nil", func() {
 		// Act
 		actual := args.Map{"len": corestr.AllIndividualStringsOfStringsLength(nil)}
@@ -158,7 +158,7 @@ func Test_Cov16_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AllIndividualStringsOfStringsLength_Items(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Items(t *testing.T) {
 	safeTest(t, "Test_Cov16_AllIndividualStringsOfStringsLength_Items", func() {
 		// Arrange
 		items := [][]string{{"a", "b"}, {"c"}}
@@ -172,7 +172,7 @@ func Test_Cov16_AllIndividualStringsOfStringsLength_Items(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov16_AllIndividualsLengthOfSimpleSlices_Nil", func() {
 		// Act
 		actual := args.Map{"len": corestr.AllIndividualsLengthOfSimpleSlices()}
@@ -183,7 +183,7 @@ func Test_Cov16_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov16_AllIndividualsLengthOfSimpleSlices_Items(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_Items(t *testing.T) {
 	safeTest(t, "Test_Cov16_AllIndividualsLengthOfSimpleSlices_Items", func() {
 		// Arrange
 		s1 := corestr.New.SimpleSlice.Lines("a", "b")
@@ -198,7 +198,7 @@ func Test_Cov16_AllIndividualsLengthOfSimpleSlices_Items(t *testing.T) {
 	})
 }
 
-func Test_Cov16_StringUtils(t *testing.T) {
+func Test_StringUtils(t *testing.T) {
 	safeTest(t, "Test_Cov16_StringUtils", func() {
 		// Act
 		actual := args.Map{
@@ -223,7 +223,7 @@ func Test_Cov16_StringUtils(t *testing.T) {
 	})
 }
 
-func Test_Cov16_EmptyCreator_All(t *testing.T) {
+func Test_EmptyCreator_All(t *testing.T) {
 	safeTest(t, "Test_Cov16_EmptyCreator_All", func() {
 		// Arrange
 		_ = corestr.Empty.Collection()
@@ -257,7 +257,7 @@ func Test_Cov16_EmptyCreator_All(t *testing.T) {
 // DataModels
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov16_HashmapDataModel(t *testing.T) {
+func Test_HashmapDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_HashmapDataModel", func() {
 		// Arrange
 		dm := &corestr.HashmapDataModel{Items: map[string]string{"a": "b"}}
@@ -281,7 +281,7 @@ func Test_Cov16_HashmapDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_HashsetDataModel(t *testing.T) {
+func Test_HashsetDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_HashsetDataModel", func() {
 		// Arrange
 		dm := &corestr.HashsetDataModel{Items: map[string]bool{"a": true}}
@@ -303,7 +303,7 @@ func Test_Cov16_HashsetDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_HashsetsCollectionDataModel(t *testing.T) {
+func Test_HashsetsCollectionDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_HashsetsCollectionDataModel", func() {
 		// Arrange
 		dm := &corestr.HashsetsCollectionDataModel{Items: []*corestr.Hashset{}}
@@ -325,7 +325,7 @@ func Test_Cov16_HashsetsCollectionDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CharCollectionDataModel(t *testing.T) {
+func Test_CharCollectionDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_CharCollectionDataModel", func() {
 		// Arrange
 		dm := &corestr.CharCollectionDataModel{
@@ -350,7 +350,7 @@ func Test_Cov16_CharCollectionDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CharHashsetDataModel(t *testing.T) {
+func Test_CharHashsetDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_CharHashsetDataModel", func() {
 		// Arrange
 		dm := &corestr.CharHashsetDataModel{
@@ -375,7 +375,7 @@ func Test_Cov16_CharHashsetDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_SimpleStringOnceModel(t *testing.T) {
+func Test_SimpleStringOnceModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_SimpleStringOnceModel", func() {
 		// Arrange
 		m := corestr.SimpleStringOnceModel{Value: "hello", IsInitialize: true}
@@ -389,7 +389,7 @@ func Test_Cov16_SimpleStringOnceModel(t *testing.T) {
 	})
 }
 
-func Test_Cov16_CollectionsOfCollectionModel(t *testing.T) {
+func Test_CollectionsOfCollectionModel(t *testing.T) {
 	safeTest(t, "Test_Cov16_CollectionsOfCollectionModel", func() {
 		// Arrange
 		m := corestr.CollectionsOfCollectionModel{Items: []*corestr.Collection{}}
@@ -407,7 +407,7 @@ func Test_Cov16_CollectionsOfCollectionModel(t *testing.T) {
 // Collection comprehensive
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov16_Collection_Basic(t *testing.T) {
+func Test_Collection_Basic(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Basic", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -427,7 +427,7 @@ func Test_Cov16_Collection_Basic(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_NilReceiver(t *testing.T) {
+func Test_Collection_NilReceiver(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_NilReceiver", func() {
 		// Arrange
 		var c *corestr.Collection
@@ -447,7 +447,7 @@ func Test_Cov16_Collection_NilReceiver(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_Add(t *testing.T) {
+func Test_Collection_Add(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Add", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -462,7 +462,7 @@ func Test_Cov16_Collection_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddNonEmpty(t *testing.T) {
+func Test_Collection_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddNonEmpty", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -478,7 +478,7 @@ func Test_Cov16_Collection_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddNonEmptyWhitespace(t *testing.T) {
+func Test_Collection_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddNonEmptyWhitespace", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -494,7 +494,7 @@ func Test_Cov16_Collection_AddNonEmptyWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddError(t *testing.T) {
+func Test_Collection_AddError(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddError", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -510,7 +510,7 @@ func Test_Cov16_Collection_AddError(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddIf(t *testing.T) {
+func Test_Collection_AddIf(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddIf", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -526,7 +526,7 @@ func Test_Cov16_Collection_AddIf(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddIfMany(t *testing.T) {
+func Test_Collection_AddIfMany(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddIfMany", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -542,7 +542,7 @@ func Test_Cov16_Collection_AddIfMany(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_Adds(t *testing.T) {
+func Test_Collection_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Adds", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -557,7 +557,7 @@ func Test_Cov16_Collection_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddStrings(t *testing.T) {
+func Test_Collection_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -572,7 +572,7 @@ func Test_Cov16_Collection_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddFunc(t *testing.T) {
+func Test_Collection_AddFunc(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddFunc", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -587,7 +587,7 @@ func Test_Cov16_Collection_AddFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddFuncErr_NoErr(t *testing.T) {
+func Test_Collection_AddFuncErr_NoErr(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddFuncErr_NoErr", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -605,7 +605,7 @@ func Test_Cov16_Collection_AddFuncErr_NoErr(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddFuncErr_WithErr(t *testing.T) {
+func Test_Collection_AddFuncErr_WithErr(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddFuncErr_WithErr", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -630,7 +630,7 @@ func Test_Cov16_Collection_AddFuncErr_WithErr(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddLock(t *testing.T) {
+func Test_Collection_AddLock(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -645,7 +645,7 @@ func Test_Cov16_Collection_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddsLock(t *testing.T) {
+func Test_Collection_AddsLock(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddsLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -660,7 +660,7 @@ func Test_Cov16_Collection_AddsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddCollection(t *testing.T) {
+func Test_Collection_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddCollection", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a"})
@@ -677,7 +677,7 @@ func Test_Cov16_Collection_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddCollections(t *testing.T) {
+func Test_Collection_AddCollections(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddCollections", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -696,7 +696,7 @@ func Test_Cov16_Collection_AddCollections(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_RemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -721,7 +721,7 @@ func Test_Cov16_Collection_RemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ListStrings(t *testing.T) {
+func Test_Collection_ListStrings(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ListStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -741,7 +741,7 @@ func Test_Cov16_Collection_ListStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_LengthLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -755,7 +755,7 @@ func Test_Cov16_Collection_LengthLock(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_IsEmptyLock(t *testing.T) {
+func Test_Collection_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_IsEmptyLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -769,7 +769,7 @@ func Test_Cov16_Collection_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AsError(t *testing.T) {
+func Test_Collection_AsError(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AsError", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -795,7 +795,7 @@ func Test_Cov16_Collection_AsError(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ToError(t *testing.T) {
+func Test_Collection_ToError(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ToError", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -821,7 +821,7 @@ func Test_Cov16_Collection_ToError(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_EachItemSplitBy", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a,b", "c"})
@@ -836,7 +836,7 @@ func Test_Cov16_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ConcatNew", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -851,7 +851,7 @@ func Test_Cov16_Collection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_IsEquals(t *testing.T) {
+func Test_Collection_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_IsEquals", func() {
 		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -866,7 +866,7 @@ func Test_Cov16_Collection_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_IsEqualsWithSensitive(t *testing.T) {
+func Test_Collection_IsEqualsWithSensitive(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_IsEqualsWithSensitive", func() {
 		// Arrange
 		a := corestr.New.Collection.Strings([]string{"A"})
@@ -887,7 +887,7 @@ func Test_Cov16_Collection_IsEqualsWithSensitive(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_JsonString(t *testing.T) {
+func Test_Collection_JsonString(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_JsonString", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -907,7 +907,7 @@ func Test_Cov16_Collection_JsonString(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddHashmapsValues(t *testing.T) {
+func Test_Collection_AddHashmapsValues(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddHashmapsValues", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -926,7 +926,7 @@ func Test_Cov16_Collection_AddHashmapsValues(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddHashmapsKeys(t *testing.T) {
+func Test_Collection_AddHashmapsKeys(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddHashmapsKeys", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -944,7 +944,7 @@ func Test_Cov16_Collection_AddHashmapsKeys(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddPointerCollectionsLock(t *testing.T) {
+func Test_Collection_AddPointerCollectionsLock(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddPointerCollectionsLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -960,7 +960,7 @@ func Test_Cov16_Collection_AddPointerCollectionsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_HasIndex(t *testing.T) {
+func Test_Collection_HasIndex(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_HasIndex", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -984,7 +984,7 @@ func Test_Cov16_Collection_HasIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_Extended(t *testing.T) {
+func Test_Collection_Extended(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Extended", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -1063,7 +1063,7 @@ func Test_Cov16_Collection_Extended(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Filter", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "bb", "ccc"})
@@ -1092,7 +1092,7 @@ func Test_Cov16_Collection_Filter(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AppendAnys(t *testing.T) {
+func Test_Collection_AppendAnys(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AppendAnys", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1114,7 +1114,7 @@ func Test_Cov16_Collection_AppendAnys(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddNonEmptyStrings(t *testing.T) {
+func Test_Collection_AddNonEmptyStrings(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddNonEmptyStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1129,7 +1129,7 @@ func Test_Cov16_Collection_AddNonEmptyStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddNonEmptyStringsSlice(t *testing.T) {
+func Test_Collection_AddNonEmptyStringsSlice(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddNonEmptyStringsSlice", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1144,7 +1144,7 @@ func Test_Cov16_Collection_AddNonEmptyStringsSlice(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ExpandMerge(t *testing.T) {
+func Test_Collection_ExpandMerge(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ExpandMerge", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -1164,7 +1164,7 @@ func Test_Cov16_Collection_ExpandMerge(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_MergeSlicesOfSlice(t *testing.T) {
+func Test_Collection_MergeSlicesOfSlice(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_MergeSlicesOfSlice", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1179,7 +1179,7 @@ func Test_Cov16_Collection_MergeSlicesOfSlice(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_GetAllExcept(t *testing.T) {
+func Test_Collection_GetAllExcept(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_GetAllExcept", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -1201,7 +1201,7 @@ func Test_Cov16_Collection_GetAllExcept(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_GetHashsetPlusHasAll(t *testing.T) {
+func Test_Collection_GetHashsetPlusHasAll(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_GetHashsetPlusHasAll", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -1222,7 +1222,7 @@ func Test_Cov16_Collection_GetHashsetPlusHasAll(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddStringsByFuncChecking(t *testing.T) {
+func Test_Collection_AddStringsByFuncChecking(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddStringsByFuncChecking", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1240,7 +1240,7 @@ func Test_Cov16_Collection_AddStringsByFuncChecking(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_AddFuncResult(t *testing.T) {
+func Test_Collection_AddFuncResult(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddFuncResult", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -1255,7 +1255,7 @@ func Test_Cov16_Collection_AddFuncResult(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ParseInjectUsingJson(t *testing.T) {
+func Test_Collection_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ParseInjectUsingJson", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -1274,7 +1274,7 @@ func Test_Cov16_Collection_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov16_Collection_ClearDispose(t *testing.T) {
+func Test_Collection_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ClearDispose", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})

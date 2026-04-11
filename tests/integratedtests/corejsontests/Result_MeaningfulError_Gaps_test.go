@@ -14,7 +14,7 @@ import (
 
 // --- Result branches ---
 
-func Test_Cov17_Result_MeaningfulError_WithBytesAndError(t *testing.T) {
+func Test_Result_MeaningfulError_WithBytesAndError(t *testing.T) {
 	// Arrange — Result with both error and bytes
 	result := corejson.Result{
 		Bytes:    []byte(`{"key":"value"}`),
@@ -32,7 +32,7 @@ func Test_Cov17_Result_MeaningfulError_WithBytesAndError(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_MeaningfulError_NoBytes(t *testing.T) {
+func Test_Result_MeaningfulError_NoBytes(t *testing.T) {
 	// Arrange — Result with error but no bytes
 	result := corejson.Result{
 		Bytes:    nil,
@@ -49,7 +49,7 @@ func Test_Cov17_Result_MeaningfulError_NoBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_SafeJsonStringInternal_Nil(t *testing.T) {
+func Test_Result_SafeJsonStringInternal_Nil(t *testing.T) {
 	// Arrange
 	var result *corejson.Result
 
@@ -63,7 +63,7 @@ func Test_Cov17_Result_SafeJsonStringInternal_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_SerializeWithError(t *testing.T) {
+func Test_Result_SerializeWithError(t *testing.T) {
 	// Arrange — Result with an error already set
 	result := &corejson.Result{
 		Bytes:    []byte(`{"key":"value"}`),
@@ -80,7 +80,7 @@ func Test_Cov17_Result_SerializeWithError(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_IsEqualPtr_SameJsonString(t *testing.T) {
+func Test_Result_IsEqualPtr_SameJsonString(t *testing.T) {
 	// Arrange
 	r1 := corejson.New("test value")
 	r2 := corejson.New("test value")
@@ -94,7 +94,7 @@ func Test_Cov17_Result_IsEqualPtr_SameJsonString(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_IsEqual_TypeNameDiffers(t *testing.T) {
+func Test_Result_IsEqual_TypeNameDiffers(t *testing.T) {
 	// Arrange
 	r1 := corejson.Result{
 		Bytes:    []byte(`"test"`),
@@ -114,7 +114,7 @@ func Test_Cov17_Result_IsEqual_TypeNameDiffers(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_CombineErrorWithRefString_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefString_NoError(t *testing.T) {
 	// Arrange
 	result := corejson.New("valid")
 
@@ -127,7 +127,7 @@ func Test_Cov17_Result_CombineErrorWithRefString_NoError(t *testing.T) {
 	})
 }
 
-func Test_Cov17_Result_CombineErrorWithRefError_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefError_NoError(t *testing.T) {
 	// Arrange
 	result := corejson.New("valid")
 
@@ -142,7 +142,7 @@ func Test_Cov17_Result_CombineErrorWithRefError_NoError(t *testing.T) {
 
 // --- BytesCollection branches ---
 
-func Test_Cov17_BytesCollection_AddSerializers_Empty(t *testing.T) {
+func Test_BytesCollection_AddSerializers_Empty(t *testing.T) {
 	// Arrange
 	coll := corejson.NewBytesCollection.Empty()
 
@@ -158,7 +158,7 @@ func Test_Cov17_BytesCollection_AddSerializers_Empty(t *testing.T) {
 
 // --- ResultsCollection branches ---
 
-func Test_Cov17_ResultsCollection_AddSerializers_Empty(t *testing.T) {
+func Test_ResultsCollection_AddSerializers_Empty(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()
 
@@ -171,7 +171,7 @@ func Test_Cov17_ResultsCollection_AddSerializers_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov17_ResultsCollection_Clone_Empty(t *testing.T) {
+func Test_ResultsCollection_Clone_Empty(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()
 
@@ -184,7 +184,7 @@ func Test_Cov17_ResultsCollection_Clone_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov17_ResultsCollection_ClonePtr_Empty(t *testing.T) {
+func Test_ResultsCollection_ClonePtr_Empty(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()
 
@@ -197,7 +197,7 @@ func Test_Cov17_ResultsCollection_ClonePtr_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov17_ResultsCollection_Clone_WithItems(t *testing.T) {
+func Test_ResultsCollection_Clone_WithItems(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()
 	coll.Add(corejson.New("item1"))
@@ -214,7 +214,7 @@ func Test_Cov17_ResultsCollection_Clone_WithItems(t *testing.T) {
 
 // --- ResultsPtrCollection branches ---
 
-func Test_Cov17_ResultsPtrCollection_AddSerializers_Empty(t *testing.T) {
+func Test_ResultsPtrCollection_AddSerializers_Empty(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 
@@ -227,7 +227,7 @@ func Test_Cov17_ResultsPtrCollection_AddSerializers_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov17_ResultsPtrCollection_UnmarshalAtSafe_NilResult(t *testing.T) {
+func Test_ResultsPtrCollection_UnmarshalAtSafe_NilResult(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 	r := corejson.NewPtr("test")
@@ -246,7 +246,7 @@ func Test_Cov17_ResultsPtrCollection_UnmarshalAtSafe_NilResult(t *testing.T) {
 
 // --- MapResults branches ---
 
-func Test_Cov17_MapResults_UnmarshalMany_Error(t *testing.T) {
+func Test_MapResults_UnmarshalMany_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	r := corejson.New("test-value")
@@ -267,7 +267,7 @@ func Test_Cov17_MapResults_UnmarshalMany_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov17_MapResults_UnmarshalManySafe_Error(t *testing.T) {
+func Test_MapResults_UnmarshalManySafe_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	r := corejson.New("test-value")
@@ -289,7 +289,7 @@ func Test_Cov17_MapResults_UnmarshalManySafe_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov17_MapResults_AddAny_Error(t *testing.T) {
+func Test_MapResults_AddAny_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 

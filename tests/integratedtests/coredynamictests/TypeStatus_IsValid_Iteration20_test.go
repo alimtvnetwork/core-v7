@@ -12,7 +12,7 @@ import (
 // TypeStatus — all methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I20_TypeStatus_IsValid_WithTypes(t *testing.T) {
+func Test_TypeStatus_IsValid_WithTypes(t *testing.T) {
 	// Arrange
 	ts := &coredynamic.TypeStatus{
 		IsSame: true,
@@ -28,7 +28,7 @@ func Test_I20_TypeStatus_IsValid_WithTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- IsValid", actual)
 }
 
-func Test_I20_TypeStatus_IsValid_Nil(t *testing.T) {
+func Test_TypeStatus_IsValid_Nil(t *testing.T) {
 	// Arrange
 	var ts *coredynamic.TypeStatus
 
@@ -40,7 +40,7 @@ func Test_I20_TypeStatus_IsValid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsValid nil", actual)
 }
 
-func Test_I20_TypeStatus_IsInvalid_Nil(t *testing.T) {
+func Test_TypeStatus_IsInvalid_Nil(t *testing.T) {
 	// Arrange
 	var ts *coredynamic.TypeStatus
 
@@ -52,7 +52,7 @@ func Test_I20_TypeStatus_IsInvalid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsInvalid nil", actual)
 }
 
-func Test_I20_TypeStatus_IsNotSame(t *testing.T) {
+func Test_TypeStatus_IsNotSame(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false}
 
@@ -70,7 +70,7 @@ func Test_I20_TypeStatus_IsNotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsNotSame", actual)
 }
 
-func Test_I20_TypeStatus_IsAnyPointer(t *testing.T) {
+func Test_TypeStatus_IsAnyPointer(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsLeftPointer: true}
 
@@ -88,7 +88,7 @@ func Test_I20_TypeStatus_IsAnyPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsAnyPointer", actual)
 }
 
-func Test_I20_TypeStatus_IsBothPointer(t *testing.T) {
+func Test_TypeStatus_IsBothPointer(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsLeftPointer: true, IsRightPointer: true}
 
@@ -100,7 +100,7 @@ func Test_I20_TypeStatus_IsBothPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsBothPointer", actual)
 }
 
-func Test_I20_TypeStatus_NonPointerLeft(t *testing.T) {
+func Test_TypeStatus_NonPointerLeft(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{
 		Left:          reflect.TypeOf((*int)(nil)),
@@ -117,7 +117,7 @@ func Test_I20_TypeStatus_NonPointerLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NonPointerLeft", actual)
 }
 
-func Test_I20_TypeStatus_NonPointerRight(t *testing.T) {
+func Test_TypeStatus_NonPointerRight(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{
 		Left:           reflect.TypeOf(0),
@@ -134,7 +134,7 @@ func Test_I20_TypeStatus_NonPointerRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NonPointerRight", actual)
 }
 
-func Test_I20_TypeStatus_NonPointerLeft_NonPointer(t *testing.T) {
+func Test_TypeStatus_NonPointerLeft_NonPointer(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{Left: reflect.TypeOf(0), Right: reflect.TypeOf(0)}
 	np := ts.NonPointerLeft()
@@ -147,7 +147,7 @@ func Test_I20_TypeStatus_NonPointerLeft_NonPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- NonPointerLeft non-ptr", actual)
 }
 
-func Test_I20_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
+func Test_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(0), Right: reflect.TypeOf(0)}
 
@@ -159,7 +159,7 @@ func Test_I20_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsSameRegardlessPointer same", actual)
 }
 
-func Test_I20_TypeStatus_IsSameRegardlessPointer_PtrVsNonPtr(t *testing.T) {
+func Test_TypeStatus_IsSameRegardlessPointer_PtrVsNonPtr(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{
 		IsSame:        false,
@@ -176,7 +176,7 @@ func Test_I20_TypeStatus_IsSameRegardlessPointer_PtrVsNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- IsSameRegardlessPointer ptr vs non-ptr", actual)
 }
 
-func Test_I20_TypeStatus_LeftName(t *testing.T) {
+func Test_TypeStatus_LeftName(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -194,7 +194,7 @@ func Test_I20_TypeStatus_LeftName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- LeftName/RightName", actual)
 }
 
-func Test_I20_TypeStatus_LeftFullName(t *testing.T) {
+func Test_TypeStatus_LeftFullName(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -212,7 +212,7 @@ func Test_I20_TypeStatus_LeftFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- LeftFullName/RightFullName", actual)
 }
 
-func Test_I20_TypeStatus_NotMatchMessage_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 
@@ -224,7 +224,7 @@ func Test_I20_TypeStatus_NotMatchMessage_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NotMatchMessage same", actual)
 }
 
-func Test_I20_TypeStatus_NotMatchMessage_NotSame(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage_NotSame(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 	msg := ts.NotMatchMessage("left", "right")
@@ -237,7 +237,7 @@ func Test_I20_TypeStatus_NotMatchMessage_NotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NotMatchMessage not same", actual)
 }
 
-func Test_I20_TypeStatus_NotMatchErr_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchErr_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 
@@ -249,7 +249,7 @@ func Test_I20_TypeStatus_NotMatchErr_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NotMatchErr same", actual)
 }
 
-func Test_I20_TypeStatus_NotMatchErr_NotSame(t *testing.T) {
+func Test_TypeStatus_NotMatchErr_NotSame(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -261,7 +261,7 @@ func Test_I20_TypeStatus_NotMatchErr_NotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NotMatchErr not same", actual)
 }
 
-func Test_I20_TypeStatus_ValidationError_Same(t *testing.T) {
+func Test_TypeStatus_ValidationError_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 
@@ -273,7 +273,7 @@ func Test_I20_TypeStatus_ValidationError_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- ValidationError same", actual)
 }
 
-func Test_I20_TypeStatus_ValidationError_NotSame(t *testing.T) {
+func Test_TypeStatus_ValidationError_NotSame(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -285,7 +285,7 @@ func Test_I20_TypeStatus_ValidationError_NotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- ValidationError not same", actual)
 }
 
-func Test_I20_TypeStatus_MustBeSame_NoPanic(t *testing.T) {
+func Test_TypeStatus_MustBeSame_NoPanic(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 	ts.MustBeSame() // should not panic
@@ -298,7 +298,7 @@ func Test_I20_TypeStatus_MustBeSame_NoPanic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus panics -- MustBeSame no panic", actual)
 }
 
-func Test_I20_TypeStatus_MustBeSame_Panic(t *testing.T) {
+func Test_TypeStatus_MustBeSame_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 		r := recover()
@@ -314,7 +314,7 @@ func Test_I20_TypeStatus_MustBeSame_Panic(t *testing.T) {
 	ts.MustBeSame()
 }
 
-func Test_I20_TypeStatus_SrcDestinationMustBeSame_NoPanic(t *testing.T) {
+func Test_TypeStatus_SrcDestinationMustBeSame_NoPanic(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 	ts.SrcDestinationMustBeSame()
@@ -327,7 +327,7 @@ func Test_I20_TypeStatus_SrcDestinationMustBeSame_NoPanic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus panics -- SrcDestinationMustBeSame no panic", actual)
 }
 
-func Test_I20_TypeStatus_SrcDestinationMustBeSame_Panic(t *testing.T) {
+func Test_TypeStatus_SrcDestinationMustBeSame_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 		r := recover()
@@ -343,7 +343,7 @@ func Test_I20_TypeStatus_SrcDestinationMustBeSame_Panic(t *testing.T) {
 	ts.SrcDestinationMustBeSame()
 }
 
-func Test_I20_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 	msg := ts.NotEqualSrcDestinationMessage()
@@ -356,7 +356,7 @@ func Test_I20_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NotEqualSrcDestinationMessage", actual)
 }
 
-func Test_I20_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -368,7 +368,7 @@ func Test_I20_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NotEqualSrcDestinationErr", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_BothNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var a, b *coredynamic.TypeStatus
 
@@ -380,7 +380,7 @@ func Test_I20_TypeStatus_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsEqual both nil", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_OneNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 
@@ -392,7 +392,7 @@ func Test_I20_TypeStatus_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsEqual one nil", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_Same(t *testing.T) {
+func Test_TypeStatus_IsEqual_Same(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
@@ -405,7 +405,7 @@ func Test_I20_TypeStatus_IsEqual_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsEqual same", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_DiffIsSame(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffIsSame(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
@@ -418,7 +418,7 @@ func Test_I20_TypeStatus_IsEqual_DiffIsSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsEqual diff IsSame", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_DiffLeft(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffLeft(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(0), Right: reflect.TypeOf("")}
@@ -431,7 +431,7 @@ func Test_I20_TypeStatus_IsEqual_DiffLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsEqual diff Left", actual)
 }
 
-func Test_I20_TypeStatus_IsEqual_DiffRight(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffRight(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
@@ -448,7 +448,7 @@ func Test_I20_TypeStatus_IsEqual_DiffRight(t *testing.T) {
 // TypedDynamic — GetAs*, Value*, Clone, Deserialize, conversions
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I20_TypedDynamic_GetAsString(t *testing.T) {
+func Test_TypedDynamic_GetAsString(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 	val, ok := td.GetAsString()
@@ -467,7 +467,7 @@ func Test_I20_TypedDynamic_GetAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsString", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsInt(t *testing.T) {
+func Test_TypedDynamic_GetAsInt(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(42, true)
 	val, ok := td.GetAsInt()
@@ -486,7 +486,7 @@ func Test_I20_TypedDynamic_GetAsInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsInt", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsInt64(t *testing.T) {
+func Test_TypedDynamic_GetAsInt64(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(int64(99), true)
 	val, ok := td.GetAsInt64()
@@ -505,7 +505,7 @@ func Test_I20_TypedDynamic_GetAsInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsInt64", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsUint(t *testing.T) {
+func Test_TypedDynamic_GetAsUint(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(uint(7), true)
 	val, ok := td.GetAsUint()
@@ -524,7 +524,7 @@ func Test_I20_TypedDynamic_GetAsUint(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsUint", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsFloat64(t *testing.T) {
+func Test_TypedDynamic_GetAsFloat64(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(3.14, true)
 	val, ok := td.GetAsFloat64()
@@ -543,7 +543,7 @@ func Test_I20_TypedDynamic_GetAsFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsFloat64", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsFloat32(t *testing.T) {
+func Test_TypedDynamic_GetAsFloat32(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(float32(1.5), true)
 	val, ok := td.GetAsFloat32()
@@ -562,7 +562,7 @@ func Test_I20_TypedDynamic_GetAsFloat32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsFloat32", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsBool(t *testing.T) {
+func Test_TypedDynamic_GetAsBool(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(true, true)
 	val, ok := td.GetAsBool()
@@ -581,7 +581,7 @@ func Test_I20_TypedDynamic_GetAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsBool", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsBytes(t *testing.T) {
+func Test_TypedDynamic_GetAsBytes(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic([]byte{1, 2}, true)
 	val, ok := td.GetAsBytes()
@@ -600,7 +600,7 @@ func Test_I20_TypedDynamic_GetAsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsBytes", actual)
 }
 
-func Test_I20_TypedDynamic_GetAsStrings(t *testing.T) {
+func Test_TypedDynamic_GetAsStrings(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic([]string{"a", "b"}, true)
 	val, ok := td.GetAsStrings()
@@ -619,7 +619,7 @@ func Test_I20_TypedDynamic_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsStrings", actual)
 }
 
-func Test_I20_TypedDynamic_ValueString(t *testing.T) {
+func Test_TypedDynamic_ValueString(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 
@@ -631,7 +631,7 @@ func Test_I20_TypedDynamic_ValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns non-empty -- ValueString", actual)
 }
 
-func Test_I20_TypedDynamic_ValueString_NonString(t *testing.T) {
+func Test_TypedDynamic_ValueString_NonString(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(42, true)
 
@@ -643,7 +643,7 @@ func Test_I20_TypedDynamic_ValueString_NonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns non-empty -- ValueString non-string", actual)
 }
 
-func Test_I20_TypedDynamic_ValueInt(t *testing.T) {
+func Test_TypedDynamic_ValueInt(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(42, true)
 
@@ -655,7 +655,7 @@ func Test_I20_TypedDynamic_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueInt", actual)
 }
 
-func Test_I20_TypedDynamic_ValueInt64(t *testing.T) {
+func Test_TypedDynamic_ValueInt64(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(int64(999), true)
 
@@ -667,7 +667,7 @@ func Test_I20_TypedDynamic_ValueInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueInt64", actual)
 }
 
-func Test_I20_TypedDynamic_ValueBool(t *testing.T) {
+func Test_TypedDynamic_ValueBool(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(true, true)
 
@@ -679,7 +679,7 @@ func Test_I20_TypedDynamic_ValueBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueBool", actual)
 }
 
-func Test_I20_TypedDynamic_ValueBool_NotBool(t *testing.T) {
+func Test_TypedDynamic_ValueBool_NotBool(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("nope", true)
 
@@ -691,7 +691,7 @@ func Test_I20_TypedDynamic_ValueBool_NotBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueBool not bool", actual)
 }
 
-func Test_I20_TypedDynamic_Clone(t *testing.T) {
+func Test_TypedDynamic_Clone(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 	cloned := td.Clone()
@@ -710,7 +710,7 @@ func Test_I20_TypedDynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Clone", actual)
 }
 
-func Test_I20_TypedDynamic_ClonePtr(t *testing.T) {
+func Test_TypedDynamic_ClonePtr(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamicPtr("hello", true)
 	cloned := td.ClonePtr()
@@ -729,7 +729,7 @@ func Test_I20_TypedDynamic_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ClonePtr", actual)
 }
 
-func Test_I20_TypedDynamic_ClonePtr_Nil(t *testing.T) {
+func Test_TypedDynamic_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var td *coredynamic.TypedDynamic[string]
 
@@ -741,7 +741,7 @@ func Test_I20_TypedDynamic_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns nil -- ClonePtr nil", actual)
 }
 
-func Test_I20_TypedDynamic_ToDynamic(t *testing.T) {
+func Test_TypedDynamic_ToDynamic(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 	d := td.ToDynamic()
@@ -754,7 +754,7 @@ func Test_I20_TypedDynamic_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ToDynamic", actual)
 }
 
-func Test_I20_TypedDynamic_Deserialize(t *testing.T) {
+func Test_TypedDynamic_Deserialize(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamicPtr("", true)
 	err := td.Deserialize([]byte(`"world"`))
@@ -773,7 +773,7 @@ func Test_I20_TypedDynamic_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Deserialize", actual)
 }
 
-func Test_I20_TypedDynamic_Deserialize_Nil(t *testing.T) {
+func Test_TypedDynamic_Deserialize_Nil(t *testing.T) {
 	// Arrange
 	var td *coredynamic.TypedDynamic[string]
 	err := td.Deserialize([]byte(`"x"`))
@@ -786,7 +786,7 @@ func Test_I20_TypedDynamic_Deserialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns nil -- Deserialize nil", actual)
 }
 
-func Test_I20_TypedDynamic_Bytes_AsBytes(t *testing.T) {
+func Test_TypedDynamic_Bytes_AsBytes(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic([]byte{1, 2}, true)
 	b, ok := td.Bytes()
@@ -805,7 +805,7 @@ func Test_I20_TypedDynamic_Bytes_AsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes as bytes", actual)
 }
 
-func Test_I20_TypedDynamic_Bytes_Marshal(t *testing.T) {
+func Test_TypedDynamic_Bytes_Marshal(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 	b, ok := td.Bytes()
@@ -824,7 +824,7 @@ func Test_I20_TypedDynamic_Bytes_Marshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes marshal", actual)
 }
 
-func Test_I20_TypedDynamic_NonPtr(t *testing.T) {
+func Test_TypedDynamic_NonPtr(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	np := td.NonPtr()
@@ -837,7 +837,7 @@ func Test_I20_TypedDynamic_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- NonPtr", actual)
 }
 
-func Test_I20_TypedDynamic_JsonModel(t *testing.T) {
+func Test_TypedDynamic_JsonModel(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("val", true)
 
@@ -849,7 +849,7 @@ func Test_I20_TypedDynamic_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonModel", actual)
 }
 
-func Test_I20_TypedDynamic_JsonModelAny(t *testing.T) {
+func Test_TypedDynamic_JsonModelAny(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic(42, true)
 
@@ -861,7 +861,7 @@ func Test_I20_TypedDynamic_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonModelAny", actual)
 }
 
-func Test_I20_TypedDynamic_ValueMarshal(t *testing.T) {
+func Test_TypedDynamic_ValueMarshal(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	b, err := td.ValueMarshal()
@@ -880,7 +880,7 @@ func Test_I20_TypedDynamic_ValueMarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueMarshal", actual)
 }
 
-func Test_I20_TypedDynamic_MarshalJSON(t *testing.T) {
+func Test_TypedDynamic_MarshalJSON(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	b, err := td.MarshalJSON()
@@ -899,7 +899,7 @@ func Test_I20_TypedDynamic_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- MarshalJSON", actual)
 }
 
-func Test_I20_TypedDynamic_UnmarshalJSON(t *testing.T) {
+func Test_TypedDynamic_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamicPtr("", true)
 	err := td.UnmarshalJSON([]byte(`"abc"`))
@@ -922,7 +922,7 @@ func Test_I20_TypedDynamic_UnmarshalJSON(t *testing.T) {
 // TypedSimpleRequest — deeper paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I20_TypedSimpleRequest_Clone(t *testing.T) {
+func Test_TypedSimpleRequest_Clone(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	cloned := sr.Clone()
@@ -941,7 +941,7 @@ func Test_I20_TypedSimpleRequest_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- Clone", actual)
 }
 
-func Test_I20_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
+func Test_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	simple := sr.ToSimpleRequest()
@@ -954,7 +954,7 @@ func Test_I20_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- ToSimpleRequest", actual)
 }
 
-func Test_I20_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
+func Test_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	td := sr.ToTypedDynamic()
@@ -973,7 +973,7 @@ func Test_I20_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- ToTypedDynamic", actual)
 }
 
-func Test_I20_TypedSimpleRequest_ToDynamic(t *testing.T) {
+func Test_TypedSimpleRequest_ToDynamic(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	d := sr.ToDynamic()
@@ -986,7 +986,7 @@ func Test_I20_TypedSimpleRequest_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- ToDynamic", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsString(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsString(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	val, ok := sr.GetAsString()
@@ -1005,7 +1005,7 @@ func Test_I20_TypedSimpleRequest_GetAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsString", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsInt(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsInt(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid(42)
 	val, ok := sr.GetAsInt()
@@ -1024,7 +1024,7 @@ func Test_I20_TypedSimpleRequest_GetAsInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsInt", actual)
 }
 
-func Test_I20_TypedSimpleRequest_InvalidError_Cached(t *testing.T) {
+func Test_TypedSimpleRequest_InvalidError_Cached(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidTypedSimpleRequest[string]("err msg")
 	e1 := sr.InvalidError()
@@ -1044,7 +1044,7 @@ func Test_I20_TypedSimpleRequest_InvalidError_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns error -- InvalidError cached", actual)
 }
 
-func Test_I20_TypedSimpleRequest_JsonBytes(t *testing.T) {
+func Test_TypedSimpleRequest_JsonBytes(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 	b, err := sr.JsonBytes()
@@ -1063,7 +1063,7 @@ func Test_I20_TypedSimpleRequest_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- JsonBytes", actual)
 }
 
-func Test_I20_TypedSimpleRequest_JsonModel(t *testing.T) {
+func Test_TypedSimpleRequest_JsonModel(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 
@@ -1075,7 +1075,7 @@ func Test_I20_TypedSimpleRequest_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- JsonModel", actual)
 }
 
-func Test_I20_TypedSimpleRequest_JsonModelAny(t *testing.T) {
+func Test_TypedSimpleRequest_JsonModelAny(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 
@@ -1091,7 +1091,7 @@ func Test_I20_TypedSimpleRequest_JsonModelAny(t *testing.T) {
 // TypedSimpleResult — deeper paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I20_TypedSimpleResult_Clone(t *testing.T) {
+func Test_TypedSimpleResult_Clone(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	cloned := sr.Clone()
@@ -1110,7 +1110,7 @@ func Test_I20_TypedSimpleResult_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Clone", actual)
 }
 
-func Test_I20_TypedSimpleResult_ClonePtr(t *testing.T) {
+func Test_TypedSimpleResult_ClonePtr(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	cloned := sr.ClonePtr()
@@ -1129,7 +1129,7 @@ func Test_I20_TypedSimpleResult_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ClonePtr", actual)
 }
 
-func Test_I20_TypedSimpleResult_ToSimpleResult(t *testing.T) {
+func Test_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	simple := sr.ToSimpleResult()
@@ -1142,7 +1142,7 @@ func Test_I20_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ToSimpleResult", actual)
 }
 
-func Test_I20_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
+func Test_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	td := sr.ToTypedDynamic()
@@ -1155,7 +1155,7 @@ func Test_I20_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ToTypedDynamic", actual)
 }
 
-func Test_I20_TypedSimpleResult_ToDynamic(t *testing.T) {
+func Test_TypedSimpleResult_ToDynamic(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	d := sr.ToDynamic()
@@ -1168,7 +1168,7 @@ func Test_I20_TypedSimpleResult_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ToDynamic", actual)
 }
 
-func Test_I20_TypedSimpleResult_InvalidError_Cached(t *testing.T) {
+func Test_TypedSimpleResult_InvalidError_Cached(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidTypedSimpleResult[string]("err")
 	e1 := sr.InvalidError()
@@ -1188,7 +1188,7 @@ func Test_I20_TypedSimpleResult_InvalidError_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns error -- InvalidError cached", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsString(t *testing.T) {
+func Test_TypedSimpleResult_GetAsString(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	val, ok := sr.GetAsString()
@@ -1207,7 +1207,7 @@ func Test_I20_TypedSimpleResult_GetAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsString", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsFloat64(t *testing.T) {
+func Test_TypedSimpleResult_GetAsFloat64(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid(3.14)
 	val, ok := sr.GetAsFloat64()
@@ -1226,7 +1226,7 @@ func Test_I20_TypedSimpleResult_GetAsFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsFloat64", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsBool(t *testing.T) {
+func Test_TypedSimpleResult_GetAsBool(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid(true)
 	val, ok := sr.GetAsBool()
@@ -1245,7 +1245,7 @@ func Test_I20_TypedSimpleResult_GetAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsBool", actual)
 }
 
-func Test_I20_TypedSimpleResult_JsonBytes(t *testing.T) {
+func Test_TypedSimpleResult_JsonBytes(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	b, err := sr.JsonBytes()
@@ -1264,7 +1264,7 @@ func Test_I20_TypedSimpleResult_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonBytes", actual)
 }
 
-func Test_I20_TypedSimpleResult_JsonPtr(t *testing.T) {
+func Test_TypedSimpleResult_JsonPtr(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	jr := sr.JsonPtr()
@@ -1277,7 +1277,7 @@ func Test_I20_TypedSimpleResult_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonPtr", actual)
 }
 
-func Test_I20_TypedSimpleResult_InvalidNoMessage(t *testing.T) {
+func Test_TypedSimpleResult_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidTypedSimpleResultNoMessage[string]()
 
@@ -1295,7 +1295,7 @@ func Test_I20_TypedSimpleResult_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns error -- InvalidNoMessage", actual)
 }
 
-func Test_I20_TypedSimpleRequest_InvalidNoMessage(t *testing.T) {
+func Test_TypedSimpleRequest_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidTypedSimpleRequestNoMessage[string]()
 
@@ -1313,7 +1313,7 @@ func Test_I20_TypedSimpleRequest_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns error -- InvalidNoMessage", actual)
 }
 
-func Test_I20_TypedSimpleRequest_String(t *testing.T) {
+func Test_TypedSimpleRequest_String(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("hello")
 
@@ -1325,7 +1325,7 @@ func Test_I20_TypedSimpleRequest_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- String", actual)
 }
 
-func Test_I20_TypedSimpleResult_String(t *testing.T) {
+func Test_TypedSimpleResult_String(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 
@@ -1337,7 +1337,7 @@ func Test_I20_TypedSimpleResult_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- String", actual)
 }
 
-func Test_I20_TypedDynamic_Invalid(t *testing.T) {
+func Test_TypedDynamic_Invalid(t *testing.T) {
 	// Arrange
 	td := coredynamic.InvalidTypedDynamic[string]()
 
@@ -1349,7 +1349,7 @@ func Test_I20_TypedDynamic_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns error -- Invalid", actual)
 }
 
-func Test_I20_TypedDynamic_InvalidPtr(t *testing.T) {
+func Test_TypedDynamic_InvalidPtr(t *testing.T) {
 	// Arrange
 	td := coredynamic.InvalidTypedDynamicPtr[string]()
 
@@ -1367,7 +1367,7 @@ func Test_I20_TypedDynamic_InvalidPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns error -- InvalidPtr", actual)
 }
 
-func Test_I20_TypedDynamic_String(t *testing.T) {
+func Test_TypedDynamic_String(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("hello", true)
 
@@ -1379,7 +1379,7 @@ func Test_I20_TypedDynamic_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- String", actual)
 }
 
-func Test_I20_TypedDynamic_JsonBytes(t *testing.T) {
+func Test_TypedDynamic_JsonBytes(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	b, err := td.JsonBytes()
@@ -1398,7 +1398,7 @@ func Test_I20_TypedDynamic_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonBytes", actual)
 }
 
-func Test_I20_TypedDynamic_JsonResult(t *testing.T) {
+func Test_TypedDynamic_JsonResult(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	jr := td.JsonResult()
@@ -1411,7 +1411,7 @@ func Test_I20_TypedDynamic_JsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonResult", actual)
 }
 
-func Test_I20_TypedDynamic_JsonString(t *testing.T) {
+func Test_TypedDynamic_JsonString(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	s, err := td.JsonString()
@@ -1430,7 +1430,7 @@ func Test_I20_TypedDynamic_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonString", actual)
 }
 
-func Test_I20_TypedDynamic_Json(t *testing.T) {
+func Test_TypedDynamic_Json(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	jr := td.Json()
@@ -1443,7 +1443,7 @@ func Test_I20_TypedDynamic_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Json", actual)
 }
 
-func Test_I20_TypedDynamic_JsonPtr(t *testing.T) {
+func Test_TypedDynamic_JsonPtr(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	jr := td.JsonPtr()
@@ -1456,7 +1456,7 @@ func Test_I20_TypedDynamic_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonPtr", actual)
 }
 
-func Test_I20_TypedSimpleResult_MarshalJSON(t *testing.T) {
+func Test_TypedSimpleResult_MarshalJSON(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 	b, err := sr.MarshalJSON()
@@ -1475,7 +1475,7 @@ func Test_I20_TypedSimpleResult_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- MarshalJSON", actual)
 }
 
-func Test_I20_TypedSimpleRequest_MarshalJSON(t *testing.T) {
+func Test_TypedSimpleRequest_MarshalJSON(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("ok")
 	b, err := sr.MarshalJSON()
@@ -1494,7 +1494,7 @@ func Test_I20_TypedSimpleRequest_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- MarshalJSON", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsBytes(t *testing.T) {
+func Test_TypedSimpleResult_GetAsBytes(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid([]byte{1, 2})
 	val, ok := sr.GetAsBytes()
@@ -1513,7 +1513,7 @@ func Test_I20_TypedSimpleResult_GetAsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsBytes", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsStrings(t *testing.T) {
+func Test_TypedSimpleResult_GetAsStrings(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid([]string{"a"})
 	val, ok := sr.GetAsStrings()
@@ -1532,7 +1532,7 @@ func Test_I20_TypedSimpleResult_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsStrings", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsBytes(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsBytes(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid([]byte{3})
 	val, ok := sr.GetAsBytes()
@@ -1551,7 +1551,7 @@ func Test_I20_TypedSimpleRequest_GetAsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsBytes", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsStrings(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsStrings(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid([]string{"a", "b"})
 	val, ok := sr.GetAsStrings()
@@ -1570,7 +1570,7 @@ func Test_I20_TypedSimpleRequest_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsStrings", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsInt64(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsInt64(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid(int64(77))
 	val, ok := sr.GetAsInt64()
@@ -1589,7 +1589,7 @@ func Test_I20_TypedSimpleRequest_GetAsInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsInt64", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsFloat64(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsFloat64(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid(1.5)
 	val, ok := sr.GetAsFloat64()
@@ -1608,7 +1608,7 @@ func Test_I20_TypedSimpleRequest_GetAsFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsFloat64", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsFloat32(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsFloat32(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid(float32(2.5))
 	val, ok := sr.GetAsFloat32()
@@ -1627,7 +1627,7 @@ func Test_I20_TypedSimpleRequest_GetAsFloat32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsFloat32", actual)
 }
 
-func Test_I20_TypedSimpleRequest_GetAsBool(t *testing.T) {
+func Test_TypedSimpleRequest_GetAsBool(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid(true)
 	val, ok := sr.GetAsBool()
@@ -1646,7 +1646,7 @@ func Test_I20_TypedSimpleRequest_GetAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsBool", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsInt(t *testing.T) {
+func Test_TypedSimpleResult_GetAsInt(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid(42)
 	val, ok := sr.GetAsInt()
@@ -1665,7 +1665,7 @@ func Test_I20_TypedSimpleResult_GetAsInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsInt", actual)
 }
 
-func Test_I20_TypedSimpleResult_GetAsInt64(t *testing.T) {
+func Test_TypedSimpleResult_GetAsInt64(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid(int64(88))
 	val, ok := sr.GetAsInt64()
@@ -1684,7 +1684,7 @@ func Test_I20_TypedSimpleResult_GetAsInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsInt64", actual)
 }
 
-func Test_I20_TypedSimpleResult_JsonModel(t *testing.T) {
+func Test_TypedSimpleResult_JsonModel(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 
@@ -1696,7 +1696,7 @@ func Test_I20_TypedSimpleResult_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonModel", actual)
 }
 
-func Test_I20_TypedSimpleResult_JsonModelAny(t *testing.T) {
+func Test_TypedSimpleResult_JsonModelAny(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("ok")
 
@@ -1708,7 +1708,7 @@ func Test_I20_TypedSimpleResult_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonModelAny", actual)
 }
 
-func Test_I20_TypedSimpleRequest_JsonResult(t *testing.T) {
+func Test_TypedSimpleRequest_JsonResult(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("x")
 	jr := sr.JsonResult()
@@ -1721,7 +1721,7 @@ func Test_I20_TypedSimpleRequest_JsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- JsonResult", actual)
 }
 
-func Test_I20_TypedSimpleRequest_Json(t *testing.T) {
+func Test_TypedSimpleRequest_Json(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("x")
 	jr := sr.Json()
@@ -1734,7 +1734,7 @@ func Test_I20_TypedSimpleRequest_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- Json", actual)
 }
 
-func Test_I20_TypedSimpleRequest_JsonPtr(t *testing.T) {
+func Test_TypedSimpleRequest_JsonPtr(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleRequestValid("x")
 	jr := sr.JsonPtr()
@@ -1747,7 +1747,7 @@ func Test_I20_TypedSimpleRequest_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- JsonPtr", actual)
 }
 
-func Test_I20_TypedSimpleResult_JsonResult(t *testing.T) {
+func Test_TypedSimpleResult_JsonResult(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("x")
 	jr := sr.JsonResult()
@@ -1760,7 +1760,7 @@ func Test_I20_TypedSimpleResult_JsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonResult", actual)
 }
 
-func Test_I20_TypedSimpleResult_Json(t *testing.T) {
+func Test_TypedSimpleResult_Json(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewTypedSimpleResultValid("x")
 	jr := sr.Json()

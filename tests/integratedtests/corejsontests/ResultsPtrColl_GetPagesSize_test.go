@@ -9,7 +9,7 @@ import (
 
 // ── ResultsPtrCollection: Paging ──
 
-func Test_Cov50_ResultsPtrColl_GetPagesSize(t *testing.T) {
+func Test_ResultsPtrColl_GetPagesSize(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b", "c")
 
@@ -22,7 +22,7 @@ func Test_Cov50_ResultsPtrColl_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagesSize returns 2 -- 3 items / 2", actual)
 }
 
-func Test_Cov50_ResultsPtrColl_GetPagesSize_ZeroPageSize(t *testing.T) {
+func Test_ResultsPtrColl_GetPagesSize_ZeroPageSize(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -35,7 +35,7 @@ func Test_Cov50_ResultsPtrColl_GetPagesSize_ZeroPageSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagesSize returns 0 -- zero page size", actual)
 }
 
-func Test_Cov50_ResultsPtrColl_GetPagedCollection(t *testing.T) {
+func Test_ResultsPtrColl_GetPagedCollection(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b", "c", "d", "e")
 
@@ -56,7 +56,7 @@ func Test_Cov50_ResultsPtrColl_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagedCollection returns 3 pages -- 5/2", actual)
 }
 
-func Test_Cov50_ResultsPtrColl_GetPagedCollection_SmallCollection(t *testing.T) {
+func Test_ResultsPtrColl_GetPagedCollection_SmallCollection(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -71,7 +71,7 @@ func Test_Cov50_ResultsPtrColl_GetPagedCollection_SmallCollection(t *testing.T) 
 
 // ── ResultsPtrCollection: Clone ──
 
-func Test_Cov50_ResultsPtrColl_Clone_DeepClone(t *testing.T) {
+func Test_ResultsPtrColl_Clone_DeepClone(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 
@@ -84,7 +84,7 @@ func Test_Cov50_ResultsPtrColl_Clone_DeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns deep clone -- 2 items", actual)
 }
 
-func Test_Cov50_ResultsPtrColl_Clone_Nil(t *testing.T) {
+func Test_ResultsPtrColl_Clone_Nil(t *testing.T) {
 	// Arrange
 	var coll *corejson.ResultsPtrCollection
 
@@ -99,7 +99,7 @@ func Test_Cov50_ResultsPtrColl_Clone_Nil(t *testing.T) {
 
 // ── ResultsPtrCollection: AddNonNilNonError ──
 
-func Test_Cov50_ResultsPtrColl_AddNonNilNonError(t *testing.T) {
+func Test_ResultsPtrColl_AddNonNilNonError(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 	valid := corejson.Serialize.Apply("valid")
@@ -118,7 +118,7 @@ func Test_Cov50_ResultsPtrColl_AddNonNilNonError(t *testing.T) {
 
 // ── ResultsPtrCollection: AddResult (non-ptr) ──
 
-func Test_Cov50_ResultsPtrColl_AddResult(t *testing.T) {
+func Test_ResultsPtrColl_AddResult(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 	r := corejson.New("hello")
@@ -134,7 +134,7 @@ func Test_Cov50_ResultsPtrColl_AddResult(t *testing.T) {
 
 // ── ResultsPtrCollection: Adds ──
 
-func Test_Cov50_ResultsPtrColl_Adds(t *testing.T) {
+func Test_ResultsPtrColl_Adds(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 	r1 := corejson.Serialize.Apply("a")
@@ -151,7 +151,7 @@ func Test_Cov50_ResultsPtrColl_Adds(t *testing.T) {
 
 // ── ResultsPtrCollection: Clear / Dispose ──
 
-func Test_Cov50_ResultsPtrColl_Clear(t *testing.T) {
+func Test_ResultsPtrColl_Clear(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 
@@ -164,7 +164,7 @@ func Test_Cov50_ResultsPtrColl_Clear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clear empties collection -- empty", actual)
 }
 
-func Test_Cov50_ResultsPtrColl_Dispose(t *testing.T) {
+func Test_ResultsPtrColl_Dispose(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -179,7 +179,7 @@ func Test_Cov50_ResultsPtrColl_Dispose(t *testing.T) {
 
 // ── ResultsPtrCollection: GetStrings ──
 
-func Test_Cov50_ResultsPtrColl_GetStrings(t *testing.T) {
+func Test_ResultsPtrColl_GetStrings(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("hello", 42)
 
@@ -194,7 +194,7 @@ func Test_Cov50_ResultsPtrColl_GetStrings(t *testing.T) {
 
 // ── ResultsPtrCollection: ParseInjectUsingJson ──
 
-func Test_Cov50_ResultsPtrColl_ParseInjectUsingJson_Valid(t *testing.T) {
+func Test_ResultsPtrColl_ParseInjectUsingJson_Valid(t *testing.T) {
 	// Arrange
 	original := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 	jsonResult := original.JsonPtr()
@@ -217,7 +217,7 @@ func Test_Cov50_ResultsPtrColl_ParseInjectUsingJson_Valid(t *testing.T) {
 
 // ── ResultsPtrCollection: GetErrorsAsSingle ──
 
-func Test_Cov50_ResultsPtrColl_GetErrorsAsSingle(t *testing.T) {
+func Test_ResultsPtrColl_GetErrorsAsSingle(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -232,7 +232,7 @@ func Test_Cov50_ResultsPtrColl_GetErrorsAsSingle(t *testing.T) {
 
 // ── ResultsPtrCollection: Json / JsonPtr / AsJsoner ──
 
-func Test_Cov50_ResultsPtrColl_Json(t *testing.T) {
+func Test_ResultsPtrColl_Json(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -247,7 +247,7 @@ func Test_Cov50_ResultsPtrColl_Json(t *testing.T) {
 
 // ── ResultsPtrCollection: NonPtr / Ptr ──
 
-func Test_Cov50_ResultsPtrColl_NonPtrPtr(t *testing.T) {
+func Test_ResultsPtrColl_NonPtrPtr(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -269,7 +269,7 @@ func Test_Cov50_ResultsPtrColl_NonPtrPtr(t *testing.T) {
 
 // ── ResultsPtrCollection: AsJsonContractsBinder / AsJsonParseSelfInjector ──
 
-func Test_Cov50_ResultsPtrColl_Interfaces(t *testing.T) {
+func Test_ResultsPtrColl_Interfaces(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a")
 
@@ -294,7 +294,7 @@ func Test_Cov50_ResultsPtrColl_Interfaces(t *testing.T) {
 
 // ── newResultsPtrCollectionCreator ──
 
-func Test_Cov50_NewResultsPtrColl_Creators(t *testing.T) {
+func Test_NewResultsPtrColl_Creators(t *testing.T) {
 	// Arrange & Act
 	empty := corejson.NewResultsPtrCollection.Empty()
 	def := corejson.NewResultsPtrCollection.Default()
@@ -320,7 +320,7 @@ func Test_Cov50_NewResultsPtrColl_Creators(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Creators return correct -- various", actual)
 }
 
-func Test_Cov50_NewResultsPtrColl_UsingResults(t *testing.T) {
+func Test_NewResultsPtrColl_UsingResults(t *testing.T) {
 	// Arrange
 	r1 := corejson.Serialize.Apply("a")
 	r2 := corejson.Serialize.Apply("b")
@@ -334,7 +334,7 @@ func Test_Cov50_NewResultsPtrColl_UsingResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingResults returns 2 -- from results", actual)
 }
 
-func Test_Cov50_NewResultsPtrColl_DeserializeUsingResult(t *testing.T) {
+func Test_NewResultsPtrColl_DeserializeUsingResult(t *testing.T) {
 	// Arrange
 	original := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 	jsonResult := original.JsonPtr()

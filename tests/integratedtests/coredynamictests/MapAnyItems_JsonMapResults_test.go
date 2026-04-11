@@ -9,7 +9,7 @@ import (
 
 // ── MapAnyItems.JsonMapResults (line 903) ──
 
-func Test_Cov75_MapAnyItems_JsonMapResults_Valid_I29(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_Valid_I29(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(3)
 	m.Add("key1", "val1")
@@ -32,7 +32,7 @@ func Test_Cov75_MapAnyItems_JsonMapResults_Valid_I29(t *testing.T) {
 
 // ── MapAnyItems.GetUsingUnmarshallAt type mismatch (line 350) ──
 
-func Test_Cov75_MapAnyItems_GetUsingUnmarshallAt_TypeMismatch_I29(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallAt_TypeMismatch_I29(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(3)
 	m.Add("key1", "stringValue")

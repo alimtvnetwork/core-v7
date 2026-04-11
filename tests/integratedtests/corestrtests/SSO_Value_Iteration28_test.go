@@ -11,7 +11,7 @@ import (
 // SimpleStringOnce — Init/Set/Get
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I28_SSO_Value_Empty(t *testing.T) {
+func Test_SSO_Value_Empty(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Value_Empty", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -35,7 +35,7 @@ func Test_I28_SSO_Value_Empty(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_SetOnUninitialized(t *testing.T) {
+func Test_SSO_SetOnUninitialized(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_SetOnUninitialized", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -58,7 +58,7 @@ func Test_I28_SSO_SetOnUninitialized(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_SetOnUninitialized_AlreadyInit(t *testing.T) {
+func Test_SSO_SetOnUninitialized_AlreadyInit(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_SetOnUninitialized_AlreadyInit", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -80,7 +80,7 @@ func Test_I28_SSO_SetOnUninitialized_AlreadyInit(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_GetSetOnce(t *testing.T) {
+func Test_SSO_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_GetSetOnce", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -102,7 +102,7 @@ func Test_I28_SSO_GetSetOnce(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_GetOnce(t *testing.T) {
+func Test_SSO_GetOnce(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_GetOnce", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -123,7 +123,7 @@ func Test_I28_SSO_GetOnce(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_GetOnce_AlreadyInit(t *testing.T) {
+func Test_SSO_GetOnce_AlreadyInit(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_GetOnce_AlreadyInit", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -139,7 +139,7 @@ func Test_I28_SSO_GetOnce_AlreadyInit(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_GetOnceFunc(t *testing.T) {
+func Test_SSO_GetOnceFunc(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_GetOnceFunc", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -161,7 +161,7 @@ func Test_I28_SSO_GetOnceFunc(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_SetOnceIfUninitialized(t *testing.T) {
+func Test_SSO_SetOnceIfUninitialized(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_SetOnceIfUninitialized", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -185,7 +185,7 @@ func Test_I28_SSO_SetOnceIfUninitialized(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Invalidate_Reset(t *testing.T) {
+func Test_SSO_Invalidate_Reset(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Invalidate_Reset", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -213,7 +213,7 @@ func Test_I28_SSO_Invalidate_Reset(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsInvalid(t *testing.T) {
+func Test_SSO_IsInvalid(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsInvalid", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -232,7 +232,7 @@ func Test_I28_SSO_IsInvalid(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsInvalid_Nil(t *testing.T) {
+func Test_SSO_IsInvalid_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsInvalid_Nil", func() {
 		// Arrange
 		var sso *corestr.SimpleStringOnce
@@ -246,7 +246,7 @@ func Test_I28_SSO_IsInvalid_Nil(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_SetInitialize_SetUnInit(t *testing.T) {
+func Test_SSO_SetInitialize_SetUnInit(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_SetInitialize_SetUnInit", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -270,7 +270,7 @@ func Test_I28_SSO_SetInitialize_SetUnInit(t *testing.T) {
 // SimpleStringOnce — Bytes, Checks
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I28_SSO_ValueBytes(t *testing.T) {
+func Test_SSO_ValueBytes(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ValueBytes", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -291,7 +291,7 @@ func Test_I28_SSO_ValueBytes(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsEmpty_IsWhitespace_Trim(t *testing.T) {
+func Test_SSO_IsEmpty_IsWhitespace_Trim(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsEmpty_IsWhitespace_Trim", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -314,7 +314,7 @@ func Test_I28_SSO_IsEmpty_IsWhitespace_Trim(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_HasValidNonEmpty_HasValidNonWhitespace(t *testing.T) {
+func Test_SSO_HasValidNonEmpty_HasValidNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_HasValidNonEmpty_HasValidNonWhitespace", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -337,7 +337,7 @@ func Test_I28_SSO_HasValidNonEmpty_HasValidNonWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_SafeValue(t *testing.T) {
+func Test_SSO_SafeValue(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_SafeValue", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -360,7 +360,7 @@ func Test_I28_SSO_SafeValue(t *testing.T) {
 // SimpleStringOnce — Numeric conversions
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I28_SSO_Int(t *testing.T) {
+func Test_SSO_Int(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -375,7 +375,7 @@ func Test_I28_SSO_Int(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int_Err(t *testing.T) {
+func Test_SSO_Int_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -390,7 +390,7 @@ func Test_I28_SSO_Int_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Byte(t *testing.T) {
+func Test_SSO_Byte(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Byte", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -405,7 +405,7 @@ func Test_I28_SSO_Byte(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Byte_OutOfRange(t *testing.T) {
+func Test_SSO_Byte_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Byte_OutOfRange", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -420,7 +420,7 @@ func Test_I28_SSO_Byte_OutOfRange(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Byte_Err(t *testing.T) {
+func Test_SSO_Byte_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Byte_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -435,7 +435,7 @@ func Test_I28_SSO_Byte_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int16(t *testing.T) {
+func Test_SSO_Int16(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int16", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -450,7 +450,7 @@ func Test_I28_SSO_Int16(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int16_OutOfRange(t *testing.T) {
+func Test_SSO_Int16_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int16_OutOfRange", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -465,7 +465,7 @@ func Test_I28_SSO_Int16_OutOfRange(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int16_Err(t *testing.T) {
+func Test_SSO_Int16_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int16_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -480,7 +480,7 @@ func Test_I28_SSO_Int16_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int32(t *testing.T) {
+func Test_SSO_Int32(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int32", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -495,7 +495,7 @@ func Test_I28_SSO_Int32(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Int32_Err(t *testing.T) {
+func Test_SSO_Int32_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Int32_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -510,7 +510,7 @@ func Test_I28_SSO_Int32_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Uint16(t *testing.T) {
+func Test_SSO_Uint16(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Uint16", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -532,7 +532,7 @@ func Test_I28_SSO_Uint16(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Uint32(t *testing.T) {
+func Test_SSO_Uint32(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Uint32", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -554,7 +554,7 @@ func Test_I28_SSO_Uint32(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRange_InRange(t *testing.T) {
+func Test_SSO_WithinRange_InRange(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRange_InRange", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -576,7 +576,7 @@ func Test_I28_SSO_WithinRange_InRange(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRange_Below(t *testing.T) {
+func Test_SSO_WithinRange_Below(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRange_Below", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -598,7 +598,7 @@ func Test_I28_SSO_WithinRange_Below(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRange_Above(t *testing.T) {
+func Test_SSO_WithinRange_Above(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRange_Above", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -620,7 +620,7 @@ func Test_I28_SSO_WithinRange_Above(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRange_NoBoundary(t *testing.T) {
+func Test_SSO_WithinRange_NoBoundary(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRange_NoBoundary", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -642,7 +642,7 @@ func Test_I28_SSO_WithinRange_NoBoundary(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRange_Err(t *testing.T) {
+func Test_SSO_WithinRange_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRange_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -664,7 +664,7 @@ func Test_I28_SSO_WithinRange_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_WithinRangeDefault(t *testing.T) {
+func Test_SSO_WithinRangeDefault(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_WithinRangeDefault", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -686,7 +686,7 @@ func Test_I28_SSO_WithinRangeDefault(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Boolean(t *testing.T) {
+func Test_SSO_Boolean(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Boolean", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -701,7 +701,7 @@ func Test_I28_SSO_Boolean(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Boolean_True(t *testing.T) {
+func Test_SSO_Boolean_True(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Boolean_True", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -716,7 +716,7 @@ func Test_I28_SSO_Boolean_True(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Boolean_ConsiderInit_Uninit(t *testing.T) {
+func Test_SSO_Boolean_ConsiderInit_Uninit(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Boolean_ConsiderInit_Uninit", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -730,7 +730,7 @@ func Test_I28_SSO_Boolean_ConsiderInit_Uninit(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_Boolean_ParseErr(t *testing.T) {
+func Test_SSO_Boolean_ParseErr(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_Boolean_ParseErr", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -745,7 +745,7 @@ func Test_I28_SSO_Boolean_ParseErr(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_BooleanDefault(t *testing.T) {
+func Test_SSO_BooleanDefault(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_BooleanDefault", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -760,7 +760,7 @@ func Test_I28_SSO_BooleanDefault(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsValueBool(t *testing.T) {
+func Test_SSO_IsValueBool(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsValueBool", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -775,7 +775,7 @@ func Test_I28_SSO_IsValueBool(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsSetter(t *testing.T) {
+func Test_SSO_IsSetter(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsSetter", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -791,7 +791,7 @@ func Test_I28_SSO_IsSetter(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsSetter_ConsiderInit_Uninit(t *testing.T) {
+func Test_SSO_IsSetter_ConsiderInit_Uninit(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsSetter_ConsiderInit_Uninit", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -806,7 +806,7 @@ func Test_I28_SSO_IsSetter_ConsiderInit_Uninit(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_IsSetter_ParseErr(t *testing.T) {
+func Test_SSO_IsSetter_ParseErr(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_IsSetter_ParseErr", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -822,7 +822,7 @@ func Test_I28_SSO_IsSetter_ParseErr(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ValueInt(t *testing.T) {
+func Test_SSO_ValueInt(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ValueInt", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -843,7 +843,7 @@ func Test_I28_SSO_ValueInt(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ValueInt_Err(t *testing.T) {
+func Test_SSO_ValueInt_Err(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ValueInt_Err", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -864,7 +864,7 @@ func Test_I28_SSO_ValueInt_Err(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ValueByte(t *testing.T) {
+func Test_SSO_ValueByte(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ValueByte", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -885,7 +885,7 @@ func Test_I28_SSO_ValueByte(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ValueFloat64(t *testing.T) {
+func Test_SSO_ValueFloat64(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ValueFloat64", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -906,7 +906,7 @@ func Test_I28_SSO_ValueFloat64(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_NonPtr_Ptr(t *testing.T) {
+func Test_SSO_NonPtr_Ptr(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_NonPtr_Ptr", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -929,7 +929,7 @@ func Test_I28_SSO_NonPtr_Ptr(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ConcatNew(t *testing.T) {
+func Test_SSO_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ConcatNew", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -945,7 +945,7 @@ func Test_I28_SSO_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_I28_SSO_ConcatNewUsingStrings(t *testing.T) {
+func Test_SSO_ConcatNewUsingStrings(t *testing.T) {
 	safeTest(t, "Test_I28_SSO_ConcatNewUsingStrings", func() {
 		// Arrange
 		var sso corestr.SimpleStringOnce
@@ -965,7 +965,7 @@ func Test_I28_SSO_ConcatNewUsingStrings(t *testing.T) {
 // HashmapDiff
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I28_HashmapDiff_Length(t *testing.T) {
+func Test_HashmapDiff_Length(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Length", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1", "b": "2"}
@@ -989,7 +989,7 @@ func Test_I28_HashmapDiff_Length(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_Nil(t *testing.T) {
+func Test_HashmapDiff_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Nil", func() {
 		// Arrange
 		var hd *corestr.HashmapDiff
@@ -1003,7 +1003,7 @@ func Test_I28_HashmapDiff_Nil(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_AllKeysSorted(t *testing.T) {
+func Test_HashmapDiff_AllKeysSorted(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_AllKeysSorted", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"b": "2", "a": "1"}
@@ -1024,7 +1024,7 @@ func Test_I28_HashmapDiff_AllKeysSorted(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_MapAnyItems(t *testing.T) {
+func Test_HashmapDiff_MapAnyItems(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_MapAnyItems", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1039,7 +1039,7 @@ func Test_I28_HashmapDiff_MapAnyItems(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_MapAnyItems_Nil(t *testing.T) {
+func Test_HashmapDiff_MapAnyItems_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_MapAnyItems_Nil", func() {
 		// Arrange
 		var hd *corestr.HashmapDiff
@@ -1054,7 +1054,7 @@ func Test_I28_HashmapDiff_MapAnyItems_Nil(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_Raw(t *testing.T) {
+func Test_HashmapDiff_Raw(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Raw", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1069,7 +1069,7 @@ func Test_I28_HashmapDiff_Raw(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_Raw_Nil(t *testing.T) {
+func Test_HashmapDiff_Raw_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Raw_Nil", func() {
 		// Arrange
 		var hd *corestr.HashmapDiff
@@ -1084,7 +1084,7 @@ func Test_I28_HashmapDiff_Raw_Nil(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_IsRawEqual(t *testing.T) {
+func Test_HashmapDiff_IsRawEqual(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_IsRawEqual", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1104,7 +1104,7 @@ func Test_I28_HashmapDiff_IsRawEqual(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_HasAnyChanges(t *testing.T) {
+func Test_HashmapDiff_HasAnyChanges(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_HasAnyChanges", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1124,7 +1124,7 @@ func Test_I28_HashmapDiff_HasAnyChanges(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_DiffRaw(t *testing.T) {
+func Test_HashmapDiff_DiffRaw(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_DiffRaw", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1", "b": "2"}
@@ -1139,7 +1139,7 @@ func Test_I28_HashmapDiff_DiffRaw(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
+func Test_HashmapDiff_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_HashmapDiffUsingRaw_NoDiff", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1154,7 +1154,7 @@ func Test_I28_HashmapDiff_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_HashmapDiffUsingRaw_HasDiff(t *testing.T) {
+func Test_HashmapDiff_HashmapDiffUsingRaw_HasDiff(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_HashmapDiffUsingRaw_HasDiff", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1169,7 +1169,7 @@ func Test_I28_HashmapDiff_HashmapDiffUsingRaw_HasDiff(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_DiffJsonMessage(t *testing.T) {
+func Test_HashmapDiff_DiffJsonMessage(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_DiffJsonMessage", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1184,7 +1184,7 @@ func Test_I28_HashmapDiff_DiffJsonMessage(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_ShouldDiffMessage(t *testing.T) {
+func Test_HashmapDiff_ShouldDiffMessage(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_ShouldDiffMessage", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1199,7 +1199,7 @@ func Test_I28_HashmapDiff_ShouldDiffMessage(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_LogShouldDiffMessage(t *testing.T) {
+func Test_HashmapDiff_LogShouldDiffMessage(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_LogShouldDiffMessage", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1214,7 +1214,7 @@ func Test_I28_HashmapDiff_LogShouldDiffMessage(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_ToStringsSliceOfDiffMap(t *testing.T) {
+func Test_HashmapDiff_ToStringsSliceOfDiffMap(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_ToStringsSliceOfDiffMap", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1230,7 +1230,7 @@ func Test_I28_HashmapDiff_ToStringsSliceOfDiffMap(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_RawMapStringAnyDiff(t *testing.T) {
+func Test_HashmapDiff_RawMapStringAnyDiff(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_RawMapStringAnyDiff", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1245,7 +1245,7 @@ func Test_I28_HashmapDiff_RawMapStringAnyDiff(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_Serialize(t *testing.T) {
+func Test_HashmapDiff_Serialize(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Serialize", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1266,7 +1266,7 @@ func Test_I28_HashmapDiff_Serialize(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDiff_Deserialize(t *testing.T) {
+func Test_HashmapDiff_Deserialize(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDiff_Deserialize", func() {
 		// Arrange
 		hd := corestr.HashmapDiff{"a": "1"}
@@ -1286,7 +1286,7 @@ func Test_I28_HashmapDiff_Deserialize(t *testing.T) {
 // HashmapDataModel
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I28_HashmapDataModel_NewUsing(t *testing.T) {
+func Test_HashmapDataModel_NewUsing(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDataModel_NewUsing", func() {
 		// Arrange
 		dm := &corestr.HashmapDataModel{Items: map[string]string{"a": "1"}}
@@ -1307,7 +1307,7 @@ func Test_I28_HashmapDataModel_NewUsing(t *testing.T) {
 	})
 }
 
-func Test_I28_HashmapDataModel_NewFromCollection(t *testing.T) {
+func Test_HashmapDataModel_NewFromCollection(t *testing.T) {
 	safeTest(t, "Test_I28_HashmapDataModel_NewFromCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)

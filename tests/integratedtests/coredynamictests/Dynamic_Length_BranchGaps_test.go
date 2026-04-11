@@ -13,7 +13,7 @@ import (
 // Dynamic — nil receiver branches (DynamicGetters.go)
 // =============================================================================
 
-func Test_Cov37_Dynamic_Length_NilReceiver(t *testing.T) {
+func Test_Dynamic_Length_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -25,7 +25,7 @@ func Test_Cov37_Dynamic_Length_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Length nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_StructStringPtr_NilReceiver(t *testing.T) {
+func Test_Dynamic_StructStringPtr_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -37,7 +37,7 @@ func Test_Cov37_Dynamic_StructStringPtr_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic StructStringPtr nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_String_NilReceiver(t *testing.T) {
+func Test_Dynamic_String_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -49,7 +49,7 @@ func Test_Cov37_Dynamic_String_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic String nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_StructString_NilReceiver(t *testing.T) {
+func Test_Dynamic_StructString_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -61,7 +61,7 @@ func Test_Cov37_Dynamic_StructString_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic StructString nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsPointer_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsPointer_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -73,7 +73,7 @@ func Test_Cov37_Dynamic_IsPointer_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsPointer nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsValueType_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsValueType_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -85,7 +85,7 @@ func Test_Cov37_Dynamic_IsValueType_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsValueType nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsStructStringNullOrEmpty_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsStructStringNullOrEmpty_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -97,7 +97,7 @@ func Test_Cov37_Dynamic_IsStructStringNullOrEmpty_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsStructStringNullOrEmpty nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsStructStringNullOrEmptyOrWhitespace_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsStructStringNullOrEmptyOrWhitespace_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -109,7 +109,7 @@ func Test_Cov37_Dynamic_IsStructStringNullOrEmptyOrWhitespace_NilReceiver(t *tes
 	expected.ShouldBeEqual(t, 0, "Dynamic IsStructStringNullOrEmptyOrWhitespace nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsPrimitive_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsPrimitive_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -121,7 +121,7 @@ func Test_Cov37_Dynamic_IsPrimitive_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsPrimitive nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsNumber_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsNumber_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -133,7 +133,7 @@ func Test_Cov37_Dynamic_IsNumber_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsNumber nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsStringType_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsStringType_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -145,7 +145,7 @@ func Test_Cov37_Dynamic_IsStringType_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsStringType nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsStruct_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsStruct_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -157,7 +157,7 @@ func Test_Cov37_Dynamic_IsStruct_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsStruct nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsFunc_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsFunc_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -169,7 +169,7 @@ func Test_Cov37_Dynamic_IsFunc_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsFunc nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsSliceOrArray_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsSliceOrArray_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -181,7 +181,7 @@ func Test_Cov37_Dynamic_IsSliceOrArray_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsSliceOrArray nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsSliceOrArrayOrMap_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsSliceOrArrayOrMap_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -193,7 +193,7 @@ func Test_Cov37_Dynamic_IsSliceOrArrayOrMap_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsSliceOrArrayOrMap nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_IsMap_NilReceiver(t *testing.T) {
+func Test_Dynamic_IsMap_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -205,7 +205,7 @@ func Test_Cov37_Dynamic_IsMap_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsMap nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_Bytes_NilReceiver(t *testing.T) {
+func Test_Dynamic_Bytes_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	b, ok := d.Bytes()
@@ -224,7 +224,7 @@ func Test_Cov37_Dynamic_Bytes_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Bytes nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_ValueNullErr_NilReceiver(t *testing.T) {
+func Test_Dynamic_ValueNullErr_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.ValueNullErr()
@@ -237,7 +237,7 @@ func Test_Cov37_Dynamic_ValueNullErr_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr nil receiver", actual)
 }
 
-func Test_Cov37_Dynamic_ValueString_NilReceiver(t *testing.T) {
+func Test_Dynamic_ValueString_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -253,7 +253,7 @@ func Test_Cov37_Dynamic_ValueString_NilReceiver(t *testing.T) {
 // Dynamic — Value extraction: type mismatch branches
 // =============================================================================
 
-func Test_Cov37_Dynamic_IntDefault_NilData(t *testing.T) {
+func Test_Dynamic_IntDefault_NilData(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	val, ok := d.IntDefault(42)
@@ -272,7 +272,7 @@ func Test_Cov37_Dynamic_IntDefault_NilData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault nil data", actual)
 }
 
-func Test_Cov37_Dynamic_IntDefault_NonNumeric(t *testing.T) {
+func Test_Dynamic_IntDefault_NonNumeric(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("abc", true)
 	val, ok := d.IntDefault(99)
@@ -291,7 +291,7 @@ func Test_Cov37_Dynamic_IntDefault_NonNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault non-numeric", actual)
 }
 
-func Test_Cov37_Dynamic_IntDefault_Valid(t *testing.T) {
+func Test_Dynamic_IntDefault_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("123", true)
 	val, ok := d.IntDefault(0)
@@ -310,7 +310,7 @@ func Test_Cov37_Dynamic_IntDefault_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault valid", actual)
 }
 
-func Test_Cov37_Dynamic_Float64_NilData(t *testing.T) {
+func Test_Dynamic_Float64_NilData(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	_, err := d.Float64()
@@ -323,7 +323,7 @@ func Test_Cov37_Dynamic_Float64_NilData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 nil data", actual)
 }
 
-func Test_Cov37_Dynamic_Float64_NonNumeric(t *testing.T) {
+func Test_Dynamic_Float64_NonNumeric(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("abc", true)
 	_, err := d.Float64()
@@ -336,7 +336,7 @@ func Test_Cov37_Dynamic_Float64_NonNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 non-numeric", actual)
 }
 
-func Test_Cov37_Dynamic_Float64_Valid(t *testing.T) {
+func Test_Dynamic_Float64_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("3.14", true)
 	val, err := d.Float64()
@@ -355,7 +355,7 @@ func Test_Cov37_Dynamic_Float64_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 valid", actual)
 }
 
-func Test_Cov37_Dynamic_ValueInt_Mismatch(t *testing.T) {
+func Test_Dynamic_ValueInt_Mismatch(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("notint", true)
 
@@ -367,7 +367,7 @@ func Test_Cov37_Dynamic_ValueInt_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueInt mismatch", actual)
 }
 
-func Test_Cov37_Dynamic_ValueUInt_Mismatch(t *testing.T) {
+func Test_Dynamic_ValueUInt_Mismatch(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("notuint", true)
 
@@ -379,7 +379,7 @@ func Test_Cov37_Dynamic_ValueUInt_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueUInt mismatch", actual)
 }
 
-func Test_Cov37_Dynamic_ValueStrings_Mismatch(t *testing.T) {
+func Test_Dynamic_ValueStrings_Mismatch(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 
@@ -391,7 +391,7 @@ func Test_Cov37_Dynamic_ValueStrings_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueStrings mismatch", actual)
 }
 
-func Test_Cov37_Dynamic_ValueBool_Mismatch(t *testing.T) {
+func Test_Dynamic_ValueBool_Mismatch(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("notbool", true)
 
@@ -403,7 +403,7 @@ func Test_Cov37_Dynamic_ValueBool_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueBool mismatch", actual)
 }
 
-func Test_Cov37_Dynamic_ValueInt64_Mismatch(t *testing.T) {
+func Test_Dynamic_ValueInt64_Mismatch(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("notint64", true)
 
@@ -415,7 +415,7 @@ func Test_Cov37_Dynamic_ValueInt64_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueInt64 mismatch", actual)
 }
 
-func Test_Cov37_Dynamic_ValueNullErr_NullData(t *testing.T) {
+func Test_Dynamic_ValueNullErr_NullData(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	err := d.ValueNullErr()
@@ -428,7 +428,7 @@ func Test_Cov37_Dynamic_ValueNullErr_NullData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr null data", actual)
 }
 
-func Test_Cov37_Dynamic_ValueNullErr_Valid(t *testing.T) {
+func Test_Dynamic_ValueNullErr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("data", true)
 	err := d.ValueNullErr()
@@ -441,7 +441,7 @@ func Test_Cov37_Dynamic_ValueNullErr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr valid", actual)
 }
 
-func Test_Cov37_Dynamic_ValueString_NonString(t *testing.T) {
+func Test_Dynamic_ValueString_NonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 	r := d.ValueString()
@@ -454,7 +454,7 @@ func Test_Cov37_Dynamic_ValueString_NonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueString non-string", actual)
 }
 
-func Test_Cov37_Dynamic_Bytes_NotBytes(t *testing.T) {
+func Test_Dynamic_Bytes_NotBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("notbytes", true)
 	_, ok := d.Bytes()
@@ -467,7 +467,7 @@ func Test_Cov37_Dynamic_Bytes_NotBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Bytes not bytes", actual)
 }
 
-func Test_Cov37_Dynamic_Bytes_Valid(t *testing.T) {
+func Test_Dynamic_Bytes_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]byte{1, 2, 3}, true)
 	b, ok := d.Bytes()
@@ -490,7 +490,7 @@ func Test_Cov37_Dynamic_Bytes_Valid(t *testing.T) {
 // Dynamic — Type check branches (positive cases)
 // =============================================================================
 
-func Test_Cov37_Dynamic_IsPointer_True(t *testing.T) {
+func Test_Dynamic_IsPointer_True(t *testing.T) {
 	// Arrange
 	s := "hello"
 	d := coredynamic.NewDynamicPtr(&s, true)
@@ -503,7 +503,7 @@ func Test_Cov37_Dynamic_IsPointer_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsPointer true", actual)
 }
 
-func Test_Cov37_Dynamic_IsValueType_True(t *testing.T) {
+func Test_Dynamic_IsValueType_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 
@@ -515,7 +515,7 @@ func Test_Cov37_Dynamic_IsValueType_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsValueType true", actual)
 }
 
-func Test_Cov37_Dynamic_IsStruct_True(t *testing.T) {
+func Test_Dynamic_IsStruct_True(t *testing.T) {
 	// Arrange
 	type s struct{ A int }
 	d := coredynamic.NewDynamicPtr(s{A: 1}, true)
@@ -528,7 +528,7 @@ func Test_Cov37_Dynamic_IsStruct_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsStruct true", actual)
 }
 
-func Test_Cov37_Dynamic_IsFunc_True(t *testing.T) {
+func Test_Dynamic_IsFunc_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(func() {}, true)
 
@@ -540,7 +540,7 @@ func Test_Cov37_Dynamic_IsFunc_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsFunc true", actual)
 }
 
-func Test_Cov37_Dynamic_IsSliceOrArray_True(t *testing.T) {
+func Test_Dynamic_IsSliceOrArray_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2}, true)
 
@@ -552,7 +552,7 @@ func Test_Cov37_Dynamic_IsSliceOrArray_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsSliceOrArray true", actual)
 }
 
-func Test_Cov37_Dynamic_IsMap_True(t *testing.T) {
+func Test_Dynamic_IsMap_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 
@@ -564,7 +564,7 @@ func Test_Cov37_Dynamic_IsMap_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsMap true", actual)
 }
 
-func Test_Cov37_Dynamic_IsSliceOrArrayOrMap_Map(t *testing.T) {
+func Test_Dynamic_IsSliceOrArrayOrMap_Map(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 
@@ -576,7 +576,7 @@ func Test_Cov37_Dynamic_IsSliceOrArrayOrMap_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsSliceOrArrayOrMap map", actual)
 }
 
-func Test_Cov37_Dynamic_IsNumber_True(t *testing.T) {
+func Test_Dynamic_IsNumber_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 
@@ -588,7 +588,7 @@ func Test_Cov37_Dynamic_IsNumber_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsNumber true", actual)
 }
 
-func Test_Cov37_Dynamic_IsPrimitive_True(t *testing.T) {
+func Test_Dynamic_IsPrimitive_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -600,7 +600,7 @@ func Test_Cov37_Dynamic_IsPrimitive_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsPrimitive true", actual)
 }
 
-func Test_Cov37_Dynamic_IsStringType_True(t *testing.T) {
+func Test_Dynamic_IsStringType_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -616,7 +616,7 @@ func Test_Cov37_Dynamic_IsStringType_True(t *testing.T) {
 // KeyVal — nil receiver branches
 // =============================================================================
 
-func Test_Cov37_KeyVal_KeyDynamicPtr_Nil(t *testing.T) {
+func Test_KeyVal_KeyDynamicPtr_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -628,7 +628,7 @@ func Test_Cov37_KeyVal_KeyDynamicPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyDynamicPtr nil", actual)
 }
 
-func Test_Cov37_KeyVal_ValueDynamicPtr_Nil(t *testing.T) {
+func Test_KeyVal_ValueDynamicPtr_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -640,7 +640,7 @@ func Test_Cov37_KeyVal_ValueDynamicPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueDynamicPtr nil", actual)
 }
 
-func Test_Cov37_KeyVal_String_Nil(t *testing.T) {
+func Test_KeyVal_String_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -652,7 +652,7 @@ func Test_Cov37_KeyVal_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal String nil", actual)
 }
 
-func Test_Cov37_KeyVal_CastKeyVal_Nil(t *testing.T) {
+func Test_KeyVal_CastKeyVal_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.CastKeyVal(nil, nil)
@@ -665,7 +665,7 @@ func Test_Cov37_KeyVal_CastKeyVal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal CastKeyVal nil", actual)
 }
 
-func Test_Cov37_KeyVal_ReflectSetKey_Nil(t *testing.T) {
+func Test_KeyVal_ReflectSetKey_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.ReflectSetKey(nil)
@@ -678,7 +678,7 @@ func Test_Cov37_KeyVal_ReflectSetKey_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSetKey nil", actual)
 }
 
-func Test_Cov37_KeyVal_ValueNullErr_Nil(t *testing.T) {
+func Test_KeyVal_ValueNullErr_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.ValueNullErr()
@@ -691,7 +691,7 @@ func Test_Cov37_KeyVal_ValueNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueNullErr nil", actual)
 }
 
-func Test_Cov37_KeyVal_KeyNullErr_Nil(t *testing.T) {
+func Test_KeyVal_KeyNullErr_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.KeyNullErr()
@@ -704,7 +704,7 @@ func Test_Cov37_KeyVal_KeyNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyNullErr nil", actual)
 }
 
-func Test_Cov37_KeyVal_KeyString_Nil(t *testing.T) {
+func Test_KeyVal_KeyString_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -716,7 +716,7 @@ func Test_Cov37_KeyVal_KeyString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyString nil", actual)
 }
 
-func Test_Cov37_KeyVal_ValueString_Nil(t *testing.T) {
+func Test_KeyVal_ValueString_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -728,7 +728,7 @@ func Test_Cov37_KeyVal_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueString nil", actual)
 }
 
-func Test_Cov37_KeyVal_KeyReflectSet_Nil(t *testing.T) {
+func Test_KeyVal_KeyReflectSet_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.KeyReflectSet(nil)
@@ -741,7 +741,7 @@ func Test_Cov37_KeyVal_KeyReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyReflectSet nil", actual)
 }
 
-func Test_Cov37_KeyVal_ValueReflectSet_Nil(t *testing.T) {
+func Test_KeyVal_ValueReflectSet_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.ValueReflectSet(nil)
@@ -754,7 +754,7 @@ func Test_Cov37_KeyVal_ValueReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueReflectSet nil", actual)
 }
 
-func Test_Cov37_KeyVal_ReflectSetTo_Nil(t *testing.T) {
+func Test_KeyVal_ReflectSetTo_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.ReflectSetTo(nil)
@@ -771,7 +771,7 @@ func Test_Cov37_KeyVal_ReflectSetTo_Nil(t *testing.T) {
 // KeyVal — Value extraction: type mismatch branches
 // =============================================================================
 
-func Test_Cov37_KeyVal_ValueInt_Mismatch(t *testing.T) {
+func Test_KeyVal_ValueInt_Mismatch(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "notint"}
 
@@ -783,7 +783,7 @@ func Test_Cov37_KeyVal_ValueInt_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt mismatch", actual)
 }
 
-func Test_Cov37_KeyVal_ValueUInt_Mismatch(t *testing.T) {
+func Test_KeyVal_ValueUInt_Mismatch(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "notuint"}
 
@@ -795,7 +795,7 @@ func Test_Cov37_KeyVal_ValueUInt_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueUInt mismatch", actual)
 }
 
-func Test_Cov37_KeyVal_ValueStrings_Mismatch(t *testing.T) {
+func Test_KeyVal_ValueStrings_Mismatch(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
 
@@ -807,7 +807,7 @@ func Test_Cov37_KeyVal_ValueStrings_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueStrings mismatch", actual)
 }
 
-func Test_Cov37_KeyVal_ValueBool_Mismatch(t *testing.T) {
+func Test_KeyVal_ValueBool_Mismatch(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "notbool"}
 
@@ -819,7 +819,7 @@ func Test_Cov37_KeyVal_ValueBool_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueBool mismatch", actual)
 }
 
-func Test_Cov37_KeyVal_ValueInt64_Mismatch(t *testing.T) {
+func Test_KeyVal_ValueInt64_Mismatch(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "notint64"}
 
@@ -831,7 +831,7 @@ func Test_Cov37_KeyVal_ValueInt64_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt64 mismatch", actual)
 }
 
-func Test_Cov37_KeyVal_ValueNullErr_NullValue(t *testing.T) {
+func Test_KeyVal_ValueNullErr_NullValue(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: nil}
 	err := kv.ValueNullErr()
@@ -844,7 +844,7 @@ func Test_Cov37_KeyVal_ValueNullErr_NullValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueNullErr null value", actual)
 }
 
-func Test_Cov37_KeyVal_KeyNullErr_NullKey(t *testing.T) {
+func Test_KeyVal_KeyNullErr_NullKey(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: nil, Value: "v"}
 	err := kv.KeyNullErr()
@@ -857,7 +857,7 @@ func Test_Cov37_KeyVal_KeyNullErr_NullKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyNullErr null key", actual)
 }
 
-func Test_Cov37_KeyVal_KeyNullErr_Valid(t *testing.T) {
+func Test_KeyVal_KeyNullErr_Valid(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	err := kv.KeyNullErr()
@@ -870,7 +870,7 @@ func Test_Cov37_KeyVal_KeyNullErr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyNullErr valid", actual)
 }
 
-func Test_Cov37_KeyVal_ValueNullErr_Valid(t *testing.T) {
+func Test_KeyVal_ValueNullErr_Valid(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	err := kv.ValueNullErr()
@@ -887,7 +887,7 @@ func Test_Cov37_KeyVal_ValueNullErr_Valid(t *testing.T) {
 // KeyVal — JSON branches
 // =============================================================================
 
-func Test_Cov37_KeyVal_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_KeyVal_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{}
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -901,7 +901,7 @@ func Test_Cov37_KeyVal_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov37_KeyVal_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_KeyVal_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{}
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -923,7 +923,7 @@ func Test_Cov37_KeyVal_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ParseInjectUsingJsonMust panics", actual)
 }
 
-func Test_Cov37_KeyVal_Serialize_Valid(t *testing.T) {
+func Test_KeyVal_Serialize_Valid(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	b, err := kv.Serialize()
@@ -942,7 +942,7 @@ func Test_Cov37_KeyVal_Serialize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize valid", actual)
 }
 
-func Test_Cov37_KeyVal_ReflectSetToMust_Panics(t *testing.T) {
+func Test_KeyVal_ReflectSetToMust_Panics(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	panicked := false
@@ -967,7 +967,7 @@ func Test_Cov37_KeyVal_ReflectSetToMust_Panics(t *testing.T) {
 // KeyVal — Positive value extraction
 // =============================================================================
 
-func Test_Cov37_KeyVal_ValueInt_Valid(t *testing.T) {
+func Test_KeyVal_ValueInt_Valid(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
 
@@ -979,7 +979,7 @@ func Test_Cov37_KeyVal_ValueInt_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt valid", actual)
 }
 
-func Test_Cov37_KeyVal_ValueUInt_Valid(t *testing.T) {
+func Test_KeyVal_ValueUInt_Valid(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: uint(7)}
 
@@ -991,7 +991,7 @@ func Test_Cov37_KeyVal_ValueUInt_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueUInt valid", actual)
 }
 
-func Test_Cov37_KeyVal_ValueBool_Valid(t *testing.T) {
+func Test_KeyVal_ValueBool_Valid(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: true}
 
@@ -1003,7 +1003,7 @@ func Test_Cov37_KeyVal_ValueBool_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueBool valid", actual)
 }
 
-func Test_Cov37_KeyVal_ValueInt64_Valid(t *testing.T) {
+func Test_KeyVal_ValueInt64_Valid(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: int64(99)}
 
@@ -1015,7 +1015,7 @@ func Test_Cov37_KeyVal_ValueInt64_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt64 valid", actual)
 }
 
-func Test_Cov37_KeyVal_ValueStrings_Valid(t *testing.T) {
+func Test_KeyVal_ValueStrings_Valid(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: []string{"a", "b"}}
 
@@ -1027,7 +1027,7 @@ func Test_Cov37_KeyVal_ValueStrings_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueStrings valid", actual)
 }
 
-func Test_Cov37_KeyVal_KeyDynamic(t *testing.T) {
+func Test_KeyVal_KeyDynamic(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "mykey", Value: "myval"}
 	d := kv.KeyDynamic()
@@ -1040,7 +1040,7 @@ func Test_Cov37_KeyVal_KeyDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyDynamic", actual)
 }
 
-func Test_Cov37_KeyVal_ValueDynamic(t *testing.T) {
+func Test_KeyVal_ValueDynamic(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	d := kv.ValueDynamic()
@@ -1053,7 +1053,7 @@ func Test_Cov37_KeyVal_ValueDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueDynamic", actual)
 }
 
-func Test_Cov37_KeyVal_IsKeyNull(t *testing.T) {
+func Test_KeyVal_IsKeyNull(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: nil, Value: "v"}
 
@@ -1065,7 +1065,7 @@ func Test_Cov37_KeyVal_IsKeyNull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal IsKeyNull", actual)
 }
 
-func Test_Cov37_KeyVal_IsValueNull(t *testing.T) {
+func Test_KeyVal_IsValueNull(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: nil}
 

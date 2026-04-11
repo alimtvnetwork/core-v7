@@ -9,7 +9,7 @@ import (
 
 // ── InfoJson — all methods ──
 
-func Test_Cov2_Info_Json(t *testing.T) {
+func Test_Info_Json(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	r := info.Json()
@@ -22,7 +22,7 @@ func Test_Cov2_Info_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Json", actual)
 }
 
-func Test_Cov2_Info_JsonPtr(t *testing.T) {
+func Test_Info_JsonPtr(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	r := info.JsonPtr()
@@ -35,7 +35,7 @@ func Test_Cov2_Info_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- JsonPtr", actual)
 }
 
-func Test_Cov2_Info_JsonString(t *testing.T) {
+func Test_Info_JsonString(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 
@@ -47,7 +47,7 @@ func Test_Cov2_Info_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- JsonString", actual)
 }
 
-func Test_Cov2_Info_JsonString_Nil(t *testing.T) {
+func Test_Info_JsonString_Nil(t *testing.T) {
 	// Arrange
 	defer func() {
 		if r := recover(); r != nil {
@@ -71,7 +71,7 @@ func Test_Cov2_Info_JsonString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- JsonString nil", actual)
 }
 
-func Test_Cov2_Info_JsonStringMust(t *testing.T) {
+func Test_Info_JsonStringMust(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 
@@ -83,7 +83,7 @@ func Test_Cov2_Info_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- JsonStringMust", actual)
 }
 
-func Test_Cov2_Info_PrettyJsonString(t *testing.T) {
+func Test_Info_PrettyJsonString(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 
@@ -95,7 +95,7 @@ func Test_Cov2_Info_PrettyJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- PrettyJsonString", actual)
 }
 
-func Test_Cov2_Info_PrettyJsonString_Nil(t *testing.T) {
+func Test_Info_PrettyJsonString_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 
@@ -107,7 +107,7 @@ func Test_Cov2_Info_PrettyJsonString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- PrettyJsonString nil", actual)
 }
 
-func Test_Cov2_Info_String(t *testing.T) {
+func Test_Info_String(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 
@@ -119,7 +119,7 @@ func Test_Cov2_Info_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- String", actual)
 }
 
-func Test_Cov2_Info_String_Nil(t *testing.T) {
+func Test_Info_String_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 
@@ -131,7 +131,7 @@ func Test_Cov2_Info_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- String nil", actual)
 }
 
-func Test_Cov2_Info_Serialize(t *testing.T) {
+func Test_Info_Serialize(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	bytes, err := info.Serialize()
@@ -150,7 +150,7 @@ func Test_Cov2_Info_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Serialize", actual)
 }
 
-func Test_Cov2_Info_ExamplesAsString(t *testing.T) {
+func Test_Info_ExamplesAsString(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{Examples: []string{"a", "b"}}
 	result := info.ExamplesAsString()
@@ -163,7 +163,7 @@ func Test_Cov2_Info_ExamplesAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- ExamplesAsString", actual)
 }
 
-func Test_Cov2_Info_ExamplesAsString_Nil(t *testing.T) {
+func Test_Info_ExamplesAsString_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 
@@ -175,7 +175,7 @@ func Test_Cov2_Info_ExamplesAsString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- ExamplesAsString nil", actual)
 }
 
-func Test_Cov2_Info_AsJsonContractsBinder(t *testing.T) {
+func Test_Info_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	binder := info.AsJsonContractsBinder()
@@ -190,7 +190,7 @@ func Test_Cov2_Info_AsJsonContractsBinder(t *testing.T) {
 
 // ── InfoMap — Map / LazyMap ──
 
-func Test_Cov2_Info_Map_Defined(t *testing.T) {
+func Test_Info_Map_Defined(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{
 		RootName: "task", Description: "desc", Url: "url",
@@ -207,7 +207,7 @@ func Test_Cov2_Info_Map_Defined(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Map defined", actual)
 }
 
-func Test_Cov2_Info_Map_Nil(t *testing.T) {
+func Test_Info_Map_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	m := info.Map()
@@ -220,7 +220,7 @@ func Test_Cov2_Info_Map_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- Map nil", actual)
 }
 
-func Test_Cov2_Info_LazyMap(t *testing.T) {
+func Test_Info_LazyMap(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	m1 := info.LazyMap()
@@ -240,7 +240,7 @@ func Test_Cov2_Info_LazyMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- LazyMap", actual)
 }
 
-func Test_Cov2_Info_LazyMapPrettyJsonString(t *testing.T) {
+func Test_Info_LazyMapPrettyJsonString(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	result := info.LazyMapPrettyJsonString()
@@ -253,7 +253,7 @@ func Test_Cov2_Info_LazyMapPrettyJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- LazyMapPrettyJsonString", actual)
 }
 
-func Test_Cov2_Info_MapWithPayload(t *testing.T) {
+func Test_Info_MapWithPayload(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	m := info.MapWithPayload([]byte("data"))
@@ -266,7 +266,7 @@ func Test_Cov2_Info_MapWithPayload(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns non-empty -- MapWithPayload", actual)
 }
 
-func Test_Cov2_Info_PrettyJsonStringWithPayloads(t *testing.T) {
+func Test_Info_PrettyJsonStringWithPayloads(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	result := info.PrettyJsonStringWithPayloads([]byte("data"))
@@ -281,7 +281,7 @@ func Test_Cov2_Info_PrettyJsonStringWithPayloads(t *testing.T) {
 
 // ── newInfoCreator ──
 
-func Test_Cov2_NewInfo_Default(t *testing.T) {
+func Test_NewInfo_Default(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.New.Info.Default("n", "d", "u")
 
@@ -293,7 +293,7 @@ func Test_Cov2_NewInfo_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- Default", actual)
 }
 
-func Test_Cov2_NewInfo_Examples(t *testing.T) {
+func Test_NewInfo_Examples(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.New.Info.Examples("n", "d", "u", "e1")
 
@@ -305,7 +305,7 @@ func Test_Cov2_NewInfo_Examples(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- Examples", actual)
 }
 
-func Test_Cov2_NewInfo_Create(t *testing.T) {
+func Test_NewInfo_Create(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.New.Info.Create(false, "n", "d", "u", "h", "e", "ex", "ch", "e1")
 
@@ -317,7 +317,7 @@ func Test_Cov2_NewInfo_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- Create", actual)
 }
 
-func Test_Cov2_NewInfo_SecureCreate(t *testing.T) {
+func Test_NewInfo_SecureCreate(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.New.Info.SecureCreate("n", "d", "u", "h", "e", "ex", "ch")
 
@@ -329,7 +329,7 @@ func Test_Cov2_NewInfo_SecureCreate(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- SecureCreate", actual)
 }
 
-func Test_Cov2_NewInfo_PlainCreate(t *testing.T) {
+func Test_NewInfo_PlainCreate(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.New.Info.PlainCreate("n", "d", "u", "h", "e", "ex", "ch")
 
@@ -343,7 +343,7 @@ func Test_Cov2_NewInfo_PlainCreate(t *testing.T) {
 
 // ── newInfoPlainTextCreator ──
 
-func Test_Cov2_PlainCreator_AllMethods(t *testing.T) {
+func Test_PlainCreator_AllMethods(t *testing.T) {
 	// Arrange
 	p := coretaskinfo.New.Info.Plain
 
@@ -387,7 +387,7 @@ func Test_Cov2_PlainCreator_AllMethods(t *testing.T) {
 
 // ── newInfoSecureTextCreator ──
 
-func Test_Cov2_SecureCreator_AllMethods(t *testing.T) {
+func Test_SecureCreator_AllMethods(t *testing.T) {
 	// Arrange
 	s := coretaskinfo.New.Info.Secure
 
@@ -428,7 +428,7 @@ func Test_Cov2_SecureCreator_AllMethods(t *testing.T) {
 
 // ── Deserialized / DeserializedUsingJsonResult ──
 
-func Test_Cov2_NewInfo_Deserialized(t *testing.T) {
+func Test_NewInfo_Deserialized(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	bytes, _ := info.Serialize()
@@ -448,7 +448,7 @@ func Test_Cov2_NewInfo_Deserialized(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- Deserialized", actual)
 }
 
-func Test_Cov2_NewInfo_DeserializedUsingJsonResult(t *testing.T) {
+func Test_NewInfo_DeserializedUsingJsonResult(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	jsonResult := info.JsonPtr()
@@ -470,7 +470,7 @@ func Test_Cov2_NewInfo_DeserializedUsingJsonResult(t *testing.T) {
 
 // ── Exclude options ──
 
-func Test_Cov2_Info_WithExcludeOptions(t *testing.T) {
+func Test_Info_WithExcludeOptions(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{
 		RootName: "task",
@@ -504,7 +504,7 @@ func Test_Cov2_Info_WithExcludeOptions(t *testing.T) {
 
 // ── MapWithPayloadAsAny ──
 
-func Test_Cov2_Info_MapWithPayloadAsAny(t *testing.T) {
+func Test_Info_MapWithPayloadAsAny(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	m := info.MapWithPayloadAsAny("hello")
@@ -519,7 +519,7 @@ func Test_Cov2_Info_MapWithPayloadAsAny(t *testing.T) {
 
 // ── LazyMapWithPayload ──
 
-func Test_Cov2_Info_LazyMapWithPayload(t *testing.T) {
+func Test_Info_LazyMapWithPayload(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	m := info.LazyMapWithPayload([]byte("data"))
@@ -534,7 +534,7 @@ func Test_Cov2_Info_LazyMapWithPayload(t *testing.T) {
 
 // ── LazyMapWithPayloadAsAny ──
 
-func Test_Cov2_Info_LazyMapWithPayloadAsAny(t *testing.T) {
+func Test_Info_LazyMapWithPayloadAsAny(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	m := info.LazyMapWithPayloadAsAny("payload")
@@ -549,7 +549,7 @@ func Test_Cov2_Info_LazyMapWithPayloadAsAny(t *testing.T) {
 
 // ── JsonParseSelfInject ──
 
-func Test_Cov2_Info_JsonParseSelfInject(t *testing.T) {
+func Test_Info_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	jsonResult := info.JsonPtr()
@@ -572,7 +572,7 @@ func Test_Cov2_Info_JsonParseSelfInject(t *testing.T) {
 
 // ── Deserialize ──
 
-func Test_Cov2_Info_Deserialize(t *testing.T) {
+func Test_Info_Deserialize(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	var parsed coretaskinfo.Info

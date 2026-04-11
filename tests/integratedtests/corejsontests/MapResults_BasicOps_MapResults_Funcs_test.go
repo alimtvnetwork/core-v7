@@ -12,7 +12,7 @@ import (
 // MapResults — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_MapResults_BasicOps(t *testing.T) {
+func Test_MapResults_BasicOps(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 
@@ -28,7 +28,7 @@ func Test_Cov20_MapResults_BasicOps(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "filled checks failed", actual)
 }
 
-func Test_Cov20_MapResults_AddMethods(t *testing.T) {
+func Test_MapResults_AddMethods(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.AddSkipOnNil("k", nil)
@@ -62,7 +62,7 @@ func Test_Cov20_MapResults_AddMethods(t *testing.T) {
 	m.AddAnyNonEmpty("k7", "world")
 }
 
-func Test_Cov20_MapResults_GetByKey(t *testing.T) {
+func Test_MapResults_GetByKey(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
@@ -78,7 +78,7 @@ func Test_Cov20_MapResults_GetByKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov20_MapResults_Errors(t *testing.T) {
+func Test_MapResults_Errors(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("ok", corejson.NewResult.Any("v"))
@@ -103,7 +103,7 @@ func Test_Cov20_MapResults_Errors(t *testing.T) {
 	_ = m.GetErrorsAsSingle()
 }
 
-func Test_Cov20_MapResults_Keys(t *testing.T) {
+func Test_MapResults_Keys(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("b", corejson.NewResult.Any("2"))
@@ -122,7 +122,7 @@ func Test_Cov20_MapResults_Keys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 }
 
-func Test_Cov20_MapResults_AllValues(t *testing.T) {
+func Test_MapResults_AllValues(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
@@ -138,7 +138,7 @@ func Test_Cov20_MapResults_AllValues(t *testing.T) {
 	_ = m.AllResultsCollection()
 }
 
-func Test_Cov20_MapResults_GetStrings(t *testing.T) {
+func Test_MapResults_GetStrings(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
@@ -153,7 +153,7 @@ func Test_Cov20_MapResults_GetStrings(t *testing.T) {
 	_ = m.GetStringsPtr()
 }
 
-func Test_Cov20_MapResults_AddKeyWithResult(t *testing.T) {
+func Test_MapResults_AddKeyWithResult(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.AddKeyWithResult(corejson.KeyWithResult{Key: "k", Result: corejson.NewResult.Any("v")})
@@ -170,7 +170,7 @@ func Test_Cov20_MapResults_AddKeyWithResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 4", actual)
 }
 
-func Test_Cov20_MapResults_AddKeyAny(t *testing.T) {
+func Test_MapResults_AddKeyAny(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.AddKeyAnyInf(corejson.KeyAny{Key: "k", AnyInf: "v"})
 	m.AddKeyAnyInfPtr(nil)
@@ -179,7 +179,7 @@ func Test_Cov20_MapResults_AddKeyAny(t *testing.T) {
 	m.AddKeyAnyItemsPtr(&corejson.KeyAny{Key: "k4", AnyInf: "v4"}, nil)
 }
 
-func Test_Cov20_MapResults_AddNonEmptyNonErrorPtr(t *testing.T) {
+func Test_MapResults_AddNonEmptyNonErrorPtr(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.AddNonEmptyNonErrorPtr("k", nil)
@@ -195,7 +195,7 @@ func Test_Cov20_MapResults_AddNonEmptyNonErrorPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_AddMapResults(t *testing.T) {
+func Test_MapResults_AddMapResults(t *testing.T) {
 	// Arrange
 	m1 := corejson.NewMapResults.Empty()
 	m1.Add("k", corejson.NewResult.Any("v"))
@@ -210,7 +210,7 @@ func Test_Cov20_MapResults_AddMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_AddMapAnyItems(t *testing.T) {
+func Test_MapResults_AddMapAnyItems(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.AddMapAnyItems(map[string]any{"k": "v"})
@@ -223,14 +223,14 @@ func Test_Cov20_MapResults_AddMapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_AddMapResultsUsingCloneOption(t *testing.T) {
+func Test_MapResults_AddMapResultsUsingCloneOption(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	items := map[string]corejson.Result{"k": corejson.NewResult.Any("v")}
 	m.AddMapResultsUsingCloneOption(false, false, items)
 	m.AddMapResultsUsingCloneOption(true, true, items)
 }
 
-func Test_Cov20_MapResults_Paging(t *testing.T) {
+func Test_MapResults_Paging(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	for i := 0; i < 10; i++ {
@@ -249,7 +249,7 @@ func Test_Cov20_MapResults_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
-func Test_Cov20_MapResults_GetNewMapUsingKeys(t *testing.T) {
+func Test_MapResults_GetNewMapUsingKeys(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("a", corejson.NewResult.Any("1"))
@@ -264,7 +264,7 @@ func Test_Cov20_MapResults_GetNewMapUsingKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_ResultCollection(t *testing.T) {
+func Test_MapResults_ResultCollection(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
@@ -278,7 +278,7 @@ func Test_Cov20_MapResults_ResultCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_ClearDispose(t *testing.T) {
+func Test_MapResults_ClearDispose(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
 	m.Clear()
@@ -286,7 +286,7 @@ func Test_Cov20_MapResults_ClearDispose(t *testing.T) {
 	m.Dispose()
 }
 
-func Test_Cov20_MapResults_JsonOps(t *testing.T) {
+func Test_MapResults_JsonOps(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
 	_ = m.JsonModel()
@@ -298,7 +298,7 @@ func Test_Cov20_MapResults_JsonOps(t *testing.T) {
 	_ = m.AsJsonParseSelfInjector()
 }
 
-func Test_Cov20_MapResults_AddJsoner(t *testing.T) {
+func Test_MapResults_AddJsoner(t *testing.T) {
 	// Arrange
 	m := corejson.NewMapResults.Empty()
 	r := corejson.NewResult.Any("x")
@@ -313,20 +313,20 @@ func Test_Cov20_MapResults_AddJsoner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov20_MapResults_AddKeyWithJsoner(t *testing.T) {
+func Test_MapResults_AddKeyWithJsoner(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	r := corejson.NewResult.Any("x")
 	m.AddKeyWithJsoner(corejson.KeyWithJsoner{Key: "k", Jsoner: &r})
 }
 
-func Test_Cov20_MapResults_AddKeyWithJsonerPtr(t *testing.T) {
+func Test_MapResults_AddKeyWithJsonerPtr(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.AddKeyWithJsonerPtr(nil)
 	r := corejson.NewResult.Any("x")
 	m.AddKeyWithJsonerPtr(&corejson.KeyWithJsoner{Key: "k", Jsoner: &r})
 }
 
-func Test_Cov20_MapResults_InjectIntoAt(t *testing.T) {
+func Test_MapResults_InjectIntoAt(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any([]string{"a"}))
 	r := corejson.NewResult.Any("x")
@@ -334,7 +334,7 @@ func Test_Cov20_MapResults_InjectIntoAt(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov20_MapResults_Unmarshal(t *testing.T) {
+func Test_MapResults_Unmarshal(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("hello"))
 	var s string
@@ -343,7 +343,7 @@ func Test_Cov20_MapResults_Unmarshal(t *testing.T) {
 	_ = m.Deserialize("k", &s)
 }
 
-func Test_Cov20_MapResults_SafeUnmarshal(t *testing.T) {
+func Test_MapResults_SafeUnmarshal(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("hello"))
 	var s string
@@ -352,7 +352,7 @@ func Test_Cov20_MapResults_SafeUnmarshal(t *testing.T) {
 	_ = m.SafeDeserialize("k", &s)
 }
 
-func Test_Cov20_MapResults_ParseInjectUsingJson(t *testing.T) {
+func Test_MapResults_ParseInjectUsingJson(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("k", corejson.NewResult.Any("v"))
 	jr := m.JsonPtr()
@@ -365,7 +365,7 @@ func Test_Cov20_MapResults_ParseInjectUsingJson(t *testing.T) {
 // Package-level functions — BytesCloneIf, BytesDeepClone, BytesToString, etc.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_BytesCloneIf_DeepClone(t *testing.T) {
+func Test_BytesCloneIf_DeepClone(t *testing.T) {
 	// Arrange
 	b := []byte("hello")
 	c := corejson.BytesCloneIf(true, b)
@@ -378,7 +378,7 @@ func Test_Cov20_BytesCloneIf_DeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
-func Test_Cov20_BytesCloneIf_NoClone(t *testing.T) {
+func Test_BytesCloneIf_NoClone(t *testing.T) {
 	// Arrange
 	b := []byte("hello")
 	c := corejson.BytesCloneIf(false, b)
@@ -391,7 +391,7 @@ func Test_Cov20_BytesCloneIf_NoClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov20_BytesCloneIf_Empty(t *testing.T) {
+func Test_BytesCloneIf_Empty(t *testing.T) {
 	// Arrange
 	c := corejson.BytesCloneIf(true, []byte{})
 
@@ -403,7 +403,7 @@ func Test_Cov20_BytesCloneIf_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov20_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone(t *testing.T) {
 	// Arrange
 	c := corejson.BytesDeepClone([]byte("hello"))
 
@@ -419,7 +419,7 @@ func Test_Cov20_BytesDeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov20_BytesToString(t *testing.T) {
+func Test_BytesToString(t *testing.T) {
 	// Arrange
 	s := corejson.BytesToString([]byte("hello"))
 
@@ -435,7 +435,7 @@ func Test_Cov20_BytesToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov20_BytesToPrettyString(t *testing.T) {
+func Test_BytesToPrettyString(t *testing.T) {
 	// Arrange
 	s := corejson.BytesToPrettyString([]byte(`{"a":1}`))
 
@@ -451,7 +451,7 @@ func Test_Cov20_BytesToPrettyString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov20_JsonString_Func(t *testing.T) {
+func Test_JsonString_Func(t *testing.T) {
 	// Arrange
 	s, err := corejson.JsonString("hello")
 
@@ -463,7 +463,7 @@ func Test_Cov20_JsonString_Func(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_JsonStringOrErrMsg_Valid(t *testing.T) {
+func Test_JsonStringOrErrMsg_Valid(t *testing.T) {
 	// Arrange
 	s := corejson.JsonStringOrErrMsg("hello")
 
@@ -475,7 +475,7 @@ func Test_Cov20_JsonStringOrErrMsg_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_JsonStringOrErrMsg_Error(t *testing.T) {
+func Test_JsonStringOrErrMsg_Error(t *testing.T) {
 	// Arrange
 	ch := make(chan int)
 	s := corejson.JsonStringOrErrMsg(ch)
@@ -492,7 +492,7 @@ func Test_Cov20_JsonStringOrErrMsg_Error(t *testing.T) {
 // anyTo — additional coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_AnyTo_SerializedRaw(t *testing.T) {
+func Test_AnyTo_SerializedRaw(t *testing.T) {
 	// Arrange
 	b, err := corejson.AnyTo.SerializedRaw("hello")
 
@@ -504,7 +504,7 @@ func Test_Cov20_AnyTo_SerializedRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedString(t *testing.T) {
+func Test_AnyTo_SerializedString(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.SerializedString("hello")
 
@@ -516,7 +516,7 @@ func Test_Cov20_AnyTo_SerializedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedSafeString(t *testing.T) {
+func Test_AnyTo_SerializedSafeString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedSafeString("hello")
 
@@ -528,7 +528,7 @@ func Test_Cov20_AnyTo_SerializedSafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedStringMust(t *testing.T) {
+func Test_AnyTo_SerializedStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedStringMust("hello")
 
@@ -540,7 +540,7 @@ func Test_Cov20_AnyTo_SerializedStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_AnyTo_SafeJsonString(t *testing.T) {
+func Test_AnyTo_SafeJsonString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonString("hello")
 
@@ -552,7 +552,7 @@ func Test_Cov20_AnyTo_SafeJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_AnyTo_PrettyStringWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
 
@@ -586,7 +586,7 @@ func Test_Cov20_AnyTo_PrettyStringWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_AnyTo_SafeJsonPrettyString(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString(t *testing.T) {
 	_ = corejson.AnyTo.SafeJsonPrettyString("hello")
 	_ = corejson.AnyTo.SafeJsonPrettyString([]byte(`{"a":1}`))
 	r := corejson.NewResult.Any("x")
@@ -596,7 +596,7 @@ func Test_Cov20_AnyTo_SafeJsonPrettyString(t *testing.T) {
 	_ = corejson.AnyTo.SafeJsonPrettyString(42)
 }
 
-func Test_Cov20_AnyTo_JsonString(t *testing.T) {
+func Test_AnyTo_JsonString(t *testing.T) {
 	_ = corejson.AnyTo.JsonString("hello")
 	_ = corejson.AnyTo.JsonString([]byte(`"x"`))
 	r := corejson.NewResult.Any("x")
@@ -606,7 +606,7 @@ func Test_Cov20_AnyTo_JsonString(t *testing.T) {
 	_ = corejson.AnyTo.JsonString(42)
 }
 
-func Test_Cov20_AnyTo_JsonStringWithErr(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr("hello")
 
@@ -627,7 +627,7 @@ func Test_Cov20_AnyTo_JsonStringWithErr(t *testing.T) {
 	_, _ = corejson.AnyTo.JsonStringWithErr(42)
 }
 
-func Test_Cov20_AnyTo_JsonStringMust(t *testing.T) {
+func Test_AnyTo_JsonStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonStringMust("hello")
 
@@ -639,7 +639,7 @@ func Test_Cov20_AnyTo_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_AnyTo_PrettyStringMust(t *testing.T) {
+func Test_AnyTo_PrettyStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.PrettyStringMust("hello")
 
@@ -651,7 +651,7 @@ func Test_Cov20_AnyTo_PrettyStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov20_AnyTo_UsingSerializer(t *testing.T) {
+func Test_AnyTo_UsingSerializer(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.UsingSerializer(nil)
 
@@ -663,13 +663,13 @@ func Test_Cov20_AnyTo_UsingSerializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for nil serializer", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedFieldsMap(t *testing.T) {
+func Test_AnyTo_SerializedFieldsMap(t *testing.T) {
 	fm, err := corejson.AnyTo.SerializedFieldsMap(map[string]int{"a": 1})
 	_ = fm
 	_ = err
 }
 
-func Test_Cov20_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
 
@@ -681,7 +681,7 @@ func Test_Cov20_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedJsonResult_Jsoner(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Jsoner(t *testing.T) {
 	// Arrange
 	inner := corejson.NewResult.Any("x")
 	r := corejson.AnyTo.SerializedJsonResult(&inner)
@@ -694,7 +694,7 @@ func Test_Cov20_AnyTo_SerializedJsonResult_Jsoner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedJsonResult_Error(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Error(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(errors.New("hello"))
 
@@ -706,7 +706,7 @@ func Test_Cov20_AnyTo_SerializedJsonResult_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov20_AnyTo_SerializedJsonResult_EmptyError(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_EmptyError(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(errors.New(""))
 
@@ -722,7 +722,7 @@ func Test_Cov20_AnyTo_SerializedJsonResult_EmptyError(t *testing.T) {
 // Serializer — additional coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_Serializer_Methods(t *testing.T) {
+func Test_Serializer_Methods(t *testing.T) {
 	_ = corejson.Serialize.StringsApply([]string{"a"})
 	_ = corejson.Serialize.FromBytes([]byte(`"x"`))
 	_ = corejson.Serialize.FromStrings([]string{"a"})
@@ -754,7 +754,7 @@ func Test_Cov20_Serializer_Methods(t *testing.T) {
 // Deserializer — additional coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_Deserializer_Methods(t *testing.T) {
+func Test_Deserializer_Methods(t *testing.T) {
 	var s string
 	_ = corejson.Deserialize.UsingStringPtr(nil, &s)
 	str := `"hello"`
@@ -798,7 +798,7 @@ func Test_Cov20_Deserializer_Methods(t *testing.T) {
 // NewResult creator — additional coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_NewResult_Various(t *testing.T) {
+func Test_NewResult_Various(t *testing.T) {
 	_ = corejson.NewResult.UsingBytes([]byte(`"x"`))
 	_ = corejson.NewResult.UsingBytesType([]byte(`"x"`), "T")
 	_ = corejson.NewResult.UsingBytesTypePtr([]byte(`"x"`), "T")
@@ -852,7 +852,7 @@ func Test_Cov20_NewResult_Various(t *testing.T) {
 // CastAny — additional coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault(t *testing.T) {
 	// Arrange
 	var out string
 	err := corejson.CastAny.FromToDefault([]byte(`"hello"`), &out)
@@ -865,7 +865,7 @@ func Test_Cov20_CastAny_FromToDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_CastAny_FromToReflection(t *testing.T) {
+func Test_CastAny_FromToReflection(t *testing.T) {
 	// Arrange
 	var out string
 	err := corejson.CastAny.FromToReflection([]byte(`"hello"`), &out)
@@ -878,7 +878,7 @@ func Test_Cov20_CastAny_FromToReflection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_CastAny_OrDeserializeTo(t *testing.T) {
+func Test_CastAny_OrDeserializeTo(t *testing.T) {
 	// Arrange
 	var out string
 	err := corejson.CastAny.OrDeserializeTo([]byte(`"hello"`), &out)
@@ -891,14 +891,14 @@ func Test_Cov20_CastAny_OrDeserializeTo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov20_CastAny_FromToOption_Jsoner(t *testing.T) {
+func Test_CastAny_FromToOption_Jsoner(t *testing.T) {
 	r := corejson.NewResult.Any("hello")
 	var out string
 	err := corejson.CastAny.FromToOption(false, &r, &out)
 	_ = err
 }
 
-func Test_Cov20_CastAny_FromToOption_SerializerFunc(t *testing.T) {
+func Test_CastAny_FromToOption_SerializerFunc(t *testing.T) {
 	// Arrange
 	fn := func() ([]byte, error) { return []byte(`"hello"`), nil }
 	var out string
@@ -912,21 +912,21 @@ func Test_Cov20_CastAny_FromToOption_SerializerFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
-func Test_Cov20_CastAny_FromToOption_Serializer(t *testing.T) {
+func Test_CastAny_FromToOption_Serializer(t *testing.T) {
 	r := corejson.NewResult.Any("hello")
 	var out string
 	err := corejson.CastAny.FromToOption(false, r, &out)
 	_ = err
 }
 
-func Test_Cov20_CastAny_FromToOption_ResultPtr(t *testing.T) {
+func Test_CastAny_FromToOption_ResultPtr(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("hello")
 	var out string
 	err := corejson.CastAny.FromToOption(false, r, &out)
 	_ = err
 }
 
-func Test_Cov20_CastAny_FromToOption_String(t *testing.T) {
+func Test_CastAny_FromToOption_String(t *testing.T) {
 	// Arrange
 	var out string
 	err := corejson.CastAny.FromToOption(false, `"hello"`, &out)
@@ -943,7 +943,7 @@ func Test_Cov20_CastAny_FromToOption_String(t *testing.T) {
 // Empty creator
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov20_EmptyCreator(t *testing.T) {
+func Test_EmptyCreator(t *testing.T) {
 	_ = corejson.Empty.Result()
 	_ = corejson.Empty.ResultWithErr("T", errors.New("e"))
 	_ = corejson.Empty.ResultPtrWithErr("T", errors.New("e"))

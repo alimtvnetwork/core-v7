@@ -9,7 +9,7 @@ import (
 
 // ── deserializeFromResultTo: Byte, ByteMust ──
 
-func Test_Cov48_ResultTo_Byte_Valid(t *testing.T) {
+func Test_ResultTo_Byte_Valid(t *testing.T) {
 	// Arrange
 	jsonResult := corejson.Serialize.Apply(byte(65))
 
@@ -28,7 +28,7 @@ func Test_Cov48_ResultTo_Byte_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.Byte returns 65 -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_ByteMust_Valid(t *testing.T) {
+func Test_ResultTo_ByteMust_Valid(t *testing.T) {
 	// Arrange
 	jsonResult := corejson.Serialize.Apply(byte(42))
 
@@ -43,7 +43,7 @@ func Test_Cov48_ResultTo_ByteMust_Valid(t *testing.T) {
 
 // ── deserializeFromResultTo: MapStringString, MapStringStringMust ──
 
-func Test_Cov48_ResultTo_MapStringString_Valid(t *testing.T) {
+func Test_ResultTo_MapStringString_Valid(t *testing.T) {
 	// Arrange
 	m := map[string]string{"hello": "world"}
 	jsonResult := corejson.Serialize.Apply(m)
@@ -63,7 +63,7 @@ func Test_Cov48_ResultTo_MapStringString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.MapStringString returns map -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_MapStringStringMust_Valid(t *testing.T) {
+func Test_ResultTo_MapStringStringMust_Valid(t *testing.T) {
 	// Arrange
 	m := map[string]string{"a": "b"}
 	jsonResult := corejson.Serialize.Apply(m)
@@ -79,7 +79,7 @@ func Test_Cov48_ResultTo_MapStringStringMust_Valid(t *testing.T) {
 
 // ── deserializeFromResultTo: ResultPtr, ResultPtrMust ──
 
-func Test_Cov48_ResultTo_ResultPtr_Valid(t *testing.T) {
+func Test_ResultTo_ResultPtr_Valid(t *testing.T) {
 	// Arrange
 	inner := corejson.New("hello")
 	outerResult := corejson.Serialize.Apply(inner)
@@ -99,7 +99,7 @@ func Test_Cov48_ResultTo_ResultPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.ResultPtr returns ptr -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_ResultPtrMust_Valid(t *testing.T) {
+func Test_ResultTo_ResultPtrMust_Valid(t *testing.T) {
 	// Arrange
 	inner := corejson.New("hello")
 	outerResult := corejson.Serialize.Apply(inner)
@@ -115,7 +115,7 @@ func Test_Cov48_ResultTo_ResultPtrMust_Valid(t *testing.T) {
 
 // ── deserializeFromResultTo: Bytes, BytesMust ──
 
-func Test_Cov48_ResultTo_Bytes_Valid(t *testing.T) {
+func Test_ResultTo_Bytes_Valid(t *testing.T) {
 	// Arrange
 	inner := corejson.New("data")
 	outerResult := corejson.Serialize.Apply(inner)
@@ -135,7 +135,7 @@ func Test_Cov48_ResultTo_Bytes_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.Bytes returns bytes -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_BytesMust_Valid(t *testing.T) {
+func Test_ResultTo_BytesMust_Valid(t *testing.T) {
 	// Arrange
 	inner := corejson.New("data")
 	outerResult := corejson.Serialize.Apply(inner)
@@ -151,7 +151,7 @@ func Test_Cov48_ResultTo_BytesMust_Valid(t *testing.T) {
 
 // ── deserializeFromResultTo: ResultsPtrCollection, ResultsPtrCollectionMust ──
 
-func Test_Cov48_ResultTo_ResultsPtrCollection_Valid(t *testing.T) {
+func Test_ResultTo_ResultsPtrCollection_Valid(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 	jsonResult := corejson.Serialize.Apply(coll)
@@ -171,7 +171,7 @@ func Test_Cov48_ResultTo_ResultsPtrCollection_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.ResultsPtrCollection returns coll -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_ResultsPtrCollectionMust_Valid(t *testing.T) {
+func Test_ResultTo_ResultsPtrCollectionMust_Valid(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("x")
 	jsonResult := corejson.Serialize.Apply(coll)
@@ -187,7 +187,7 @@ func Test_Cov48_ResultTo_ResultsPtrCollectionMust_Valid(t *testing.T) {
 
 // ── deserializeFromResultTo: MapResults, MapResultsMust ──
 
-func Test_Cov48_ResultTo_MapResults_Valid(t *testing.T) {
+func Test_ResultTo_MapResults_Valid(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.UsingMapAnyItems(map[string]any{"k": "v"})
 	jsonResult := corejson.Serialize.Apply(mr)
@@ -207,7 +207,7 @@ func Test_Cov48_ResultTo_MapResults_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultTo.MapResults returns map -- valid", actual)
 }
 
-func Test_Cov48_ResultTo_MapResultsMust_Valid(t *testing.T) {
+func Test_ResultTo_MapResultsMust_Valid(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.UsingMapAnyItems(map[string]any{"k": "v"})
 	jsonResult := corejson.Serialize.Apply(mr)

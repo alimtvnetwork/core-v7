@@ -15,7 +15,7 @@ import (
 
 // ── GetChar / GetCharOf ──
 
-func Test_Cov63_CharHashsetMap_GetChar_NonEmpty(t *testing.T) {
+func Test_CharHashsetMap_GetChar_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetChar_NonEmpty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -29,7 +29,7 @@ func Test_Cov63_CharHashsetMap_GetChar_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetChar_Empty(t *testing.T) {
+func Test_CharHashsetMap_GetChar_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetChar_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -43,7 +43,7 @@ func Test_Cov63_CharHashsetMap_GetChar_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetCharOf_NonEmpty(t *testing.T) {
+func Test_CharHashsetMap_GetCharOf_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCharOf_NonEmpty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -57,7 +57,7 @@ func Test_Cov63_CharHashsetMap_GetCharOf_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetCharOf_Empty(t *testing.T) {
+func Test_CharHashsetMap_GetCharOf_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCharOf_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -73,7 +73,7 @@ func Test_Cov63_CharHashsetMap_GetCharOf_Empty(t *testing.T) {
 
 // ── IsEmpty / HasItems / Length ──
 
-func Test_Cov63_CharHashsetMap_IsEmpty(t *testing.T) {
+func Test_CharHashsetMap_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEmpty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -93,7 +93,7 @@ func Test_Cov63_CharHashsetMap_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEmpty_Nil(t *testing.T) {
+func Test_CharHashsetMap_IsEmpty_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEmpty_Nil", func() {
 		// Act
 		actual := args.Map{"empty": corestr.Empty.CharHashsetMap().IsEmpty()}
@@ -104,7 +104,7 @@ func Test_Cov63_CharHashsetMap_IsEmpty_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasItems_NonEmpty(t *testing.T) {
+func Test_CharHashsetMap_HasItems_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasItems_NonEmpty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -119,7 +119,7 @@ func Test_Cov63_CharHashsetMap_HasItems_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEmptyLock(t *testing.T) {
+func Test_CharHashsetMap_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEmptyLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -133,7 +133,7 @@ func Test_Cov63_CharHashsetMap_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Length(t *testing.T) {
+func Test_CharHashsetMap_Length(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Length", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -149,7 +149,7 @@ func Test_Cov63_CharHashsetMap_Length(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Length_Empty(t *testing.T) {
+func Test_CharHashsetMap_Length_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Length_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -163,7 +163,7 @@ func Test_Cov63_CharHashsetMap_Length_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_LengthLock(t *testing.T) {
+func Test_CharHashsetMap_LengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -180,7 +180,7 @@ func Test_Cov63_CharHashsetMap_LengthLock(t *testing.T) {
 
 // ── Add / AddStrings ──
 
-func Test_Cov63_CharHashsetMap_Add(t *testing.T) {
+func Test_CharHashsetMap_Add(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Add", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -202,7 +202,7 @@ func Test_Cov63_CharHashsetMap_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Add_ExistingChar(t *testing.T) {
+func Test_CharHashsetMap_Add_ExistingChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Add_ExistingChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -218,7 +218,7 @@ func Test_Cov63_CharHashsetMap_Add_ExistingChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStrings(t *testing.T) {
+func Test_CharHashsetMap_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStrings", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -239,7 +239,7 @@ func Test_Cov63_CharHashsetMap_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStrings_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddStrings_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStrings_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -254,7 +254,7 @@ func Test_Cov63_CharHashsetMap_AddStrings_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddLock(t *testing.T) {
+func Test_CharHashsetMap_AddLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -270,7 +270,7 @@ func Test_Cov63_CharHashsetMap_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddLock_NewChar(t *testing.T) {
+func Test_CharHashsetMap_AddLock_NewChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddLock_NewChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -286,7 +286,7 @@ func Test_Cov63_CharHashsetMap_AddLock_NewChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStringsLock(t *testing.T) {
+func Test_CharHashsetMap_AddStringsLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStringsLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -301,7 +301,7 @@ func Test_Cov63_CharHashsetMap_AddStringsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStringsLock_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddStringsLock_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStringsLock_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -318,7 +318,7 @@ func Test_Cov63_CharHashsetMap_AddStringsLock_Nil(t *testing.T) {
 
 // ── AddSameStartingCharItems ──
 
-func Test_Cov63_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
+func Test_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameStartingCharItems", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -333,7 +333,7 @@ func Test_Cov63_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Empty(t *testing.T) {
+func Test_CharHashsetMap_AddSameStartingCharItems_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -348,7 +348,7 @@ func Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Existing(t *testing.T) {
+func Test_CharHashsetMap_AddSameStartingCharItems_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Existing", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -366,7 +366,7 @@ func Test_Cov63_CharHashsetMap_AddSameStartingCharItems_Existing(t *testing.T) {
 
 // ── AddCollectionItems / AddCharCollectionMapItems ──
 
-func Test_Cov63_CharHashsetMap_AddCollectionItems(t *testing.T) {
+func Test_CharHashsetMap_AddCollectionItems(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddCollectionItems", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -382,7 +382,7 @@ func Test_Cov63_CharHashsetMap_AddCollectionItems(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddCollectionItems_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddCollectionItems_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddCollectionItems_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -397,7 +397,7 @@ func Test_Cov63_CharHashsetMap_AddCollectionItems_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddCharCollectionMapItems_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddCharCollectionMapItems_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddCharCollectionMapItems_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -414,7 +414,7 @@ func Test_Cov63_CharHashsetMap_AddCharCollectionMapItems_Nil(t *testing.T) {
 
 // ── AddHashsetItems ──
 
-func Test_Cov63_CharHashsetMap_AddHashsetItems(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetItems(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetItems", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -432,7 +432,7 @@ func Test_Cov63_CharHashsetMap_AddHashsetItems(t *testing.T) {
 
 // ── Has ──
 
-func Test_Cov63_CharHashsetMap_Has(t *testing.T) {
+func Test_CharHashsetMap_Has(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Has", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -453,7 +453,7 @@ func Test_Cov63_CharHashsetMap_Has(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Has_Empty(t *testing.T) {
+func Test_CharHashsetMap_Has_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Has_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -467,7 +467,7 @@ func Test_Cov63_CharHashsetMap_Has_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Has_CharExistsButNotStr(t *testing.T) {
+func Test_CharHashsetMap_Has_CharExistsButNotStr(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Has_CharExistsButNotStr", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -484,7 +484,7 @@ func Test_Cov63_CharHashsetMap_Has_CharExistsButNotStr(t *testing.T) {
 
 // ── HasWithHashset ──
 
-func Test_Cov63_CharHashsetMap_HasWithHashset(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashset(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashset", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -506,7 +506,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashset(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashset_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -527,7 +527,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasWithHashset_MissChar(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashset_MissChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashset_MissChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -549,7 +549,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashset_MissChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasWithHashsetLock(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashsetLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashsetLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -571,7 +571,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashsetLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasWithHashsetLock_Empty(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashsetLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashsetLock_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -586,7 +586,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashsetLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HasWithHashsetLock_MissChar(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashsetLock_MissChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HasWithHashsetLock_MissChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -604,7 +604,7 @@ func Test_Cov63_CharHashsetMap_HasWithHashsetLock_MissChar(t *testing.T) {
 
 // ── LengthOf / LengthOfLock / LengthOfHashsetFromFirstChar ──
 
-func Test_Cov63_CharHashsetMap_LengthOf(t *testing.T) {
+func Test_CharHashsetMap_LengthOf(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthOf", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -626,7 +626,7 @@ func Test_Cov63_CharHashsetMap_LengthOf(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_LengthOf_Empty(t *testing.T) {
+func Test_CharHashsetMap_LengthOf_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthOf_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -640,7 +640,7 @@ func Test_Cov63_CharHashsetMap_LengthOf_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_LengthOfLock(t *testing.T) {
+func Test_CharHashsetMap_LengthOfLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthOfLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -655,7 +655,7 @@ func Test_Cov63_CharHashsetMap_LengthOfLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_LengthOfLock_Empty(t *testing.T) {
+func Test_CharHashsetMap_LengthOfLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthOfLock_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -669,7 +669,7 @@ func Test_Cov63_CharHashsetMap_LengthOfLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
+func Test_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_LengthOfHashsetFromFirstChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -693,7 +693,7 @@ func Test_Cov63_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
 
 // ── AllLengthsSum / AllLengthsSumLock ──
 
-func Test_Cov63_CharHashsetMap_AllLengthsSum(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSum(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AllLengthsSum", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -708,7 +708,7 @@ func Test_Cov63_CharHashsetMap_AllLengthsSum(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AllLengthsSum_Empty(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSum_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AllLengthsSum_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -722,7 +722,7 @@ func Test_Cov63_CharHashsetMap_AllLengthsSum_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AllLengthsSumLock(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSumLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AllLengthsSumLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -737,7 +737,7 @@ func Test_Cov63_CharHashsetMap_AllLengthsSumLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AllLengthsSumLock_Empty(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSumLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AllLengthsSumLock_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -753,7 +753,7 @@ func Test_Cov63_CharHashsetMap_AllLengthsSumLock_Empty(t *testing.T) {
 
 // ── GetMap / GetCopyMapLock ──
 
-func Test_Cov63_CharHashsetMap_GetMap(t *testing.T) {
+func Test_CharHashsetMap_GetMap(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetMap", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -768,7 +768,7 @@ func Test_Cov63_CharHashsetMap_GetMap(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetCopyMapLock(t *testing.T) {
+func Test_CharHashsetMap_GetCopyMapLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCopyMapLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -784,7 +784,7 @@ func Test_Cov63_CharHashsetMap_GetCopyMapLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetCopyMapLock_Empty(t *testing.T) {
+func Test_CharHashsetMap_GetCopyMapLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCopyMapLock_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -801,7 +801,7 @@ func Test_Cov63_CharHashsetMap_GetCopyMapLock_Empty(t *testing.T) {
 
 // ── List / SortedListAsc / SortedListDsc ──
 
-func Test_Cov63_CharHashsetMap_List(t *testing.T) {
+func Test_CharHashsetMap_List(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_List", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -816,7 +816,7 @@ func Test_Cov63_CharHashsetMap_List(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_SortedListAsc(t *testing.T) {
+func Test_CharHashsetMap_SortedListAsc(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_SortedListAsc", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -838,7 +838,7 @@ func Test_Cov63_CharHashsetMap_SortedListAsc(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_SortedListDsc(t *testing.T) {
+func Test_CharHashsetMap_SortedListDsc(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_SortedListDsc", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -862,7 +862,7 @@ func Test_Cov63_CharHashsetMap_SortedListDsc(t *testing.T) {
 
 // ── String / SummaryString / StringLock / SummaryStringLock ──
 
-func Test_Cov63_CharHashsetMap_String(t *testing.T) {
+func Test_CharHashsetMap_String(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_String", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -877,7 +877,7 @@ func Test_Cov63_CharHashsetMap_String(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_SummaryString(t *testing.T) {
+func Test_CharHashsetMap_SummaryString(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_SummaryString", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -892,7 +892,7 @@ func Test_Cov63_CharHashsetMap_SummaryString(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_StringLock(t *testing.T) {
+func Test_CharHashsetMap_StringLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_StringLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -907,7 +907,7 @@ func Test_Cov63_CharHashsetMap_StringLock(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_SummaryStringLock(t *testing.T) {
+func Test_CharHashsetMap_SummaryStringLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_SummaryStringLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -924,7 +924,7 @@ func Test_Cov63_CharHashsetMap_SummaryStringLock(t *testing.T) {
 
 // ── Print / PrintLock ──
 
-func Test_Cov63_CharHashsetMap_Print_True(t *testing.T) {
+func Test_CharHashsetMap_Print_True(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Print_True", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -940,7 +940,7 @@ func Test_Cov63_CharHashsetMap_Print_True(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Print_False(t *testing.T) {
+func Test_CharHashsetMap_Print_False(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Print_False", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -955,7 +955,7 @@ func Test_Cov63_CharHashsetMap_Print_False(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_PrintLock_True(t *testing.T) {
+func Test_CharHashsetMap_PrintLock_True(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_PrintLock_True", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -971,7 +971,7 @@ func Test_Cov63_CharHashsetMap_PrintLock_True(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_PrintLock_False(t *testing.T) {
+func Test_CharHashsetMap_PrintLock_False(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_PrintLock_False", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -988,7 +988,7 @@ func Test_Cov63_CharHashsetMap_PrintLock_False(t *testing.T) {
 
 // ── IsEquals / IsEqualsLock ──
 
-func Test_Cov63_CharHashsetMap_IsEquals_Same(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_Same(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_Same", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1003,7 +1003,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_Same(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_Nil(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1017,7 +1017,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_BothEmpty(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_BothEmpty", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1032,7 +1032,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_BothEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_OneEmpty(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_OneEmpty", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1048,7 +1048,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_OneEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_DiffLen(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_DiffLen(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_DiffLen", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1065,7 +1065,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_DiffLen(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_DiffContent(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_DiffContent(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_DiffContent", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1082,7 +1082,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_DiffContent(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEquals_MissingKey(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_MissingKey(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEquals_MissingKey", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1099,7 +1099,7 @@ func Test_Cov63_CharHashsetMap_IsEquals_MissingKey(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_IsEqualsLock(t *testing.T) {
+func Test_CharHashsetMap_IsEqualsLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_IsEqualsLock", func() {
 		// Arrange
 		a := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1118,7 +1118,7 @@ func Test_Cov63_CharHashsetMap_IsEqualsLock(t *testing.T) {
 
 // ── GetHashset / GetHashsetLock ──
 
-func Test_Cov63_CharHashsetMap_GetHashset_Found(t *testing.T) {
+func Test_CharHashsetMap_GetHashset_Found(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetHashset_Found", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1134,7 +1134,7 @@ func Test_Cov63_CharHashsetMap_GetHashset_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetHashset_MissNoAdd(t *testing.T) {
+func Test_CharHashsetMap_GetHashset_MissNoAdd(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetHashset_MissNoAdd", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1149,7 +1149,7 @@ func Test_Cov63_CharHashsetMap_GetHashset_MissNoAdd(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetHashset_MissAddNew(t *testing.T) {
+func Test_CharHashsetMap_GetHashset_MissAddNew(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetHashset_MissAddNew", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1164,7 +1164,7 @@ func Test_Cov63_CharHashsetMap_GetHashset_MissAddNew(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetHashsetLock(t *testing.T) {
+func Test_CharHashsetMap_GetHashsetLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetHashsetLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1181,7 +1181,7 @@ func Test_Cov63_CharHashsetMap_GetHashsetLock(t *testing.T) {
 
 // ── GetHashsetByChar / HashsetByChar / HashsetByCharLock ──
 
-func Test_Cov63_CharHashsetMap_GetHashsetByChar(t *testing.T) {
+func Test_CharHashsetMap_GetHashsetByChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetHashsetByChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1197,7 +1197,7 @@ func Test_Cov63_CharHashsetMap_GetHashsetByChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetByChar(t *testing.T) {
+func Test_CharHashsetMap_HashsetByChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetByChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1213,7 +1213,7 @@ func Test_Cov63_CharHashsetMap_HashsetByChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetByCharLock_Found(t *testing.T) {
+func Test_CharHashsetMap_HashsetByCharLock_Found(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetByCharLock_Found", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1229,7 +1229,7 @@ func Test_Cov63_CharHashsetMap_HashsetByCharLock_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetByCharLock_Miss(t *testing.T) {
+func Test_CharHashsetMap_HashsetByCharLock_Miss(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetByCharLock_Miss", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1246,7 +1246,7 @@ func Test_Cov63_CharHashsetMap_HashsetByCharLock_Miss(t *testing.T) {
 
 // ── HashsetByStringFirstChar / HashsetByStringFirstCharLock ──
 
-func Test_Cov63_CharHashsetMap_HashsetByStringFirstChar(t *testing.T) {
+func Test_CharHashsetMap_HashsetByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetByStringFirstChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1262,7 +1262,7 @@ func Test_Cov63_CharHashsetMap_HashsetByStringFirstChar(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetByStringFirstCharLock(t *testing.T) {
+func Test_CharHashsetMap_HashsetByStringFirstCharLock(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetByStringFirstCharLock", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1280,7 +1280,7 @@ func Test_Cov63_CharHashsetMap_HashsetByStringFirstCharLock(t *testing.T) {
 
 // ── HashsetsCollection / HashsetsCollectionByChars / HashsetsCollectionByStringsFirstChar ──
 
-func Test_Cov63_CharHashsetMap_HashsetsCollection(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollection", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1296,7 +1296,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollection_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1311,7 +1311,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollectionByChars", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1327,7 +1327,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_Empty(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByChars_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1342,7 +1342,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_NilHashset(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByChars_NilHashset(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_NilHashset", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1358,7 +1358,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollectionByChars_NilHashset(t *testing.T
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByStringsFirstChar(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1374,7 +1374,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar(t *testing.T
 	})
 }
 
-func Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar_Empty(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByStringsFirstChar_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1391,7 +1391,7 @@ func Test_Cov63_CharHashsetMap_HashsetsCollectionByStringsFirstChar_Empty(t *tes
 
 // ── GetCharsGroups ──
 
-func Test_Cov63_CharHashsetMap_GetCharsGroups(t *testing.T) {
+func Test_CharHashsetMap_GetCharsGroups(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCharsGroups", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1406,7 +1406,7 @@ func Test_Cov63_CharHashsetMap_GetCharsGroups(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_GetCharsGroups_Empty(t *testing.T) {
+func Test_CharHashsetMap_GetCharsGroups_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_GetCharsGroups_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1423,7 +1423,7 @@ func Test_Cov63_CharHashsetMap_GetCharsGroups_Empty(t *testing.T) {
 
 // ── AddSameCharsCollection ──
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollection_New(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollection_New(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollection_New", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1439,7 +1439,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollection_New(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollection_Existing(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollection_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollection_Existing", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1456,7 +1456,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollection_Existing(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollection_NilCol(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollection_NilCol(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollection_NilCol", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1471,7 +1471,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollection_NilCol(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollection_ExistingNilCol(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollection_ExistingNilCol(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollection_ExistingNilCol", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1489,7 +1489,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollection_ExistingNilCol(t *testing.
 
 // ── AddSameCharsHashset ──
 
-func Test_Cov63_CharHashsetMap_AddSameCharsHashset_New(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsHashset_New(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsHashset_New", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1505,7 +1505,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsHashset_New(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsHashset_Existing(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsHashset_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsHashset_Existing", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1522,7 +1522,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsHashset_Existing(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsHashset_NilHashset(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsHashset_NilHashset(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsHashset_NilHashset", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1537,7 +1537,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsHashset_NilHashset(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsHashset_ExistingNil(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsHashset_ExistingNil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsHashset_ExistingNil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1555,7 +1555,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsHashset_ExistingNil(t *testing.T) {
 
 // ── AddSameCharsCollectionLock ──
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_New(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollectionLock_New(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_New", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1571,7 +1571,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_New(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_Existing(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollectionLock_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_Existing", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1588,7 +1588,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_Existing(t *testing.T)
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_NilCol(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollectionLock_NilCol(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_NilCol", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1603,7 +1603,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_NilCol(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_ExistingNil(t *testing.T) {
+func Test_CharHashsetMap_AddSameCharsCollectionLock_ExistingNil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_ExistingNil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1621,7 +1621,7 @@ func Test_Cov63_CharHashsetMap_AddSameCharsCollectionLock_ExistingNil(t *testing
 
 // ── AddHashsetLock ──
 
-func Test_Cov63_CharHashsetMap_AddHashsetLock_New(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetLock_New(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetLock_New", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1637,7 +1637,7 @@ func Test_Cov63_CharHashsetMap_AddHashsetLock_New(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddHashsetLock_Existing(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetLock_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetLock_Existing", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1654,7 +1654,7 @@ func Test_Cov63_CharHashsetMap_AddHashsetLock_Existing(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddHashsetLock_NilHashset(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetLock_NilHashset(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetLock_NilHashset", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1669,7 +1669,7 @@ func Test_Cov63_CharHashsetMap_AddHashsetLock_NilHashset(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddHashsetLock_ExistingNil(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetLock_ExistingNil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetLock_ExistingNil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1687,7 +1687,7 @@ func Test_Cov63_CharHashsetMap_AddHashsetLock_ExistingNil(t *testing.T) {
 
 // ── JSON ──
 
-func Test_Cov63_CharHashsetMap_JsonModel(t *testing.T) {
+func Test_CharHashsetMap_JsonModel(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_JsonModel", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1702,7 +1702,7 @@ func Test_Cov63_CharHashsetMap_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_JsonModelAny(t *testing.T) {
+func Test_CharHashsetMap_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_JsonModelAny", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1716,7 +1716,7 @@ func Test_Cov63_CharHashsetMap_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_MarshalJSON(t *testing.T) {
+func Test_CharHashsetMap_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_MarshalJSON", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1738,7 +1738,7 @@ func Test_Cov63_CharHashsetMap_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_UnmarshalJSON(t *testing.T) {
+func Test_CharHashsetMap_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_UnmarshalJSON", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1756,7 +1756,7 @@ func Test_Cov63_CharHashsetMap_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_UnmarshalJSON_Error(t *testing.T) {
+func Test_CharHashsetMap_UnmarshalJSON_Error(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_UnmarshalJSON_Error", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1771,7 +1771,7 @@ func Test_Cov63_CharHashsetMap_UnmarshalJSON_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Json(t *testing.T) {
+func Test_CharHashsetMap_Json(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Json", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1787,7 +1787,7 @@ func Test_Cov63_CharHashsetMap_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_JsonPtr(t *testing.T) {
+func Test_CharHashsetMap_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_JsonPtr", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1803,7 +1803,7 @@ func Test_Cov63_CharHashsetMap_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_ParseInjectUsingJson(t *testing.T) {
+func Test_CharHashsetMap_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_ParseInjectUsingJson", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1827,7 +1827,7 @@ func Test_Cov63_CharHashsetMap_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_CharHashsetMap_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1843,7 +1843,7 @@ func Test_Cov63_CharHashsetMap_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_CharHashsetMap_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1861,7 +1861,7 @@ func Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_CharHashsetMap_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust_Panics", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1885,7 +1885,7 @@ func Test_Cov63_CharHashsetMap_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_JsonParseSelfInject(t *testing.T) {
+func Test_CharHashsetMap_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_JsonParseSelfInject", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1905,7 +1905,7 @@ func Test_Cov63_CharHashsetMap_JsonParseSelfInject(t *testing.T) {
 
 // ── Interface casts ──
 
-func Test_Cov63_CharHashsetMap_AsJsoner(t *testing.T) {
+func Test_CharHashsetMap_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AsJsoner", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1919,7 +1919,7 @@ func Test_Cov63_CharHashsetMap_AsJsoner(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AsJsonContractsBinder(t *testing.T) {
+func Test_CharHashsetMap_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AsJsonContractsBinder", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1933,7 +1933,7 @@ func Test_Cov63_CharHashsetMap_AsJsonContractsBinder(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AsJsonMarshaller(t *testing.T) {
+func Test_CharHashsetMap_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AsJsonMarshaller", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1947,7 +1947,7 @@ func Test_Cov63_CharHashsetMap_AsJsonMarshaller(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AsJsonParseSelfInjector(t *testing.T) {
+func Test_CharHashsetMap_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AsJsonParseSelfInjector", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1963,7 +1963,7 @@ func Test_Cov63_CharHashsetMap_AsJsonParseSelfInjector(t *testing.T) {
 
 // ── RemoveAll / Clear ──
 
-func Test_Cov63_CharHashsetMap_RemoveAll(t *testing.T) {
+func Test_CharHashsetMap_RemoveAll(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_RemoveAll", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1979,7 +1979,7 @@ func Test_Cov63_CharHashsetMap_RemoveAll(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_RemoveAll_Empty(t *testing.T) {
+func Test_CharHashsetMap_RemoveAll_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_RemoveAll_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -1994,7 +1994,7 @@ func Test_Cov63_CharHashsetMap_RemoveAll_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Clear(t *testing.T) {
+func Test_CharHashsetMap_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Clear", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2010,7 +2010,7 @@ func Test_Cov63_CharHashsetMap_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Clear_Empty(t *testing.T) {
+func Test_CharHashsetMap_Clear_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Clear_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2027,7 +2027,7 @@ func Test_Cov63_CharHashsetMap_Clear_Empty(t *testing.T) {
 
 // ── Constructors ──
 
-func Test_Cov63_CharHashsetMap_Cap_MinEnforced(t *testing.T) {
+func Test_CharHashsetMap_Cap_MinEnforced(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Cap_MinEnforced", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(1, 1)
@@ -2041,7 +2041,7 @@ func Test_Cov63_CharHashsetMap_Cap_MinEnforced(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_CapItems(t *testing.T) {
+func Test_CharHashsetMap_CapItems(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_CapItems", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
@@ -2055,7 +2055,7 @@ func Test_Cov63_CharHashsetMap_CapItems(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Strings(t *testing.T) {
+func Test_CharHashsetMap_Strings(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Strings", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Strings(10, []string{"apple", "banana"})
@@ -2069,7 +2069,7 @@ func Test_Cov63_CharHashsetMap_Strings(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_Strings_Nil(t *testing.T) {
+func Test_CharHashsetMap_Strings_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_Strings_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Strings(10, nil)
@@ -2085,7 +2085,7 @@ func Test_Cov63_CharHashsetMap_Strings_Nil(t *testing.T) {
 
 // ── AddStringsAsyncLock ──
 
-func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Small(t *testing.T) {
+func Test_CharHashsetMap_AddStringsAsyncLock_Small(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Small", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2109,7 +2109,7 @@ func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Small(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Empty(t *testing.T) {
+func Test_CharHashsetMap_AddStringsAsyncLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2124,7 +2124,7 @@ func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_NilCallback(t *testing.T) {
+func Test_CharHashsetMap_AddStringsAsyncLock_NilCallback(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddStringsAsyncLock_NilCallback", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2141,7 +2141,7 @@ func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_NilCallback(t *testing.T) {
 
 // ── AddCollectionItemsAsyncLock ──
 
-func Test_Cov63_CharHashsetMap_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddCollectionItemsAsyncLock_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
@@ -2158,7 +2158,7 @@ func Test_Cov63_CharHashsetMap_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
 
 // ── AddHashsetItemsAsyncLock ──
 
-func Test_Cov63_CharHashsetMap_AddHashsetItemsAsyncLock_Nil(t *testing.T) {
+func Test_CharHashsetMap_AddHashsetItemsAsyncLock_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov63_CharHashsetMap_AddHashsetItemsAsyncLock_Nil", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)

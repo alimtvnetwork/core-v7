@@ -14,7 +14,7 @@ import (
 // AnyCollection — nil/empty branches
 // =============================================================================
 
-func Test_Cov39_AnyCollection_Length_Nil(t *testing.T) {
+func Test_AnyCollection_Length_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.AnyCollection
 
@@ -26,7 +26,7 @@ func Test_Cov39_AnyCollection_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Length nil", actual)
 }
 
-func Test_Cov39_AnyCollection_IsEmpty_Nil(t *testing.T) {
+func Test_AnyCollection_IsEmpty_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.AnyCollection
 
@@ -38,7 +38,7 @@ func Test_Cov39_AnyCollection_IsEmpty_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection IsEmpty nil", actual)
 }
 
-func Test_Cov39_AnyCollection_IsEmpty_Empty(t *testing.T) {
+func Test_AnyCollection_IsEmpty_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -50,7 +50,7 @@ func Test_Cov39_AnyCollection_IsEmpty_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection IsEmpty empty", actual)
 }
 
-func Test_Cov39_AnyCollection_HasAnyItem_False(t *testing.T) {
+func Test_AnyCollection_HasAnyItem_False(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -62,7 +62,7 @@ func Test_Cov39_AnyCollection_HasAnyItem_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection HasAnyItem false", actual)
 }
 
-func Test_Cov39_AnyCollection_HasAnyItem_True(t *testing.T) {
+func Test_AnyCollection_HasAnyItem_True(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -75,7 +75,7 @@ func Test_Cov39_AnyCollection_HasAnyItem_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection HasAnyItem true", actual)
 }
 
-func Test_Cov39_AnyCollection_LastIndex(t *testing.T) {
+func Test_AnyCollection_LastIndex(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a").Add("b")
@@ -88,7 +88,7 @@ func Test_Cov39_AnyCollection_LastIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LastIndex", actual)
 }
 
-func Test_Cov39_AnyCollection_HasIndex_True(t *testing.T) {
+func Test_AnyCollection_HasIndex_True(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a")
@@ -101,7 +101,7 @@ func Test_Cov39_AnyCollection_HasIndex_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection HasIndex true", actual)
 }
 
-func Test_Cov39_AnyCollection_HasIndex_False(t *testing.T) {
+func Test_AnyCollection_HasIndex_False(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -113,7 +113,7 @@ func Test_Cov39_AnyCollection_HasIndex_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection HasIndex false", actual)
 }
 
-func Test_Cov39_AnyCollection_Count(t *testing.T) {
+func Test_AnyCollection_Count(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a")
@@ -130,7 +130,7 @@ func Test_Cov39_AnyCollection_Count(t *testing.T) {
 // AnyCollection — Items / DynamicItems / DynamicCollection
 // =============================================================================
 
-func Test_Cov39_AnyCollection_Items_Empty(t *testing.T) {
+func Test_AnyCollection_Items_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -142,7 +142,7 @@ func Test_Cov39_AnyCollection_Items_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Items empty", actual)
 }
 
-func Test_Cov39_AnyCollection_Items_Valid(t *testing.T) {
+func Test_AnyCollection_Items_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2)
@@ -155,7 +155,7 @@ func Test_Cov39_AnyCollection_Items_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Items valid", actual)
 }
 
-func Test_Cov39_AnyCollection_DynamicItems_Empty(t *testing.T) {
+func Test_AnyCollection_DynamicItems_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -167,7 +167,7 @@ func Test_Cov39_AnyCollection_DynamicItems_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection DynamicItems empty", actual)
 }
 
-func Test_Cov39_AnyCollection_DynamicItems_Valid(t *testing.T) {
+func Test_AnyCollection_DynamicItems_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -180,7 +180,7 @@ func Test_Cov39_AnyCollection_DynamicItems_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection DynamicItems valid", actual)
 }
 
-func Test_Cov39_AnyCollection_DynamicCollection_Empty(t *testing.T) {
+func Test_AnyCollection_DynamicCollection_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	dc := c.DynamicCollection()
@@ -193,7 +193,7 @@ func Test_Cov39_AnyCollection_DynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection DynamicCollection empty", actual)
 }
 
-func Test_Cov39_AnyCollection_DynamicCollection_Valid(t *testing.T) {
+func Test_AnyCollection_DynamicCollection_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -211,7 +211,7 @@ func Test_Cov39_AnyCollection_DynamicCollection_Valid(t *testing.T) {
 // AnyCollection — First / Last / FirstOrDefault / LastOrDefault
 // =============================================================================
 
-func Test_Cov39_AnyCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_AnyCollection_FirstOrDefault_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -223,7 +223,7 @@ func Test_Cov39_AnyCollection_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection FirstOrDefault empty", actual)
 }
 
-func Test_Cov39_AnyCollection_FirstOrDefault_Valid(t *testing.T) {
+func Test_AnyCollection_FirstOrDefault_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("first")
@@ -236,7 +236,7 @@ func Test_Cov39_AnyCollection_FirstOrDefault_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection FirstOrDefault valid", actual)
 }
 
-func Test_Cov39_AnyCollection_FirstOrDefaultDynamic_Empty(t *testing.T) {
+func Test_AnyCollection_FirstOrDefaultDynamic_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -248,7 +248,7 @@ func Test_Cov39_AnyCollection_FirstOrDefaultDynamic_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection FirstOrDefaultDynamic empty", actual)
 }
 
-func Test_Cov39_AnyCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_AnyCollection_LastOrDefault_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -260,7 +260,7 @@ func Test_Cov39_AnyCollection_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LastOrDefault empty", actual)
 }
 
-func Test_Cov39_AnyCollection_LastOrDefault_Valid(t *testing.T) {
+func Test_AnyCollection_LastOrDefault_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a").Add("last")
@@ -273,7 +273,7 @@ func Test_Cov39_AnyCollection_LastOrDefault_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LastOrDefault valid", actual)
 }
 
-func Test_Cov39_AnyCollection_LastOrDefaultDynamic_Empty(t *testing.T) {
+func Test_AnyCollection_LastOrDefaultDynamic_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -289,7 +289,7 @@ func Test_Cov39_AnyCollection_LastOrDefaultDynamic_Empty(t *testing.T) {
 // AnyCollection — Skip / Take / Limit
 // =============================================================================
 
-func Test_Cov39_AnyCollection_Skip(t *testing.T) {
+func Test_AnyCollection_Skip(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -302,7 +302,7 @@ func Test_Cov39_AnyCollection_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Skip", actual)
 }
 
-func Test_Cov39_AnyCollection_SkipCollection(t *testing.T) {
+func Test_AnyCollection_SkipCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -316,7 +316,7 @@ func Test_Cov39_AnyCollection_SkipCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection SkipCollection", actual)
 }
 
-func Test_Cov39_AnyCollection_Take(t *testing.T) {
+func Test_AnyCollection_Take(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -329,7 +329,7 @@ func Test_Cov39_AnyCollection_Take(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Take", actual)
 }
 
-func Test_Cov39_AnyCollection_TakeCollection(t *testing.T) {
+func Test_AnyCollection_TakeCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -343,7 +343,7 @@ func Test_Cov39_AnyCollection_TakeCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection TakeCollection", actual)
 }
 
-func Test_Cov39_AnyCollection_LimitCollection(t *testing.T) {
+func Test_AnyCollection_LimitCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -357,7 +357,7 @@ func Test_Cov39_AnyCollection_LimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LimitCollection", actual)
 }
 
-func Test_Cov39_AnyCollection_SafeLimitCollection(t *testing.T) {
+func Test_AnyCollection_SafeLimitCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2)
@@ -375,7 +375,7 @@ func Test_Cov39_AnyCollection_SafeLimitCollection(t *testing.T) {
 // AnyCollection — RemoveAt
 // =============================================================================
 
-func Test_Cov39_AnyCollection_RemoveAt_Invalid(t *testing.T) {
+func Test_AnyCollection_RemoveAt_Invalid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -387,7 +387,7 @@ func Test_Cov39_AnyCollection_RemoveAt_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection RemoveAt invalid", actual)
 }
 
-func Test_Cov39_AnyCollection_RemoveAt_Valid(t *testing.T) {
+func Test_AnyCollection_RemoveAt_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -411,7 +411,7 @@ func Test_Cov39_AnyCollection_RemoveAt_Valid(t *testing.T) {
 // AnyCollection — Loop (sync and async)
 // =============================================================================
 
-func Test_Cov39_AnyCollection_Loop_Empty(t *testing.T) {
+func Test_AnyCollection_Loop_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	called := false
@@ -425,7 +425,7 @@ func Test_Cov39_AnyCollection_Loop_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Loop empty", actual)
 }
 
-func Test_Cov39_AnyCollection_Loop_Sync_Break(t *testing.T) {
+func Test_AnyCollection_Loop_Sync_Break(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -443,7 +443,7 @@ func Test_Cov39_AnyCollection_Loop_Sync_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Loop sync break", actual)
 }
 
-func Test_Cov39_AnyCollection_Loop_Async(t *testing.T) {
+func Test_AnyCollection_Loop_Async(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -457,7 +457,7 @@ func Test_Cov39_AnyCollection_Loop_Async(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Loop async", actual)
 }
 
-func Test_Cov39_AnyCollection_LoopDynamic_Empty(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	called := false
@@ -471,7 +471,7 @@ func Test_Cov39_AnyCollection_LoopDynamic_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LoopDynamic empty", actual)
 }
 
-func Test_Cov39_AnyCollection_LoopDynamic_Sync_Break(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Sync_Break(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2)
@@ -489,7 +489,7 @@ func Test_Cov39_AnyCollection_LoopDynamic_Sync_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection LoopDynamic sync break", actual)
 }
 
-func Test_Cov39_AnyCollection_LoopDynamic_Async(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Async(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2)
@@ -507,7 +507,7 @@ func Test_Cov39_AnyCollection_LoopDynamic_Async(t *testing.T) {
 // AnyCollection — Add variants
 // =============================================================================
 
-func Test_Cov39_AnyCollection_AddNonNull_Nil(t *testing.T) {
+func Test_AnyCollection_AddNonNull_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddNonNull(nil)
@@ -520,7 +520,7 @@ func Test_Cov39_AnyCollection_AddNonNull_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddNonNull nil", actual)
 }
 
-func Test_Cov39_AnyCollection_AddNonNull_Valid(t *testing.T) {
+func Test_AnyCollection_AddNonNull_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddNonNull("a")
@@ -533,7 +533,7 @@ func Test_Cov39_AnyCollection_AddNonNull_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddNonNull valid", actual)
 }
 
-func Test_Cov39_AnyCollection_AddNonNullDynamic_Nil(t *testing.T) {
+func Test_AnyCollection_AddNonNullDynamic_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddNonNullDynamic(nil, false)
@@ -546,7 +546,7 @@ func Test_Cov39_AnyCollection_AddNonNullDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddNonNullDynamic nil", actual)
 }
 
-func Test_Cov39_AnyCollection_AddNonNullDynamic_Valid(t *testing.T) {
+func Test_AnyCollection_AddNonNullDynamic_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddNonNullDynamic("a", true)
@@ -559,7 +559,7 @@ func Test_Cov39_AnyCollection_AddNonNullDynamic_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddNonNullDynamic valid", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyManyDynamic_Nil(t *testing.T) {
+func Test_AnyCollection_AddAnyManyDynamic_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddAnyManyDynamic(nil...)
@@ -572,7 +572,7 @@ func Test_Cov39_AnyCollection_AddAnyManyDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyManyDynamic nil", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyManyDynamic_Valid(t *testing.T) {
+func Test_AnyCollection_AddAnyManyDynamic_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddAnyManyDynamic("a", "b")
@@ -585,7 +585,7 @@ func Test_Cov39_AnyCollection_AddAnyManyDynamic_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyManyDynamic valid", actual)
 }
 
-func Test_Cov39_AnyCollection_AddMany_Nil(t *testing.T) {
+func Test_AnyCollection_AddMany_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddMany(nil...)
@@ -598,7 +598,7 @@ func Test_Cov39_AnyCollection_AddMany_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddMany nil", actual)
 }
 
-func Test_Cov39_AnyCollection_AddMany_WithNils(t *testing.T) {
+func Test_AnyCollection_AddMany_WithNils(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddMany("a", nil, "b")
@@ -611,7 +611,7 @@ func Test_Cov39_AnyCollection_AddMany_WithNils(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddMany with nils", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
+func Test_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddAnySliceFromSingleItem(nil)
@@ -624,7 +624,7 @@ func Test_Cov39_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnySliceFromSingleItem nil", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnySliceFromSingleItem_Valid(t *testing.T) {
+func Test_AnyCollection_AddAnySliceFromSingleItem_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.AddAnySliceFromSingleItem([]int{1, 2, 3})
@@ -641,7 +641,7 @@ func Test_Cov39_AnyCollection_AddAnySliceFromSingleItem_Valid(t *testing.T) {
 // AnyCollection — Type validation
 // =============================================================================
 
-func Test_Cov39_AnyCollection_AddAnyWithTypeValidation_Error(t *testing.T) {
+func Test_AnyCollection_AddAnyWithTypeValidation_Error(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.AddAnyWithTypeValidation(true, reflect.TypeOf(""), 42)
@@ -654,7 +654,7 @@ func Test_Cov39_AnyCollection_AddAnyWithTypeValidation_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyWithTypeValidation error", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
+func Test_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.AddAnyWithTypeValidation(true, reflect.TypeOf(""), "hello")
@@ -673,7 +673,7 @@ func Test_Cov39_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyWithTypeValidation valid", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.AddAnyItemsWithTypeValidation(false, true, reflect.TypeOf(""))
@@ -686,7 +686,7 @@ func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyItemsWithTypeValidation empty", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.AddAnyItemsWithTypeValidation(true, true, reflect.TypeOf(""), "a", 42, "b")
@@ -705,7 +705,7 @@ func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *t
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyItemsWithTypeValidation continue on error", actual)
 }
 
-func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.AddAnyItemsWithTypeValidation(false, true, reflect.TypeOf(""), "a", 42, "b")
@@ -728,7 +728,7 @@ func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_StopOnError(t *testi
 // AnyCollection — JSON branches
 // =============================================================================
 
-func Test_Cov39_AnyCollection_JsonString_Valid(t *testing.T) {
+func Test_AnyCollection_JsonString_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -748,7 +748,7 @@ func Test_Cov39_AnyCollection_JsonString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonString valid", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonStringMust_Valid(t *testing.T) {
+func Test_AnyCollection_JsonStringMust_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -762,7 +762,7 @@ func Test_Cov39_AnyCollection_JsonStringMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonStringMust valid", actual)
 }
 
-func Test_Cov39_AnyCollection_MarshalJSON(t *testing.T) {
+func Test_AnyCollection_MarshalJSON(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -782,7 +782,7 @@ func Test_Cov39_AnyCollection_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection MarshalJSON", actual)
 }
 
-func Test_Cov39_AnyCollection_UnmarshalJSON_Valid(t *testing.T) {
+func Test_AnyCollection_UnmarshalJSON_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.UnmarshalJSON([]byte(`[1,2,3]`))
@@ -801,7 +801,7 @@ func Test_Cov39_AnyCollection_UnmarshalJSON_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection UnmarshalJSON valid", actual)
 }
 
-func Test_Cov39_AnyCollection_UnmarshalJSON_Invalid(t *testing.T) {
+func Test_AnyCollection_UnmarshalJSON_Invalid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	err := c.UnmarshalJSON([]byte(`not json`))
@@ -814,7 +814,7 @@ func Test_Cov39_AnyCollection_UnmarshalJSON_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection UnmarshalJSON invalid", actual)
 }
 
-func Test_Cov39_AnyCollection_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_AnyCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -828,7 +828,7 @@ func Test_Cov39_AnyCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov39_AnyCollection_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_AnyCollection_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -850,7 +850,7 @@ func Test_Cov39_AnyCollection_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection ParseInjectUsingJsonMust panics", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonParseSelfInject_Error(t *testing.T) {
+func Test_AnyCollection_JsonParseSelfInject_Error(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -864,7 +864,7 @@ func Test_Cov39_AnyCollection_JsonParseSelfInject_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonParseSelfInject error", actual)
 }
 
-func Test_Cov39_AnyCollection_Json(t *testing.T) {
+func Test_AnyCollection_Json(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -878,7 +878,7 @@ func Test_Cov39_AnyCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Json", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonPtr(t *testing.T) {
+func Test_AnyCollection_JsonPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -896,7 +896,7 @@ func Test_Cov39_AnyCollection_JsonPtr(t *testing.T) {
 // AnyCollection — JsonResultsCollection / JsonResultsPtrCollection
 // =============================================================================
 
-func Test_Cov39_AnyCollection_JsonResultsCollection_Empty(t *testing.T) {
+func Test_AnyCollection_JsonResultsCollection_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	r := c.JsonResultsCollection()
@@ -909,7 +909,7 @@ func Test_Cov39_AnyCollection_JsonResultsCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonResultsCollection empty", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonResultsCollection_Valid(t *testing.T) {
+func Test_AnyCollection_JsonResultsCollection_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -923,7 +923,7 @@ func Test_Cov39_AnyCollection_JsonResultsCollection_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonResultsCollection valid", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonResultsPtrCollection_Empty(t *testing.T) {
+func Test_AnyCollection_JsonResultsPtrCollection_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	r := c.JsonResultsPtrCollection()
@@ -936,7 +936,7 @@ func Test_Cov39_AnyCollection_JsonResultsPtrCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonResultsPtrCollection empty", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonResultsPtrCollection_Valid(t *testing.T) {
+func Test_AnyCollection_JsonResultsPtrCollection_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -954,7 +954,7 @@ func Test_Cov39_AnyCollection_JsonResultsPtrCollection_Valid(t *testing.T) {
 // AnyCollection — Paging
 // =============================================================================
 
-func Test_Cov39_AnyCollection_GetPagesSize_Zero(t *testing.T) {
+func Test_AnyCollection_GetPagesSize_Zero(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -966,7 +966,7 @@ func Test_Cov39_AnyCollection_GetPagesSize_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection GetPagesSize zero", actual)
 }
 
-func Test_Cov39_AnyCollection_GetPagesSize_Negative(t *testing.T) {
+func Test_AnyCollection_GetPagesSize_Negative(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -978,7 +978,7 @@ func Test_Cov39_AnyCollection_GetPagesSize_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection GetPagesSize negative", actual)
 }
 
-func Test_Cov39_AnyCollection_GetPagesSize_Valid(t *testing.T) {
+func Test_AnyCollection_GetPagesSize_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1).Add(2).Add(3)
@@ -991,7 +991,7 @@ func Test_Cov39_AnyCollection_GetPagesSize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection GetPagesSize valid", actual)
 }
 
-func Test_Cov39_AnyCollection_GetPagedCollection_SmallData(t *testing.T) {
+func Test_AnyCollection_GetPagedCollection_SmallData(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -1005,7 +1005,7 @@ func Test_Cov39_AnyCollection_GetPagedCollection_SmallData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection GetPagedCollection small data", actual)
 }
 
-func Test_Cov39_AnyCollection_GetPagedCollection_MultiPage(t *testing.T) {
+func Test_AnyCollection_GetPagedCollection_MultiPage(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	for i := 0; i < 5; i++ {
@@ -1021,7 +1021,7 @@ func Test_Cov39_AnyCollection_GetPagedCollection_MultiPage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection GetPagedCollection multi page", actual)
 }
 
-func Test_Cov39_AnyCollection_GetSinglePageCollection_Small(t *testing.T) {
+func Test_AnyCollection_GetSinglePageCollection_Small(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -1039,7 +1039,7 @@ func Test_Cov39_AnyCollection_GetSinglePageCollection_Small(t *testing.T) {
 // AnyCollection — Misc
 // =============================================================================
 
-func Test_Cov39_AnyCollection_Strings_Empty(t *testing.T) {
+func Test_AnyCollection_Strings_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -1051,7 +1051,7 @@ func Test_Cov39_AnyCollection_Strings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Strings empty", actual)
 }
 
-func Test_Cov39_AnyCollection_Strings_Valid(t *testing.T) {
+func Test_AnyCollection_Strings_Valid(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a").Add(1)
@@ -1064,7 +1064,7 @@ func Test_Cov39_AnyCollection_Strings_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection Strings valid", actual)
 }
 
-func Test_Cov39_AnyCollection_String(t *testing.T) {
+func Test_AnyCollection_String(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("a")
@@ -1077,7 +1077,7 @@ func Test_Cov39_AnyCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection String", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonModel(t *testing.T) {
+func Test_AnyCollection_JsonModel(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(1)
@@ -1090,7 +1090,7 @@ func Test_Cov39_AnyCollection_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonModel", actual)
 }
 
-func Test_Cov39_AnyCollection_JsonModelAny(t *testing.T) {
+func Test_AnyCollection_JsonModelAny(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 
@@ -1102,7 +1102,7 @@ func Test_Cov39_AnyCollection_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonModelAny", actual)
 }
 
-func Test_Cov39_AnyCollection_ListStrings(t *testing.T) {
+func Test_AnyCollection_ListStrings(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("hello")
@@ -1116,7 +1116,7 @@ func Test_Cov39_AnyCollection_ListStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection ListStrings", actual)
 }
 
-func Test_Cov39_AnyCollection_ListStringsPtr(t *testing.T) {
+func Test_AnyCollection_ListStringsPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("hello")
@@ -1130,7 +1130,7 @@ func Test_Cov39_AnyCollection_ListStringsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection ListStringsPtr", actual)
 }
 
-func Test_Cov39_AnyCollection_At(t *testing.T) {
+func Test_AnyCollection_At(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add("x")
@@ -1143,7 +1143,7 @@ func Test_Cov39_AnyCollection_At(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection At", actual)
 }
 
-func Test_Cov39_AnyCollection_AtAsDynamic(t *testing.T) {
+func Test_AnyCollection_AtAsDynamic(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyAnyCollection()
 	c.Add(42)

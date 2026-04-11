@@ -11,7 +11,7 @@ import (
 
 // ── ReflectInterfaceVal non-ptr (line 20) ──
 
-func Test_Cov75_ReflectInterfaceVal_NonPtr_I29(t *testing.T) {
+func Test_ReflectInterfaceVal_NonPtr_I29(t *testing.T) {
 	// Arrange / Act
 	result := coredynamic.ReflectInterfaceVal(42)
 
@@ -23,7 +23,7 @@ func Test_Cov75_ReflectInterfaceVal_NonPtr_I29(t *testing.T) {
 
 // ── ReflectSetFromTo: []byte → struct (line 159-167) ──
 
-func Test_Cov75_ReflectSetFromTo_BytesToStruct_I29(t *testing.T) {
+func Test_ReflectSetFromTo_BytesToStruct_I29(t *testing.T) {
 	// Arrange
 	type sample struct {
 		Name string `json:"name"`
@@ -48,7 +48,7 @@ func Test_Cov75_ReflectSetFromTo_BytesToStruct_I29(t *testing.T) {
 
 // ── ReflectSetFromTo: struct → *[]byte (line 174-180) ──
 
-func Test_Cov75_ReflectSetFromTo_StructToBytes_I29(t *testing.T) {
+func Test_ReflectSetFromTo_StructToBytes_I29(t *testing.T) {
 	// Arrange
 	type sample struct {
 		Name string `json:"name"`
@@ -73,7 +73,7 @@ func Test_Cov75_ReflectSetFromTo_StructToBytes_I29(t *testing.T) {
 
 // ── SafeZeroSet non-pointer (line 18) ──
 
-func Test_Cov75_SafeZeroSet_NonPointer_I29(t *testing.T) {
+func Test_SafeZeroSet_NonPointer_I29(t *testing.T) {
 	// Arrange
 	val := reflect.ValueOf(42)
 

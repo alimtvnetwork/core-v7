@@ -11,7 +11,7 @@ import (
 // TypedSimpleRequest[T] — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov15_TypedSimpleRequest_Constructors(t *testing.T) {
+func Test_TypedSimpleRequest_Constructors(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequest("hello", true, "")
 	rv := coredynamic.NewTypedSimpleRequestValid("world")
@@ -38,7 +38,7 @@ func Test_Cov15_TypedSimpleRequest_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- constructors", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_NilReceiver(t *testing.T) {
+func Test_TypedSimpleRequest_NilReceiver(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 
@@ -57,7 +57,7 @@ func Test_Cov15_TypedSimpleRequest_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns nil -- nil", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_InvalidError(t *testing.T) {
+func Test_TypedSimpleRequest_InvalidError(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	inv := coredynamic.InvalidTypedSimpleRequest[string]("err")
@@ -81,7 +81,7 @@ func Test_Cov15_TypedSimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidError returns error -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_String(t *testing.T) {
+func Test_TypedSimpleRequest_String(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 
@@ -93,7 +93,7 @@ func Test_Cov15_TypedSimpleRequest_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_Json(t *testing.T) {
+func Test_TypedSimpleRequest_Json(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	jb, err := r.JsonBytes()
@@ -122,7 +122,7 @@ func Test_Cov15_TypedSimpleRequest_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- Json", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_GetAs(t *testing.T) {
+func Test_TypedSimpleRequest_GetAs(t *testing.T) {
 	// Arrange
 	rs := coredynamic.NewTypedSimpleRequestValid("hello")
 	ri := coredynamic.NewTypedSimpleRequestValid(42)
@@ -155,7 +155,7 @@ func Test_Cov15_TypedSimpleRequest_GetAs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAs returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_Clone(t *testing.T) {
+func Test_TypedSimpleRequest_Clone(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	cloned := r.Clone()
@@ -176,7 +176,7 @@ func Test_Cov15_TypedSimpleRequest_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
+func Test_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	sr := r.ToSimpleRequest()
@@ -197,7 +197,7 @@ func Test_Cov15_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSimpleRequest returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
+func Test_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	td := r.ToTypedDynamic()
@@ -220,7 +220,7 @@ func Test_Cov15_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToTypedDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleRequest_ToDynamic(t *testing.T) {
+func Test_TypedSimpleRequest_ToDynamic(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	d := r.ToDynamic()
@@ -247,7 +247,7 @@ func Test_Cov15_TypedSimpleRequest_ToDynamic(t *testing.T) {
 // TypedSimpleResult[T] — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov15_TypedSimpleResult_Constructors(t *testing.T) {
+func Test_TypedSimpleResult_Constructors(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResult("hello", true, "")
 	rv := coredynamic.NewTypedSimpleResultValid("world")
@@ -274,7 +274,7 @@ func Test_Cov15_TypedSimpleResult_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- constructors", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_NilReceiver(t *testing.T) {
+func Test_TypedSimpleResult_NilReceiver(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -293,7 +293,7 @@ func Test_Cov15_TypedSimpleResult_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns nil -- nil", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_InvalidError(t *testing.T) {
+func Test_TypedSimpleResult_InvalidError(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	inv := coredynamic.InvalidTypedSimpleResult[string]("err")
@@ -317,7 +317,7 @@ func Test_Cov15_TypedSimpleResult_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidError returns error -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_String(t *testing.T) {
+func Test_TypedSimpleResult_String(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 
@@ -329,7 +329,7 @@ func Test_Cov15_TypedSimpleResult_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_Json(t *testing.T) {
+func Test_TypedSimpleResult_Json(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	jb, err := r.JsonBytes()
@@ -358,7 +358,7 @@ func Test_Cov15_TypedSimpleResult_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Json", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_GetAs(t *testing.T) {
+func Test_TypedSimpleResult_GetAs(t *testing.T) {
 	// Arrange
 	rs := coredynamic.NewTypedSimpleResultValid("hello")
 	ri := coredynamic.NewTypedSimpleResultValid(42)
@@ -390,7 +390,7 @@ func Test_Cov15_TypedSimpleResult_GetAs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAs returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_Clone(t *testing.T) {
+func Test_TypedSimpleResult_Clone(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	cloned := r.Clone()
@@ -413,7 +413,7 @@ func Test_Cov15_TypedSimpleResult_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_ToSimpleResult(t *testing.T) {
+func Test_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	sr := r.ToSimpleResult()
@@ -434,7 +434,7 @@ func Test_Cov15_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSimpleResult returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
+func Test_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	td := r.ToTypedDynamic()
@@ -457,7 +457,7 @@ func Test_Cov15_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToTypedDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov15_TypedSimpleResult_ToDynamic(t *testing.T) {
+func Test_TypedSimpleResult_ToDynamic(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	d := r.ToDynamic()

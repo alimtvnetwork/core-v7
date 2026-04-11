@@ -13,7 +13,7 @@ import (
 // Hashmap — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Hashmap_BasicOps(t *testing.T) {
+func Test_Hashmap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_BasicOps", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(10)
@@ -42,7 +42,7 @@ func Test_Cov14_Hashmap_BasicOps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_SetBySplitter(t *testing.T) {
+func Test_Hashmap_SetBySplitter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_SetBySplitter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -58,7 +58,7 @@ func Test_Cov14_Hashmap_SetBySplitter(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddOrUpdateVariants(t *testing.T) {
+func Test_Hashmap_AddOrUpdateVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateVariants", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(10)
@@ -79,7 +79,7 @@ func Test_Cov14_Hashmap_AddOrUpdateVariants(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddsOrUpdates(t *testing.T) {
+func Test_Hashmap_AddsOrUpdates(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdates", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -99,7 +99,7 @@ func Test_Cov14_Hashmap_AddsOrUpdates(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddOrUpdateMap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateMap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateMap", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -116,7 +116,7 @@ func Test_Cov14_Hashmap_AddOrUpdateMap(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddOrUpdateHashmap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateHashmap", func() {
 		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
@@ -137,7 +137,7 @@ func Test_Cov14_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddOrUpdateCollection(t *testing.T) {
+func Test_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -161,7 +161,7 @@ func Test_Cov14_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Get", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -188,7 +188,7 @@ func Test_Cov14_Hashmap_Get(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_ConcatNew(t *testing.T) {
+func Test_Hashmap_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ConcatNew", func() {
 		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
@@ -214,7 +214,7 @@ func Test_Cov14_Hashmap_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_ConcatNewUsingMaps(t *testing.T) {
+func Test_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ConcatNewUsingMaps", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -234,7 +234,7 @@ func Test_Cov14_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Keys_Values(t *testing.T) {
+func Test_Hashmap_Keys_Values(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Keys_Values", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -254,7 +254,7 @@ func Test_Cov14_Hashmap_Keys_Values(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_IsEqual(t *testing.T) {
+func Test_Hashmap_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_IsEqual", func() {
 		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
@@ -291,7 +291,7 @@ func Test_Cov14_Hashmap_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Remove(t *testing.T) {
+func Test_Hashmap_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Remove", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -307,7 +307,7 @@ func Test_Cov14_Hashmap_Remove(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_KeysToLower(t *testing.T) {
+func Test_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_KeysToLower", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -324,7 +324,7 @@ func Test_Cov14_Hashmap_KeysToLower(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_String(t *testing.T) {
+func Test_Hashmap_String(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_String", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -335,7 +335,7 @@ func Test_Cov14_Hashmap_String(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Join(t *testing.T) {
+func Test_Hashmap_Join(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Join", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -344,7 +344,7 @@ func Test_Cov14_Hashmap_Join(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_JSON(t *testing.T) {
+func Test_Hashmap_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_JSON", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -371,7 +371,7 @@ func Test_Cov14_Hashmap_JSON(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Clone(t *testing.T) {
+func Test_Hashmap_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Clone", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -379,7 +379,7 @@ func Test_Cov14_Hashmap_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Clear_Dispose(t *testing.T) {
+func Test_Hashmap_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Clear_Dispose", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -399,7 +399,7 @@ func Test_Cov14_Hashmap_Clear_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_ToError(t *testing.T) {
+func Test_Hashmap_ToError(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ToError", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -408,7 +408,7 @@ func Test_Cov14_Hashmap_ToError(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_KeyValStringLines(t *testing.T) {
+func Test_Hashmap_KeyValStringLines(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_KeyValStringLines", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -416,7 +416,7 @@ func Test_Cov14_Hashmap_KeyValStringLines(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_ToStringsUsingCompiler(t *testing.T) {
+func Test_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ToStringsUsingCompiler", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -433,7 +433,7 @@ func Test_Cov14_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_GetKeysFilteredItems(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetKeysFilteredItems", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -453,7 +453,7 @@ func Test_Cov14_Hashmap_GetKeysFilteredItems(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_GetKeysFilteredCollection(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetKeysFilteredCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -472,7 +472,7 @@ func Test_Cov14_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_GetValuesExcept(t *testing.T) {
+func Test_Hashmap_GetValuesExcept(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetValuesExcept", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -495,7 +495,7 @@ func Test_Cov14_Hashmap_GetValuesExcept(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_Creators(t *testing.T) {
+func Test_Hashmap_Creators(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Creators", func() {
 		_ = corestr.New.Hashmap.Empty()
 		_ = corestr.New.Hashmap.Cap(5)
@@ -520,7 +520,7 @@ func Test_Cov14_Hashmap_Creators(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddsOrUpdatesFilter(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesFilter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdatesFilter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -540,7 +540,7 @@ func Test_Cov14_Hashmap_AddsOrUpdatesFilter(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -562,7 +562,7 @@ func Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 // HashmapDiff — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
+func Test_HashmapDiff_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashmapDiff_AllMethods", func() {
 		// Arrange
 		diff := corestr.HashmapDiff(map[string]string{"a": "1", "b": "2"})
@@ -615,7 +615,7 @@ func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
 // Hashset — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Hashset_BasicOps(t *testing.T) {
+func Test_Hashset_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_BasicOps", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(10)
@@ -647,7 +647,7 @@ func Test_Cov14_Hashset_BasicOps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddVariants(t *testing.T) {
+func Test_Hashset_AddVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddVariants", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(10)
@@ -675,7 +675,7 @@ func Test_Cov14_Hashset_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddFuncErr(t *testing.T) {
+func Test_Hashset_AddFuncErr(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddFuncErr", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -690,7 +690,7 @@ func Test_Cov14_Hashset_AddFuncErr(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddStrings_Adds(t *testing.T) {
+func Test_Hashset_AddStrings_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddStrings_Adds", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(10)
@@ -706,7 +706,7 @@ func Test_Cov14_Hashset_AddStrings_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddHashsetItems(t *testing.T) {
+func Test_Hashset_AddHashsetItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddHashsetItems", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
@@ -724,7 +724,7 @@ func Test_Cov14_Hashset_AddHashsetItems(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddItemsMap(t *testing.T) {
+func Test_Hashset_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddItemsMap", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -739,7 +739,7 @@ func Test_Cov14_Hashset_AddItemsMap(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddCollection(t *testing.T) {
+func Test_Hashset_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddCollection", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -757,7 +757,7 @@ func Test_Cov14_Hashset_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_AddSimpleSlice(t *testing.T) {
+func Test_Hashset_AddSimpleSlice(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddSimpleSlice", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -773,7 +773,7 @@ func Test_Cov14_Hashset_AddSimpleSlice(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_ConcatNewHashsets(t *testing.T) {
+func Test_Hashset_ConcatNewHashsets(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ConcatNewHashsets", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
@@ -796,7 +796,7 @@ func Test_Cov14_Hashset_ConcatNewHashsets(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_ConcatNewStrings(t *testing.T) {
+func Test_Hashset_ConcatNewStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ConcatNewStrings", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -811,7 +811,7 @@ func Test_Cov14_Hashset_ConcatNewStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_List_OrderedList_SortedList(t *testing.T) {
+func Test_Hashset_List_OrderedList_SortedList(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_List_OrderedList_SortedList", func() {
 		h := corestr.New.Hashset.Strings([]string{"c", "a", "b"})
 
@@ -824,7 +824,7 @@ func Test_Cov14_Hashset_List_OrderedList_SortedList(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_IsEquals(t *testing.T) {
+func Test_Hashset_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_IsEquals", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -851,7 +851,7 @@ func Test_Cov14_Hashset_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Filter(t *testing.T) {
+func Test_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Filter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"ab", "cd", "ef"})
@@ -867,7 +867,7 @@ func Test_Cov14_Hashset_Filter(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_GetFilteredItems(t *testing.T) {
+func Test_Hashset_GetFilteredItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_GetFilteredItems", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"ab", "cd"})
@@ -885,7 +885,7 @@ func Test_Cov14_Hashset_GetFilteredItems(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_GetAllExcept(t *testing.T) {
+func Test_Hashset_GetAllExcept(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_GetAllExcept", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b", "c"})
@@ -908,7 +908,7 @@ func Test_Cov14_Hashset_GetAllExcept(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Remove(t *testing.T) {
+func Test_Hashset_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Remove", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -930,7 +930,7 @@ func Test_Cov14_Hashset_Remove(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_ToLowerSet(t *testing.T) {
+func Test_Hashset_ToLowerSet(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ToLowerSet", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"HELLO"})
@@ -945,7 +945,7 @@ func Test_Cov14_Hashset_ToLowerSet(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Resize(t *testing.T) {
+func Test_Hashset_Resize(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Resize", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(2)
@@ -962,7 +962,7 @@ func Test_Cov14_Hashset_Resize(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_String(t *testing.T) {
+func Test_Hashset_String(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_String", func() {
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		_ = h.String()
@@ -975,7 +975,7 @@ func Test_Cov14_Hashset_String(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_WrapQuotes(t *testing.T) {
+func Test_Hashset_WrapQuotes(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_WrapQuotes", func() {
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		_ = h.WrapDoubleQuote()
@@ -985,7 +985,7 @@ func Test_Cov14_Hashset_WrapQuotes(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Transpile(t *testing.T) {
+func Test_Hashset_Transpile(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Transpile", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1004,7 +1004,7 @@ func Test_Cov14_Hashset_Transpile(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_JSON(t *testing.T) {
+func Test_Hashset_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_JSON", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -1026,7 +1026,7 @@ func Test_Cov14_Hashset_JSON(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_DistinctDiff(t *testing.T) {
+func Test_Hashset_DistinctDiff(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_DistinctDiff", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -1047,7 +1047,7 @@ func Test_Cov14_Hashset_DistinctDiff(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Clear_Dispose(t *testing.T) {
+func Test_Hashset_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Clear_Dispose", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1065,7 +1065,7 @@ func Test_Cov14_Hashset_Clear_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_MapStringAny(t *testing.T) {
+func Test_Hashset_MapStringAny(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_MapStringAny", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -1082,7 +1082,7 @@ func Test_Cov14_Hashset_MapStringAny(t *testing.T) {
 	})
 }
 
-func Test_Cov14_Hashset_Creators(t *testing.T) {
+func Test_Hashset_Creators(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Creators", func() {
 		_ = corestr.New.Hashset.Empty()
 		_ = corestr.New.Hashset.Cap(5)
@@ -1111,7 +1111,7 @@ func Test_Cov14_Hashset_Creators(t *testing.T) {
 // LinkedList — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_LinkedList_BasicOps(t *testing.T) {
+func Test_LinkedList_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_BasicOps", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1130,7 +1130,7 @@ func Test_Cov14_LinkedList_BasicOps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_AddVariants(t *testing.T) {
+func Test_LinkedList_AddVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AddVariants", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1157,7 +1157,7 @@ func Test_Cov14_LinkedList_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_Adds_AddStrings(t *testing.T) {
+func Test_LinkedList_Adds_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Adds_AddStrings", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1173,7 +1173,7 @@ func Test_Cov14_LinkedList_Adds_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_AddCollection(t *testing.T) {
+func Test_LinkedList_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AddCollection", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1190,7 +1190,7 @@ func Test_Cov14_LinkedList_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_IsEquals(t *testing.T) {
+func Test_LinkedList_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_IsEquals", func() {
 		// Arrange
 		ll1 := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1211,7 +1211,7 @@ func Test_Cov14_LinkedList_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_List_ToCollection(t *testing.T) {
+func Test_LinkedList_List_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_List_ToCollection", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		_ = ll.List()
@@ -1219,7 +1219,7 @@ func Test_Cov14_LinkedList_List_ToCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_SafeIndexAt(t *testing.T) {
+func Test_LinkedList_SafeIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_SafeIndexAt", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
@@ -1239,7 +1239,7 @@ func Test_Cov14_LinkedList_SafeIndexAt(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_SafePointerIndexAtUsingDefault", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
@@ -1257,7 +1257,7 @@ func Test_Cov14_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_Loop(t *testing.T) {
+func Test_LinkedList_Loop(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Loop", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
@@ -1277,7 +1277,7 @@ func Test_Cov14_LinkedList_Loop(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_String", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
 		_ = ll.String()
@@ -1288,7 +1288,7 @@ func Test_Cov14_LinkedList_String(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_JSON(t *testing.T) {
+func Test_LinkedList_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_JSON", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1314,7 +1314,7 @@ func Test_Cov14_LinkedList_JSON(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_Clear(t *testing.T) {
+func Test_LinkedList_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Clear", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1329,7 +1329,7 @@ func Test_Cov14_LinkedList_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_Creators(t *testing.T) {
+func Test_LinkedList_Creators(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Creators", func() {
 		_ = corestr.New.LinkedList.Create()
 		_ = corestr.New.LinkedList.Empty()
@@ -1342,7 +1342,7 @@ func Test_Cov14_LinkedList_Creators(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_AppendNode(t *testing.T) {
+func Test_LinkedList_AppendNode(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AppendNode", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1358,7 +1358,7 @@ func Test_Cov14_LinkedList_AppendNode(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_GetNextNodes(t *testing.T) {
+func Test_LinkedList_GetNextNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_GetNextNodes", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
@@ -1373,7 +1373,7 @@ func Test_Cov14_LinkedList_GetNextNodes(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_GetAllLinkedNodes(t *testing.T) {
+func Test_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_GetAllLinkedNodes", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1388,7 +1388,7 @@ func Test_Cov14_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_GetCompareSummary(t *testing.T) {
+func Test_LinkedList_GetCompareSummary(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_GetCompareSummary", func() {
 		ll1 := corestr.New.LinkedList.Strings([]string{"a"})
 		ll2 := corestr.New.LinkedList.Strings([]string{"b"})
@@ -1396,7 +1396,7 @@ func Test_Cov14_LinkedList_GetCompareSummary(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedList_Joins(t *testing.T) {
+func Test_LinkedList_Joins(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Joins", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1415,7 +1415,7 @@ func Test_Cov14_LinkedList_Joins(t *testing.T) {
 // LinkedListNode — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_LinkedListNode_AllMethods(t *testing.T) {
+func Test_LinkedListNode_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedListNode_AllMethods", func() {
 		// Arrange
 		node := &corestr.LinkedListNode{Element: "a"}
@@ -1458,7 +1458,7 @@ func Test_Cov14_LinkedListNode_AllMethods(t *testing.T) {
 // NonChainedLinkedListNodes — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_NonChainedLinkedListNodes(t *testing.T) {
+func Test_NonChainedLinkedListNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_NonChainedLinkedListNodes", func() {
 		// Arrange
 		nodes := corestr.NewNonChainedLinkedListNodes(5)
@@ -1493,7 +1493,7 @@ func Test_Cov14_NonChainedLinkedListNodes(t *testing.T) {
 // NonChainedLinkedCollectionNodes — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_NonChainedLinkedCollectionNodes(t *testing.T) {
+func Test_NonChainedLinkedCollectionNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_NonChainedLinkedCollectionNodes", func() {
 		// Arrange
 		nodes := corestr.NewNonChainedLinkedCollectionNodes(5)
@@ -1522,7 +1522,7 @@ func Test_Cov14_NonChainedLinkedCollectionNodes(t *testing.T) {
 // KeyValueCollection — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_KeyValueCollection_AllMethods(t *testing.T) {
+func Test_KeyValueCollection_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_AllMethods", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1573,7 +1573,7 @@ func Test_Cov14_KeyValueCollection_AllMethods(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_Adds(t *testing.T) {
+func Test_KeyValueCollection_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Adds", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1602,7 +1602,7 @@ func Test_Cov14_KeyValueCollection_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_Find(t *testing.T) {
+func Test_KeyValueCollection_Find(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Find", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1622,7 +1622,7 @@ func Test_Cov14_KeyValueCollection_Find(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_JSON(t *testing.T) {
+func Test_KeyValueCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_JSON", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1645,7 +1645,7 @@ func Test_Cov14_KeyValueCollection_JSON(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_StringsUsingFormat(t *testing.T) {
+func Test_KeyValueCollection_StringsUsingFormat(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_StringsUsingFormat", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1661,7 +1661,7 @@ func Test_Cov14_KeyValueCollection_StringsUsingFormat(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_AddStringBySplit(t *testing.T) {
+func Test_KeyValueCollection_AddStringBySplit(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_AddStringBySplit", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1677,7 +1677,7 @@ func Test_Cov14_KeyValueCollection_AddStringBySplit(t *testing.T) {
 	})
 }
 
-func Test_Cov14_KeyValueCollection_Clear_Dispose(t *testing.T) {
+func Test_KeyValueCollection_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Clear_Dispose", func() {
 		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
@@ -1701,7 +1701,7 @@ func Test_Cov14_KeyValueCollection_Clear_Dispose(t *testing.T) {
 // SimpleStringOnce — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_SimpleStringOnce_BasicOps(t *testing.T) {
+func Test_SimpleStringOnce_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_BasicOps", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello")
@@ -1735,7 +1735,7 @@ func Test_Cov14_SimpleStringOnce_BasicOps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
+func Test_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_SetOnUninitialized", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -1756,7 +1756,7 @@ func Test_Cov14_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_GetSetOnce(t *testing.T) {
+func Test_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetSetOnce", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -1777,7 +1777,7 @@ func Test_Cov14_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_GetOnce(t *testing.T) {
+func Test_SimpleStringOnce_GetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetOnce", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -1792,7 +1792,7 @@ func Test_Cov14_SimpleStringOnce_GetOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_GetOnceFunc(t *testing.T) {
+func Test_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetOnceFunc", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -1812,7 +1812,7 @@ func Test_Cov14_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_SetOnceIfUninitialized(t *testing.T) {
+func Test_SimpleStringOnce_SetOnceIfUninitialized(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_SetOnceIfUninitialized", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -1830,7 +1830,7 @@ func Test_Cov14_SimpleStringOnce_SetOnceIfUninitialized(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Reset_Invalidate(t *testing.T) {
+func Test_SimpleStringOnce_Reset_Invalidate(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Reset_Invalidate", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("val")
@@ -1852,7 +1852,7 @@ func Test_Cov14_SimpleStringOnce_Reset_Invalidate(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Conversions(t *testing.T) {
+func Test_SimpleStringOnce_Conversions(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Conversions", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("42")
@@ -1889,7 +1889,7 @@ func Test_Cov14_SimpleStringOnce_Conversions(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_WithinRange(t *testing.T) {
+func Test_SimpleStringOnce_WithinRange(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_WithinRange", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("50")
@@ -1913,7 +1913,7 @@ func Test_Cov14_SimpleStringOnce_WithinRange(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Is_Contains_Regex(t *testing.T) {
+func Test_SimpleStringOnce_Is_Contains_Regex(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Is_Contains_Regex", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello world")
@@ -1953,7 +1953,7 @@ func Test_Cov14_SimpleStringOnce_Is_Contains_Regex(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Split(t *testing.T) {
+func Test_SimpleStringOnce_Split(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Split", func() {
 		s := corestr.New.SimpleStringOnce.Init("a,b,c")
 
@@ -1967,7 +1967,7 @@ func Test_Cov14_SimpleStringOnce_Split(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_ConcatNew(t *testing.T) {
+func Test_SimpleStringOnce_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_ConcatNew", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello")
@@ -1985,7 +1985,7 @@ func Test_Cov14_SimpleStringOnce_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Clone(t *testing.T) {
+func Test_SimpleStringOnce_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Clone", func() {
 		s := corestr.New.SimpleStringOnce.Init("val")
 		_ = s.Clone()
@@ -1994,7 +1994,7 @@ func Test_Cov14_SimpleStringOnce_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_JSON(t *testing.T) {
+func Test_SimpleStringOnce_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_JSON", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("val")
@@ -2016,14 +2016,14 @@ func Test_Cov14_SimpleStringOnce_JSON(t *testing.T) {
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Dispose(t *testing.T) {
+func Test_SimpleStringOnce_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Dispose", func() {
 		s := corestr.New.SimpleStringOnce.Init("val")
 		s.Dispose()
 	})
 }
 
-func Test_Cov14_SimpleStringOnce_Creators(t *testing.T) {
+func Test_SimpleStringOnce_Creators(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Creators", func() {
 		_ = corestr.New.SimpleStringOnce.Init("val")
 		_ = corestr.New.SimpleStringOnce.InitPtr("val")
@@ -2039,7 +2039,7 @@ func Test_Cov14_SimpleStringOnce_Creators(t *testing.T) {
 // CollectionsOfCollection — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_CollectionsOfCollection(t *testing.T) {
+func Test_CollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_CollectionsOfCollection", func() {
 		// Arrange
 		coc := corestr.Empty.CollectionsOfCollection()
@@ -2068,7 +2068,7 @@ func Test_Cov14_CollectionsOfCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_CollectionsOfCollection_JSON(t *testing.T) {
+func Test_CollectionsOfCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_CollectionsOfCollection_JSON", func() {
 		// Arrange
 		coc := corestr.Empty.CollectionsOfCollection()
@@ -2096,7 +2096,7 @@ func Test_Cov14_CollectionsOfCollection_JSON(t *testing.T) {
 // HashsetsCollection — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_HashsetsCollection(t *testing.T) {
+func Test_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection", func() {
 		// Arrange
 		hc := corestr.Empty.HashsetsCollection()
@@ -2126,7 +2126,7 @@ func Test_Cov14_HashsetsCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov14_HashsetsCollection_IsEqual(t *testing.T) {
+func Test_HashsetsCollection_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_IsEqual", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
@@ -2147,7 +2147,7 @@ func Test_Cov14_HashsetsCollection_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_Cov14_HashsetsCollection_ConcatNew(t *testing.T) {
+func Test_HashsetsCollection_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_ConcatNew", func() {
 		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
@@ -2174,7 +2174,7 @@ func Test_Cov14_HashsetsCollection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Cov14_HashsetsCollection_JSON(t *testing.T) {
+func Test_HashsetsCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_JSON", func() {
 		// Arrange
 		hc := corestr.Empty.HashsetsCollection()
@@ -2201,7 +2201,7 @@ func Test_Cov14_HashsetsCollection_JSON(t *testing.T) {
 // LinkedCollections — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_LinkedCollections_BasicOps(t *testing.T) {
+func Test_LinkedCollections_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_BasicOps", func() {
 		// Arrange
 		lc := corestr.Empty.LinkedCollections()
@@ -2228,7 +2228,7 @@ func Test_Cov14_LinkedCollections_BasicOps(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedCollections_AddStrings(t *testing.T) {
+func Test_LinkedCollections_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddStrings", func() {
 		// Arrange
 		lc := corestr.Empty.LinkedCollections()
@@ -2243,7 +2243,7 @@ func Test_Cov14_LinkedCollections_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedCollections_AddFront(t *testing.T) {
+func Test_LinkedCollections_AddFront(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddFront", func() {
 		// Arrange
 		lc := corestr.Empty.LinkedCollections()
@@ -2262,7 +2262,7 @@ func Test_Cov14_LinkedCollections_AddFront(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedCollections_IsEquals(t *testing.T) {
+func Test_LinkedCollections_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_IsEquals", func() {
 		// Arrange
 		lc1 := corestr.Empty.LinkedCollections()
@@ -2280,7 +2280,7 @@ func Test_Cov14_LinkedCollections_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Cov14_LinkedCollections_AddAnother(t *testing.T) {
+func Test_LinkedCollections_AddAnother(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddAnother", func() {
 		// Arrange
 		lc1 := corestr.Empty.LinkedCollections()
@@ -2304,7 +2304,7 @@ func Test_Cov14_LinkedCollections_AddAnother(t *testing.T) {
 // LinkedCollectionNode — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_LinkedCollectionNode(t *testing.T) {
+func Test_LinkedCollectionNode(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollectionNode", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -2337,7 +2337,7 @@ func Test_Cov14_LinkedCollectionNode(t *testing.T) {
 // CharCollectionMap — basic coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_CharCollectionMap_BasicOps(t *testing.T) {
+func Test_CharCollectionMap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_CharCollectionMap_BasicOps", func() {
 		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
@@ -2360,7 +2360,7 @@ func Test_Cov14_CharCollectionMap_BasicOps(t *testing.T) {
 // CharHashsetMap — basic coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_CharHashsetMap_BasicOps(t *testing.T) {
+func Test_CharHashsetMap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_CharHashsetMap_BasicOps", func() {
 		// Arrange
 		chm := corestr.Empty.CharHashsetMap()
@@ -2388,7 +2388,7 @@ func Test_Cov14_CharHashsetMap_BasicOps(t *testing.T) {
 // KeyValues Creator — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_KeyValuesCreator(t *testing.T) {
+func Test_KeyValuesCreator(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValuesCreator", func() {
 		_ = corestr.New.KeyValues.Cap(5)
 	})

@@ -9,7 +9,7 @@ import (
 
 // ── Collection — additional methods ──
 
-func Test_Cov3_Collection_Add(t *testing.T) {
+func Test_Collection_Add(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_Add", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -30,7 +30,7 @@ func Test_Cov3_Collection_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov3_Collection_AddStrings(t *testing.T) {
+func Test_Collection_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_AddStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -45,7 +45,7 @@ func Test_Cov3_Collection_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov3_Collection_AddIf(t *testing.T) {
+func Test_Collection_AddIf(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_AddIf", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -63,7 +63,7 @@ func Test_Cov3_Collection_AddIf(t *testing.T) {
 
 // ── Hashmap — additional methods ──
 
-func Test_Cov3_Hashmap_AddOrUpdate(t *testing.T) {
+func Test_Hashmap_AddOrUpdate(t *testing.T) {
 	safeTest(t, "Test_Cov3_Hashmap_AddOrUpdate", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -85,7 +85,7 @@ func Test_Cov3_Hashmap_AddOrUpdate(t *testing.T) {
 	})
 }
 
-func Test_Cov3_Hashmap_Get_Miss(t *testing.T) {
+func Test_Hashmap_Get_Miss(t *testing.T) {
 	safeTest(t, "Test_Cov3_Hashmap_Get_Miss", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -100,7 +100,7 @@ func Test_Cov3_Hashmap_Get_Miss(t *testing.T) {
 	})
 }
 
-func Test_Cov3_Hashmap_Has(t *testing.T) {
+func Test_Hashmap_Has(t *testing.T) {
 	safeTest(t, "Test_Cov3_Hashmap_Has", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -123,7 +123,7 @@ func Test_Cov3_Hashmap_Has(t *testing.T) {
 
 // ── Hashset — additional methods ──
 
-func Test_Cov3_Hashset_Remove(t *testing.T) {
+func Test_Hashset_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov3_Hashset_Remove", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -147,7 +147,7 @@ func Test_Cov3_Hashset_Remove(t *testing.T) {
 
 // ── LeftRight — additional methods ──
 
-func Test_Cov3_LeftRight_Empty(t *testing.T) {
+func Test_LeftRight_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov3_LeftRight_Empty", func() {
 		// Arrange
 		lr := corestr.LeftRight{}
@@ -167,7 +167,7 @@ func Test_Cov3_LeftRight_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov3_LeftRight_PartialLeft(t *testing.T) {
+func Test_LeftRight_PartialLeft(t *testing.T) {
 	safeTest(t, "Test_Cov3_LeftRight_PartialLeft", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("l", "")
@@ -191,7 +191,7 @@ func Test_Cov3_LeftRight_PartialLeft(t *testing.T) {
 
 // ── LeftMiddleRight — additional methods ──
 
-func Test_Cov3_LeftMiddleRight_Empty(t *testing.T) {
+func Test_LeftMiddleRight_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov3_LeftMiddleRight_Empty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("", "", "")
@@ -215,7 +215,7 @@ func Test_Cov3_LeftMiddleRight_Empty(t *testing.T) {
 
 // ── KeyValuePair ──
 
-func Test_Cov3_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov3_KeyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -237,7 +237,7 @@ func Test_Cov3_KeyValuePair(t *testing.T) {
 
 // ── KeyAnyValuePair ──
 
-func Test_Cov3_KeyAnyValuePair(t *testing.T) {
+func Test_KeyAnyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov3_KeyAnyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}
@@ -259,7 +259,7 @@ func Test_Cov3_KeyAnyValuePair(t *testing.T) {
 
 // ── SimpleSlice — additional methods ──
 
-func Test_Cov3_SimpleSlice_Clear(t *testing.T) {
+func Test_SimpleSlice_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov3_SimpleSlice_Clear", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Cap(5)
@@ -283,7 +283,7 @@ func Test_Cov3_SimpleSlice_Clear(t *testing.T) {
 
 // ── NewValidValue ──
 
-func Test_Cov3_NewValidValue(t *testing.T) {
+func Test_NewValidValue(t *testing.T) {
 	safeTest(t, "Test_Cov3_NewValidValue", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -303,7 +303,7 @@ func Test_Cov3_NewValidValue(t *testing.T) {
 	})
 }
 
-func Test_Cov3_NewValidValue_Empty(t *testing.T) {
+func Test_NewValidValue_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov3_NewValidValue_Empty", func() {
 		// Arrange
 		vv := corestr.NewValidValue("")
@@ -325,7 +325,7 @@ func Test_Cov3_NewValidValue_Empty(t *testing.T) {
 
 // ── AllIndividualsLengthOfSimpleSlices ──
 
-func Test_Cov3_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 	safeTest(t, "Test_Cov3_AllIndividualsLengthOfSimpleSlices", func() {
 		// Arrange
 		s1 := corestr.New.SimpleSlice.Cap(5)
@@ -342,7 +342,7 @@ func Test_Cov3_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 	})
 }
 
-func Test_Cov3_AllIndividualsLengthOfSimpleSlices_NoArgs(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_NoArgs(t *testing.T) {
 	safeTest(t, "Test_Cov3_AllIndividualsLengthOfSimpleSlices_NoArgs", func() {
 		// Act
 		actual := args.Map{"result": corestr.AllIndividualsLengthOfSimpleSlices()}

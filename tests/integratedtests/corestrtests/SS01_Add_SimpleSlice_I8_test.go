@@ -13,7 +13,7 @@ import (
 // SimpleSlice — Core operations
 // =============================================================================
 
-func Test_I8_SS01_Add(t *testing.T) {
+func Test_SS01_Add(t *testing.T) {
 	safeTest(t, "Test_I8_SS01_Add", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -28,7 +28,7 @@ func Test_I8_SS01_Add(t *testing.T) {
 	})
 }
 
-func Test_I8_SS02_AddSplit(t *testing.T) {
+func Test_SS02_AddSplit(t *testing.T) {
 	safeTest(t, "Test_I8_SS02_AddSplit", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -43,7 +43,7 @@ func Test_I8_SS02_AddSplit(t *testing.T) {
 	})
 }
 
-func Test_I8_SS03_AddIf(t *testing.T) {
+func Test_SS03_AddIf(t *testing.T) {
 	safeTest(t, "Test_I8_SS03_AddIf", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -62,7 +62,7 @@ func Test_I8_SS03_AddIf(t *testing.T) {
 	})
 }
 
-func Test_I8_SS04_Adds(t *testing.T) {
+func Test_SS04_Adds(t *testing.T) {
 	safeTest(t, "Test_I8_SS04_Adds", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -77,7 +77,7 @@ func Test_I8_SS04_Adds(t *testing.T) {
 	})
 }
 
-func Test_I8_SS05_Append(t *testing.T) {
+func Test_SS05_Append(t *testing.T) {
 	safeTest(t, "Test_I8_SS05_Append", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -92,7 +92,7 @@ func Test_I8_SS05_Append(t *testing.T) {
 	})
 }
 
-func Test_I8_SS06_AppendFmt(t *testing.T) {
+func Test_SS06_AppendFmt(t *testing.T) {
 	safeTest(t, "Test_I8_SS06_AppendFmt", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -112,7 +112,7 @@ func Test_I8_SS06_AppendFmt(t *testing.T) {
 	})
 }
 
-func Test_I8_SS07_AppendFmtIf(t *testing.T) {
+func Test_SS07_AppendFmtIf(t *testing.T) {
 	safeTest(t, "Test_I8_SS07_AppendFmtIf", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -131,7 +131,7 @@ func Test_I8_SS07_AppendFmtIf(t *testing.T) {
 	})
 }
 
-func Test_I8_SS08_AddAsTitleValue(t *testing.T) {
+func Test_SS08_AddAsTitleValue(t *testing.T) {
 	safeTest(t, "Test_I8_SS08_AddAsTitleValue", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -146,7 +146,7 @@ func Test_I8_SS08_AddAsTitleValue(t *testing.T) {
 	})
 }
 
-func Test_I8_SS09_AddAsCurlyTitleWrap(t *testing.T) {
+func Test_SS09_AddAsCurlyTitleWrap(t *testing.T) {
 	safeTest(t, "Test_I8_SS09_AddAsCurlyTitleWrap", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -161,7 +161,7 @@ func Test_I8_SS09_AddAsCurlyTitleWrap(t *testing.T) {
 	})
 }
 
-func Test_I8_SS10_AddAsCurlyTitleWrapIf(t *testing.T) {
+func Test_SS10_AddAsCurlyTitleWrapIf(t *testing.T) {
 	safeTest(t, "Test_I8_SS10_AddAsCurlyTitleWrapIf", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -180,7 +180,7 @@ func Test_I8_SS10_AddAsCurlyTitleWrapIf(t *testing.T) {
 	})
 }
 
-func Test_I8_SS11_AddAsTitleValueIf(t *testing.T) {
+func Test_SS11_AddAsTitleValueIf(t *testing.T) {
 	safeTest(t, "Test_I8_SS11_AddAsTitleValueIf", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -199,7 +199,7 @@ func Test_I8_SS11_AddAsTitleValueIf(t *testing.T) {
 	})
 }
 
-func Test_I8_SS12_InsertAt(t *testing.T) {
+func Test_SS12_InsertAt(t *testing.T) {
 	safeTest(t, "Test_I8_SS12_InsertAt", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "c")
@@ -219,7 +219,7 @@ func Test_I8_SS12_InsertAt(t *testing.T) {
 	})
 }
 
-func Test_I8_SS13_AddStruct(t *testing.T) {
+func Test_SS13_AddStruct(t *testing.T) {
 	safeTest(t, "Test_I8_SS13_AddStruct", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -240,7 +240,7 @@ func Test_I8_SS13_AddStruct(t *testing.T) {
 	})
 }
 
-func Test_I8_SS14_AddPointer(t *testing.T) {
+func Test_SS14_AddPointer(t *testing.T) {
 	safeTest(t, "Test_I8_SS14_AddPointer", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -260,7 +260,7 @@ func Test_I8_SS14_AddPointer(t *testing.T) {
 	})
 }
 
-func Test_I8_SS15_AddsIf(t *testing.T) {
+func Test_SS15_AddsIf(t *testing.T) {
 	safeTest(t, "Test_I8_SS15_AddsIf", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -279,7 +279,7 @@ func Test_I8_SS15_AddsIf(t *testing.T) {
 	})
 }
 
-func Test_I8_SS16_AddError(t *testing.T) {
+func Test_SS16_AddError(t *testing.T) {
 	safeTest(t, "Test_I8_SS16_AddError", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
@@ -298,7 +298,7 @@ func Test_I8_SS16_AddError(t *testing.T) {
 	})
 }
 
-func Test_I8_SS17_AsDefaultError(t *testing.T) {
+func Test_SS17_AsDefaultError(t *testing.T) {
 	safeTest(t, "Test_I8_SS17_AsDefaultError", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("err1")
@@ -313,7 +313,7 @@ func Test_I8_SS17_AsDefaultError(t *testing.T) {
 	})
 }
 
-func Test_I8_SS18_AsError_Empty(t *testing.T) {
+func Test_SS18_AsError_Empty(t *testing.T) {
 	safeTest(t, "Test_I8_SS18_AsError_Empty", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(0)
@@ -332,7 +332,7 @@ func Test_I8_SS18_AsError_Empty(t *testing.T) {
 // SimpleSlice — Access, Skip, Take
 // =============================================================================
 
-func Test_I8_SS19_First(t *testing.T) {
+func Test_SS19_First(t *testing.T) {
 	safeTest(t, "Test_I8_SS19_First", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -346,7 +346,7 @@ func Test_I8_SS19_First(t *testing.T) {
 	})
 }
 
-func Test_I8_SS20_Last(t *testing.T) {
+func Test_SS20_Last(t *testing.T) {
 	safeTest(t, "Test_I8_SS20_Last", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -360,7 +360,7 @@ func Test_I8_SS20_Last(t *testing.T) {
 	})
 }
 
-func Test_I8_SS21_FirstOrDefault(t *testing.T) {
+func Test_SS21_FirstOrDefault(t *testing.T) {
 	safeTest(t, "Test_I8_SS21_FirstOrDefault", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -378,7 +378,7 @@ func Test_I8_SS21_FirstOrDefault(t *testing.T) {
 	})
 }
 
-func Test_I8_SS22_LastOrDefault(t *testing.T) {
+func Test_SS22_LastOrDefault(t *testing.T) {
 	safeTest(t, "Test_I8_SS22_LastOrDefault", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -396,7 +396,7 @@ func Test_I8_SS22_LastOrDefault(t *testing.T) {
 	})
 }
 
-func Test_I8_SS23_FirstDynamic(t *testing.T) {
+func Test_SS23_FirstDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS23_FirstDynamic", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -410,7 +410,7 @@ func Test_I8_SS23_FirstDynamic(t *testing.T) {
 	})
 }
 
-func Test_I8_SS24_LastDynamic(t *testing.T) {
+func Test_SS24_LastDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS24_LastDynamic", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -424,21 +424,21 @@ func Test_I8_SS24_LastDynamic(t *testing.T) {
 	})
 }
 
-func Test_I8_SS25_FirstOrDefaultDynamic(t *testing.T) {
+func Test_SS25_FirstOrDefaultDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS25_FirstOrDefaultDynamic", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		_ = ss.FirstOrDefaultDynamic()
 	})
 }
 
-func Test_I8_SS26_LastOrDefaultDynamic(t *testing.T) {
+func Test_SS26_LastOrDefaultDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS26_LastOrDefaultDynamic", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		_ = ss.LastOrDefaultDynamic()
 	})
 }
 
-func Test_I8_SS27_Skip(t *testing.T) {
+func Test_SS27_Skip(t *testing.T) {
 	safeTest(t, "Test_I8_SS27_Skip", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c")
@@ -458,7 +458,7 @@ func Test_I8_SS27_Skip(t *testing.T) {
 	})
 }
 
-func Test_I8_SS28_SkipDynamic(t *testing.T) {
+func Test_SS28_SkipDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS28_SkipDynamic", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		_ = ss.SkipDynamic(1)
@@ -466,7 +466,7 @@ func Test_I8_SS28_SkipDynamic(t *testing.T) {
 	})
 }
 
-func Test_I8_SS29_Take(t *testing.T) {
+func Test_SS29_Take(t *testing.T) {
 	safeTest(t, "Test_I8_SS29_Take", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c")
@@ -486,7 +486,7 @@ func Test_I8_SS29_Take(t *testing.T) {
 	})
 }
 
-func Test_I8_SS30_TakeDynamic(t *testing.T) {
+func Test_SS30_TakeDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS30_TakeDynamic", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		_ = ss.TakeDynamic(1)
@@ -494,7 +494,7 @@ func Test_I8_SS30_TakeDynamic(t *testing.T) {
 	})
 }
 
-func Test_I8_SS31_Limit(t *testing.T) {
+func Test_SS31_Limit(t *testing.T) {
 	safeTest(t, "Test_I8_SS31_Limit", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -509,14 +509,14 @@ func Test_I8_SS31_Limit(t *testing.T) {
 	})
 }
 
-func Test_I8_SS32_LimitDynamic(t *testing.T) {
+func Test_SS32_LimitDynamic(t *testing.T) {
 	safeTest(t, "Test_I8_SS32_LimitDynamic", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		_ = ss.LimitDynamic(1)
 	})
 }
 
-func Test_I8_SS33_Count(t *testing.T) {
+func Test_SS33_Count(t *testing.T) {
 	safeTest(t, "Test_I8_SS33_Count", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -530,7 +530,7 @@ func Test_I8_SS33_Count(t *testing.T) {
 	})
 }
 
-func Test_I8_SS34_CountFunc(t *testing.T) {
+func Test_SS34_CountFunc(t *testing.T) {
 	safeTest(t, "Test_I8_SS34_CountFunc", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "bb", "ccc")
@@ -545,7 +545,7 @@ func Test_I8_SS34_CountFunc(t *testing.T) {
 	})
 }
 
-func Test_I8_SS35_IsContains(t *testing.T) {
+func Test_SS35_IsContains(t *testing.T) {
 	safeTest(t, "Test_I8_SS35_IsContains", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -566,7 +566,7 @@ func Test_I8_SS35_IsContains(t *testing.T) {
 // SimpleSlice — JSON, String, Sort
 // =============================================================================
 
-func Test_I8_SS36_Json(t *testing.T) {
+func Test_SS36_Json(t *testing.T) {
 	safeTest(t, "Test_I8_SS36_Json", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -581,7 +581,7 @@ func Test_I8_SS36_Json(t *testing.T) {
 	})
 }
 
-func Test_I8_SS37_ParseInjectUsingJson(t *testing.T) {
+func Test_SS37_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_I8_SS37_ParseInjectUsingJson", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -598,7 +598,7 @@ func Test_I8_SS37_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_I8_SS38_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_SS38_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_I8_SS38_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(1)
@@ -614,7 +614,7 @@ func Test_I8_SS38_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_I8_SS39_String(t *testing.T) {
+func Test_SS39_String(t *testing.T) {
 	safeTest(t, "Test_I8_SS39_String", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -628,7 +628,7 @@ func Test_I8_SS39_String(t *testing.T) {
 	})
 }
 
-func Test_I8_SS40_Join(t *testing.T) {
+func Test_SS40_Join(t *testing.T) {
 	safeTest(t, "Test_I8_SS40_Join", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -642,7 +642,7 @@ func Test_I8_SS40_Join(t *testing.T) {
 	})
 }
 
-func Test_I8_SS41_List(t *testing.T) {
+func Test_SS41_List(t *testing.T) {
 	safeTest(t, "Test_I8_SS41_List", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -656,7 +656,7 @@ func Test_I8_SS41_List(t *testing.T) {
 	})
 }
 
-func Test_I8_SS42_RemoveIndexes(t *testing.T) {
+func Test_SS42_RemoveIndexes(t *testing.T) {
 	safeTest(t, "Test_I8_SS42_RemoveIndexes", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c")
@@ -674,7 +674,7 @@ func Test_I8_SS42_RemoveIndexes(t *testing.T) {
 	})
 }
 
-func Test_I8_SS43_MarshalJSON(t *testing.T) {
+func Test_SS43_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_I8_SS43_MarshalJSON", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -689,7 +689,7 @@ func Test_I8_SS43_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_I8_SS44_UnmarshalJSON(t *testing.T) {
+func Test_SS44_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_I8_SS44_UnmarshalJSON", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(0)
@@ -707,7 +707,7 @@ func Test_I8_SS44_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_I8_SS45_SafeStrings(t *testing.T) {
+func Test_SS45_SafeStrings(t *testing.T) {
 	safeTest(t, "Test_I8_SS45_SafeStrings", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "", "b")
@@ -722,7 +722,7 @@ func Test_I8_SS45_SafeStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_SS46_Serialize(t *testing.T) {
+func Test_SS46_Serialize(t *testing.T) {
 	safeTest(t, "Test_I8_SS46_Serialize", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")

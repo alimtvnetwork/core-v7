@@ -12,7 +12,7 @@ import (
 // LeftRight — Constructors
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_InvalidLeftRightNoMessage(t *testing.T) {
+func Test_InvalidLeftRightNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov69_InvalidLeftRightNoMessage", func() {
 		// Arrange & Act
 		lr := corestr.InvalidLeftRightNoMessage()
@@ -32,7 +32,7 @@ func Test_Cov69_InvalidLeftRightNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov69_InvalidLeftRight(t *testing.T) {
+func Test_InvalidLeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov69_InvalidLeftRight", func() {
 		// Arrange & Act
 		lr := corestr.InvalidLeftRight("test error")
@@ -50,7 +50,7 @@ func Test_Cov69_InvalidLeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov69_NewLeftRight(t *testing.T) {
+func Test_NewLeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov69_NewLeftRight", func() {
 		// Arrange & Act
 		lr := corestr.NewLeftRight("a", "b")
@@ -74,7 +74,7 @@ func Test_Cov69_NewLeftRight(t *testing.T) {
 // LeftRight — LeftRightUsingSlice
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_LeftRightUsingSlice_Empty(t *testing.T) {
+func Test_LeftRightUsingSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlice_Empty", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlice([]string{})
@@ -86,7 +86,7 @@ func Test_Cov69_LeftRightUsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightUsingSlice_One(t *testing.T) {
+func Test_LeftRightUsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlice_One", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlice([]string{"only"})
@@ -106,7 +106,7 @@ func Test_Cov69_LeftRightUsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightUsingSlice_Two(t *testing.T) {
+func Test_LeftRightUsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlice_Two", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
@@ -126,7 +126,7 @@ func Test_Cov69_LeftRightUsingSlice_Two(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightUsingSlice_Three(t *testing.T) {
+func Test_LeftRightUsingSlice_Three(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlice_Three", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b", "c"})
@@ -150,7 +150,7 @@ func Test_Cov69_LeftRightUsingSlice_Three(t *testing.T) {
 // LeftRight — LeftRightUsingSlicePtr (deprecated)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_LeftRightUsingSlicePtr_Nil(t *testing.T) {
+func Test_LeftRightUsingSlicePtr_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlicePtr_Nil", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlicePtr(nil)
@@ -162,7 +162,7 @@ func Test_Cov69_LeftRightUsingSlicePtr_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightUsingSlicePtr_Empty(t *testing.T) {
+func Test_LeftRightUsingSlicePtr_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlicePtr_Empty", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlicePtr([]string{})
@@ -174,7 +174,7 @@ func Test_Cov69_LeftRightUsingSlicePtr_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightUsingSlicePtr_Two(t *testing.T) {
+func Test_LeftRightUsingSlicePtr_Two(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightUsingSlicePtr_Two", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlicePtr([]string{"x", "y"})
@@ -198,7 +198,7 @@ func Test_Cov69_LeftRightUsingSlicePtr_Two(t *testing.T) {
 // LeftRight — LeftRightTrimmedUsingSlice
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_LeftRightTrimmedUsingSlice_Nil(t *testing.T) {
+func Test_LeftRightTrimmedUsingSlice_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightTrimmedUsingSlice_Nil", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightTrimmedUsingSlice(nil)
@@ -210,7 +210,7 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightTrimmedUsingSlice_Empty(t *testing.T) {
+func Test_LeftRightTrimmedUsingSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightTrimmedUsingSlice_Empty", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{})
@@ -222,7 +222,7 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightTrimmedUsingSlice_One(t *testing.T) {
+func Test_LeftRightTrimmedUsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightTrimmedUsingSlice_One", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" only "})
@@ -240,7 +240,7 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LeftRightTrimmedUsingSlice_Two(t *testing.T) {
+func Test_LeftRightTrimmedUsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_Cov69_LeftRightTrimmedUsingSlice_Two", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
@@ -264,7 +264,7 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_Two(t *testing.T) {
 // LeftRight — String-specific methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_LR_LeftBytes(t *testing.T) {
+func Test_LR_LeftBytes(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_LeftBytes", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc", "def")
@@ -284,7 +284,7 @@ func Test_Cov69_LR_LeftBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_RightBytes(t *testing.T) {
+func Test_LR_RightBytes(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_RightBytes", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc", "def")
@@ -304,7 +304,7 @@ func Test_Cov69_LR_RightBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_LeftTrim(t *testing.T) {
+func Test_LR_LeftTrim(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_LeftTrim", func() {
 		// Arrange
 		lr := corestr.NewLeftRight(" x ", "y")
@@ -318,7 +318,7 @@ func Test_Cov69_LR_LeftTrim(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_RightTrim(t *testing.T) {
+func Test_LR_RightTrim(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_RightTrim", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("x", " y ")
@@ -332,7 +332,7 @@ func Test_Cov69_LR_RightTrim(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsLeftEmpty_True(t *testing.T) {
+func Test_LR_IsLeftEmpty_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsLeftEmpty_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("", "b")
@@ -346,7 +346,7 @@ func Test_Cov69_LR_IsLeftEmpty_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsRightEmpty_True(t *testing.T) {
+func Test_LR_IsRightEmpty_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsRightEmpty_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "")
@@ -360,7 +360,7 @@ func Test_Cov69_LR_IsRightEmpty_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsLeftWhitespace(t *testing.T) {
+func Test_LR_IsLeftWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsLeftWhitespace", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("  ", "b")
@@ -374,7 +374,7 @@ func Test_Cov69_LR_IsLeftWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsRightWhitespace(t *testing.T) {
+func Test_LR_IsRightWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsRightWhitespace", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "  ")
@@ -388,7 +388,7 @@ func Test_Cov69_LR_IsRightWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonEmptyLeft_True(t *testing.T) {
+func Test_LR_HasValidNonEmptyLeft_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonEmptyLeft_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -402,7 +402,7 @@ func Test_Cov69_LR_HasValidNonEmptyLeft_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonEmptyLeft_EmptyLeft(t *testing.T) {
+func Test_LR_HasValidNonEmptyLeft_EmptyLeft(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonEmptyLeft_EmptyLeft", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("", "b")
@@ -416,7 +416,7 @@ func Test_Cov69_LR_HasValidNonEmptyLeft_EmptyLeft(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonEmptyRight_True(t *testing.T) {
+func Test_LR_HasValidNonEmptyRight_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonEmptyRight_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -430,7 +430,7 @@ func Test_Cov69_LR_HasValidNonEmptyRight_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonWhitespaceLeft_True(t *testing.T) {
+func Test_LR_HasValidNonWhitespaceLeft_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonWhitespaceLeft_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -444,7 +444,7 @@ func Test_Cov69_LR_HasValidNonWhitespaceLeft_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
+func Test_LR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonWhitespaceLeft_Ws", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("  ", "b")
@@ -458,7 +458,7 @@ func Test_Cov69_LR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasValidNonWhitespaceRight_True(t *testing.T) {
+func Test_LR_HasValidNonWhitespaceRight_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasValidNonWhitespaceRight_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -472,7 +472,7 @@ func Test_Cov69_LR_HasValidNonWhitespaceRight_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasSafeNonEmpty_True(t *testing.T) {
+func Test_LR_HasSafeNonEmpty_True(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasSafeNonEmpty_True", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -486,7 +486,7 @@ func Test_Cov69_LR_HasSafeNonEmpty_True(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_HasSafeNonEmpty_EmptyRight(t *testing.T) {
+func Test_LR_HasSafeNonEmpty_EmptyRight(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_HasSafeNonEmpty_EmptyRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "")
@@ -500,7 +500,7 @@ func Test_Cov69_LR_HasSafeNonEmpty_EmptyRight(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_NonPtr(t *testing.T) {
+func Test_LR_NonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_NonPtr", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -521,7 +521,7 @@ func Test_Cov69_LR_NonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Ptr(t *testing.T) {
+func Test_LR_Ptr(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Ptr", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -540,7 +540,7 @@ func Test_Cov69_LR_Ptr(t *testing.T) {
 // LeftRight — Regex, Is, IsEqual, Clone, Clear, Dispose
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov69_LR_IsLeftRegexMatch_Match(t *testing.T) {
+func Test_LR_IsLeftRegexMatch_Match(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsLeftRegexMatch_Match", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc123", "x")
@@ -555,7 +555,7 @@ func Test_Cov69_LR_IsLeftRegexMatch_Match(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsLeftRegexMatch_Nil(t *testing.T) {
+func Test_LR_IsLeftRegexMatch_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsLeftRegexMatch_Nil", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc", "x")
@@ -569,7 +569,7 @@ func Test_Cov69_LR_IsLeftRegexMatch_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsRightRegexMatch_Match(t *testing.T) {
+func Test_LR_IsRightRegexMatch_Match(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsRightRegexMatch_Match", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("x", "abc123")
@@ -584,7 +584,7 @@ func Test_Cov69_LR_IsRightRegexMatch_Match(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsRightRegexMatch_Nil(t *testing.T) {
+func Test_LR_IsRightRegexMatch_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsRightRegexMatch_Nil", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("x", "abc")
@@ -598,7 +598,7 @@ func Test_Cov69_LR_IsRightRegexMatch_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsLeft(t *testing.T) {
+func Test_LR_IsLeft(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsLeft", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("hello", "world")
@@ -618,7 +618,7 @@ func Test_Cov69_LR_IsLeft(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsRight(t *testing.T) {
+func Test_LR_IsRight(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("hello", "world")
@@ -638,7 +638,7 @@ func Test_Cov69_LR_IsRight(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Is(t *testing.T) {
+func Test_LR_Is(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Is", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -658,7 +658,7 @@ func Test_Cov69_LR_Is(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsEqual_BothNil(t *testing.T) {
+func Test_LR_IsEqual_BothNil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsEqual_BothNil", func() {
 		// Arrange
 		var a, b *corestr.LeftRight
@@ -672,7 +672,7 @@ func Test_Cov69_LR_IsEqual_BothNil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsEqual_OneNil(t *testing.T) {
+func Test_LR_IsEqual_OneNil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsEqual_OneNil", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -686,7 +686,7 @@ func Test_Cov69_LR_IsEqual_OneNil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsEqual_Match(t *testing.T) {
+func Test_LR_IsEqual_Match(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsEqual_Match", func() {
 		// Arrange
 		a := corestr.NewLeftRight("a", "b")
@@ -701,7 +701,7 @@ func Test_Cov69_LR_IsEqual_Match(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_IsEqual_Mismatch(t *testing.T) {
+func Test_LR_IsEqual_Mismatch(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_IsEqual_Mismatch", func() {
 		// Arrange
 		a := corestr.NewLeftRight("a", "b")
@@ -716,7 +716,7 @@ func Test_Cov69_LR_IsEqual_Mismatch(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Clone(t *testing.T) {
+func Test_LR_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Clone", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -739,7 +739,7 @@ func Test_Cov69_LR_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Clear(t *testing.T) {
+func Test_LR_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Clear", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -760,7 +760,7 @@ func Test_Cov69_LR_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Clear_Nil(t *testing.T) {
+func Test_LR_Clear_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Clear_Nil", func() {
 		// Arrange
 		var lr *corestr.LeftRight
@@ -775,7 +775,7 @@ func Test_Cov69_LR_Clear_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Dispose(t *testing.T) {
+func Test_LR_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Dispose", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -796,7 +796,7 @@ func Test_Cov69_LR_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Cov69_LR_Dispose_Nil(t *testing.T) {
+func Test_LR_Dispose_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov69_LR_Dispose_Nil", func() {
 		// Arrange
 		var lr *corestr.LeftRight

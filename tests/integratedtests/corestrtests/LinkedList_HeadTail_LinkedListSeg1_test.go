@@ -15,7 +15,7 @@ import (
 
 // ── Head / Tail / Length ──
 
-func Test_Cov64_LinkedList_HeadTail_Empty(t *testing.T) {
+func Test_LinkedList_HeadTail_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_HeadTail_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -37,7 +37,7 @@ func Test_Cov64_LinkedList_HeadTail_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_HeadTail_NonEmpty(t *testing.T) {
+func Test_LinkedList_HeadTail_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_HeadTail_NonEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -60,7 +60,7 @@ func Test_Cov64_LinkedList_HeadTail_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_LengthLock(t *testing.T) {
+func Test_LinkedList_LengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_LengthLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -77,7 +77,7 @@ func Test_Cov64_LinkedList_LengthLock(t *testing.T) {
 
 // ── IsEmpty / HasItems / IsEmptyLock ──
 
-func Test_Cov64_LinkedList_IsEmpty(t *testing.T) {
+func Test_LinkedList_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -97,7 +97,7 @@ func Test_Cov64_LinkedList_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_HasItems(t *testing.T) {
+func Test_LinkedList_HasItems(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_HasItems", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -118,7 +118,7 @@ func Test_Cov64_LinkedList_HasItems(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEmptyLock(t *testing.T) {
+func Test_LinkedList_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEmptyLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -134,7 +134,7 @@ func Test_Cov64_LinkedList_IsEmptyLock(t *testing.T) {
 
 // ── Add variants ──
 
-func Test_Cov64_LinkedList_Add_First(t *testing.T) {
+func Test_LinkedList_Add_First(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Add_First", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -155,7 +155,7 @@ func Test_Cov64_LinkedList_Add_First(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Add_Multiple(t *testing.T) {
+func Test_LinkedList_Add_Multiple(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Add_Multiple", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -176,7 +176,7 @@ func Test_Cov64_LinkedList_Add_Multiple(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -191,7 +191,7 @@ func Test_Cov64_LinkedList_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Adds(t *testing.T) {
+func Test_LinkedList_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Adds", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -206,7 +206,7 @@ func Test_Cov64_LinkedList_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Adds_Empty(t *testing.T) {
+func Test_LinkedList_Adds_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Adds_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -221,7 +221,7 @@ func Test_Cov64_LinkedList_Adds_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddsLock(t *testing.T) {
+func Test_LinkedList_AddsLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddsLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -236,7 +236,7 @@ func Test_Cov64_LinkedList_AddsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStrings(t *testing.T) {
+func Test_LinkedList_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStrings", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -251,7 +251,7 @@ func Test_Cov64_LinkedList_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStrings_Empty(t *testing.T) {
+func Test_LinkedList_AddStrings_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStrings_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -266,7 +266,7 @@ func Test_Cov64_LinkedList_AddStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddNonEmpty(t *testing.T) {
+func Test_LinkedList_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddNonEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -282,7 +282,7 @@ func Test_Cov64_LinkedList_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
+func Test_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddNonEmptyWhitespace", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -298,7 +298,7 @@ func Test_Cov64_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddIf_True(t *testing.T) {
+func Test_LinkedList_AddIf_True(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddIf_True", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -313,7 +313,7 @@ func Test_Cov64_LinkedList_AddIf_True(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddIf_False(t *testing.T) {
+func Test_LinkedList_AddIf_False(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddIf_False", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -328,7 +328,7 @@ func Test_Cov64_LinkedList_AddIf_False(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddsIf_True(t *testing.T) {
+func Test_LinkedList_AddsIf_True(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddsIf_True", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -343,7 +343,7 @@ func Test_Cov64_LinkedList_AddsIf_True(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddsIf_False(t *testing.T) {
+func Test_LinkedList_AddsIf_False(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddsIf_False", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -358,7 +358,7 @@ func Test_Cov64_LinkedList_AddsIf_False(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddFunc(t *testing.T) {
+func Test_LinkedList_AddFunc(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddFunc", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -373,7 +373,7 @@ func Test_Cov64_LinkedList_AddFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddFuncErr_NoError(t *testing.T) {
+func Test_LinkedList_AddFuncErr_NoError(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddFuncErr_NoError", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -391,7 +391,7 @@ func Test_Cov64_LinkedList_AddFuncErr_NoError(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddFuncErr_Error(t *testing.T) {
+func Test_LinkedList_AddFuncErr_Error(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddFuncErr_Error", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -416,7 +416,7 @@ func Test_Cov64_LinkedList_AddFuncErr_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Push(t *testing.T) {
+func Test_LinkedList_Push(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Push", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -431,7 +431,7 @@ func Test_Cov64_LinkedList_Push(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_PushBack(t *testing.T) {
+func Test_LinkedList_PushBack(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_PushBack", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -446,7 +446,7 @@ func Test_Cov64_LinkedList_PushBack(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_PushFront(t *testing.T) {
+func Test_LinkedList_PushFront(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_PushFront", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -468,7 +468,7 @@ func Test_Cov64_LinkedList_PushFront(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddFront_Empty(t *testing.T) {
+func Test_LinkedList_AddFront_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddFront_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -489,7 +489,7 @@ func Test_Cov64_LinkedList_AddFront_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddFront_NonEmpty(t *testing.T) {
+func Test_LinkedList_AddFront_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddFront_NonEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -511,7 +511,7 @@ func Test_Cov64_LinkedList_AddFront_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddItemsMap(t *testing.T) {
+func Test_LinkedList_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddItemsMap", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -526,7 +526,7 @@ func Test_Cov64_LinkedList_AddItemsMap(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddItemsMap_Empty(t *testing.T) {
+func Test_LinkedList_AddItemsMap_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddItemsMap_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -543,7 +543,7 @@ func Test_Cov64_LinkedList_AddItemsMap_Empty(t *testing.T) {
 
 // ── AppendNode / AppendChainOfNodes ──
 
-func Test_Cov64_LinkedList_AppendNode_Empty(t *testing.T) {
+func Test_LinkedList_AppendNode_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AppendNode_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -565,7 +565,7 @@ func Test_Cov64_LinkedList_AppendNode_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AppendNode_NonEmpty(t *testing.T) {
+func Test_LinkedList_AppendNode_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AppendNode_NonEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -588,7 +588,7 @@ func Test_Cov64_LinkedList_AppendNode_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddBackNode(t *testing.T) {
+func Test_LinkedList_AddBackNode(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddBackNode", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -606,7 +606,7 @@ func Test_Cov64_LinkedList_AddBackNode(t *testing.T) {
 
 // ── AddCollection / AddPointerStringsPtr ──
 
-func Test_Cov64_LinkedList_AddCollection(t *testing.T) {
+func Test_LinkedList_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddCollection", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -622,7 +622,7 @@ func Test_Cov64_LinkedList_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddCollection_Nil(t *testing.T) {
+func Test_LinkedList_AddCollection_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddCollection_Nil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -637,7 +637,7 @@ func Test_Cov64_LinkedList_AddCollection_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddPointerStringsPtr(t *testing.T) {
+func Test_LinkedList_AddPointerStringsPtr(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddPointerStringsPtr", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -655,7 +655,7 @@ func Test_Cov64_LinkedList_AddPointerStringsPtr(t *testing.T) {
 
 // ── InsertAt ──
 
-func Test_Cov64_LinkedList_InsertAt_Front(t *testing.T) {
+func Test_LinkedList_InsertAt_Front(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_InsertAt_Front", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -671,7 +671,7 @@ func Test_Cov64_LinkedList_InsertAt_Front(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_InsertAt_Negative(t *testing.T) {
+func Test_LinkedList_InsertAt_Negative(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_InsertAt_Negative", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -687,7 +687,7 @@ func Test_Cov64_LinkedList_InsertAt_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_InsertAt_Middle(t *testing.T) {
+func Test_LinkedList_InsertAt_Middle(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_InsertAt_Middle", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -706,7 +706,7 @@ func Test_Cov64_LinkedList_InsertAt_Middle(t *testing.T) {
 
 // ── AttachWithNode ──
 
-func Test_Cov64_LinkedList_AttachWithNode_NilCurrent(t *testing.T) {
+func Test_LinkedList_AttachWithNode_NilCurrent(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AttachWithNode_NilCurrent", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -721,7 +721,7 @@ func Test_Cov64_LinkedList_AttachWithNode_NilCurrent(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AttachWithNode_NextNotNil(t *testing.T) {
+func Test_LinkedList_AttachWithNode_NextNotNil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AttachWithNode_NextNotNil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -737,7 +737,7 @@ func Test_Cov64_LinkedList_AttachWithNode_NextNotNil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AttachWithNode_Success(t *testing.T) {
+func Test_LinkedList_AttachWithNode_Success(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AttachWithNode_Success", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -761,7 +761,7 @@ func Test_Cov64_LinkedList_AttachWithNode_Success(t *testing.T) {
 
 // ── AddAfterNode ──
 
-func Test_Cov64_LinkedList_AddAfterNode(t *testing.T) {
+func Test_LinkedList_AddAfterNode(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddAfterNode", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -779,7 +779,7 @@ func Test_Cov64_LinkedList_AddAfterNode(t *testing.T) {
 
 // ── AddStringsToNode ──
 
-func Test_Cov64_LinkedList_AddStringsToNode_Empty(t *testing.T) {
+func Test_LinkedList_AddStringsToNode_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsToNode_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -795,7 +795,7 @@ func Test_Cov64_LinkedList_AddStringsToNode_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStringsToNode_NilSkip(t *testing.T) {
+func Test_LinkedList_AddStringsToNode_NilSkip(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsToNode_NilSkip", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -810,7 +810,7 @@ func Test_Cov64_LinkedList_AddStringsToNode_NilSkip(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStringsToNode_Single(t *testing.T) {
+func Test_LinkedList_AddStringsToNode_Single(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsToNode_Single", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -826,7 +826,7 @@ func Test_Cov64_LinkedList_AddStringsToNode_Single(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStringsToNode_Multiple(t *testing.T) {
+func Test_LinkedList_AddStringsToNode_Multiple(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsToNode_Multiple", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -842,7 +842,7 @@ func Test_Cov64_LinkedList_AddStringsToNode_Multiple(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
+func Test_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsPtrToNode_Nil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -857,7 +857,7 @@ func Test_Cov64_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AddStringsPtrToNode_NonNil(t *testing.T) {
+func Test_LinkedList_AddStringsPtrToNode_NonNil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddStringsPtrToNode_NonNil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -876,7 +876,7 @@ func Test_Cov64_LinkedList_AddStringsPtrToNode_NonNil(t *testing.T) {
 
 // ── AddCollectionToNode ──
 
-func Test_Cov64_LinkedList_AddCollectionToNode(t *testing.T) {
+func Test_LinkedList_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddCollectionToNode", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -895,7 +895,7 @@ func Test_Cov64_LinkedList_AddCollectionToNode(t *testing.T) {
 
 // ── Loop ──
 
-func Test_Cov64_LinkedList_Loop(t *testing.T) {
+func Test_LinkedList_Loop(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Loop", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -915,7 +915,7 @@ func Test_Cov64_LinkedList_Loop(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Loop_Empty(t *testing.T) {
+func Test_LinkedList_Loop_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Loop_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -934,7 +934,7 @@ func Test_Cov64_LinkedList_Loop_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Loop_Break(t *testing.T) {
+func Test_LinkedList_Loop_Break(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Loop_Break", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -954,7 +954,7 @@ func Test_Cov64_LinkedList_Loop_Break(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Loop_BreakSecond(t *testing.T) {
+func Test_LinkedList_Loop_BreakSecond(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Loop_BreakSecond", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -976,7 +976,7 @@ func Test_Cov64_LinkedList_Loop_BreakSecond(t *testing.T) {
 
 // ── Filter ──
 
-func Test_Cov64_LinkedList_Filter(t *testing.T) {
+func Test_LinkedList_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Filter", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -994,7 +994,7 @@ func Test_Cov64_LinkedList_Filter(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Filter_Empty(t *testing.T) {
+func Test_LinkedList_Filter_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Filter_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1011,7 +1011,7 @@ func Test_Cov64_LinkedList_Filter_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Filter_BreakFirst(t *testing.T) {
+func Test_LinkedList_Filter_BreakFirst(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Filter_BreakFirst", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1029,7 +1029,7 @@ func Test_Cov64_LinkedList_Filter_BreakFirst(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Filter_BreakSecond(t *testing.T) {
+func Test_LinkedList_Filter_BreakSecond(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Filter_BreakSecond", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1049,7 +1049,7 @@ func Test_Cov64_LinkedList_Filter_BreakSecond(t *testing.T) {
 
 // ── GetNextNodes / GetAllLinkedNodes ──
 
-func Test_Cov64_LinkedList_GetNextNodes(t *testing.T) {
+func Test_LinkedList_GetNextNodes(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_GetNextNodes", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1065,7 +1065,7 @@ func Test_Cov64_LinkedList_GetNextNodes(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_GetAllLinkedNodes(t *testing.T) {
+func Test_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_GetAllLinkedNodes", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1083,7 +1083,7 @@ func Test_Cov64_LinkedList_GetAllLinkedNodes(t *testing.T) {
 
 // ── IndexAt / SafeIndexAt ──
 
-func Test_Cov64_LinkedList_IndexAt_Zero(t *testing.T) {
+func Test_LinkedList_IndexAt_Zero(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IndexAt_Zero", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1099,7 +1099,7 @@ func Test_Cov64_LinkedList_IndexAt_Zero(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IndexAt_Middle(t *testing.T) {
+func Test_LinkedList_IndexAt_Middle(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IndexAt_Middle", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1115,7 +1115,7 @@ func Test_Cov64_LinkedList_IndexAt_Middle(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IndexAt_Negative(t *testing.T) {
+func Test_LinkedList_IndexAt_Negative(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IndexAt_Negative", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1131,7 +1131,7 @@ func Test_Cov64_LinkedList_IndexAt_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafeIndexAt(t *testing.T) {
+func Test_LinkedList_SafeIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafeIndexAt", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1147,7 +1147,7 @@ func Test_Cov64_LinkedList_SafeIndexAt(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafeIndexAt_OutOfRange", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1163,7 +1163,7 @@ func Test_Cov64_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafeIndexAt_Negative(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_Negative(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafeIndexAt_Negative", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1178,7 +1178,7 @@ func Test_Cov64_LinkedList_SafeIndexAt_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafeIndexAt_Zero(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_Zero(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafeIndexAt_Zero", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1194,7 +1194,7 @@ func Test_Cov64_LinkedList_SafeIndexAt_Zero(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafeIndexAtLock(t *testing.T) {
+func Test_LinkedList_SafeIndexAtLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafeIndexAtLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1210,7 +1210,7 @@ func Test_Cov64_LinkedList_SafeIndexAtLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafePointerIndexAt(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafePointerIndexAt", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1232,7 +1232,7 @@ func Test_Cov64_LinkedList_SafePointerIndexAt(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafePointerIndexAt_Nil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1247,7 +1247,7 @@ func Test_Cov64_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1263,7 +1263,7 @@ func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault_Default(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAtUsingDefault_Default(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault_Default", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1278,7 +1278,7 @@ func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefault_Default(t *testing.T) 
 	})
 }
 
-func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefaultLock(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAtUsingDefaultLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_SafePointerIndexAtUsingDefaultLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1296,7 +1296,7 @@ func Test_Cov64_LinkedList_SafePointerIndexAtUsingDefaultLock(t *testing.T) {
 
 // ── RemoveNodeByElementValue ──
 
-func Test_Cov64_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByElementValue_First", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1318,7 +1318,7 @@ func Test_Cov64_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNodeByElementValue_Middle(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue_Middle(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByElementValue_Middle", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1334,7 +1334,7 @@ func Test_Cov64_LinkedList_RemoveNodeByElementValue_Middle(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNodeByElementValue_CaseInsensitive(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue_CaseInsensitive(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByElementValue_CaseInsensitive", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1352,7 +1352,7 @@ func Test_Cov64_LinkedList_RemoveNodeByElementValue_CaseInsensitive(t *testing.T
 
 // ── RemoveNodeByIndex ──
 
-func Test_Cov64_LinkedList_RemoveNodeByIndex_First(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndex_First(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByIndex_First", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1374,7 +1374,7 @@ func Test_Cov64_LinkedList_RemoveNodeByIndex_First(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNodeByIndex_Last(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndex_Last(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByIndex_Last", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1390,7 +1390,7 @@ func Test_Cov64_LinkedList_RemoveNodeByIndex_Last(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNodeByIndex_Middle(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndex_Middle(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByIndex_Middle", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1408,7 +1408,7 @@ func Test_Cov64_LinkedList_RemoveNodeByIndex_Middle(t *testing.T) {
 
 // ── RemoveNodeByIndexes ──
 
-func Test_Cov64_LinkedList_RemoveNodeByIndexes(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndexes(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByIndexes", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1424,7 +1424,7 @@ func Test_Cov64_LinkedList_RemoveNodeByIndexes(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNodeByIndexes_Empty(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndexes_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNodeByIndexes_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1442,7 +1442,7 @@ func Test_Cov64_LinkedList_RemoveNodeByIndexes_Empty(t *testing.T) {
 
 // ── RemoveNode ──
 
-func Test_Cov64_LinkedList_RemoveNode_Nil(t *testing.T) {
+func Test_LinkedList_RemoveNode_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNode_Nil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1458,7 +1458,7 @@ func Test_Cov64_LinkedList_RemoveNode_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNode_First(t *testing.T) {
+func Test_LinkedList_RemoveNode_First(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNode_First", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1480,7 +1480,7 @@ func Test_Cov64_LinkedList_RemoveNode_First(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveNode_Second(t *testing.T) {
+func Test_LinkedList_RemoveNode_Second(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveNode_Second", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1499,7 +1499,7 @@ func Test_Cov64_LinkedList_RemoveNode_Second(t *testing.T) {
 
 // ── GetCompareSummary ──
 
-func Test_Cov64_LinkedList_GetCompareSummary(t *testing.T) {
+func Test_LinkedList_GetCompareSummary(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_GetCompareSummary", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1519,7 +1519,7 @@ func Test_Cov64_LinkedList_GetCompareSummary(t *testing.T) {
 
 // ── IsEquals / IsEqualsWithSensitive ──
 
-func Test_Cov64_LinkedList_IsEquals_Same(t *testing.T) {
+func Test_LinkedList_IsEquals_Same(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_Same", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1534,7 +1534,7 @@ func Test_Cov64_LinkedList_IsEquals_Same(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEquals_BothEmpty(t *testing.T) {
+func Test_LinkedList_IsEquals_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_BothEmpty", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1549,7 +1549,7 @@ func Test_Cov64_LinkedList_IsEquals_BothEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEquals_OneEmpty(t *testing.T) {
+func Test_LinkedList_IsEquals_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_OneEmpty", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1565,7 +1565,7 @@ func Test_Cov64_LinkedList_IsEquals_OneEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEquals_DiffLen(t *testing.T) {
+func Test_LinkedList_IsEquals_DiffLen(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_DiffLen", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1582,7 +1582,7 @@ func Test_Cov64_LinkedList_IsEquals_DiffLen(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEquals_Nil(t *testing.T) {
+func Test_LinkedList_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_Nil", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1597,7 +1597,7 @@ func Test_Cov64_LinkedList_IsEquals_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEquals_Equal(t *testing.T) {
+func Test_LinkedList_IsEquals_Equal(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEquals_Equal", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1614,7 +1614,7 @@ func Test_Cov64_LinkedList_IsEquals_Equal(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
+func Test_LinkedList_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_IsEqualsWithSensitive_CaseInsensitive", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Create()
@@ -1633,7 +1633,7 @@ func Test_Cov64_LinkedList_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
 
 // ── ToCollection / List ──
 
-func Test_Cov64_LinkedList_ToCollection(t *testing.T) {
+func Test_LinkedList_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ToCollection", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1649,7 +1649,7 @@ func Test_Cov64_LinkedList_ToCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ToCollection_Empty(t *testing.T) {
+func Test_LinkedList_ToCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ToCollection_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1664,7 +1664,7 @@ func Test_Cov64_LinkedList_ToCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_List(t *testing.T) {
+func Test_LinkedList_List(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_List", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1679,7 +1679,7 @@ func Test_Cov64_LinkedList_List(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_List_Empty(t *testing.T) {
+func Test_LinkedList_List_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_List_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1693,7 +1693,7 @@ func Test_Cov64_LinkedList_List_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ListPtr(t *testing.T) {
+func Test_LinkedList_ListPtr(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ListPtr", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1708,7 +1708,7 @@ func Test_Cov64_LinkedList_ListPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ListLock(t *testing.T) {
+func Test_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ListLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1723,7 +1723,7 @@ func Test_Cov64_LinkedList_ListLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ListPtrLock(t *testing.T) {
+func Test_LinkedList_ListPtrLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ListPtrLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1740,7 +1740,7 @@ func Test_Cov64_LinkedList_ListPtrLock(t *testing.T) {
 
 // ── String / StringLock / Join / JoinLock / Joins ──
 
-func Test_Cov64_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_String", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1755,7 +1755,7 @@ func Test_Cov64_LinkedList_String(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_String_Empty(t *testing.T) {
+func Test_LinkedList_String_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_String_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1769,7 +1769,7 @@ func Test_Cov64_LinkedList_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_StringLock(t *testing.T) {
+func Test_LinkedList_StringLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_StringLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1784,7 +1784,7 @@ func Test_Cov64_LinkedList_StringLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_StringLock_Empty(t *testing.T) {
+func Test_LinkedList_StringLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_StringLock_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1798,7 +1798,7 @@ func Test_Cov64_LinkedList_StringLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Join(t *testing.T) {
+func Test_LinkedList_Join(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Join", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1813,7 +1813,7 @@ func Test_Cov64_LinkedList_Join(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_JoinLock(t *testing.T) {
+func Test_LinkedList_JoinLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_JoinLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1828,7 +1828,7 @@ func Test_Cov64_LinkedList_JoinLock(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Joins(t *testing.T) {
+func Test_LinkedList_Joins(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Joins", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1844,7 +1844,7 @@ func Test_Cov64_LinkedList_Joins(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Joins_NilItems(t *testing.T) {
+func Test_LinkedList_Joins_NilItems(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Joins_NilItems", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1861,7 +1861,7 @@ func Test_Cov64_LinkedList_Joins_NilItems(t *testing.T) {
 
 // ── JSON ──
 
-func Test_Cov64_LinkedList_JsonModel(t *testing.T) {
+func Test_LinkedList_JsonModel(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_JsonModel", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1876,7 +1876,7 @@ func Test_Cov64_LinkedList_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_JsonModelAny(t *testing.T) {
+func Test_LinkedList_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_JsonModelAny", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1890,7 +1890,7 @@ func Test_Cov64_LinkedList_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_MarshalJSON(t *testing.T) {
+func Test_LinkedList_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_MarshalJSON", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1912,7 +1912,7 @@ func Test_Cov64_LinkedList_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_UnmarshalJSON(t *testing.T) {
+func Test_LinkedList_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_UnmarshalJSON", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1933,7 +1933,7 @@ func Test_Cov64_LinkedList_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_UnmarshalJSON_Error(t *testing.T) {
+func Test_LinkedList_UnmarshalJSON_Error(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_UnmarshalJSON_Error", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1948,7 +1948,7 @@ func Test_Cov64_LinkedList_UnmarshalJSON_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Json(t *testing.T) {
+func Test_LinkedList_Json(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Json", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1964,7 +1964,7 @@ func Test_Cov64_LinkedList_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_JsonPtr(t *testing.T) {
+func Test_LinkedList_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_JsonPtr", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -1980,7 +1980,7 @@ func Test_Cov64_LinkedList_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ParseInjectUsingJson(t *testing.T) {
+func Test_LinkedList_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ParseInjectUsingJson", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2004,7 +2004,7 @@ func Test_Cov64_LinkedList_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_LinkedList_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2020,7 +2020,7 @@ func Test_Cov64_LinkedList_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_LinkedList_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2038,7 +2038,7 @@ func Test_Cov64_LinkedList_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_LinkedList_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ParseInjectUsingJsonMust_Panics", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2062,7 +2062,7 @@ func Test_Cov64_LinkedList_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_JsonParseSelfInject(t *testing.T) {
+func Test_LinkedList_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_JsonParseSelfInject", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2080,7 +2080,7 @@ func Test_Cov64_LinkedList_JsonParseSelfInject(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AsJsonMarshaller(t *testing.T) {
+func Test_LinkedList_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AsJsonMarshaller", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2096,7 +2096,7 @@ func Test_Cov64_LinkedList_AsJsonMarshaller(t *testing.T) {
 
 // ── Clear / RemoveAll ──
 
-func Test_Cov64_LinkedList_Clear(t *testing.T) {
+func Test_LinkedList_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Clear", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2118,7 +2118,7 @@ func Test_Cov64_LinkedList_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_Clear_Empty(t *testing.T) {
+func Test_LinkedList_Clear_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_Clear_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2133,7 +2133,7 @@ func Test_Cov64_LinkedList_Clear_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_RemoveAll(t *testing.T) {
+func Test_LinkedList_RemoveAll(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_RemoveAll", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2151,7 +2151,7 @@ func Test_Cov64_LinkedList_RemoveAll(t *testing.T) {
 
 // ── AppendChainOfNodes ──
 
-func Test_Cov64_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
+func Test_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AppendChainOfNodes_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2168,7 +2168,7 @@ func Test_Cov64_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov64_LinkedList_AppendChainOfNodes_NonEmpty(t *testing.T) {
+func Test_LinkedList_AppendChainOfNodes_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AppendChainOfNodes_NonEmpty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()

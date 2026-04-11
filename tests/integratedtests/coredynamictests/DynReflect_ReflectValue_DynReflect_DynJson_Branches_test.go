@@ -14,7 +14,7 @@ import (
 // DynamicReflect — ReflectValue / ReflectType / ReflectKind
 // =============================================================================
 
-func Test_Cov41_DynReflect_ReflectValue(t *testing.T) {
+func Test_DynReflect_ReflectValue(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	rv := d.ReflectValue()
@@ -27,7 +27,7 @@ func Test_Cov41_DynReflect_ReflectValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectValue", actual)
 }
 
-func Test_Cov41_DynReflect_ReflectValue_Cached(t *testing.T) {
+func Test_DynReflect_ReflectValue_Cached(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	rv1 := d.ReflectValue()
@@ -41,7 +41,7 @@ func Test_Cov41_DynReflect_ReflectValue_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectValue cached", actual)
 }
 
-func Test_Cov41_DynReflect_ReflectKind(t *testing.T) {
+func Test_DynReflect_ReflectKind(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -53,7 +53,7 @@ func Test_Cov41_DynReflect_ReflectKind(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectKind", actual)
 }
 
-func Test_Cov41_DynReflect_ReflectTypeName(t *testing.T) {
+func Test_DynReflect_ReflectTypeName(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -65,7 +65,7 @@ func Test_Cov41_DynReflect_ReflectTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectTypeName", actual)
 }
 
-func Test_Cov41_DynReflect_ReflectType(t *testing.T) {
+func Test_DynReflect_ReflectType(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 	rt := d.ReflectType()
@@ -78,7 +78,7 @@ func Test_Cov41_DynReflect_ReflectType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectType", actual)
 }
 
-func Test_Cov41_DynReflect_ReflectType_Cached(t *testing.T) {
+func Test_DynReflect_ReflectType_Cached(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 	rt1 := d.ReflectType()
@@ -92,7 +92,7 @@ func Test_Cov41_DynReflect_ReflectType_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectType cached", actual)
 }
 
-func Test_Cov41_DynReflect_IsReflectTypeOf_True(t *testing.T) {
+func Test_DynReflect_IsReflectTypeOf_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 
@@ -104,7 +104,7 @@ func Test_Cov41_DynReflect_IsReflectTypeOf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsReflectTypeOf true", actual)
 }
 
-func Test_Cov41_DynReflect_IsReflectTypeOf_False(t *testing.T) {
+func Test_DynReflect_IsReflectTypeOf_False(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 
@@ -116,7 +116,7 @@ func Test_Cov41_DynReflect_IsReflectTypeOf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsReflectTypeOf false", actual)
 }
 
-func Test_Cov41_DynReflect_IsReflectKind_True(t *testing.T) {
+func Test_DynReflect_IsReflectKind_True(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -128,7 +128,7 @@ func Test_Cov41_DynReflect_IsReflectKind_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IsReflectKind true", actual)
 }
 
-func Test_Cov41_DynReflect_IsReflectKind_False(t *testing.T) {
+func Test_DynReflect_IsReflectKind_False(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -144,7 +144,7 @@ func Test_Cov41_DynReflect_IsReflectKind_False(t *testing.T) {
 // DynamicReflect — Index/Key access
 // =============================================================================
 
-func Test_Cov41_DynReflect_ItemReflectValueUsingIndex(t *testing.T) {
+func Test_DynReflect_ItemReflectValueUsingIndex(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{10, 20, 30}, true)
 	rv := d.ItemReflectValueUsingIndex(1)
@@ -157,7 +157,7 @@ func Test_Cov41_DynReflect_ItemReflectValueUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemReflectValueUsingIndex", actual)
 }
 
-func Test_Cov41_DynReflect_ItemUsingIndex(t *testing.T) {
+func Test_DynReflect_ItemUsingIndex(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]string{"a", "b"}, true)
 
@@ -169,7 +169,7 @@ func Test_Cov41_DynReflect_ItemUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemUsingIndex", actual)
 }
 
-func Test_Cov41_DynReflect_ItemReflectValueUsingKey(t *testing.T) {
+func Test_DynReflect_ItemReflectValueUsingKey(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"x": 42}, true)
 	rv := d.ItemReflectValueUsingKey("x")
@@ -182,7 +182,7 @@ func Test_Cov41_DynReflect_ItemReflectValueUsingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemReflectValueUsingKey", actual)
 }
 
-func Test_Cov41_DynReflect_ItemUsingKey(t *testing.T) {
+func Test_DynReflect_ItemUsingKey(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]string{"k": "v"}, true)
 
@@ -198,7 +198,7 @@ func Test_Cov41_DynReflect_ItemUsingKey(t *testing.T) {
 // DynamicReflect — ReflectSetTo
 // =============================================================================
 
-func Test_Cov41_DynReflect_ReflectSetTo_Nil(t *testing.T) {
+func Test_DynReflect_ReflectSetTo_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.ReflectSetTo(nil)
@@ -215,7 +215,7 @@ func Test_Cov41_DynReflect_ReflectSetTo_Nil(t *testing.T) {
 // DynamicReflect — Loop
 // =============================================================================
 
-func Test_Cov41_DynReflect_Loop_Invalid(t *testing.T) {
+func Test_DynReflect_Loop_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 	called := d.Loop(func(i int, item any) bool { return false })
@@ -228,7 +228,7 @@ func Test_Cov41_DynReflect_Loop_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop invalid", actual)
 }
 
-func Test_Cov41_DynReflect_Loop_Nil(t *testing.T) {
+func Test_DynReflect_Loop_Nil(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	called := d.Loop(func(i int, item any) bool { return false })
@@ -241,7 +241,7 @@ func Test_Cov41_DynReflect_Loop_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop nil", actual)
 }
 
-func Test_Cov41_DynReflect_Loop_Valid(t *testing.T) {
+func Test_DynReflect_Loop_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	count := 0
@@ -264,7 +264,7 @@ func Test_Cov41_DynReflect_Loop_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop valid", actual)
 }
 
-func Test_Cov41_DynReflect_Loop_Break(t *testing.T) {
+func Test_DynReflect_Loop_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	count := 0
@@ -291,7 +291,7 @@ func Test_Cov41_DynReflect_Loop_Break(t *testing.T) {
 // DynamicReflect — FilterAsDynamicCollection
 // =============================================================================
 
-func Test_Cov41_DynReflect_FilterAsDynamicCollection_Invalid(t *testing.T) {
+func Test_DynReflect_FilterAsDynamicCollection_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 	r := d.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) { return true, false })
@@ -304,7 +304,7 @@ func Test_Cov41_DynReflect_FilterAsDynamicCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic FilterAsDynamicCollection invalid", actual)
 }
 
-func Test_Cov41_DynReflect_FilterAsDynamicCollection_TakeAll(t *testing.T) {
+func Test_DynReflect_FilterAsDynamicCollection_TakeAll(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	r := d.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) { return true, false })
@@ -317,7 +317,7 @@ func Test_Cov41_DynReflect_FilterAsDynamicCollection_TakeAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic FilterAsDynamicCollection take all", actual)
 }
 
-func Test_Cov41_DynReflect_FilterAsDynamicCollection_Break(t *testing.T) {
+func Test_DynReflect_FilterAsDynamicCollection_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	r := d.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) {
@@ -332,7 +332,7 @@ func Test_Cov41_DynReflect_FilterAsDynamicCollection_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic FilterAsDynamicCollection break", actual)
 }
 
-func Test_Cov41_DynReflect_FilterAsDynamicCollection_Skip(t *testing.T) {
+func Test_DynReflect_FilterAsDynamicCollection_Skip(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	r := d.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) {
@@ -351,7 +351,7 @@ func Test_Cov41_DynReflect_FilterAsDynamicCollection_Skip(t *testing.T) {
 // DynamicReflect — LoopMap
 // =============================================================================
 
-func Test_Cov41_DynReflect_LoopMap_Invalid(t *testing.T) {
+func Test_DynReflect_LoopMap_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 	called := d.LoopMap(func(i int, k, v any) bool { return false })
@@ -364,7 +364,7 @@ func Test_Cov41_DynReflect_LoopMap_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic LoopMap invalid", actual)
 }
 
-func Test_Cov41_DynReflect_LoopMap_Valid(t *testing.T) {
+func Test_DynReflect_LoopMap_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 	count := 0
@@ -387,7 +387,7 @@ func Test_Cov41_DynReflect_LoopMap_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic LoopMap valid", actual)
 }
 
-func Test_Cov41_DynReflect_LoopMap_Break(t *testing.T) {
+func Test_DynReflect_LoopMap_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1, "b": 2}, true)
 	count := 0
@@ -414,7 +414,7 @@ func Test_Cov41_DynReflect_LoopMap_Break(t *testing.T) {
 // DynamicReflect — MapToKeyVal
 // =============================================================================
 
-func Test_Cov41_DynReflect_MapToKeyVal_Valid(t *testing.T) {
+func Test_DynReflect_MapToKeyVal_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 	kvc, err := d.MapToKeyVal()
@@ -437,7 +437,7 @@ func Test_Cov41_DynReflect_MapToKeyVal_Valid(t *testing.T) {
 // DynamicJson — nil receiver branches
 // =============================================================================
 
-func Test_Cov41_DynJson_Deserialize_Nil(t *testing.T) {
+func Test_DynJson_Deserialize_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.Deserialize([]byte(`"test"`))
@@ -450,7 +450,7 @@ func Test_Cov41_DynJson_Deserialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Deserialize nil", actual)
 }
 
-func Test_Cov41_DynJson_ValueMarshal_Nil(t *testing.T) {
+func Test_DynJson_ValueMarshal_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.ValueMarshal()
@@ -463,7 +463,7 @@ func Test_Cov41_DynJson_ValueMarshal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueMarshal nil", actual)
 }
 
-func Test_Cov41_DynJson_ValueMarshal_Valid(t *testing.T) {
+func Test_DynJson_ValueMarshal_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b, err := d.ValueMarshal()
@@ -482,7 +482,7 @@ func Test_Cov41_DynJson_ValueMarshal_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueMarshal valid", actual)
 }
 
-func Test_Cov41_DynJson_JsonPayloadMust(t *testing.T) {
+func Test_DynJson_JsonPayloadMust(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b := d.JsonPayloadMust()
@@ -495,7 +495,7 @@ func Test_Cov41_DynJson_JsonPayloadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonPayloadMust", actual)
 }
 
-func Test_Cov41_DynJson_JsonBytesPtr_Null(t *testing.T) {
+func Test_DynJson_JsonBytesPtr_Null(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	b, err := d.JsonBytesPtr()
@@ -514,7 +514,7 @@ func Test_Cov41_DynJson_JsonBytesPtr_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr null", actual)
 }
 
-func Test_Cov41_DynJson_JsonBytesPtr_Valid(t *testing.T) {
+func Test_DynJson_JsonBytesPtr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b, err := d.JsonBytesPtr()
@@ -533,7 +533,7 @@ func Test_Cov41_DynJson_JsonBytesPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr valid", actual)
 }
 
-func Test_Cov41_DynJson_MarshalJSON(t *testing.T) {
+func Test_DynJson_MarshalJSON(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 	b, err := d.MarshalJSON()
@@ -552,7 +552,7 @@ func Test_Cov41_DynJson_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic MarshalJSON", actual)
 }
 
-func Test_Cov41_DynJson_UnmarshalJSON_Nil(t *testing.T) {
+func Test_DynJson_UnmarshalJSON_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.UnmarshalJSON([]byte(`"test"`))
@@ -565,7 +565,7 @@ func Test_Cov41_DynJson_UnmarshalJSON_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic UnmarshalJSON nil", actual)
 }
 
-func Test_Cov41_DynJson_JsonModel(t *testing.T) {
+func Test_DynJson_JsonModel(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 
@@ -577,7 +577,7 @@ func Test_Cov41_DynJson_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonModel", actual)
 }
 
-func Test_Cov41_DynJson_JsonModelAny(t *testing.T) {
+func Test_DynJson_JsonModelAny(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 
@@ -589,7 +589,7 @@ func Test_Cov41_DynJson_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonModelAny", actual)
 }
 
-func Test_Cov41_DynJson_Json(t *testing.T) {
+func Test_DynJson_Json(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	r := d.Json()
@@ -602,7 +602,7 @@ func Test_Cov41_DynJson_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Json", actual)
 }
 
-func Test_Cov41_DynJson_JsonPtr(t *testing.T) {
+func Test_DynJson_JsonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	r := d.JsonPtr()
@@ -615,7 +615,7 @@ func Test_Cov41_DynJson_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonPtr", actual)
 }
 
-func Test_Cov41_DynJson_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_DynJson_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("x", true)
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -629,7 +629,7 @@ func Test_Cov41_DynJson_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov41_DynJson_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_DynJson_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("x", true)
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -651,7 +651,7 @@ func Test_Cov41_DynJson_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ParseInjectUsingJsonMust panics", actual)
 }
 
-func Test_Cov41_DynJson_JsonParseSelfInject_Error(t *testing.T) {
+func Test_DynJson_JsonParseSelfInject_Error(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("x", true)
 	jr := &corejson.Result{Error: errors.New("fail")}
@@ -665,7 +665,7 @@ func Test_Cov41_DynJson_JsonParseSelfInject_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonParseSelfInject error", actual)
 }
 
-func Test_Cov41_DynJson_JsonBytes_Valid(t *testing.T) {
+func Test_DynJson_JsonBytes_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b, err := d.JsonBytes()
@@ -684,7 +684,7 @@ func Test_Cov41_DynJson_JsonBytes_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytes valid", actual)
 }
 
-func Test_Cov41_DynJson_JsonString_Valid(t *testing.T) {
+func Test_DynJson_JsonString_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	s, err := d.JsonString()
@@ -703,7 +703,7 @@ func Test_Cov41_DynJson_JsonString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonString valid", actual)
 }
 
-func Test_Cov41_DynJson_JsonStringMust(t *testing.T) {
+func Test_DynJson_JsonStringMust(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	s := d.JsonStringMust()

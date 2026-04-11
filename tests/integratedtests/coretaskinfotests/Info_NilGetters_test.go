@@ -9,7 +9,7 @@ import (
 
 // ── Info nil-safe getters ──
 
-func Test_Cov_Info_NilGetters(t *testing.T) {
+func Test_Info_NilGetters(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 
@@ -42,7 +42,7 @@ func Test_Cov_Info_NilGetters(t *testing.T) {
 
 // ── Info with values ──
 
-func Test_Cov_Info_DefinedGetters(t *testing.T) {
+func Test_Info_DefinedGetters(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{
 		RootName:      "test-task",
@@ -81,7 +81,7 @@ func Test_Cov_Info_DefinedGetters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- defined getters", actual)
 }
 
-func Test_Cov_Info_IsName(t *testing.T) {
+func Test_Info_IsName(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "test"}
 
@@ -101,7 +101,7 @@ func Test_Cov_Info_IsName(t *testing.T) {
 
 // ── IsInclude / IsExclude checks ──
 
-func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
+func Test_Info_IsInclude_NoExcludeOptions(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{
 		RootName:      "name",
@@ -148,7 +148,7 @@ func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns empty -- IsInclude no exclude options", actual)
 }
 
-func Test_Cov_Info_NilIncludeAdditionalErrorWrap(t *testing.T) {
+func Test_Info_NilIncludeAdditionalErrorWrap(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 
@@ -162,7 +162,7 @@ func Test_Cov_Info_NilIncludeAdditionalErrorWrap(t *testing.T) {
 
 // ── Clone ──
 
-func Test_Cov_Info_Clone(t *testing.T) {
+func Test_Info_Clone(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{
 		RootName:    "task",
@@ -187,7 +187,7 @@ func Test_Cov_Info_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Clone", actual)
 }
 
-func Test_Cov_Info_ClonePtr_Nil(t *testing.T) {
+func Test_Info_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	cloned := info.ClonePtr()
@@ -200,7 +200,7 @@ func Test_Cov_Info_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info ClonePtr nil -- nil", actual)
 }
 
-func Test_Cov_Info_ClonePtr_Defined(t *testing.T) {
+func Test_Info_ClonePtr_Defined(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "test"}
 	cloned := info.ClonePtr()
@@ -213,7 +213,7 @@ func Test_Cov_Info_ClonePtr_Defined(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info ClonePtr defined -- cloned", actual)
 }
 
-func Test_Cov_Info_ToPtr(t *testing.T) {
+func Test_Info_ToPtr(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	ptr := info.ToPtr()
@@ -226,7 +226,7 @@ func Test_Cov_Info_ToPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- ToPtr", actual)
 }
 
-func Test_Cov_Info_ToNonPtr(t *testing.T) {
+func Test_Info_ToNonPtr(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	nonPtr := info.ToNonPtr()
@@ -241,7 +241,7 @@ func Test_Cov_Info_ToNonPtr(t *testing.T) {
 
 // ── SetSecure / SetPlain ──
 
-func Test_Cov_Info_SetSecure_Nil(t *testing.T) {
+func Test_Info_SetSecure_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	result := info.SetSecure()
@@ -254,7 +254,7 @@ func Test_Cov_Info_SetSecure_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info SetSecure nil -- creates secure", actual)
 }
 
-func Test_Cov_Info_SetSecure_Defined(t *testing.T) {
+func Test_Info_SetSecure_Defined(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	result := info.SetSecure()
@@ -273,7 +273,7 @@ func Test_Cov_Info_SetSecure_Defined(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info SetSecure defined -- sets secure flag", actual)
 }
 
-func Test_Cov_Info_SetPlain_Nil(t *testing.T) {
+func Test_Info_SetPlain_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	result := info.SetPlain()
@@ -286,7 +286,7 @@ func Test_Cov_Info_SetPlain_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info SetPlain nil -- creates plain", actual)
 }
 
-func Test_Cov_Info_SetPlain_Defined(t *testing.T) {
+func Test_Info_SetPlain_Defined(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	info.SetSecure()
@@ -302,7 +302,7 @@ func Test_Cov_Info_SetPlain_Defined(t *testing.T) {
 
 // ── Options / ExamplesAsSlice ──
 
-func Test_Cov_Info_Options_Nil(t *testing.T) {
+func Test_Info_Options_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	opts := info.Options()
@@ -315,7 +315,7 @@ func Test_Cov_Info_Options_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info Options nil -- returns empty", actual)
 }
 
-func Test_Cov_Info_ExamplesAsSlice_Nil(t *testing.T) {
+func Test_Info_ExamplesAsSlice_Nil(t *testing.T) {
 	// Arrange
 	var info *coretaskinfo.Info
 	slice := info.ExamplesAsSlice()
@@ -328,7 +328,7 @@ func Test_Cov_Info_ExamplesAsSlice_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Info ExamplesAsSlice nil -- returns empty", actual)
 }
 
-func Test_Cov_Info_ExamplesAsSlice_Defined(t *testing.T) {
+func Test_Info_ExamplesAsSlice_Defined(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{Examples: []string{"a", "b"}}
 	slice := info.ExamplesAsSlice()

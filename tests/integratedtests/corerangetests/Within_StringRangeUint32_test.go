@@ -9,7 +9,7 @@ import (
 
 // ── within.go — uncovered branches ──
 
-func Test_Cov5_Within_StringRangeUint32_AboveMax(t *testing.T) {
+func Test_Within_StringRangeUint32_AboveMax(t *testing.T) {
 	// Arrange & Act — input that parses but exceeds MaxInt32 after Atoi
 	// Actually Atoi would fail for values > MaxInt. Test the boundary:
 	// On 64-bit, Atoi("2147483648") succeeds but > MaxInt32
@@ -27,7 +27,7 @@ func Test_Cov5_Within_StringRangeUint32_AboveMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeUint32 returns 0 -- above MaxInt32", actual)
 }
 
-func Test_Cov5_Within_StringRangeUint32_Invalid(t *testing.T) {
+func Test_Within_StringRangeUint32_Invalid(t *testing.T) {
 	// Arrange & Act
 	_, ok := corerange.Within.StringRangeUint32("abc")
 
@@ -37,7 +37,7 @@ func Test_Cov5_Within_StringRangeUint32_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeUint32 returns false -- invalid input", actual)
 }
 
-func Test_Cov5_Within_StringRangeFloat_OutOfRange_NoBoundary(t *testing.T) {
+func Test_Within_StringRangeFloat_OutOfRange_NoBoundary(t *testing.T) {
 	// Arrange & Act — valid float string, out of range, no boundary usage
 	val, ok := corerange.Within.StringRangeFloat(false, 10.0, 20.0, "5.0")
 
@@ -53,7 +53,7 @@ func Test_Cov5_Within_StringRangeFloat_OutOfRange_NoBoundary(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeFloat returns zero -- no boundary out of range", actual)
 }
 
-func Test_Cov5_Within_StringRangeFloat_OutOfRange_WithBoundary(t *testing.T) {
+func Test_Within_StringRangeFloat_OutOfRange_WithBoundary(t *testing.T) {
 	// Arrange & Act — valid float, out of range, WITH boundary → returns clamped
 	val, ok := corerange.Within.StringRangeFloat(true, 10.0, 20.0, "5.0")
 
@@ -69,7 +69,7 @@ func Test_Cov5_Within_StringRangeFloat_OutOfRange_WithBoundary(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeFloat returns min -- boundary below min", actual)
 }
 
-func Test_Cov5_Within_StringRangeInt16_Invalid(t *testing.T) {
+func Test_Within_StringRangeInt16_Invalid(t *testing.T) {
 	// Arrange
 	_, ok := corerange.Within.StringRangeInt16("abc")
 
@@ -81,7 +81,7 @@ func Test_Cov5_Within_StringRangeInt16_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeInt16 returns false -- invalid input", actual)
 }
 
-func Test_Cov5_Within_StringRangeInt8_Invalid(t *testing.T) {
+func Test_Within_StringRangeInt8_Invalid(t *testing.T) {
 	// Arrange
 	_, ok := corerange.Within.StringRangeInt8("abc")
 
@@ -93,7 +93,7 @@ func Test_Cov5_Within_StringRangeInt8_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeInt8 returns false -- invalid input", actual)
 }
 
-func Test_Cov5_Within_StringRangeUint16_Invalid(t *testing.T) {
+func Test_Within_StringRangeUint16_Invalid(t *testing.T) {
 	// Arrange
 	_, ok := corerange.Within.StringRangeUint16("abc")
 
@@ -107,7 +107,7 @@ func Test_Cov5_Within_StringRangeUint16_Invalid(t *testing.T) {
 
 // ── MinMaxInt.go — uncovered branches ──
 
-func Test_Cov5_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange — Min > Max → negative diff
 	mm := &corerange.MinMaxInt{Min: 10, Max: 3}
 
@@ -123,7 +123,7 @@ func Test_Cov5_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt DifferenceAbsolute returns positive -- negative diff", actual)
 }
 
-func Test_Cov5_MinMaxInt_IsInvalidValue(t *testing.T) {
+func Test_MinMaxInt_IsInvalidValue(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 10}
 
@@ -141,7 +141,7 @@ func Test_Cov5_MinMaxInt_IsInvalidValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt IsInvalidValue returns expected -- boundary check", actual)
 }
 
-func Test_Cov5_MinMaxInt_CreateRangeInt(t *testing.T) {
+func Test_MinMaxInt_CreateRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 0, Max: 10}
 
@@ -153,7 +153,7 @@ func Test_Cov5_MinMaxInt_CreateRangeInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt CreateRangeInt returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_MinMaxInt_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxInt_CreateRangeInt8(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 0, Max: 10}
 
@@ -165,7 +165,7 @@ func Test_Cov5_MinMaxInt_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_MinMaxInt_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxInt_CreateRangeInt16(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 0, Max: 10}
 
@@ -177,7 +177,7 @@ func Test_Cov5_MinMaxInt_CreateRangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt CreateRangeInt16 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_MinMaxInt_RangeLengthInt(t *testing.T) {
+func Test_MinMaxInt_RangeLengthInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 3, Max: 7}
 
@@ -189,7 +189,7 @@ func Test_Cov5_MinMaxInt_RangeLengthInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt RangeLengthInt returns 5 -- range 3 to 7", actual)
 }
 
-func Test_Cov5_MinMaxInt_NilComparisons(t *testing.T) {
+func Test_MinMaxInt_NilComparisons(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxInt
 
@@ -219,7 +219,7 @@ func Test_Cov5_MinMaxInt_NilComparisons(t *testing.T) {
 
 // ── MinMaxInt16.go — uncovered branches ──
 
-func Test_Cov5_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt16{Min: 10, Max: 3}
 
@@ -237,7 +237,7 @@ func Test_Cov5_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt16 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
-func Test_Cov5_MinMaxInt16_NilComparisons(t *testing.T) {
+func Test_MinMaxInt16_NilComparisons(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxInt16
 
@@ -263,7 +263,7 @@ func Test_Cov5_MinMaxInt16_NilComparisons(t *testing.T) {
 
 // ── MinMaxInt8.go — uncovered branches ──
 
-func Test_Cov5_MinMaxInt8_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt8_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 10, Max: 3}
 
@@ -281,7 +281,7 @@ func Test_Cov5_MinMaxInt8_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
-func Test_Cov5_MinMaxInt8_NilComparisons(t *testing.T) {
+func Test_MinMaxInt8_NilComparisons(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxInt8
 
@@ -305,7 +305,7 @@ func Test_Cov5_MinMaxInt8_NilComparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 nil comparisons return false -- nil receiver", actual)
 }
 
-func Test_Cov5_MinMaxInt8_IsInvalidValue(t *testing.T) {
+func Test_MinMaxInt8_IsInvalidValue(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 1, Max: 10}
 
@@ -325,7 +325,7 @@ func Test_Cov5_MinMaxInt8_IsInvalidValue(t *testing.T) {
 
 // ── MinMaxInt64.go — uncovered branches ──
 
-func Test_Cov5_MinMaxInt64_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt64_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 10, Max: 3}
 
@@ -343,7 +343,7 @@ func Test_Cov5_MinMaxInt64_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
-func Test_Cov5_MinMaxInt64_NilComparisons(t *testing.T) {
+func Test_MinMaxInt64_NilComparisons(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxInt64
 
@@ -367,7 +367,7 @@ func Test_Cov5_MinMaxInt64_NilComparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 nil comparisons return false -- nil receiver", actual)
 }
 
-func Test_Cov5_MinMaxInt64_IsInvalidValue(t *testing.T) {
+func Test_MinMaxInt64_IsInvalidValue(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 1, Max: 10}
 
@@ -385,7 +385,7 @@ func Test_Cov5_MinMaxInt64_IsInvalidValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 IsInvalidValue returns expected -- boundary", actual)
 }
 
-func Test_Cov5_MinMaxInt64_IsWithinRange_Nil(t *testing.T) {
+func Test_MinMaxInt64_IsWithinRange_Nil(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxInt64
 
@@ -399,7 +399,7 @@ func Test_Cov5_MinMaxInt64_IsWithinRange_Nil(t *testing.T) {
 
 // ── MinMaxByte.go — uncovered branches ──
 
-func Test_Cov5_MinMaxByte_NilComparisons(t *testing.T) {
+func Test_MinMaxByte_NilComparisons(t *testing.T) {
 	// Arrange
 	var nilMm *corerange.MinMaxByte
 
@@ -423,7 +423,7 @@ func Test_Cov5_MinMaxByte_NilComparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte nil comparisons return false -- nil receiver", actual)
 }
 
-func Test_Cov5_MinMaxByte_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -435,7 +435,7 @@ func Test_Cov5_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_MinMaxByte_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -447,7 +447,7 @@ func Test_Cov5_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte CreateRangeInt16 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_MinMaxByte_CreateRangeInt(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -461,7 +461,7 @@ func Test_Cov5_MinMaxByte_CreateRangeInt(t *testing.T) {
 
 // ── RangeByte.go — uncovered branches ──
 
-func Test_Cov5_RangeByte_Ranges_Invalid(t *testing.T) {
+func Test_RangeByte_Ranges_Invalid(t *testing.T) {
 	// Arrange — create invalid RangeByte
 	rb := corerange.NewRangeByteMinMax("abc", "|", 0, 255)
 
@@ -481,7 +481,7 @@ func Test_Cov5_RangeByte_Ranges_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeByte Ranges returns empty -- invalid input", actual)
 }
 
-func Test_Cov5_RangeByte_IsInvalidValue(t *testing.T) {
+func Test_RangeByte_IsInvalidValue(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("3:7", ":", 0, 10)
 
@@ -499,7 +499,7 @@ func Test_Cov5_RangeByte_IsInvalidValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeByte IsInvalidValue returns expected -- boundary", actual)
 }
 
-func Test_Cov5_RangeByte_String(t *testing.T) {
+func Test_RangeByte_String(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("3:7", ":", 0, 10)
 
@@ -511,7 +511,7 @@ func Test_Cov5_RangeByte_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeByte String returns non-empty -- valid", actual)
 }
 
-func Test_Cov5_RangeByte_NewRangeByte_WithMinMax(t *testing.T) {
+func Test_RangeByte_NewRangeByte_WithMinMax(t *testing.T) {
 	// Arrange — non-nil minMax
 	mb := &corerange.MinMaxByte{Min: 0, Max: 255}
 	rb := corerange.NewRangeByte("3:7", ":", mb)
@@ -530,7 +530,7 @@ func Test_Cov5_RangeByte_NewRangeByte_WithMinMax(t *testing.T) {
 
 // ── RangeInt8.go — uncovered branches ──
 
-func Test_Cov5_RangeInt8_Ranges_Invalid(t *testing.T) {
+func Test_RangeInt8_Ranges_Invalid(t *testing.T) {
 	// Arrange
 	ri8 := corerange.NewRangeInt8MinMax("abc", ":", 0, 10)
 
@@ -542,7 +542,7 @@ func Test_Cov5_RangeInt8_Ranges_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt8 Ranges returns empty -- invalid input", actual)
 }
 
-func Test_Cov5_RangeInt8_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt8_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange — reversed range
 	ri8 := &corerange.RangeInt8{
 		BaseRange: &corerange.BaseRange{IsValid: true},
@@ -554,7 +554,7 @@ func Test_Cov5_RangeInt8_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt8 DifferenceAbsolute returns positive -- reversed", actual)
 }
 
-func Test_Cov5_RangeInt8_IsInvalidValue_NotValid(t *testing.T) {
+func Test_RangeInt8_IsInvalidValue_NotValid(t *testing.T) {
 	// Arrange
 	ri8 := corerange.NewRangeInt8MinMax("abc", ":", 0, 10)
 
@@ -566,7 +566,7 @@ func Test_Cov5_RangeInt8_IsInvalidValue_NotValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt8 IsInvalidValue returns true -- not valid", actual)
 }
 
-func Test_Cov5_RangeInt8_String(t *testing.T) {
+func Test_RangeInt8_String(t *testing.T) {
 	// Arrange
 	ri8 := corerange.NewRangeInt8MinMax("3:7", ":", 0, 10)
 
@@ -578,7 +578,7 @@ func Test_Cov5_RangeInt8_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt8 String returns non-empty -- valid", actual)
 }
 
-func Test_Cov5_RangeInt8_NewRangeInt8_WithMinMax(t *testing.T) {
+func Test_RangeInt8_NewRangeInt8_WithMinMax(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 0, Max: 10}
 	ri8 := corerange.NewRangeInt8("3:7", ":", mm)
@@ -597,7 +597,7 @@ func Test_Cov5_RangeInt8_NewRangeInt8_WithMinMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewRangeInt8 returns valid -- non-nil minMax", actual)
 }
 
-func Test_Cov5_RangeInt8_IsValidPlusWithinRange_NotValid(t *testing.T) {
+func Test_RangeInt8_IsValidPlusWithinRange_NotValid(t *testing.T) {
 	// Arrange
 	ri8 := corerange.NewRangeInt8MinMax("abc", ":", 0, 10)
 
@@ -611,7 +611,7 @@ func Test_Cov5_RangeInt8_IsValidPlusWithinRange_NotValid(t *testing.T) {
 
 // ── RangeInt16.go — uncovered branches ──
 
-func Test_Cov5_RangeInt16_Ranges_Invalid(t *testing.T) {
+func Test_RangeInt16_Ranges_Invalid(t *testing.T) {
 	// Arrange
 	ri16 := corerange.NewRangeInt16MinMax("abc", ":", 0, 10)
 
@@ -623,7 +623,7 @@ func Test_Cov5_RangeInt16_Ranges_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 Ranges returns empty -- invalid input", actual)
 }
 
-func Test_Cov5_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	ri16 := &corerange.RangeInt16{
 		BaseRange: &corerange.BaseRange{IsValid: true},
@@ -639,7 +639,7 @@ func Test_Cov5_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 DifferenceAbsolute returns positive -- reversed", actual)
 }
 
-func Test_Cov5_RangeInt16_IsInvalidValue_NotValid(t *testing.T) {
+func Test_RangeInt16_IsInvalidValue_NotValid(t *testing.T) {
 	// Arrange
 	ri16 := corerange.NewRangeInt16MinMax("abc", ":", 0, 10)
 
@@ -651,7 +651,7 @@ func Test_Cov5_RangeInt16_IsInvalidValue_NotValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 IsInvalidValue returns true -- not valid", actual)
 }
 
-func Test_Cov5_RangeInt16_String(t *testing.T) {
+func Test_RangeInt16_String(t *testing.T) {
 	// Arrange
 	ri16 := corerange.NewRangeInt16MinMax("3:7", ":", 0, 10)
 
@@ -663,7 +663,7 @@ func Test_Cov5_RangeInt16_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 String returns non-empty -- valid", actual)
 }
 
-func Test_Cov5_RangeInt16_NewRangeInt16_WithMinMax(t *testing.T) {
+func Test_RangeInt16_NewRangeInt16_WithMinMax(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt16{Min: 0, Max: 10}
 	ri16 := corerange.NewRangeInt16("3:7", ":", mm)
@@ -682,7 +682,7 @@ func Test_Cov5_RangeInt16_NewRangeInt16_WithMinMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewRangeInt16 returns valid -- non-nil minMax", actual)
 }
 
-func Test_Cov5_RangeInt16_IsValidPlusWithinRange_NotValid(t *testing.T) {
+func Test_RangeInt16_IsValidPlusWithinRange_NotValid(t *testing.T) {
 	// Arrange
 	ri16 := corerange.NewRangeInt16MinMax("abc", ":", 0, 10)
 
@@ -694,7 +694,7 @@ func Test_Cov5_RangeInt16_IsValidPlusWithinRange_NotValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 IsValidPlusWithinRange returns false -- not valid", actual)
 }
 
-func Test_Cov5_RangeInt16_RangesInt16(t *testing.T) {
+func Test_RangeInt16_RangesInt16(t *testing.T) {
 	// Arrange
 	ri16 := corerange.NewRangeInt16MinMax("3:7", ":", 0, 10)
 
@@ -708,7 +708,7 @@ func Test_Cov5_RangeInt16_RangesInt16(t *testing.T) {
 
 // ── RangeInt — uncovered branches ──
 
-func Test_Cov5_RangeInt_Ranges_Invalid(t *testing.T) {
+func Test_RangeInt_Ranges_Invalid(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("abc", ":", 0, 10)
 
@@ -720,7 +720,7 @@ func Test_Cov5_RangeInt_Ranges_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt Ranges returns empty -- invalid input", actual)
 }
 
-func Test_Cov5_RangeInt_IsValidPlusWithinRange_NotValid(t *testing.T) {
+func Test_RangeInt_IsValidPlusWithinRange_NotValid(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("abc", ":", 0, 10)
 
@@ -734,7 +734,7 @@ func Test_Cov5_RangeInt_IsValidPlusWithinRange_NotValid(t *testing.T) {
 
 // ── StartEndInt.go — uncovered branches ──
 
-func Test_Cov5_StartEndInt_Ranges_Nil(t *testing.T) {
+func Test_StartEndInt_Ranges_Nil(t *testing.T) {
 	// Arrange
 	var se *corerange.StartEndInt
 	ranges := se.Ranges()
@@ -747,7 +747,7 @@ func Test_Cov5_StartEndInt_Ranges_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt Ranges returns empty -- nil receiver", actual)
 }
 
-func Test_Cov5_StartEndInt_ZeroStartEnd(t *testing.T) {
+func Test_StartEndInt_ZeroStartEnd(t *testing.T) {
 	// Arrange — Start=0, End=0
 	se := &corerange.StartEndInt{Start: 0, End: 0}
 
@@ -767,7 +767,7 @@ func Test_Cov5_StartEndInt_ZeroStartEnd(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt zero values -- both invalid", actual)
 }
 
-func Test_Cov5_StartEndInt_RangeInt16(t *testing.T) {
+func Test_StartEndInt_RangeInt16(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 3, End: 7}
 	mm := &corerange.MinMaxInt16{Min: 0, Max: 100}
@@ -780,7 +780,7 @@ func Test_Cov5_StartEndInt_RangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt RangeInt16 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_StartEndInt_RangeInt8(t *testing.T) {
+func Test_StartEndInt_RangeInt8(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 3, End: 7}
 	mm := &corerange.MinMaxInt8{Min: 0, Max: 10}
@@ -793,7 +793,7 @@ func Test_Cov5_StartEndInt_RangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt RangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_StartEndInt_RangeInt(t *testing.T) {
+func Test_StartEndInt_RangeInt(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 3, End: 7}
 	mm := &corerange.MinMaxInt{Min: 0, Max: 100}
@@ -808,7 +808,7 @@ func Test_Cov5_StartEndInt_RangeInt(t *testing.T) {
 
 // ── StartEndSimpleString.go — uncovered branches ──
 
-func Test_Cov5_StartEndSimpleString_EmptyStart(t *testing.T) {
+func Test_StartEndSimpleString_EmptyStart(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "", End: "world"}
 
@@ -830,7 +830,7 @@ func Test_Cov5_StartEndSimpleString_EmptyStart(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString empty start -- partial validity", actual)
 }
 
-func Test_Cov5_StartEndSimpleString_RangeInt16(t *testing.T) {
+func Test_StartEndSimpleString_RangeInt16(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "3", End: "7"}
 	mm := &corerange.MinMaxInt16{Min: 0, Max: 100}
@@ -843,7 +843,7 @@ func Test_Cov5_StartEndSimpleString_RangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString RangeInt16 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_StartEndSimpleString_RangeInt8(t *testing.T) {
+func Test_StartEndSimpleString_RangeInt8(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "3", End: "7"}
 	mm := &corerange.MinMaxInt8{Min: 0, Max: 10}
@@ -856,7 +856,7 @@ func Test_Cov5_StartEndSimpleString_RangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString RangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_Cov5_StartEndSimpleString_RangeInt_WithMinMax(t *testing.T) {
+func Test_StartEndSimpleString_RangeInt_WithMinMax(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "3", End: "7"}
 	mm := &corerange.MinMaxInt{Min: 0, Max: 100}
@@ -869,7 +869,7 @@ func Test_Cov5_StartEndSimpleString_RangeInt_WithMinMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString RangeInt returns non-nil -- with minMax", actual)
 }
 
-func Test_Cov5_StartEndSimpleString_StartEndString_BothEmpty(t *testing.T) {
+func Test_StartEndSimpleString_StartEndString_BothEmpty(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "", End: ""}
 	result := se.StartEndString()
@@ -890,7 +890,7 @@ func Test_Cov5_StartEndSimpleString_StartEndString_BothEmpty(t *testing.T) {
 
 // ── RangeByte — IsValidPlusWithinRange not valid ──
 
-func Test_Cov5_RangeByte_IsValidPlusWithinRange_NotValid(t *testing.T) {
+func Test_RangeByte_IsValidPlusWithinRange_NotValid(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("abc", "|", 0, 255)
 
@@ -904,7 +904,7 @@ func Test_Cov5_RangeByte_IsValidPlusWithinRange_NotValid(t *testing.T) {
 
 // ── RangeInt — NewRangeInt invalid start/end parsing ──
 
-func Test_Cov5_RangeInt_NewRangeInt_SingleElement(t *testing.T) {
+func Test_RangeInt_NewRangeInt_SingleElement(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("5", ":", 0, 10)
 
@@ -924,7 +924,7 @@ func Test_Cov5_RangeInt_NewRangeInt_SingleElement(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt NewRangeInt single element -- no end", actual)
 }
 
-func Test_Cov5_RangeInt_NewRangeInt_ReversedRange(t *testing.T) {
+func Test_RangeInt_NewRangeInt_ReversedRange(t *testing.T) {
 	// Arrange
 	// end < start → isValid=false
 	ri := corerange.NewRangeIntMinMax("7:3", ":", 0, 10)
@@ -937,7 +937,7 @@ func Test_Cov5_RangeInt_NewRangeInt_ReversedRange(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt NewRangeInt reversed range -- end less than start", actual)
 }
 
-func Test_Cov5_RangeInt_NewRangeInt_OutOfMinMax(t *testing.T) {
+func Test_RangeInt_NewRangeInt_OutOfMinMax(t *testing.T) {
 	// Arrange
 	// valid parse but outside min/max bounds
 	ri := corerange.NewRangeIntMinMax("1:20", ":", 5, 10)

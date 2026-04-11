@@ -10,7 +10,7 @@ import (
 
 // ── Integer ──
 
-func Test_Cov7_Integer(t *testing.T) {
+func Test_Integer(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer(5, 5),
@@ -27,7 +27,7 @@ func Test_Cov7_Integer(t *testing.T) {
 
 // ── IntegerPtr ──
 
-func Test_Cov7_IntegerPtr_BothNil(t *testing.T) {
+func Test_IntegerPtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IntegerPtr(nil, nil)}
 
@@ -36,7 +36,7 @@ func Test_Cov7_IntegerPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- both nil", actual)
 }
 
-func Test_Cov7_IntegerPtr_LeftNil(t *testing.T) {
+func Test_IntegerPtr_LeftNil(t *testing.T) {
 	// Arrange
 	r := 5
 
@@ -48,7 +48,7 @@ func Test_Cov7_IntegerPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- left nil", actual)
 }
 
-func Test_Cov7_IntegerPtr_Equal(t *testing.T) {
+func Test_IntegerPtr_Equal(t *testing.T) {
 	// Arrange
 	l, r := 5, 5
 
@@ -62,7 +62,7 @@ func Test_Cov7_IntegerPtr_Equal(t *testing.T) {
 
 // ── Integer8 / Integer8Ptr ──
 
-func Test_Cov7_Integer8(t *testing.T) {
+func Test_Integer8(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal": corecmp.Integer8(5, 5),
@@ -77,7 +77,7 @@ func Test_Cov7_Integer8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Integer8Ptr_BothNil(t *testing.T) {
+func Test_Integer8Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer8Ptr(nil, nil)}
 
@@ -88,7 +88,7 @@ func Test_Cov7_Integer8Ptr_BothNil(t *testing.T) {
 
 // ── Integer16 / Integer16Ptr ──
 
-func Test_Cov7_Integer16(t *testing.T) {
+func Test_Integer16(t *testing.T) {
 	// Act
 	actual := args.Map{"equal": corecmp.Integer16(5, 5)}
 
@@ -97,7 +97,7 @@ func Test_Cov7_Integer16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16 returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Integer16Ptr_BothNil(t *testing.T) {
+func Test_Integer16Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer16Ptr(nil, nil)}
 
@@ -108,7 +108,7 @@ func Test_Cov7_Integer16Ptr_BothNil(t *testing.T) {
 
 // ── Integer32 / Integer32Ptr ──
 
-func Test_Cov7_Integer32(t *testing.T) {
+func Test_Integer32(t *testing.T) {
 	// Act
 	actual := args.Map{"equal": corecmp.Integer32(5, 5)}
 
@@ -117,7 +117,7 @@ func Test_Cov7_Integer32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32 returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Integer32Ptr_BothNil(t *testing.T) {
+func Test_Integer32Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer32Ptr(nil, nil)}
 
@@ -128,7 +128,7 @@ func Test_Cov7_Integer32Ptr_BothNil(t *testing.T) {
 
 // ── Integer64 / Integer64Ptr ──
 
-func Test_Cov7_Integer64(t *testing.T) {
+func Test_Integer64(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal": corecmp.Integer64(5, 5),
@@ -143,7 +143,7 @@ func Test_Cov7_Integer64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Integer64Ptr_BothNil(t *testing.T) {
+func Test_Integer64Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer64Ptr(nil, nil)}
 
@@ -152,7 +152,7 @@ func Test_Cov7_Integer64Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64Ptr returns nil -- both nil", actual)
 }
 
-func Test_Cov7_Integer64Ptr_RightNil(t *testing.T) {
+func Test_Integer64Ptr_RightNil(t *testing.T) {
 	// Arrange
 	l := int64(5)
 
@@ -166,7 +166,7 @@ func Test_Cov7_Integer64Ptr_RightNil(t *testing.T) {
 
 // ── Byte / BytePtr ──
 
-func Test_Cov7_Byte(t *testing.T) {
+func Test_Byte(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Byte(5, 5),
@@ -183,7 +183,7 @@ func Test_Cov7_Byte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns correct value -- with args", actual)
 }
 
-func Test_Cov7_BytePtr_BothNil(t *testing.T) {
+func Test_BytePtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.BytePtr(nil, nil)}
 
@@ -192,7 +192,7 @@ func Test_Cov7_BytePtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- both nil", actual)
 }
 
-func Test_Cov7_BytePtr_LeftNil(t *testing.T) {
+func Test_BytePtr_LeftNil(t *testing.T) {
 	// Arrange
 	r := byte(5)
 
@@ -206,7 +206,7 @@ func Test_Cov7_BytePtr_LeftNil(t *testing.T) {
 
 // ── IsIntegersEqual / IsIntegersEqualPtr ──
 
-func Test_Cov7_IsIntegersEqual(t *testing.T) {
+func Test_IsIntegersEqual(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.IsIntegersEqual([]int{1, 2}, []int{1, 2}),
@@ -225,7 +225,7 @@ func Test_Cov7_IsIntegersEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns correct value -- with args", actual)
 }
 
-func Test_Cov7_IsIntegersEqualPtr(t *testing.T) {
+func Test_IsIntegersEqualPtr(t *testing.T) {
 	// Arrange
 	left := []int{1, 2}
 	right := []int{1, 2}
@@ -249,7 +249,7 @@ func Test_Cov7_IsIntegersEqualPtr(t *testing.T) {
 
 // ── IsStringsEqual / IsStringsEqualPtr ──
 
-func Test_Cov7_IsStringsEqual(t *testing.T) {
+func Test_IsStringsEqual(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.IsStringsEqual([]string{"a", "b"}, []string{"a", "b"}),
@@ -266,7 +266,7 @@ func Test_Cov7_IsStringsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- with args", actual)
 }
 
-func Test_Cov7_IsStringsEqualPtr(t *testing.T) {
+func Test_IsStringsEqualPtr(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.IsStringsEqualPtr([]string{"a"}, []string{"a"}),
@@ -283,7 +283,7 @@ func Test_Cov7_IsStringsEqualPtr(t *testing.T) {
 
 // ── AnyItem ──
 
-func Test_Cov7_AnyItem(t *testing.T) {
+func Test_AnyItem(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"bothNil": corecmp.AnyItem(nil, nil),
@@ -304,7 +304,7 @@ func Test_Cov7_AnyItem(t *testing.T) {
 
 // ── VersionSliceInteger — RightNil ──
 
-func Test_Cov7_VersionSliceInteger_RightNil(t *testing.T) {
+func Test_VersionSliceInteger_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.VersionSliceInteger([]int{1}, nil)}
 

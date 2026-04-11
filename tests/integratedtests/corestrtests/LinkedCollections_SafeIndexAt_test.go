@@ -20,7 +20,7 @@ import (
 
 // ---------- LinkedCollection: SafeIndexAt out-of-range ----------
 
-func Test_I28_LinkedCollections_SafeIndexAt_OutOfRange(t *testing.T) {
+func Test_LinkedCollections_SafeIndexAt_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_SafeIndexAt_OutOfRange", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -39,7 +39,7 @@ func Test_I28_LinkedCollections_SafeIndexAt_OutOfRange(t *testing.T) {
 
 // ---------- LinkedCollection: SafeIndexAt with Lock out-of-range ----------
 
-func Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
+func Test_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -63,7 +63,7 @@ func Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
 
 // ---------- LinkedCollection: IsEqualsPtr both empty ----------
 
-func Test_I28_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
+func Test_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_IsChainEqual_BothEmpty", func() {
 		// Arrange
 		lc1 := corestr.New.LinkedCollection.Create()
@@ -81,7 +81,7 @@ func Test_I28_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
 
 // ---------- LinkedCollection: IsEqualsPtr one empty ----------
 
-func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
+func Test_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_IsChainEqual_OneEmpty", func() {
 		// Arrange
 		lc1 := corestr.New.LinkedCollection.Create()
@@ -100,7 +100,7 @@ func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 
 // ---------- LinkedCollection: ToCollection with items ----------
 
-func Test_I28_LinkedCollections_ToCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollection(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollection", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -119,7 +119,7 @@ func Test_I28_LinkedCollections_ToCollection(t *testing.T) {
 
 // ---------- LinkedCollection: ToCollectionsOfCollection with items ----------
 
-func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollectionsOfCollection", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -138,7 +138,7 @@ func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 
 // ---------- LinkedCollection: AddCollections all nil ----------
 
-func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
+func Test_LinkedCollections_AddCollections_AllNil(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_AddCollections_AllNil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -155,7 +155,7 @@ func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
 
 // ---------- LinkedListNode: IsChainEqual both nil ----------
 
-func Test_I28_LinkedListNode_IsChainEqual_BothNil(t *testing.T) {
+func Test_LinkedListNode_IsChainEqual_BothNil(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedListNode_IsChainEqual_BothNil", func() {
 		// Arrange
 		var n1 *corestr.LinkedListNode
@@ -173,7 +173,7 @@ func Test_I28_LinkedListNode_IsChainEqual_BothNil(t *testing.T) {
 
 // ---------- LinkedListNode: IsChainEqual one nil ----------
 
-func Test_I28_LinkedListNode_IsChainEqual_OneNil(t *testing.T) {
+func Test_LinkedListNode_IsChainEqual_OneNil(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedListNode_IsChainEqual_OneNil", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -192,7 +192,7 @@ func Test_I28_LinkedListNode_IsChainEqual_OneNil(t *testing.T) {
 
 // ---------- LinkedList: SafeIndexAt out-of-range ----------
 
-func Test_I28_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedList_SafeIndexAt_OutOfRange", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -210,7 +210,7 @@ func Test_I28_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
 
 // ---------- LinkedList: SafeIndexAtLock out-of-range ----------
 
-func Test_I28_LinkedList_SafeIndexAtLock_OutOfRange(t *testing.T) {
+func Test_LinkedList_SafeIndexAtLock_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedList_SafeIndexAtLock_OutOfRange", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -228,7 +228,7 @@ func Test_I28_LinkedList_SafeIndexAtLock_OutOfRange(t *testing.T) {
 
 // ---------- CollectionsOfCollection: AllIndividualItemsLength with empty collection ----------
 
-func Test_I28_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSkip(t *testing.T) {
+func Test_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSkip(t *testing.T) {
 	safeTest(t, "Test_I28_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSkip", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Cap(4)
@@ -248,7 +248,7 @@ func Test_I28_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSk
 
 // ---------- CollectionsOfCollection: List nil/empty skip ----------
 
-func Test_I28_CollectionsOfCollection_List_NilEmptySkip(t *testing.T) {
+func Test_CollectionsOfCollection_List_NilEmptySkip(t *testing.T) {
 	safeTest(t, "Test_I28_CollectionsOfCollection_List_NilEmptySkip", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Cap(4)

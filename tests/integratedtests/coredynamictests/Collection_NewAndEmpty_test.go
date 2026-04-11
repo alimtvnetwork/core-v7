@@ -12,7 +12,7 @@ import (
 // Collection[T] — core methods
 // ═══════════════════════════════════════════
 
-func Test_Cov12_Collection_NewAndEmpty(t *testing.T) {
+func Test_Collection_NewAndEmpty(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](10)
 	e := coredynamic.EmptyCollection[string]()
@@ -35,7 +35,7 @@ func Test_Cov12_Collection_NewAndEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New/Empty returns empty -- with args", actual)
 }
 
-func Test_Cov12_Collection_From_Nil(t *testing.T) {
+func Test_Collection_From_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom[string](nil)
 
@@ -47,7 +47,7 @@ func Test_Cov12_Collection_From_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionFrom returns nil -- nil", actual)
 }
 
-func Test_Cov12_Collection_From(t *testing.T) {
+func Test_Collection_From(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
@@ -67,7 +67,7 @@ func Test_Cov12_Collection_From(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionFrom returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Clone(t *testing.T) {
+func Test_Collection_Clone(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionClone([]string{"a", "b"})
 
@@ -85,7 +85,7 @@ func Test_Cov12_Collection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionClone returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_At_SafeAt(t *testing.T) {
+func Test_Collection_At_SafeAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 
@@ -105,7 +105,7 @@ func Test_Cov12_Collection_At_SafeAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "At/SafeAt returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_FirstOrDefault(t *testing.T) {
+func Test_Collection_FirstOrDefault(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a"})
 	e := coredynamic.EmptyCollection[string]()
@@ -140,7 +140,7 @@ func Test_Cov12_Collection_FirstOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FirstOrDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Items_Nil(t *testing.T) {
+func Test_Collection_Items_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[string]
 
@@ -152,7 +152,7 @@ func Test_Cov12_Collection_Items_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Items returns nil -- nil", actual)
 }
 
-func Test_Cov12_Collection_Length_Nil(t *testing.T) {
+func Test_Collection_Length_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[string]
 
@@ -174,7 +174,7 @@ func Test_Cov12_Collection_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns nil -- nil", actual)
 }
 
-func Test_Cov12_Collection_HasIndex(t *testing.T) {
+func Test_Collection_HasIndex(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
@@ -198,7 +198,7 @@ func Test_Cov12_Collection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndex returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_SkipTakeLimitSlice(t *testing.T) {
+func Test_Collection_SkipTakeLimitSlice(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c", "d"})
 
@@ -217,7 +217,7 @@ func Test_Cov12_Collection_SkipTakeLimitSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Skip/Take/Limit returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Add_AddMany_AddNonNil(t *testing.T) {
+func Test_Collection_Add_AddMany_AddNonNil(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.Add("a").AddMany("b", "c")
@@ -233,7 +233,7 @@ func Test_Cov12_Collection_Add_AddMany_AddNonNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Add/AddMany/AddNonNil returns nil -- with args", actual)
 }
 
-func Test_Cov12_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 	ok := c.RemoveAt(1)
@@ -255,7 +255,7 @@ func Test_Cov12_Collection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveAt returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_ClearDispose(t *testing.T) {
+func Test_Collection_ClearDispose(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	c.Clear()
@@ -273,7 +273,7 @@ func Test_Cov12_Collection_ClearDispose(t *testing.T) {
 	expected2.ShouldBeEqual(t, 0, "Dispose returns correct value -- with args", actual2)
 }
 
-func Test_Cov12_Collection_Loop(t *testing.T) {
+func Test_Collection_Loop(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 	count := 0
@@ -287,7 +287,7 @@ func Test_Cov12_Collection_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Loop_Empty(t *testing.T) {
+func Test_Collection_Loop_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[string]()
 	count := 0
@@ -301,7 +301,7 @@ func Test_Cov12_Collection_Loop_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns empty -- empty", actual)
 }
 
-func Test_Cov12_Collection_LoopAsync(t *testing.T) {
+func Test_Collection_LoopAsync(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	var mu sync.Mutex
@@ -320,7 +320,7 @@ func Test_Cov12_Collection_LoopAsync(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopAsync returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_LoopAsync_Empty(t *testing.T) {
+func Test_Collection_LoopAsync_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[int]()
 	c.LoopAsync(func(i int, item int) {})
@@ -333,7 +333,7 @@ func Test_Cov12_Collection_LoopAsync_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopAsync returns empty -- empty", actual)
 }
 
-func Test_Cov12_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4})
 	filtered := c.Filter(func(i int) bool { return i%2 == 0 })
@@ -346,7 +346,7 @@ func Test_Cov12_Collection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Filter_Empty(t *testing.T) {
+func Test_Collection_Filter_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[int]()
 	filtered := c.Filter(func(i int) bool { return true })
@@ -359,7 +359,7 @@ func Test_Cov12_Collection_Filter_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns empty -- empty", actual)
 }
 
-func Test_Cov12_Collection_Paging(t *testing.T) {
+func Test_Collection_Paging(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 	pages := c.GetPagesSize(2)
@@ -379,7 +379,7 @@ func Test_Cov12_Collection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagesSize returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_GetPagedCollection(t *testing.T) {
+func Test_Collection_GetPagedCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 	paged := c.GetPagedCollection(2)
@@ -392,7 +392,7 @@ func Test_Cov12_Collection_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagedCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_GetPagedCollection_Small(t *testing.T) {
+func Test_Collection_GetPagedCollection_Small(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2})
 	paged := c.GetPagedCollection(10)
@@ -405,7 +405,7 @@ func Test_Cov12_Collection_GetPagedCollection_Small(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagedCollection returns correct value -- small", actual)
 }
 
-func Test_Cov12_Collection_GetSinglePageCollection(t *testing.T) {
+func Test_Collection_GetSinglePageCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 	page := c.GetSinglePageCollection(2, 1)
@@ -418,7 +418,7 @@ func Test_Cov12_Collection_GetSinglePageCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetSinglePageCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Json(t *testing.T) {
+func Test_Collection_Json(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	js, err := c.JsonString()
@@ -445,7 +445,7 @@ func Test_Cov12_Collection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Json", actual)
 }
 
-func Test_Cov12_Collection_UnmarshalJSON(t *testing.T) {
+func Test_Collection_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[string]()
 	err := c.UnmarshalJSON([]byte(`["x","y"]`))
@@ -464,7 +464,7 @@ func Test_Cov12_Collection_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns correct value -- with args", actual)
 }
 
-func Test_Cov12_Collection_Strings(t *testing.T) {
+func Test_Collection_Strings(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	strs := c.Strings()
@@ -488,7 +488,7 @@ func Test_Cov12_Collection_Strings(t *testing.T) {
 // CollectionMethods — AddIf, AddCollection, ConcatNew, Clone, Capacity, Reverse, InsertAt, IndexOfFunc, SprintItems
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionMethods_AddIf(t *testing.T) {
+func Test_CollectionMethods_AddIf(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.AddIf(true, "a").AddIf(false, "b")
@@ -501,7 +501,7 @@ func Test_Cov12_CollectionMethods_AddIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddIf returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_AddManyIf(t *testing.T) {
+func Test_CollectionMethods_AddManyIf(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.AddManyIf(true, "a", "b").AddManyIf(false, "c")
@@ -514,7 +514,7 @@ func Test_Cov12_CollectionMethods_AddManyIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddManyIf returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_AddCollection(t *testing.T) {
+func Test_CollectionMethods_AddCollection(t *testing.T) {
 	// Arrange
 	c1 := coredynamic.CollectionFrom([]string{"a"})
 	c2 := coredynamic.CollectionFrom([]string{"b", "c"})
@@ -529,7 +529,7 @@ func Test_Cov12_CollectionMethods_AddCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_AddCollections(t *testing.T) {
+func Test_CollectionMethods_AddCollections(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c1 := coredynamic.CollectionFrom([]string{"a"})
@@ -543,7 +543,7 @@ func Test_Cov12_CollectionMethods_AddCollections(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddCollections returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_ConcatNew(t *testing.T) {
+func Test_CollectionMethods_ConcatNew(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a"})
 	c2 := c.ConcatNew("b", "c")
@@ -562,7 +562,7 @@ func Test_Cov12_CollectionMethods_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConcatNew returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_Clone_Nil(t *testing.T) {
+func Test_CollectionMethods_Clone_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[string]
 	cloned := c.Clone()
@@ -575,7 +575,7 @@ func Test_Cov12_CollectionMethods_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns nil -- nil", actual)
 }
 
-func Test_Cov12_CollectionMethods_Capacity(t *testing.T) {
+func Test_CollectionMethods_Capacity(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](10)
 	var nilC *coredynamic.Collection[string]
@@ -594,7 +594,7 @@ func Test_Cov12_CollectionMethods_Capacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Capacity returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_AddCapacity(t *testing.T) {
+func Test_CollectionMethods_AddCapacity(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.AddCapacity(10)
@@ -608,7 +608,7 @@ func Test_Cov12_CollectionMethods_AddCapacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddCapacity returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_Resize(t *testing.T) {
+func Test_CollectionMethods_Resize(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.Resize(20)
@@ -622,7 +622,7 @@ func Test_Cov12_CollectionMethods_Resize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Resize returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_Reverse(t *testing.T) {
+func Test_CollectionMethods_Reverse(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 	c.Reverse()
@@ -641,7 +641,7 @@ func Test_Cov12_CollectionMethods_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reverse returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_Reverse_Single(t *testing.T) {
+func Test_CollectionMethods_Reverse_Single(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a"})
 	c.Reverse()
@@ -654,7 +654,7 @@ func Test_Cov12_CollectionMethods_Reverse_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reverse returns correct value -- single", actual)
 }
 
-func Test_Cov12_CollectionMethods_InsertAt(t *testing.T) {
+func Test_CollectionMethods_InsertAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "c"})
 	c.InsertAt(1, "b")
@@ -673,7 +673,7 @@ func Test_Cov12_CollectionMethods_InsertAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InsertAt returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_InsertAt_Empty(t *testing.T) {
+func Test_CollectionMethods_InsertAt_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a"})
 	c.InsertAt(0)
@@ -686,7 +686,7 @@ func Test_Cov12_CollectionMethods_InsertAt_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InsertAt returns empty -- empty", actual)
 }
 
-func Test_Cov12_CollectionMethods_IndexOfFunc(t *testing.T) {
+func Test_CollectionMethods_IndexOfFunc(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 	idx := c.IndexOfFunc(func(s string) bool { return s == "b" })
@@ -709,7 +709,7 @@ func Test_Cov12_CollectionMethods_IndexOfFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IndexOfFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMethods_SprintItems(t *testing.T) {
+func Test_CollectionMethods_SprintItems(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2})
 	items := c.SprintItems("%d")
@@ -726,7 +726,7 @@ func Test_Cov12_CollectionMethods_SprintItems(t *testing.T) {
 // CollectionSearch — Contains, IndexOf, Has, HasAll, LastIndexOf, Count, Lock variants
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionSearch_Contains(t *testing.T) {
+func Test_CollectionSearch_Contains(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 
@@ -751,7 +751,7 @@ func Test_Cov12_CollectionSearch_Contains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Search returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionSearch_HasAll_Empty(t *testing.T) {
+func Test_CollectionSearch_HasAll_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[string]()
 
@@ -763,7 +763,7 @@ func Test_Cov12_CollectionSearch_HasAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns empty -- empty", actual)
 }
 
-func Test_Cov12_CollectionSearch_Lock(t *testing.T) {
+func Test_CollectionSearch_Lock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
@@ -785,7 +785,7 @@ func Test_Cov12_CollectionSearch_Lock(t *testing.T) {
 // CollectionSort
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionSort_SortFunc(t *testing.T) {
+func Test_CollectionSort_SortFunc(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	c.SortFunc(func(a, b int) bool { return a < b })
@@ -804,7 +804,7 @@ func Test_Cov12_CollectionSort_SortFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionSort_SortFunc_Single(t *testing.T) {
+func Test_CollectionSort_SortFunc_Single(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1})
 	c.SortFunc(func(a, b int) bool { return a < b })
@@ -817,7 +817,7 @@ func Test_Cov12_CollectionSort_SortFunc_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- single", actual)
 }
 
-func Test_Cov12_CollectionSort_SortFuncLock(t *testing.T) {
+func Test_CollectionSort_SortFuncLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	c.SortFuncLock(func(a, b int) bool { return a < b })
@@ -830,7 +830,7 @@ func Test_Cov12_CollectionSort_SortFuncLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFuncLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionSort_SortedFunc(t *testing.T) {
+func Test_CollectionSort_SortedFunc(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	sorted := c.SortedFunc(func(a, b int) bool { return a < b })
@@ -849,7 +849,7 @@ func Test_Cov12_CollectionSort_SortedFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortedFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionSort_PackageLevelSort(t *testing.T) {
+func Test_CollectionSort_PackageLevelSort(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	coredynamic.SortAsc(c)
@@ -866,7 +866,7 @@ func Test_Cov12_CollectionSort_PackageLevelSort(t *testing.T) {
 	expected2.ShouldBeEqual(t, 0, "SortDesc returns correct value -- with args", actual2)
 }
 
-func Test_Cov12_CollectionSort_SortAscDescLock(t *testing.T) {
+func Test_CollectionSort_SortAscDescLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	coredynamic.SortAscLock(c)
@@ -883,7 +883,7 @@ func Test_Cov12_CollectionSort_SortAscDescLock(t *testing.T) {
 	expected2.ShouldBeEqual(t, 0, "SortDescLock returns correct value -- with args", actual2)
 }
 
-func Test_Cov12_CollectionSort_SortedAscDesc(t *testing.T) {
+func Test_CollectionSort_SortedAscDesc(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{3, 1, 2})
 	asc := coredynamic.SortedAsc(c)
@@ -903,7 +903,7 @@ func Test_Cov12_CollectionSort_SortedAscDesc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortedAsc/Desc returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionSort_IsSorted(t *testing.T) {
+func Test_CollectionSort_IsSorted(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	single := coredynamic.CollectionFrom([]int{1})
@@ -928,7 +928,7 @@ func Test_Cov12_CollectionSort_IsSorted(t *testing.T) {
 // CollectionDistinct
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionDistinct(t *testing.T) {
+func Test_CollectionDistinct(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "a", "c", "b"})
 	d := coredynamic.Distinct(c)
@@ -957,7 +957,7 @@ func Test_Cov12_CollectionDistinct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Distinct returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionDistinct_Empty(t *testing.T) {
+func Test_CollectionDistinct_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyCollection[string]()
 	d := coredynamic.Distinct(c)
@@ -981,7 +981,7 @@ func Test_Cov12_CollectionDistinct_Empty(t *testing.T) {
 // CollectionGroupBy
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionGroupBy(t *testing.T) {
+func Test_CollectionGroupBy(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"apple", "avocado", "banana"})
 	groups := coredynamic.GroupBy(c, func(s string) byte { return s[0] })
@@ -994,7 +994,7 @@ func Test_Cov12_CollectionGroupBy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupBy returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionGroupBy_Nil(t *testing.T) {
+func Test_CollectionGroupBy_Nil(t *testing.T) {
 	// Arrange
 	groups := coredynamic.GroupBy[string, byte](nil, func(s string) byte { return s[0] })
 
@@ -1006,7 +1006,7 @@ func Test_Cov12_CollectionGroupBy_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupBy returns nil -- nil", actual)
 }
 
-func Test_Cov12_CollectionGroupBy_Lock(t *testing.T) {
+func Test_CollectionGroupBy_Lock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	groups := coredynamic.GroupByLock(c, func(s string) string { return s })
@@ -1019,7 +1019,7 @@ func Test_Cov12_CollectionGroupBy_Lock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupByLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionGroupBy_Count(t *testing.T) {
+func Test_CollectionGroupBy_Count(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b", "a"})
 	counts := coredynamic.GroupByCount(c, func(s string) string { return s })
@@ -1038,7 +1038,7 @@ func Test_Cov12_CollectionGroupBy_Count(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupByCount returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionGroupBy_Count_Nil(t *testing.T) {
+func Test_CollectionGroupBy_Count_Nil(t *testing.T) {
 	// Arrange
 	counts := coredynamic.GroupByCount[string, string](nil, func(s string) string { return s })
 
@@ -1054,7 +1054,7 @@ func Test_Cov12_CollectionGroupBy_Count_Nil(t *testing.T) {
 // CollectionMap — Map, FlatMap, Reduce
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionMap_Map(t *testing.T) {
+func Test_CollectionMap_Map(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	mapped := coredynamic.Map(c, func(i int) string { return "x" })
@@ -1067,7 +1067,7 @@ func Test_Cov12_CollectionMap_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMap_Map_Nil(t *testing.T) {
+func Test_CollectionMap_Map_Nil(t *testing.T) {
 	// Arrange
 	mapped := coredynamic.Map[int, string](nil, func(i int) string { return "x" })
 
@@ -1079,7 +1079,7 @@ func Test_Cov12_CollectionMap_Map_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns nil -- nil", actual)
 }
 
-func Test_Cov12_CollectionMap_FlatMap(t *testing.T) {
+func Test_CollectionMap_FlatMap(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"ab", "cd"})
 	flat := coredynamic.FlatMap(c, func(s string) []byte { return []byte(s) })
@@ -1092,7 +1092,7 @@ func Test_Cov12_CollectionMap_FlatMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FlatMap returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMap_FlatMap_Nil(t *testing.T) {
+func Test_CollectionMap_FlatMap_Nil(t *testing.T) {
 	// Arrange
 	flat := coredynamic.FlatMap[string, byte](nil, func(s string) []byte { return []byte(s) })
 
@@ -1104,7 +1104,7 @@ func Test_Cov12_CollectionMap_FlatMap_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FlatMap returns nil -- nil", actual)
 }
 
-func Test_Cov12_CollectionMap_Reduce(t *testing.T) {
+func Test_CollectionMap_Reduce(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	sum := coredynamic.Reduce(c, 0, func(acc int, item int) int { return acc + item })
@@ -1117,7 +1117,7 @@ func Test_Cov12_CollectionMap_Reduce(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reduce returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionMap_Reduce_Nil(t *testing.T) {
+func Test_CollectionMap_Reduce_Nil(t *testing.T) {
 	// Arrange
 	sum := coredynamic.Reduce[int, int](nil, 99, func(acc int, item int) int { return acc + item })
 
@@ -1133,7 +1133,7 @@ func Test_Cov12_CollectionMap_Reduce_Nil(t *testing.T) {
 // CollectionLock — all Lock methods
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionLock_LengthLock(t *testing.T) {
+func Test_CollectionLock_LengthLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
@@ -1151,7 +1151,7 @@ func Test_Cov12_CollectionLock_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_AddLock(t *testing.T) {
+func Test_CollectionLock_AddLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.AddLock("a")
@@ -1166,7 +1166,7 @@ func Test_Cov12_CollectionLock_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_AddCollectionLock(t *testing.T) {
+func Test_CollectionLock_AddCollectionLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c2 := coredynamic.CollectionFrom([]string{"a", "b"})
@@ -1181,7 +1181,7 @@ func Test_Cov12_CollectionLock_AddCollectionLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddCollectionLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_AddCollectionsLock(t *testing.T) {
+func Test_CollectionLock_AddCollectionsLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c1 := coredynamic.CollectionFrom([]string{"a"})
@@ -1195,7 +1195,7 @@ func Test_Cov12_CollectionLock_AddCollectionsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddCollectionsLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_AddIfLock(t *testing.T) {
+func Test_CollectionLock_AddIfLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.AddIfLock(true, "a").AddIfLock(false, "b")
@@ -1208,7 +1208,7 @@ func Test_Cov12_CollectionLock_AddIfLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddIfLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_RemoveAtLock(t *testing.T) {
+func Test_CollectionLock_RemoveAtLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	ok := c.RemoveAtLock(0)
@@ -1230,7 +1230,7 @@ func Test_Cov12_CollectionLock_RemoveAtLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveAtLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_ClearLock(t *testing.T) {
+func Test_CollectionLock_ClearLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a"})
 	c.ClearLock()
@@ -1243,7 +1243,7 @@ func Test_Cov12_CollectionLock_ClearLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClearLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_ItemsLock(t *testing.T) {
+func Test_CollectionLock_ItemsLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	items := c.ItemsLock()
@@ -1256,7 +1256,7 @@ func Test_Cov12_CollectionLock_ItemsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemsLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_FirstLastLock(t *testing.T) {
+func Test_CollectionLock_FirstLastLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
@@ -1274,7 +1274,7 @@ func Test_Cov12_CollectionLock_FirstLastLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FirstLastLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_AddWithWgLock(t *testing.T) {
+func Test_CollectionLock_AddWithWgLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	wg := &sync.WaitGroup{}
@@ -1290,7 +1290,7 @@ func Test_Cov12_CollectionLock_AddWithWgLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddWithWgLock returns non-empty -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_LoopLock(t *testing.T) {
+func Test_CollectionLock_LoopLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	count := 0
@@ -1304,7 +1304,7 @@ func Test_Cov12_CollectionLock_LoopLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_FilterLock(t *testing.T) {
+func Test_CollectionLock_FilterLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4})
 	f := c.FilterLock(func(i int) bool { return i%2 == 0 })
@@ -1317,7 +1317,7 @@ func Test_Cov12_CollectionLock_FilterLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FilterLock returns correct value -- with args", actual)
 }
 
-func Test_Cov12_CollectionLock_StringsLock(t *testing.T) {
+func Test_CollectionLock_StringsLock(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 	strs := c.StringsLock()
@@ -1334,7 +1334,7 @@ func Test_Cov12_CollectionLock_StringsLock(t *testing.T) {
 // CollectionTypes — factory shortcuts
 // ═══════════════════════════════════════════
 
-func Test_Cov12_CollectionTypes(t *testing.T) {
+func Test_CollectionTypes(t *testing.T) {
 	// Arrange
 	sc := coredynamic.NewStringCollection(5)
 	esc := coredynamic.EmptyStringCollection()
@@ -1367,7 +1367,7 @@ func Test_Cov12_CollectionTypes(t *testing.T) {
 // newCreator — New.Collection pattern
 // ═══════════════════════════════════════════
 
-func Test_Cov12_NewCreator_Collection(t *testing.T) {
+func Test_NewCreator_Collection(t *testing.T) {
 	// Arrange
 	sc := coredynamic.New.Collection.String.Cap(5)
 	se := coredynamic.New.Collection.String.Empty()
@@ -1391,7 +1391,7 @@ func Test_Cov12_NewCreator_Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String returns correct value -- with args", actual)
 }
 
-func Test_Cov12_NewCreator_Int(t *testing.T) {
+func Test_NewCreator_Int(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Int.LenCap(2, 5)
 
@@ -1403,7 +1403,7 @@ func Test_Cov12_NewCreator_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Int.LenCap returns correct value -- with args", actual)
 }
 
-func Test_Cov12_NewCreator_Int64(t *testing.T) {
+func Test_NewCreator_Int64(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Int64.LenCap(2, 5)
 
@@ -1415,7 +1415,7 @@ func Test_Cov12_NewCreator_Int64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Int64.LenCap returns correct value -- with args", actual)
 }
 
-func Test_Cov12_NewCreator_Byte(t *testing.T) {
+func Test_NewCreator_Byte(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Byte.LenCap(2, 5)
 
@@ -1427,7 +1427,7 @@ func Test_Cov12_NewCreator_Byte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Byte.LenCap returns correct value -- with args", actual)
 }
 
-func Test_Cov12_NewCreator_Any(t *testing.T) {
+func Test_NewCreator_Any(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Any.Cap(5)
 
@@ -1439,7 +1439,7 @@ func Test_Cov12_NewCreator_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Any returns correct value -- with args", actual)
 }
 
-func Test_Cov12_NewCreator_Other(t *testing.T) {
+func Test_NewCreator_Other(t *testing.T) {
 	// Arrange
 	bs := coredynamic.New.Collection.ByteSlice.Empty()
 	bo := coredynamic.New.Collection.Bool.Empty()

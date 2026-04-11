@@ -9,7 +9,7 @@ import (
 
 // ── RangeInt ──
 
-func Test_Cov4_RangeInt_CreateRanges(t *testing.T) {
+func Test_RangeInt_CreateRanges(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	extra := corerange.MinMaxInt{Min: 10, Max: 12}
@@ -31,7 +31,7 @@ func Test_Cov4_RangeInt_CreateRanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns non-empty -- CreateRanges with extra MinMaxInt", actual)
 }
 
-func Test_Cov4_RangeInt_CreateRanges_NoExtra(t *testing.T) {
+func Test_RangeInt_CreateRanges_NoExtra(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 3, true)
 	ranges := ri.CreateRanges()
@@ -44,7 +44,7 @@ func Test_Cov4_RangeInt_CreateRanges_NoExtra(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns empty -- CreateRanges no extra", actual)
 }
 
-func Test_Cov4_RangeInt_RangesExcept(t *testing.T) {
+func Test_RangeInt_RangesExcept(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	result := ri.RangesExcept(2, 4)
@@ -57,7 +57,7 @@ func Test_Cov4_RangeInt_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- RangesExcept", actual)
 }
 
-func Test_Cov4_RangeInt_Conversions(t *testing.T) {
+func Test_RangeInt_Conversions(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	ri8 := ri.CreateRangeInt8()
@@ -84,7 +84,7 @@ func Test_Cov4_RangeInt_Conversions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- conversions", actual)
 }
 
-func Test_Cov4_RangeInt_IsWithinRange(t *testing.T) {
+func Test_RangeInt_IsWithinRange(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 10, true)
 
@@ -104,7 +104,7 @@ func Test_Cov4_RangeInt_IsWithinRange(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns non-empty -- IsWithinRange", actual)
 }
 
-func Test_Cov4_RangeInt_String(t *testing.T) {
+func Test_RangeInt_String(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 
@@ -116,7 +116,7 @@ func Test_Cov4_RangeInt_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- String", actual)
 }
 
-func Test_Cov4_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(5, 1, false)
 
@@ -130,7 +130,7 @@ func Test_Cov4_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 
 // ── StartEndInt ──
 
-func Test_Cov4_StartEndInt_Methods(t *testing.T) {
+func Test_StartEndInt_Methods(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 2, End: 10}
 
@@ -169,7 +169,7 @@ func Test_Cov4_StartEndInt_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- methods", actual)
 }
 
-func Test_Cov4_StartEndInt_Nil(t *testing.T) {
+func Test_StartEndInt_Nil(t *testing.T) {
 	// Arrange
 	var se *corerange.StartEndInt
 
@@ -193,7 +193,7 @@ func Test_Cov4_StartEndInt_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns nil -- nil receiver", actual)
 }
 
-func Test_Cov4_StartEndInt_Ranges(t *testing.T) {
+func Test_StartEndInt_Ranges(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 3}
 	ranges := se.Ranges()
@@ -206,7 +206,7 @@ func Test_Cov4_StartEndInt_Ranges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- Ranges", actual)
 }
 
-func Test_Cov4_StartEndInt_CreateRanges(t *testing.T) {
+func Test_StartEndInt_CreateRanges(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 3}
 	extra := corerange.StartEndInt{Start: 10, End: 12}
@@ -220,7 +220,7 @@ func Test_Cov4_StartEndInt_CreateRanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- CreateRanges", actual)
 }
 
-func Test_Cov4_StartEndInt_RangesExcept(t *testing.T) {
+func Test_StartEndInt_RangesExcept(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 	result := se.RangesExcept(2, 4)
@@ -235,7 +235,7 @@ func Test_Cov4_StartEndInt_RangesExcept(t *testing.T) {
 
 // ── StartEndSimpleString ──
 
-func Test_Cov4_StartEndSimpleString_Methods(t *testing.T) {
+func Test_StartEndSimpleString_Methods(t *testing.T) {
 	// Arrange
 	ss := &corerange.StartEndSimpleString{Start: "abc", End: "xyz"}
 
@@ -267,7 +267,7 @@ func Test_Cov4_StartEndSimpleString_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString returns correct value -- methods", actual)
 }
 
-func Test_Cov4_StartEndSimpleString_Nil(t *testing.T) {
+func Test_StartEndSimpleString_Nil(t *testing.T) {
 	// Arrange
 	var ss *corerange.StartEndSimpleString
 
@@ -291,7 +291,7 @@ func Test_Cov4_StartEndSimpleString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString returns nil -- nil", actual)
 }
 
-func Test_Cov4_StartEndSimpleString_StartEndString(t *testing.T) {
+func Test_StartEndSimpleString_StartEndString(t *testing.T) {
 	// Arrange
 	ss := &corerange.StartEndSimpleString{Start: "a", End: "b"}
 	result := ss.StartEndString()
@@ -314,7 +314,7 @@ func Test_Cov4_StartEndSimpleString_StartEndString(t *testing.T) {
 
 // ── RangeAny ──
 
-func Test_Cov4_RangeAny_Methods(t *testing.T) {
+func Test_RangeAny_Methods(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
@@ -349,7 +349,7 @@ func Test_Cov4_RangeAny_Methods(t *testing.T) {
 
 // ── Within ──
 
-func Test_Cov4_Within_RangeInteger(t *testing.T) {
+func Test_Within_RangeInteger(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.RangeInteger(true, 0, 100, 50)
 	val2, ok2 := corerange.Within.RangeInteger(true, 0, 100, -5)
@@ -374,7 +374,7 @@ func Test_Cov4_Within_RangeInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeInteger", actual)
 }
 
-func Test_Cov4_Within_RangeDefaultInteger(t *testing.T) {
+func Test_Within_RangeDefaultInteger(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.RangeDefaultInteger(0, 10, 5)
 
@@ -392,7 +392,7 @@ func Test_Cov4_Within_RangeDefaultInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeDefaultInteger", actual)
 }
 
-func Test_Cov4_Within_StringRange_Types(t *testing.T) {
+func Test_Within_StringRange_Types(t *testing.T) {
 	// Arrange
 	v8, ok8 := corerange.Within.StringRangeInt8("5")
 	v16, ok16 := corerange.Within.StringRangeInt16("100")
@@ -420,7 +420,7 @@ func Test_Cov4_Within_StringRange_Types(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- StringRange type variants", actual)
 }
 
-func Test_Cov4_Within_StringRangeInteger_InvalidInput(t *testing.T) {
+func Test_Within_StringRangeInteger_InvalidInput(t *testing.T) {
 	// Arrange
 	_, ok := corerange.Within.StringRangeInteger(true, 0, 100, "abc")
 
@@ -432,7 +432,7 @@ func Test_Cov4_Within_StringRangeInteger_InvalidInput(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns error -- StringRangeInteger invalid", actual)
 }
 
-func Test_Cov4_Within_RangeByte(t *testing.T) {
+func Test_Within_RangeByte(t *testing.T) {
 	// Arrange
 	v, ok := corerange.Within.RangeByteDefault(100)
 	v2, ok2 := corerange.Within.RangeByte(true, -1)
@@ -457,7 +457,7 @@ func Test_Cov4_Within_RangeByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeByte", actual)
 }
 
-func Test_Cov4_Within_RangeUint16(t *testing.T) {
+func Test_Within_RangeUint16(t *testing.T) {
 	// Arrange
 	v, ok := corerange.Within.RangeUint16Default(500)
 	v2, ok2 := corerange.Within.RangeUint16(false, -1)
@@ -476,7 +476,7 @@ func Test_Cov4_Within_RangeUint16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeUint16", actual)
 }
 
-func Test_Cov4_Within_RangeFloat(t *testing.T) {
+func Test_Within_RangeFloat(t *testing.T) {
 	// Arrange
 	v, ok := corerange.Within.RangeFloat(true, 0, 100, 50)
 	v2, ok2 := corerange.Within.RangeFloat(true, 0, 100, -5)
@@ -498,7 +498,7 @@ func Test_Cov4_Within_RangeFloat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeFloat", actual)
 }
 
-func Test_Cov4_Within_RangeFloat64(t *testing.T) {
+func Test_Within_RangeFloat64(t *testing.T) {
 	// Arrange
 	v, ok := corerange.Within.RangeFloat64(true, 0, 100, 50)
 	v2, ok2 := corerange.Within.RangeFloat64(true, 0, 100, 200)
@@ -517,7 +517,7 @@ func Test_Cov4_Within_RangeFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeFloat64", actual)
 }
 
-func Test_Cov4_Within_StringRangeFloat_InvalidInput(t *testing.T) {
+func Test_Within_StringRangeFloat_InvalidInput(t *testing.T) {
 	// Arrange
 	_, ok := corerange.Within.StringRangeFloat(true, 0, 100, "abc")
 	_, ok64 := corerange.Within.StringRangeFloat64(true, 0, 100, "abc")
@@ -536,7 +536,7 @@ func Test_Cov4_Within_StringRangeFloat_InvalidInput(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within returns error -- StringRangeFloat invalid", actual)
 }
 
-func Test_Cov4_Within_StringRangeIntegerDefault(t *testing.T) {
+func Test_Within_StringRangeIntegerDefault(t *testing.T) {
 	// Arrange
 	v, ok := corerange.Within.StringRangeIntegerDefault(0, 100, "50")
 	v2, ok2 := corerange.Within.StringRangeIntegerDefault(0, 100, "abc")
@@ -563,7 +563,7 @@ func Test_Cov4_Within_StringRangeIntegerDefault(t *testing.T) {
 
 // ── MinMaxInt ──
 
-func Test_Cov4_MinMaxInt_IsEqual(t *testing.T) {
+func Test_MinMaxInt_IsEqual(t *testing.T) {
 	// Arrange
 	a := &corerange.MinMaxInt{Min: 1, Max: 10}
 	b := &corerange.MinMaxInt{Min: 1, Max: 10}
@@ -587,7 +587,7 @@ func Test_Cov4_MinMaxInt_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov4_MinMaxInt_String(t *testing.T) {
+func Test_MinMaxInt_String(t *testing.T) {
 	// Arrange
 	mm := corerange.MinMaxInt{Min: 1, Max: 10}
 
@@ -599,7 +599,7 @@ func Test_Cov4_MinMaxInt_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- String", actual)
 }
 
-func Test_Cov4_MinMaxInt_RangesExcept(t *testing.T) {
+func Test_MinMaxInt_RangesExcept(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 5}
 	result := mm.RangesExcept(2, 4)
@@ -612,7 +612,7 @@ func Test_Cov4_MinMaxInt_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- RangesExcept", actual)
 }
 
-func Test_Cov4_MinMaxInt_IsOutOfRange(t *testing.T) {
+func Test_MinMaxInt_IsOutOfRange(t *testing.T) {
 	// Arrange
 	mm := corerange.MinMaxInt{Min: 1, Max: 10}
 
@@ -634,7 +634,7 @@ func Test_Cov4_MinMaxInt_IsOutOfRange(t *testing.T) {
 
 // ── MinMaxByte ──
 
-func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
+func Test_MinMaxByte_Methods(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -675,7 +675,7 @@ func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte returns correct value -- methods", actual)
 }
 
-func Test_Cov4_MinMaxByte_Clone(t *testing.T) {
+func Test_MinMaxByte_Clone(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 	cloned := mb.ClonePtr()
@@ -700,7 +700,7 @@ func Test_Cov4_MinMaxByte_Clone(t *testing.T) {
 
 // ── RangeByte ──
 
-func Test_Cov4_RangeByte_Difference(t *testing.T) {
+func Test_RangeByte_Difference(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("1|5", "|", 0, 255)
 
@@ -720,7 +720,7 @@ func Test_Cov4_RangeByte_Difference(t *testing.T) {
 
 // ── RangeString ──
 
-func Test_Cov4_RangeString_Methods(t *testing.T) {
+func Test_RangeString_Methods(t *testing.T) {
 	// Arrange
 	rs := corerange.NewRangeString("hello:world", ":")
 
@@ -740,7 +740,7 @@ func Test_Cov4_RangeString_Methods(t *testing.T) {
 
 // ── StartEndString ──
 
-func Test_Cov4_StartEndString_UsingLines(t *testing.T) {
+func Test_StartEndString_UsingLines(t *testing.T) {
 	// Arrange
 	se := corerange.NewStartEndStringUsingLines([]string{"first", "last"})
 
@@ -757,7 +757,7 @@ func Test_Cov4_StartEndString_UsingLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndString returns correct value -- UsingLines", actual)
 }
 
-func Test_Cov4_StartEndString_CreateRangeString(t *testing.T) {
+func Test_StartEndString_CreateRangeString(t *testing.T) {
 	// Arrange
 	se := corerange.NewStartEndString("a:b", ":")
 	rs := se.CreateRangeString()

@@ -11,7 +11,7 @@ import (
 // MapStringStringOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_MapStringStringOnce_AllKeys(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1", "b": "2"} })
 	keys := mo.AllKeys()
@@ -31,7 +31,7 @@ func Test_Cov9_MapStringStringOnce_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeys returns correct value -- returns all keys", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{} })
 	keys := mo.AllKeys()
@@ -44,7 +44,7 @@ func Test_Cov9_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeys returns empty -- empty map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllValues(t *testing.T) {
+func Test_MapStringStringOnce_AllValues(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 	vals := mo.AllValues()
@@ -64,7 +64,7 @@ func Test_Cov9_MapStringStringOnce_AllValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllValues returns non-empty -- returns all values", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllValues_Empty(t *testing.T) {
+func Test_MapStringStringOnce_AllValues_Empty(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{} })
 	vals := mo.AllValues()
@@ -77,7 +77,7 @@ func Test_Cov9_MapStringStringOnce_AllValues_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllValues returns empty -- empty map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllKeysSorted(t *testing.T) {
+func Test_MapStringStringOnce_AllKeysSorted(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"b": "2", "a": "1"} })
 	sorted := mo.AllKeysSorted()
@@ -97,7 +97,7 @@ func Test_Cov9_MapStringStringOnce_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeysSorted returns correct value -- returns sorted keys", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllKeysSorted_Empty(t *testing.T) {
+func Test_MapStringStringOnce_AllKeysSorted_Empty(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{} })
 	sorted := mo.AllKeysSorted()
@@ -110,7 +110,7 @@ func Test_Cov9_MapStringStringOnce_AllKeysSorted_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeysSorted returns empty -- empty map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllValuesSorted(t *testing.T) {
+func Test_MapStringStringOnce_AllValuesSorted(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "z", "b": "a"} })
 	sorted := mo.AllValuesSorted()
@@ -130,7 +130,7 @@ func Test_Cov9_MapStringStringOnce_AllValuesSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllValuesSorted returns non-empty -- returns sorted values", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_AllValuesSorted_Empty(t *testing.T) {
+func Test_MapStringStringOnce_AllValuesSorted_Empty(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{} })
 	sorted := mo.AllValuesSorted()
@@ -143,7 +143,7 @@ func Test_Cov9_MapStringStringOnce_AllValuesSorted_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllValuesSorted returns empty -- empty map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_GetValue(t *testing.T) {
+func Test_MapStringStringOnce_GetValue(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"k": "v"} })
 
@@ -161,7 +161,7 @@ func Test_Cov9_MapStringStringOnce_GetValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetValue returns empty -- returns value or empty", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
+func Test_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"k": "v"} })
 	v1, ok1 := mo.GetValueWithStatus("k")
@@ -183,7 +183,7 @@ func Test_Cov9_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetValueWithStatus returns non-empty -- returns status", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_Has_IsMissing(t *testing.T) {
+func Test_MapStringStringOnce_Has_IsMissing(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"k": "v"} })
 
@@ -203,7 +203,7 @@ func Test_Cov9_MapStringStringOnce_Has_IsMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Has returns correct value -- and IsMissing correct", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_HasAll(t *testing.T) {
+func Test_MapStringStringOnce_HasAll(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1", "b": "2"} })
 
@@ -221,7 +221,7 @@ func Test_Cov9_MapStringStringOnce_HasAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns correct value -- correct", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_Strings(t *testing.T) {
+func Test_MapStringStringOnce_Strings(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 	s := mo.Strings()
@@ -241,7 +241,7 @@ func Test_Cov9_MapStringStringOnce_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Strings returns correct value -- returns kv lines", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_Strings_Empty(t *testing.T) {
+func Test_MapStringStringOnce_Strings_Empty(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{} })
 	s := mo.Strings()
@@ -254,7 +254,7 @@ func Test_Cov9_MapStringStringOnce_Strings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Strings returns empty -- empty map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_JsonStringMust(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{"a": "1"} })
 	s := mo.JsonStringMust()
@@ -267,7 +267,7 @@ func Test_Cov9_MapStringStringOnce_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonStringMust returns json -- valid map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_String(t *testing.T) {
+func Test_MapStringStringOnce_String(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{"a": "1"} })
 	s := mo.String()
@@ -280,7 +280,7 @@ func Test_Cov9_MapStringStringOnce_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- returns csv-like output", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_ValuesPtr(t *testing.T) {
+func Test_MapStringStringOnce_ValuesPtr(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 	vp := mo.ValuesPtr()
@@ -293,7 +293,7 @@ func Test_Cov9_MapStringStringOnce_ValuesPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValuesPtr returns non-empty -- returns ptr", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_Length_Nil(t *testing.T) {
+func Test_MapStringStringOnce_Length_Nil(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 
@@ -305,7 +305,7 @@ func Test_Cov9_MapStringStringOnce_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns 0 -- nil map", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 
@@ -317,7 +317,7 @@ func Test_Cov9_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns nil -- both nil", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_IsEqual_DiffLen(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_DiffLen(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 
@@ -329,7 +329,7 @@ func Test_Cov9_MapStringStringOnce_IsEqual_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- diff length", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_IsEqual_DiffValue(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_DiffValue(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 
@@ -341,7 +341,7 @@ func Test_Cov9_MapStringStringOnce_IsEqual_DiffValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- diff value", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 
@@ -353,7 +353,7 @@ func Test_Cov9_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- missing key", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_IsEqual_Match(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_Match(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 
@@ -365,7 +365,7 @@ func Test_Cov9_MapStringStringOnce_IsEqual_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- match", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_Serialize(t *testing.T) {
+func Test_MapStringStringOnce_Serialize(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{"a": "1"} })
 	b, err := mo.Serialize()
@@ -384,7 +384,7 @@ func Test_Cov9_MapStringStringOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- returns bytes", actual)
 }
 
-func Test_Cov9_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
+func Test_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 	err := mo.UnmarshalJSON([]byte(`{"x":"y"}`))
@@ -407,7 +407,7 @@ func Test_Cov9_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
 // StringsOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_StringsOnce_UniqueMap(t *testing.T) {
+func Test_StringsOnce_UniqueMap(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b", "a"} })
 	m := so.UniqueMap()
@@ -429,7 +429,7 @@ func Test_Cov9_StringsOnce_UniqueMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UniqueMap returns correct value -- returns unique map", actual)
 }
 
-func Test_Cov9_StringsOnce_UniqueMap_Nil(t *testing.T) {
+func Test_StringsOnce_UniqueMap_Nil(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return nil })
 	m := so.UniqueMap()
@@ -442,7 +442,7 @@ func Test_Cov9_StringsOnce_UniqueMap_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UniqueMap returns empty -- nil values", actual)
 }
 
-func Test_Cov9_StringsOnce_UniqueMapLock(t *testing.T) {
+func Test_StringsOnce_UniqueMapLock(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"x"} })
 	m := so.UniqueMapLock()
@@ -455,7 +455,7 @@ func Test_Cov9_StringsOnce_UniqueMapLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UniqueMapLock returns correct value -- returns locked unique map", actual)
 }
 
-func Test_Cov9_StringsOnce_CsvLines(t *testing.T) {
+func Test_StringsOnce_CsvLines(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 	lines := so.CsvLines()
@@ -468,7 +468,7 @@ func Test_Cov9_StringsOnce_CsvLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CsvLines returns correct value -- returns csv lines", actual)
 }
 
-func Test_Cov9_StringsOnce_Csv(t *testing.T) {
+func Test_StringsOnce_Csv(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 	csv := so.Csv()
@@ -481,7 +481,7 @@ func Test_Cov9_StringsOnce_Csv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Csv returns correct value -- returns csv string", actual)
 }
 
-func Test_Cov9_StringsOnce_Sorted(t *testing.T) {
+func Test_StringsOnce_Sorted(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"b", "a"} })
 	s := so.Sorted()
@@ -501,7 +501,7 @@ func Test_Cov9_StringsOnce_Sorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Sorted returns non-empty -- returns sorted values", actual)
 }
 
-func Test_Cov9_StringsOnce_RangesMap(t *testing.T) {
+func Test_StringsOnce_RangesMap(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"x", "y"} })
 	m := so.RangesMap()
@@ -520,7 +520,7 @@ func Test_Cov9_StringsOnce_RangesMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesMap returns correct value -- returns index map", actual)
 }
 
-func Test_Cov9_StringsOnce_RangesMap_Empty(t *testing.T) {
+func Test_StringsOnce_RangesMap_Empty(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{} })
 	m := so.RangesMap()
@@ -533,7 +533,7 @@ func Test_Cov9_StringsOnce_RangesMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesMap returns empty -- empty slice", actual)
 }
 
-func Test_Cov9_StringsOnce_HasAll(t *testing.T) {
+func Test_StringsOnce_HasAll(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 
@@ -551,7 +551,7 @@ func Test_Cov9_StringsOnce_HasAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns correct value -- correct", actual)
 }
 
-func Test_Cov9_StringsOnce_JsonStringMust(t *testing.T) {
+func Test_StringsOnce_JsonStringMust(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 	s := so.JsonStringMust()
@@ -564,7 +564,7 @@ func Test_Cov9_StringsOnce_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonStringMust returns correct value -- returns json", actual)
 }
 
-func Test_Cov9_StringsOnce_String(t *testing.T) {
+func Test_StringsOnce_String(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 	s := so.String()
@@ -577,7 +577,7 @@ func Test_Cov9_StringsOnce_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- returns csv output", actual)
 }
 
-func Test_Cov9_StringsOnce_Length_Nil(t *testing.T) {
+func Test_StringsOnce_Length_Nil(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -589,7 +589,7 @@ func Test_Cov9_StringsOnce_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns 0 -- nil values", actual)
 }
 
-func Test_Cov9_StringsOnce_SafeStrings(t *testing.T) {
+func Test_StringsOnce_SafeStrings(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return nil })
 	ss := so.SafeStrings()
@@ -602,7 +602,7 @@ func Test_Cov9_StringsOnce_SafeStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeStrings returns empty slice -- nil", actual)
 }
 
-func Test_Cov9_StringsOnce_SafeStrings_NonEmpty(t *testing.T) {
+func Test_StringsOnce_SafeStrings_NonEmpty(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"x"} })
 	ss := so.SafeStrings()
@@ -619,7 +619,7 @@ func Test_Cov9_StringsOnce_SafeStrings_NonEmpty(t *testing.T) {
 // IntegersOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_IntegersOnce_Sorted(t *testing.T) {
+func Test_IntegersOnce_Sorted(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{3, 1, 2} })
 	s := io.Sorted()
@@ -639,7 +639,7 @@ func Test_Cov9_IntegersOnce_Sorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Sorted returns correct value -- returns sorted ints", actual)
 }
 
-func Test_Cov9_IntegersOnce_RangesMap(t *testing.T) {
+func Test_IntegersOnce_RangesMap(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{10, 20} })
 	m := io.RangesMap()
@@ -658,7 +658,7 @@ func Test_Cov9_IntegersOnce_RangesMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesMap returns correct value -- returns index map", actual)
 }
 
-func Test_Cov9_IntegersOnce_RangesMap_Empty(t *testing.T) {
+func Test_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := io.RangesMap()
@@ -671,7 +671,7 @@ func Test_Cov9_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesMap returns empty -- empty slice", actual)
 }
 
-func Test_Cov9_IntegersOnce_RangesBoolMap(t *testing.T) {
+func Test_IntegersOnce_RangesBoolMap(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{5, 10} })
 	m := io.RangesBoolMap()
@@ -690,7 +690,7 @@ func Test_Cov9_IntegersOnce_RangesBoolMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesBoolMap returns correct value -- returns bool map", actual)
 }
 
-func Test_Cov9_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
+func Test_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := io.RangesBoolMap()
@@ -703,7 +703,7 @@ func Test_Cov9_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesBoolMap returns empty -- empty slice", actual)
 }
 
-func Test_Cov9_IntegersOnce_UniqueMap(t *testing.T) {
+func Test_IntegersOnce_UniqueMap(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2, 1} })
 	m := io.UniqueMap()
@@ -716,7 +716,7 @@ func Test_Cov9_IntegersOnce_UniqueMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UniqueMap returns correct value -- returns unique map", actual)
 }
 
-func Test_Cov9_IntegersOnce_UniqueMap_Empty(t *testing.T) {
+func Test_IntegersOnce_UniqueMap_Empty(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := io.UniqueMap()
@@ -729,7 +729,7 @@ func Test_Cov9_IntegersOnce_UniqueMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UniqueMap returns empty -- empty slice", actual)
 }
 
-func Test_Cov9_IntegersOnce_IsEqual_DiffCount(t *testing.T) {
+func Test_IntegersOnce_IsEqual_DiffCount(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2, 1} })
 
@@ -741,7 +741,7 @@ func Test_Cov9_IntegersOnce_IsEqual_DiffCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- diff count", actual)
 }
 
-func Test_Cov9_IntegersOnce_IsEqual_DiffValues(t *testing.T) {
+func Test_IntegersOnce_IsEqual_DiffValues(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2} })
 
@@ -753,7 +753,7 @@ func Test_Cov9_IntegersOnce_IsEqual_DiffValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns non-empty -- diff values", actual)
 }
 
-func Test_Cov9_IntegersOnce_Aliases(t *testing.T) {
+func Test_IntegersOnce_Aliases(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2} })
 
@@ -783,7 +783,7 @@ func Test_Cov9_IntegersOnce_Aliases(t *testing.T) {
 // StringsOnce — IsEqual with excess value
 // ==========================================================================
 
-func Test_Cov9_StringsOnce_IsEqual_DiffCount(t *testing.T) {
+func Test_StringsOnce_IsEqual_DiffCount(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 
@@ -795,7 +795,7 @@ func Test_Cov9_StringsOnce_IsEqual_DiffCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- diff count", actual)
 }
 
-func Test_Cov9_StringsOnce_IsEqual_DiffValues(t *testing.T) {
+func Test_StringsOnce_IsEqual_DiffValues(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 
@@ -811,7 +811,7 @@ func Test_Cov9_StringsOnce_IsEqual_DiffValues(t *testing.T) {
 // ByteOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_ByteOnce_UnmarshalJSON(t *testing.T) {
+func Test_ByteOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOncePtr(func() byte { return 0 })
 	err := bo.UnmarshalJSON([]byte(`65`))
@@ -830,7 +830,7 @@ func Test_Cov9_ByteOnce_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns correct value -- parses byte", actual)
 }
 
-func Test_Cov9_ByteOnce_Int(t *testing.T) {
+func Test_ByteOnce_Int(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOncePtr(func() byte { return 42 })
 
@@ -842,7 +842,7 @@ func Test_Cov9_ByteOnce_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Int returns correct value -- returns int value", actual)
 }
 
-func Test_Cov9_ByteOnce_IsEmpty_IsZero(t *testing.T) {
+func Test_ByteOnce_IsEmpty_IsZero(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOncePtr(func() byte { return 0 })
 
@@ -860,7 +860,7 @@ func Test_Cov9_ByteOnce_IsEmpty_IsZero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- and IsZero on zero byte", actual)
 }
 
-func Test_Cov9_ByteOnce_IsPositive_IsNegative(t *testing.T) {
+func Test_ByteOnce_IsPositive_IsNegative(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOncePtr(func() byte { return 5 })
 
@@ -882,7 +882,7 @@ func Test_Cov9_ByteOnce_IsPositive_IsNegative(t *testing.T) {
 // IntegerOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_IntegerOnce_UnmarshalJSON(t *testing.T) {
+func Test_IntegerOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOncePtr(func() int { return 0 })
 	err := io.UnmarshalJSON([]byte(`42`))
@@ -901,7 +901,7 @@ func Test_Cov9_IntegerOnce_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns correct value -- parses int", actual)
 }
 
-func Test_Cov9_IntegerOnce_ComparisonMethods(t *testing.T) {
+func Test_IntegerOnce_ComparisonMethods(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOncePtr(func() int { return 5 })
 
@@ -943,7 +943,7 @@ func Test_Cov9_IntegerOnce_ComparisonMethods(t *testing.T) {
 // BoolOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_BoolOnce_UnmarshalJSON(t *testing.T) {
+func Test_BoolOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOncePtr(func() bool { return false })
 	err := bo.UnmarshalJSON([]byte(`true`))
@@ -966,7 +966,7 @@ func Test_Cov9_BoolOnce_UnmarshalJSON(t *testing.T) {
 // BytesOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_BytesOnce_UnmarshalJSON(t *testing.T) {
+func Test_BytesOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOncePtr(func() []byte { return nil })
 	err := bo.UnmarshalJSON([]byte(`"aGVsbG8="`))
@@ -985,7 +985,7 @@ func Test_Cov9_BytesOnce_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns correct value -- parses bytes", actual)
 }
 
-func Test_Cov9_BytesOnce_NilInitializerFunc(t *testing.T) {
+func Test_BytesOnce_NilInitializerFunc(t *testing.T) {
 	// Arrange
 	bo := &coreonce.BytesOnce{}
 	val := bo.Value()
@@ -1010,7 +1010,7 @@ func Test_Cov9_BytesOnce_NilInitializerFunc(t *testing.T) {
 // StringOnce — remaining uncovered methods
 // ==========================================================================
 
-func Test_Cov9_StringOnce_SplitLeftRight_Single(t *testing.T) {
+func Test_StringOnce_SplitLeftRight_Single(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOncePtr(func() string { return "only" })
 	left, right := so.SplitLeftRight("=")
@@ -1029,7 +1029,7 @@ func Test_Cov9_StringOnce_SplitLeftRight_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns correct value -- single element", actual)
 }
 
-func Test_Cov9_StringOnce_SplitLeftRight_Two(t *testing.T) {
+func Test_StringOnce_SplitLeftRight_Two(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOncePtr(func() string { return "k=v" })
 	left, right := so.SplitLeftRight("=")
@@ -1048,7 +1048,7 @@ func Test_Cov9_StringOnce_SplitLeftRight_Two(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns correct value -- two parts", actual)
 }
 
-func Test_Cov9_StringOnce_SplitLeftRightTrim(t *testing.T) {
+func Test_StringOnce_SplitLeftRightTrim(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOncePtr(func() string { return " k = v " })
 	left, right := so.SplitLeftRightTrim("=")
@@ -1067,7 +1067,7 @@ func Test_Cov9_StringOnce_SplitLeftRightTrim(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrim returns correct value -- trims spaces", actual)
 }
 
-func Test_Cov9_StringOnce_MoreMethods(t *testing.T) {
+func Test_StringOnce_MoreMethods(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOncePtr(func() string { return "hello world" })
 

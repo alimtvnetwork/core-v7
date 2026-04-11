@@ -11,7 +11,7 @@ import (
 // KeyValCollection — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_Cov8_KeyValCollection_Empty(t *testing.T) {
+func Test_KeyValCollection_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	var nilC *coredynamic.KeyValCollection
@@ -33,7 +33,7 @@ func Test_Cov8_KeyValCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns empty -- Empty", actual)
 }
 
-func Test_Cov8_KeyValCollection_Add(t *testing.T) {
+func Test_KeyValCollection_Add(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -53,7 +53,7 @@ func Test_Cov8_KeyValCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Add", actual)
 }
 
-func Test_Cov8_KeyValCollection_AddPtr(t *testing.T) {
+func Test_KeyValCollection_AddPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.AddPtr(&coredynamic.KeyVal{Key: "a", Value: 1})
@@ -67,7 +67,7 @@ func Test_Cov8_KeyValCollection_AddPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- AddPtr", actual)
 }
 
-func Test_Cov8_KeyValCollection_AddMany(t *testing.T) {
+func Test_KeyValCollection_AddMany(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.AddMany(
@@ -84,7 +84,7 @@ func Test_Cov8_KeyValCollection_AddMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- AddMany", actual)
 }
 
-func Test_Cov8_KeyValCollection_AddManyPtr(t *testing.T) {
+func Test_KeyValCollection_AddManyPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.AddManyPtr(
@@ -102,7 +102,7 @@ func Test_Cov8_KeyValCollection_AddManyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- AddManyPtr", actual)
 }
 
-func Test_Cov8_KeyValCollection_Items(t *testing.T) {
+func Test_KeyValCollection_Items(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -122,7 +122,7 @@ func Test_Cov8_KeyValCollection_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Items", actual)
 }
 
-func Test_Cov8_KeyValCollection_AllKeys(t *testing.T) {
+func Test_KeyValCollection_AllKeys(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "b", Value: 2})
@@ -147,7 +147,7 @@ func Test_Cov8_KeyValCollection_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- AllKeys", actual)
 }
 
-func Test_Cov8_KeyValCollection_AllValues(t *testing.T) {
+func Test_KeyValCollection_AllValues(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 42})
@@ -168,7 +168,7 @@ func Test_Cov8_KeyValCollection_AllValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns non-empty -- AllValues", actual)
 }
 
-func Test_Cov8_KeyValCollection_MapAnyItems(t *testing.T) {
+func Test_KeyValCollection_MapAnyItems(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -193,7 +193,7 @@ func Test_Cov8_KeyValCollection_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- MapAnyItems", actual)
 }
 
-func Test_Cov8_KeyValCollection_String(t *testing.T) {
+func Test_KeyValCollection_String(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -206,7 +206,7 @@ func Test_Cov8_KeyValCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- String", actual)
 }
 
-func Test_Cov8_KeyValCollection_Json(t *testing.T) {
+func Test_KeyValCollection_Json(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -232,7 +232,7 @@ func Test_Cov8_KeyValCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Json", actual)
 }
 
-func Test_Cov8_KeyValCollection_JsonString(t *testing.T) {
+func Test_KeyValCollection_JsonString(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -253,7 +253,7 @@ func Test_Cov8_KeyValCollection_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- JsonString", actual)
 }
 
-func Test_Cov8_KeyValCollection_Serialize(t *testing.T) {
+func Test_KeyValCollection_Serialize(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -273,7 +273,7 @@ func Test_Cov8_KeyValCollection_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Serialize", actual)
 }
 
-func Test_Cov8_KeyValCollection_Clone(t *testing.T) {
+func Test_KeyValCollection_Clone(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -299,7 +299,7 @@ func Test_Cov8_KeyValCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Clone", actual)
 }
 
-func Test_Cov8_KeyValCollection_Paging(t *testing.T) {
+func Test_KeyValCollection_Paging(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 5; i++ {
@@ -325,7 +325,7 @@ func Test_Cov8_KeyValCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Paging", actual)
 }
 
-func Test_Cov8_KeyValCollection_Paging_SmallSet(t *testing.T) {
+func Test_KeyValCollection_Paging_SmallSet(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -349,7 +349,7 @@ func Test_Cov8_KeyValCollection_Paging_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Paging small set", actual)
 }
 
-func Test_Cov8_KeyValCollection_JsonMapResults(t *testing.T) {
+func Test_KeyValCollection_JsonMapResults(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: "hello"})
@@ -373,7 +373,7 @@ func Test_Cov8_KeyValCollection_JsonMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- JsonMapResults", actual)
 }
 
-func Test_Cov8_KeyValCollection_JsonResultsCollection(t *testing.T) {
+func Test_KeyValCollection_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: "hello"})
@@ -394,7 +394,7 @@ func Test_Cov8_KeyValCollection_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_Cov8_KeyValCollection_ParseJson(t *testing.T) {
+func Test_KeyValCollection_ParseJson(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -418,7 +418,7 @@ func Test_Cov8_KeyValCollection_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_KeyValCollection_JsonParseSelfInject(t *testing.T) {
+func Test_KeyValCollection_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -436,7 +436,7 @@ func Test_Cov8_KeyValCollection_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_Cov8_KeyValCollection_NonPtrPtr(t *testing.T) {
+func Test_KeyValCollection_NonPtrPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -464,7 +464,7 @@ func Test_Cov8_KeyValCollection_NonPtrPtr(t *testing.T) {
 // DynamicCollection — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_Cov8_DynamicCollection_Empty(t *testing.T) {
+func Test_DynamicCollection_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	var nilDC *coredynamic.DynamicCollection
@@ -488,7 +488,7 @@ func Test_Cov8_DynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- Empty", actual)
 }
 
-func Test_Cov8_DynamicCollection_Add(t *testing.T) {
+func Test_DynamicCollection_Add(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.Add(coredynamic.NewDynamic("a", true))
@@ -514,7 +514,7 @@ func Test_Cov8_DynamicCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Add", actual)
 }
 
-func Test_Cov8_DynamicCollection_AddAnyMany(t *testing.T) {
+func Test_DynamicCollection_AddAnyMany(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -528,7 +528,7 @@ func Test_Cov8_DynamicCollection_AddAnyMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddAnyMany", actual)
 }
 
-func Test_Cov8_DynamicCollection_AddManyPtr(t *testing.T) {
+func Test_DynamicCollection_AddManyPtr(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddManyPtr(
@@ -546,7 +546,7 @@ func Test_Cov8_DynamicCollection_AddManyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddManyPtr", actual)
 }
 
-func Test_Cov8_DynamicCollection_FirstLastOrDefault(t *testing.T) {
+func Test_DynamicCollection_FirstLastOrDefault(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("first", true)
@@ -578,7 +578,7 @@ func Test_Cov8_DynamicCollection_FirstLastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- FirstLast", actual)
 }
 
-func Test_Cov8_DynamicCollection_At(t *testing.T) {
+func Test_DynamicCollection_At(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -592,7 +592,7 @@ func Test_Cov8_DynamicCollection_At(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- At", actual)
 }
 
-func Test_Cov8_DynamicCollection_Items(t *testing.T) {
+func Test_DynamicCollection_Items(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("a", true)
@@ -612,7 +612,7 @@ func Test_Cov8_DynamicCollection_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Items", actual)
 }
 
-func Test_Cov8_DynamicCollection_SkipTakeLimitSlice(t *testing.T) {
+func Test_DynamicCollection_SkipTakeLimitSlice(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(10)
 	dc.AddAnyMany("a", "b", "c", "d", "e")
@@ -641,7 +641,7 @@ func Test_Cov8_DynamicCollection_SkipTakeLimitSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Skip/Take/Limit", actual)
 }
 
-func Test_Cov8_DynamicCollection_RemoveAt(t *testing.T) {
+func Test_DynamicCollection_RemoveAt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -664,7 +664,7 @@ func Test_Cov8_DynamicCollection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- RemoveAt", actual)
 }
 
-func Test_Cov8_DynamicCollection_AnyItems(t *testing.T) {
+func Test_DynamicCollection_AnyItems(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -686,7 +686,7 @@ func Test_Cov8_DynamicCollection_AnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AnyItems", actual)
 }
 
-func Test_Cov8_DynamicCollection_AnyItemsCollection(t *testing.T) {
+func Test_DynamicCollection_AnyItemsCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -708,7 +708,7 @@ func Test_Cov8_DynamicCollection_AnyItemsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AnyItemsCollection", actual)
 }
 
-func Test_Cov8_DynamicCollection_ListStrings(t *testing.T) {
+func Test_DynamicCollection_ListStrings(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("hello", "world")
@@ -729,7 +729,7 @@ func Test_Cov8_DynamicCollection_ListStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- ListStrings", actual)
 }
 
-func Test_Cov8_DynamicCollection_Strings(t *testing.T) {
+func Test_DynamicCollection_Strings(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -754,7 +754,7 @@ func Test_Cov8_DynamicCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Strings", actual)
 }
 
-func Test_Cov8_DynamicCollection_Loop(t *testing.T) {
+func Test_DynamicCollection_Loop(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -784,7 +784,7 @@ func Test_Cov8_DynamicCollection_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Loop", actual)
 }
 
-func Test_Cov8_DynamicCollection_Loop_Break(t *testing.T) {
+func Test_DynamicCollection_Loop_Break(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -802,7 +802,7 @@ func Test_Cov8_DynamicCollection_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Loop break", actual)
 }
 
-func Test_Cov8_DynamicCollection_Json(t *testing.T) {
+func Test_DynamicCollection_Json(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -833,7 +833,7 @@ func Test_Cov8_DynamicCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Json", actual)
 }
 
-func Test_Cov8_DynamicCollection_JsonResultsCollection(t *testing.T) {
+func Test_DynamicCollection_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -858,7 +858,7 @@ func Test_Cov8_DynamicCollection_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_Cov8_DynamicCollection_Paging(t *testing.T) {
+func Test_DynamicCollection_Paging(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(10)
 	dc.AddAnyMany("a", "b", "c", "d", "e")
@@ -882,7 +882,7 @@ func Test_Cov8_DynamicCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Paging", actual)
 }
 
-func Test_Cov8_DynamicCollection_Paging_SmallSet(t *testing.T) {
+func Test_DynamicCollection_Paging_SmallSet(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("a", true)
@@ -906,7 +906,7 @@ func Test_Cov8_DynamicCollection_Paging_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Paging small set", actual)
 }
 
-func Test_Cov8_DynamicCollection_ParseJson(t *testing.T) {
+func Test_DynamicCollection_ParseJson(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -930,7 +930,7 @@ func Test_Cov8_DynamicCollection_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_DynamicCollection_JsonParseSelfInject(t *testing.T) {
+func Test_DynamicCollection_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -952,7 +952,7 @@ func Test_Cov8_DynamicCollection_JsonParseSelfInject(t *testing.T) {
 // MapAnyItems — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_Cov8_MapAnyItems_Constructors(t *testing.T) {
+func Test_MapAnyItems_Constructors(t *testing.T) {
 	// Arrange
 	empty := coredynamic.EmptyMapAnyItems()
 	m := coredynamic.NewMapAnyItems(5)
@@ -981,7 +981,7 @@ func Test_Cov8_MapAnyItems_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Constructors", actual)
 }
 
-func Test_Cov8_MapAnyItems_AddSet(t *testing.T) {
+func Test_MapAnyItems_AddSet(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	isNew1 := m.Add("a", 1)
@@ -1002,7 +1002,7 @@ func Test_Cov8_MapAnyItems_AddSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Add/Set", actual)
 }
 
-func Test_Cov8_MapAnyItems_Get(t *testing.T) {
+func Test_MapAnyItems_Get(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 42})
 	val, has := m.Get("a")
@@ -1024,7 +1024,7 @@ func Test_Cov8_MapAnyItems_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Get", actual)
 }
 
-func Test_Cov8_MapAnyItems_AllKeys(t *testing.T) {
+func Test_MapAnyItems_AllKeys(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeys()
@@ -1049,7 +1049,7 @@ func Test_Cov8_MapAnyItems_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AllKeys", actual)
 }
 
-func Test_Cov8_MapAnyItems_AddMapResult(t *testing.T) {
+func Test_MapAnyItems_AddMapResult(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.Add("a", 1)
@@ -1064,7 +1064,7 @@ func Test_Cov8_MapAnyItems_AddMapResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddMapResult", actual)
 }
 
-func Test_Cov8_MapAnyItems_AddManyMapResults(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResults(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.AddManyMapResultsUsingOption(true, map[string]any{"a": 1}, map[string]any{"b": 2})
@@ -1078,7 +1078,7 @@ func Test_Cov8_MapAnyItems_AddManyMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddManyMapResults", actual)
 }
 
-func Test_Cov8_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
+func Test_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2, "c": 3})
 	sub := m.GetNewMapUsingKeys(false, "a", "c")
@@ -1098,7 +1098,7 @@ func Test_Cov8_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetNewMapUsingKeys", actual)
 }
 
-func Test_Cov8_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jsonResult := m.Json()
@@ -1128,7 +1128,7 @@ func Test_Cov8_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Json", actual)
 }
 
-func Test_Cov8_MapAnyItems_Strings(t *testing.T) {
+func Test_MapAnyItems_Strings(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	strs := m.Strings()
@@ -1148,7 +1148,7 @@ func Test_Cov8_MapAnyItems_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Strings", actual)
 }
 
-func Test_Cov8_MapAnyItems_ClearDisposeDeepClear(t *testing.T) {
+func Test_MapAnyItems_ClearDisposeDeepClear(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	m.Clear()
@@ -1182,7 +1182,7 @@ func Test_Cov8_MapAnyItems_ClearDisposeDeepClear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Clear/DeepClear/Dispose", actual)
 }
 
-func Test_Cov8_MapAnyItems_IsEqual(t *testing.T) {
+func Test_MapAnyItems_IsEqual(t *testing.T) {
 	// Arrange
 	m1 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
@@ -1211,7 +1211,7 @@ func Test_Cov8_MapAnyItems_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov8_MapAnyItems_ClonePtr(t *testing.T) {
+func Test_MapAnyItems_ClonePtr(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	cloned, err := m.ClonePtr()
@@ -1234,7 +1234,7 @@ func Test_Cov8_MapAnyItems_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ClonePtr", actual)
 }
 
-func Test_Cov8_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
+func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	self := m.MapAnyItems()
@@ -1247,7 +1247,7 @@ func Test_Cov8_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- self-reference", actual)
 }
 
-func Test_Cov8_MapAnyItems_Paging(t *testing.T) {
+func Test_MapAnyItems_Paging(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(10)
 	for i := 0; i < 5; i++ {
@@ -1270,7 +1270,7 @@ func Test_Cov8_MapAnyItems_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Paging", actual)
 }
 
-func Test_Cov8_MapAnyItems_Paging_SmallSet(t *testing.T) {
+func Test_MapAnyItems_Paging_SmallSet(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	pages := m.GetPagesSize(0)
@@ -1290,7 +1290,7 @@ func Test_Cov8_MapAnyItems_Paging_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Paging small set", actual)
 }
 
-func Test_Cov8_MapAnyItems_ParseJson(t *testing.T) {
+func Test_MapAnyItems_ParseJson(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jsonResult := m.Json()
@@ -1313,7 +1313,7 @@ func Test_Cov8_MapAnyItems_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_MapAnyItems_JsonParseSelfInject(t *testing.T) {
+func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jsonResult := m.Json()
@@ -1330,7 +1330,7 @@ func Test_Cov8_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_Cov8_MapAnyItems_JsonResultsCollections(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollections(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "hello"})
 	rc := m.JsonResultsCollection()
@@ -1360,7 +1360,7 @@ func Test_Cov8_MapAnyItems_JsonResultsCollections(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultsCollections", actual)
 }
 
-func Test_Cov8_MapAnyItems_JsonResultOfKey(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "hello"})
 	found := m.JsonResultOfKey("a")
@@ -1380,7 +1380,7 @@ func Test_Cov8_MapAnyItems_JsonResultOfKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKey", actual)
 }
 
-func Test_Cov8_MapAnyItems_JsonResultOfKeys(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "hello", "b": 42})
 	results := m.JsonResultOfKeys("a", "b")
@@ -1400,7 +1400,7 @@ func Test_Cov8_MapAnyItems_JsonResultOfKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKeys", actual)
 }
 
-func Test_Cov8_MapAnyItems_AddJsonResultPtr(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.AddJsonResultPtr("a", nil) // nil — should skip
@@ -1421,7 +1421,7 @@ func Test_Cov8_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddJsonResultPtr", actual)
 }
 
-func Test_Cov8_MapAnyItems_RawMapStringAnyDiff(t *testing.T) {
+func Test_MapAnyItems_RawMapStringAnyDiff(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	diff := m.RawMapStringAnyDiff()
@@ -1442,7 +1442,7 @@ func Test_Cov8_MapAnyItems_RawMapStringAnyDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- RawMapStringAnyDiff", actual)
 }
 
-func Test_Cov8_MapAnyItems_Deserialize(t *testing.T) {
+func Test_MapAnyItems_Deserialize(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"name": "test"})
 	var result string
@@ -1465,7 +1465,7 @@ func Test_Cov8_MapAnyItems_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Deserialize", actual)
 }
 
-func Test_Cov8_MapAnyItems_GetFieldsMap(t *testing.T) {
+func Test_MapAnyItems_GetFieldsMap(t *testing.T) {
 	// Arrange
 	inner := map[string]any{"x": 1}
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"data": inner})
@@ -1486,7 +1486,7 @@ func Test_Cov8_MapAnyItems_GetFieldsMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetFieldsMap", actual)
 }
 
-func Test_Cov8_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
+func Test_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	err := m.GetManyItemsRefs() // empty — should return nil
@@ -1499,7 +1499,7 @@ func Test_Cov8_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- GetManyItemsRefs empty", actual)
 }
 
-func Test_Cov8_MapAnyItems_HasAnyChanges(t *testing.T) {
+func Test_MapAnyItems_HasAnyChanges(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	changed := m.HasAnyChanges(true, map[string]any{"a": 2})

@@ -10,7 +10,7 @@ import (
 
 // ── Result extended methods ──
 
-func Test_Cov3_Result_Map(t *testing.T) {
+func Test_Result_Map(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	m := r.Map()
@@ -31,7 +31,7 @@ func Test_Cov3_Result_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Map returns populated -- valid", actual)
 }
 
-func Test_Cov3_Result_Map_WithError(t *testing.T) {
+func Test_Result_Map_WithError(t *testing.T) {
 	// Arrange
 	r := &corejson.Result{Error: errors.New("err"), TypeName: "test"}
 	m := r.Map()
@@ -44,7 +44,7 @@ func Test_Cov3_Result_Map_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Map with error -- has error key", actual)
 }
 
-func Test_Cov3_Result_BytesTypeName(t *testing.T) {
+func Test_Result_BytesTypeName(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	var nilR *corejson.Result
@@ -63,7 +63,7 @@ func Test_Cov3_Result_BytesTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result BytesTypeName -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_SafeBytesTypeName(t *testing.T) {
+func Test_Result_SafeBytesTypeName(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -75,7 +75,7 @@ func Test_Cov3_Result_SafeBytesTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SafeBytesTypeName -- valid", actual)
 }
 
-func Test_Cov3_Result_PrettyJsonString(t *testing.T) {
+func Test_Result_PrettyJsonString(t *testing.T) {
 	// Arrange
 	r := corejson.New(map[string]int{"a": 1})
 	var nilR *corejson.Result
@@ -94,7 +94,7 @@ func Test_Cov3_Result_PrettyJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result PrettyJsonString -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_PrettyJsonStringOrErrString(t *testing.T) {
+func Test_Result_PrettyJsonStringOrErrString(t *testing.T) {
 	// Arrange
 	r := corejson.New(map[string]int{"a": 1})
 	errR := &corejson.Result{Error: errors.New("fail")}
@@ -116,7 +116,7 @@ func Test_Cov3_Result_PrettyJsonStringOrErrString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result PrettyJsonStringOrErrString -- all branches", actual)
 }
 
-func Test_Cov3_Result_Length(t *testing.T) {
+func Test_Result_Length(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	var nilR *corejson.Result
@@ -135,7 +135,7 @@ func Test_Cov3_Result_Length(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Length -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_ErrorString(t *testing.T) {
+func Test_Result_ErrorString(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	errR := &corejson.Result{Error: errors.New("fail")}
@@ -154,7 +154,7 @@ func Test_Cov3_Result_ErrorString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result ErrorString -- no error and error", actual)
 }
 
-func Test_Cov3_Result_IsErrorEqual(t *testing.T) {
+func Test_Result_IsErrorEqual(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	errR := &corejson.Result{Error: errors.New("fail")}
@@ -177,7 +177,7 @@ func Test_Cov3_Result_IsErrorEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result IsErrorEqual -- all branches", actual)
 }
 
-func Test_Cov3_Result_SafeNonIssueBytes(t *testing.T) {
+func Test_Result_SafeNonIssueBytes(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	errR := &corejson.Result{Error: errors.New("fail")}
@@ -196,7 +196,7 @@ func Test_Cov3_Result_SafeNonIssueBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SafeNonIssueBytes -- valid and error", actual)
 }
 
-func Test_Cov3_Result_SafeBytes(t *testing.T) {
+func Test_Result_SafeBytes(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	var nilR *corejson.Result
@@ -215,7 +215,7 @@ func Test_Cov3_Result_SafeBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SafeBytes -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_Values(t *testing.T) {
+func Test_Result_Values(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -227,7 +227,7 @@ func Test_Cov3_Result_Values(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Values -- has bytes", actual)
 }
 
-func Test_Cov3_Result_SafeValues(t *testing.T) {
+func Test_Result_SafeValues(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	var nilR *corejson.Result
@@ -246,7 +246,7 @@ func Test_Cov3_Result_SafeValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SafeValues -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_SafeValuesPtr(t *testing.T) {
+func Test_Result_SafeValuesPtr(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -258,7 +258,7 @@ func Test_Cov3_Result_SafeValuesPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SafeValuesPtr -- has bytes", actual)
 }
 
-func Test_Cov3_Result_Raw(t *testing.T) {
+func Test_Result_Raw(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	bytes, err := r.Raw()
@@ -281,7 +281,7 @@ func Test_Cov3_Result_Raw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Raw -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_RawString(t *testing.T) {
+func Test_Result_RawString(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	s, err := r.RawString()
@@ -300,7 +300,7 @@ func Test_Cov3_Result_RawString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result RawString -- valid", actual)
 }
 
-func Test_Cov3_Result_RawStringMust(t *testing.T) {
+func Test_Result_RawStringMust(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	s := r.RawStringMust()
@@ -313,7 +313,7 @@ func Test_Cov3_Result_RawStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result RawStringMust -- valid", actual)
 }
 
-func Test_Cov3_Result_RawErrString(t *testing.T) {
+func Test_Result_RawErrString(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	bytes, errMsg := r.RawErrString()
@@ -332,7 +332,7 @@ func Test_Cov3_Result_RawErrString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result RawErrString -- valid", actual)
 }
 
-func Test_Cov3_Result_RawPrettyString(t *testing.T) {
+func Test_Result_RawPrettyString(t *testing.T) {
 	// Arrange
 	r := corejson.New(map[string]int{"a": 1})
 	s, err := r.RawPrettyString()
@@ -351,7 +351,7 @@ func Test_Cov3_Result_RawPrettyString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result RawPrettyString -- valid", actual)
 }
 
-func Test_Cov3_Result_MeaningfulError(t *testing.T) {
+func Test_Result_MeaningfulError(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	errR := &corejson.Result{Error: errors.New("fail"), Bytes: []byte("x")}
@@ -376,7 +376,7 @@ func Test_Cov3_Result_MeaningfulError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result MeaningfulError -- all branches", actual)
 }
 
-func Test_Cov3_Result_HasAnyItem(t *testing.T) {
+func Test_Result_HasAnyItem(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -388,7 +388,7 @@ func Test_Cov3_Result_HasAnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result HasAnyItem -- valid", actual)
 }
 
-func Test_Cov3_Result_IsEmptyJsonBytes(t *testing.T) {
+func Test_Result_IsEmptyJsonBytes(t *testing.T) {
 	// Arrange
 	empty := &corejson.Result{Bytes: []byte("{}")}
 	nonEmpty := corejson.New("hello")
@@ -407,7 +407,7 @@ func Test_Cov3_Result_IsEmptyJsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result IsEmptyJsonBytes -- empty {} and valid", actual)
 }
 
-func Test_Cov3_Result_HasSafeItems(t *testing.T) {
+func Test_Result_HasSafeItems(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	errR := &corejson.Result{Error: errors.New("fail")}
@@ -426,7 +426,7 @@ func Test_Cov3_Result_HasSafeItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result HasSafeItems -- valid and error", actual)
 }
 
-func Test_Cov3_Result_Serialize(t *testing.T) {
+func Test_Result_Serialize(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	bytes, err := r.Serialize()
@@ -453,7 +453,7 @@ func Test_Cov3_Result_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Serialize -- all branches", actual)
 }
 
-func Test_Cov3_Result_SerializeMust(t *testing.T) {
+func Test_Result_SerializeMust(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	bytes := r.SerializeMust()
@@ -466,7 +466,7 @@ func Test_Cov3_Result_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SerializeMust -- valid", actual)
 }
 
-func Test_Cov3_Result_SerializeSkipExistingIssues(t *testing.T) {
+func Test_Result_SerializeSkipExistingIssues(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	bytes, err := r.SerializeSkipExistingIssues()
@@ -491,7 +491,7 @@ func Test_Cov3_Result_SerializeSkipExistingIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result SerializeSkipExistingIssues -- all branches", actual)
 }
 
-func Test_Cov3_Result_UnmarshalSkipExistingIssues(t *testing.T) {
+func Test_Result_UnmarshalSkipExistingIssues(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	var s string
@@ -515,7 +515,7 @@ func Test_Cov3_Result_UnmarshalSkipExistingIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result UnmarshalSkipExistingIssues -- all branches", actual)
 }
 
-func Test_Cov3_Result_UnmarshalResult(t *testing.T) {
+func Test_Result_UnmarshalResult(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	inner := r.Json()
@@ -535,7 +535,7 @@ func Test_Cov3_Result_UnmarshalResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result UnmarshalResult -- roundtrip", actual)
 }
 
-func Test_Cov3_Result_JsonModel(t *testing.T) {
+func Test_Result_JsonModel(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	model := r.JsonModel()
@@ -556,7 +556,7 @@ func Test_Cov3_Result_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result JsonModel -- valid and nil", actual)
 }
 
-func Test_Cov3_Result_InjectInto(t *testing.T) {
+func Test_Result_InjectInto(t *testing.T) {
 	// Arrange
 	type S struct{ Name string }
 	r := corejson.New(S{Name: "test"})
@@ -577,7 +577,7 @@ func Test_Cov3_Result_InjectInto(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Unmarshal -- valid", actual)
 }
 
-func Test_Cov3_Result_Dispose(t *testing.T) {
+func Test_Result_Dispose(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 	r.Dispose()
@@ -590,7 +590,7 @@ func Test_Cov3_Result_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result Dispose -- empty after", actual)
 }
 
-func Test_Cov3_Result_Nil_Dispose(t *testing.T) {
+func Test_Result_Nil_Dispose(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	r.Dispose()
@@ -605,7 +605,7 @@ func Test_Cov3_Result_Nil_Dispose(t *testing.T) {
 
 // ── Serialize logic ──
 
-func Test_Cov3_Serialize_FromBytes(t *testing.T) {
+func Test_Serialize_FromBytes(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromBytes([]byte{1, 2})
 
@@ -617,7 +617,7 @@ func Test_Cov3_Serialize_FromBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromBytes -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromStrings(t *testing.T) {
+func Test_Serialize_FromStrings(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromStrings([]string{"a"})
 
@@ -629,7 +629,7 @@ func Test_Cov3_Serialize_FromStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromStrings -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromStringsSpread(t *testing.T) {
+func Test_Serialize_FromStringsSpread(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromStringsSpread("a", "b")
 
@@ -641,7 +641,7 @@ func Test_Cov3_Serialize_FromStringsSpread(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromStringsSpread -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromString(t *testing.T) {
+func Test_Serialize_FromString(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromString("hello")
 
@@ -653,7 +653,7 @@ func Test_Cov3_Serialize_FromString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromString -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromInteger(t *testing.T) {
+func Test_Serialize_FromInteger(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromInteger(42)
 
@@ -665,7 +665,7 @@ func Test_Cov3_Serialize_FromInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromInteger -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromBool(t *testing.T) {
+func Test_Serialize_FromBool(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromBool(true)
 
@@ -677,7 +677,7 @@ func Test_Cov3_Serialize_FromBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromBool -- valid", actual)
 }
 
-func Test_Cov3_Serialize_FromIntegers(t *testing.T) {
+func Test_Serialize_FromIntegers(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.FromIntegers([]int{1, 2})
 
@@ -689,7 +689,7 @@ func Test_Cov3_Serialize_FromIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize FromIntegers -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToString(t *testing.T) {
+func Test_Serialize_ToString(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToString("hello")
 
@@ -701,7 +701,7 @@ func Test_Cov3_Serialize_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToString -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToStringErr(t *testing.T) {
+func Test_Serialize_ToStringErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.Serialize.ToStringErr("hello")
 
@@ -719,7 +719,7 @@ func Test_Cov3_Serialize_ToStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToStringErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToBytesErr(t *testing.T) {
+func Test_Serialize_ToBytesErr(t *testing.T) {
 	// Arrange
 	b, err := corejson.Serialize.ToBytesErr("hello")
 
@@ -737,7 +737,7 @@ func Test_Cov3_Serialize_ToBytesErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToBytesErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToBytesSwallowErr(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToBytesSwallowErr("hello")
 
@@ -749,7 +749,7 @@ func Test_Cov3_Serialize_ToBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToBytesSwallowErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	// Arrange
 	b := corejson.Serialize.ToSafeBytesSwallowErr("hello")
 
@@ -761,7 +761,7 @@ func Test_Cov3_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToSafeBytesSwallowErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToPrettyStringErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.Serialize.ToPrettyStringErr(map[string]int{"a": 1})
 
@@ -779,7 +779,7 @@ func Test_Cov3_Serialize_ToPrettyStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToPrettyStringErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToPrettyStringIncludingErr(map[string]int{"a": 1})
 
@@ -791,7 +791,7 @@ func Test_Cov3_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize ToPrettyStringIncludingErr -- valid", actual)
 }
 
-func Test_Cov3_Serialize_Pretty(t *testing.T) {
+func Test_Serialize_Pretty(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.Pretty(map[string]int{"a": 1})
 
@@ -803,7 +803,7 @@ func Test_Cov3_Serialize_Pretty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize Pretty -- valid", actual)
 }
 
-func Test_Cov3_Serialize_UsingAny(t *testing.T) {
+func Test_Serialize_UsingAny(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.UsingAny("hello")
 
@@ -815,7 +815,7 @@ func Test_Cov3_Serialize_UsingAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize UsingAny -- valid", actual)
 }
 
-func Test_Cov3_Serialize_StringsApply(t *testing.T) {
+func Test_Serialize_StringsApply(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.StringsApply([]string{"a"})
 
@@ -829,7 +829,7 @@ func Test_Cov3_Serialize_StringsApply(t *testing.T) {
 
 // ── Deserialize logic ──
 
-func Test_Cov3_Deserialize_UsingString(t *testing.T) {
+func Test_Deserialize_UsingString(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingString(`"hello"`, &s)
@@ -848,7 +848,7 @@ func Test_Cov3_Deserialize_UsingString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize UsingString -- valid", actual)
 }
 
-func Test_Cov3_Deserialize_UsingStringOption(t *testing.T) {
+func Test_Deserialize_UsingStringOption(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingStringOption(true, "", &s)
@@ -861,7 +861,7 @@ func Test_Cov3_Deserialize_UsingStringOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize UsingStringOption skip empty -- valid", actual)
 }
 
-func Test_Cov3_Deserialize_UsingStringIgnoreEmpty(t *testing.T) {
+func Test_Deserialize_UsingStringIgnoreEmpty(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingStringIgnoreEmpty("", &s)
@@ -874,7 +874,7 @@ func Test_Cov3_Deserialize_UsingStringIgnoreEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize UsingStringIgnoreEmpty -- valid", actual)
 }
 
-func Test_Cov3_Deserialize_MapAnyToPointer(t *testing.T) {
+func Test_Deserialize_MapAnyToPointer(t *testing.T) {
 	// Arrange
 	type S struct{ Name string }
 	var s S
@@ -897,7 +897,7 @@ func Test_Cov3_Deserialize_MapAnyToPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize MapAnyToPointer -- valid", actual)
 }
 
-func Test_Cov3_Deserialize_FromTo(t *testing.T) {
+func Test_Deserialize_FromTo(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.FromTo(`"hello"`, &s)
@@ -916,7 +916,7 @@ func Test_Cov3_Deserialize_FromTo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize FromTo -- string to string", actual)
 }
 
-func Test_Cov3_Deserialize_UsingBytesIf(t *testing.T) {
+func Test_Deserialize_UsingBytesIf(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesIf(true, []byte(`"hello"`), &s)
@@ -940,7 +940,7 @@ func Test_Cov3_Deserialize_UsingBytesIf(t *testing.T) {
 
 // ── BytesCloneIf / BytesDeepClone / BytesToString / BytesToPrettyString ──
 
-func Test_Cov3_BytesCloneIf(t *testing.T) {
+func Test_BytesCloneIf(t *testing.T) {
 	// Arrange
 	result := corejson.BytesCloneIf(true, []byte{1, 2})
 	noClone := corejson.BytesCloneIf(false, []byte{1, 2})
@@ -962,7 +962,7 @@ func Test_Cov3_BytesCloneIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf -- all branches", actual)
 }
 
-func Test_Cov3_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone(t *testing.T) {
 	// Arrange
 	result := corejson.BytesDeepClone([]byte{1, 2})
 	emptyResult := corejson.BytesDeepClone(nil)
@@ -981,7 +981,7 @@ func Test_Cov3_BytesDeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesDeepClone -- valid and empty", actual)
 }
 
-func Test_Cov3_BytesToString(t *testing.T) {
+func Test_BytesToString(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToString([]byte("hello"))
 	emptyResult := corejson.BytesToString(nil)
@@ -1000,7 +1000,7 @@ func Test_Cov3_BytesToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString -- valid and empty", actual)
 }
 
-func Test_Cov3_BytesToPrettyString(t *testing.T) {
+func Test_BytesToPrettyString(t *testing.T) {
 	// Arrange
 	b, _ := corejson.Serialize.Raw(map[string]int{"a": 1})
 	result := corejson.BytesToPrettyString(b)
@@ -1022,7 +1022,7 @@ func Test_Cov3_BytesToPrettyString(t *testing.T) {
 
 // ── JsonString / JsonStringOrErrMsg ──
 
-func Test_Cov3_JsonString_Func(t *testing.T) {
+func Test_JsonString_Func(t *testing.T) {
 	// Arrange
 	s, err := corejson.JsonString("hello")
 
@@ -1040,7 +1040,7 @@ func Test_Cov3_JsonString_Func(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonString func -- valid", actual)
 }
 
-func Test_Cov3_JsonStringOrErrMsg(t *testing.T) {
+func Test_JsonStringOrErrMsg(t *testing.T) {
 	// Arrange
 	s := corejson.JsonStringOrErrMsg("hello")
 
@@ -1054,7 +1054,7 @@ func Test_Cov3_JsonStringOrErrMsg(t *testing.T) {
 
 // ── AnyTo extended ──
 
-func Test_Cov3_AnyTo_SerializedSafeString(t *testing.T) {
+func Test_AnyTo_SerializedSafeString(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedSafeString(map[string]int{"a": 1})
 
@@ -1066,7 +1066,7 @@ func Test_Cov3_AnyTo_SerializedSafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedSafeString -- valid", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedStringMust(t *testing.T) {
+func Test_AnyTo_SerializedStringMust(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedStringMust(map[string]int{"a": 1})
 
@@ -1078,7 +1078,7 @@ func Test_Cov3_AnyTo_SerializedStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedStringMust -- valid", actual)
 }
 
-func Test_Cov3_AnyTo_PrettyStringWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError(map[string]int{"a": 1})
 	sStr, errStr := corejson.AnyTo.PrettyStringWithError("plain")
@@ -1101,7 +1101,7 @@ func Test_Cov3_AnyTo_PrettyStringWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo PrettyStringWithError -- map and string", actual)
 }
 
-func Test_Cov3_AnyTo_JsonStringWithErr(t *testing.T) {
+func Test_AnyTo_JsonStringWithErr(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr(map[string]int{"a": 1})
 	sStr, errStr := corejson.AnyTo.JsonStringWithErr("plain")
@@ -1124,7 +1124,7 @@ func Test_Cov3_AnyTo_JsonStringWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo JsonStringWithErr -- map and string", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
 
@@ -1136,7 +1136,7 @@ func Test_Cov3_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedJsonResult nil -- has error", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult([]byte(`"hello"`))
 
@@ -1148,7 +1148,7 @@ func Test_Cov3_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedJsonResult bytes -- valid", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedJsonResult_String(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_String(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(`"hello"`)
 
@@ -1160,7 +1160,7 @@ func Test_Cov3_AnyTo_SerializedJsonResult_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedJsonResult string -- valid", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedJsonResult_Error(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Error(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(errors.New("test error"))
 
@@ -1172,7 +1172,7 @@ func Test_Cov3_AnyTo_SerializedJsonResult_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo SerializedJsonResult error -- valid", actual)
 }
 
-func Test_Cov3_AnyTo_SerializedFieldsMap(t *testing.T) {
+func Test_AnyTo_SerializedFieldsMap(t *testing.T) {
 	// Arrange
 	type S struct{ Name string }
 	m, err := corejson.AnyTo.SerializedFieldsMap(S{Name: "test"})
@@ -1195,7 +1195,7 @@ func Test_Cov3_AnyTo_SerializedFieldsMap(t *testing.T) {
 
 // ── NewResult creators ──
 
-func Test_Cov3_NewResult_AnyPtr(t *testing.T) {
+func Test_NewResult_AnyPtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 
@@ -1213,7 +1213,7 @@ func Test_Cov3_NewResult_AnyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewResult AnyPtr -- valid", actual)
 }
 
-func Test_Cov3_NewResult_Any(t *testing.T) {
+func Test_NewResult_Any(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 
@@ -1225,7 +1225,7 @@ func Test_Cov3_NewResult_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewResult Any -- valid", actual)
 }
 
-func Test_Cov3_NewResult_UsingBytesTypePtr(t *testing.T) {
+func Test_NewResult_UsingBytesTypePtr(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingBytesTypePtr([]byte(`"hello"`), "string")
 
@@ -1243,7 +1243,7 @@ func Test_Cov3_NewResult_UsingBytesTypePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewResult UsingBytesTypePtr -- valid", actual)
 }
 
-func Test_Cov3_NewResult_UsingStringWithType(t *testing.T) {
+func Test_NewResult_UsingStringWithType(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingStringWithType(`"hello"`, "string")
 
@@ -1257,7 +1257,7 @@ func Test_Cov3_NewResult_UsingStringWithType(t *testing.T) {
 
 // ── Empty creators ──
 
-func Test_Cov3_Empty_ResultPtrWithErr(t *testing.T) {
+func Test_Empty_ResultPtrWithErr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultPtrWithErr("test", errors.New("fail"))
 
@@ -1269,7 +1269,7 @@ func Test_Cov3_Empty_ResultPtrWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty ResultPtrWithErr -- has error", actual)
 }
 
-func Test_Cov3_Empty_ResultsCollection(t *testing.T) {
+func Test_Empty_ResultsCollection(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 
@@ -1283,7 +1283,7 @@ func Test_Cov3_Empty_ResultsCollection(t *testing.T) {
 
 // ── ResultsCollection basic ──
 
-func Test_Cov3_ResultsCollection_AddAndGet(t *testing.T) {
+func Test_ResultsCollection_AddAndGet(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 	r := corejson.New("hello")
@@ -1309,7 +1309,7 @@ func Test_Cov3_ResultsCollection_AddAndGet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsCollection Add and get -- 1 item", actual)
 }
 
-func Test_Cov3_ResultsCollection_GetAt(t *testing.T) {
+func Test_ResultsCollection_GetAt(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 	rc.Add(corejson.New("hello"))
@@ -1323,7 +1323,7 @@ func Test_Cov3_ResultsCollection_GetAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsCollection GetAt -- index 0", actual)
 }
 
-func Test_Cov3_ResultsCollection_GetStrings(t *testing.T) {
+func Test_ResultsCollection_GetStrings(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 	rc.Add(corejson.New("hello"))
@@ -1337,7 +1337,7 @@ func Test_Cov3_ResultsCollection_GetStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsCollection GetStrings -- 1 item", actual)
 }
 
-func Test_Cov3_ResultsCollection_HasError(t *testing.T) {
+func Test_ResultsCollection_HasError(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 	rc.Add(corejson.New("hello"))
@@ -1350,7 +1350,7 @@ func Test_Cov3_ResultsCollection_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsCollection HasError -- no error", actual)
 }
 
-func Test_Cov3_ResultsCollection_Dispose(t *testing.T) {
+func Test_ResultsCollection_Dispose(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 	rc.Add(corejson.New("hello"))
@@ -1366,7 +1366,7 @@ func Test_Cov3_ResultsCollection_Dispose(t *testing.T) {
 
 // ── CastAny ──
 
-func Test_Cov3_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.CastAny.FromToDefault(`"hello"`, &s)

@@ -12,7 +12,7 @@ import (
 // Covers CollectionIter.go L9-16, L22-29, L35-42
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_Collection_All_Iterator(t *testing.T) {
+func Test_Collection_All_Iterator(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.String.Items("a", "b", "c")
 	count := 0
@@ -30,7 +30,7 @@ func Test_Cov4_Collection_All_Iterator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- All iterator", actual)
 }
 
-func Test_Cov4_Collection_All_BreakEarly(t *testing.T) {
+func Test_Collection_All_BreakEarly(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.String.Items("a", "b", "c")
 	count := 0
@@ -49,7 +49,7 @@ func Test_Cov4_Collection_All_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- All break early", actual)
 }
 
-func Test_Cov4_Collection_Values_Iterator(t *testing.T) {
+func Test_Collection_Values_Iterator(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.String.Items("x", "y")
 	count := 0
@@ -66,7 +66,7 @@ func Test_Cov4_Collection_Values_Iterator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- Values iterator", actual)
 }
 
-func Test_Cov4_Collection_Values_BreakEarly(t *testing.T) {
+func Test_Collection_Values_BreakEarly(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.String.Items("x", "y", "z")
 	count := 0
@@ -85,7 +85,7 @@ func Test_Cov4_Collection_Values_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- Values break", actual)
 }
 
-func Test_Cov4_Collection_Backward_Iterator(t *testing.T) {
+func Test_Collection_Backward_Iterator(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.Int.Items(10, 20, 30)
 	var items []int
@@ -107,7 +107,7 @@ func Test_Cov4_Collection_Backward_Iterator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Backward", actual)
 }
 
-func Test_Cov4_Collection_Backward_BreakEarly(t *testing.T) {
+func Test_Collection_Backward_BreakEarly(t *testing.T) {
 	// Arrange
 	col := coregeneric.New.Collection.Int.Items(10, 20, 30)
 	count := 0
@@ -131,7 +131,7 @@ func Test_Cov4_Collection_Backward_BreakEarly(t *testing.T) {
 // Covers HashmapIter.go L8-16, L21-29, L34-42
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_Hashmap_All_Iterator(t *testing.T) {
+func Test_Hashmap_All_Iterator(t *testing.T) {
 	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
@@ -149,7 +149,7 @@ func Test_Cov4_Hashmap_All_Iterator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- All", actual)
 }
 
-func Test_Cov4_Hashmap_All_BreakEarly(t *testing.T) {
+func Test_Hashmap_All_BreakEarly(t *testing.T) {
 	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
@@ -168,7 +168,7 @@ func Test_Cov4_Hashmap_All_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- All break", actual)
 }
 
-func Test_Cov4_Hashmap_IterKeys_BreakEarly(t *testing.T) {
+func Test_Hashmap_IterKeys_BreakEarly(t *testing.T) {
 	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
@@ -187,7 +187,7 @@ func Test_Cov4_Hashmap_IterKeys_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- IterKeys break", actual)
 }
 
-func Test_Cov4_Hashmap_IterValues_BreakEarly(t *testing.T) {
+func Test_Hashmap_IterValues_BreakEarly(t *testing.T) {
 	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
@@ -211,7 +211,7 @@ func Test_Cov4_Hashmap_IterValues_BreakEarly(t *testing.T) {
 // Covers HashsetIter.go L9-16, L22-29
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_Hashset_All_BreakEarly(t *testing.T) {
+func Test_Hashset_All_BreakEarly(t *testing.T) {
 	// Arrange
 	hs := coregeneric.New.Hashset.String.Items("a", "b")
 	count := 0
@@ -228,7 +228,7 @@ func Test_Cov4_Hashset_All_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- All break", actual)
 }
 
-func Test_Cov4_Hashset_Values_BreakEarly(t *testing.T) {
+func Test_Hashset_Values_BreakEarly(t *testing.T) {
 	// Arrange
 	hs := coregeneric.New.Hashset.String.Items("a", "b")
 	count := 0
@@ -250,7 +250,7 @@ func Test_Cov4_Hashset_Values_BreakEarly(t *testing.T) {
 // Covers SimpleSliceIter.go L8-15, L21-28
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_SimpleSlice_All_BreakEarly(t *testing.T) {
+func Test_SimpleSlice_All_BreakEarly(t *testing.T) {
 	// Arrange
 	ss := coregeneric.New.SimpleSlice.String.Items("x", "y", "z")
 	count := 0
@@ -267,7 +267,7 @@ func Test_Cov4_SimpleSlice_All_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- All break", actual)
 }
 
-func Test_Cov4_SimpleSlice_Values_BreakEarly(t *testing.T) {
+func Test_SimpleSlice_Values_BreakEarly(t *testing.T) {
 	// Arrange
 	ss := coregeneric.New.SimpleSlice.String.Items("x", "y", "z")
 	count := 0
@@ -289,7 +289,7 @@ func Test_Cov4_SimpleSlice_Values_BreakEarly(t *testing.T) {
 // Covers LinkedListIter.go L8-21, L27-38
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_LinkedList_All_Iterator(t *testing.T) {
+func Test_LinkedList_All_Iterator(t *testing.T) {
 	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
@@ -308,7 +308,7 @@ func Test_Cov4_LinkedList_All_Iterator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- All", actual)
 }
 
-func Test_Cov4_LinkedList_All_BreakEarly(t *testing.T) {
+func Test_LinkedList_All_BreakEarly(t *testing.T) {
 	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
@@ -327,7 +327,7 @@ func Test_Cov4_LinkedList_All_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- All break", actual)
 }
 
-func Test_Cov4_LinkedList_Values_BreakEarly(t *testing.T) {
+func Test_LinkedList_Values_BreakEarly(t *testing.T) {
 	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
@@ -359,7 +359,7 @@ func Test_Cov4_LinkedList_Values_BreakEarly(t *testing.T) {
 // Covers numericfuncs.go L151-153, L178-180
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_MaxOf_FirstIsGreater(t *testing.T) {
+func Test_MaxOf_FirstIsGreater(t *testing.T) {
 	// Arrange
 	result := coregeneric.MaxOf(10, 5)
 
@@ -371,7 +371,7 @@ func Test_Cov4_MaxOf_FirstIsGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MaxOf returns correct value -- first greater", actual)
 }
 
-func Test_Cov4_MaxOfSlice_MultipleValues(t *testing.T) {
+func Test_MaxOfSlice_MultipleValues(t *testing.T) {
 	// Arrange
 	result := coregeneric.MaxOfSlice([]int{3, 7, 1, 9, 2})
 

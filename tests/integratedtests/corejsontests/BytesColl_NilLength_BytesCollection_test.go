@@ -11,7 +11,7 @@ import (
 // BytesCollection — Length / IsEmpty / HasAnyItem
 // =============================================================================
 
-func Test_Cov45_BytesColl_NilLength(t *testing.T) {
+func Test_BytesColl_NilLength(t *testing.T) {
 	tc := bytesCollNilLengthTestCase
 
 	// Arrange
@@ -26,7 +26,7 @@ func Test_Cov45_BytesColl_NilLength(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_IsEmpty(t *testing.T) {
+func Test_BytesColl_IsEmpty(t *testing.T) {
 	tc := bytesCollIsEmptyTrueTestCase
 
 	// Arrange
@@ -41,7 +41,7 @@ func Test_Cov45_BytesColl_IsEmpty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_HasAnyItem(t *testing.T) {
+func Test_BytesColl_HasAnyItem(t *testing.T) {
 	tc := bytesCollHasAnyItemTestCase
 
 	// Arrange
@@ -57,7 +57,7 @@ func Test_Cov45_BytesColl_HasAnyItem(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_LastIndex(t *testing.T) {
+func Test_BytesColl_LastIndex(t *testing.T) {
 	tc := bytesCollLastIndexTestCase
 
 	// Arrange
@@ -77,7 +77,7 @@ func Test_Cov45_BytesColl_LastIndex(t *testing.T) {
 // BytesCollection — FirstOrDefault / LastOrDefault
 // =============================================================================
 
-func Test_Cov45_BytesColl_FirstOrDefault_Empty(t *testing.T) {
+func Test_BytesColl_FirstOrDefault_Empty(t *testing.T) {
 	tc := bytesCollFirstOrDefaultEmptyTestCase
 
 	// Arrange
@@ -92,7 +92,7 @@ func Test_Cov45_BytesColl_FirstOrDefault_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_FirstOrDefault_HasItem(t *testing.T) {
+func Test_BytesColl_FirstOrDefault_HasItem(t *testing.T) {
 	tc := bytesCollFirstOrDefaultHasItemTestCase
 
 	// Arrange
@@ -108,7 +108,7 @@ func Test_Cov45_BytesColl_FirstOrDefault_HasItem(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_LastOrDefault_Empty(t *testing.T) {
+func Test_BytesColl_LastOrDefault_Empty(t *testing.T) {
 	tc := bytesCollLastOrDefaultEmptyTestCase
 
 	// Arrange
@@ -123,7 +123,7 @@ func Test_Cov45_BytesColl_LastOrDefault_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_LastOrDefault_HasItem(t *testing.T) {
+func Test_BytesColl_LastOrDefault_HasItem(t *testing.T) {
 	tc := bytesCollLastOrDefaultHasItemTestCase
 
 	// Arrange
@@ -143,7 +143,7 @@ func Test_Cov45_BytesColl_LastOrDefault_HasItem(t *testing.T) {
 // BytesCollection — Take / Limit / Skip
 // =============================================================================
 
-func Test_Cov45_BytesColl_Take_Empty(t *testing.T) {
+func Test_BytesColl_Take_Empty(t *testing.T) {
 	tc := bytesCollTakeEmptyTestCase
 
 	// Arrange
@@ -159,7 +159,7 @@ func Test_Cov45_BytesColl_Take_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Take_Valid(t *testing.T) {
+func Test_BytesColl_Take_Valid(t *testing.T) {
 	tc := bytesCollTakeValidTestCase
 
 	// Arrange
@@ -176,7 +176,7 @@ func Test_Cov45_BytesColl_Take_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Limit_TakeAll(t *testing.T) {
+func Test_BytesColl_Limit_TakeAll(t *testing.T) {
 	tc := bytesCollLimitTakeAllTestCase
 
 	// Arrange
@@ -193,7 +193,7 @@ func Test_Cov45_BytesColl_Limit_TakeAll(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Limit_Empty(t *testing.T) {
+func Test_BytesColl_Limit_Empty(t *testing.T) {
 	tc := bytesCollLimitEmptyTestCase
 
 	// Arrange
@@ -209,7 +209,7 @@ func Test_Cov45_BytesColl_Limit_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Skip_Empty(t *testing.T) {
+func Test_BytesColl_Skip_Empty(t *testing.T) {
 	tc := bytesCollSkipEmptyTestCase
 
 	// Arrange
@@ -225,7 +225,7 @@ func Test_Cov45_BytesColl_Skip_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Skip_Valid(t *testing.T) {
+func Test_BytesColl_Skip_Valid(t *testing.T) {
 	tc := bytesCollSkipValidTestCase
 
 	// Arrange
@@ -246,7 +246,7 @@ func Test_Cov45_BytesColl_Skip_Valid(t *testing.T) {
 // BytesCollection — Add variants
 // =============================================================================
 
-func Test_Cov45_BytesColl_AddSkipOnNil_Nil(t *testing.T) {
+func Test_BytesColl_AddSkipOnNil_Nil(t *testing.T) {
 	tc := bytesCollAddSkipOnNilNilTestCase
 
 	// Arrange
@@ -262,7 +262,7 @@ func Test_Cov45_BytesColl_AddSkipOnNil_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddSkipOnNil_Valid(t *testing.T) {
+func Test_BytesColl_AddSkipOnNil_Valid(t *testing.T) {
 	tc := bytesCollAddSkipOnNilValidTestCase
 
 	// Arrange
@@ -278,7 +278,7 @@ func Test_Cov45_BytesColl_AddSkipOnNil_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddNonEmpty_Empty(t *testing.T) {
+func Test_BytesColl_AddNonEmpty_Empty(t *testing.T) {
 	tc := bytesCollAddNonEmptyEmptyTestCase
 
 	// Arrange
@@ -294,7 +294,7 @@ func Test_Cov45_BytesColl_AddNonEmpty_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddNonEmpty_Valid(t *testing.T) {
+func Test_BytesColl_AddNonEmpty_Valid(t *testing.T) {
 	tc := bytesCollAddNonEmptyValidTestCase
 
 	// Arrange
@@ -310,7 +310,7 @@ func Test_Cov45_BytesColl_AddNonEmpty_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddResultPtr_Skip(t *testing.T) {
+func Test_BytesColl_AddResultPtr_Skip(t *testing.T) {
 	tc := bytesCollAddResultPtrSkipTestCase
 
 	// Arrange
@@ -327,7 +327,7 @@ func Test_Cov45_BytesColl_AddResultPtr_Skip(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddResultPtr_Valid(t *testing.T) {
+func Test_BytesColl_AddResultPtr_Valid(t *testing.T) {
 	tc := bytesCollAddResultPtrValidTestCase
 
 	// Arrange
@@ -344,7 +344,7 @@ func Test_Cov45_BytesColl_AddResultPtr_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddResult_Skip(t *testing.T) {
+func Test_BytesColl_AddResult_Skip(t *testing.T) {
 	tc := bytesCollAddResultSkipTestCase
 
 	// Arrange
@@ -361,7 +361,7 @@ func Test_Cov45_BytesColl_AddResult_Skip(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddResult_Valid(t *testing.T) {
+func Test_BytesColl_AddResult_Valid(t *testing.T) {
 	tc := bytesCollAddResultValidTestCase
 
 	// Arrange
@@ -378,7 +378,7 @@ func Test_Cov45_BytesColl_AddResult_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddPtr_Empty(t *testing.T) {
+func Test_BytesColl_AddPtr_Empty(t *testing.T) {
 	tc := bytesCollAddPtrEmptyTestCase
 
 	// Arrange
@@ -394,7 +394,7 @@ func Test_Cov45_BytesColl_AddPtr_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddPtr_Valid(t *testing.T) {
+func Test_BytesColl_AddPtr_Valid(t *testing.T) {
 	tc := bytesCollAddPtrValidTestCase
 
 	// Arrange
@@ -410,7 +410,7 @@ func Test_Cov45_BytesColl_AddPtr_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Adds_Empty(t *testing.T) {
+func Test_BytesColl_Adds_Empty(t *testing.T) {
 	tc := bytesCollAddsEmptyTestCase
 
 	// Arrange
@@ -426,7 +426,7 @@ func Test_Cov45_BytesColl_Adds_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Adds_Valid(t *testing.T) {
+func Test_BytesColl_Adds_Valid(t *testing.T) {
 	tc := bytesCollAddsValidTestCase
 
 	// Arrange
@@ -442,7 +442,7 @@ func Test_Cov45_BytesColl_Adds_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddsPtr_Nil(t *testing.T) {
+func Test_BytesColl_AddsPtr_Nil(t *testing.T) {
 	tc := bytesCollAddsPtrNilTestCase
 
 	// Arrange
@@ -462,7 +462,7 @@ func Test_Cov45_BytesColl_AddsPtr_Nil(t *testing.T) {
 // BytesCollection — AddAny / AddAnyItems / AddSerializerFunc
 // =============================================================================
 
-func Test_Cov45_BytesColl_AddAny_Valid(t *testing.T) {
+func Test_BytesColl_AddAny_Valid(t *testing.T) {
 	tc := bytesCollAddAnyValidTestCase
 
 	// Arrange
@@ -479,7 +479,7 @@ func Test_Cov45_BytesColl_AddAny_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddAnyItems_Empty(t *testing.T) {
+func Test_BytesColl_AddAnyItems_Empty(t *testing.T) {
 	tc := bytesCollAddAnyItemsEmptyTestCase
 
 	// Arrange
@@ -495,7 +495,7 @@ func Test_Cov45_BytesColl_AddAnyItems_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddAnyItems_Valid(t *testing.T) {
+func Test_BytesColl_AddAnyItems_Valid(t *testing.T) {
 	tc := bytesCollAddAnyItemsValidTestCase
 
 	// Arrange
@@ -512,7 +512,7 @@ func Test_Cov45_BytesColl_AddAnyItems_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddSerializerFunc_Nil(t *testing.T) {
+func Test_BytesColl_AddSerializerFunc_Nil(t *testing.T) {
 	tc := bytesCollAddSerializerFuncNilTestCase
 
 	// Arrange
@@ -528,7 +528,7 @@ func Test_Cov45_BytesColl_AddSerializerFunc_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddSerializerFunctions_Empty(t *testing.T) {
+func Test_BytesColl_AddSerializerFunctions_Empty(t *testing.T) {
 	tc := bytesCollAddSerializerFunctionsEmptyTestCase
 
 	// Arrange
@@ -548,7 +548,7 @@ func Test_Cov45_BytesColl_AddSerializerFunctions_Empty(t *testing.T) {
 // BytesCollection — GetAtSafe / GetResultAtSafe / GetAtSafeUsingLength
 // =============================================================================
 
-func Test_Cov45_BytesColl_GetAtSafe_OutOfRange(t *testing.T) {
+func Test_BytesColl_GetAtSafe_OutOfRange(t *testing.T) {
 	tc := bytesCollGetAtSafeOutOfRangeTestCase
 
 	// Arrange
@@ -563,7 +563,7 @@ func Test_Cov45_BytesColl_GetAtSafe_OutOfRange(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetAtSafe_Valid(t *testing.T) {
+func Test_BytesColl_GetAtSafe_Valid(t *testing.T) {
 	tc := bytesCollGetAtSafeValidTestCase
 
 	// Arrange
@@ -579,7 +579,7 @@ func Test_Cov45_BytesColl_GetAtSafe_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetResultAtSafe_OutOfRange(t *testing.T) {
+func Test_BytesColl_GetResultAtSafe_OutOfRange(t *testing.T) {
 	tc := bytesCollGetResultAtSafeOutOfRangeTestCase
 
 	// Arrange
@@ -594,7 +594,7 @@ func Test_Cov45_BytesColl_GetResultAtSafe_OutOfRange(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetAtSafeUsingLength_Out(t *testing.T) {
+func Test_BytesColl_GetAtSafeUsingLength_Out(t *testing.T) {
 	tc := bytesCollGetAtSafeUsingLengthOutTestCase
 
 	// Arrange
@@ -609,7 +609,7 @@ func Test_Cov45_BytesColl_GetAtSafeUsingLength_Out(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetAtSafePtr_OutOfRange(t *testing.T) {
+func Test_BytesColl_GetAtSafePtr_OutOfRange(t *testing.T) {
 	tc := bytesCollGetAtSafePtrOutOfRangeTestCase
 
 	// Arrange
@@ -628,7 +628,7 @@ func Test_Cov45_BytesColl_GetAtSafePtr_OutOfRange(t *testing.T) {
 // BytesCollection — Clear / Dispose / Clone / ClonePtr
 // =============================================================================
 
-func Test_Cov45_BytesColl_Clear(t *testing.T) {
+func Test_BytesColl_Clear(t *testing.T) {
 	tc := bytesCollClearTestCase
 
 	// Arrange
@@ -645,7 +645,7 @@ func Test_Cov45_BytesColl_Clear(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Clear_Nil(t *testing.T) {
+func Test_BytesColl_Clear_Nil(t *testing.T) {
 	tc := bytesCollClearNilTestCase
 
 	// Arrange
@@ -661,7 +661,7 @@ func Test_Cov45_BytesColl_Clear_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Dispose(t *testing.T) {
+func Test_BytesColl_Dispose(t *testing.T) {
 	tc := bytesCollDisposeTestCase
 
 	// Arrange
@@ -678,7 +678,7 @@ func Test_Cov45_BytesColl_Dispose(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Clone(t *testing.T) {
+func Test_BytesColl_Clone(t *testing.T) {
 	tc := bytesCollCloneTestCase
 
 	// Arrange
@@ -695,7 +695,7 @@ func Test_Cov45_BytesColl_Clone(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_ClonePtr_Nil(t *testing.T) {
+func Test_BytesColl_ClonePtr_Nil(t *testing.T) {
 	tc := bytesCollClonePtrNilTestCase
 
 	// Arrange
@@ -711,7 +711,7 @@ func Test_Cov45_BytesColl_ClonePtr_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_ClonePtr_Valid(t *testing.T) {
+func Test_BytesColl_ClonePtr_Valid(t *testing.T) {
 	tc := bytesCollClonePtrValidTestCase
 
 	// Arrange
@@ -732,7 +732,7 @@ func Test_Cov45_BytesColl_ClonePtr_Valid(t *testing.T) {
 // BytesCollection — Strings / Json / Paging / UnmarshalAt
 // =============================================================================
 
-func Test_Cov45_BytesColl_Strings_Empty(t *testing.T) {
+func Test_BytesColl_Strings_Empty(t *testing.T) {
 	tc := bytesCollStringsEmptyTestCase
 
 	// Arrange
@@ -747,7 +747,7 @@ func Test_Cov45_BytesColl_Strings_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Strings_Valid(t *testing.T) {
+func Test_BytesColl_Strings_Valid(t *testing.T) {
 	tc := bytesCollStringsValidTestCase
 
 	// Arrange
@@ -763,7 +763,7 @@ func Test_Cov45_BytesColl_Strings_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_Json(t *testing.T) {
+func Test_BytesColl_Json(t *testing.T) {
 	tc := bytesCollJsonTestCase
 
 	// Arrange
@@ -780,7 +780,7 @@ func Test_Cov45_BytesColl_Json(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetPagesSize_Zero(t *testing.T) {
+func Test_BytesColl_GetPagesSize_Zero(t *testing.T) {
 	tc := bytesCollGetPagesSizeZeroTestCase
 
 	// Arrange
@@ -795,7 +795,7 @@ func Test_Cov45_BytesColl_GetPagesSize_Zero(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetPagesSize_Valid(t *testing.T) {
+func Test_BytesColl_GetPagesSize_Valid(t *testing.T) {
 	tc := bytesCollGetPagesSizeValidTestCase
 
 	// Arrange
@@ -811,7 +811,7 @@ func Test_Cov45_BytesColl_GetPagesSize_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_UnmarshalAt(t *testing.T) {
+func Test_BytesColl_UnmarshalAt(t *testing.T) {
 	tc := bytesCollUnmarshalAtTestCase
 
 	// Arrange
@@ -830,7 +830,7 @@ func Test_Cov45_BytesColl_UnmarshalAt(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_GetAt(t *testing.T) {
+func Test_BytesColl_GetAt(t *testing.T) {
 	tc := bytesCollGetAtTestCase
 
 	// Arrange
@@ -846,7 +846,7 @@ func Test_Cov45_BytesColl_GetAt(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_JsonResultAt(t *testing.T) {
+func Test_BytesColl_JsonResultAt(t *testing.T) {
 	tc := bytesCollJsonResultAtTestCase
 
 	// Arrange
@@ -866,7 +866,7 @@ func Test_Cov45_BytesColl_JsonResultAt(t *testing.T) {
 // BytesCollection — AddBytesCollection / AddRawMapResults
 // =============================================================================
 
-func Test_Cov45_BytesColl_AddBytesCollection_Empty(t *testing.T) {
+func Test_BytesColl_AddBytesCollection_Empty(t *testing.T) {
 	tc := bytesCollAddBytesCollectionEmptyTestCase
 
 	// Arrange
@@ -883,7 +883,7 @@ func Test_Cov45_BytesColl_AddBytesCollection_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddBytesCollection_Valid(t *testing.T) {
+func Test_BytesColl_AddBytesCollection_Valid(t *testing.T) {
 	tc := bytesCollAddBytesCollectionValidTestCase
 
 	// Arrange
@@ -901,7 +901,7 @@ func Test_Cov45_BytesColl_AddBytesCollection_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_AddRawMapResults_Empty(t *testing.T) {
+func Test_BytesColl_AddRawMapResults_Empty(t *testing.T) {
 	tc := bytesCollAddRawMapResultsEmptyTestCase
 
 	// Arrange
@@ -921,7 +921,7 @@ func Test_Cov45_BytesColl_AddRawMapResults_Empty(t *testing.T) {
 // BytesCollection — ShadowClone / ParseInjectUsingJson / UnmarshalIntoSameIndex
 // =============================================================================
 
-func Test_Cov45_BytesColl_ShadowClone(t *testing.T) {
+func Test_BytesColl_ShadowClone(t *testing.T) {
 	tc := bytesCollShadowCloneTestCase
 
 	// Arrange
@@ -938,7 +938,7 @@ func Test_Cov45_BytesColl_ShadowClone(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_ParseInjectUsingJson_Valid(t *testing.T) {
+func Test_BytesColl_ParseInjectUsingJson_Valid(t *testing.T) {
 	tc := bytesCollParseInjectUsingJsonValidTestCase
 
 	// Arrange
@@ -958,7 +958,7 @@ func Test_Cov45_BytesColl_ParseInjectUsingJson_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov45_BytesColl_UnmarshalIntoSameIndex_Nil(t *testing.T) {
+func Test_BytesColl_UnmarshalIntoSameIndex_Nil(t *testing.T) {
 	tc := bytesCollUnmarshalIntoSameIndexNilTestCase
 
 	// Arrange

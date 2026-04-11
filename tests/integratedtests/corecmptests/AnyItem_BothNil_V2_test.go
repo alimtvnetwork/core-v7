@@ -13,7 +13,7 @@ import (
 // AnyItem — all 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_AnyItem_BothNil(t *testing.T) {
+func Test_AnyItem_BothNil(t *testing.T) {
 	// Arrange
 	r := corecmp.AnyItem(nil, nil)
 
@@ -25,7 +25,7 @@ func Test_Cov14_AnyItem_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- both nil → Equal", actual)
 }
 
-func Test_Cov14_AnyItem_LeftNilOnly(t *testing.T) {
+func Test_AnyItem_LeftNilOnly(t *testing.T) {
 	// Arrange
 	r := corecmp.AnyItem(nil, 1)
 
@@ -37,7 +37,7 @@ func Test_Cov14_AnyItem_LeftNilOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- left nil → NotEqual", actual)
 }
 
-func Test_Cov14_AnyItem_RightNilOnly(t *testing.T) {
+func Test_AnyItem_RightNilOnly(t *testing.T) {
 	// Arrange
 	r := corecmp.AnyItem(1, nil)
 
@@ -49,7 +49,7 @@ func Test_Cov14_AnyItem_RightNilOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- right nil → NotEqual", actual)
 }
 
-func Test_Cov14_AnyItem_SameValue(t *testing.T) {
+func Test_AnyItem_SameValue(t *testing.T) {
 	// Arrange
 	r := corecmp.AnyItem(42, 42)
 
@@ -61,7 +61,7 @@ func Test_Cov14_AnyItem_SameValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns correct value -- same → Equal", actual)
 }
 
-func Test_Cov14_AnyItem_DiffValue(t *testing.T) {
+func Test_AnyItem_DiffValue(t *testing.T) {
 	// Arrange
 	r := corecmp.AnyItem(1, 2)
 
@@ -77,7 +77,7 @@ func Test_Cov14_AnyItem_DiffValue(t *testing.T) {
 // Byte — 3 branches: Equal, LeftLess, LeftGreater
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Byte_Equal(t *testing.T) {
+func Test_Byte_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Byte(5, 5)}
 
@@ -86,7 +86,7 @@ func Test_Cov14_Byte_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Byte_Less(t *testing.T) {
+func Test_Byte_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Byte(1, 9)}
 
@@ -95,7 +95,7 @@ func Test_Cov14_Byte_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns correct value -- less", actual)
 }
 
-func Test_Cov14_Byte_Greater(t *testing.T) {
+func Test_Byte_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Byte(9, 1)}
 
@@ -108,7 +108,7 @@ func Test_Cov14_Byte_Greater(t *testing.T) {
 // BytePtr — 4 branches: BothNil, LeftNil, RightNil, Delegate
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_BytePtr_BothNil(t *testing.T) {
+func Test_BytePtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.BytePtr(nil, nil)}
 
@@ -117,7 +117,7 @@ func Test_Cov14_BytePtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_BytePtr_LeftNil(t *testing.T) {
+func Test_BytePtr_LeftNil(t *testing.T) {
 	// Arrange
 	b := byte(1)
 
@@ -129,7 +129,7 @@ func Test_Cov14_BytePtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_BytePtr_RightNil(t *testing.T) {
+func Test_BytePtr_RightNil(t *testing.T) {
 	// Arrange
 	b := byte(1)
 
@@ -141,7 +141,7 @@ func Test_Cov14_BytePtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_BytePtr_Delegate(t *testing.T) {
+func Test_BytePtr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := byte(3), byte(7)
 
@@ -157,7 +157,7 @@ func Test_Cov14_BytePtr_Delegate(t *testing.T) {
 // Integer — 3 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Integer_Equal(t *testing.T) {
+func Test_Integer_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer(10, 10)}
 
@@ -166,7 +166,7 @@ func Test_Cov14_Integer_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Integer_Less(t *testing.T) {
+func Test_Integer_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer(-5, 5)}
 
@@ -175,7 +175,7 @@ func Test_Cov14_Integer_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer returns correct value -- less", actual)
 }
 
-func Test_Cov14_Integer_Greater(t *testing.T) {
+func Test_Integer_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer(5, -5)}
 
@@ -188,7 +188,7 @@ func Test_Cov14_Integer_Greater(t *testing.T) {
 // IntegerPtr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IntegerPtr_BothNil(t *testing.T) {
+func Test_IntegerPtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IntegerPtr(nil, nil)}
 
@@ -197,7 +197,7 @@ func Test_Cov14_IntegerPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IntegerPtr_LeftNil(t *testing.T) {
+func Test_IntegerPtr_LeftNil(t *testing.T) {
 	// Arrange
 	v := 1
 
@@ -209,7 +209,7 @@ func Test_Cov14_IntegerPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IntegerPtr_RightNil(t *testing.T) {
+func Test_IntegerPtr_RightNil(t *testing.T) {
 	// Arrange
 	v := 1
 
@@ -221,7 +221,7 @@ func Test_Cov14_IntegerPtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_IntegerPtr_Delegate(t *testing.T) {
+func Test_IntegerPtr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := 10, 20
 
@@ -237,7 +237,7 @@ func Test_Cov14_IntegerPtr_Delegate(t *testing.T) {
 // Integer8 — 3 branches + Integer8Ptr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Integer8_Equal(t *testing.T) {
+func Test_Integer8_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer8(5, 5)}
 
@@ -246,7 +246,7 @@ func Test_Cov14_Integer8_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Integer8_Less(t *testing.T) {
+func Test_Integer8_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer8(-10, 10)}
 
@@ -255,7 +255,7 @@ func Test_Cov14_Integer8_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- less", actual)
 }
 
-func Test_Cov14_Integer8_Greater(t *testing.T) {
+func Test_Integer8_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer8(10, -10)}
 
@@ -264,7 +264,7 @@ func Test_Cov14_Integer8_Greater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- greater", actual)
 }
 
-func Test_Cov14_Integer8Ptr_BothNil(t *testing.T) {
+func Test_Integer8Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer8Ptr(nil, nil)}
 
@@ -273,7 +273,7 @@ func Test_Cov14_Integer8Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_Integer8Ptr_LeftNil(t *testing.T) {
+func Test_Integer8Ptr_LeftNil(t *testing.T) {
 	// Arrange
 	v := int8(1)
 
@@ -285,7 +285,7 @@ func Test_Cov14_Integer8Ptr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_Integer8Ptr_RightNil(t *testing.T) {
+func Test_Integer8Ptr_RightNil(t *testing.T) {
 	// Arrange
 	v := int8(1)
 
@@ -297,7 +297,7 @@ func Test_Cov14_Integer8Ptr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_Integer8Ptr_Delegate(t *testing.T) {
+func Test_Integer8Ptr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := int8(3), int8(7)
 
@@ -313,7 +313,7 @@ func Test_Cov14_Integer8Ptr_Delegate(t *testing.T) {
 // Integer16 — 3 branches + Integer16Ptr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Integer16_Equal(t *testing.T) {
+func Test_Integer16_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer16(100, 100)}
 
@@ -322,7 +322,7 @@ func Test_Cov14_Integer16_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16 returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Integer16_Less(t *testing.T) {
+func Test_Integer16_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer16(-100, 100)}
 
@@ -331,7 +331,7 @@ func Test_Cov14_Integer16_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16 returns correct value -- less", actual)
 }
 
-func Test_Cov14_Integer16_Greater(t *testing.T) {
+func Test_Integer16_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer16(100, -100)}
 
@@ -340,7 +340,7 @@ func Test_Cov14_Integer16_Greater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16 returns correct value -- greater", actual)
 }
 
-func Test_Cov14_Integer16Ptr_BothNil(t *testing.T) {
+func Test_Integer16Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer16Ptr(nil, nil)}
 
@@ -349,7 +349,7 @@ func Test_Cov14_Integer16Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16Ptr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_Integer16Ptr_LeftNil(t *testing.T) {
+func Test_Integer16Ptr_LeftNil(t *testing.T) {
 	// Arrange
 	v := int16(1)
 
@@ -361,7 +361,7 @@ func Test_Cov14_Integer16Ptr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16Ptr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_Integer16Ptr_RightNil(t *testing.T) {
+func Test_Integer16Ptr_RightNil(t *testing.T) {
 	// Arrange
 	v := int16(1)
 
@@ -373,7 +373,7 @@ func Test_Cov14_Integer16Ptr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16Ptr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_Integer16Ptr_Delegate(t *testing.T) {
+func Test_Integer16Ptr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := int16(3), int16(7)
 
@@ -389,7 +389,7 @@ func Test_Cov14_Integer16Ptr_Delegate(t *testing.T) {
 // Integer32 — 3 branches + Integer32Ptr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Integer32_Equal(t *testing.T) {
+func Test_Integer32_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer32(1000, 1000)}
 
@@ -398,7 +398,7 @@ func Test_Cov14_Integer32_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32 returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Integer32_Less(t *testing.T) {
+func Test_Integer32_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer32(-1000, 1000)}
 
@@ -407,7 +407,7 @@ func Test_Cov14_Integer32_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32 returns correct value -- less", actual)
 }
 
-func Test_Cov14_Integer32_Greater(t *testing.T) {
+func Test_Integer32_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer32(1000, -1000)}
 
@@ -416,7 +416,7 @@ func Test_Cov14_Integer32_Greater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32 returns correct value -- greater", actual)
 }
 
-func Test_Cov14_Integer32Ptr_BothNil(t *testing.T) {
+func Test_Integer32Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer32Ptr(nil, nil)}
 
@@ -425,7 +425,7 @@ func Test_Cov14_Integer32Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32Ptr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_Integer32Ptr_LeftNil(t *testing.T) {
+func Test_Integer32Ptr_LeftNil(t *testing.T) {
 	// Arrange
 	v := int32(1)
 
@@ -437,7 +437,7 @@ func Test_Cov14_Integer32Ptr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32Ptr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_Integer32Ptr_RightNil(t *testing.T) {
+func Test_Integer32Ptr_RightNil(t *testing.T) {
 	// Arrange
 	v := int32(1)
 
@@ -449,7 +449,7 @@ func Test_Cov14_Integer32Ptr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32Ptr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_Integer32Ptr_Delegate(t *testing.T) {
+func Test_Integer32Ptr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := int32(3), int32(7)
 
@@ -465,7 +465,7 @@ func Test_Cov14_Integer32Ptr_Delegate(t *testing.T) {
 // Integer64 — 3 branches + Integer64Ptr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Integer64_Equal(t *testing.T) {
+func Test_Integer64_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer64(99999, 99999)}
 
@@ -474,7 +474,7 @@ func Test_Cov14_Integer64_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Integer64_Less(t *testing.T) {
+func Test_Integer64_Less(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer64(-99999, 99999)}
 
@@ -483,7 +483,7 @@ func Test_Cov14_Integer64_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- less", actual)
 }
 
-func Test_Cov14_Integer64_Greater(t *testing.T) {
+func Test_Integer64_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer64(99999, -99999)}
 
@@ -492,7 +492,7 @@ func Test_Cov14_Integer64_Greater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- greater", actual)
 }
 
-func Test_Cov14_Integer64Ptr_BothNil(t *testing.T) {
+func Test_Integer64Ptr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.Integer64Ptr(nil, nil)}
 
@@ -501,7 +501,7 @@ func Test_Cov14_Integer64Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64Ptr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_Integer64Ptr_LeftNil(t *testing.T) {
+func Test_Integer64Ptr_LeftNil(t *testing.T) {
 	// Arrange
 	v := int64(1)
 
@@ -513,7 +513,7 @@ func Test_Cov14_Integer64Ptr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64Ptr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_Integer64Ptr_RightNil(t *testing.T) {
+func Test_Integer64Ptr_RightNil(t *testing.T) {
 	// Arrange
 	v := int64(1)
 
@@ -525,7 +525,7 @@ func Test_Cov14_Integer64Ptr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64Ptr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_Integer64Ptr_Delegate(t *testing.T) {
+func Test_Integer64Ptr_Delegate(t *testing.T) {
 	// Arrange
 	a, b := int64(3), int64(7)
 
@@ -541,7 +541,7 @@ func Test_Cov14_Integer64Ptr_Delegate(t *testing.T) {
 // IsIntegersEqual — 4 branches (nil/nil, nil/val, val/nil, delegate)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IsIntegersEqual_BothNil(t *testing.T) {
+func Test_IsIntegersEqual_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsIntegersEqual(nil, nil)}
 
@@ -550,7 +550,7 @@ func Test_Cov14_IsIntegersEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IsIntegersEqual_LeftNil(t *testing.T) {
+func Test_IsIntegersEqual_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsIntegersEqual(nil, []int{1})}
 
@@ -559,7 +559,7 @@ func Test_Cov14_IsIntegersEqual_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IsIntegersEqual_RightNil(t *testing.T) {
+func Test_IsIntegersEqual_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsIntegersEqual([]int{1}, nil)}
 
@@ -572,7 +572,7 @@ func Test_Cov14_IsIntegersEqual_RightNil(t *testing.T) {
 // IsIntegersEqualPtr — 4 branches (nil/nil, nil/val, diffLen, delegate)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IsIntegersEqualPtr_BothNil(t *testing.T) {
+func Test_IsIntegersEqualPtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsIntegersEqualPtr(nil, nil)}
 
@@ -581,7 +581,7 @@ func Test_Cov14_IsIntegersEqualPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqualPtr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IsIntegersEqualPtr_LeftNil(t *testing.T) {
+func Test_IsIntegersEqualPtr_LeftNil(t *testing.T) {
 	// Arrange
 	r := []int{1}
 
@@ -593,7 +593,7 @@ func Test_Cov14_IsIntegersEqualPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqualPtr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IsIntegersEqualPtr_RightNil(t *testing.T) {
+func Test_IsIntegersEqualPtr_RightNil(t *testing.T) {
 	// Arrange
 	l := []int{1}
 
@@ -605,7 +605,7 @@ func Test_Cov14_IsIntegersEqualPtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqualPtr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_IsIntegersEqualPtr_DiffLen(t *testing.T) {
+func Test_IsIntegersEqualPtr_DiffLen(t *testing.T) {
 	// Arrange
 	l := []int{1}
 	r := []int{1, 2}
@@ -622,7 +622,7 @@ func Test_Cov14_IsIntegersEqualPtr_DiffLen(t *testing.T) {
 // IsStringsEqual — 5 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IsStringsEqual_BothNil(t *testing.T) {
+func Test_IsStringsEqual_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual(nil, nil)}
 
@@ -631,7 +631,7 @@ func Test_Cov14_IsStringsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IsStringsEqual_LeftNil(t *testing.T) {
+func Test_IsStringsEqual_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual(nil, []string{"a"})}
 
@@ -640,7 +640,7 @@ func Test_Cov14_IsStringsEqual_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IsStringsEqual_RightNil(t *testing.T) {
+func Test_IsStringsEqual_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual([]string{"a"}, nil)}
 
@@ -649,7 +649,7 @@ func Test_Cov14_IsStringsEqual_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns nil -- right nil", actual)
 }
 
-func Test_Cov14_IsStringsEqual_DiffLen(t *testing.T) {
+func Test_IsStringsEqual_DiffLen(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual([]string{"a"}, []string{"a", "b"})}
 
@@ -658,7 +658,7 @@ func Test_Cov14_IsStringsEqual_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- diff len", actual)
 }
 
-func Test_Cov14_IsStringsEqual_Same(t *testing.T) {
+func Test_IsStringsEqual_Same(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual([]string{"a", "b"}, []string{"a", "b"})}
 
@@ -667,7 +667,7 @@ func Test_Cov14_IsStringsEqual_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- same", actual)
 }
 
-func Test_Cov14_IsStringsEqual_Diff(t *testing.T) {
+func Test_IsStringsEqual_Diff(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqual([]string{"a", "b"}, []string{"a", "c"})}
 
@@ -680,7 +680,7 @@ func Test_Cov14_IsStringsEqual_Diff(t *testing.T) {
 // IsStringsEqualPtr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IsStringsEqualPtr_BothNil(t *testing.T) {
+func Test_IsStringsEqualPtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualPtr(nil, nil)}
 
@@ -689,7 +689,7 @@ func Test_Cov14_IsStringsEqualPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualPtr_LeftNil(t *testing.T) {
+func Test_IsStringsEqualPtr_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualPtr(nil, []string{"a"})}
 
@@ -698,7 +698,7 @@ func Test_Cov14_IsStringsEqualPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualPtr_RightNil(t *testing.T) {
+func Test_IsStringsEqualPtr_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualPtr([]string{"a"}, nil)}
 
@@ -707,7 +707,7 @@ func Test_Cov14_IsStringsEqualPtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualPtr_DiffLen(t *testing.T) {
+func Test_IsStringsEqualPtr_DiffLen(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualPtr([]string{"a"}, []string{"a", "b"})}
 
@@ -716,7 +716,7 @@ func Test_Cov14_IsStringsEqualPtr_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns correct value -- diff len", actual)
 }
 
-func Test_Cov14_IsStringsEqualPtr_Same(t *testing.T) {
+func Test_IsStringsEqualPtr_Same(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualPtr([]string{"x", "y"}, []string{"x", "y"})}
 
@@ -729,7 +729,7 @@ func Test_Cov14_IsStringsEqualPtr_Same(t *testing.T) {
 // IsStringsEqualWithoutOrder — 5 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_IsStringsEqualWithoutOrder_BothNil(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder(nil, nil)}
 
@@ -738,7 +738,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithoutOrder returns nil -- both nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualWithoutOrder_LeftNil(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder(nil, []string{"a"})}
 
@@ -747,7 +747,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithoutOrder returns nil -- left nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualWithoutOrder_RightNil(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder([]string{"a"}, nil)}
 
@@ -756,7 +756,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithoutOrder returns nil -- right nil", actual)
 }
 
-func Test_Cov14_IsStringsEqualWithoutOrder_DiffLen(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_DiffLen(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder([]string{"a"}, []string{"a", "b"})}
 
@@ -765,7 +765,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithoutOrder returns non-empty -- diff len", actual)
 }
 
-func Test_Cov14_IsStringsEqualWithoutOrder_Reordered(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_Reordered(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder([]string{"b", "a"}, []string{"a", "b"})}
 
@@ -774,7 +774,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_Reordered(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithoutOrder returns non-empty -- reordered", actual)
 }
 
-func Test_Cov14_IsStringsEqualWithoutOrder_Mismatch(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_Mismatch(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.IsStringsEqualWithoutOrder([]string{"a", "b"}, []string{"a", "c"})}
 
@@ -787,7 +787,7 @@ func Test_Cov14_IsStringsEqualWithoutOrder_Mismatch(t *testing.T) {
 // Time — 3 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_Time_Equal(t *testing.T) {
+func Test_Time_Equal(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -799,7 +799,7 @@ func Test_Cov14_Time_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Time returns correct value -- equal", actual)
 }
 
-func Test_Cov14_Time_Less(t *testing.T) {
+func Test_Time_Less(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -811,7 +811,7 @@ func Test_Cov14_Time_Less(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Time returns correct value -- less", actual)
 }
 
-func Test_Cov14_Time_Greater(t *testing.T) {
+func Test_Time_Greater(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -827,7 +827,7 @@ func Test_Cov14_Time_Greater(t *testing.T) {
 // TimePtr — 4 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_TimePtr_BothNil(t *testing.T) {
+func Test_TimePtr_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.TimePtr(nil, nil)}
 
@@ -836,7 +836,7 @@ func Test_Cov14_TimePtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TimePtr returns nil -- both nil", actual)
 }
 
-func Test_Cov14_TimePtr_LeftNil(t *testing.T) {
+func Test_TimePtr_LeftNil(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -848,7 +848,7 @@ func Test_Cov14_TimePtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TimePtr returns nil -- left nil", actual)
 }
 
-func Test_Cov14_TimePtr_RightNil(t *testing.T) {
+func Test_TimePtr_RightNil(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -860,7 +860,7 @@ func Test_Cov14_TimePtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TimePtr returns nil -- right nil", actual)
 }
 
-func Test_Cov14_TimePtr_Delegate(t *testing.T) {
+func Test_TimePtr_Delegate(t *testing.T) {
 	// Arrange
 	now := time.Now()
 	later := now.Add(time.Hour)
@@ -877,7 +877,7 @@ func Test_Cov14_TimePtr_Delegate(t *testing.T) {
 // VersionSliceByte — 7 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_VersionSliceByte_BothNil(t *testing.T) {
+func Test_VersionSliceByte_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte(nil, nil)}
 
@@ -886,7 +886,7 @@ func Test_Cov14_VersionSliceByte_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns nil -- both nil", actual)
 }
 
-func Test_Cov14_VersionSliceByte_LeftNil(t *testing.T) {
+func Test_VersionSliceByte_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte(nil, []byte{1})}
 
@@ -895,7 +895,7 @@ func Test_Cov14_VersionSliceByte_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns nil -- left nil", actual)
 }
 
-func Test_Cov14_VersionSliceByte_RightNil(t *testing.T) {
+func Test_VersionSliceByte_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{1}, nil)}
 
@@ -904,7 +904,7 @@ func Test_Cov14_VersionSliceByte_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns nil -- right nil", actual)
 }
 
-func Test_Cov14_VersionSliceByte_EqualSameLen(t *testing.T) {
+func Test_VersionSliceByte_EqualSameLen(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2, 3})}
 
@@ -913,7 +913,7 @@ func Test_Cov14_VersionSliceByte_EqualSameLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns correct value -- equal same len", actual)
 }
 
-func Test_Cov14_VersionSliceByte_LoopLeftLess(t *testing.T) {
+func Test_VersionSliceByte_LoopLeftLess(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{1, 0, 0}, []byte{1, 0, 1})}
 
@@ -922,7 +922,7 @@ func Test_Cov14_VersionSliceByte_LoopLeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns correct value -- loop left less", actual)
 }
 
-func Test_Cov14_VersionSliceByte_LoopLeftGreater(t *testing.T) {
+func Test_VersionSliceByte_LoopLeftGreater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{2, 0, 0}, []byte{1, 9, 9})}
 
@@ -931,7 +931,7 @@ func Test_Cov14_VersionSliceByte_LoopLeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns correct value -- loop left greater", actual)
 }
 
-func Test_Cov14_VersionSliceByte_ShorterLeft(t *testing.T) {
+func Test_VersionSliceByte_ShorterLeft(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{1, 0}, []byte{1, 0, 0})}
 
@@ -940,7 +940,7 @@ func Test_Cov14_VersionSliceByte_ShorterLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSB returns correct value -- shorter left", actual)
 }
 
-func Test_Cov14_VersionSliceByte_ShorterRight(t *testing.T) {
+func Test_VersionSliceByte_ShorterRight(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceByte([]byte{1, 0, 0}, []byte{1, 0})}
 
@@ -953,7 +953,7 @@ func Test_Cov14_VersionSliceByte_ShorterRight(t *testing.T) {
 // VersionSliceInteger — 7 branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov14_VersionSliceInteger_BothNil(t *testing.T) {
+func Test_VersionSliceInteger_BothNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger(nil, nil)}
 
@@ -962,7 +962,7 @@ func Test_Cov14_VersionSliceInteger_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns nil -- both nil", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_LeftNil(t *testing.T) {
+func Test_VersionSliceInteger_LeftNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger(nil, []int{1})}
 
@@ -971,7 +971,7 @@ func Test_Cov14_VersionSliceInteger_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns nil -- left nil", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_RightNil(t *testing.T) {
+func Test_VersionSliceInteger_RightNil(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{1}, nil)}
 
@@ -980,7 +980,7 @@ func Test_Cov14_VersionSliceInteger_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns nil -- right nil", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_EqualSameLen(t *testing.T) {
+func Test_VersionSliceInteger_EqualSameLen(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2, 3})}
 
@@ -989,7 +989,7 @@ func Test_Cov14_VersionSliceInteger_EqualSameLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns correct value -- equal same len", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_LoopLeftLess(t *testing.T) {
+func Test_VersionSliceInteger_LoopLeftLess(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{1, 0, 0}, []int{1, 0, 1})}
 
@@ -998,7 +998,7 @@ func Test_Cov14_VersionSliceInteger_LoopLeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns correct value -- loop left less", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_LoopLeftGreater(t *testing.T) {
+func Test_VersionSliceInteger_LoopLeftGreater(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{2, 0, 0}, []int{1, 9, 9})}
 
@@ -1007,7 +1007,7 @@ func Test_Cov14_VersionSliceInteger_LoopLeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns correct value -- loop left greater", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_ShorterLeft(t *testing.T) {
+func Test_VersionSliceInteger_ShorterLeft(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{1, 0}, []int{1, 0, 0})}
 
@@ -1016,7 +1016,7 @@ func Test_Cov14_VersionSliceInteger_ShorterLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VSI returns correct value -- shorter left", actual)
 }
 
-func Test_Cov14_VersionSliceInteger_ShorterRight(t *testing.T) {
+func Test_VersionSliceInteger_ShorterRight(t *testing.T) {
 	// Act
 	actual := args.Map{"v": corecmp.VersionSliceInteger([]int{1, 0, 0}, []int{1, 0})}
 

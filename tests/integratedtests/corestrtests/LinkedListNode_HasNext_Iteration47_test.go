@@ -11,7 +11,7 @@ import (
 // LinkedListNode
 // ═══════════════════════════════════════════════════════════════
 
-func Test_Cov51_LinkedListNode_HasNext_False(t *testing.T) {
+func Test_LinkedListNode_HasNext_False(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_HasNext_False", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -22,7 +22,7 @@ func Test_Cov51_LinkedListNode_HasNext_False(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_HasNext_True(t *testing.T) {
+func Test_LinkedListNode_HasNext_True(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_HasNext_True", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -33,7 +33,7 @@ func Test_Cov51_LinkedListNode_HasNext_True(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_Next(t *testing.T) {
+func Test_LinkedListNode_Next(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_Next", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -44,7 +44,7 @@ func Test_Cov51_LinkedListNode_Next(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_EndOfChain(t *testing.T) {
+func Test_LinkedListNode_EndOfChain(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_EndOfChain", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -58,7 +58,7 @@ func Test_Cov51_LinkedListNode_EndOfChain(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_Clone(t *testing.T) {
+func Test_LinkedListNode_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_Clone", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("x")
@@ -72,7 +72,7 @@ func Test_Cov51_LinkedListNode_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsEqual_Same(t *testing.T) {
+func Test_LinkedListNode_IsEqual_Same(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsEqual_Same", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -83,7 +83,7 @@ func Test_Cov51_LinkedListNode_IsEqual_Same(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsEqual_BothNil(t *testing.T) {
+func Test_LinkedListNode_IsEqual_BothNil(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsEqual_BothNil", func() {
 		var n *corestr.LinkedListNode
 		tc := caseV1Compat{Name: "Node IsEqual both nil", Expected: true, Actual: n.IsEqual(nil), Args: args.Map{}}
@@ -93,7 +93,7 @@ func Test_Cov51_LinkedListNode_IsEqual_BothNil(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsEqualValue(t *testing.T) {
+func Test_LinkedListNode_IsEqualValue(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsEqualValue", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("hello")
@@ -104,7 +104,7 @@ func Test_Cov51_LinkedListNode_IsEqualValue(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsEqualValueSensitive_CI(t *testing.T) {
+func Test_LinkedListNode_IsEqualValueSensitive_CI(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsEqualValueSensitive_CI", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("Hello")
@@ -115,7 +115,7 @@ func Test_Cov51_LinkedListNode_IsEqualValueSensitive_CI(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_String(t *testing.T) {
+func Test_LinkedListNode_String(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_String", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("test")
@@ -126,7 +126,7 @@ func Test_Cov51_LinkedListNode_String(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_List(t *testing.T) {
+func Test_LinkedListNode_List(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_List", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -137,7 +137,7 @@ func Test_Cov51_LinkedListNode_List(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_Join(t *testing.T) {
+func Test_LinkedListNode_Join(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_Join", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -148,7 +148,7 @@ func Test_Cov51_LinkedListNode_Join(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_CreateLinkedList(t *testing.T) {
+func Test_LinkedListNode_CreateLinkedList(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_CreateLinkedList", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("x").Add("y")
@@ -160,7 +160,7 @@ func Test_Cov51_LinkedListNode_CreateLinkedList(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsChainEqual_True(t *testing.T) {
+func Test_LinkedListNode_IsChainEqual_True(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsChainEqual_True", func() {
 		ll1 := corestr.Empty.LinkedList()
 		ll1.Add("a").Add("b")
@@ -173,7 +173,7 @@ func Test_Cov51_LinkedListNode_IsChainEqual_True(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedListNode_IsChainEqual_CaseInsensitive(t *testing.T) {
+func Test_LinkedListNode_IsChainEqual_CaseInsensitive(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedListNode_IsChainEqual_CaseInsensitive", func() {
 		ll1 := corestr.Empty.LinkedList()
 		ll1.Add("A").Add("B")
@@ -190,7 +190,7 @@ func Test_Cov51_LinkedListNode_IsChainEqual_CaseInsensitive(t *testing.T) {
 // LinkedList
 // ═══════════════════════════════════════════════════════════════
 
-func Test_Cov51_LinkedList_Add(t *testing.T) {
+func Test_LinkedList_Add(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Add", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -201,7 +201,7 @@ func Test_Cov51_LinkedList_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Head(t *testing.T) {
+func Test_LinkedList_Head(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Head", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("first")
@@ -212,7 +212,7 @@ func Test_Cov51_LinkedList_Head(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Tail(t *testing.T) {
+func Test_LinkedList_Tail(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Tail", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -223,7 +223,7 @@ func Test_Cov51_LinkedList_Tail(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEmpty_True(t *testing.T) {
+func Test_LinkedList_IsEmpty_True(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEmpty_True", func() {
 		ll := corestr.Empty.LinkedList()
 		tc := caseV1Compat{Name: "LL IsEmpty true", Expected: true, Actual: ll.IsEmpty(), Args: args.Map{}}
@@ -233,7 +233,7 @@ func Test_Cov51_LinkedList_IsEmpty_True(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEmpty_False(t *testing.T) {
+func Test_LinkedList_IsEmpty_False(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEmpty_False", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -244,7 +244,7 @@ func Test_Cov51_LinkedList_IsEmpty_False(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_HasItems(t *testing.T) {
+func Test_LinkedList_HasItems(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_HasItems", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -255,7 +255,7 @@ func Test_Cov51_LinkedList_HasItems(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEmptyLock(t *testing.T) {
+func Test_LinkedList_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEmptyLock", func() {
 		ll := corestr.Empty.LinkedList()
 		tc := caseV1Compat{Name: "LL IsEmptyLock", Expected: true, Actual: ll.IsEmptyLock(), Args: args.Map{}}
@@ -265,7 +265,7 @@ func Test_Cov51_LinkedList_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_LengthLock(t *testing.T) {
+func Test_LinkedList_LengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_LengthLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -276,7 +276,7 @@ func Test_Cov51_LinkedList_LengthLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddLock("x")
@@ -287,7 +287,7 @@ func Test_Cov51_LinkedList_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddFront(t *testing.T) {
+func Test_LinkedList_AddFront(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddFront", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("b").AddFront("a")
@@ -298,7 +298,7 @@ func Test_Cov51_LinkedList_AddFront(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddFront_Empty(t *testing.T) {
+func Test_LinkedList_AddFront_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddFront_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddFront("a")
@@ -309,7 +309,7 @@ func Test_Cov51_LinkedList_AddFront_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_PushFront(t *testing.T) {
+func Test_LinkedList_PushFront(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_PushFront", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("b").PushFront("a")
@@ -320,7 +320,7 @@ func Test_Cov51_LinkedList_PushFront(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_PushBack(t *testing.T) {
+func Test_LinkedList_PushBack(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_PushBack", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.PushBack("a")
@@ -331,7 +331,7 @@ func Test_Cov51_LinkedList_PushBack(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Push(t *testing.T) {
+func Test_LinkedList_Push(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Push", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Push("a")
@@ -342,7 +342,7 @@ func Test_Cov51_LinkedList_Push(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddNonEmpty(t *testing.T) {
+func Test_LinkedList_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddNonEmpty", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddNonEmpty("a").AddNonEmpty("")
@@ -353,7 +353,7 @@ func Test_Cov51_LinkedList_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
+func Test_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddNonEmptyWhitespace", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddNonEmptyWhitespace("a").AddNonEmptyWhitespace("  ")
@@ -364,7 +364,7 @@ func Test_Cov51_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddIf_True(t *testing.T) {
+func Test_LinkedList_AddIf_True(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddIf_True", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddIf(true, "a")
@@ -375,7 +375,7 @@ func Test_Cov51_LinkedList_AddIf_True(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddIf_False(t *testing.T) {
+func Test_LinkedList_AddIf_False(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddIf_False", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddIf(false, "a")
@@ -386,7 +386,7 @@ func Test_Cov51_LinkedList_AddIf_False(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddsIf_True(t *testing.T) {
+func Test_LinkedList_AddsIf_True(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddsIf_True", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddsIf(true, "a", "b")
@@ -397,7 +397,7 @@ func Test_Cov51_LinkedList_AddsIf_True(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddsIf_False(t *testing.T) {
+func Test_LinkedList_AddsIf_False(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddsIf_False", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddsIf(false, "a", "b")
@@ -408,7 +408,7 @@ func Test_Cov51_LinkedList_AddsIf_False(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddFunc(t *testing.T) {
+func Test_LinkedList_AddFunc(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddFunc", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddFunc(func() string { return "x" })
@@ -419,7 +419,7 @@ func Test_Cov51_LinkedList_AddFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddFuncErr_NoErr(t *testing.T) {
+func Test_LinkedList_AddFuncErr_NoErr(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddFuncErr_NoErr", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddFuncErr(func() (string, error) { return "ok", nil }, func(err error) {})
@@ -430,7 +430,7 @@ func Test_Cov51_LinkedList_AddFuncErr_NoErr(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Adds(t *testing.T) {
+func Test_LinkedList_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Adds", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
@@ -441,7 +441,7 @@ func Test_Cov51_LinkedList_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Adds_Empty(t *testing.T) {
+func Test_LinkedList_Adds_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Adds_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds()
@@ -452,7 +452,7 @@ func Test_Cov51_LinkedList_Adds_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddStrings(t *testing.T) {
+func Test_LinkedList_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddStrings", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddStrings([]string{"x", "y"})
@@ -463,7 +463,7 @@ func Test_Cov51_LinkedList_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddsLock(t *testing.T) {
+func Test_LinkedList_AddsLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddsLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddsLock("a", "b")
@@ -474,7 +474,7 @@ func Test_Cov51_LinkedList_AddsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddItemsMap(t *testing.T) {
+func Test_LinkedList_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddItemsMap", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddItemsMap(map[string]bool{"a": true, "b": false})
@@ -485,7 +485,7 @@ func Test_Cov51_LinkedList_AddItemsMap(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddCollection(t *testing.T) {
+func Test_LinkedList_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddCollection", func() {
 		ll := corestr.Empty.LinkedList()
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -497,7 +497,7 @@ func Test_Cov51_LinkedList_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AddCollection_Nil(t *testing.T) {
+func Test_LinkedList_AddCollection_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AddCollection_Nil", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddCollection(nil)
@@ -508,7 +508,7 @@ func Test_Cov51_LinkedList_AddCollection_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AppendNode(t *testing.T) {
+func Test_LinkedList_AppendNode(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AppendNode", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -521,7 +521,7 @@ func Test_Cov51_LinkedList_AppendNode(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AppendNode_Empty(t *testing.T) {
+func Test_LinkedList_AppendNode_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AppendNode_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		node := &corestr.LinkedListNode{Element: "a"}
@@ -533,7 +533,7 @@ func Test_Cov51_LinkedList_AppendNode_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEquals_Same(t *testing.T) {
+func Test_LinkedList_IsEquals_Same(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEquals_Same", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -544,7 +544,7 @@ func Test_Cov51_LinkedList_IsEquals_Same(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEquals_Equal(t *testing.T) {
+func Test_LinkedList_IsEquals_Equal(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEquals_Equal", func() {
 		ll1 := corestr.Empty.LinkedList()
 		ll1.Add("a").Add("b")
@@ -557,7 +557,7 @@ func Test_Cov51_LinkedList_IsEquals_Equal(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEquals_DiffLen(t *testing.T) {
+func Test_LinkedList_IsEquals_DiffLen(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEquals_DiffLen", func() {
 		ll1 := corestr.Empty.LinkedList()
 		ll1.Add("a")
@@ -570,7 +570,7 @@ func Test_Cov51_LinkedList_IsEquals_DiffLen(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_IsEqualsWithSensitive_CI(t *testing.T) {
+func Test_LinkedList_IsEqualsWithSensitive_CI(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_IsEqualsWithSensitive_CI", func() {
 		ll1 := corestr.Empty.LinkedList()
 		ll1.Add("A")
@@ -583,7 +583,7 @@ func Test_Cov51_LinkedList_IsEqualsWithSensitive_CI(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_List(t *testing.T) {
+func Test_LinkedList_List(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_List", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -594,7 +594,7 @@ func Test_Cov51_LinkedList_List(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_List_Empty(t *testing.T) {
+func Test_LinkedList_List_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_List_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		tc := caseV1Compat{Name: "LL List empty", Expected: 0, Actual: len(ll.List()), Args: args.Map{}}
@@ -604,7 +604,7 @@ func Test_Cov51_LinkedList_List_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_ListLock(t *testing.T) {
+func Test_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_ListLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -615,7 +615,7 @@ func Test_Cov51_LinkedList_ListLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_String", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -626,7 +626,7 @@ func Test_Cov51_LinkedList_String(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_String_Empty(t *testing.T) {
+func Test_LinkedList_String_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_String_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		tc := caseV1Compat{Name: "LL String empty", Expected: true, Actual: len(ll.String()) > 0, Args: args.Map{}}
@@ -636,7 +636,7 @@ func Test_Cov51_LinkedList_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Join(t *testing.T) {
+func Test_LinkedList_Join(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Join", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -647,7 +647,7 @@ func Test_Cov51_LinkedList_Join(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_JoinLock(t *testing.T) {
+func Test_LinkedList_JoinLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_JoinLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -658,7 +658,7 @@ func Test_Cov51_LinkedList_JoinLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_ToCollection(t *testing.T) {
+func Test_LinkedList_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_ToCollection", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -670,7 +670,7 @@ func Test_Cov51_LinkedList_ToCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_ToCollection_Empty(t *testing.T) {
+func Test_LinkedList_ToCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_ToCollection_Empty", func() {
 		ll := corestr.Empty.LinkedList()
 		col := ll.ToCollection(5)
@@ -681,7 +681,7 @@ func Test_Cov51_LinkedList_ToCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafeIndexAt(t *testing.T) {
+func Test_LinkedList_SafeIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafeIndexAt", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -693,7 +693,7 @@ func Test_Cov51_LinkedList_SafeIndexAt(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafeIndexAt_OOB(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_OOB(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafeIndexAt_OOB", func() {
 		ll := corestr.Empty.LinkedList()
 		node := ll.SafeIndexAt(0)
@@ -704,7 +704,7 @@ func Test_Cov51_LinkedList_SafeIndexAt_OOB(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafeIndexAt_Negative(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_Negative(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafeIndexAt_Negative", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -716,7 +716,7 @@ func Test_Cov51_LinkedList_SafeIndexAt_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafePointerIndexAt(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafePointerIndexAt", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -728,7 +728,7 @@ func Test_Cov51_LinkedList_SafePointerIndexAt(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafePointerIndexAt_Nil", func() {
 		ll := corestr.Empty.LinkedList()
 		ptr := ll.SafePointerIndexAt(0)
@@ -739,7 +739,7 @@ func Test_Cov51_LinkedList_SafePointerIndexAt_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
+func Test_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafePointerIndexAtUsingDefault", func() {
 		ll := corestr.Empty.LinkedList()
 		val := ll.SafePointerIndexAtUsingDefault(0, "def")
@@ -750,7 +750,7 @@ func Test_Cov51_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_SafeIndexAtLock(t *testing.T) {
+func Test_LinkedList_SafeIndexAtLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_SafeIndexAtLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -762,7 +762,7 @@ func Test_Cov51_LinkedList_SafeIndexAtLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Clear(t *testing.T) {
+func Test_LinkedList_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Clear", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -774,7 +774,7 @@ func Test_Cov51_LinkedList_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_RemoveAll(t *testing.T) {
+func Test_LinkedList_RemoveAll(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_RemoveAll", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -786,7 +786,7 @@ func Test_Cov51_LinkedList_RemoveAll(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_JsonModel(t *testing.T) {
+func Test_LinkedList_JsonModel(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_JsonModel", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -797,7 +797,7 @@ func Test_Cov51_LinkedList_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_MarshalJSON(t *testing.T) {
+func Test_LinkedList_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_MarshalJSON", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -809,7 +809,7 @@ func Test_Cov51_LinkedList_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_UnmarshalJSON(t *testing.T) {
+func Test_LinkedList_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_UnmarshalJSON", func() {
 		ll := corestr.Empty.LinkedList()
 		err := ll.UnmarshalJSON([]byte(`["x","y"]`))
@@ -820,7 +820,7 @@ func Test_Cov51_LinkedList_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Loop(t *testing.T) {
+func Test_LinkedList_Loop(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Loop", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -836,7 +836,7 @@ func Test_Cov51_LinkedList_Loop(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Loop_Break(t *testing.T) {
+func Test_LinkedList_Loop_Break(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Loop_Break", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -852,7 +852,7 @@ func Test_Cov51_LinkedList_Loop_Break(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Filter(t *testing.T) {
+func Test_LinkedList_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Filter", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -866,7 +866,7 @@ func Test_Cov51_LinkedList_Filter(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_GetAllLinkedNodes(t *testing.T) {
+func Test_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_GetAllLinkedNodes", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -878,7 +878,7 @@ func Test_Cov51_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_GetNextNodes(t *testing.T) {
+func Test_LinkedList_GetNextNodes(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_GetNextNodes", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -890,7 +890,7 @@ func Test_Cov51_LinkedList_GetNextNodes(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_InsertAt(t *testing.T) {
+func Test_LinkedList_InsertAt(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_InsertAt", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("c")
@@ -902,7 +902,7 @@ func Test_Cov51_LinkedList_InsertAt(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_InsertAt_Front(t *testing.T) {
+func Test_LinkedList_InsertAt_Front(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_InsertAt_Front", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("b")
@@ -914,7 +914,7 @@ func Test_Cov51_LinkedList_InsertAt_Front(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_RemoveNodeByElementValue(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_RemoveNodeByElementValue", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -926,7 +926,7 @@ func Test_Cov51_LinkedList_RemoveNodeByElementValue(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_RemoveNodeByElementValue_First", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b")
@@ -938,7 +938,7 @@ func Test_Cov51_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_RemoveNodeByIndex(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndex(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_RemoveNodeByIndex", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
@@ -950,7 +950,7 @@ func Test_Cov51_LinkedList_RemoveNodeByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_StringLock(t *testing.T) {
+func Test_LinkedList_StringLock(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_StringLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -961,7 +961,7 @@ func Test_Cov51_LinkedList_StringLock(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Joins(t *testing.T) {
+func Test_LinkedList_Joins(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Joins", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -973,7 +973,7 @@ func Test_Cov51_LinkedList_Joins(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_JsonModelAny(t *testing.T) {
+func Test_LinkedList_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_JsonModelAny", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -984,7 +984,7 @@ func Test_Cov51_LinkedList_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_Json(t *testing.T) {
+func Test_LinkedList_Json(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_Json", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -996,7 +996,7 @@ func Test_Cov51_LinkedList_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov51_LinkedList_AsJsonMarshaller(t *testing.T) {
+func Test_LinkedList_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov51_LinkedList_AsJsonMarshaller", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
@@ -1012,7 +1012,7 @@ func Test_Cov51_LinkedList_AsJsonMarshaller(t *testing.T) {
 // CharCollectionDataModel
 // ═══════════════════════════════════════════════════════════════
 
-func Test_Cov51_CharCollectionDataModel_NewUsing(t *testing.T) {
+func Test_CharCollectionDataModel_NewUsing(t *testing.T) {
 	safeTest(t, "Test_Cov51_CharCollectionDataModel_NewUsing", func() {
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(5, 5)
 		ccm.Add("hello")
@@ -1024,7 +1024,7 @@ func Test_Cov51_CharCollectionDataModel_NewUsing(t *testing.T) {
 	})
 }
 
-func Test_Cov51_CharCollectionDataModel_NewUsingDataModel(t *testing.T) {
+func Test_CharCollectionDataModel_NewUsingDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov51_CharCollectionDataModel_NewUsingDataModel", func() {
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(5, 5)
 		ccm.Add("hello")

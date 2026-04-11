@@ -19,7 +19,7 @@ import (
 
 // ── CharHashsetMap.efficientAddOfLargeItems (line 748-772) ──
 
-func Test_Cov32_CharHashsetMap_EfficientAdd_I29(t *testing.T) {
+func Test_CharHashsetMap_EfficientAdd_I29(t *testing.T) {
 	// Arrange
 	chm := corestr.New.CharHashsetMap.Cap(3, 3)
 
@@ -42,7 +42,7 @@ func Test_Cov32_CharHashsetMap_EfficientAdd_I29(t *testing.T) {
 // ── Collection JSON operations (lines 497, 508, 528, 539, 559, 570, 581, 592) ──
 // Various nil/error return paths in JSON — mostly dead code on valid data
 
-func Test_Cov32_Collection_JsonString_I29(t *testing.T) {
+func Test_Collection_JsonString_I29(t *testing.T) {
 	// Arrange
 	coll := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
@@ -68,7 +68,7 @@ func Test_Cov32_Collection_JsonString_I29(t *testing.T) {
 
 // ── LinkedCollections various paths ──
 
-func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T) {
+func Test_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T) {
 	// Arrange
 	lc := corestr.New.LinkedCollection.Create()
 	lc.Add(corestr.New.Collection.Strings([]string{"x"}))
@@ -84,7 +84,7 @@ func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T
 
 // ── LinkedCollections.ToCollection (line 1265) ──
 
-func Test_Cov32_LinkedCollections_ToCollection_I29(t *testing.T) {
+func Test_LinkedCollections_ToCollection_I29(t *testing.T) {
 	// Arrange
 	lc := corestr.New.LinkedCollection.Create()
 	lc.Add(corestr.New.Collection.Strings([]string{"v1", "v2"}))

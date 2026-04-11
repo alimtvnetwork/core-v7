@@ -12,7 +12,7 @@ import (
 // TypeSameStatus
 // ==========================================================================
 
-func Test_Cov3_TypeSameStatus_SameTypes(t *testing.T) {
+func Test_TypeSameStatus_SameTypes(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", "world")
 
@@ -33,7 +33,7 @@ func Test_Cov3_TypeSameStatus_SameTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus same types -- string string", actual)
 }
 
-func Test_Cov3_TypeSameStatus_DiffTypes(t *testing.T) {
+func Test_TypeSameStatus_DiffTypes(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 
@@ -45,7 +45,7 @@ func Test_Cov3_TypeSameStatus_DiffTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus diff types -- string int", actual)
 }
 
-func Test_Cov3_TypeSameStatus_NilLeft(t *testing.T) {
+func Test_TypeSameStatus_NilLeft(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "hello")
 
@@ -63,7 +63,7 @@ func Test_Cov3_TypeSameStatus_NilLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus nil left -- nil string", actual)
 }
 
-func Test_Cov3_TypeSameStatus_Pointers(t *testing.T) {
+func Test_TypeSameStatus_Pointers(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, &s)
@@ -88,7 +88,7 @@ func Test_Cov3_TypeSameStatus_Pointers(t *testing.T) {
 // TypeNotEqualErr
 // ==========================================================================
 
-func Test_Cov3_TypeNotEqualErr_Same(t *testing.T) {
+func Test_TypeNotEqualErr_Same(t *testing.T) {
 	// Arrange
 	err := coredynamic.TypeNotEqualErr("a", "b")
 
@@ -100,7 +100,7 @@ func Test_Cov3_TypeNotEqualErr_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeNotEqualErr same types no error -- string string", actual)
 }
 
-func Test_Cov3_TypeNotEqualErr_Diff(t *testing.T) {
+func Test_TypeNotEqualErr_Diff(t *testing.T) {
 	// Arrange
 	err := coredynamic.TypeNotEqualErr("a", 42)
 
@@ -116,7 +116,7 @@ func Test_Cov3_TypeNotEqualErr_Diff(t *testing.T) {
 // TypesIndexOf
 // ==========================================================================
 
-func Test_Cov3_TypesIndexOf_Found(t *testing.T) {
+func Test_TypesIndexOf_Found(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -129,7 +129,7 @@ func Test_Cov3_TypesIndexOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypesIndexOf finds at index 1 -- int in [str,int]", actual)
 }
 
-func Test_Cov3_TypesIndexOf_NotFound(t *testing.T) {
+func Test_TypesIndexOf_NotFound(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	boolType := reflect.TypeOf(true)
@@ -146,7 +146,7 @@ func Test_Cov3_TypesIndexOf_NotFound(t *testing.T) {
 // NotAcceptedTypesErr
 // ==========================================================================
 
-func Test_Cov3_NotAcceptedTypesErr_Match(t *testing.T) {
+func Test_NotAcceptedTypesErr_Match(t *testing.T) {
 	// Arrange
 	err := coredynamic.NotAcceptedTypesErr("hello", reflect.TypeOf(""))
 
@@ -158,7 +158,7 @@ func Test_Cov3_NotAcceptedTypesErr_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NotAcceptedTypesErr match -- string", actual)
 }
 
-func Test_Cov3_NotAcceptedTypesErr_NoMatch(t *testing.T) {
+func Test_NotAcceptedTypesErr_NoMatch(t *testing.T) {
 	// Arrange
 	err := coredynamic.NotAcceptedTypesErr("hello", reflect.TypeOf(0))
 
@@ -174,7 +174,7 @@ func Test_Cov3_NotAcceptedTypesErr_NoMatch(t *testing.T) {
 // ReflectKindValidation
 // ==========================================================================
 
-func Test_Cov3_ReflectKindValidation_Match(t *testing.T) {
+func Test_ReflectKindValidation_Match(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectKindValidation(reflect.String, "hello")
 
@@ -186,7 +186,7 @@ func Test_Cov3_ReflectKindValidation_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectKindValidation match -- string", actual)
 }
 
-func Test_Cov3_ReflectKindValidation_NoMatch(t *testing.T) {
+func Test_ReflectKindValidation_NoMatch(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectKindValidation(reflect.Int, "hello")
 
@@ -202,7 +202,7 @@ func Test_Cov3_ReflectKindValidation_NoMatch(t *testing.T) {
 // ReflectTypeValidation
 // ==========================================================================
 
-func Test_Cov3_ReflectTypeValidation_Match(t *testing.T) {
+func Test_ReflectTypeValidation_Match(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(""), "hello")
 
@@ -214,7 +214,7 @@ func Test_Cov3_ReflectTypeValidation_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation match -- string", actual)
 }
 
-func Test_Cov3_ReflectTypeValidation_NoMatch(t *testing.T) {
+func Test_ReflectTypeValidation_NoMatch(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(0), "hello")
 
@@ -226,7 +226,7 @@ func Test_Cov3_ReflectTypeValidation_NoMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation no match -- string vs int", actual)
 }
 
-func Test_Cov3_ReflectTypeValidation_NilNotExpected(t *testing.T) {
+func Test_ReflectTypeValidation_NilNotExpected(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(""), nil)
 
@@ -238,7 +238,7 @@ func Test_Cov3_ReflectTypeValidation_NilNotExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation nil not expected -- nil", actual)
 }
 
-func Test_Cov3_ReflectTypeValidation_NilAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilAllowed(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(false, reflect.TypeOf(""), nil)
 
@@ -254,7 +254,7 @@ func Test_Cov3_ReflectTypeValidation_NilAllowed(t *testing.T) {
 // ReflectInterfaceVal
 // ==========================================================================
 
-func Test_Cov3_ReflectInterfaceVal_Value(t *testing.T) {
+func Test_ReflectInterfaceVal_Value(t *testing.T) {
 	// Arrange
 	result := coredynamic.ReflectInterfaceVal("hello")
 
@@ -266,7 +266,7 @@ func Test_Cov3_ReflectInterfaceVal_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectInterfaceVal value type -- string", actual)
 }
 
-func Test_Cov3_ReflectInterfaceVal_Pointer(t *testing.T) {
+func Test_ReflectInterfaceVal_Pointer(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := coredynamic.ReflectInterfaceVal(&s)
@@ -283,7 +283,7 @@ func Test_Cov3_ReflectInterfaceVal_Pointer(t *testing.T) {
 // ZeroSetAny
 // ==========================================================================
 
-func Test_Cov3_ZeroSetAny_Nil(t *testing.T) {
+func Test_ZeroSetAny_Nil(t *testing.T) {
 	// Arrange
 	// should not panic
 	coredynamic.ZeroSetAny(nil)
@@ -296,7 +296,7 @@ func Test_Cov3_ZeroSetAny_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ZeroSetAny nil no panic -- nil", actual)
 }
 
-func Test_Cov3_ZeroSetAny_Pointer(t *testing.T) {
+func Test_ZeroSetAny_Pointer(t *testing.T) {
 	// Arrange
 	type s struct{ A int }
 	val := &s{A: 42}
@@ -314,7 +314,7 @@ func Test_Cov3_ZeroSetAny_Pointer(t *testing.T) {
 // ZeroSet
 // ==========================================================================
 
-func Test_Cov3_ZeroSet(t *testing.T) {
+func Test_ZeroSet(t *testing.T) {
 	// Arrange
 	type s struct{ A int }
 	val := &s{A: 42}
@@ -332,7 +332,7 @@ func Test_Cov3_ZeroSet(t *testing.T) {
 // Type
 // ==========================================================================
 
-func Test_Cov3_Type(t *testing.T) {
+func Test_Type(t *testing.T) {
 	// Arrange
 	rt := coredynamic.Type("hello")
 
@@ -348,7 +348,7 @@ func Test_Cov3_Type(t *testing.T) {
 // AnyToReflectVal
 // ==========================================================================
 
-func Test_Cov3_AnyToReflectVal(t *testing.T) {
+func Test_AnyToReflectVal(t *testing.T) {
 	// Arrange
 	rv := coredynamic.AnyToReflectVal(42)
 
@@ -370,7 +370,7 @@ func Test_Cov3_AnyToReflectVal(t *testing.T) {
 // KeyVal — comprehensive
 // ==========================================================================
 
-func Test_Cov3_KeyVal_Basics(t *testing.T) {
+func Test_KeyVal_Basics(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "myKey", Value: "myVal"}
 
@@ -391,7 +391,7 @@ func Test_Cov3_KeyVal_Basics(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal basics return expected -- string kv", actual)
 }
 
-func Test_Cov3_KeyVal_TypedGetters(t *testing.T) {
+func Test_KeyVal_TypedGetters(t *testing.T) {
 	// Arrange
 	kvInt := &coredynamic.KeyVal{Key: "k", Value: 42}
 	kvUint := &coredynamic.KeyVal{Key: "k", Value: uint(10)}
@@ -415,7 +415,7 @@ func Test_Cov3_KeyVal_TypedGetters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal typed getters -- various types", actual)
 }
 
-func Test_Cov3_KeyVal_TypedGetters_Fail(t *testing.T) {
+func Test_KeyVal_TypedGetters_Fail(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "notInt"}
 
@@ -435,7 +435,7 @@ func Test_Cov3_KeyVal_TypedGetters_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal typed getters fail -- wrong type", actual)
 }
 
-func Test_Cov3_KeyVal_Dynamic(t *testing.T) {
+func Test_KeyVal_Dynamic(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	kd := kv.KeyDynamic()
@@ -456,7 +456,7 @@ func Test_Cov3_KeyVal_Dynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Dynamic methods -- string kv", actual)
 }
 
-func Test_Cov3_KeyVal_NullErrors(t *testing.T) {
+func Test_KeyVal_NullErrors(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 
@@ -474,7 +474,7 @@ func Test_Cov3_KeyVal_NullErrors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal null errors nil -- non-null kv", actual)
 }
 
-func Test_Cov3_KeyVal_NullErrors_Nil(t *testing.T) {
+func Test_KeyVal_NullErrors_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -492,7 +492,7 @@ func Test_Cov3_KeyVal_NullErrors_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal null errors return err -- nil receiver", actual)
 }
 
-func Test_Cov3_KeyVal_NilStrings(t *testing.T) {
+func Test_KeyVal_NilStrings(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -510,7 +510,7 @@ func Test_Cov3_KeyVal_NilStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal nil receiver strings empty -- nil", actual)
 }
 
-func Test_Cov3_KeyVal_ReflectSetMethods(t *testing.T) {
+func Test_KeyVal_ReflectSetMethods(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "hello", Value: "world"}
 	var keyTarget string
@@ -532,7 +532,7 @@ func Test_Cov3_KeyVal_ReflectSetMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSet methods -- string kv", actual)
 }
 
-func Test_Cov3_KeyVal_ReflectSetMethods_Nil(t *testing.T) {
+func Test_KeyVal_ReflectSetMethods_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -554,7 +554,7 @@ func Test_Cov3_KeyVal_ReflectSetMethods_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSet nil receiver returns errors -- nil", actual)
 }
 
-func Test_Cov3_KeyVal_CastKeyVal_Nil(t *testing.T) {
+func Test_KeyVal_CastKeyVal_Nil(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.CastKeyVal(nil, nil)
@@ -567,7 +567,7 @@ func Test_Cov3_KeyVal_CastKeyVal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal CastKeyVal nil receiver -- nil", actual)
 }
 
-func Test_Cov3_KeyVal_Json(t *testing.T) {
+func Test_KeyVal_Json(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	j := kv.Json()
@@ -591,7 +591,7 @@ func Test_Cov3_KeyVal_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Json methods -- valid kv", actual)
 }
 
-func Test_Cov3_KeyVal_Serialize(t *testing.T) {
+func Test_KeyVal_Serialize(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	bytes, err := kv.Serialize()
@@ -610,7 +610,7 @@ func Test_Cov3_KeyVal_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize returns bytes -- valid", actual)
 }
 
-func Test_Cov3_KeyVal_ValueReflectValue(t *testing.T) {
+func Test_KeyVal_ValueReflectValue(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: 42}
 	rv := kv.ValueReflectValue()
@@ -627,7 +627,7 @@ func Test_Cov3_KeyVal_ValueReflectValue(t *testing.T) {
 // SimpleRequest — coverage
 // ==========================================================================
 
-func Test_Cov3_SimpleRequest_Constructors(t *testing.T) {
+func Test_SimpleRequest_Constructors(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.InvalidSimpleRequestNoMessage()
 	r2 := coredynamic.InvalidSimpleRequest("error")
@@ -652,7 +652,7 @@ func Test_Cov3_SimpleRequest_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest constructors -- all", actual)
 }
 
-func Test_Cov3_SimpleRequest_InvalidError(t *testing.T) {
+func Test_SimpleRequest_InvalidError(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.NewSimpleRequestValid("ok")
 	r2 := coredynamic.InvalidSimpleRequest("err")
@@ -671,7 +671,7 @@ func Test_Cov3_SimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidError -- valid and invalid", actual)
 }
 
-func Test_Cov3_SimpleRequest_GetErrorOnTypeMismatch(t *testing.T) {
+func Test_SimpleRequest_GetErrorOnTypeMismatch(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid("hello")
 	matchErr := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -691,7 +691,7 @@ func Test_Cov3_SimpleRequest_GetErrorOnTypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch -- match and mismatch", actual)
 }
 
-func Test_Cov3_SimpleRequest_IsPointer(t *testing.T) {
+func Test_SimpleRequest_IsPointer(t *testing.T) {
 	// Arrange
 	s := "hello"
 	r := coredynamic.NewSimpleRequestValid(&s)
@@ -708,7 +708,7 @@ func Test_Cov3_SimpleRequest_IsPointer(t *testing.T) {
 // MapAsKeyValSlice — error path
 // ==========================================================================
 
-func Test_Cov3_MapAsKeyValSlice_NotMap(t *testing.T) {
+func Test_MapAsKeyValSlice_NotMap(t *testing.T) {
 	// Arrange
 	rv := reflect.ValueOf("notAMap")
 	_, err := coredynamic.MapAsKeyValSlice(rv)
@@ -721,7 +721,7 @@ func Test_Cov3_MapAsKeyValSlice_NotMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice not map returns error -- string", actual)
 }
 
-func Test_Cov3_MapAsKeyValSlice_Valid(t *testing.T) {
+func Test_MapAsKeyValSlice_Valid(t *testing.T) {
 	// Arrange
 	rv := reflect.ValueOf(map[string]int{"a": 1, "b": 2})
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
@@ -744,7 +744,7 @@ func Test_Cov3_MapAsKeyValSlice_Valid(t *testing.T) {
 // TypeStatus — pointer branches
 // ==========================================================================
 
-func Test_Cov3_TypeStatus_PointerBranches(t *testing.T) {
+func Test_TypeStatus_PointerBranches(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "hello")
@@ -767,7 +767,7 @@ func Test_Cov3_TypeStatus_PointerBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus pointer branches -- ptr vs value", actual)
 }
 
-func Test_Cov3_TypeStatus_NullNames(t *testing.T) {
+func Test_TypeStatus_NullNames(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, nil)
 
@@ -787,7 +787,7 @@ func Test_Cov3_TypeStatus_NullNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus null names -- nil nil", actual)
 }
 
-func Test_Cov3_TypeStatus_IsEqual_RightDiff(t *testing.T) {
+func Test_TypeStatus_IsEqual_RightDiff(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -806,7 +806,7 @@ func Test_Cov3_TypeStatus_IsEqual_RightDiff(t *testing.T) {
 // CastTo — additional paths
 // ==========================================================================
 
-func Test_Cov3_CastTo_MatchingType(t *testing.T) {
+func Test_CastTo_MatchingType(t *testing.T) {
 	// Arrange
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(""))
 
@@ -826,7 +826,7 @@ func Test_Cov3_CastTo_MatchingType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastTo matching type -- string", actual)
 }
 
-func Test_Cov3_CastTo_NotMatching(t *testing.T) {
+func Test_CastTo_NotMatching(t *testing.T) {
 	// Arrange
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(0))
 
@@ -848,7 +848,7 @@ func Test_Cov3_CastTo_NotMatching(t *testing.T) {
 // CastedResult — additional methods
 // ==========================================================================
 
-func Test_Cov3_CastedResult_Methods(t *testing.T) {
+func Test_CastedResult_Methods(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{
 		IsValid: true, IsNull: false, IsPointer: false,
@@ -877,7 +877,7 @@ func Test_Cov3_CastedResult_Methods(t *testing.T) {
 // Dynamic — Clone, NonPtr, Ptr
 // ==========================================================================
 
-func Test_Cov3_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	cloned := d.Clone()
@@ -906,7 +906,7 @@ func Test_Cov3_Dynamic_Clone(t *testing.T) {
 // Dynamic — InvalidDynamic constructor
 // ==========================================================================
 
-func Test_Cov3_Dynamic_InvalidDynamic(t *testing.T) {
+func Test_Dynamic_InvalidDynamic(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -924,7 +924,7 @@ func Test_Cov3_Dynamic_InvalidDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns invalid -- no data", actual)
 }
 
-func Test_Cov3_Dynamic_InvalidDynamicPtr(t *testing.T) {
+func Test_Dynamic_InvalidDynamicPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 

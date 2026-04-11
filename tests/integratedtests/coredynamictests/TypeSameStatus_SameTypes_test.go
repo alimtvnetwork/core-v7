@@ -13,7 +13,7 @@ import (
 // TypeSameStatus
 // ═══════════════════════════════════════════
 
-func Test_Cov10_TypeSameStatus_SameTypes(t *testing.T) {
+func Test_TypeSameStatus_SameTypes(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", "world")
 
@@ -34,7 +34,7 @@ func Test_Cov10_TypeSameStatus_SameTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- same types", actual)
 }
 
-func Test_Cov10_TypeSameStatus_DiffTypes(t *testing.T) {
+func Test_TypeSameStatus_DiffTypes(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 
@@ -54,7 +54,7 @@ func Test_Cov10_TypeSameStatus_DiffTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- diff types", actual)
 }
 
-func Test_Cov10_TypeSameStatus_Pointers(t *testing.T) {
+func Test_TypeSameStatus_Pointers(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "world")
@@ -75,7 +75,7 @@ func Test_Cov10_TypeSameStatus_Pointers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- pointers", actual)
 }
 
-func Test_Cov10_TypeSameStatus_NilInput(t *testing.T) {
+func Test_TypeSameStatus_NilInput(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "hello")
 
@@ -99,7 +99,7 @@ func Test_Cov10_TypeSameStatus_NilInput(t *testing.T) {
 // TypeStatus — methods
 // ═══════════════════════════════════════════
 
-func Test_Cov10_TypeStatus_Methods(t *testing.T) {
+func Test_TypeStatus_Methods(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", "world")
 
@@ -124,7 +124,7 @@ func Test_Cov10_TypeStatus_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- methods", actual)
 }
 
-func Test_Cov10_TypeStatus_NilReceiver(t *testing.T) {
+func Test_TypeStatus_NilReceiver(t *testing.T) {
 	// Arrange
 	var nilTS *coredynamic.TypeStatus
 
@@ -142,7 +142,7 @@ func Test_Cov10_TypeStatus_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- nil receiver", actual)
 }
 
-func Test_Cov10_TypeStatus_NotMatchMessage(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 	msg := ts.NotMatchMessage("left", "right")
@@ -163,7 +163,7 @@ func Test_Cov10_TypeStatus_NotMatchMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- not match message", actual)
 }
 
-func Test_Cov10_TypeStatus_NotMatchErr(t *testing.T) {
+func Test_TypeStatus_NotMatchErr(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 	err := ts.NotMatchErr("l", "r")
@@ -184,7 +184,7 @@ func Test_Cov10_TypeStatus_NotMatchErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- not match err", actual)
 }
 
-func Test_Cov10_TypeStatus_ValidationError(t *testing.T) {
+func Test_TypeStatus_ValidationError(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 	err := ts.ValidationError()
@@ -205,7 +205,7 @@ func Test_Cov10_TypeStatus_ValidationError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- validation error", actual)
 }
 
-func Test_Cov10_TypeStatus_NotEqualSrcDest(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDest(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 	msg := ts.NotEqualSrcDestinationMessage()
@@ -225,7 +225,7 @@ func Test_Cov10_TypeStatus_NotEqualSrcDest(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- src dest", actual)
 }
 
-func Test_Cov10_TypeStatus_MustBeSame(t *testing.T) {
+func Test_TypeStatus_MustBeSame(t *testing.T) {
 	// Arrange
 	sameTS := coredynamic.TypeSameStatus("a", "b")
 	sameTS.MustBeSame() // should not panic
@@ -239,7 +239,7 @@ func Test_Cov10_TypeStatus_MustBeSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- must be same", actual)
 }
 
-func Test_Cov10_TypeStatus_IsEqual(t *testing.T) {
+func Test_TypeStatus_IsEqual(t *testing.T) {
 	// Arrange
 	ts1 := coredynamic.TypeSameStatus("a", "b")
 	ts2 := coredynamic.TypeSameStatus("a", "b")
@@ -262,7 +262,7 @@ func Test_Cov10_TypeStatus_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- is equal", actual)
 }
 
-func Test_Cov10_TypeStatus_NonPointerLeftRight(t *testing.T) {
+func Test_TypeStatus_NonPointerLeftRight(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "world")
@@ -282,7 +282,7 @@ func Test_Cov10_TypeStatus_NonPointerLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- non-pointer left/right", actual)
 }
 
-func Test_Cov10_TypeStatus_NullNames(t *testing.T) {
+func Test_TypeStatus_NullNames(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, nil)
 
@@ -306,7 +306,7 @@ func Test_Cov10_TypeStatus_NullNames(t *testing.T) {
 // TypedDynamic
 // ═══════════════════════════════════════════
 
-func Test_Cov10_TypedDynamic_Constructors(t *testing.T) {
+func Test_TypedDynamic_Constructors(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	dv := coredynamic.NewTypedDynamicValid("world")
@@ -338,7 +338,7 @@ func Test_Cov10_TypedDynamic_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- constructors", actual)
 }
 
-func Test_Cov10_TypedDynamic_GetAs(t *testing.T) {
+func Test_TypedDynamic_GetAs(t *testing.T) {
 	// Arrange
 	ds := coredynamic.NewTypedDynamic("hello", true)
 	di := coredynamic.NewTypedDynamic(42, true)
@@ -376,7 +376,7 @@ func Test_Cov10_TypedDynamic_GetAs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- getAs", actual)
 }
 
-func Test_Cov10_TypedDynamic_Value(t *testing.T) {
+func Test_TypedDynamic_Value(t *testing.T) {
 	// Arrange
 	ds := coredynamic.NewTypedDynamic("hello", true)
 	di := coredynamic.NewTypedDynamic(42, true)
@@ -401,7 +401,7 @@ func Test_Cov10_TypedDynamic_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- value", actual)
 }
 
-func Test_Cov10_TypedDynamic_Json(t *testing.T) {
+func Test_TypedDynamic_Json(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	jb, jErr := d.JsonBytes()
@@ -438,7 +438,7 @@ func Test_Cov10_TypedDynamic_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- json", actual)
 }
 
-func Test_Cov10_TypedDynamic_Bytes(t *testing.T) {
+func Test_TypedDynamic_Bytes(t *testing.T) {
 	// Arrange
 	db := coredynamic.NewTypedDynamic([]byte("hello"), true)
 	ds := coredynamic.NewTypedDynamic("hello", true)
@@ -459,7 +459,7 @@ func Test_Cov10_TypedDynamic_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- bytes", actual)
 }
 
-func Test_Cov10_TypedDynamic_ClonePtrNonPtr(t *testing.T) {
+func Test_TypedDynamic_ClonePtrNonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	cloned := d.Clone()
@@ -490,7 +490,7 @@ func Test_Cov10_TypedDynamic_ClonePtrNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- clone/ptr", actual)
 }
 
-func Test_Cov10_TypedDynamic_UnmarshalDeserialize(t *testing.T) {
+func Test_TypedDynamic_UnmarshalDeserialize(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	err := d.UnmarshalJSON([]byte(`"hello"`))
@@ -511,7 +511,7 @@ func Test_Cov10_TypedDynamic_UnmarshalDeserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- unmarshal", actual)
 }
 
-func Test_Cov10_TypedDynamic_UnmarshalBadJSON(t *testing.T) {
+func Test_TypedDynamic_UnmarshalBadJSON(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr(0, false)
 	err := d.UnmarshalJSON([]byte(`"not-an-int"`))
@@ -530,7 +530,7 @@ func Test_Cov10_TypedDynamic_UnmarshalBadJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- unmarshal bad json", actual)
 }
 
-func Test_Cov10_TypedDynamic_Deserialize(t *testing.T) {
+func Test_TypedDynamic_Deserialize(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	jsonBytes, _ := json.Marshal("world")
@@ -552,7 +552,7 @@ func Test_Cov10_TypedDynamic_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- deserialize", actual)
 }
 
-func Test_Cov10_TypedDynamic_DeserializeNilReceiver(t *testing.T) {
+func Test_TypedDynamic_DeserializeNilReceiver(t *testing.T) {
 	// Arrange
 	var nilD *coredynamic.TypedDynamic[string]
 	err := nilD.Deserialize([]byte(`"hello"`))
@@ -569,7 +569,7 @@ func Test_Cov10_TypedDynamic_DeserializeNilReceiver(t *testing.T) {
 // SimpleResult
 // ═══════════════════════════════════════════
 
-func Test_Cov10_SimpleResult_Constructors(t *testing.T) {
+func Test_SimpleResult_Constructors(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	srInv := coredynamic.InvalidSimpleResult("err-msg")
@@ -596,7 +596,7 @@ func Test_Cov10_SimpleResult_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- constructors", actual)
 }
 
-func Test_Cov10_SimpleResult_InvalidError(t *testing.T) {
+func Test_SimpleResult_InvalidError(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	srInv := coredynamic.InvalidSimpleResult("err-msg")
@@ -615,7 +615,7 @@ func Test_Cov10_SimpleResult_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns error -- invalid error", actual)
 }
 
-func Test_Cov10_SimpleResult_TypeMismatch(t *testing.T) {
+func Test_SimpleResult_TypeMismatch(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	strType := reflect.TypeOf("")
@@ -640,7 +640,7 @@ func Test_Cov10_SimpleResult_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- type mismatch", actual)
 }
 
-func Test_Cov10_SimpleResult_Clone(t *testing.T) {
+func Test_SimpleResult_Clone(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	cloned := sr.Clone()
@@ -666,7 +666,7 @@ func Test_Cov10_SimpleResult_Clone(t *testing.T) {
 // SimpleRequest
 // ═══════════════════════════════════════════
 
-func Test_Cov10_SimpleRequest_Constructors(t *testing.T) {
+func Test_SimpleRequest_Constructors(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	srInv := coredynamic.InvalidSimpleRequest("err-msg")
@@ -694,7 +694,7 @@ func Test_Cov10_SimpleRequest_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- constructors", actual)
 }
 
-func Test_Cov10_SimpleRequest_InvalidError(t *testing.T) {
+func Test_SimpleRequest_InvalidError(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	srInv := coredynamic.InvalidSimpleRequest("err-msg")
@@ -713,7 +713,7 @@ func Test_Cov10_SimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns error -- invalid error", actual)
 }
 
-func Test_Cov10_SimpleRequest_TypeMismatch(t *testing.T) {
+func Test_SimpleRequest_TypeMismatch(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	strType := reflect.TypeOf("")
@@ -735,7 +735,7 @@ func Test_Cov10_SimpleRequest_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- type mismatch", actual)
 }
 
-func Test_Cov10_SimpleRequest_IsPointer(t *testing.T) {
+func Test_SimpleRequest_IsPointer(t *testing.T) {
 	// Arrange
 	s := "hello"
 	sr := coredynamic.NewSimpleRequestValid(&s)
@@ -761,7 +761,7 @@ func Test_Cov10_SimpleRequest_IsPointer(t *testing.T) {
 // ValueStatus (coredynamic)
 // ═══════════════════════════════════════════
 
-func Test_Cov10_ValueStatus_Basic(t *testing.T) {
+func Test_ValueStatus_Basic(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatusNoMessage()
 	vs2 := coredynamic.InvalidValueStatus("err")
@@ -786,7 +786,7 @@ func Test_Cov10_ValueStatus_Basic(t *testing.T) {
 // ZeroSet / SafeZeroSet
 // ═══════════════════════════════════════════
 
-func Test_Cov10_ZeroSet(t *testing.T) {
+func Test_ZeroSet(t *testing.T) {
 	// Arrange
 	type testStruct struct{ Name string }
 	ts := testStruct{Name: "hello"}
@@ -801,7 +801,7 @@ func Test_Cov10_ZeroSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ZeroSet returns correct value -- with args", actual)
 }
 
-func Test_Cov10_SafeZeroSet(t *testing.T) {
+func Test_SafeZeroSet(t *testing.T) {
 	// Arrange
 	type testStruct struct{ Name string }
 	ts := testStruct{Name: "hello"}
@@ -820,7 +820,7 @@ func Test_Cov10_SafeZeroSet(t *testing.T) {
 // BytesConverter
 // ═══════════════════════════════════════════
 
-func Test_Cov10_BytesConverter_Basic(t *testing.T) {
+func Test_BytesConverter_Basic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	str, err := bc.ToString()
@@ -846,7 +846,7 @@ func Test_Cov10_BytesConverter_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- basic", actual)
 }
 
-func Test_Cov10_BytesConverter_EmptyBytes(t *testing.T) {
+func Test_BytesConverter_EmptyBytes(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte{})
 	castStr := bc.SafeCastString()
@@ -866,7 +866,7 @@ func Test_Cov10_BytesConverter_EmptyBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns empty -- empty", actual)
 }
 
-func Test_Cov10_BytesConverter_Bool(t *testing.T) {
+func Test_BytesConverter_Bool(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`true`))
 	b, err := bc.ToBool()
@@ -888,7 +888,7 @@ func Test_Cov10_BytesConverter_Bool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- bool", actual)
 }
 
-func Test_Cov10_BytesConverter_Strings(t *testing.T) {
+func Test_BytesConverter_Strings(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	strs, err := bc.ToStrings()
@@ -908,7 +908,7 @@ func Test_Cov10_BytesConverter_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- strings", actual)
 }
 
-func Test_Cov10_BytesConverter_Int64(t *testing.T) {
+func Test_BytesConverter_Int64(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`42`))
 	val, err := bc.ToInt64()
@@ -930,7 +930,7 @@ func Test_Cov10_BytesConverter_Int64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- int64", actual)
 }
 
-func Test_Cov10_BytesConverter_Deserialize(t *testing.T) {
+func Test_BytesConverter_Deserialize(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	var target string
@@ -954,7 +954,7 @@ func Test_Cov10_BytesConverter_Deserialize(t *testing.T) {
 // Type function
 // ═══════════════════════════════════════════
 
-func Test_Cov10_Type(t *testing.T) {
+func Test_Type(t *testing.T) {
 	// Arrange
 	rt := coredynamic.Type("hello")
 

@@ -13,7 +13,7 @@ import (
 
 // --- BaseRange methods ---
 
-func Test_Cov8_BaseRange_CreateRangeInt(t *testing.T) {
+func Test_BaseRange_CreateRangeInt(t *testing.T) {
 	// Arrange
 	br := &corerange.BaseRange{
 		RawInput:  "1-5",
@@ -31,7 +31,7 @@ func Test_Cov8_BaseRange_CreateRangeInt(t *testing.T) {
 	})
 }
 
-func Test_Cov8_BaseRange_IsInvalid(t *testing.T) {
+func Test_BaseRange_IsInvalid(t *testing.T) {
 	// Arrange
 	br := &corerange.BaseRange{IsValid: false}
 
@@ -41,7 +41,7 @@ func Test_Cov8_BaseRange_IsInvalid(t *testing.T) {
 	})
 }
 
-func Test_Cov8_BaseRange_String(t *testing.T) {
+func Test_BaseRange_String(t *testing.T) {
 	// Arrange
 	br := &corerange.BaseRange{Separator: "-"}
 
@@ -54,7 +54,7 @@ func Test_Cov8_BaseRange_String(t *testing.T) {
 	})
 }
 
-func Test_Cov8_BaseRange_Clone(t *testing.T) {
+func Test_BaseRange_Clone(t *testing.T) {
 	// Arrange
 	br := &corerange.BaseRange{
 		RawInput:  "1-5",
@@ -75,7 +75,7 @@ func Test_Cov8_BaseRange_Clone(t *testing.T) {
 
 // --- MinMaxByte methods ---
 
-func Test_Cov8_MinMaxByte_CreateMinMaxInt(t *testing.T) {
+func Test_MinMaxByte_CreateMinMaxInt(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -88,7 +88,7 @@ func Test_Cov8_MinMaxByte_CreateMinMaxInt(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_CreateRangeInt(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -101,7 +101,7 @@ func Test_Cov8_MinMaxByte_CreateRangeInt(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -114,7 +114,7 @@ func Test_Cov8_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -127,7 +127,7 @@ func Test_Cov8_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_Comparison(t *testing.T) {
+func Test_MinMaxByte_Comparison(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 5, Max: 10}
 
@@ -146,7 +146,7 @@ func Test_Cov8_MinMaxByte_Comparison(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_RangesInt(t *testing.T) {
+func Test_MinMaxByte_RangesInt(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 3, Max: 5}
 
@@ -159,7 +159,7 @@ func Test_Cov8_MinMaxByte_RangesInt(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_IsWithinRange(t *testing.T) {
+func Test_MinMaxByte_IsWithinRange(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 3, Max: 5}
 
@@ -171,7 +171,7 @@ func Test_Cov8_MinMaxByte_IsWithinRange(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_Clone(t *testing.T) {
+func Test_MinMaxByte_Clone(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 3, Max: 5}
 
@@ -186,7 +186,7 @@ func Test_Cov8_MinMaxByte_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxByte_ClonePtr_Nil(t *testing.T) {
+func Test_MinMaxByte_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var mmb *corerange.MinMaxByte
 
@@ -201,7 +201,7 @@ func Test_Cov8_MinMaxByte_ClonePtr_Nil(t *testing.T) {
 
 // --- MinMaxInt methods ---
 
-func Test_Cov8_MinMaxInt_Comparison(t *testing.T) {
+func Test_MinMaxInt_Comparison(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt{Min: 5, Max: 10}
 
@@ -220,7 +220,7 @@ func Test_Cov8_MinMaxInt_Comparison(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange — Min > Max (unusual but tests the branch)
 	mmi := &corerange.MinMaxInt{Min: 10, Max: 5}
 
@@ -233,7 +233,7 @@ func Test_Cov8_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_CreateRanges(t *testing.T) {
+func Test_MinMaxInt_CreateRanges(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt{Min: 1, Max: 3}
 	extra := corerange.MinMaxInt{Min: 5, Max: 6}
@@ -247,7 +247,7 @@ func Test_Cov8_MinMaxInt_CreateRanges(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_CreateRanges_NoExtra(t *testing.T) {
+func Test_MinMaxInt_CreateRanges_NoExtra(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt{Min: 1, Max: 3}
 
@@ -260,7 +260,7 @@ func Test_Cov8_MinMaxInt_CreateRanges_NoExtra(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_RangesExcept(t *testing.T) {
+func Test_MinMaxInt_RangesExcept(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt{Min: 1, Max: 5}
 
@@ -273,7 +273,7 @@ func Test_Cov8_MinMaxInt_RangesExcept(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_IsEqual_BothNil(t *testing.T) {
+func Test_MinMaxInt_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var a *corerange.MinMaxInt
 	var b *corerange.MinMaxInt
@@ -284,7 +284,7 @@ func Test_Cov8_MinMaxInt_IsEqual_BothNil(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_IsEqual_OneNil(t *testing.T) {
+func Test_MinMaxInt_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	a := &corerange.MinMaxInt{Min: 1, Max: 5}
 
@@ -294,7 +294,7 @@ func Test_Cov8_MinMaxInt_IsEqual_OneNil(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_IsEqual_SamePointer(t *testing.T) {
+func Test_MinMaxInt_IsEqual_SamePointer(t *testing.T) {
 	// Arrange
 	a := &corerange.MinMaxInt{Min: 1, Max: 5}
 
@@ -304,7 +304,7 @@ func Test_Cov8_MinMaxInt_IsEqual_SamePointer(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt_String(t *testing.T) {
+func Test_MinMaxInt_String(t *testing.T) {
 	// Arrange
 	mmi := corerange.MinMaxInt{Min: 1, Max: 5}
 
@@ -319,7 +319,7 @@ func Test_Cov8_MinMaxInt_String(t *testing.T) {
 
 // --- MinMaxInt16 methods ---
 
-func Test_Cov8_MinMaxInt16_Comparison(t *testing.T) {
+func Test_MinMaxInt16_Comparison(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt16{Min: 5, Max: 10}
 
@@ -338,7 +338,7 @@ func Test_Cov8_MinMaxInt16_Comparison(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt16{Min: 10, Max: 5}
 
@@ -351,7 +351,7 @@ func Test_Cov8_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt16_Clone(t *testing.T) {
+func Test_MinMaxInt16_Clone(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt16{Min: 3, Max: 8}
 
@@ -366,7 +366,7 @@ func Test_Cov8_MinMaxInt16_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov8_MinMaxInt16_ClonePtr_Nil(t *testing.T) {
+func Test_MinMaxInt16_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var mmi *corerange.MinMaxInt16
 
@@ -381,7 +381,7 @@ func Test_Cov8_MinMaxInt16_ClonePtr_Nil(t *testing.T) {
 
 // --- RangeInt methods ---
 
-func Test_Cov8_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(10, 5, true)
 
@@ -394,7 +394,7 @@ func Test_Cov8_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeInt_CreateStartEnd(t *testing.T) {
+func Test_RangeInt_CreateStartEnd(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 
@@ -408,7 +408,7 @@ func Test_Cov8_RangeInt_CreateStartEnd(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeInt_ShallowCreate(t *testing.T) {
+func Test_RangeInt_ShallowCreate(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 
@@ -425,7 +425,7 @@ func Test_Cov8_RangeInt_ShallowCreate(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeInt_CreateRanges(t *testing.T) {
+func Test_RangeInt_CreateRanges(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("1-3", "-", 0, 10)
 
@@ -438,7 +438,7 @@ func Test_Cov8_RangeInt_CreateRanges(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeInt_RangesExcept(t *testing.T) {
+func Test_RangeInt_RangesExcept(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("1-5", "-", 0, 10)
 
@@ -453,7 +453,7 @@ func Test_Cov8_RangeInt_RangesExcept(t *testing.T) {
 
 // --- RangeByte methods ---
 
-func Test_Cov8_RangeByte_NewRangeByteMinMax(t *testing.T) {
+func Test_RangeByte_NewRangeByteMinMax(t *testing.T) {
 	// Act
 	result := corerange.NewRangeByteMinMax("1-5", "-", 0, 10)
 
@@ -463,7 +463,7 @@ func Test_Cov8_RangeByte_NewRangeByteMinMax(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeByte_NewRangeByte_NilMinMax(t *testing.T) {
+func Test_RangeByte_NewRangeByte_NilMinMax(t *testing.T) {
 	// Act
 	result := corerange.NewRangeByte("1-5", "-", nil)
 
@@ -473,7 +473,7 @@ func Test_Cov8_RangeByte_NewRangeByte_NilMinMax(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeByte_Difference(t *testing.T) {
+func Test_RangeByte_Difference(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("1-5", "-", 0, 10)
 
@@ -484,7 +484,7 @@ func Test_Cov8_RangeByte_Difference(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeByte_Ranges_Invalid(t *testing.T) {
+func Test_RangeByte_Ranges_Invalid(t *testing.T) {
 	// Arrange
 	rb := corerange.NewRangeByteMinMax("invalid", "-", 0, 10)
 
@@ -499,7 +499,7 @@ func Test_Cov8_RangeByte_Ranges_Invalid(t *testing.T) {
 
 // --- RangeAny methods ---
 
-func Test_Cov8_RangeAny_Methods(t *testing.T) {
+func Test_RangeAny_Methods(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
@@ -524,7 +524,7 @@ func Test_Cov8_RangeAny_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeAny_CreateRangeIntMinMax(t *testing.T) {
+func Test_RangeAny_CreateRangeIntMinMax(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
@@ -549,7 +549,7 @@ func Test_Cov8_RangeAny_CreateRangeIntMinMax(t *testing.T) {
 
 // --- RangeInt16 methods ---
 
-func Test_Cov8_RangeInt16_NewRangeInt16_NilMinMax(t *testing.T) {
+func Test_RangeInt16_NewRangeInt16_NilMinMax(t *testing.T) {
 	// Act
 	result := corerange.NewRangeInt16("1-5", "-", nil)
 
@@ -559,7 +559,7 @@ func Test_Cov8_RangeInt16_NewRangeInt16_NilMinMax(t *testing.T) {
 	})
 }
 
-func Test_Cov8_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeInt16MinMax("5-1", "-", 0, 10)
 
@@ -574,7 +574,7 @@ func Test_Cov8_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
 
 // --- StartEndInt methods ---
 
-func Test_Cov8_StartEndInt(t *testing.T) {
+func Test_StartEndInt(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 
@@ -587,7 +587,7 @@ func Test_Cov8_StartEndInt(t *testing.T) {
 	})
 }
 
-func Test_Cov8_StartEndInt_Diff(t *testing.T) {
+func Test_StartEndInt_Diff(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 
@@ -605,7 +605,7 @@ func Test_Cov8_StartEndInt_Diff(t *testing.T) {
 // StartEndInt.ClonePtr, StartEndString.IsEmpty, StartEndSimpleString.Length/IsEmpty/String/Clone/ClonePtr,
 // and Within.StringRangeInt do not exist — removed.
 
-func Test_Cov8_StartEndString_String(t *testing.T) {
+func Test_StartEndString_String(t *testing.T) {
 	// Arrange
 	ses := &corerange.StartEndString{
 		BaseRange: &corerange.BaseRange{
@@ -621,7 +621,7 @@ func Test_Cov8_StartEndString_String(t *testing.T) {
 	})
 }
 
-func Test_Cov8_StartEndSimpleString_StringHyphen(t *testing.T) {
+func Test_StartEndSimpleString_StringHyphen(t *testing.T) {
 	// Arrange
 	sess := &corerange.StartEndSimpleString{
 		Start: "a",
@@ -636,7 +636,7 @@ func Test_Cov8_StartEndSimpleString_StringHyphen(t *testing.T) {
 	})
 }
 
-func Test_Cov8_Within_StringRangeInt8(t *testing.T) {
+func Test_Within_StringRangeInt8(t *testing.T) {
 	// Act
 	val, ok := corerange.Within.StringRangeInt8("42")
 
@@ -647,7 +647,7 @@ func Test_Cov8_Within_StringRangeInt8(t *testing.T) {
 	})
 }
 
-func Test_Cov8_Within_StringRangeInt16(t *testing.T) {
+func Test_Within_StringRangeInt16(t *testing.T) {
 	// Act
 	val, ok := corerange.Within.StringRangeInt16("42")
 
@@ -658,7 +658,7 @@ func Test_Cov8_Within_StringRangeInt16(t *testing.T) {
 	})
 }
 
-func Test_Cov8_Within_StringRangeInt32(t *testing.T) {
+func Test_Within_StringRangeInt32(t *testing.T) {
 	// Act
 	val, ok := corerange.Within.StringRangeInt32("42")
 
@@ -669,7 +669,7 @@ func Test_Cov8_Within_StringRangeInt32(t *testing.T) {
 	})
 }
 
-func Test_Cov8_Within_StringRangeByte(t *testing.T) {
+func Test_Within_StringRangeByte(t *testing.T) {
 	// Act
 	val, ok := corerange.Within.StringRangeByte("42")
 
@@ -680,7 +680,7 @@ func Test_Cov8_Within_StringRangeByte(t *testing.T) {
 	})
 }
 
-func Test_Cov8_Within_StringRangeByte_OutOfRange(t *testing.T) {
+func Test_Within_StringRangeByte_OutOfRange(t *testing.T) {
 	// Act
 	_, ok := corerange.Within.StringRangeByte("300")
 
@@ -692,7 +692,7 @@ func Test_Cov8_Within_StringRangeByte_OutOfRange(t *testing.T) {
 
 // --- NewRangeInt edge cases ---
 
-func Test_Cov8_NewRangeInt_NilMinMax(t *testing.T) {
+func Test_NewRangeInt_NilMinMax(t *testing.T) {
 	// Act
 	result := corerange.NewRangeInt("1-5", "-", nil)
 
@@ -703,7 +703,7 @@ func Test_Cov8_NewRangeInt_NilMinMax(t *testing.T) {
 	})
 }
 
-func Test_Cov8_NewRangeInt_Invalid(t *testing.T) {
+func Test_NewRangeInt_Invalid(t *testing.T) {
 	// Act
 	result := corerange.NewRangeInt("abc", "-", nil)
 
@@ -713,7 +713,7 @@ func Test_Cov8_NewRangeInt_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov8_NewRangeIntUsingValues(t *testing.T) {
+func Test_NewRangeIntUsingValues(t *testing.T) {
 	// Act
 	result := corerange.NewRangeIntUsingValues(1, 5, true)
 

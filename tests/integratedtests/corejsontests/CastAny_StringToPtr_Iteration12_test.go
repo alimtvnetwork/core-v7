@@ -11,7 +11,7 @@ import (
 // ── castingAny: string case ──
 // Covers castingAny.go L79-82
 
-func Test_Cov34_CastAny_StringToPtr(t *testing.T) {
+func Test_CastAny_StringToPtr(t *testing.T) {
 	// Arrange
 	jsonStr := `{"key":"value"}`
 	var result map[string]string
@@ -32,7 +32,7 @@ func Test_Cov34_CastAny_StringToPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastAny.OrDeserializeTo works -- string input", actual)
 }
 
-func Test_Cov34_CastAny_BytesToPtr(t *testing.T) {
+func Test_CastAny_BytesToPtr(t *testing.T) {
 	// Arrange
 	jsonBytes := []byte(`{"key":"value"}`)
 	var result map[string]string
@@ -56,7 +56,7 @@ func Test_Cov34_CastAny_BytesToPtr(t *testing.T) {
 // ── anyTo: string case ──
 // Covers anyTo.go L46-47, L48-49
 
-func Test_Cov34_AnyTo_String(t *testing.T) {
+func Test_AnyTo_String(t *testing.T) {
 	// Arrange
 	jsonStr := `{"key":"value"}`
 	result := corejson.AnyTo.SerializedJsonResult(jsonStr)
@@ -78,7 +78,7 @@ func Test_Cov34_AnyTo_String(t *testing.T) {
 // ── Result: FieldsNames with valid JSON ──
 // Covers Result.go L85-94
 
-func Test_Cov34_Result_FieldsNames(t *testing.T) {
+func Test_Result_FieldsNames(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.UsingBytes([]byte(`{"name":"test","age":30}`))
 	names, err := (&r).FieldsNames()
@@ -101,7 +101,7 @@ func Test_Cov34_Result_FieldsNames(t *testing.T) {
 // ── Result: MeaningfulError with error and payload ──
 // Covers Result.go L376-381
 
-func Test_Cov34_Result_MeaningfulError_WithPayload(t *testing.T) {
+func Test_Result_MeaningfulError_WithPayload(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.UsingBytesTypePtr(
 		[]byte(`{"data":"test"}`),
@@ -122,7 +122,7 @@ func Test_Cov34_Result_MeaningfulError_WithPayload(t *testing.T) {
 // ── Result: safeJsonStringInternal nil ──
 // Covers Result.go L385
 
-func Test_Cov34_Result_MeaningfulError_NilResult(t *testing.T) {
+func Test_Result_MeaningfulError_NilResult(t *testing.T) {
 	// Arrange
 	var result *corejson.Result
 	err := result.MeaningfulError()
@@ -139,7 +139,7 @@ func Test_Cov34_Result_MeaningfulError_NilResult(t *testing.T) {
 // ── Result: serializeInternal error path ──
 // Covers Result.go L639-646
 
-func Test_Cov34_Result_Serialize_Error(t *testing.T) {
+func Test_Result_Serialize_Error(t *testing.T) {
 	// Arrange
 	result := &corejson.Result{
 		Error: errors.New("serialize error"),
@@ -158,7 +158,7 @@ func Test_Cov34_Result_Serialize_Error(t *testing.T) {
 // ── Result: IsEqual with same bytes ──
 // Covers Result.go L827-829, L872-874
 
-func Test_Cov34_Result_IsEqual_SameBytes(t *testing.T) {
+func Test_Result_IsEqual_SameBytes(t *testing.T) {
 	// Arrange
 	r1 := corejson.NewResult.UsingBytesTypePtr([]byte(`{"a":1}`), "T")
 	r2 := corejson.NewResult.UsingBytesTypePtr([]byte(`{"a":1}`), "T")
@@ -173,7 +173,7 @@ func Test_Cov34_Result_IsEqual_SameBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns true -- same bytes same type", actual)
 }
 
-func Test_Cov34_Result_IsEqual_DiffType(t *testing.T) {
+func Test_Result_IsEqual_DiffType(t *testing.T) {
 	// Arrange
 	r1 := corejson.NewResult.UsingBytesTypePtr([]byte(`{"a":1}`), "TypeA")
 	r2 := corejson.NewResult.UsingBytesTypePtr([]byte(`{"a":1}`), "TypeB")
@@ -191,7 +191,7 @@ func Test_Cov34_Result_IsEqual_DiffType(t *testing.T) {
 // ── MapResults: Unmarshal empty bytes ──
 // Covers MapResults.go L164-165
 
-func Test_Cov34_MapResults_Unmarshal_EmptyResult(t *testing.T) {
+func Test_MapResults_Unmarshal_EmptyResult(t *testing.T) {
 	// Arrange
 	emptyResult := corejson.NewResult.UsingBytes([]byte{})
 	mr := &corejson.MapResults{
@@ -217,7 +217,7 @@ func Test_Cov34_MapResults_Unmarshal_EmptyResult(t *testing.T) {
 // ── MapResults: UnmarshalManySafe empty ──
 // Covers MapResults.go L202
 
-func Test_Cov34_MapResults_UnmarshalManySafe_Empty(t *testing.T) {
+func Test_MapResults_UnmarshalManySafe_Empty(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{Items: map[string]corejson.Result{}}
 
@@ -234,7 +234,7 @@ func Test_Cov34_MapResults_UnmarshalManySafe_Empty(t *testing.T) {
 // ── MapResults: SafeUnmarshal missing key ──
 // Covers MapResults.go L235-236
 
-func Test_Cov34_MapResults_SafeUnmarshal_Missing(t *testing.T) {
+func Test_MapResults_SafeUnmarshal_Missing(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{Items: map[string]corejson.Result{}}
 
@@ -252,7 +252,7 @@ func Test_Cov34_MapResults_SafeUnmarshal_Missing(t *testing.T) {
 // ── MapResults: AddAnySkipOnNil nil ──
 // Covers MapResults.go L324-326 (AddAnySkipOnNil error path)
 
-func Test_Cov34_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
+func Test_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{Items: map[string]corejson.Result{}}
 	err := mr.AddAnySkipOnNil("key", nil)
@@ -265,7 +265,7 @@ func Test_Cov34_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddAnySkipOnNil returns nil -- nil item", actual)
 }
 
-func Test_Cov34_MapResults_AddAnySkipOnNil_Valid(t *testing.T) {
+func Test_MapResults_AddAnySkipOnNil_Valid(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{Items: map[string]corejson.Result{}}
 	err := mr.AddAnySkipOnNil("key", map[string]string{"a": "b"})
@@ -289,7 +289,7 @@ func Test_Cov34_MapResults_AddAnySkipOnNil_Valid(t *testing.T) {
 // ── MapResults: GetSinglePageCollection length mismatch panic ──
 // Covers MapResults.go L718-729
 
-func Test_Cov34_MapResults_GetSinglePageCollection_LengthMismatch(t *testing.T) {
+func Test_MapResults_GetSinglePageCollection_LengthMismatch(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{
 		Items: map[string]corejson.Result{
@@ -319,7 +319,7 @@ func Test_Cov34_MapResults_GetSinglePageCollection_LengthMismatch(t *testing.T) 
 // ── MapResults: GetNewMapUsingKeys with panic on missing ──
 // Covers MapResults.go L773-779
 
-func Test_Cov34_MapResults_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
+func Test_MapResults_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
 	// Arrange
 	mr := &corejson.MapResults{
 		Items: map[string]corejson.Result{
@@ -348,7 +348,7 @@ func Test_Cov34_MapResults_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
 // ── deserializeFromBytesTo: nil ptr ──
 // Covers deserializeFromBytesTo.go L23-24
 
-func Test_Cov34_Deserialize_UsingBytes_NilPtr(t *testing.T) {
+func Test_Deserialize_UsingBytes_NilPtr(t *testing.T) {
 	// Arrange
 	err := corejson.Deserialize.UsingBytes([]byte(`{}`), nil)
 
@@ -363,7 +363,7 @@ func Test_Cov34_Deserialize_UsingBytes_NilPtr(t *testing.T) {
 // ── newResultCreator: UsingSerializerFunc ──
 // Covers newResultCreator.go L66-68
 
-func Test_Cov34_NewResult_UsingSerializerFunc(t *testing.T) {
+func Test_NewResult_UsingSerializerFunc(t *testing.T) {
 	// Arrange
 	fn := func() ([]byte, error) { return []byte(`{"key":"val"}`), nil }
 	result := corejson.NewResult.UsingSerializerFunc(fn)
@@ -385,7 +385,7 @@ func Test_Cov34_NewResult_UsingSerializerFunc(t *testing.T) {
 // ── newBytesCollectionCreator: empty ──
 // Covers newBytesCollectionCreator.go L52
 
-func Test_Cov34_NewBytesCollection_Empty(t *testing.T) {
+func Test_NewBytesCollection_Empty(t *testing.T) {
 	// Arrange
 	result := corejson.NewBytesCollection.Empty()
 
@@ -406,7 +406,7 @@ func Test_Cov34_NewBytesCollection_Empty(t *testing.T) {
 // ── newMapResultsCreator: empty ──
 // Covers newMapResultsCreator.go L52
 
-func Test_Cov34_NewMapResults_Empty(t *testing.T) {
+func Test_NewMapResults_Empty(t *testing.T) {
 	// Arrange
 	result := corejson.NewMapResults.Empty()
 
@@ -427,7 +427,7 @@ func Test_Cov34_NewMapResults_Empty(t *testing.T) {
 // ── newResultsCollectionCreator: empty ──
 // Covers newResultsCollectionCreator.go L56
 
-func Test_Cov34_NewResultsCollection_Empty(t *testing.T) {
+func Test_NewResultsCollection_Empty(t *testing.T) {
 	// Arrange
 	result := corejson.NewResultsCollection.Empty()
 

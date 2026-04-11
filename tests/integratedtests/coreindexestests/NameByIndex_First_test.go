@@ -11,7 +11,7 @@ import (
 // NameByIndex
 // ============================================================================
 
-func Test_Cov_NameByIndex_First(t *testing.T) {
+func Test_NameByIndex_First(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.NameByIndex(0)}
 
@@ -20,7 +20,7 @@ func Test_Cov_NameByIndex_First(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameByIndex returns First -- index 0", actual)
 }
 
-func Test_Cov_NameByIndex_Tenth(t *testing.T) {
+func Test_NameByIndex_Tenth(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.NameByIndex(9)}
 
@@ -29,7 +29,7 @@ func Test_Cov_NameByIndex_Tenth(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameByIndex returns Tenth -- index 9", actual)
 }
 
-func Test_Cov_NameByIndex_OutOfRange(t *testing.T) {
+func Test_NameByIndex_OutOfRange(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.NameByIndex(99)}
 
@@ -42,7 +42,7 @@ func Test_Cov_NameByIndex_OutOfRange(t *testing.T) {
 // Of
 // ============================================================================
 
-func Test_Cov_Of_Found(t *testing.T) {
+func Test_Of_Found(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.Of([]int{10, 20, 30}, 20)}
 
@@ -51,7 +51,7 @@ func Test_Cov_Of_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Of returns index -- found", actual)
 }
 
-func Test_Cov_Of_NotFound(t *testing.T) {
+func Test_Of_NotFound(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.Of([]int{10, 20, 30}, 99)}
 
@@ -60,7 +60,7 @@ func Test_Cov_Of_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Of returns -1 -- not found", actual)
 }
 
-func Test_Cov_Of_Empty(t *testing.T) {
+func Test_Of_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.Of([]int{}, 1)}
 
@@ -73,7 +73,7 @@ func Test_Cov_Of_Empty(t *testing.T) {
 // SafeEndingIndex
 // ============================================================================
 
-func Test_Cov_SafeEndingIndex_WithinBounds(t *testing.T) {
+func Test_SafeEndingIndex_WithinBounds(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.SafeEndingIndex(10, 5)}
 
@@ -82,7 +82,7 @@ func Test_Cov_SafeEndingIndex_WithinBounds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeEndingIndex returns requested -- within bounds", actual)
 }
 
-func Test_Cov_SafeEndingIndex_BeyondBounds(t *testing.T) {
+func Test_SafeEndingIndex_BeyondBounds(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.SafeEndingIndex(5, 10)}
 
@@ -95,7 +95,7 @@ func Test_Cov_SafeEndingIndex_BeyondBounds(t *testing.T) {
 // IsInvalidIndex
 // ============================================================================
 
-func Test_Cov_IsInvalidIndex_Negative(t *testing.T) {
+func Test_IsInvalidIndex_Negative(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsInvalidIndex(-1)}
 
@@ -104,7 +104,7 @@ func Test_Cov_IsInvalidIndex_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsInvalidIndex returns true -- -1", actual)
 }
 
-func Test_Cov_IsInvalidIndex_Zero(t *testing.T) {
+func Test_IsInvalidIndex_Zero(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsInvalidIndex(0)}
 
@@ -113,7 +113,7 @@ func Test_Cov_IsInvalidIndex_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsInvalidIndex returns false -- 0", actual)
 }
 
-func Test_Cov_IsInvalidIndex_Positive(t *testing.T) {
+func Test_IsInvalidIndex_Positive(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coreindexes.IsInvalidIndex(5)}
 
@@ -126,7 +126,7 @@ func Test_Cov_IsInvalidIndex_Positive(t *testing.T) {
 // HasIndexPlusRemoveIndex
 // ============================================================================
 
-func Test_Cov_HasIndexPlusRemoveIndex_Found(t *testing.T) {
+func Test_HasIndexPlusRemoveIndex_Found(t *testing.T) {
 	// Arrange
 	indexes := []int{1, 2, 3}
 	found := coreindexes.HasIndexPlusRemoveIndex(&indexes, 2)
@@ -145,7 +145,7 @@ func Test_Cov_HasIndexPlusRemoveIndex_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndexPlusRemoveIndex removes and returns true -- found", actual)
 }
 
-func Test_Cov_HasIndexPlusRemoveIndex_NotFound(t *testing.T) {
+func Test_HasIndexPlusRemoveIndex_NotFound(t *testing.T) {
 	// Arrange
 	indexes := []int{1, 2, 3}
 	found := coreindexes.HasIndexPlusRemoveIndex(&indexes, 99)

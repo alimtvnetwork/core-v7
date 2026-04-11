@@ -12,7 +12,7 @@ import (
 // AnyOnce — uncovered paths
 // ==========================================================================
 
-func Test_Cov3_AnyOnce_ValueStringOnly(t *testing.T) {
+func Test_AnyOnce_ValueStringOnly(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "hello" })
 
@@ -34,7 +34,7 @@ func Test_Cov3_AnyOnce_ValueStringOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce alias methods return expected -- hello", actual)
 }
 
-func Test_Cov3_AnyOnce_ValueString_Cached(t *testing.T) {
+func Test_AnyOnce_ValueString_Cached(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	// Call twice to test caching path
@@ -49,7 +49,7 @@ func Test_Cov3_AnyOnce_ValueString_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce ValueString cached returns same -- second call", actual)
 }
 
-func Test_Cov3_AnyOnce_CastFail(t *testing.T) {
+func Test_AnyOnce_CastFail(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	_, okStr := ao.CastValueString()
@@ -72,7 +72,7 @@ func Test_Cov3_AnyOnce_CastFail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce Cast methods fail -- wrong type", actual)
 }
 
-func Test_Cov3_AnyOnce_ValueString_NilReturn(t *testing.T) {
+func Test_AnyOnce_ValueString_NilReturn(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 	result := ao.ValueString()
@@ -89,7 +89,7 @@ func Test_Cov3_AnyOnce_ValueString_NilReturn(t *testing.T) {
 // ErrorOnce — with actual error
 // ==========================================================================
 
-func Test_Cov3_ErrorOnce_WithError(t *testing.T) {
+func Test_ErrorOnce_WithError(t *testing.T) {
 	// Arrange
 	testErr := errors.New("test error")
 	eo := coreonce.NewErrorOnce(func() error { return testErr })
@@ -125,7 +125,7 @@ func Test_Cov3_ErrorOnce_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce with error returns expected -- test error", actual)
 }
 
-func Test_Cov3_ErrorOnce_Value(t *testing.T) {
+func Test_ErrorOnce_Value(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -147,7 +147,7 @@ func Test_Cov3_ErrorOnce_Value(t *testing.T) {
 // AnyErrorOnce — with error
 // ==========================================================================
 
-func Test_Cov3_AnyErrorOnce_WithError(t *testing.T) {
+func Test_AnyErrorOnce_WithError(t *testing.T) {
 	// Arrange
 	testErr := errors.New("fail")
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return nil, testErr })
@@ -170,7 +170,7 @@ func Test_Cov3_AnyErrorOnce_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce with error returns expected -- fail", actual)
 }
 
-func Test_Cov3_AnyErrorOnce_ValueString_Nil(t *testing.T) {
+func Test_AnyErrorOnce_ValueString_Nil(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return nil, nil })
 	val, err := aeo.ValueString()
@@ -189,7 +189,7 @@ func Test_Cov3_AnyErrorOnce_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueString nil value returns empty -- nil data", actual)
 }
 
-func Test_Cov3_AnyErrorOnce_CastFail(t *testing.T) {
+func Test_AnyErrorOnce_CastFail(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	_, _, okStr := aeo.CastValueString()
@@ -216,7 +216,7 @@ func Test_Cov3_AnyErrorOnce_CastFail(t *testing.T) {
 // BytesErrorOnce — with error path
 // ==========================================================================
 
-func Test_Cov3_BytesErrorOnce_WithError(t *testing.T) {
+func Test_BytesErrorOnce_WithError(t *testing.T) {
 	// Arrange
 	testErr := errors.New("bytes error")
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return nil, testErr })
@@ -237,7 +237,7 @@ func Test_Cov3_BytesErrorOnce_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce with error returns expected -- error", actual)
 }
 
-func Test_Cov3_BytesErrorOnce_Valid(t *testing.T) {
+func Test_BytesErrorOnce_Valid(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("hi"), nil })
 
@@ -259,7 +259,7 @@ func Test_Cov3_BytesErrorOnce_Valid(t *testing.T) {
 // StringOnce — additional edge cases
 // ==========================================================================
 
-func Test_Cov3_StringOnce_IsEqual_False(t *testing.T) {
+func Test_StringOnce_IsEqual_False(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "hello" })
 
@@ -285,7 +285,7 @@ func Test_Cov3_StringOnce_IsEqual_False(t *testing.T) {
 // IntegerOnce — zero value
 // ==========================================================================
 
-func Test_Cov3_IntegerOnce_Zero(t *testing.T) {
+func Test_IntegerOnce_Zero(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 0 })
 
@@ -309,7 +309,7 @@ func Test_Cov3_IntegerOnce_Zero(t *testing.T) {
 // ByteOnce — zero value
 // ==========================================================================
 
-func Test_Cov3_ByteOnce_Zero(t *testing.T) {
+func Test_ByteOnce_Zero(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 0 })
 
@@ -331,7 +331,7 @@ func Test_Cov3_ByteOnce_Zero(t *testing.T) {
 // IntegersOnce — empty
 // ==========================================================================
 
-func Test_Cov3_IntegersOnce_Empty(t *testing.T) {
+func Test_IntegersOnce_Empty(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{} })
 
@@ -347,7 +347,7 @@ func Test_Cov3_IntegersOnce_Empty(t *testing.T) {
 // StringsOnce — empty
 // ==========================================================================
 
-func Test_Cov3_StringsOnce_Empty(t *testing.T) {
+func Test_StringsOnce_Empty(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{} })
 
@@ -370,7 +370,7 @@ func Test_Cov3_StringsOnce_Empty(t *testing.T) {
 // MapStringStringOnce — IsEqual edge: different values
 // ==========================================================================
 
-func Test_Cov3_MapStringStringOnce_Empty(t *testing.T) {
+func Test_MapStringStringOnce_Empty(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
 
@@ -389,7 +389,7 @@ func Test_Cov3_MapStringStringOnce_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce empty returns expected -- empty map", actual)
 }
 
-func Test_Cov3_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
+func Test_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
 	mb, _ := mso.MarshalJSON()

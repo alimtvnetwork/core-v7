@@ -11,7 +11,7 @@ import (
 
 // ─── Collection: AddHashmapsKeysValues ──────
 
-func Test_Cov42_Collection_AddHashmapsKeysValues_Valid(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValues_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddHashmapsKeysValues_Valid", func() {
 		col := corestr.New.Collection.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -27,7 +27,7 @@ func Test_Cov42_Collection_AddHashmapsKeysValues_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AddHashmapsKeysValues_Nil(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValues_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddHashmapsKeysValues_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddHashmapsKeysValues(nil)
@@ -44,7 +44,7 @@ func Test_Cov42_Collection_AddHashmapsKeysValues_Nil(t *testing.T) {
 
 // ─── Collection: AddHashmapsKeysValuesUsingFilter ──────
 
-func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Accept(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValuesUsingFilter_Accept(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Accept", func() {
 		col := corestr.New.Collection.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -63,7 +63,7 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Accept(t *testing.T)
 	})
 }
 
-func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Break(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValuesUsingFilter_Break(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Break", func() {
 		col := corestr.New.Collection.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -82,7 +82,7 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Break(t *testing.T) 
 	})
 }
 
-func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddHashmapsKeysValuesUsingFilter(nil, nil)
@@ -99,7 +99,7 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
 
 // ─── Collection: AddPointerCollectionsLock ──────
 
-func Test_Cov42_Collection_AddPointerCollectionsLock(t *testing.T) {
+func Test_Collection_AddPointerCollectionsLock(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddPointerCollectionsLock", func() {
 		col := corestr.New.Collection.Empty()
 		other := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -117,7 +117,7 @@ func Test_Cov42_Collection_AddPointerCollectionsLock(t *testing.T) {
 
 // ─── Collection: AppendCollectionPtr ──────
 
-func Test_Cov42_Collection_AppendCollectionPtr(t *testing.T) {
+func Test_Collection_AppendCollectionPtr(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendCollectionPtr", func() {
 		col := corestr.New.Collection.Strings([]string{"x"})
 		other := corestr.New.Collection.Strings([]string{"y", "z"})
@@ -135,7 +135,7 @@ func Test_Cov42_Collection_AppendCollectionPtr(t *testing.T) {
 
 // ─── Collection: Single ──────
 
-func Test_Cov42_Collection_Single_OneItem(t *testing.T) {
+func Test_Collection_Single_OneItem(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Single_OneItem", func() {
 		col := corestr.New.Collection.Strings([]string{"only"})
 		tc := coretestcases.CaseV1{
@@ -151,7 +151,7 @@ func Test_Cov42_Collection_Single_OneItem(t *testing.T) {
 
 // ─── Collection: SortedListDsc ──────
 
-func Test_Cov42_Collection_SortedListDsc(t *testing.T) {
+func Test_Collection_SortedListDsc(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_SortedListDsc", func() {
 		col := corestr.New.Collection.Strings([]string{"apple", "cherry", "banana"})
 		sorted := col.SortedListDsc()
@@ -168,7 +168,7 @@ func Test_Cov42_Collection_SortedListDsc(t *testing.T) {
 
 // ─── Collection: HasUsingSensitivity ──────
 
-func Test_Cov42_Collection_HasUsingSensitivity_CaseSensitive(t *testing.T) {
+func Test_Collection_HasUsingSensitivity_CaseSensitive(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_HasUsingSensitivity_CaseSensitive", func() {
 		col := corestr.New.Collection.Strings([]string{"Hello"})
 		tc := coretestcases.CaseV1{
@@ -182,7 +182,7 @@ func Test_Cov42_Collection_HasUsingSensitivity_CaseSensitive(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_HasUsingSensitivity_CaseInsensitive(t *testing.T) {
+func Test_Collection_HasUsingSensitivity_CaseInsensitive(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_HasUsingSensitivity_CaseInsensitive", func() {
 		col := corestr.New.Collection.Strings([]string{"Hello"})
 		tc := coretestcases.CaseV1{
@@ -198,7 +198,7 @@ func Test_Cov42_Collection_HasUsingSensitivity_CaseInsensitive(t *testing.T) {
 
 // ─── Collection: AddStringsAsync ──────
 
-func Test_Cov42_Collection_AddStringsAsync_Empty(t *testing.T) {
+func Test_Collection_AddStringsAsync_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddStringsAsync_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		wg := &sync.WaitGroup{}
@@ -216,7 +216,7 @@ func Test_Cov42_Collection_AddStringsAsync_Empty(t *testing.T) {
 
 // ─── Collection: AddNonEmptyStrings / AddNonEmptyStringsSlice ──────
 
-func Test_Cov42_Collection_AddNonEmptyStrings_Valid(t *testing.T) {
+func Test_Collection_AddNonEmptyStrings_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddNonEmptyStrings_Valid", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddNonEmptyStrings("a", "b")
@@ -231,7 +231,7 @@ func Test_Cov42_Collection_AddNonEmptyStrings_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AddNonEmptyStrings_Empty(t *testing.T) {
+func Test_Collection_AddNonEmptyStrings_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddNonEmptyStrings_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddNonEmptyStrings()
@@ -246,7 +246,7 @@ func Test_Cov42_Collection_AddNonEmptyStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AddNonEmptyStringsSlice_Valid(t *testing.T) {
+func Test_Collection_AddNonEmptyStringsSlice_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddNonEmptyStringsSlice_Valid", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddNonEmptyStringsSlice([]string{"x", "y"})
@@ -261,7 +261,7 @@ func Test_Cov42_Collection_AddNonEmptyStringsSlice_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AddNonEmptyStringsSlice_Empty(t *testing.T) {
+func Test_Collection_AddNonEmptyStringsSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddNonEmptyStringsSlice_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddNonEmptyStringsSlice([]string{})
@@ -278,7 +278,7 @@ func Test_Cov42_Collection_AddNonEmptyStringsSlice_Empty(t *testing.T) {
 
 // ─── Collection: AddFuncResult ──────
 
-func Test_Cov42_Collection_AddFuncResult_Valid(t *testing.T) {
+func Test_Collection_AddFuncResult_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddFuncResult_Valid", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddFuncResult(func() string { return "hello" })
@@ -293,7 +293,7 @@ func Test_Cov42_Collection_AddFuncResult_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AddFuncResult_Nil(t *testing.T) {
+func Test_Collection_AddFuncResult_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddFuncResult_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddFuncResult(nil)
@@ -310,7 +310,7 @@ func Test_Cov42_Collection_AddFuncResult_Nil(t *testing.T) {
 
 // ─── Collection: AddStringsByFuncChecking ──────
 
-func Test_Cov42_Collection_AddStringsByFuncChecking_Filter(t *testing.T) {
+func Test_Collection_AddStringsByFuncChecking_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddStringsByFuncChecking_Filter", func() {
 		col := corestr.New.Collection.Empty()
 		col.AddStringsByFuncChecking(
@@ -330,7 +330,7 @@ func Test_Cov42_Collection_AddStringsByFuncChecking_Filter(t *testing.T) {
 
 // ─── Collection: ExpandSlicePlusAdd ──────
 
-func Test_Cov42_Collection_ExpandSlicePlusAdd(t *testing.T) {
+func Test_Collection_ExpandSlicePlusAdd(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_ExpandSlicePlusAdd", func() {
 		col := corestr.New.Collection.Empty()
 		col.ExpandSlicePlusAdd(
@@ -352,7 +352,7 @@ func Test_Cov42_Collection_ExpandSlicePlusAdd(t *testing.T) {
 
 // ─── Collection: MergeSlicesOfSlice ──────
 
-func Test_Cov42_Collection_MergeSlicesOfSlice(t *testing.T) {
+func Test_Collection_MergeSlicesOfSlice(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_MergeSlicesOfSlice", func() {
 		col := corestr.New.Collection.Empty()
 		col.MergeSlicesOfSlice([]string{"a", "b"}, []string{"c"})
@@ -369,7 +369,7 @@ func Test_Cov42_Collection_MergeSlicesOfSlice(t *testing.T) {
 
 // ─── Collection: CharCollectionMap ──────
 
-func Test_Cov42_Collection_CharCollectionMap(t *testing.T) {
+func Test_Collection_CharCollectionMap(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_CharCollectionMap", func() {
 		col := corestr.New.Collection.Strings([]string{"apple", "banana", "avocado"})
 		ccm := col.CharCollectionMap()
@@ -386,7 +386,7 @@ func Test_Cov42_Collection_CharCollectionMap(t *testing.T) {
 
 // ─── Collection: CsvLines / CsvLinesOptions / Csv / CsvOptions ──────
 
-func Test_Cov42_Collection_CsvLines(t *testing.T) {
+func Test_Collection_CsvLines(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_CsvLines", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		lines := col.CsvLines()
@@ -401,7 +401,7 @@ func Test_Cov42_Collection_CsvLines(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_CsvLinesOptions(t *testing.T) {
+func Test_Collection_CsvLinesOptions(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_CsvLinesOptions", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		lines := col.CsvLinesOptions(true)
@@ -416,7 +416,7 @@ func Test_Cov42_Collection_CsvLinesOptions(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_Csv_Empty(t *testing.T) {
+func Test_Collection_Csv_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Csv_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		tc := coretestcases.CaseV1{
@@ -430,7 +430,7 @@ func Test_Cov42_Collection_Csv_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_Csv_NonEmpty(t *testing.T) {
+func Test_Collection_Csv_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Csv_NonEmpty", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		csv := col.Csv()
@@ -445,7 +445,7 @@ func Test_Cov42_Collection_Csv_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_CsvOptions_Empty(t *testing.T) {
+func Test_Collection_CsvOptions_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_CsvOptions_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		tc := coretestcases.CaseV1{
@@ -459,7 +459,7 @@ func Test_Cov42_Collection_CsvOptions_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_CsvOptions_NonEmpty(t *testing.T) {
+func Test_Collection_CsvOptions_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_CsvOptions_NonEmpty", func() {
 		col := corestr.New.Collection.Strings([]string{"x"})
 		csv := col.CsvOptions(false)
@@ -476,7 +476,7 @@ func Test_Cov42_Collection_CsvOptions_NonEmpty(t *testing.T) {
 
 // ─── Collection: IsContainsPtr ──────
 
-func Test_Cov42_Collection_IsContainsPtr_Found(t *testing.T) {
+func Test_Collection_IsContainsPtr_Found(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsPtr_Found", func() {
 		col := corestr.New.Collection.Strings([]string{"hello"})
 		s := "hello"
@@ -491,7 +491,7 @@ func Test_Cov42_Collection_IsContainsPtr_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsPtr_Nil(t *testing.T) {
+func Test_Collection_IsContainsPtr_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsPtr_Nil", func() {
 		col := corestr.New.Collection.Strings([]string{"hello"})
 		tc := coretestcases.CaseV1{
@@ -505,7 +505,7 @@ func Test_Cov42_Collection_IsContainsPtr_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsPtr_Empty(t *testing.T) {
+func Test_Collection_IsContainsPtr_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsPtr_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		s := "hello"
@@ -522,7 +522,7 @@ func Test_Cov42_Collection_IsContainsPtr_Empty(t *testing.T) {
 
 // ─── Collection: GetHashsetPlusHasAll ──────
 
-func Test_Cov42_Collection_GetHashsetPlusHasAll_True(t *testing.T) {
+func Test_Collection_GetHashsetPlusHasAll_True(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetHashsetPlusHasAll_True", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		hs, hasAll := col.GetHashsetPlusHasAll([]string{"a", "b"})
@@ -537,7 +537,7 @@ func Test_Cov42_Collection_GetHashsetPlusHasAll_True(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_GetHashsetPlusHasAll_False(t *testing.T) {
+func Test_Collection_GetHashsetPlusHasAll_False(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetHashsetPlusHasAll_False", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		_, hasAll := col.GetHashsetPlusHasAll([]string{"a", "c"})
@@ -554,7 +554,7 @@ func Test_Cov42_Collection_GetHashsetPlusHasAll_False(t *testing.T) {
 
 // ─── Collection: IsContainsAllSlice ──────
 
-func Test_Cov42_Collection_IsContainsAllSlice_True(t *testing.T) {
+func Test_Collection_IsContainsAllSlice_True(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllSlice_True", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		tc := coretestcases.CaseV1{
@@ -568,7 +568,7 @@ func Test_Cov42_Collection_IsContainsAllSlice_True(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsAllSlice_False(t *testing.T) {
+func Test_Collection_IsContainsAllSlice_False(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllSlice_False", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		tc := coretestcases.CaseV1{
@@ -582,7 +582,7 @@ func Test_Cov42_Collection_IsContainsAllSlice_False(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsAllSlice_Empty(t *testing.T) {
+func Test_Collection_IsContainsAllSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllSlice_Empty", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		tc := coretestcases.CaseV1{
@@ -596,7 +596,7 @@ func Test_Cov42_Collection_IsContainsAllSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsAllSlice_EmptyCollection(t *testing.T) {
+func Test_Collection_IsContainsAllSlice_EmptyCollection(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllSlice_EmptyCollection", func() {
 		col := corestr.New.Collection.Empty()
 		tc := coretestcases.CaseV1{
@@ -612,7 +612,7 @@ func Test_Cov42_Collection_IsContainsAllSlice_EmptyCollection(t *testing.T) {
 
 // ─── Collection: IsContainsAll / IsContainsAllLock ──────
 
-func Test_Cov42_Collection_IsContainsAll_True(t *testing.T) {
+func Test_Collection_IsContainsAll_True(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAll_True", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		tc := coretestcases.CaseV1{
@@ -626,7 +626,7 @@ func Test_Cov42_Collection_IsContainsAll_True(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsAllLock_True(t *testing.T) {
+func Test_Collection_IsContainsAllLock_True(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllLock_True", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		tc := coretestcases.CaseV1{
@@ -640,7 +640,7 @@ func Test_Cov42_Collection_IsContainsAllLock_True(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_IsContainsAllLock_Nil(t *testing.T) {
+func Test_Collection_IsContainsAllLock_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_IsContainsAllLock_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		tc := coretestcases.CaseV1{
@@ -656,7 +656,7 @@ func Test_Cov42_Collection_IsContainsAllLock_Nil(t *testing.T) {
 
 // ─── Collection: New (instance method) ──────
 
-func Test_Cov42_Collection_New_Empty(t *testing.T) {
+func Test_Collection_New_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_New_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		newCol := col.New()
@@ -671,7 +671,7 @@ func Test_Cov42_Collection_New_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_New_WithArgs(t *testing.T) {
+func Test_Collection_New_WithArgs(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_New_WithArgs", func() {
 		col := corestr.New.Collection.Empty()
 		newCol := col.New("a", "b")
@@ -688,7 +688,7 @@ func Test_Cov42_Collection_New_WithArgs(t *testing.T) {
 
 // ─── newCollectionCreator: CloneStrings / LineUsingSep / LineDefault / StringsPlusCap / CapStrings / LenCap ──────
 
-func Test_Cov42_newCollectionCreator_CloneStrings(t *testing.T) {
+func Test_newCollectionCreator_CloneStrings(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_CloneStrings", func() {
 		items := []string{"a", "b"}
 		col := corestr.New.Collection.CloneStrings(items)
@@ -704,7 +704,7 @@ func Test_Cov42_newCollectionCreator_CloneStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_LineUsingSep(t *testing.T) {
+func Test_newCollectionCreator_LineUsingSep(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_LineUsingSep", func() {
 		col := corestr.New.Collection.LineUsingSep(",", "a,b,c")
 		tc := coretestcases.CaseV1{
@@ -718,7 +718,7 @@ func Test_Cov42_newCollectionCreator_LineUsingSep(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_LineDefault(t *testing.T) {
+func Test_newCollectionCreator_LineDefault(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_LineDefault", func() {
 		col := corestr.New.Collection.LineDefault("a\nb")
 		tc := coretestcases.CaseV1{
@@ -732,7 +732,7 @@ func Test_Cov42_newCollectionCreator_LineDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_StringsPlusCap_ZeroCap(t *testing.T) {
+func Test_newCollectionCreator_StringsPlusCap_ZeroCap(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_StringsPlusCap_ZeroCap", func() {
 		col := corestr.New.Collection.StringsPlusCap(0, []string{"a"})
 		tc := coretestcases.CaseV1{
@@ -746,7 +746,7 @@ func Test_Cov42_newCollectionCreator_StringsPlusCap_ZeroCap(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_StringsPlusCap_WithCap(t *testing.T) {
+func Test_newCollectionCreator_StringsPlusCap_WithCap(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_StringsPlusCap_WithCap", func() {
 		col := corestr.New.Collection.StringsPlusCap(10, []string{"a", "b"})
 		tc := coretestcases.CaseV1{
@@ -760,7 +760,7 @@ func Test_Cov42_newCollectionCreator_StringsPlusCap_WithCap(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_CapStrings_ZeroCap(t *testing.T) {
+func Test_newCollectionCreator_CapStrings_ZeroCap(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_CapStrings_ZeroCap", func() {
 		col := corestr.New.Collection.CapStrings(0, []string{"x"})
 		tc := coretestcases.CaseV1{
@@ -774,7 +774,7 @@ func Test_Cov42_newCollectionCreator_CapStrings_ZeroCap(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_CapStrings_WithCap(t *testing.T) {
+func Test_newCollectionCreator_CapStrings_WithCap(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_CapStrings_WithCap", func() {
 		col := corestr.New.Collection.CapStrings(5, []string{"x"})
 		tc := coretestcases.CaseV1{
@@ -788,7 +788,7 @@ func Test_Cov42_newCollectionCreator_CapStrings_WithCap(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_LenCap(t *testing.T) {
+func Test_newCollectionCreator_LenCap(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_LenCap", func() {
 		col := corestr.New.Collection.LenCap(3, 10)
 		tc := coretestcases.CaseV1{
@@ -802,7 +802,7 @@ func Test_Cov42_newCollectionCreator_LenCap(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_Create(t *testing.T) {
+func Test_newCollectionCreator_Create(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_Create", func() {
 		col := corestr.New.Collection.Create([]string{"a"})
 		tc := coretestcases.CaseV1{
@@ -816,7 +816,7 @@ func Test_Cov42_newCollectionCreator_Create(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_StringsOptions_Clone(t *testing.T) {
+func Test_newCollectionCreator_StringsOptions_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_StringsOptions_Clone", func() {
 		items := []string{"x"}
 		col := corestr.New.Collection.StringsOptions(true, items)
@@ -832,7 +832,7 @@ func Test_Cov42_newCollectionCreator_StringsOptions_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov42_newCollectionCreator_StringsOptions_NoClone_Empty(t *testing.T) {
+func Test_newCollectionCreator_StringsOptions_NoClone_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_newCollectionCreator_StringsOptions_NoClone_Empty", func() {
 		col := corestr.New.Collection.StringsOptions(false, []string{})
 		tc := coretestcases.CaseV1{
@@ -848,7 +848,7 @@ func Test_Cov42_newCollectionCreator_StringsOptions_NoClone_Empty(t *testing.T) 
 
 // ─── Collection: AppendAnys with nil items ──────
 
-func Test_Cov42_Collection_AppendAnys_WithNilItem(t *testing.T) {
+func Test_Collection_AppendAnys_WithNilItem(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnys_WithNilItem", func() {
 		col := corestr.New.Collection.Empty()
 		col.AppendAnys("hello", nil, "world")
@@ -865,7 +865,7 @@ func Test_Cov42_Collection_AppendAnys_WithNilItem(t *testing.T) {
 
 // ─── Collection: AppendAnysUsingFilter ──────
 
-func Test_Cov42_Collection_AppendAnysUsingFilter_Accept(t *testing.T) {
+func Test_Collection_AppendAnysUsingFilter_Accept(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnysUsingFilter_Accept", func() {
 		col := corestr.New.Collection.Empty()
 		filter := func(str string, index int) (string, bool, bool) {
@@ -883,7 +883,7 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Accept(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AppendAnysUsingFilter_Break(t *testing.T) {
+func Test_Collection_AppendAnysUsingFilter_Break(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnysUsingFilter_Break", func() {
 		col := corestr.New.Collection.Empty()
 		filter := func(str string, index int) (string, bool, bool) {
@@ -901,7 +901,7 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Break(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AppendAnysUsingFilter_Skip(t *testing.T) {
+func Test_Collection_AppendAnysUsingFilter_Skip(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnysUsingFilter_Skip", func() {
 		col := corestr.New.Collection.Empty()
 		filter := func(str string, index int) (string, bool, bool) {
@@ -921,7 +921,7 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Skip(t *testing.T) {
 
 // ─── Collection: AppendAnysUsingFilterLock ──────
 
-func Test_Cov42_Collection_AppendAnysUsingFilterLock_Accept(t *testing.T) {
+func Test_Collection_AppendAnysUsingFilterLock_Accept(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnysUsingFilterLock_Accept", func() {
 		col := corestr.New.Collection.Empty()
 		filter := func(str string, index int) (string, bool, bool) {
@@ -939,7 +939,7 @@ func Test_Cov42_Collection_AppendAnysUsingFilterLock_Accept(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
+func Test_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendAnysUsingFilterLock_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		col.AppendAnysUsingFilterLock(nil, nil)
@@ -956,7 +956,7 @@ func Test_Cov42_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
 
 // ─── Collection: AppendNonEmptyAnys ──────
 
-func Test_Cov42_Collection_AppendNonEmptyAnys_Valid(t *testing.T) {
+func Test_Collection_AppendNonEmptyAnys_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendNonEmptyAnys_Valid", func() {
 		col := corestr.New.Collection.Empty()
 		col.AppendNonEmptyAnys("hello", nil, "world")
@@ -971,7 +971,7 @@ func Test_Cov42_Collection_AppendNonEmptyAnys_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_AppendNonEmptyAnys_Nil(t *testing.T) {
+func Test_Collection_AppendNonEmptyAnys_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AppendNonEmptyAnys_Nil", func() {
 		col := corestr.New.Collection.Empty()
 		col.AppendNonEmptyAnys(nil)
@@ -988,7 +988,7 @@ func Test_Cov42_Collection_AppendNonEmptyAnys_Nil(t *testing.T) {
 
 // ─── Collection: GetAllExceptCollection / GetAllExcept ──────
 
-func Test_Cov42_Collection_GetAllExceptCollection_WithExclude(t *testing.T) {
+func Test_Collection_GetAllExceptCollection_WithExclude(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetAllExceptCollection_WithExclude", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		exclude := corestr.New.Collection.Strings([]string{"b"})
@@ -1004,7 +1004,7 @@ func Test_Cov42_Collection_GetAllExceptCollection_WithExclude(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_GetAllExceptCollection_NilExclude(t *testing.T) {
+func Test_Collection_GetAllExceptCollection_NilExclude(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetAllExceptCollection_NilExclude", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		result := col.GetAllExceptCollection(nil)
@@ -1019,7 +1019,7 @@ func Test_Cov42_Collection_GetAllExceptCollection_NilExclude(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_GetAllExcept_Valid(t *testing.T) {
+func Test_Collection_GetAllExcept_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetAllExcept_Valid", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		result := col.GetAllExcept([]string{"c"})
@@ -1034,7 +1034,7 @@ func Test_Cov42_Collection_GetAllExcept_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_GetAllExcept_Nil(t *testing.T) {
+func Test_Collection_GetAllExcept_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_GetAllExcept_Nil", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		result := col.GetAllExcept(nil)
@@ -1051,7 +1051,7 @@ func Test_Cov42_Collection_GetAllExcept_Nil(t *testing.T) {
 
 // ─── Collection: SummaryString / SummaryStringWithHeader ──────
 
-func Test_Cov42_Collection_SummaryString(t *testing.T) {
+func Test_Collection_SummaryString(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_SummaryString", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		s := col.SummaryString(1)
@@ -1066,7 +1066,7 @@ func Test_Cov42_Collection_SummaryString(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_SummaryStringWithHeader_NonEmpty(t *testing.T) {
+func Test_Collection_SummaryStringWithHeader_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_SummaryStringWithHeader_NonEmpty", func() {
 		col := corestr.New.Collection.Strings([]string{"x"})
 		s := col.SummaryStringWithHeader("header")
@@ -1081,7 +1081,7 @@ func Test_Cov42_Collection_SummaryStringWithHeader_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
+func Test_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_SummaryStringWithHeader_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		s := col.SummaryStringWithHeader("header")
@@ -1098,7 +1098,7 @@ func Test_Cov42_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
 
 // ─── Collection: Joins with extra items ──────
 
-func Test_Cov42_Collection_Joins_WithExtra(t *testing.T) {
+func Test_Collection_Joins_WithExtra(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Joins_WithExtra", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		result := col.Joins(",", "c")
@@ -1113,7 +1113,7 @@ func Test_Cov42_Collection_Joins_WithExtra(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_Joins_NoExtra(t *testing.T) {
+func Test_Collection_Joins_NoExtra(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Joins_NoExtra", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		result := col.Joins(",")
@@ -1130,7 +1130,7 @@ func Test_Cov42_Collection_Joins_NoExtra(t *testing.T) {
 
 // ─── Collection: Serialize / Deserialize ──────
 
-func Test_Cov42_Collection_Serialize(t *testing.T) {
+func Test_Collection_Serialize(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Serialize", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		bytes, err := col.Serialize()
@@ -1145,7 +1145,7 @@ func Test_Cov42_Collection_Serialize(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_Deserialize(t *testing.T) {
+func Test_Collection_Deserialize(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_Deserialize", func() {
 		col := corestr.New.Collection.Strings([]string{"hello"})
 		var target []string
@@ -1163,7 +1163,7 @@ func Test_Cov42_Collection_Deserialize(t *testing.T) {
 
 // ─── Collection: NonEmptyList / NonEmptyListPtr ──────
 
-func Test_Cov42_Collection_NonEmptyList(t *testing.T) {
+func Test_Collection_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_NonEmptyList", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
 		list := col.NonEmptyList()
@@ -1178,7 +1178,7 @@ func Test_Cov42_Collection_NonEmptyList(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_NonEmptyListPtr(t *testing.T) {
+func Test_Collection_NonEmptyListPtr(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_NonEmptyListPtr", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
 		listPtr := col.NonEmptyListPtr()
@@ -1195,7 +1195,7 @@ func Test_Cov42_Collection_NonEmptyListPtr(t *testing.T) {
 
 // ─── Collection: StringLock ──────
 
-func Test_Cov42_Collection_StringLock_NonEmpty(t *testing.T) {
+func Test_Collection_StringLock_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_StringLock_NonEmpty", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		s := col.StringLock()
@@ -1210,7 +1210,7 @@ func Test_Cov42_Collection_StringLock_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov42_Collection_StringLock_Empty(t *testing.T) {
+func Test_Collection_StringLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_StringLock_Empty", func() {
 		col := corestr.New.Collection.Empty()
 		s := col.StringLock()

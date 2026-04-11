@@ -13,7 +13,7 @@ import (
 // SimpleStringOnce — JSON/Serialization coverage gaps (15 methods)
 // =============================================================================
 
-func Test_Cov65_SSO_Json(t *testing.T) {
+func Test_SSO_Json(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_Json", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -28,7 +28,7 @@ func Test_Cov65_SSO_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_JsonPtr(t *testing.T) {
+func Test_SSO_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_JsonPtr", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -49,7 +49,7 @@ func Test_Cov65_SSO_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_JsonModel(t *testing.T) {
+func Test_SSO_JsonModel(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_JsonModel", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -70,7 +70,7 @@ func Test_Cov65_SSO_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_JsonModelAny(t *testing.T) {
+func Test_SSO_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_JsonModelAny", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("x")
@@ -84,7 +84,7 @@ func Test_Cov65_SSO_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_MarshalJSON(t *testing.T) {
+func Test_SSO_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_MarshalJSON", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -105,7 +105,7 @@ func Test_Cov65_SSO_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_UnmarshalJSON(t *testing.T) {
+func Test_SSO_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_UnmarshalJSON", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -122,7 +122,7 @@ func Test_Cov65_SSO_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_UnmarshalJSON_Error(t *testing.T) {
+func Test_SSO_UnmarshalJSON_Error(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_UnmarshalJSON_Error", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("")
@@ -137,7 +137,7 @@ func Test_Cov65_SSO_UnmarshalJSON_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_ParseInjectUsingJson(t *testing.T) {
+func Test_SSO_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_ParseInjectUsingJson", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -160,7 +160,7 @@ func Test_Cov65_SSO_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_SSO_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("")
@@ -176,7 +176,7 @@ func Test_Cov65_SSO_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_SSO_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -193,7 +193,7 @@ func Test_Cov65_SSO_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+func Test_SSO_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_ParseInjectUsingJsonMust_Panics", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("")
@@ -217,7 +217,7 @@ func Test_Cov65_SSO_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_JsonParseSelfInject(t *testing.T) {
+func Test_SSO_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_JsonParseSelfInject", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -234,7 +234,7 @@ func Test_Cov65_SSO_JsonParseSelfInject(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_AsJsonContractsBinder(t *testing.T) {
+func Test_SSO_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_AsJsonContractsBinder", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -248,7 +248,7 @@ func Test_Cov65_SSO_AsJsonContractsBinder(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_AsJsoner(t *testing.T) {
+func Test_SSO_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_AsJsoner", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -262,7 +262,7 @@ func Test_Cov65_SSO_AsJsoner(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_AsJsonParseSelfInjector(t *testing.T) {
+func Test_SSO_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_AsJsonParseSelfInjector", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -276,7 +276,7 @@ func Test_Cov65_SSO_AsJsonParseSelfInjector(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_AsJsonMarshaller(t *testing.T) {
+func Test_SSO_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_AsJsonMarshaller", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -290,7 +290,7 @@ func Test_Cov65_SSO_AsJsonMarshaller(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_Serialize(t *testing.T) {
+func Test_SSO_Serialize(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_Serialize", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -311,7 +311,7 @@ func Test_Cov65_SSO_Serialize(t *testing.T) {
 	})
 }
 
-func Test_Cov65_SSO_Deserialize(t *testing.T) {
+func Test_SSO_Deserialize(t *testing.T) {
 	safeTest(t, "Test_Cov65_SSO_Deserialize", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -331,7 +331,7 @@ func Test_Cov65_SSO_Deserialize(t *testing.T) {
 // LinkedCollectionNode — Next, isNextEqual, isNextChainEqual
 // =============================================================================
 
-func Test_Cov65_LCN_Next(t *testing.T) {
+func Test_LCN_Next(t *testing.T) {
 	safeTest(t, "Test_Cov65_LCN_Next", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -348,7 +348,7 @@ func Test_Cov65_LCN_Next(t *testing.T) {
 	})
 }
 
-func Test_Cov65_LCN_Next_Nil(t *testing.T) {
+func Test_LCN_Next_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov65_LCN_Next_Nil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -364,7 +364,7 @@ func Test_Cov65_LCN_Next_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov65_LCN_IsChainEqual_SameChain(t *testing.T) {
+func Test_LCN_IsChainEqual_SameChain(t *testing.T) {
 	safeTest(t, "Test_Cov65_LCN_IsChainEqual_SameChain", func() {
 		// Arrange
 		lc1 := corestr.New.LinkedCollection.Create()
@@ -383,7 +383,7 @@ func Test_Cov65_LCN_IsChainEqual_SameChain(t *testing.T) {
 	})
 }
 
-func Test_Cov65_LCN_IsChainEqual_Different(t *testing.T) {
+func Test_LCN_IsChainEqual_Different(t *testing.T) {
 	safeTest(t, "Test_Cov65_LCN_IsChainEqual_Different", func() {
 		// Arrange
 		lc1 := corestr.New.LinkedCollection.Create()
@@ -402,7 +402,7 @@ func Test_Cov65_LCN_IsChainEqual_Different(t *testing.T) {
 	})
 }
 
-func Test_Cov65_LCN_IsEqual_EqualElements(t *testing.T) {
+func Test_LCN_IsEqual_EqualElements(t *testing.T) {
 	safeTest(t, "Test_Cov65_LCN_IsEqual_EqualElements", func() {
 		// Arrange
 		lc1 := corestr.New.LinkedCollection.Create()
@@ -423,7 +423,7 @@ func Test_Cov65_LCN_IsEqual_EqualElements(t *testing.T) {
 // KeyValueCollection — KeysHashset (panics with "implement me")
 // =============================================================================
 
-func Test_Cov65_KVC_KeysHashset_Panics(t *testing.T) {
+func Test_KVC_KeysHashset_Panics(t *testing.T) {
 	safeTest(t, "Test_Cov65_KVC_KeysHashset_Panics", func() {
 		// Arrange
 		kvc := corestr.New.KeyValues.Empty()
@@ -451,7 +451,7 @@ func Test_Cov65_KVC_KeysHashset_Panics(t *testing.T) {
 // CollectionsOfCollection — JsonPtr
 // =============================================================================
 
-func Test_Cov65_COC_JsonPtr(t *testing.T) {
+func Test_COC_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov65_COC_JsonPtr", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -477,7 +477,7 @@ func Test_Cov65_COC_JsonPtr(t *testing.T) {
 // HashsetsCollection — JsonPtr
 // =============================================================================
 
-func Test_Cov65_HC_JsonPtr(t *testing.T) {
+func Test_HC_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov65_HC_JsonPtr", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()

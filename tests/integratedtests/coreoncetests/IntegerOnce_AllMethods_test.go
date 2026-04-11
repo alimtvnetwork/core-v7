@@ -12,7 +12,7 @@ import (
 // IntegerOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_IntegerOnce_AllMethods(t *testing.T) {
+func Test_IntegerOnce_AllMethods(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 5 })
 
@@ -44,7 +44,7 @@ func Test_Cov2_IntegerOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce AllMethods returns expected -- value 5", actual)
 }
 
-func Test_Cov2_IntegerOnce_NegativeValue(t *testing.T) {
+func Test_IntegerOnce_NegativeValue(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return -3 })
 
@@ -64,7 +64,7 @@ func Test_Cov2_IntegerOnce_NegativeValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce negative returns expected -- value -3", actual)
 }
 
-func Test_Cov2_IntegerOnce_MarshalUnmarshal(t *testing.T) {
+func Test_IntegerOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	marshalledBytes, marshalErr := io.MarshalJSON()
@@ -90,7 +90,7 @@ func Test_Cov2_IntegerOnce_MarshalUnmarshal(t *testing.T) {
 // BoolOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_BoolOnce_AllMethods(t *testing.T) {
+func Test_BoolOnce_AllMethods(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 
@@ -109,7 +109,7 @@ func Test_Cov2_BoolOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce AllMethods returns expected -- value true", actual)
 }
 
-func Test_Cov2_BoolOnce_MarshalUnmarshal(t *testing.T) {
+func Test_BoolOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 	marshalledBytes, marshalErr := bo.MarshalJSON()
@@ -134,7 +134,7 @@ func Test_Cov2_BoolOnce_MarshalUnmarshal(t *testing.T) {
 // ByteOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_ByteOnce_AllMethods(t *testing.T) {
+func Test_ByteOnce_AllMethods(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 42 })
 
@@ -156,7 +156,7 @@ func Test_Cov2_ByteOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ByteOnce AllMethods returns expected -- value 42", actual)
 }
 
-func Test_Cov2_ByteOnce_MarshalUnmarshal(t *testing.T) {
+func Test_ByteOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 10 })
 	marshalledBytes, marshalErr := bo.MarshalJSON()
@@ -183,7 +183,7 @@ func Test_Cov2_ByteOnce_MarshalUnmarshal(t *testing.T) {
 // BytesOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_BytesOnce_AllMethods(t *testing.T) {
+func Test_BytesOnce_AllMethods(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOnce(func() []byte { return []byte("hello") })
 
@@ -203,7 +203,7 @@ func Test_Cov2_BytesOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesOnce AllMethods returns expected -- value hello", actual)
 }
 
-func Test_Cov2_BytesOnce_NilFunc(t *testing.T) {
+func Test_BytesOnce_NilFunc(t *testing.T) {
 	// Arrange
 	bo := coreonce.BytesOnce{}
 
@@ -221,7 +221,7 @@ func Test_Cov2_BytesOnce_NilFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesOnce nil func returns empty -- no initializer", actual)
 }
 
-func Test_Cov2_BytesOnce_MarshalUnmarshal(t *testing.T) {
+func Test_BytesOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOnce(func() []byte { return []byte("test") })
 	marshalledBytes, marshalErr := bo.MarshalJSON()
@@ -248,7 +248,7 @@ func Test_Cov2_BytesOnce_MarshalUnmarshal(t *testing.T) {
 // ErrorOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_ErrorOnce_WithNilError(t *testing.T) {
+func Test_ErrorOnce_WithNilError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -274,7 +274,7 @@ func Test_Cov2_ErrorOnce_WithNilError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce nil returns all safe -- nil error", actual)
 }
 
-func Test_Cov2_ErrorOnce_ConcatNewString(t *testing.T) {
+func Test_ErrorOnce_ConcatNewString(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	result := eo.ConcatNewString("extra")
@@ -287,7 +287,7 @@ func Test_Cov2_ErrorOnce_ConcatNewString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce ConcatNewString returns extra -- nil error", actual)
 }
 
-func Test_Cov2_ErrorOnce_ConcatNew(t *testing.T) {
+func Test_ErrorOnce_ConcatNew(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -299,7 +299,7 @@ func Test_Cov2_ErrorOnce_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce ConcatNew returns error -- always", actual)
 }
 
-func Test_Cov2_ErrorOnce_MarshalUnmarshal(t *testing.T) {
+func Test_ErrorOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	marshalledBytes, marshalErr := eo.MarshalJSON()
@@ -322,7 +322,7 @@ func Test_Cov2_ErrorOnce_MarshalUnmarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce Marshal/Unmarshal returns no error -- nil error", actual)
 }
 
-func Test_Cov2_ErrorOnce_HandleError_NoError(t *testing.T) {
+func Test_ErrorOnce_HandleError_NoError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	eo.HandleError() // should not panic
@@ -335,7 +335,7 @@ func Test_Cov2_ErrorOnce_HandleError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce HandleError no panic -- nil error", actual)
 }
 
-func Test_Cov2_ErrorOnce_HandleErrorWith_NoError(t *testing.T) {
+func Test_ErrorOnce_HandleErrorWith_NoError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	eo.HandleErrorWith("msg") // should not panic
@@ -352,7 +352,7 @@ func Test_Cov2_ErrorOnce_HandleErrorWith_NoError(t *testing.T) {
 // AnyOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_AnyOnce_ValueString_Nil(t *testing.T) {
+func Test_AnyOnce_ValueString_Nil(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 
@@ -371,7 +371,7 @@ func Test_Cov2_AnyOnce_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce nil value returns empty -- nil initializer", actual)
 }
 
-func Test_Cov2_AnyOnce_CastMethods(t *testing.T) {
+func Test_AnyOnce_CastMethods(t *testing.T) {
 	// Arrange
 	aoStr := coreonce.NewAnyOnce(func() any { return "hello" })
 	valStr, okStr := aoStr.CastValueString()
@@ -404,7 +404,7 @@ func Test_Cov2_AnyOnce_CastMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce CastMethods return expected -- various types", actual)
 }
 
-func Test_Cov2_AnyOnce_Serialize(t *testing.T) {
+func Test_AnyOnce_Serialize(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "hello" })
 	_, serErr := ao.Serialize()
@@ -427,7 +427,7 @@ func Test_Cov2_AnyOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce Serialize returns no error -- valid value", actual)
 }
 
-func Test_Cov2_AnyOnce_Deserialize(t *testing.T) {
+func Test_AnyOnce_Deserialize(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "hello" })
 	var result string
@@ -445,7 +445,7 @@ func Test_Cov2_AnyOnce_Deserialize(t *testing.T) {
 // AnyErrorOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_AnyErrorOnce_AllMethods(t *testing.T) {
+func Test_AnyErrorOnce_AllMethods(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 
@@ -472,7 +472,7 @@ func Test_Cov2_AnyErrorOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce AllMethods returns expected -- valid value", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_CastMethods(t *testing.T) {
+func Test_AnyErrorOnce_CastMethods(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	valStr, err, ok := aeo.CastValueString()
@@ -493,7 +493,7 @@ func Test_Cov2_AnyErrorOnce_CastMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce CastValueString returns value -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_CastStrings(t *testing.T) {
+func Test_AnyErrorOnce_CastStrings(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return []string{"a"}, nil })
 	vals, err, ok := aeo.CastValueStrings()
@@ -514,7 +514,7 @@ func Test_Cov2_AnyErrorOnce_CastStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce CastValueStrings returns values -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_CastHashmapMap(t *testing.T) {
+func Test_AnyErrorOnce_CastHashmapMap(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return map[string]string{"k": "v"}, nil })
 	vals, err, ok := aeo.CastValueHashmapMap()
@@ -535,7 +535,7 @@ func Test_Cov2_AnyErrorOnce_CastHashmapMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce CastValueHashmapMap returns values -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_CastMapAny(t *testing.T) {
+func Test_AnyErrorOnce_CastMapAny(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return map[string]any{"k": 1}, nil })
 	vals, err, ok := aeo.CastValueMapStringAnyMap()
@@ -556,7 +556,7 @@ func Test_Cov2_AnyErrorOnce_CastMapAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce CastValueMapStringAnyMap returns values -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_CastBytes(t *testing.T) {
+func Test_AnyErrorOnce_CastBytes(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return []byte("hi"), nil })
 	vals, err, ok := aeo.CastValueBytes()
@@ -577,7 +577,7 @@ func Test_Cov2_AnyErrorOnce_CastBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce CastValueBytes returns values -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_ValueString(t *testing.T) {
+func Test_AnyErrorOnce_ValueString(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	val, err := aeo.ValueString()
@@ -602,7 +602,7 @@ func Test_Cov2_AnyErrorOnce_ValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueString returns value -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_ValueStringMust(t *testing.T) {
+func Test_AnyErrorOnce_ValueStringMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	val := aeo.ValueStringMust()
@@ -615,7 +615,7 @@ func Test_Cov2_AnyErrorOnce_ValueStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueStringMust returns value -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_ExecuteMust(t *testing.T) {
+func Test_AnyErrorOnce_ExecuteMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	val := aeo.ExecuteMust()
@@ -628,7 +628,7 @@ func Test_Cov2_AnyErrorOnce_ExecuteMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ExecuteMust returns value -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_ValueMust(t *testing.T) {
+func Test_AnyErrorOnce_ValueMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	val := aeo.ValueMust()
@@ -641,7 +641,7 @@ func Test_Cov2_AnyErrorOnce_ValueMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueMust returns value -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_Serialize(t *testing.T) {
+func Test_AnyErrorOnce_Serialize(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	_, serErr := aeo.Serialize()
@@ -664,7 +664,7 @@ func Test_Cov2_AnyErrorOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce Serialize returns no error -- valid", actual)
 }
 
-func Test_Cov2_AnyErrorOnce_Deserialize(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 	var result string
@@ -682,7 +682,7 @@ func Test_Cov2_AnyErrorOnce_Deserialize(t *testing.T) {
 // BytesErrorOnce — comprehensive method coverage
 // ==========================================================================
 
-func Test_Cov2_BytesErrorOnce_AllMethods(t *testing.T) {
+func Test_BytesErrorOnce_AllMethods(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("hello"), nil })
 
@@ -713,7 +713,7 @@ func Test_Cov2_BytesErrorOnce_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce AllMethods returns expected -- valid bytes", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_ValueWithError(t *testing.T) {
+func Test_BytesErrorOnce_ValueWithError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("hi"), nil })
 	val, err := beo.ValueWithError()
@@ -732,7 +732,7 @@ func Test_Cov2_BytesErrorOnce_ValueWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce ValueWithError returns value -- valid", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_Execute(t *testing.T) {
+func Test_BytesErrorOnce_Execute(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("hi"), nil })
 	val, err := beo.Execute()
@@ -751,7 +751,7 @@ func Test_Cov2_BytesErrorOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce Execute returns value -- valid", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_HandleError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_HandleError_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return nil, nil })
 	beo.HandleError() // no panic
@@ -764,7 +764,7 @@ func Test_Cov2_BytesErrorOnce_HandleError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce HandleError no panic -- nil error", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return nil, nil })
 	beo.MustBeEmptyError() // no panic
@@ -777,7 +777,7 @@ func Test_Cov2_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce MustBeEmptyError no panic -- nil error", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_MustHaveSafeItems(t *testing.T) {
+func Test_BytesErrorOnce_MustHaveSafeItems(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("data"), nil })
 	beo.MustHaveSafeItems() // no panic
@@ -790,7 +790,7 @@ func Test_Cov2_BytesErrorOnce_MustHaveSafeItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce MustHaveSafeItems no panic -- has data", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_MarshalJSON(t *testing.T) {
+func Test_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) {
 		return json.Marshal("hello")
@@ -813,7 +813,7 @@ func Test_Cov2_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce MarshalJSON returns bytes -- valid", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_SerializeMust(t *testing.T) {
+func Test_BytesErrorOnce_SerializeMust(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) {
 		return json.Marshal("hello")
@@ -828,7 +828,7 @@ func Test_Cov2_BytesErrorOnce_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce SerializeMust returns bytes -- valid", actual)
 }
 
-func Test_Cov2_BytesErrorOnce_Deserialize(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) {
 		return json.Marshal("hello")
@@ -854,7 +854,7 @@ func Test_Cov2_BytesErrorOnce_Deserialize(t *testing.T) {
 // StringsOnce — UnmarshalJSON
 // ==========================================================================
 
-func Test_Cov2_StringsOnce_UnmarshalJSON(t *testing.T) {
+func Test_StringsOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return nil })
 	data, _ := json.Marshal([]string{"a", "b"})
@@ -878,7 +878,7 @@ func Test_Cov2_StringsOnce_UnmarshalJSON(t *testing.T) {
 // IntegersOnce — UnmarshalJSON, IsZero
 // ==========================================================================
 
-func Test_Cov2_IntegersOnce_UnmarshalJSON(t *testing.T) {
+func Test_IntegersOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return nil })
 	data, _ := json.Marshal([]int{1, 2, 3})
@@ -904,7 +904,7 @@ func Test_Cov2_IntegersOnce_UnmarshalJSON(t *testing.T) {
 // MapStringStringOnce — UnmarshalJSON
 // ==========================================================================
 
-func Test_Cov2_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
+func Test_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return nil })
 	data, _ := json.Marshal(map[string]string{"a": "1"})

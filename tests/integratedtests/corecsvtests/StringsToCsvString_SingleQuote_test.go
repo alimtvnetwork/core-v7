@@ -9,7 +9,7 @@ import (
 
 // ── StringsToCsvString — all quote branches ──
 
-func Test_Cov2_StringsToCsvString_SingleQuote(t *testing.T) {
+func Test_StringsToCsvString_SingleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.StringsToCsvString(", ", true, true, "a", "b")
 
@@ -21,7 +21,7 @@ func Test_Cov2_StringsToCsvString_SingleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsToCsvString returns correct value -- single quote", actual)
 }
 
-func Test_Cov2_StringsToCsvString_DoubleQuote(t *testing.T) {
+func Test_StringsToCsvString_DoubleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.StringsToCsvString(", ", true, false, "a", "b")
 
@@ -33,7 +33,7 @@ func Test_Cov2_StringsToCsvString_DoubleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsToCsvString returns correct value -- double quote", actual)
 }
 
-func Test_Cov2_StringsToCsvString_NoQuote(t *testing.T) {
+func Test_StringsToCsvString_NoQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.StringsToCsvString(", ", false, false, "a", "b")
 
@@ -47,7 +47,7 @@ func Test_Cov2_StringsToCsvString_NoQuote(t *testing.T) {
 
 // ── AnyItemsToCsvString — all quote branches ──
 
-func Test_Cov2_AnyItemsToCsvString_SingleQuote(t *testing.T) {
+func Test_AnyItemsToCsvString_SingleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyItemsToCsvString(", ", true, true, "a", 1)
 
@@ -59,7 +59,7 @@ func Test_Cov2_AnyItemsToCsvString_SingleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItemsToCsvString returns correct value -- single quote", actual)
 }
 
-func Test_Cov2_AnyItemsToCsvString_DoubleQuote(t *testing.T) {
+func Test_AnyItemsToCsvString_DoubleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyItemsToCsvString(", ", true, false, "a", 1)
 
@@ -71,7 +71,7 @@ func Test_Cov2_AnyItemsToCsvString_DoubleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItemsToCsvString returns correct value -- double quote", actual)
 }
 
-func Test_Cov2_AnyItemsToCsvString_NoQuote(t *testing.T) {
+func Test_AnyItemsToCsvString_NoQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyItemsToCsvString(", ", false, false, "a", 1)
 
@@ -85,7 +85,7 @@ func Test_Cov2_AnyItemsToCsvString_NoQuote(t *testing.T) {
 
 // ── AnyToTypesCsvStrings — no-quote branch ──
 
-func Test_Cov2_AnyToTypesCsvStrings_NoQuote(t *testing.T) {
+func Test_AnyToTypesCsvStrings_NoQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyToTypesCsvStrings(false, false, "a")
 
@@ -97,7 +97,7 @@ func Test_Cov2_AnyToTypesCsvStrings_NoQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToTypesCsvStrings returns empty -- no quote", actual)
 }
 
-func Test_Cov2_AnyToTypesCsvStrings_Empty(t *testing.T) {
+func Test_AnyToTypesCsvStrings_Empty(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyToTypesCsvStrings(false, false)
 
@@ -111,7 +111,7 @@ func Test_Cov2_AnyToTypesCsvStrings_Empty(t *testing.T) {
 
 // ── StringsToCsvStrings — double-quote branch (explicit) ──
 
-func Test_Cov2_StringsToCsvStrings_DoubleQuote(t *testing.T) {
+func Test_StringsToCsvStrings_DoubleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.StringsToCsvStrings(true, false, "a")
 
@@ -123,7 +123,7 @@ func Test_Cov2_StringsToCsvStrings_DoubleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsToCsvStrings returns correct value -- double quote", actual)
 }
 
-func Test_Cov2_StringsToCsvStrings_Empty(t *testing.T) {
+func Test_StringsToCsvStrings_Empty(t *testing.T) {
 	// Arrange
 	result := corecsv.StringsToCsvStrings(true, true)
 
@@ -137,7 +137,7 @@ func Test_Cov2_StringsToCsvStrings_Empty(t *testing.T) {
 
 // ── AnyItemsToCsvStrings — double-quote, empty ──
 
-func Test_Cov2_AnyItemsToCsvStrings_DoubleQuote(t *testing.T) {
+func Test_AnyItemsToCsvStrings_DoubleQuote(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyItemsToCsvStrings(true, false, "a")
 
@@ -149,7 +149,7 @@ func Test_Cov2_AnyItemsToCsvStrings_DoubleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItemsToCsvStrings returns correct value -- double quote", actual)
 }
 
-func Test_Cov2_AnyItemsToCsvStrings_Empty(t *testing.T) {
+func Test_AnyItemsToCsvStrings_Empty(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyItemsToCsvStrings(true, true)
 
@@ -163,7 +163,7 @@ func Test_Cov2_AnyItemsToCsvStrings_Empty(t *testing.T) {
 
 // ── RangeNamesWithValuesIndexes — multi items ──
 
-func Test_Cov2_RangeNamesWithValuesIndexes_MultiItems(t *testing.T) {
+func Test_RangeNamesWithValuesIndexes_MultiItems(t *testing.T) {
 	// Arrange
 	result := corecsv.RangeNamesWithValuesIndexes("A", "B", "C")
 
@@ -177,7 +177,7 @@ func Test_Cov2_RangeNamesWithValuesIndexes_MultiItems(t *testing.T) {
 
 // ── StringersToString — empty ──
 
-func Test_Cov2_StringersToString_Empty(t *testing.T) {
+func Test_StringersToString_Empty(t *testing.T) {
 	// Arrange
 	result := corecsv.StringersToString(", ", false, false)
 
@@ -191,7 +191,7 @@ func Test_Cov2_StringersToString_Empty(t *testing.T) {
 
 // ── CompileStringersToString — empty ──
 
-func Test_Cov2_CompileStringersToString_Empty(t *testing.T) {
+func Test_CompileStringersToString_Empty(t *testing.T) {
 	// Arrange
 	result := corecsv.CompileStringersToString(", ", false, false)
 

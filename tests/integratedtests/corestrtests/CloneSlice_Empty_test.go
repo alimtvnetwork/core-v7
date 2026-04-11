@@ -11,7 +11,7 @@ import (
 // CloneSlice / CloneSliceIf
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_CloneSlice_Empty(t *testing.T) {
+func Test_CloneSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_CloneSlice_Empty", func() {
 		// Arrange
 		result := corestr.CloneSlice(nil)
@@ -25,7 +25,7 @@ func Test_Cov15_CloneSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_CloneSlice_Valid(t *testing.T) {
+func Test_CloneSlice_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov15_CloneSlice_Valid", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{"a", "b"})
@@ -45,7 +45,7 @@ func Test_Cov15_CloneSlice_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov15_CloneSliceIf_Empty(t *testing.T) {
+func Test_CloneSliceIf_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_CloneSliceIf_Empty", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true)
@@ -59,7 +59,7 @@ func Test_Cov15_CloneSliceIf_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_CloneSliceIf_SkipClone(t *testing.T) {
+func Test_CloneSliceIf_SkipClone(t *testing.T) {
 	safeTest(t, "Test_Cov15_CloneSliceIf_SkipClone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(false, "a", "b")
@@ -73,7 +73,7 @@ func Test_Cov15_CloneSliceIf_SkipClone(t *testing.T) {
 	})
 }
 
-func Test_Cov15_CloneSliceIf_Clone(t *testing.T) {
+func Test_CloneSliceIf_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov15_CloneSliceIf_Clone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true, "a", "b")
@@ -97,7 +97,7 @@ func Test_Cov15_CloneSliceIf_Clone(t *testing.T) {
 // AnyToString
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_AnyToString_Empty(t *testing.T) {
+func Test_AnyToString_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_AnyToString_Empty", func() {
 		// Arrange
 		result := corestr.AnyToString(false, "")
@@ -111,7 +111,7 @@ func Test_Cov15_AnyToString_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_AnyToString_NoFieldName(t *testing.T) {
+func Test_AnyToString_NoFieldName(t *testing.T) {
 	safeTest(t, "Test_Cov15_AnyToString_NoFieldName", func() {
 		// Arrange
 		result := corestr.AnyToString(false, "hello")
@@ -125,7 +125,7 @@ func Test_Cov15_AnyToString_NoFieldName(t *testing.T) {
 	})
 }
 
-func Test_Cov15_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName(t *testing.T) {
 	safeTest(t, "Test_Cov15_AnyToString_WithFieldName", func() {
 		// Arrange
 		result := corestr.AnyToString(true, "hello")
@@ -143,7 +143,7 @@ func Test_Cov15_AnyToString_WithFieldName(t *testing.T) {
 // LeftRight
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_LeftRight_NewLeftRight(t *testing.T) {
+func Test_LeftRight_NewLeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_NewLeftRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -165,7 +165,7 @@ func Test_Cov15_LeftRight_NewLeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftRight_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_InvalidNoMessage", func() {
 		// Arrange
 		lr := corestr.InvalidLeftRightNoMessage()
@@ -179,7 +179,7 @@ func Test_Cov15_LeftRight_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_InvalidWithMessage(t *testing.T) {
+func Test_LeftRight_InvalidWithMessage(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_InvalidWithMessage", func() {
 		// Arrange
 		lr := corestr.InvalidLeftRight("msg")
@@ -199,7 +199,7 @@ func Test_Cov15_LeftRight_InvalidWithMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_UsingSlice_Empty(t *testing.T) {
+func Test_LeftRight_UsingSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_UsingSlice_Empty", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice(nil)
@@ -213,7 +213,7 @@ func Test_Cov15_LeftRight_UsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_UsingSlice_One(t *testing.T) {
+func Test_LeftRight_UsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_UsingSlice_One", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{"a"})
@@ -235,7 +235,7 @@ func Test_Cov15_LeftRight_UsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_UsingSlice_Two(t *testing.T) {
+func Test_LeftRight_UsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_UsingSlice_Two", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
@@ -257,7 +257,7 @@ func Test_Cov15_LeftRight_UsingSlice_Two(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_TrimmedUsingSlice_Nil", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice(nil)
@@ -271,7 +271,7 @@ func Test_Cov15_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_TrimmedUsingSlice_One", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a "})
@@ -291,7 +291,7 @@ func Test_Cov15_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_TrimmedUsingSlice_Two", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
@@ -311,7 +311,7 @@ func Test_Cov15_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_LeftBytes(t *testing.T) {
+func Test_LeftRight_LeftBytes(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_LeftBytes", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("hi", "")
@@ -325,7 +325,7 @@ func Test_Cov15_LeftRight_LeftBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_IsLeftEmpty(t *testing.T) {
+func Test_LeftRight_IsLeftEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_IsLeftEmpty", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("", "b")
@@ -339,7 +339,7 @@ func Test_Cov15_LeftRight_IsLeftEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_IsRightWhitespace(t *testing.T) {
+func Test_LeftRight_IsRightWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_IsRightWhitespace", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "  ")
@@ -353,7 +353,7 @@ func Test_Cov15_LeftRight_IsRightWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_HasValidNonEmptyLeft(t *testing.T) {
+func Test_LeftRight_HasValidNonEmptyLeft(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_HasValidNonEmptyLeft", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -367,7 +367,7 @@ func Test_Cov15_LeftRight_HasValidNonEmptyLeft(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_HasValidNonWhitespaceRight(t *testing.T) {
+func Test_LeftRight_HasValidNonWhitespaceRight(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_HasValidNonWhitespaceRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -381,7 +381,7 @@ func Test_Cov15_LeftRight_HasValidNonWhitespaceRight(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_HasSafeNonEmpty(t *testing.T) {
+func Test_LeftRight_HasSafeNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_HasSafeNonEmpty", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -395,7 +395,7 @@ func Test_Cov15_LeftRight_HasSafeNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_Is(t *testing.T) {
+func Test_LeftRight_Is(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_Is", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -415,7 +415,7 @@ func Test_Cov15_LeftRight_Is(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_IsEqual(t *testing.T) {
+func Test_LeftRight_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_IsEqual", func() {
 		// Arrange
 		lr1 := corestr.NewLeftRight("a", "b")
@@ -437,7 +437,7 @@ func Test_Cov15_LeftRight_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_IsEqual_BothNil(t *testing.T) {
+func Test_LeftRight_IsEqual_BothNil(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_IsEqual_BothNil", func() {
 		// Arrange
 		var lr1, lr2 *corestr.LeftRight
@@ -451,7 +451,7 @@ func Test_Cov15_LeftRight_IsEqual_BothNil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_Clone", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -472,7 +472,7 @@ func Test_Cov15_LeftRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRight_Dispose(t *testing.T) {
+func Test_LeftRight_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRight_Dispose", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -491,7 +491,7 @@ func Test_Cov15_LeftRight_Dispose(t *testing.T) {
 // LeftMiddleRight
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_LeftMiddleRight_New(t *testing.T) {
+func Test_LeftMiddleRight_New(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_New", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -513,7 +513,7 @@ func Test_Cov15_LeftMiddleRight_New(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftMiddleRight_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_InvalidNoMessage", func() {
 		// Arrange
 		lmr := corestr.InvalidLeftMiddleRightNoMessage()
@@ -527,7 +527,7 @@ func Test_Cov15_LeftMiddleRight_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_MiddleTrim(t *testing.T) {
+func Test_LeftMiddleRight_MiddleTrim(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_MiddleTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", " b ", "c")
@@ -541,7 +541,7 @@ func Test_Cov15_LeftMiddleRight_MiddleTrim(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_IsMiddleWhitespace(t *testing.T) {
+func Test_LeftMiddleRight_IsMiddleWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_IsMiddleWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "  ", "c")
@@ -555,7 +555,7 @@ func Test_Cov15_LeftMiddleRight_IsMiddleWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_HasValidNonEmptyMiddle(t *testing.T) {
+func Test_LeftMiddleRight_HasValidNonEmptyMiddle(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_HasValidNonEmptyMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -569,7 +569,7 @@ func Test_Cov15_LeftMiddleRight_HasValidNonEmptyMiddle(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_HasSafeNonEmpty(t *testing.T) {
+func Test_LeftMiddleRight_HasSafeNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_HasSafeNonEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -583,7 +583,7 @@ func Test_Cov15_LeftMiddleRight_HasSafeNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_IsAll(t *testing.T) {
+func Test_LeftMiddleRight_IsAll(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_IsAll", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -597,7 +597,7 @@ func Test_Cov15_LeftMiddleRight_IsAll(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_ToLeftRight(t *testing.T) {
+func Test_LeftMiddleRight_ToLeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_ToLeftRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -618,7 +618,7 @@ func Test_Cov15_LeftMiddleRight_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRight_Clone(t *testing.T) {
+func Test_LeftMiddleRight_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRight_Clone", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -645,7 +645,7 @@ func Test_Cov15_LeftMiddleRight_Clone(t *testing.T) {
 // LeftRightFromSplit / LeftMiddleRightFromSplit
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRightFromSplit", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("key=value", "=")
@@ -665,7 +665,7 @@ func Test_Cov15_LeftRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRightFromSplitTrimmed", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
@@ -685,7 +685,7 @@ func Test_Cov15_LeftRightFromSplitTrimmed(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRightFromSplitFull(t *testing.T) {
+func Test_LeftRightFromSplitFull(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRightFromSplitFull", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
@@ -705,7 +705,7 @@ func Test_Cov15_LeftRightFromSplitFull(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftRightFromSplitFullTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftRightFromSplitFullTrimmed", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
@@ -725,7 +725,7 @@ func Test_Cov15_LeftRightFromSplitFullTrimmed(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRightFromSplit(t *testing.T) {
+func Test_LeftMiddleRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRightFromSplit", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
@@ -747,7 +747,7 @@ func Test_Cov15_LeftMiddleRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRightFromSplitTrimmed", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitTrimmed(" a . b . c ", ".")
@@ -769,7 +769,7 @@ func Test_Cov15_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRightFromSplitN(t *testing.T) {
+func Test_LeftMiddleRightFromSplitN(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRightFromSplitN", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitN("a:b:c:d:e", ":")
@@ -791,7 +791,7 @@ func Test_Cov15_LeftMiddleRightFromSplitN(t *testing.T) {
 	})
 }
 
-func Test_Cov15_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
+func Test_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
 	safeTest(t, "Test_Cov15_LeftMiddleRightFromSplitNTrimmed", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitNTrimmed(" a : b : c : d ", ":")
@@ -815,7 +815,7 @@ func Test_Cov15_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
 // ValidValue
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_ValidValue_New(t *testing.T) {
+func Test_ValidValue_New(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_New", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -835,7 +835,7 @@ func Test_Cov15_ValidValue_New(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Empty(t *testing.T) {
+func Test_ValidValue_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Empty", func() {
 		// Arrange
 		vv := corestr.NewValidValueEmpty()
@@ -855,7 +855,7 @@ func Test_Cov15_ValidValue_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Invalid(t *testing.T) {
+func Test_ValidValue_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Invalid", func() {
 		// Arrange
 		vv := corestr.InvalidValidValue("msg")
@@ -875,7 +875,7 @@ func Test_Cov15_ValidValue_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_InvalidNoMessage(t *testing.T) {
+func Test_ValidValue_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_InvalidNoMessage", func() {
 		// Arrange
 		vv := corestr.InvalidValidValueNoMessage()
@@ -889,7 +889,7 @@ func Test_Cov15_ValidValue_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueBytesOnce(t *testing.T) {
+func Test_ValidValue_ValueBytesOnce(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueBytesOnce", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hi")
@@ -911,7 +911,7 @@ func Test_Cov15_ValidValue_ValueBytesOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsWhitespace(t *testing.T) {
+func Test_ValidValue_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsWhitespace", func() {
 		// Arrange
 		vv := corestr.NewValidValue("  ")
@@ -925,7 +925,7 @@ func Test_Cov15_ValidValue_IsWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Trim(t *testing.T) {
+func Test_ValidValue_Trim(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Trim", func() {
 		// Arrange
 		vv := corestr.NewValidValue(" hello ")
@@ -939,7 +939,7 @@ func Test_Cov15_ValidValue_Trim(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_HasValidNonEmpty(t *testing.T) {
+func Test_ValidValue_HasValidNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_HasValidNonEmpty", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hi")
@@ -953,7 +953,7 @@ func Test_Cov15_ValidValue_HasValidNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueBool(t *testing.T) {
+func Test_ValidValue_ValueBool(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueBool", func() {
 		// Arrange
 		vv := corestr.NewValidValue("true")
@@ -967,7 +967,7 @@ func Test_Cov15_ValidValue_ValueBool(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueBool_Empty(t *testing.T) {
+func Test_ValidValue_ValueBool_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueBool_Empty", func() {
 		// Arrange
 		vv := corestr.NewValidValue("")
@@ -981,7 +981,7 @@ func Test_Cov15_ValidValue_ValueBool_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueInt(t *testing.T) {
+func Test_ValidValue_ValueInt(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueInt", func() {
 		// Arrange
 		vv := corestr.NewValidValue("42")
@@ -995,7 +995,7 @@ func Test_Cov15_ValidValue_ValueInt(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueInt_Invalid(t *testing.T) {
+func Test_ValidValue_ValueInt_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueInt_Invalid", func() {
 		// Arrange
 		vv := corestr.NewValidValue("abc")
@@ -1009,7 +1009,7 @@ func Test_Cov15_ValidValue_ValueInt_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueByte(t *testing.T) {
+func Test_ValidValue_ValueByte(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueByte", func() {
 		// Arrange
 		vv := corestr.NewValidValue("42")
@@ -1023,7 +1023,7 @@ func Test_Cov15_ValidValue_ValueByte(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueByte_TooHigh(t *testing.T) {
+func Test_ValidValue_ValueByte_TooHigh(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueByte_TooHigh", func() {
 		// Arrange
 		vv := corestr.NewValidValue("999")
@@ -1037,7 +1037,7 @@ func Test_Cov15_ValidValue_ValueByte_TooHigh(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueByte_Negative(t *testing.T) {
+func Test_ValidValue_ValueByte_Negative(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueByte_Negative", func() {
 		// Arrange
 		vv := corestr.NewValidValue("-1")
@@ -1051,7 +1051,7 @@ func Test_Cov15_ValidValue_ValueByte_Negative(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_ValueFloat64(t *testing.T) {
+func Test_ValidValue_ValueFloat64(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_ValueFloat64", func() {
 		// Arrange
 		vv := corestr.NewValidValue("3.14")
@@ -1066,7 +1066,7 @@ func Test_Cov15_ValidValue_ValueFloat64(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsAnyOf", func() {
 		// Arrange
 		vv := corestr.NewValidValue("b")
@@ -1086,7 +1086,7 @@ func Test_Cov15_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsAnyOf_Empty(t *testing.T) {
+func Test_ValidValue_IsAnyOf_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsAnyOf_Empty", func() {
 		// Arrange
 		vv := corestr.NewValidValue("b")
@@ -1100,7 +1100,7 @@ func Test_Cov15_ValidValue_IsAnyOf_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsContains(t *testing.T) {
+func Test_ValidValue_IsContains(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsContains", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello world")
@@ -1114,7 +1114,7 @@ func Test_Cov15_ValidValue_IsContains(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsAnyContains(t *testing.T) {
+func Test_ValidValue_IsAnyContains(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsAnyContains", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello world")
@@ -1134,7 +1134,7 @@ func Test_Cov15_ValidValue_IsAnyContains(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsEqualNonSensitive(t *testing.T) {
+func Test_ValidValue_IsEqualNonSensitive(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsEqualNonSensitive", func() {
 		// Arrange
 		vv := corestr.NewValidValue("Hello")
@@ -1148,7 +1148,7 @@ func Test_Cov15_ValidValue_IsEqualNonSensitive(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_IsRegexMatches_Nil(t *testing.T) {
+func Test_ValidValue_IsRegexMatches_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_IsRegexMatches_Nil", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -1162,7 +1162,7 @@ func Test_Cov15_ValidValue_IsRegexMatches_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_RegexFindString_Nil(t *testing.T) {
+func Test_ValidValue_RegexFindString_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_RegexFindString_Nil", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -1176,7 +1176,7 @@ func Test_Cov15_ValidValue_RegexFindString_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_RegexFindAllStringsWithFlag_Nil(t *testing.T) {
+func Test_ValidValue_RegexFindAllStringsWithFlag_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_RegexFindAllStringsWithFlag_Nil", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -1197,7 +1197,7 @@ func Test_Cov15_ValidValue_RegexFindAllStringsWithFlag_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_RegexFindAllStrings_Nil(t *testing.T) {
+func Test_ValidValue_RegexFindAllStrings_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_RegexFindAllStrings_Nil", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -1212,7 +1212,7 @@ func Test_Cov15_ValidValue_RegexFindAllStrings_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Split", func() {
 		// Arrange
 		vv := corestr.NewValidValue("a,b,c")
@@ -1227,7 +1227,7 @@ func Test_Cov15_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Clone", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hi")
@@ -1248,7 +1248,7 @@ func Test_Cov15_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Clone_Nil(t *testing.T) {
+func Test_ValidValue_Clone_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Clone_Nil", func() {
 		// Arrange
 		var vv *corestr.ValidValue
@@ -1263,7 +1263,7 @@ func Test_Cov15_ValidValue_Clone_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_String_Nil(t *testing.T) {
+func Test_ValidValue_String_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_String_Nil", func() {
 		// Arrange
 		var vv *corestr.ValidValue
@@ -1277,7 +1277,7 @@ func Test_Cov15_ValidValue_String_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_FullString_Nil(t *testing.T) {
+func Test_ValidValue_FullString_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_FullString_Nil", func() {
 		// Arrange
 		var vv *corestr.ValidValue
@@ -1291,7 +1291,7 @@ func Test_Cov15_ValidValue_FullString_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValue_Dispose(t *testing.T) {
+func Test_ValidValue_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValue_Dispose", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hi")
@@ -1316,7 +1316,7 @@ func Test_Cov15_ValidValue_Dispose(t *testing.T) {
 // ValidValues
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_ValidValues_Empty(t *testing.T) {
+func Test_ValidValues_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValues_Empty", func() {
 		// Arrange
 		vvs := corestr.EmptyValidValues()
@@ -1336,7 +1336,7 @@ func Test_Cov15_ValidValues_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValues_Add(t *testing.T) {
+func Test_ValidValues_Add(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValues_Add", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -1357,7 +1357,7 @@ func Test_Cov15_ValidValues_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValues_Strings", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -1374,7 +1374,7 @@ func Test_Cov15_ValidValues_Strings(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValues_SafeValueAt", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -1395,7 +1395,7 @@ func Test_Cov15_ValidValues_SafeValueAt(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValidValues_Nil(t *testing.T) {
+func Test_ValidValues_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValidValues_Nil", func() {
 		// Arrange
 		var vvs *corestr.ValidValues
@@ -1419,7 +1419,7 @@ func Test_Cov15_ValidValues_Nil(t *testing.T) {
 // ValueStatus
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValueStatus_Invalid", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatus("msg")
@@ -1439,7 +1439,7 @@ func Test_Cov15_ValueStatus_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValueStatus_InvalidNoMessage", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatusNoMessage()
@@ -1453,7 +1453,7 @@ func Test_Cov15_ValueStatus_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov15_ValueStatus_Clone(t *testing.T) {
+func Test_ValueStatus_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov15_ValueStatus_Clone", func() {
 		// Arrange
 		vs := &corestr.ValueStatus{ValueValid: corestr.NewValidValue("hi"), Index: 3}
@@ -1478,7 +1478,7 @@ func Test_Cov15_ValueStatus_Clone(t *testing.T) {
 // TextWithLineNumber
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_TextWithLineNumber_HasLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_HasLineNumber(t *testing.T) {
 	safeTest(t, "Test_Cov15_TextWithLineNumber_HasLineNumber", func() {
 		// Arrange
 		tln := &corestr.TextWithLineNumber{LineNumber: 5, Text: "hi"}
@@ -1498,7 +1498,7 @@ func Test_Cov15_TextWithLineNumber_HasLineNumber(t *testing.T) {
 	})
 }
 
-func Test_Cov15_TextWithLineNumber_Nil(t *testing.T) {
+func Test_TextWithLineNumber_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov15_TextWithLineNumber_Nil", func() {
 		// Arrange
 		var tln *corestr.TextWithLineNumber
@@ -1520,7 +1520,7 @@ func Test_Cov15_TextWithLineNumber_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov15_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
+func Test_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
 	safeTest(t, "Test_Cov15_TextWithLineNumber_IsEmptyTextLineBoth", func() {
 		// Arrange
 		tln := &corestr.TextWithLineNumber{LineNumber: -1, Text: ""}
@@ -1538,7 +1538,7 @@ func Test_Cov15_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
 // KeyValuePair
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_KeyValuePair_Basic(t *testing.T) {
+func Test_KeyValuePair_Basic(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_Basic", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1560,7 +1560,7 @@ func Test_Cov15_KeyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueBool(t *testing.T) {
+func Test_KeyValuePair_ValueBool(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueBool", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "true"}
@@ -1574,7 +1574,7 @@ func Test_Cov15_KeyValuePair_ValueBool(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueBool_Empty(t *testing.T) {
+func Test_KeyValuePair_ValueBool_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueBool_Empty", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: ""}
@@ -1588,7 +1588,7 @@ func Test_Cov15_KeyValuePair_ValueBool_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueInt(t *testing.T) {
+func Test_KeyValuePair_ValueInt(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueInt", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "42"}
@@ -1602,7 +1602,7 @@ func Test_Cov15_KeyValuePair_ValueInt(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueByte(t *testing.T) {
+func Test_KeyValuePair_ValueByte(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueByte", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "42"}
@@ -1616,7 +1616,7 @@ func Test_Cov15_KeyValuePair_ValueByte(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueByte_TooHigh(t *testing.T) {
+func Test_KeyValuePair_ValueByte_TooHigh(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueByte_TooHigh", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "999"}
@@ -1630,7 +1630,7 @@ func Test_Cov15_KeyValuePair_ValueByte_TooHigh(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueFloat64(t *testing.T) {
+func Test_KeyValuePair_ValueFloat64(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueFloat64", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "3.14"}
@@ -1645,7 +1645,7 @@ func Test_Cov15_KeyValuePair_ValueFloat64(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_ValueValid", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1666,7 +1666,7 @@ func Test_Cov15_KeyValuePair_ValueValid(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_String(t *testing.T) {
+func Test_KeyValuePair_String(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_String", func() {
 		// Arrange
 		kvp := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1680,7 +1680,7 @@ func Test_Cov15_KeyValuePair_String(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyValuePair_Dispose(t *testing.T) {
+func Test_KeyValuePair_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyValuePair_Dispose", func() {
 		// Arrange
 		kvp := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1705,7 +1705,7 @@ func Test_Cov15_KeyValuePair_Dispose(t *testing.T) {
 // KeyAnyValuePair
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_KeyAnyValuePair_Basic(t *testing.T) {
+func Test_KeyAnyValuePair_Basic(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyAnyValuePair_Basic", func() {
 		// Arrange
 		kavp := corestr.KeyAnyValuePair{Key: "k", Value: 42}
@@ -1727,7 +1727,7 @@ func Test_Cov15_KeyAnyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyAnyValuePair_IsValueNull(t *testing.T) {
+func Test_KeyAnyValuePair_IsValueNull(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyAnyValuePair_IsValueNull", func() {
 		// Arrange
 		kavp := corestr.KeyAnyValuePair{Key: "k"}
@@ -1741,7 +1741,7 @@ func Test_Cov15_KeyAnyValuePair_IsValueNull(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyAnyValuePair_ValueString(t *testing.T) {
+func Test_KeyAnyValuePair_ValueString(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyAnyValuePair_ValueString", func() {
 		// Arrange
 		kavp := corestr.KeyAnyValuePair{Key: "k", Value: "hello"}
@@ -1755,7 +1755,7 @@ func Test_Cov15_KeyAnyValuePair_ValueString(t *testing.T) {
 	})
 }
 
-func Test_Cov15_KeyAnyValuePair_Dispose(t *testing.T) {
+func Test_KeyAnyValuePair_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov15_KeyAnyValuePair_Dispose", func() {
 		// Arrange
 		kavp := &corestr.KeyAnyValuePair{Key: "k", Value: "v"}
@@ -1780,7 +1780,7 @@ func Test_Cov15_KeyAnyValuePair_Dispose(t *testing.T) {
 // StringUtils (utils)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapDoubleIfMissing_Empty", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapDoubleIfMissing("")}
@@ -1791,7 +1791,7 @@ func Test_Cov15_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapDoubleIfMissing_AlreadyWrapped(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_AlreadyWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapDoubleIfMissing_AlreadyWrapped", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapDoubleIfMissing(`"hi"`)}
@@ -1802,7 +1802,7 @@ func Test_Cov15_StringUtils_WrapDoubleIfMissing_AlreadyWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapDoubleIfMissing_NotWrapped", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapDoubleIfMissing("hi")}
@@ -1813,7 +1813,7 @@ func Test_Cov15_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapSingleIfMissing_Empty", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapSingleIfMissing("")}
@@ -1824,7 +1824,7 @@ func Test_Cov15_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapSingleIfMissing_AlreadyWrapped(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_AlreadyWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapSingleIfMissing_AlreadyWrapped", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapSingleIfMissing("'hi'")}
@@ -1835,7 +1835,7 @@ func Test_Cov15_StringUtils_WrapSingleIfMissing_AlreadyWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapSingleIfMissing_NotWrapped", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapSingleIfMissing("hi")}
@@ -1846,7 +1846,7 @@ func Test_Cov15_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapDouble(t *testing.T) {
+func Test_StringUtils_WrapDouble(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapDouble", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapDouble("hi")}
@@ -1857,7 +1857,7 @@ func Test_Cov15_StringUtils_WrapDouble(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapSingle(t *testing.T) {
+func Test_StringUtils_WrapSingle(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapSingle", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapSingle("hi")}
@@ -1868,7 +1868,7 @@ func Test_Cov15_StringUtils_WrapSingle(t *testing.T) {
 	})
 }
 
-func Test_Cov15_StringUtils_WrapTilda(t *testing.T) {
+func Test_StringUtils_WrapTilda(t *testing.T) {
 	safeTest(t, "Test_Cov15_StringUtils_WrapTilda", func() {
 		// Act
 		actual := args.Map{"val": corestr.StringUtils.WrapTilda("hi")}
@@ -1883,7 +1883,7 @@ func Test_Cov15_StringUtils_WrapTilda(t *testing.T) {
 // SimpleStringOnce — Key methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_SimpleStringOnce_GetSetOnce(t *testing.T) {
+func Test_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_GetSetOnce", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -1904,7 +1904,7 @@ func Test_Cov15_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_GetSetOnce_AlreadyInit(t *testing.T) {
+func Test_SimpleStringOnce_GetSetOnce_AlreadyInit(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_GetSetOnce_AlreadyInit", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -1920,7 +1920,7 @@ func Test_Cov15_SimpleStringOnce_GetSetOnce_AlreadyInit(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_GetOnce(t *testing.T) {
+func Test_SimpleStringOnce_GetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_GetOnce", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -1941,7 +1941,7 @@ func Test_Cov15_SimpleStringOnce_GetOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
+func Test_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_SetOnUninitialized", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -1962,7 +1962,7 @@ func Test_Cov15_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_SetOnUninitialized_AlreadyInit(t *testing.T) {
+func Test_SimpleStringOnce_SetOnUninitialized_AlreadyInit(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_SetOnUninitialized_AlreadyInit", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -1978,7 +1978,7 @@ func Test_Cov15_SimpleStringOnce_SetOnUninitialized_AlreadyInit(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_Invalidate(t *testing.T) {
+func Test_SimpleStringOnce_Invalidate(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_Invalidate", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2000,7 +2000,7 @@ func Test_Cov15_SimpleStringOnce_Invalidate(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_Boolean(t *testing.T) {
+func Test_SimpleStringOnce_Boolean(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_Boolean", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2015,7 +2015,7 @@ func Test_Cov15_SimpleStringOnce_Boolean(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_Boolean_Uninit(t *testing.T) {
+func Test_SimpleStringOnce_Boolean_Uninit(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_Boolean_Uninit", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2029,7 +2029,7 @@ func Test_Cov15_SimpleStringOnce_Boolean_Uninit(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_Int(t *testing.T) {
+func Test_SimpleStringOnce_Int(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_Int", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2044,7 +2044,7 @@ func Test_Cov15_SimpleStringOnce_Int(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_Byte(t *testing.T) {
+func Test_SimpleStringOnce_Byte(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_Byte", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2059,7 +2059,7 @@ func Test_Cov15_SimpleStringOnce_Byte(t *testing.T) {
 	})
 }
 
-func Test_Cov15_SimpleStringOnce_ConcatNew(t *testing.T) {
+func Test_SimpleStringOnce_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnce_ConcatNew", func() {
 		// Arrange
 		sso := corestr.SimpleStringOnce{}
@@ -2079,7 +2079,7 @@ func Test_Cov15_SimpleStringOnce_ConcatNew(t *testing.T) {
 // SimpleStringOnceModel
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov15_SimpleStringOnceModel(t *testing.T) {
+func Test_SimpleStringOnceModel(t *testing.T) {
 	safeTest(t, "Test_Cov15_SimpleStringOnceModel", func() {
 		// Arrange
 		m := corestr.SimpleStringOnceModel{Value: "hi", IsInitialize: true}

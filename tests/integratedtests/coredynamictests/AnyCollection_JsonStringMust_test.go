@@ -9,7 +9,7 @@ import (
 
 // ── AnyCollection.JsonStringMust valid (line 495) ──
 
-func Test_Cov75_AnyCollection_JsonStringMust_Valid_I29(t *testing.T) {
+func Test_AnyCollection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewAnyCollection(3)
 	coll.Add("hello")

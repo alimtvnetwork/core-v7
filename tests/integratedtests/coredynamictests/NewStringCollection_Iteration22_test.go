@@ -12,7 +12,7 @@ import (
 // CollectionTypes — factory shortcuts
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_NewStringCollection(t *testing.T) {
+func Test_NewStringCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewStringCollection(5)
 	col.Add("a").Add("b")
@@ -25,7 +25,7 @@ func Test_I22_NewStringCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewStringCollection returns correct value -- with args", actual)
 }
 
-func Test_I22_EmptyStringCollection(t *testing.T) {
+func Test_EmptyStringCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 
@@ -37,7 +37,7 @@ func Test_I22_EmptyStringCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyStringCollection returns empty -- with args", actual)
 }
 
-func Test_I22_NewIntCollection(t *testing.T) {
+func Test_NewIntCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewIntCollection(3)
 	col.Add(1).Add(2).Add(3)
@@ -50,7 +50,7 @@ func Test_I22_NewIntCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewIntCollection returns correct value -- with args", actual)
 }
 
-func Test_I22_EmptyIntCollection(t *testing.T) {
+func Test_EmptyIntCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 
@@ -62,7 +62,7 @@ func Test_I22_EmptyIntCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyIntCollection returns empty -- with args", actual)
 }
 
-func Test_I22_NewInt64Collection(t *testing.T) {
+func Test_NewInt64Collection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewInt64Collection(2)
 	col.Add(int64(99))
@@ -75,7 +75,7 @@ func Test_I22_NewInt64Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInt64Collection returns correct value -- with args", actual)
 }
 
-func Test_I22_NewByteCollection(t *testing.T) {
+func Test_NewByteCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewByteCollection(2)
 	col.Add(byte(0x41))
@@ -88,7 +88,7 @@ func Test_I22_NewByteCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewByteCollection returns correct value -- with args", actual)
 }
 
-func Test_I22_NewBoolCollection(t *testing.T) {
+func Test_NewBoolCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewBoolCollection(2)
 	col.Add(true).Add(false)
@@ -101,7 +101,7 @@ func Test_I22_NewBoolCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewBoolCollection returns correct value -- with args", actual)
 }
 
-func Test_I22_NewFloat64Collection(t *testing.T) {
+func Test_NewFloat64Collection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewFloat64Collection(2)
 	col.Add(3.14)
@@ -114,7 +114,7 @@ func Test_I22_NewFloat64Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFloat64Collection returns correct value -- with args", actual)
 }
 
-func Test_I22_NewAnyMapCollection(t *testing.T) {
+func Test_NewAnyMapCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewAnyMapCollection(2)
 	col.Add(map[string]any{"k": "v"})
@@ -127,7 +127,7 @@ func Test_I22_NewAnyMapCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewAnyMapCollection returns correct value -- with args", actual)
 }
 
-func Test_I22_NewStringMapCollection(t *testing.T) {
+func Test_NewStringMapCollection(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewStringMapCollection(2)
 	col.Add(map[string]string{"k": "v"})
@@ -144,7 +144,7 @@ func Test_I22_NewStringMapCollection(t *testing.T) {
 // CollectionDistinct
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_Distinct_Duplicates(t *testing.T) {
+func Test_Distinct_Duplicates(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b").Add("a").Add("c").Add("b")
@@ -158,7 +158,7 @@ func Test_I22_Distinct_Duplicates(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Distinct returns correct value -- duplicates", actual)
 }
 
-func Test_I22_Distinct_Empty(t *testing.T) {
+func Test_Distinct_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	result := coredynamic.Distinct(col)
@@ -171,7 +171,7 @@ func Test_I22_Distinct_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Distinct returns empty -- empty", actual)
 }
 
-func Test_I22_Unique_Alias(t *testing.T) {
+func Test_Unique_Alias(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(1)
@@ -185,7 +185,7 @@ func Test_I22_Unique_Alias(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Unique returns correct value -- alias", actual)
 }
 
-func Test_I22_DistinctLock(t *testing.T) {
+func Test_DistinctLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("x").Add("x").Add("y")
@@ -199,7 +199,7 @@ func Test_I22_DistinctLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DistinctLock returns correct value -- with args", actual)
 }
 
-func Test_I22_DistinctCount(t *testing.T) {
+func Test_DistinctCount(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b").Add("a")
@@ -212,7 +212,7 @@ func Test_I22_DistinctCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DistinctCount returns correct value -- with args", actual)
 }
 
-func Test_I22_DistinctCount_Empty(t *testing.T) {
+func Test_DistinctCount_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 
@@ -224,7 +224,7 @@ func Test_I22_DistinctCount_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DistinctCount returns empty -- empty", actual)
 }
 
-func Test_I22_IsDistinct_True(t *testing.T) {
+func Test_IsDistinct_True(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -237,7 +237,7 @@ func Test_I22_IsDistinct_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsDistinct returns non-empty -- true", actual)
 }
 
-func Test_I22_IsDistinct_False(t *testing.T) {
+func Test_IsDistinct_False(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(1)
@@ -254,7 +254,7 @@ func Test_I22_IsDistinct_False(t *testing.T) {
 // CollectionMap — Map, FlatMap, Reduce
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_Map_Transform(t *testing.T) {
+func Test_Map_Transform(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -270,7 +270,7 @@ func Test_I22_Map_Transform(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- transform", actual)
 }
 
-func Test_I22_Map_Empty(t *testing.T) {
+func Test_Map_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	result := coredynamic.Map(col, func(i int) string { return "" })
@@ -283,7 +283,7 @@ func Test_I22_Map_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns empty -- empty", actual)
 }
 
-func Test_I22_Map_Nil(t *testing.T) {
+func Test_Map_Nil(t *testing.T) {
 	// Arrange
 	result := coredynamic.Map[int, string](nil, func(i int) string { return "" })
 
@@ -295,7 +295,7 @@ func Test_I22_Map_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns nil -- nil", actual)
 }
 
-func Test_I22_FlatMap(t *testing.T) {
+func Test_FlatMap(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyCollection[[]string]()
 	col.Add([]string{"a", "b"}).Add([]string{"c"})
@@ -309,7 +309,7 @@ func Test_I22_FlatMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FlatMap returns correct value -- with args", actual)
 }
 
-func Test_I22_FlatMap_Empty(t *testing.T) {
+func Test_FlatMap_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyCollection[[]string]()
 	result := coredynamic.FlatMap(col, func(s []string) []string { return s })
@@ -322,7 +322,7 @@ func Test_I22_FlatMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FlatMap returns empty -- empty", actual)
 }
 
-func Test_I22_FlatMap_Nil(t *testing.T) {
+func Test_FlatMap_Nil(t *testing.T) {
 	// Arrange
 	result := coredynamic.FlatMap[[]string, string](nil, func(s []string) []string { return s })
 
@@ -334,7 +334,7 @@ func Test_I22_FlatMap_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FlatMap returns nil -- nil", actual)
 }
 
-func Test_I22_Reduce_Sum(t *testing.T) {
+func Test_Reduce_Sum(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -348,7 +348,7 @@ func Test_I22_Reduce_Sum(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reduce returns correct value -- sum", actual)
 }
 
-func Test_I22_Reduce_Empty(t *testing.T) {
+func Test_Reduce_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	sum := coredynamic.Reduce(col, 10, func(acc int, item int) int { return acc + item })
@@ -361,7 +361,7 @@ func Test_I22_Reduce_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reduce returns empty -- empty returns initial", actual)
 }
 
-func Test_I22_Reduce_Nil(t *testing.T) {
+func Test_Reduce_Nil(t *testing.T) {
 	// Arrange
 	sum := coredynamic.Reduce[int, int](nil, 42, func(acc int, item int) int { return acc + item })
 
@@ -377,7 +377,7 @@ func Test_I22_Reduce_Nil(t *testing.T) {
 // CollectionSearch — Contains, IndexOf, Has, HasAll, LastIndexOf, Count, Lock variants
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_Contains_Found(t *testing.T) {
+func Test_Contains_Found(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b")
@@ -390,7 +390,7 @@ func Test_I22_Contains_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Contains returns correct value -- found", actual)
 }
 
-func Test_I22_Contains_NotFound(t *testing.T) {
+func Test_Contains_NotFound(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a")
@@ -403,7 +403,7 @@ func Test_I22_Contains_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Contains returns correct value -- not found", actual)
 }
 
-func Test_I22_IndexOf_Found(t *testing.T) {
+func Test_IndexOf_Found(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("x").Add("y").Add("z")
@@ -416,7 +416,7 @@ func Test_I22_IndexOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IndexOf returns correct value -- found", actual)
 }
 
-func Test_I22_IndexOf_NotFound(t *testing.T) {
+func Test_IndexOf_NotFound(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("x")
@@ -429,7 +429,7 @@ func Test_I22_IndexOf_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IndexOf returns correct value -- not found", actual)
 }
 
-func Test_I22_Has_Alias(t *testing.T) {
+func Test_Has_Alias(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2)
@@ -442,7 +442,7 @@ func Test_I22_Has_Alias(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Has returns correct value -- alias", actual)
 }
 
-func Test_I22_HasAll_True(t *testing.T) {
+func Test_HasAll_True(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -455,7 +455,7 @@ func Test_I22_HasAll_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns non-empty -- true", actual)
 }
 
-func Test_I22_HasAll_False(t *testing.T) {
+func Test_HasAll_False(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2)
@@ -468,7 +468,7 @@ func Test_I22_HasAll_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns non-empty -- false", actual)
 }
 
-func Test_I22_HasAll_Empty(t *testing.T) {
+func Test_HasAll_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 
@@ -480,7 +480,7 @@ func Test_I22_HasAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAll returns empty -- empty", actual)
 }
 
-func Test_I22_LastIndexOf_Found(t *testing.T) {
+func Test_LastIndexOf_Found(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b").Add("a")
@@ -493,7 +493,7 @@ func Test_I22_LastIndexOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LastIndexOf returns correct value -- found", actual)
 }
 
-func Test_I22_LastIndexOf_NotFound(t *testing.T) {
+func Test_LastIndexOf_NotFound(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a")
@@ -506,7 +506,7 @@ func Test_I22_LastIndexOf_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LastIndexOf returns correct value -- not found", actual)
 }
 
-func Test_I22_Count_Occurrences(t *testing.T) {
+func Test_Count_Occurrences(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b").Add("a").Add("a")
@@ -519,7 +519,7 @@ func Test_I22_Count_Occurrences(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Count returns correct value -- occurrences", actual)
 }
 
-func Test_I22_ContainsLock(t *testing.T) {
+func Test_ContainsLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("x")
@@ -532,7 +532,7 @@ func Test_I22_ContainsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ContainsLock returns correct value -- with args", actual)
 }
 
-func Test_I22_IndexOfLock(t *testing.T) {
+func Test_IndexOfLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b")
@@ -549,7 +549,7 @@ func Test_I22_IndexOfLock(t *testing.T) {
 // CollectionSort
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_SortFunc(t *testing.T) {
+func Test_SortFunc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1).Add(2)
@@ -569,7 +569,7 @@ func Test_I22_SortFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- with args", actual)
 }
 
-func Test_I22_SortFunc_Single(t *testing.T) {
+func Test_SortFunc_Single(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1)
@@ -583,7 +583,7 @@ func Test_I22_SortFunc_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- single", actual)
 }
 
-func Test_I22_SortFuncLock(t *testing.T) {
+func Test_SortFuncLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1).Add(2)
@@ -597,7 +597,7 @@ func Test_I22_SortFuncLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortFuncLock returns correct value -- with args", actual)
 }
 
-func Test_I22_SortedFunc(t *testing.T) {
+func Test_SortedFunc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1).Add(2)
@@ -617,7 +617,7 @@ func Test_I22_SortedFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortedFunc returns correct value -- does not mutate", actual)
 }
 
-func Test_I22_SortAsc(t *testing.T) {
+func Test_SortAsc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1).Add(2)
@@ -637,7 +637,7 @@ func Test_I22_SortAsc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortAsc returns correct value -- with args", actual)
 }
 
-func Test_I22_SortDesc(t *testing.T) {
+func Test_SortDesc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(3).Add(2)
@@ -657,7 +657,7 @@ func Test_I22_SortDesc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortDesc returns correct value -- with args", actual)
 }
 
-func Test_I22_SortAscLock(t *testing.T) {
+func Test_SortAscLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1)
@@ -671,7 +671,7 @@ func Test_I22_SortAscLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortAscLock returns correct value -- with args", actual)
 }
 
-func Test_I22_SortDescLock(t *testing.T) {
+func Test_SortDescLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(3)
@@ -685,7 +685,7 @@ func Test_I22_SortDescLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortDescLock returns correct value -- with args", actual)
 }
 
-func Test_I22_SortedAsc(t *testing.T) {
+func Test_SortedAsc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1).Add(2)
@@ -705,7 +705,7 @@ func Test_I22_SortedAsc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortedAsc returns correct value -- with args", actual)
 }
 
-func Test_I22_SortedDesc(t *testing.T) {
+func Test_SortedDesc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(3).Add(2)
@@ -725,7 +725,7 @@ func Test_I22_SortedDesc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SortedDesc returns correct value -- with args", actual)
 }
 
-func Test_I22_IsSorted_True(t *testing.T) {
+func Test_IsSorted_True(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -738,7 +738,7 @@ func Test_I22_IsSorted_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSorted returns non-empty -- true", actual)
 }
 
-func Test_I22_IsSorted_False(t *testing.T) {
+func Test_IsSorted_False(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(1)
@@ -751,7 +751,7 @@ func Test_I22_IsSorted_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSorted returns non-empty -- false", actual)
 }
 
-func Test_I22_IsSorted_Single(t *testing.T) {
+func Test_IsSorted_Single(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1)
@@ -764,7 +764,7 @@ func Test_I22_IsSorted_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSorted returns correct value -- single", actual)
 }
 
-func Test_I22_IsSortedAsc(t *testing.T) {
+func Test_IsSortedAsc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3)
@@ -777,7 +777,7 @@ func Test_I22_IsSortedAsc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSortedAsc returns correct value -- with args", actual)
 }
 
-func Test_I22_IsSortedDesc(t *testing.T) {
+func Test_IsSortedDesc(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(3).Add(2).Add(1)
@@ -794,7 +794,7 @@ func Test_I22_IsSortedDesc(t *testing.T) {
 // CollectionGroupBy
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_GroupBy(t *testing.T) {
+func Test_GroupBy(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("ab").Add("ac").Add("bd")
@@ -814,7 +814,7 @@ func Test_I22_GroupBy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupBy returns correct value -- with args", actual)
 }
 
-func Test_I22_GroupBy_Empty(t *testing.T) {
+func Test_GroupBy_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	groups := coredynamic.GroupBy(col, func(s string) string { return s })
@@ -827,7 +827,7 @@ func Test_I22_GroupBy_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupBy returns empty -- empty", actual)
 }
 
-func Test_I22_GroupBy_Nil(t *testing.T) {
+func Test_GroupBy_Nil(t *testing.T) {
 	// Arrange
 	groups := coredynamic.GroupBy[string, string](nil, func(s string) string { return s })
 
@@ -839,7 +839,7 @@ func Test_I22_GroupBy_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupBy returns nil -- nil", actual)
 }
 
-func Test_I22_GroupByLock(t *testing.T) {
+func Test_GroupByLock(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 	col.Add(1).Add(2).Add(3).Add(4)
@@ -864,7 +864,7 @@ func Test_I22_GroupByLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupByLock returns correct value -- with args", actual)
 }
 
-func Test_I22_GroupByCount(t *testing.T) {
+func Test_GroupByCount(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	col.Add("a").Add("b").Add("a")
@@ -884,7 +884,7 @@ func Test_I22_GroupByCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupByCount returns correct value -- with args", actual)
 }
 
-func Test_I22_GroupByCount_Empty(t *testing.T) {
+func Test_GroupByCount_Empty(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 	counts := coredynamic.GroupByCount(col, func(s string) string { return s })
@@ -897,7 +897,7 @@ func Test_I22_GroupByCount_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GroupByCount returns empty -- empty", actual)
 }
 
-func Test_I22_GroupByCount_Nil(t *testing.T) {
+func Test_GroupByCount_Nil(t *testing.T) {
 	// Arrange
 	counts := coredynamic.GroupByCount[string, string](nil, func(s string) string { return s })
 
@@ -913,7 +913,7 @@ func Test_I22_GroupByCount_Nil(t *testing.T) {
 // ReflectSetFromTo — deeper paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I22_ReflectSetFromTo_BothNil(t *testing.T) {
+func Test_ReflectSetFromTo_BothNil(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo(nil, nil)
 
@@ -925,7 +925,7 @@ func Test_I22_ReflectSetFromTo_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns nil -- both nil", actual)
 }
 
-func Test_I22_ReflectSetFromTo_SameType(t *testing.T) {
+func Test_ReflectSetFromTo_SameType(t *testing.T) {
 	// Arrange
 	from := "hello"
 	var to string
@@ -945,7 +945,7 @@ func Test_I22_ReflectSetFromTo_SameType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same type", actual)
 }
 
-func Test_I22_ReflectSetFromTo_SamePointerType(t *testing.T) {
+func Test_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	// Arrange
 	from := new(string)
 	*from = "hello"
@@ -966,7 +966,7 @@ func Test_I22_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same ptr type", actual)
 }
 
-func Test_I22_ReflectSetFromTo_ToNonPointer(t *testing.T) {
+func Test_ReflectSetFromTo_ToNonPointer(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo("hello", "notpointer")
 
@@ -978,7 +978,7 @@ func Test_I22_ReflectSetFromTo_ToNonPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns non-empty -- to non-pointer", actual)
 }
 
-func Test_I22_ReflectSetFromTo_ToNil(t *testing.T) {
+func Test_ReflectSetFromTo_ToNil(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo("hello", nil)
 
@@ -990,7 +990,7 @@ func Test_I22_ReflectSetFromTo_ToNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns nil -- to nil", actual)
 }
 
-func Test_I22_ReflectSetFromTo_FromNilPtr(t *testing.T) {
+func Test_ReflectSetFromTo_FromNilPtr(t *testing.T) {
 	// Arrange
 	var from *string
 	var to string
@@ -1004,7 +1004,7 @@ func Test_I22_ReflectSetFromTo_FromNilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns nil -- from nil ptr", actual)
 }
 
-func Test_I22_ReflectSetFromTo_BytesToStruct(t *testing.T) {
+func Test_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	// Arrange
 	type Simple struct {
 		Name string `json:"name"`
@@ -1027,7 +1027,7 @@ func Test_I22_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bytes to struct", actual)
 }
 
-func Test_I22_ReflectSetFromTo_StructToBytes(t *testing.T) {
+func Test_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	// Arrange
 	type Simple struct {
 		Name string `json:"name"`
@@ -1050,7 +1050,7 @@ func Test_I22_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- struct to bytes", actual)
 }
 
-func Test_I22_ReflectSetFromTo_TypeMismatch(t *testing.T) {
+func Test_ReflectSetFromTo_TypeMismatch(t *testing.T) {
 	// Arrange
 	from := "hello"
 	var to int
@@ -1064,7 +1064,7 @@ func Test_I22_ReflectSetFromTo_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- type mismatch", actual)
 }
 
-func Test_I22_ReflectSetFromTo_IntValue(t *testing.T) {
+func Test_ReflectSetFromTo_IntValue(t *testing.T) {
 	// Arrange
 	from := 42
 	var to int
@@ -1084,7 +1084,7 @@ func Test_I22_ReflectSetFromTo_IntValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- int value", actual)
 }
 
-func Test_I22_ReflectSetFromTo_ReflectType(t *testing.T) {
+func Test_ReflectSetFromTo_ReflectType(t *testing.T) {
 	// Arrange
 	_ = reflect.TypeOf("")
 	from := true

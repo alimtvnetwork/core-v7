@@ -13,7 +13,7 @@ import (
 // ==========================================================================
 
 // SerializeMust panic path: unmarshallable value triggers panic
-func Test_Cov8_AnyOnce_SerializeMust_Panic(t *testing.T) {
+func Test_AnyOnce_SerializeMust_Panic(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return func() {} })
 	panicked := callPanics(func() { ao.SerializeMust() })
@@ -27,7 +27,7 @@ func Test_Cov8_AnyOnce_SerializeMust_Panic(t *testing.T) {
 }
 
 // Deserialize when Serialize fails (value is func → Marshal error → early return)
-func Test_Cov8_AnyOnce_Deserialize_SerializeError(t *testing.T) {
+func Test_AnyOnce_Deserialize_SerializeError(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return func() {} })
 	var result string
@@ -42,7 +42,7 @@ func Test_Cov8_AnyOnce_Deserialize_SerializeError(t *testing.T) {
 }
 
 // String() on non-nil value — covers the else branch in String()
-func Test_Cov8_AnyOnce_String_NonNil(t *testing.T) {
+func Test_AnyOnce_String_NonNil(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return 42 })
 
@@ -55,7 +55,7 @@ func Test_Cov8_AnyOnce_String_NonNil(t *testing.T) {
 }
 
 // IsStringEmptyOrWhitespace on non-nil non-whitespace value
-func Test_Cov8_AnyOnce_IsStringEmptyOrWhitespace_NonEmpty(t *testing.T) {
+func Test_AnyOnce_IsStringEmptyOrWhitespace_NonEmpty(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return "hello" })
 
@@ -72,7 +72,7 @@ func Test_Cov8_AnyOnce_IsStringEmptyOrWhitespace_NonEmpty(t *testing.T) {
 // ==========================================================================
 
 // Error() when already initialized — covers the isInitialized early return (line 37-39)
-func Test_Cov8_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
+func Test_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "ok", nil })
 	// First call initializes
@@ -89,7 +89,7 @@ func Test_Cov8_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 }
 
 // Error() already initialized with error
-func Test_Cov8_AnyErrorOnce_Error_AlreadyInitialized_WithError(t *testing.T) {
+func Test_AnyErrorOnce_Error_AlreadyInitialized_WithError(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("fail") })
 	_, _ = aeo.Value()
@@ -104,7 +104,7 @@ func Test_Cov8_AnyErrorOnce_Error_AlreadyInitialized_WithError(t *testing.T) {
 }
 
 // ValueOnly() when already initialized — covers the isInitialized early return (line 246-248)
-func Test_Cov8_AnyErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
+func Test_AnyErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "cached", nil })
 	_, _ = aeo.Value()
@@ -119,7 +119,7 @@ func Test_Cov8_AnyErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
 }
 
 // Deserialize when value has existing error — covers early return at Serialize
-func Test_Cov8_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("pre") })
 	var result string
@@ -134,7 +134,7 @@ func Test_Cov8_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 }
 
 // Deserialize with marshal error (value is func)
-func Test_Cov8_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return func() {}, nil })
 	var result string
@@ -149,7 +149,7 @@ func Test_Cov8_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 }
 
 // String() with nil value — covers the IsNull early return
-func Test_Cov8_AnyErrorOnce_String_Nil(t *testing.T) {
+func Test_AnyErrorOnce_String_Nil(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, nil })
 
@@ -166,7 +166,7 @@ func Test_Cov8_AnyErrorOnce_String_Nil(t *testing.T) {
 // ==========================================================================
 
 // HandleError with error — panics
-func Test_Cov8_ErrorOnce_HandleError_Panic(t *testing.T) {
+func Test_ErrorOnce_HandleError_Panic(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOncePtr(func() error { return errors.New("boom") })
 	panicked := callPanics(func() { eo.HandleError() })
@@ -180,7 +180,7 @@ func Test_Cov8_ErrorOnce_HandleError_Panic(t *testing.T) {
 }
 
 // String() on nil error — panics because it.Value().Error() on nil
-func Test_Cov8_ErrorOnce_String_NilError_Panics(t *testing.T) {
+func Test_ErrorOnce_String_NilError_Panics(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOncePtr(func() error { return nil })
 	panicked := callPanics(func() { _ = eo.String() })
@@ -194,7 +194,7 @@ func Test_Cov8_ErrorOnce_String_NilError_Panics(t *testing.T) {
 }
 
 // ErrorOnce.MarshalJSON with error value — covers the non-nil path
-func Test_Cov8_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
+func Test_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOncePtr(func() error { return errors.New("err-msg") })
 	mb, err := eo.MarshalJSON()
@@ -214,7 +214,7 @@ func Test_Cov8_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
 }
 
 // ErrorOnce.Serialize with error value
-func Test_Cov8_ErrorOnce_Serialize_WithError(t *testing.T) {
+func Test_ErrorOnce_Serialize_WithError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOncePtr(func() error { return errors.New("err-val") })
 	b, err := eo.Serialize()
@@ -238,7 +238,7 @@ func Test_Cov8_ErrorOnce_Serialize_WithError(t *testing.T) {
 // ==========================================================================
 
 // MustBeEmptyError with no error — should not panic
-func Test_Cov8_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	panicked := callPanics(func() { beo.MustBeEmptyError() })
@@ -252,7 +252,7 @@ func Test_Cov8_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
 }
 
 // MustBeEmptyError with error — panics
-func Test_Cov8_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
+func Test_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, errors.New("e") })
 	panicked := callPanics(func() { beo.MustBeEmptyError() })
@@ -266,7 +266,7 @@ func Test_Cov8_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
 }
 
 // HandleError with no error — should not panic
-func Test_Cov8_BytesErrorOnce_HandleError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_HandleError_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	panicked := callPanics(func() { beo.HandleError() })
@@ -280,7 +280,7 @@ func Test_Cov8_BytesErrorOnce_HandleError_NoError(t *testing.T) {
 }
 
 // HandleError with error — panics
-func Test_Cov8_BytesErrorOnce_HandleError_Panic(t *testing.T) {
+func Test_BytesErrorOnce_HandleError_Panic(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, errors.New("e") })
 	panicked := callPanics(func() { beo.HandleError() })
@@ -294,7 +294,7 @@ func Test_Cov8_BytesErrorOnce_HandleError_Panic(t *testing.T) {
 }
 
 // Error() when already initialized — covers isInitialized early return (line 63-65)
-func Test_Cov8_BytesErrorOnce_Error_AlreadyInitialized(t *testing.T) {
+func Test_BytesErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	_, _ = beo.Value()
@@ -309,7 +309,7 @@ func Test_Cov8_BytesErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 }
 
 // ValueOnly() when already initialized — covers isInitialized early return (line 221-222)
-func Test_Cov8_BytesErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
+func Test_BytesErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("data"), nil })
 	_, _ = beo.Value()
@@ -324,7 +324,7 @@ func Test_Cov8_BytesErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
 }
 
 // MustHaveSafeItems with valid data — should not panic
-func Test_Cov8_BytesErrorOnce_MustHaveSafeItems_NoError(t *testing.T) {
+func Test_BytesErrorOnce_MustHaveSafeItems_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	panicked := callPanics(func() { beo.MustHaveSafeItems() })
@@ -338,7 +338,7 @@ func Test_Cov8_BytesErrorOnce_MustHaveSafeItems_NoError(t *testing.T) {
 }
 
 // DeserializeMust with success — no panic
-func Test_Cov8_BytesErrorOnce_DeserializeMust_NoError(t *testing.T) {
+func Test_BytesErrorOnce_DeserializeMust_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte(`"hello"`), nil })
 	var result string
@@ -359,7 +359,7 @@ func Test_Cov8_BytesErrorOnce_DeserializeMust_NoError(t *testing.T) {
 }
 
 // Deserialize with nil toPtr — covers typeNameString empty path
-func Test_Cov8_BytesErrorOnce_Deserialize_NilToPtr(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize_NilToPtr(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("not-json"), nil })
 	err := beo.Deserialize(nil)
@@ -373,7 +373,7 @@ func Test_Cov8_BytesErrorOnce_Deserialize_NilToPtr(t *testing.T) {
 }
 
 // Deserialize with existing error and nil toPtr — covers typeNameString nil path
-func Test_Cov8_BytesErrorOnce_Deserialize_ExistingError_NilToPtr(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize_ExistingError_NilToPtr(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, errors.New("fail") })
 	err := beo.Deserialize(nil)
@@ -387,7 +387,7 @@ func Test_Cov8_BytesErrorOnce_Deserialize_ExistingError_NilToPtr(t *testing.T) {
 }
 
 // Deserialize with existing error and non-nil data — covers valString path
-func Test_Cov8_BytesErrorOnce_Deserialize_ExistingError_WithData(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize_ExistingError_WithData(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("some-data"), errors.New("fail") })
 	var result string
@@ -402,7 +402,7 @@ func Test_Cov8_BytesErrorOnce_Deserialize_ExistingError_WithData(t *testing.T) {
 }
 
 // SerializeMust with no error — no panic
-func Test_Cov8_BytesErrorOnce_SerializeMust_NoError(t *testing.T) {
+func Test_BytesErrorOnce_SerializeMust_NoError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	var result []byte
@@ -423,7 +423,7 @@ func Test_Cov8_BytesErrorOnce_SerializeMust_NoError(t *testing.T) {
 }
 
 // IsEmpty on nil receiver scenario — covers it == nil check
-func Test_Cov8_BytesErrorOnce_IsEmpty_NilData(t *testing.T) {
+func Test_BytesErrorOnce_IsEmpty_NilData(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, nil })
 
@@ -436,7 +436,7 @@ func Test_Cov8_BytesErrorOnce_IsEmpty_NilData(t *testing.T) {
 }
 
 // HasIssuesOrEmpty with error — covers err != nil path
-func Test_Cov8_BytesErrorOnce_HasIssuesOrEmpty_WithError(t *testing.T) {
+func Test_BytesErrorOnce_HasIssuesOrEmpty_WithError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("data"), errors.New("e") })
 
@@ -453,7 +453,7 @@ func Test_Cov8_BytesErrorOnce_HasIssuesOrEmpty_WithError(t *testing.T) {
 // ==========================================================================
 
 // IsEmpty with nil initializerFunc — covers the initializerFunc == nil path
-func Test_Cov8_StringsOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
+func Test_StringsOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
 	// Arrange
 	so := &coreonce.StringsOnce{}
 
@@ -470,7 +470,7 @@ func Test_Cov8_StringsOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
 // ==========================================================================
 
 // IsEmpty with nil initializerFunc — covers the initializerFunc == nil path
-func Test_Cov8_MapStringStringOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
+func Test_MapStringStringOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
 	// Arrange
 	mo := &coreonce.MapStringStringOnce{}
 
@@ -487,7 +487,7 @@ func Test_Cov8_MapStringStringOnce_IsEmpty_NilInitializerFunc(t *testing.T) {
 // ==========================================================================
 
 // IsEqual with nil items vs nil items — covers both-nil path
-func Test_Cov8_IntegersOnce_IsEqual_BothNil(t *testing.T) {
+func Test_IntegersOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return nil })
 
@@ -504,7 +504,7 @@ func Test_Cov8_IntegersOnce_IsEqual_BothNil(t *testing.T) {
 // ==========================================================================
 
 // IsEqual with nil values and nil comparison
-func Test_Cov8_StringsOnce_IsEqual_BothNil(t *testing.T) {
+func Test_StringsOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -517,7 +517,7 @@ func Test_Cov8_StringsOnce_IsEqual_BothNil(t *testing.T) {
 }
 
 // IsEqual with nil values and non-nil comparison — covers currentItems == nil path
-func Test_Cov8_StringsOnce_IsEqual_NilVsNonNil(t *testing.T) {
+func Test_StringsOnce_IsEqual_NilVsNonNil(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -533,7 +533,7 @@ func Test_Cov8_StringsOnce_IsEqual_NilVsNonNil(t *testing.T) {
 // IntegersOnce — IsEqual nil vs non-nil
 // ==========================================================================
 
-func Test_Cov8_IntegersOnce_IsEqual_NilVsNonNil(t *testing.T) {
+func Test_IntegersOnce_IsEqual_NilVsNonNil(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOncePtr(func() []int { return nil })
 
@@ -550,7 +550,7 @@ func Test_Cov8_IntegersOnce_IsEqual_NilVsNonNil(t *testing.T) {
 // ==========================================================================
 
 // IsEqual right nil, left non-nil — covers currentItems non-nil, rightMap nil
-func Test_Cov8_MapStringStringOnce_IsEqual_LeftNonNilRightNil(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_LeftNonNilRightNil(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
 
@@ -567,7 +567,7 @@ func Test_Cov8_MapStringStringOnce_IsEqual_LeftNonNilRightNil(t *testing.T) {
 // ==========================================================================
 
 // Deserialize with nil toPtr — covers the toPtr == nil → typeSafeName empty path
-func Test_Cov8_AnyErrorOnce_Deserialize_NilToPtr(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_NilToPtr(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "hello", nil })
 	err := aeo.Deserialize(nil)
@@ -586,7 +586,7 @@ func Test_Cov8_AnyErrorOnce_Deserialize_NilToPtr(t *testing.T) {
 // BytesOnce — IsEmpty nil pointer check
 // ==========================================================================
 
-func Test_Cov8_BytesOnce_IsEmpty_NilPtr(t *testing.T) {
+func Test_BytesOnce_IsEmpty_NilPtr(t *testing.T) {
 	// Arrange
 	var bo *coreonce.BytesOnce
 
@@ -598,7 +598,7 @@ func Test_Cov8_BytesOnce_IsEmpty_NilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns true -- nil pointer", actual)
 }
 
-func Test_Cov8_BytesOnce_Length_NilPtr(t *testing.T) {
+func Test_BytesOnce_Length_NilPtr(t *testing.T) {
 	// Arrange
 	var bo *coreonce.BytesOnce
 
@@ -611,7 +611,7 @@ func Test_Cov8_BytesOnce_Length_NilPtr(t *testing.T) {
 }
 
 // BytesOnce nil func with Value() call — covers initializerFunc == nil path
-func Test_Cov8_BytesOnce_Value_NilFunc(t *testing.T) {
+func Test_BytesOnce_Value_NilFunc(t *testing.T) {
 	// Arrange
 	bo := &coreonce.BytesOnce{}
 	val := bo.Value()

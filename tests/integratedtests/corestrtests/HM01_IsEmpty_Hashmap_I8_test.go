@@ -13,7 +13,7 @@ import (
 // Hashmap — Core operations
 // =============================================================================
 
-func Test_I8_HM01_IsEmpty(t *testing.T) {
+func Test_HM01_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_I8_HM01_IsEmpty", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -27,7 +27,7 @@ func Test_I8_HM01_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_I8_HM02_HasItems(t *testing.T) {
+func Test_HM02_HasItems(t *testing.T) {
 	safeTest(t, "Test_I8_HM02_HasItems", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -45,7 +45,7 @@ func Test_I8_HM02_HasItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HM03_IsEmptyLock(t *testing.T) {
+func Test_HM03_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM03_IsEmptyLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -59,7 +59,7 @@ func Test_I8_HM03_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM04_AddOrUpdate(t *testing.T) {
+func Test_HM04_AddOrUpdate(t *testing.T) {
 	safeTest(t, "Test_I8_HM04_AddOrUpdate", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -78,7 +78,7 @@ func Test_I8_HM04_AddOrUpdate(t *testing.T) {
 	})
 }
 
-func Test_I8_HM05_Set(t *testing.T) {
+func Test_HM05_Set(t *testing.T) {
 	safeTest(t, "Test_I8_HM05_Set", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -93,7 +93,7 @@ func Test_I8_HM05_Set(t *testing.T) {
 	})
 }
 
-func Test_I8_HM06_SetTrim(t *testing.T) {
+func Test_HM06_SetTrim(t *testing.T) {
 	safeTest(t, "Test_I8_HM06_SetTrim", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -108,7 +108,7 @@ func Test_I8_HM06_SetTrim(t *testing.T) {
 	})
 }
 
-func Test_I8_HM07_SetBySplitter(t *testing.T) {
+func Test_HM07_SetBySplitter(t *testing.T) {
 	safeTest(t, "Test_I8_HM07_SetBySplitter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -128,7 +128,7 @@ func Test_I8_HM07_SetBySplitter(t *testing.T) {
 	})
 }
 
-func Test_I8_HM08_AddOrUpdateKeyStrValInt(t *testing.T) {
+func Test_HM08_AddOrUpdateKeyStrValInt(t *testing.T) {
 	safeTest(t, "Test_I8_HM08_AddOrUpdateKeyStrValInt", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -143,7 +143,7 @@ func Test_I8_HM08_AddOrUpdateKeyStrValInt(t *testing.T) {
 	})
 }
 
-func Test_I8_HM09_AddOrUpdateKeyStrValFloat(t *testing.T) {
+func Test_HM09_AddOrUpdateKeyStrValFloat(t *testing.T) {
 	safeTest(t, "Test_I8_HM09_AddOrUpdateKeyStrValFloat", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -158,7 +158,7 @@ func Test_I8_HM09_AddOrUpdateKeyStrValFloat(t *testing.T) {
 	})
 }
 
-func Test_I8_HM10_AddOrUpdateKeyStrValFloat64(t *testing.T) {
+func Test_HM10_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 	safeTest(t, "Test_I8_HM10_AddOrUpdateKeyStrValFloat64", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -173,7 +173,7 @@ func Test_I8_HM10_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 	})
 }
 
-func Test_I8_HM11_AddOrUpdateKeyStrValAny(t *testing.T) {
+func Test_HM11_AddOrUpdateKeyStrValAny(t *testing.T) {
 	safeTest(t, "Test_I8_HM11_AddOrUpdateKeyStrValAny", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -188,7 +188,7 @@ func Test_I8_HM11_AddOrUpdateKeyStrValAny(t *testing.T) {
 	})
 }
 
-func Test_I8_HM12_AddOrUpdateKeyVal(t *testing.T) {
+func Test_HM12_AddOrUpdateKeyVal(t *testing.T) {
 	safeTest(t, "Test_I8_HM12_AddOrUpdateKeyVal", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -203,7 +203,7 @@ func Test_I8_HM12_AddOrUpdateKeyVal(t *testing.T) {
 	})
 }
 
-func Test_I8_HM13_AddOrUpdateKeyValueAny(t *testing.T) {
+func Test_HM13_AddOrUpdateKeyValueAny(t *testing.T) {
 	safeTest(t, "Test_I8_HM13_AddOrUpdateKeyValueAny", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -218,7 +218,7 @@ func Test_I8_HM13_AddOrUpdateKeyValueAny(t *testing.T) {
 	})
 }
 
-func Test_I8_HM14_AddOrUpdateLock(t *testing.T) {
+func Test_HM14_AddOrUpdateLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM14_AddOrUpdateLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -233,7 +233,7 @@ func Test_I8_HM14_AddOrUpdateLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM15_AddOrUpdateWithWgLock(t *testing.T) {
+func Test_HM15_AddOrUpdateWithWgLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM15_AddOrUpdateWithWgLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -251,7 +251,7 @@ func Test_I8_HM15_AddOrUpdateWithWgLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM16_AddOrUpdateHashmap(t *testing.T) {
+func Test_HM16_AddOrUpdateHashmap(t *testing.T) {
 	safeTest(t, "Test_I8_HM16_AddOrUpdateHashmap", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -272,7 +272,7 @@ func Test_I8_HM16_AddOrUpdateHashmap(t *testing.T) {
 	})
 }
 
-func Test_I8_HM17_AddOrUpdateMap(t *testing.T) {
+func Test_HM17_AddOrUpdateMap(t *testing.T) {
 	safeTest(t, "Test_I8_HM17_AddOrUpdateMap", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -288,7 +288,7 @@ func Test_I8_HM17_AddOrUpdateMap(t *testing.T) {
 	})
 }
 
-func Test_I8_HM18_AddsOrUpdates(t *testing.T) {
+func Test_HM18_AddsOrUpdates(t *testing.T) {
 	safeTest(t, "Test_I8_HM18_AddsOrUpdates", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -306,7 +306,7 @@ func Test_I8_HM18_AddsOrUpdates(t *testing.T) {
 	})
 }
 
-func Test_I8_HM19_AddOrUpdateKeyAnyValues(t *testing.T) {
+func Test_HM19_AddOrUpdateKeyAnyValues(t *testing.T) {
 	safeTest(t, "Test_I8_HM19_AddOrUpdateKeyAnyValues", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -323,7 +323,7 @@ func Test_I8_HM19_AddOrUpdateKeyAnyValues(t *testing.T) {
 	})
 }
 
-func Test_I8_HM20_AddOrUpdateKeyValues(t *testing.T) {
+func Test_HM20_AddOrUpdateKeyValues(t *testing.T) {
 	safeTest(t, "Test_I8_HM20_AddOrUpdateKeyValues", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -340,7 +340,7 @@ func Test_I8_HM20_AddOrUpdateKeyValues(t *testing.T) {
 	})
 }
 
-func Test_I8_HM21_AddOrUpdateCollection(t *testing.T) {
+func Test_HM21_AddOrUpdateCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HM21_AddOrUpdateCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -366,7 +366,7 @@ func Test_I8_HM21_AddOrUpdateCollection(t *testing.T) {
 // Hashmap — Query operations
 // =============================================================================
 
-func Test_I8_HM22_Has(t *testing.T) {
+func Test_HM22_Has(t *testing.T) {
 	safeTest(t, "Test_I8_HM22_Has", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -384,7 +384,7 @@ func Test_I8_HM22_Has(t *testing.T) {
 	})
 }
 
-func Test_I8_HM23_Contains(t *testing.T) {
+func Test_HM23_Contains(t *testing.T) {
 	safeTest(t, "Test_I8_HM23_Contains", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -399,7 +399,7 @@ func Test_I8_HM23_Contains(t *testing.T) {
 	})
 }
 
-func Test_I8_HM24_ContainsLock(t *testing.T) {
+func Test_HM24_ContainsLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM24_ContainsLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -414,7 +414,7 @@ func Test_I8_HM24_ContainsLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM25_IsKeyMissing(t *testing.T) {
+func Test_HM25_IsKeyMissing(t *testing.T) {
 	safeTest(t, "Test_I8_HM25_IsKeyMissing", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -432,7 +432,7 @@ func Test_I8_HM25_IsKeyMissing(t *testing.T) {
 	})
 }
 
-func Test_I8_HM26_IsKeyMissingLock(t *testing.T) {
+func Test_HM26_IsKeyMissingLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM26_IsKeyMissingLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -447,7 +447,7 @@ func Test_I8_HM26_IsKeyMissingLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM27_HasLock(t *testing.T) {
+func Test_HM27_HasLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM27_HasLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -462,7 +462,7 @@ func Test_I8_HM27_HasLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM28_HasAllStrings(t *testing.T) {
+func Test_HM28_HasAllStrings(t *testing.T) {
 	safeTest(t, "Test_I8_HM28_HasAllStrings", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -481,7 +481,7 @@ func Test_I8_HM28_HasAllStrings(t *testing.T) {
 	})
 }
 
-func Test_I8_HM29_HasAll(t *testing.T) {
+func Test_HM29_HasAll(t *testing.T) {
 	safeTest(t, "Test_I8_HM29_HasAll", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -496,7 +496,7 @@ func Test_I8_HM29_HasAll(t *testing.T) {
 	})
 }
 
-func Test_I8_HM30_HasAnyItem(t *testing.T) {
+func Test_HM30_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_I8_HM30_HasAnyItem", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -514,7 +514,7 @@ func Test_I8_HM30_HasAnyItem(t *testing.T) {
 	})
 }
 
-func Test_I8_HM31_HasAny(t *testing.T) {
+func Test_HM31_HasAny(t *testing.T) {
 	safeTest(t, "Test_I8_HM31_HasAny", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -532,7 +532,7 @@ func Test_I8_HM31_HasAny(t *testing.T) {
 	})
 }
 
-func Test_I8_HM32_HasWithLock(t *testing.T) {
+func Test_HM32_HasWithLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM32_HasWithLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -547,7 +547,7 @@ func Test_I8_HM32_HasWithLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM33_HasAllCollectionItems(t *testing.T) {
+func Test_HM33_HasAllCollectionItems(t *testing.T) {
 	safeTest(t, "Test_I8_HM33_HasAllCollectionItems", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -571,7 +571,7 @@ func Test_I8_HM33_HasAllCollectionItems(t *testing.T) {
 // Hashmap — Get, Values, Keys, Diff, Filter
 // =============================================================================
 
-func Test_I8_HM34_Items(t *testing.T) {
+func Test_HM34_Items(t *testing.T) {
 	safeTest(t, "Test_I8_HM34_Items", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -586,7 +586,7 @@ func Test_I8_HM34_Items(t *testing.T) {
 	})
 }
 
-func Test_I8_HM35_SafeItems(t *testing.T) {
+func Test_HM35_SafeItems(t *testing.T) {
 	safeTest(t, "Test_I8_HM35_SafeItems", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -601,7 +601,7 @@ func Test_I8_HM35_SafeItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HM36_ValuesList(t *testing.T) {
+func Test_HM36_ValuesList(t *testing.T) {
 	safeTest(t, "Test_I8_HM36_ValuesList", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -616,7 +616,7 @@ func Test_I8_HM36_ValuesList(t *testing.T) {
 	})
 }
 
-func Test_I8_HM37_ValuesCollection(t *testing.T) {
+func Test_HM37_ValuesCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HM37_ValuesCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -632,7 +632,7 @@ func Test_I8_HM37_ValuesCollection(t *testing.T) {
 	})
 }
 
-func Test_I8_HM38_ValuesHashset(t *testing.T) {
+func Test_HM38_ValuesHashset(t *testing.T) {
 	safeTest(t, "Test_I8_HM38_ValuesHashset", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -648,7 +648,7 @@ func Test_I8_HM38_ValuesHashset(t *testing.T) {
 	})
 }
 
-func Test_I8_HM39_KeysValuesCollection(t *testing.T) {
+func Test_HM39_KeysValuesCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HM39_KeysValuesCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -664,7 +664,7 @@ func Test_I8_HM39_KeysValuesCollection(t *testing.T) {
 	})
 }
 
-func Test_I8_HM40_KeysValuesList(t *testing.T) {
+func Test_HM40_KeysValuesList(t *testing.T) {
 	safeTest(t, "Test_I8_HM40_KeysValuesList", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -680,7 +680,7 @@ func Test_I8_HM40_KeysValuesList(t *testing.T) {
 	})
 }
 
-func Test_I8_HM41_KeysValuePairs(t *testing.T) {
+func Test_HM41_KeysValuePairs(t *testing.T) {
 	safeTest(t, "Test_I8_HM41_KeysValuePairs", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -696,7 +696,7 @@ func Test_I8_HM41_KeysValuePairs(t *testing.T) {
 	})
 }
 
-func Test_I8_HM42_GetKeysFilteredItems(t *testing.T) {
+func Test_HM42_GetKeysFilteredItems(t *testing.T) {
 	safeTest(t, "Test_I8_HM42_GetKeysFilteredItems", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -715,7 +715,7 @@ func Test_I8_HM42_GetKeysFilteredItems(t *testing.T) {
 	})
 }
 
-func Test_I8_HM43_GetKeysFilteredCollection(t *testing.T) {
+func Test_HM43_GetKeysFilteredCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HM43_GetKeysFilteredCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -733,7 +733,7 @@ func Test_I8_HM43_GetKeysFilteredCollection(t *testing.T) {
 	})
 }
 
-func Test_I8_HM44_ConcatNew(t *testing.T) {
+func Test_HM44_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_I8_HM44_ConcatNew", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -751,7 +751,7 @@ func Test_I8_HM44_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_I8_HM45_ConcatNew_Empty(t *testing.T) {
+func Test_HM45_ConcatNew_Empty(t *testing.T) {
 	safeTest(t, "Test_I8_HM45_ConcatNew_Empty", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -767,7 +767,7 @@ func Test_I8_HM45_ConcatNew_Empty(t *testing.T) {
 	})
 }
 
-func Test_I8_HM46_ConcatNewUsingMaps(t *testing.T) {
+func Test_HM46_ConcatNewUsingMaps(t *testing.T) {
 	safeTest(t, "Test_I8_HM46_ConcatNewUsingMaps", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -784,7 +784,7 @@ func Test_I8_HM46_ConcatNewUsingMaps(t *testing.T) {
 	})
 }
 
-func Test_I8_HM47_Diff(t *testing.T) {
+func Test_HM47_Diff(t *testing.T) {
 	safeTest(t, "Test_I8_HM47_Diff", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -796,7 +796,7 @@ func Test_I8_HM47_Diff(t *testing.T) {
 	})
 }
 
-func Test_I8_HM48_DiffRaw(t *testing.T) {
+func Test_HM48_DiffRaw(t *testing.T) {
 	safeTest(t, "Test_I8_HM48_DiffRaw", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
@@ -805,7 +805,7 @@ func Test_I8_HM48_DiffRaw(t *testing.T) {
 	})
 }
 
-func Test_I8_HM49_AddsOrUpdatesUsingFilter(t *testing.T) {
+func Test_HM49_AddsOrUpdatesUsingFilter(t *testing.T) {
 	safeTest(t, "Test_I8_HM49_AddsOrUpdatesUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -822,7 +822,7 @@ func Test_I8_HM49_AddsOrUpdatesUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_I8_HM50_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
+func Test_HM50_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_I8_HM50_AddsOrUpdatesAnyUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -839,7 +839,7 @@ func Test_I8_HM50_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_I8_HM51_Json(t *testing.T) {
+func Test_HM51_Json(t *testing.T) {
 	safeTest(t, "Test_I8_HM51_Json", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -855,7 +855,7 @@ func Test_I8_HM51_Json(t *testing.T) {
 	})
 }
 
-func Test_I8_HM52_ParseInjectUsingJson(t *testing.T) {
+func Test_HM52_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_I8_HM52_ParseInjectUsingJson", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -873,7 +873,7 @@ func Test_I8_HM52_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_I8_HM53_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_HM53_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_I8_HM53_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(1)
@@ -889,7 +889,7 @@ func Test_I8_HM53_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_I8_HM54_String(t *testing.T) {
+func Test_HM54_String(t *testing.T) {
 	safeTest(t, "Test_I8_HM54_String", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -905,7 +905,7 @@ func Test_I8_HM54_String(t *testing.T) {
 	})
 }
 
-func Test_I8_HM55_Clear(t *testing.T) {
+func Test_HM55_Clear(t *testing.T) {
 	safeTest(t, "Test_I8_HM55_Clear", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -921,7 +921,7 @@ func Test_I8_HM55_Clear(t *testing.T) {
 	})
 }
 
-func Test_I8_HM56_Dispose(t *testing.T) {
+func Test_HM56_Dispose(t *testing.T) {
 	safeTest(t, "Test_I8_HM56_Dispose", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -937,7 +937,7 @@ func Test_I8_HM56_Dispose(t *testing.T) {
 	})
 }
 
-func Test_I8_HM57_ItemsCopyLock(t *testing.T) {
+func Test_HM57_ItemsCopyLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM57_ItemsCopyLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -953,7 +953,7 @@ func Test_I8_HM57_ItemsCopyLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM58_Collection(t *testing.T) {
+func Test_HM58_Collection(t *testing.T) {
 	safeTest(t, "Test_I8_HM58_Collection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -969,7 +969,7 @@ func Test_I8_HM58_Collection(t *testing.T) {
 	})
 }
 
-func Test_I8_HM59_AddOrUpdateStringsPtrWgLock(t *testing.T) {
+func Test_HM59_AddOrUpdateStringsPtrWgLock(t *testing.T) {
 	safeTest(t, "Test_I8_HM59_AddOrUpdateStringsPtrWgLock", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
@@ -987,7 +987,7 @@ func Test_I8_HM59_AddOrUpdateStringsPtrWgLock(t *testing.T) {
 	})
 }
 
-func Test_I8_HM60_KeysValuePairsCollection(t *testing.T) {
+func Test_HM60_KeysValuePairsCollection(t *testing.T) {
 	safeTest(t, "Test_I8_HM60_KeysValuePairsCollection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(5)

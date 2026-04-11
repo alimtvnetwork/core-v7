@@ -9,7 +9,7 @@ import (
 
 // ── Dynamic constructors ──
 
-func Test_Cov5_NewDynamic_Valid(t *testing.T) {
+func Test_NewDynamic_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -35,7 +35,7 @@ func Test_Cov5_NewDynamic_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewDynamicValid returns valid -- string", actual)
 }
 
-func Test_Cov5_NewDynamic_Invalid(t *testing.T) {
+func Test_NewDynamic_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -53,7 +53,7 @@ func Test_Cov5_NewDynamic_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns invalid -- nil data", actual)
 }
 
-func Test_Cov5_NewDynamic_Ptr(t *testing.T) {
+func Test_NewDynamic_Ptr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -71,7 +71,7 @@ func Test_Cov5_NewDynamic_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewDynamicPtr returns valid ptr -- string", actual)
 }
 
-func Test_Cov5_InvalidDynamicPtr(t *testing.T) {
+func Test_InvalidDynamicPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 
@@ -85,7 +85,7 @@ func Test_Cov5_InvalidDynamicPtr(t *testing.T) {
 
 // ── Dynamic Clone ──
 
-func Test_Cov5_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	c := d.Clone()
@@ -105,7 +105,7 @@ func Test_Cov5_Dynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Clone returns same data -- string", actual)
 }
 
-func Test_Cov5_Dynamic_ClonePtr_Nil(t *testing.T) {
+func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -117,7 +117,7 @@ func Test_Cov5_Dynamic_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr nil -- returns nil", actual)
 }
 
-func Test_Cov5_Dynamic_NonPtr_Ptr(t *testing.T) {
+func Test_Dynamic_NonPtr_Ptr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -137,7 +137,7 @@ func Test_Cov5_Dynamic_NonPtr_Ptr(t *testing.T) {
 
 // ── Dynamic type checks ──
 
-func Test_Cov5_Dynamic_TypeChecks_String(t *testing.T) {
+func Test_Dynamic_TypeChecks_String(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -163,7 +163,7 @@ func Test_Cov5_Dynamic_TypeChecks_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- string", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Map(t *testing.T) {
+func Test_Dynamic_TypeChecks_Map(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 
@@ -183,7 +183,7 @@ func Test_Cov5_Dynamic_TypeChecks_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- map", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Slice(t *testing.T) {
+func Test_Dynamic_TypeChecks_Slice(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 
@@ -201,7 +201,7 @@ func Test_Cov5_Dynamic_TypeChecks_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- slice", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Pointer(t *testing.T) {
+func Test_Dynamic_TypeChecks_Pointer(t *testing.T) {
 	// Arrange
 	x := 42
 	d := coredynamic.NewDynamicPtr(&x, true)
@@ -214,7 +214,7 @@ func Test_Cov5_Dynamic_TypeChecks_Pointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- pointer", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Struct(t *testing.T) {
+func Test_Dynamic_TypeChecks_Struct(t *testing.T) {
 	// Arrange
 	type S struct{ A int }
 	d := coredynamic.NewDynamicPtr(S{A: 1}, true)
@@ -227,7 +227,7 @@ func Test_Cov5_Dynamic_TypeChecks_Struct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- struct", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Func(t *testing.T) {
+func Test_Dynamic_TypeChecks_Func(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(func() {}, true)
 
@@ -239,7 +239,7 @@ func Test_Cov5_Dynamic_TypeChecks_Func(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic type checks -- func", actual)
 }
 
-func Test_Cov5_Dynamic_TypeChecks_Number(t *testing.T) {
+func Test_Dynamic_TypeChecks_Number(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 
@@ -259,7 +259,7 @@ func Test_Cov5_Dynamic_TypeChecks_Number(t *testing.T) {
 
 // ── Dynamic value extraction ──
 
-func Test_Cov5_Dynamic_ValueInt(t *testing.T) {
+func Test_Dynamic_ValueInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(42)
 
@@ -271,7 +271,7 @@ func Test_Cov5_Dynamic_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueInt -- 42", actual)
 }
 
-func Test_Cov5_Dynamic_IntDefault(t *testing.T) {
+func Test_Dynamic_IntDefault(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	val, ok := d.IntDefault(99)
@@ -292,7 +292,7 @@ func Test_Cov5_Dynamic_IntDefault(t *testing.T) {
 
 // ── Dynamic JSON ──
 
-func Test_Cov5_Dynamic_Json(t *testing.T) {
+func Test_Dynamic_Json(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	r := d.Json()
@@ -313,7 +313,7 @@ func Test_Cov5_Dynamic_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Json -- valid", actual)
 }
 
-func Test_Cov5_Dynamic_JsonParseSelfInject(t *testing.T) {
+func Test_Dynamic_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	r := d.JsonPtr()
@@ -330,7 +330,7 @@ func Test_Cov5_Dynamic_JsonParseSelfInject(t *testing.T) {
 
 // ── MapAnyItems ──
 
-func Test_Cov5_MapAnyItems_Basic(t *testing.T) {
+func Test_MapAnyItems_Basic(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("key1", "val1")
@@ -356,7 +356,7 @@ func Test_Cov5_MapAnyItems_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems basic -- 2 items", actual)
 }
 
-func Test_Cov5_MapAnyItems_GetValue(t *testing.T) {
+func Test_MapAnyItems_GetValue(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -374,7 +374,7 @@ func Test_Cov5_MapAnyItems_GetValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetValue -- found and missing", actual)
 }
 
-func Test_Cov5_MapAnyItems_Get(t *testing.T) {
+func Test_MapAnyItems_Get(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	val, has := m.Get("a")
@@ -396,7 +396,7 @@ func Test_Cov5_MapAnyItems_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Get -- found and missing", actual)
 }
 
-func Test_Cov5_MapAnyItems_Deserialize(t *testing.T) {
+func Test_MapAnyItems_Deserialize(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "hello"})
 	var s string
@@ -416,7 +416,7 @@ func Test_Cov5_MapAnyItems_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Deserialize -- valid", actual)
 }
 
-func Test_Cov5_MapAnyItems_Deserialize_Missing(t *testing.T) {
+func Test_MapAnyItems_Deserialize_Missing(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var s string
@@ -430,7 +430,7 @@ func Test_Cov5_MapAnyItems_Deserialize_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Deserialize missing -- error", actual)
 }
 
-func Test_Cov5_MapAnyItems_AllKeysSorted(t *testing.T) {
+func Test_MapAnyItems_AllKeysSorted(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeysSorted()
@@ -449,7 +449,7 @@ func Test_Cov5_MapAnyItems_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AllKeysSorted -- sorted", actual)
 }
 
-func Test_Cov5_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	r := m.Json()
@@ -471,7 +471,7 @@ func Test_Cov5_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Json -- valid", actual)
 }
 
-func Test_Cov5_MapAnyItems_Nil(t *testing.T) {
+func Test_MapAnyItems_Nil(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 
@@ -491,7 +491,7 @@ func Test_Cov5_MapAnyItems_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Nil -- safe defaults", actual)
 }
 
-func Test_Cov5_MapAnyItems_JsonParseSelfInject(t *testing.T) {
+func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	r := m.JsonPtr()
@@ -514,7 +514,7 @@ func Test_Cov5_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 
 // ── Collection[T] ──
 
-func Test_Cov5_Collection_Basic(t *testing.T) {
+func Test_Collection_Basic(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.Add("a").Add("b").Add("c")
@@ -542,7 +542,7 @@ func Test_Cov5_Collection_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection basic -- 3 items", actual)
 }
 
-func Test_Cov5_Collection_FirstLastOrDefault(t *testing.T) {
+func Test_Collection_FirstLastOrDefault(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[string](5)
 	c.Add("a").Add("b")
@@ -574,7 +574,7 @@ func Test_Cov5_Collection_FirstLastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection FirstLastOrDefault -- valid and empty", actual)
 }
 
-func Test_Cov5_Collection_AddMany(t *testing.T) {
+func Test_Collection_AddMany(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[int](5)
 	c.AddMany(1, 2, 3)
@@ -587,7 +587,7 @@ func Test_Cov5_Collection_AddMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection AddMany -- 3 items", actual)
 }
 
-func Test_Cov5_Collection_AddNonNil(t *testing.T) {
+func Test_Collection_AddNonNil(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewCollection[int](5)
 	v := 42
@@ -602,7 +602,7 @@ func Test_Cov5_Collection_AddNonNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection AddNonNil -- skip nil", actual)
 }
 
-func Test_Cov5_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	ok := c.RemoveAt(1)
@@ -624,7 +624,7 @@ func Test_Cov5_Collection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection RemoveAt -- valid and invalid", actual)
 }
 
-func Test_Cov5_Collection_Skip_Take(t *testing.T) {
+func Test_Collection_Skip_Take(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 
@@ -644,7 +644,7 @@ func Test_Cov5_Collection_Skip_Take(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Skip/Take/Limit -- correct", actual)
 }
 
-func Test_Cov5_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 	filtered := c.Filter(func(i int) bool { return i > 3 })
@@ -657,7 +657,7 @@ func Test_Cov5_Collection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Filter -- gt 3", actual)
 }
 
-func Test_Cov5_Collection_Loop(t *testing.T) {
+func Test_Collection_Loop(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	sum := 0
@@ -671,7 +671,7 @@ func Test_Cov5_Collection_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Loop -- sum all", actual)
 }
 
-func Test_Cov5_Collection_GetPagesSize(t *testing.T) {
+func Test_Collection_GetPagesSize(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 
@@ -689,7 +689,7 @@ func Test_Cov5_Collection_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection GetPagesSize -- 2 per page", actual)
 }
 
-func Test_Cov5_Collection_Clear_Dispose(t *testing.T) {
+func Test_Collection_Clear_Dispose(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	c.Clear()
@@ -702,7 +702,7 @@ func Test_Cov5_Collection_Clear_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Clear -- empty after", actual)
 }
 
-func Test_Cov5_Collection_Nil(t *testing.T) {
+func Test_Collection_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[int]
 
@@ -720,7 +720,7 @@ func Test_Cov5_Collection_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Nil -- safe defaults", actual)
 }
 
-func Test_Cov5_Collection_CollectionFrom_Nil(t *testing.T) {
+func Test_Collection_CollectionFrom_Nil(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom[int](nil)
 
@@ -732,7 +732,7 @@ func Test_Cov5_Collection_CollectionFrom_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionFrom nil -- empty", actual)
 }
 
-func Test_Cov5_Collection_CollectionClone(t *testing.T) {
+func Test_Collection_CollectionClone(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionClone([]int{1, 2})
 
@@ -752,7 +752,7 @@ func Test_Cov5_Collection_CollectionClone(t *testing.T) {
 
 // ── LeftRight ──
 
-func Test_Cov5_LeftRight(t *testing.T) {
+func Test_LeftRight(t *testing.T) {
 	// Arrange
 	lr := coredynamic.LeftRight{Left: "l", Right: "r"}
 
@@ -772,7 +772,7 @@ func Test_Cov5_LeftRight(t *testing.T) {
 
 // ── Type ──
 
-func Test_Cov5_Type_Basic(t *testing.T) {
+func Test_Type_Basic(t *testing.T) {
 	// Arrange
 	typ := coredynamic.Type("hello")
 
@@ -792,7 +792,7 @@ func Test_Cov5_Type_Basic(t *testing.T) {
 
 // ── TypeMustBeSame ──
 
-func Test_Cov5_TypeMustBeSame_Same(t *testing.T) {
+func Test_TypeMustBeSame_Same(t *testing.T) {
 	// Arrange
 	coredynamic.TypeMustBeSame("hello", "world") // should not panic
 
@@ -804,7 +804,7 @@ func Test_Cov5_TypeMustBeSame_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeMustBeSame same -- no panic", actual)
 }
 
-func Test_Cov5_TypeMustBeSame_Different(t *testing.T) {
+func Test_TypeMustBeSame_Different(t *testing.T) {
 	// Arrange
 	defer func() {
 		r := recover()
@@ -821,7 +821,7 @@ func Test_Cov5_TypeMustBeSame_Different(t *testing.T) {
 
 // ── ValueStatus ──
 
-func Test_Cov5_ValueStatus(t *testing.T) {
+func Test_ValueStatus(t *testing.T) {
 	// Arrange
 	vs := &coredynamic.ValueStatus{Value: "hello", IsValid: true}
 
@@ -841,7 +841,7 @@ func Test_Cov5_ValueStatus(t *testing.T) {
 
 // ── SimpleRequest / SimpleResult ──
 
-func Test_Cov5_SimpleRequest(t *testing.T) {
+func Test_SimpleRequest(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 
@@ -859,7 +859,7 @@ func Test_Cov5_SimpleRequest(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest -- valid", actual)
 }
 
-func Test_Cov5_SimpleResult(t *testing.T) {
+func Test_SimpleResult(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 
@@ -879,7 +879,7 @@ func Test_Cov5_SimpleResult(t *testing.T) {
 
 // ── NewMapAnyItemsUsingAnyTypeMap ──
 
-func Test_Cov5_NewMapAnyItemsUsingAnyTypeMap(t *testing.T) {
+func Test_NewMapAnyItemsUsingAnyTypeMap(t *testing.T) {
 	// Arrange
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]any{"a": 1})
 	_, nilErr := coredynamic.NewMapAnyItemsUsingAnyTypeMap(nil)

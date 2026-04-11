@@ -9,7 +9,7 @@ import (
 
 // ── CollectionLock.LengthLock (line 15) ──
 
-func Test_Cov75_CollectionLock_LengthLock_I29(t *testing.T) {
+func Test_CollectionLock_LengthLock_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[int](5)
 	coll.Add(1)
@@ -26,7 +26,7 @@ func Test_Cov75_CollectionLock_LengthLock_I29(t *testing.T) {
 
 // ── CollectionLock.RemoveAtLock invalid index (line 125) ──
 
-func Test_Cov75_CollectionLock_RemoveAtLock_InvalidIndex_I29(t *testing.T) {
+func Test_CollectionLock_RemoveAtLock_InvalidIndex_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](2)
 	coll.Add("a")

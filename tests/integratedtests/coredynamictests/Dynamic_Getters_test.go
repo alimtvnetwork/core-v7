@@ -12,7 +12,7 @@ import (
 // Dynamic — DynamicGetters.go coverage
 // ==========================================================================
 
-func Test_Cov_Dynamic_Getters_String(t *testing.T) {
+func Test_Dynamic_Getters_String(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -35,7 +35,7 @@ func Test_Cov_Dynamic_Getters_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Getters returns expected -- string value", actual)
 }
 
-func Test_Cov_Dynamic_Getters_TypeChecks(t *testing.T) {
+func Test_Dynamic_Getters_TypeChecks(t *testing.T) {
 	// Arrange
 	dStr := coredynamic.NewDynamicValid("hello")
 	dInt := coredynamic.NewDynamicValid(42)
@@ -71,7 +71,7 @@ func Test_Cov_Dynamic_Getters_TypeChecks(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic TypeChecks returns expected -- various types", actual)
 }
 
-func Test_Cov_Dynamic_Getters_ValueExtraction(t *testing.T) {
+func Test_Dynamic_Getters_ValueExtraction(t *testing.T) {
 	// Arrange
 	dInt := coredynamic.NewDynamicValid(42)
 	dUint := coredynamic.NewDynamicValid(uint(10))
@@ -101,7 +101,7 @@ func Test_Cov_Dynamic_Getters_ValueExtraction(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueExtraction returns expected -- various types", actual)
 }
 
-func Test_Cov_Dynamic_Getters_IntDefault(t *testing.T) {
+func Test_Dynamic_Getters_IntDefault(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("42")
 	val, ok := d.IntDefault(0)
@@ -120,7 +120,7 @@ func Test_Cov_Dynamic_Getters_IntDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns 42 -- string 42", actual)
 }
 
-func Test_Cov_Dynamic_Getters_IntDefault_Invalid(t *testing.T) {
+func Test_Dynamic_Getters_IntDefault_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("abc")
 	val, ok := d.IntDefault(99)
@@ -139,7 +139,7 @@ func Test_Cov_Dynamic_Getters_IntDefault_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns default -- invalid string", actual)
 }
 
-func Test_Cov_Dynamic_Getters_IntDefault_Nil(t *testing.T) {
+func Test_Dynamic_Getters_IntDefault_Nil(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 	val, ok := d.IntDefault(99)
@@ -158,7 +158,7 @@ func Test_Cov_Dynamic_Getters_IntDefault_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns default -- nil data", actual)
 }
 
-func Test_Cov_Dynamic_Getters_Float64_Valid(t *testing.T) {
+func Test_Dynamic_Getters_Float64_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("3.14")
 	val, err := d.Float64()
@@ -177,7 +177,7 @@ func Test_Cov_Dynamic_Getters_Float64_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 returns value -- valid float string", actual)
 }
 
-func Test_Cov_Dynamic_Getters_Float64_Nil(t *testing.T) {
+func Test_Dynamic_Getters_Float64_Nil(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 	_, err := d.Float64()
@@ -190,7 +190,7 @@ func Test_Cov_Dynamic_Getters_Float64_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 returns error -- nil data", actual)
 }
 
-func Test_Cov_Dynamic_Getters_Float64_Invalid(t *testing.T) {
+func Test_Dynamic_Getters_Float64_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("abc")
 	_, err := d.Float64()
@@ -203,7 +203,7 @@ func Test_Cov_Dynamic_Getters_Float64_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 returns error -- invalid string", actual)
 }
 
-func Test_Cov_Dynamic_Getters_ValueNullErr(t *testing.T) {
+func Test_Dynamic_Getters_ValueNullErr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -215,7 +215,7 @@ func Test_Cov_Dynamic_Getters_ValueNullErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr returns nil -- valid data", actual)
 }
 
-func Test_Cov_Dynamic_Getters_ValueNullErr_Nil(t *testing.T) {
+func Test_Dynamic_Getters_ValueNullErr_Nil(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 
@@ -227,7 +227,7 @@ func Test_Cov_Dynamic_Getters_ValueNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr returns error -- nil data", actual)
 }
 
-func Test_Cov_Dynamic_Getters_ValueString_Nil(t *testing.T) {
+func Test_Dynamic_Getters_ValueString_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -239,7 +239,7 @@ func Test_Cov_Dynamic_Getters_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueString returns empty -- nil receiver", actual)
 }
 
-func Test_Cov_Dynamic_Getters_Bytes_Nil(t *testing.T) {
+func Test_Dynamic_Getters_Bytes_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, ok := d.Bytes()
@@ -252,7 +252,7 @@ func Test_Cov_Dynamic_Getters_Bytes_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Bytes returns false -- nil receiver", actual)
 }
 
-func Test_Cov_Dynamic_Getters_StructStringNull(t *testing.T) {
+func Test_Dynamic_Getters_StructStringNull(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 
@@ -274,7 +274,7 @@ func Test_Cov_Dynamic_Getters_StructStringNull(t *testing.T) {
 // Dynamic — DynamicReflect.go coverage
 // ==========================================================================
 
-func Test_Cov_Dynamic_Reflect_Methods(t *testing.T) {
+func Test_Dynamic_Reflect_Methods(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -297,7 +297,7 @@ func Test_Cov_Dynamic_Reflect_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Reflect Methods returns expected -- string", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_Loop(t *testing.T) {
+func Test_Dynamic_Reflect_Loop(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid([]string{"a", "b", "c"})
 	count := 0
@@ -314,7 +314,7 @@ func Test_Cov_Dynamic_Reflect_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop iterates all -- 3 items", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_Loop_Invalid(t *testing.T) {
+func Test_Dynamic_Reflect_Loop_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 	called := d.Loop(func(index int, item any) bool { return false })
@@ -327,7 +327,7 @@ func Test_Cov_Dynamic_Reflect_Loop_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop returns false -- invalid", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_LoopMap(t *testing.T) {
+func Test_Dynamic_Reflect_LoopMap(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(map[string]int{"a": 1})
 	called := d.LoopMap(func(index int, key, value any) bool { return false })
@@ -340,7 +340,7 @@ func Test_Cov_Dynamic_Reflect_LoopMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic LoopMap iterates map -- 1 entry", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_FilterAsDynamicCollection(t *testing.T) {
+func Test_Dynamic_Reflect_FilterAsDynamicCollection(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid([]string{"a", "b", "c"})
 	filtered := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -355,7 +355,7 @@ func Test_Cov_Dynamic_Reflect_FilterAsDynamicCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic FilterAsDynamicCollection returns 1 -- filter b", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_ItemUsingIndex(t *testing.T) {
+func Test_Dynamic_Reflect_ItemUsingIndex(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid([]string{"a", "b"})
 
@@ -367,7 +367,7 @@ func Test_Cov_Dynamic_Reflect_ItemUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemUsingIndex returns first -- index 0", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_ItemUsingKey(t *testing.T) {
+func Test_Dynamic_Reflect_ItemUsingKey(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(map[string]int{"key": 42})
 
@@ -379,7 +379,7 @@ func Test_Cov_Dynamic_Reflect_ItemUsingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemUsingKey returns 42 -- key lookup", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_ReflectSetTo(t *testing.T) {
+func Test_Dynamic_Reflect_ReflectSetTo(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	var target string
@@ -393,7 +393,7 @@ func Test_Cov_Dynamic_Reflect_ReflectSetTo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ReflectSetTo returns no error -- valid", actual)
 }
 
-func Test_Cov_Dynamic_Reflect_ReflectSetTo_Nil(t *testing.T) {
+func Test_Dynamic_Reflect_ReflectSetTo_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.ReflectSetTo(nil)
@@ -410,7 +410,7 @@ func Test_Cov_Dynamic_Reflect_ReflectSetTo_Nil(t *testing.T) {
 // Dynamic — DynamicJson.go coverage
 // ==========================================================================
 
-func Test_Cov_Dynamic_Json_Methods(t *testing.T) {
+func Test_Dynamic_Json_Methods(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	jsonBytes, jsonErr := d.JsonBytesPtr()
@@ -440,7 +440,7 @@ func Test_Cov_Dynamic_Json_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Json Methods returns expected -- string value", actual)
 }
 
-func Test_Cov_Dynamic_Json_Null(t *testing.T) {
+func Test_Dynamic_Json_Null(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 	jsonBytes, jsonErr := d.JsonBytesPtr()
@@ -459,7 +459,7 @@ func Test_Cov_Dynamic_Json_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr returns empty -- nil data", actual)
 }
 
-func Test_Cov_Dynamic_Json_JsonModel(t *testing.T) {
+func Test_Dynamic_Json_JsonModel(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -481,7 +481,7 @@ func Test_Cov_Dynamic_Json_JsonModel(t *testing.T) {
 // DynamicStatus coverage
 // ==========================================================================
 
-func Test_Cov_DynamicStatus_InvalidNoMessage(t *testing.T) {
+func Test_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
@@ -499,7 +499,7 @@ func Test_Cov_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidNoMessage returns invalid -- no message", actual)
 }
 
-func Test_Cov_DynamicStatus_InvalidWithMessage(t *testing.T) {
+func Test_DynamicStatus_InvalidWithMessage(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("error")
 
@@ -517,7 +517,7 @@ func Test_Cov_DynamicStatus_InvalidWithMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidWithMessage returns invalid -- with message", actual)
 }
 
-func Test_Cov_DynamicStatus_Clone(t *testing.T) {
+func Test_DynamicStatus_Clone(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("error")
 	cloned := ds.Clone()
@@ -536,7 +536,7 @@ func Test_Cov_DynamicStatus_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone returns copy -- with message", actual)
 }
 
-func Test_Cov_DynamicStatus_ClonePtr(t *testing.T) {
+func Test_DynamicStatus_ClonePtr(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("error")
 	clonedPtr := ds.ClonePtr()
@@ -560,7 +560,7 @@ func Test_Cov_DynamicStatus_ClonePtr(t *testing.T) {
 // ValueStatus coverage
 // ==========================================================================
 
-func Test_Cov_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
@@ -578,7 +578,7 @@ func Test_Cov_ValueStatus_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStatus InvalidNoMessage returns invalid -- no message", actual)
 }
 
-func Test_Cov_ValueStatus_InvalidWithMessage(t *testing.T) {
+func Test_ValueStatus_InvalidWithMessage(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatus("error")
 
@@ -602,7 +602,7 @@ func Test_Cov_ValueStatus_InvalidWithMessage(t *testing.T) {
 // TypeStatus coverage
 // ==========================================================================
 
-func Test_Cov_TypeStatus_Methods(t *testing.T) {
+func Test_TypeStatus_Methods(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -640,7 +640,7 @@ func Test_Cov_TypeStatus_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus Methods returns expected -- different types", actual)
 }
 
-func Test_Cov_TypeStatus_Same(t *testing.T) {
+func Test_TypeStatus_Same(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	ts := &coredynamic.TypeStatus{IsSame: true, Left: strType, Right: strType}
@@ -662,7 +662,7 @@ func Test_Cov_TypeStatus_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus Same returns expected -- same types", actual)
 }
 
-func Test_Cov_TypeStatus_NilReceiver(t *testing.T) {
+func Test_TypeStatus_NilReceiver(t *testing.T) {
 	// Arrange
 	var ts *coredynamic.TypeStatus
 
@@ -680,7 +680,7 @@ func Test_Cov_TypeStatus_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus nil returns safe defaults -- nil receiver", actual)
 }
 
-func Test_Cov_TypeStatus_IsEqual(t *testing.T) {
+func Test_TypeStatus_IsEqual(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	ts1 := &coredynamic.TypeStatus{IsSame: true, Left: strType, Right: strType}
@@ -708,7 +708,7 @@ func Test_Cov_TypeStatus_IsEqual(t *testing.T) {
 // SimpleResult — additional coverage
 // ==========================================================================
 
-func Test_Cov_SimpleResult_InvalidNoMessage(t *testing.T) {
+func Test_SimpleResult_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidSimpleResultNoMessage()
 
@@ -726,7 +726,7 @@ func Test_Cov_SimpleResult_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidNoMessage returns invalid -- no message", actual)
 }
 
-func Test_Cov_SimpleResult_InvalidWithMessage(t *testing.T) {
+func Test_SimpleResult_InvalidWithMessage(t *testing.T) {
 	// Arrange
 	sr := coredynamic.InvalidSimpleResult("error")
 
@@ -746,7 +746,7 @@ func Test_Cov_SimpleResult_InvalidWithMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidWithMessage returns invalid -- with message", actual)
 }
 
-func Test_Cov_SimpleResult_Valid(t *testing.T) {
+func Test_SimpleResult_Valid(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("data")
 
@@ -764,7 +764,7 @@ func Test_Cov_SimpleResult_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Valid returns valid -- with data", actual)
 }
 
-func Test_Cov_SimpleResult_Clone(t *testing.T) {
+func Test_SimpleResult_Clone(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResult("data", true, "")
 	cloned := sr.Clone()
@@ -783,7 +783,7 @@ func Test_Cov_SimpleResult_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone returns copy -- valid", actual)
 }
 
-func Test_Cov_SimpleResult_ClonePtr(t *testing.T) {
+func Test_SimpleResult_ClonePtr(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResult("data", true, "")
 	cloned := sr.ClonePtr()
@@ -803,7 +803,7 @@ func Test_Cov_SimpleResult_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr returns expected -- valid and nil", actual)
 }
 
-func Test_Cov_SimpleResult_GetErrorOnTypeMismatch(t *testing.T) {
+func Test_SimpleResult_GetErrorOnTypeMismatch(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	errMatch := sr.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)

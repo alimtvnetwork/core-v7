@@ -13,7 +13,7 @@ import (
 
 // ── CharCollectionMap: nil items init branches ──
 
-func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
+func Test_CharCollectionMap_AddToNilItems(t *testing.T) {
 	// Arrange
 	ccm := corestr.New.CharCollectionMap.Empty()
 
@@ -26,7 +26,7 @@ func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-zero length after add", actual)
 }
 
-func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
+func Test_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 	// Arrange
 	ccm := corestr.New.CharCollectionMap.Empty()
 
@@ -41,7 +41,7 @@ func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 
 // ── CharCollectionMap.AddHashmapsValues: nil hashmaps ──
 
-func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
 	ccm := corestr.New.CharCollectionMap.Empty()
 
@@ -56,7 +56,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 
 // ── CharCollectionMap.AddHashmapsKeysOrValuesBothUsingFilter: nil hashmaps ──
 
-func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *testing.T) {
 	// Arrange
 	ccm := corestr.New.CharCollectionMap.Empty()
 
@@ -71,7 +71,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *test
 
 // ── CharCollectionMap.AddHashmapsKeysValuesBoth: nil hashmaps ──
 
-func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.T) {
 	// Arrange
 	ccm := corestr.New.CharCollectionMap.Empty()
 
@@ -86,7 +86,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.
 
 // ── CharHashsetMap: nil items init branches ──
 
-func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
+func Test_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 	// Arrange
 	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
@@ -99,7 +99,7 @@ func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-zero length", actual)
 }
 
-func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
+func Test_CharHashsetMap_Add_NilItems(t *testing.T) {
 	// Arrange
 	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
@@ -114,7 +114,7 @@ func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 
 // ── CharHashsetMap: GetHashset/GetHashsetLock nil items init ──
 
-func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
+func Test_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 	// Arrange
 	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
@@ -127,7 +127,7 @@ func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil hashset", actual)
 }
 
-func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
+func Test_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 	// Arrange
 	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
@@ -142,7 +142,7 @@ func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 
 // ── Collection: resize branches ──
 
-func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
+func Test_Collection_LengthLock_Normal(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
@@ -155,7 +155,7 @@ func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_Cov27_Collection_AddHashmapsValues_NilInput(t *testing.T) {
+func Test_Collection_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Cap(5)
 
@@ -168,7 +168,7 @@ func Test_Cov27_Collection_AddHashmapsValues_NilInput(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected zero length", actual)
 }
 
-func Test_Cov27_Collection_AddStrings_NilInput(t *testing.T) {
+func Test_Collection_AddStrings_NilInput(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Cap(5)
 
@@ -176,7 +176,7 @@ func Test_Cov27_Collection_AddStrings_NilInput(t *testing.T) {
 	c.AddStrings(nil)
 }
 
-func Test_Cov27_Collection_AddCollections_EmptyInput(t *testing.T) {
+func Test_Collection_AddCollections_EmptyInput(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Cap(5)
 
@@ -186,7 +186,7 @@ func Test_Cov27_Collection_AddCollections_EmptyInput(t *testing.T) {
 
 // ── CollectionsOfCollection.AllIndividualItemsLength: empty collection ──
 
-func Test_Cov27_CollectionsOfCollection_AllLength_Empty(t *testing.T) {
+func Test_CollectionsOfCollection_AllLength_Empty(t *testing.T) {
 	// Arrange
 	cc := corestr.New.CollectionsOfCollection.Cap(0)
 
@@ -199,7 +199,7 @@ func Test_Cov27_CollectionsOfCollection_AllLength_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_Cov27_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
+func Test_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
 	// Arrange
 	cc := corestr.New.CollectionsOfCollection.Cap(0)
 	emptyCol := corestr.New.Collection.Cap(0)
@@ -216,7 +216,7 @@ func Test_Cov27_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
 
 // ── LinkedList: equality branches ──
 
-func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
+func Test_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	// Arrange
 	ll1 := corestr.Empty.LinkedList()
 	ll2 := corestr.Empty.LinkedList()
@@ -230,7 +230,7 @@ func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal for two empty linked lists", actual)
 }
 
-func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
+func Test_LinkedList_IsEqual_OneEmpty(t *testing.T) {
 	// Arrange
 	ll1 := corestr.Empty.LinkedList()
 	ll2 := corestr.Empty.LinkedList().Add("a")
@@ -246,7 +246,7 @@ func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
 
 // ── LinkedList: RemoveNodeByElementValue panic on empty ──
 
-func Test_Cov27_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
+func Test_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
@@ -262,7 +262,7 @@ func Test_Cov27_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
 
 // ── LinkedList: RemoveNodeByIndex negative index ──
 
-func Test_Cov27_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
@@ -278,7 +278,7 @@ func Test_Cov27_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
 
 // ── LinkedList: RemoveNodeByIndexes empty panic ──
 
-func Test_Cov27_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
+func Test_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
@@ -294,7 +294,7 @@ func Test_Cov27_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
 
 // ── LinkedList: RemoveNode empty panic ──
 
-func Test_Cov27_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
+func Test_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	node := corestr.Empty.LinkedList().Add("a").Head()
@@ -311,7 +311,7 @@ func Test_Cov27_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
 
 // ── LinkedList: AddStringsToNode nil node panic ──
 
-func Test_Cov27_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
+func Test_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
@@ -327,7 +327,7 @@ func Test_Cov27_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
 
 // ── LinkedList: IndexAt out of range ──
 
-func Test_Cov27_LinkedList_IndexAt_OutOfRangePanics(t *testing.T) {
+func Test_LinkedList_IndexAt_OutOfRangePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
@@ -343,7 +343,7 @@ func Test_Cov27_LinkedList_IndexAt_OutOfRangePanics(t *testing.T) {
 
 // ── LinkedList: SafeIndexAt returns nil for not found ──
 
-func Test_Cov27_LinkedList_SafeIndexAt_NotFound(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_NotFound(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 
@@ -358,7 +358,7 @@ func Test_Cov27_LinkedList_SafeIndexAt_NotFound(t *testing.T) {
 
 // ── LinkedList: IndexAt returns nil branch (line 801) ──
 
-func Test_Cov27_LinkedList_IndexAt_ReturnNil(t *testing.T) {
+func Test_LinkedList_IndexAt_ReturnNil(t *testing.T) {
 	// Arrange — create list with 3 items, index at last item
 	ll := corestr.Empty.LinkedList().Add("a").Add("b").Add("c")
 
@@ -373,7 +373,7 @@ func Test_Cov27_LinkedList_IndexAt_ReturnNil(t *testing.T) {
 
 // ── LinkedList: SafeIndexAt line 853 (return nil after loop) ──
 
-func Test_Cov27_LinkedList_SafeIndexAt_BeyondLength(t *testing.T) {
+func Test_LinkedList_SafeIndexAt_BeyondLength(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a").Add("b")
 
@@ -388,7 +388,7 @@ func Test_Cov27_LinkedList_SafeIndexAt_BeyondLength(t *testing.T) {
 
 // ── LinkedList: GetNextNodes ──
 
-func Test_Cov27_LinkedList_GetNextNodes_EmptyOrZero(t *testing.T) {
+func Test_LinkedList_GetNextNodes_EmptyOrZero(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 
@@ -403,7 +403,7 @@ func Test_Cov27_LinkedList_GetNextNodes_EmptyOrZero(t *testing.T) {
 
 // ── LinkedCollections: equality branches ──
 
-func Test_Cov27_LinkedCollections_IsEqualsPtr_BothEmpty(t *testing.T) {
+func Test_LinkedCollections_IsEqualsPtr_BothEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
 	lc2 := corestr.Empty.LinkedCollections()
@@ -417,7 +417,7 @@ func Test_Cov27_LinkedCollections_IsEqualsPtr_BothEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal for two empty linked collections", actual)
 }
 
-func Test_Cov27_LinkedCollections_IsEqualsPtr_OneEmpty(t *testing.T) {
+func Test_LinkedCollections_IsEqualsPtr_OneEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
 	col := corestr.New.Collection.Strings([]string{"a"})
@@ -434,7 +434,7 @@ func Test_Cov27_LinkedCollections_IsEqualsPtr_OneEmpty(t *testing.T) {
 
 // ── LinkedCollections: AddLock (incrementLengthLock) ──
 
-func Test_Cov27_LinkedCollections_AddLock(t *testing.T) {
+func Test_LinkedCollections_AddLock(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
 	col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -450,7 +450,7 @@ func Test_Cov27_LinkedCollections_AddLock(t *testing.T) {
 
 // ── LinkedCollections: SafePointerIndexAt ──
 
-func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
+func Test_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
 
@@ -465,7 +465,7 @@ func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 
 // ── LinkedCollections: ToCollection / ToCollectionsOfCollection ──
 
-func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
 	col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -480,7 +480,7 @@ func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty collection", actual)
 }
 
-func Test_Cov27_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
 	col := corestr.New.Collection.Strings([]string{"x"})
@@ -497,7 +497,7 @@ func Test_Cov27_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 
 // ── SimpleSlice: TakeDynamic nil/negative ──
 
-func Test_Cov27_SimpleSlice_TakeDynamic_Negative(t *testing.T) {
+func Test_SimpleSlice_TakeDynamic_Negative(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{"a", "b"})
 
@@ -513,7 +513,7 @@ func Test_Cov27_SimpleSlice_TakeDynamic_Negative(t *testing.T) {
 
 // ── SimpleSlice: IsEqualLines nil branches ──
 
-func Test_Cov27_SimpleSlice_IsEqualLines_NilSelf(t *testing.T) {
+func Test_SimpleSlice_IsEqualLines_NilSelf(t *testing.T) {
 	// Arrange
 	var ss *corestr.SimpleSlice
 
@@ -526,7 +526,7 @@ func Test_Cov27_SimpleSlice_IsEqualLines_NilSelf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true for both nil", actual)
 }
 
-func Test_Cov27_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
+func Test_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{"a"})
 
@@ -543,7 +543,7 @@ func Test_Cov27_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 
 // ── SimpleSlice: IsEqualByFuncLinesSplit empty both sides (line 1173) ──
 
-func Test_Cov27_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
+func Test_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{})
 
@@ -561,7 +561,7 @@ func Test_Cov27_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 
 // ── KeyValueCollection.UnmarshalJSON wrapper branches ──
 
-func Test_Cov27_KeyValueCollection_UnmarshalJSON_WrappedFormat(t *testing.T) {
+func Test_KeyValueCollection_UnmarshalJSON_WrappedFormat(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
 	data := []byte(`{"KeyValuePairs":[{"Key":"k","Value":"v"}]}`)
@@ -575,7 +575,7 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_WrappedFormat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
-func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T) {
+func Test_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
 	data := []byte(`{"KeyValuePairs":[]}`)
@@ -589,7 +589,7 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
-func Test_Cov27_KeyValueCollection_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_KeyValueCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
 	jsonResult := corestr.New.Collection.Strings([]string{"not json"}).Json()

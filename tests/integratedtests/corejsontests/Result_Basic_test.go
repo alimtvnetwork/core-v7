@@ -9,7 +9,7 @@ import (
 
 // ── Result ──
 
-func Test_Cov7_Result_Basic(t *testing.T) {
+func Test_Result_Basic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 
@@ -31,7 +31,7 @@ func Test_Cov7_Result_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- basic", actual)
 }
 
-func Test_Cov7_Result_Ptr(t *testing.T) {
+func Test_Result_Ptr(t *testing.T) {
 	// Arrange
 	result := corejson.NewPtr(map[string]int{"a": 1})
 
@@ -49,7 +49,7 @@ func Test_Cov7_Result_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Result_SafeBytes(t *testing.T) {
+func Test_Result_SafeBytes(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 
@@ -61,7 +61,7 @@ func Test_Cov7_Result_SafeBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeBytes returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Result_Unmarshal(t *testing.T) {
+func Test_Result_Unmarshal(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -81,7 +81,7 @@ func Test_Cov7_Result_Unmarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Result_Deserialize(t *testing.T) {
+func Test_Result_Deserialize(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"b": 2})
 	var target map[string]int
@@ -101,7 +101,7 @@ func Test_Cov7_Result_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Result_MeaningfulError_NoError(t *testing.T) {
+func Test_Result_MeaningfulError_NoError(t *testing.T) {
 	// Arrange
 	result := corejson.New("hello")
 	err := result.MeaningfulError()
@@ -116,7 +116,7 @@ func Test_Cov7_Result_MeaningfulError_NoError(t *testing.T) {
 
 // ── Serialize ──
 
-func Test_Cov7_Serialize_Raw(t *testing.T) {
+func Test_Serialize_Raw(t *testing.T) {
 	// Arrange
 	bytes, err := corejson.Serialize.Raw(map[string]int{"a": 1})
 
@@ -134,7 +134,7 @@ func Test_Cov7_Serialize_Raw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize.Raw returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Serialize_UsingAny(t *testing.T) {
+func Test_Serialize_UsingAny(t *testing.T) {
 	// Arrange
 	result := corejson.Serialize.UsingAny(map[string]int{"a": 1})
 
@@ -148,7 +148,7 @@ func Test_Cov7_Serialize_UsingAny(t *testing.T) {
 
 // ── Deserialize ──
 
-func Test_Cov7_Deserialize_UsingBytes(t *testing.T) {
+func Test_Deserialize_UsingBytes(t *testing.T) {
 	// Arrange
 	var target map[string]int
 	err := corejson.Deserialize.UsingBytes([]byte(`{"a":1}`), &target)
@@ -167,7 +167,7 @@ func Test_Cov7_Deserialize_UsingBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingBytes returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Deserialize_UsingBytes_Invalid(t *testing.T) {
+func Test_Deserialize_UsingBytes_Invalid(t *testing.T) {
 	// Arrange
 	var target map[string]int
 	err := corejson.Deserialize.UsingBytes([]byte("invalid"), &target)
@@ -180,7 +180,7 @@ func Test_Cov7_Deserialize_UsingBytes_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingBytes returns error -- invalid", actual)
 }
 
-func Test_Cov7_Deserialize_UsingResult(t *testing.T) {
+func Test_Deserialize_UsingResult(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -200,7 +200,7 @@ func Test_Cov7_Deserialize_UsingResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingResult returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Deserialize_Apply(t *testing.T) {
+func Test_Deserialize_Apply(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -216,7 +216,7 @@ func Test_Cov7_Deserialize_Apply(t *testing.T) {
 
 // ── BytesDeepClone ──
 
-func Test_Cov7_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone(t *testing.T) {
 	// Arrange
 	original := []byte("hello")
 	cloned := corejson.BytesDeepClone(original)
@@ -230,7 +230,7 @@ func Test_Cov7_BytesDeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesDeepClone returns correct value -- with args", actual)
 }
 
-func Test_Cov7_BytesDeepClone_Nil(t *testing.T) {
+func Test_BytesDeepClone_Nil(t *testing.T) {
 	// Arrange
 	cloned := corejson.BytesDeepClone(nil)
 
@@ -244,7 +244,7 @@ func Test_Cov7_BytesDeepClone_Nil(t *testing.T) {
 
 // ── BytesToString ──
 
-func Test_Cov7_BytesToString(t *testing.T) {
+func Test_BytesToString(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToString([]byte("hello"))
 
@@ -256,7 +256,7 @@ func Test_Cov7_BytesToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString returns correct value -- with args", actual)
 }
 
-func Test_Cov7_BytesToPrettyString(t *testing.T) {
+func Test_BytesToPrettyString(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToPrettyString([]byte(`{"a":1}`))
 
@@ -270,7 +270,7 @@ func Test_Cov7_BytesToPrettyString(t *testing.T) {
 
 // ── Empty ──
 
-func Test_Cov7_Empty_ResultPtr(t *testing.T) {
+func Test_Empty_ResultPtr(t *testing.T) {
 	// Arrange
 	result := corejson.Empty.ResultPtr()
 
@@ -288,7 +288,7 @@ func Test_Cov7_Empty_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr returns empty -- with args", actual)
 }
 
-func Test_Cov7_Empty_Result(t *testing.T) {
+func Test_Empty_Result(t *testing.T) {
 	// Arrange
 	result := corejson.Empty.Result()
 
@@ -302,7 +302,7 @@ func Test_Cov7_Empty_Result(t *testing.T) {
 
 // ── NewResult ──
 
-func Test_Cov7_NewResult_UsingTypeBytesPtr(t *testing.T) {
+func Test_NewResult_UsingTypeBytesPtr(t *testing.T) {
 	// Arrange
 	result := corejson.NewResult.UsingTypeBytesPtr("TestType", []byte(`{"a":1}`))
 
@@ -322,7 +322,7 @@ func Test_Cov7_NewResult_UsingTypeBytesPtr(t *testing.T) {
 
 // ── BytesCloneIf ──
 
-func Test_Cov7_BytesCloneIf_True(t *testing.T) {
+func Test_BytesCloneIf_True(t *testing.T) {
 	// Arrange
 	original := []byte("data")
 	cloned := corejson.BytesCloneIf(true, original)
@@ -336,7 +336,7 @@ func Test_Cov7_BytesCloneIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns non-empty -- true", actual)
 }
 
-func Test_Cov7_BytesCloneIf_False(t *testing.T) {
+func Test_BytesCloneIf_False(t *testing.T) {
 	// Arrange
 	cloned := corejson.BytesCloneIf(false, []byte("data"))
 
@@ -350,7 +350,7 @@ func Test_Cov7_BytesCloneIf_False(t *testing.T) {
 
 // ── AnyTo ──
 
-func Test_Cov7_AnyTo_SerializedJsonResult(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult(map[string]int{"a": 1})
 
@@ -362,7 +362,7 @@ func Test_Cov7_AnyTo_SerializedJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns correct value -- with args", actual)
 }
 
-func Test_Cov7_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult([]byte(`{"a":1}`))
 
@@ -374,7 +374,7 @@ func Test_Cov7_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns correct value -- bytes", actual)
 }
 
-func Test_Cov7_AnyTo_SerializedJsonResult_String(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_String(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult(`{"a":1}`)
 
@@ -388,7 +388,7 @@ func Test_Cov7_AnyTo_SerializedJsonResult_String(t *testing.T) {
 
 // ── CastAny ──
 
-func Test_Cov7_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault(t *testing.T) {
 	// Arrange
 	source := map[string]int{"a": 1}
 	var target map[string]int
@@ -410,7 +410,7 @@ func Test_Cov7_CastAny_FromToDefault(t *testing.T) {
 
 // ── BytesCollection ──
 
-func Test_Cov7_BytesCollection_Empty(t *testing.T) {
+func Test_BytesCollection_Empty(t *testing.T) {
 	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 
@@ -428,7 +428,7 @@ func Test_Cov7_BytesCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCollection returns empty -- empty", actual)
 }
 
-func Test_Cov7_BytesCollection_Add(t *testing.T) {
+func Test_BytesCollection_Add(t *testing.T) {
 	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte("hello"))
@@ -450,7 +450,7 @@ func Test_Cov7_BytesCollection_Add(t *testing.T) {
 
 // ── ResultCollection ──
 
-func Test_Cov7_ResultCollection_Empty(t *testing.T) {
+func Test_ResultCollection_Empty(t *testing.T) {
 	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 
@@ -462,7 +462,7 @@ func Test_Cov7_ResultCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultCollection returns empty -- empty", actual)
 }
 
-func Test_Cov7_ResultCollection_Add(t *testing.T) {
+func Test_ResultCollection_Add(t *testing.T) {
 	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	result := corejson.New("hello")
@@ -478,7 +478,7 @@ func Test_Cov7_ResultCollection_Add(t *testing.T) {
 
 // ── JsonString / JsonStringer ──
 
-func Test_Cov7_JsonString(t *testing.T) {
+func Test_JsonString(t *testing.T) {
 	// Arrange
 	js, err := corejson.JsonString(`{"a":1}`)
 
@@ -498,7 +498,7 @@ func Test_Cov7_JsonString(t *testing.T) {
 
 // ── MapResults ──
 
-func Test_Cov7_MapResults_Empty(t *testing.T) {
+func Test_MapResults_Empty(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 
@@ -510,7 +510,7 @@ func Test_Cov7_MapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapResults returns empty -- empty", actual)
 }
 
-func Test_Cov7_MapResults_Add(t *testing.T) {
+func Test_MapResults_Add(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	result := corejson.New("hello")

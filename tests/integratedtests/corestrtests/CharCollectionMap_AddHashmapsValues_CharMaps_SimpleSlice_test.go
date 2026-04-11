@@ -23,7 +23,7 @@ import (
 
 // ---------- CharCollectionMap: AddHashmapsValues nil ----------
 
-func Test_I28_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsValues_Nil", func() {
 		// Arrange
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
@@ -40,7 +40,7 @@ func Test_I28_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 
 // ---------- CharCollectionMap: AddHashmapsKeysOrValuesBothUsingFilter nil ----------
 
-func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil", func() {
 		// Arrange
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
@@ -57,7 +57,7 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *te
 
 // ---------- CharCollectionMap: AddHashmapsKeysValuesBoth nil ----------
 
-func Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil", func() {
 		// Arrange
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
@@ -74,7 +74,7 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 
 // ---------- CharHashsetMap: AddLock triggers nil items init ----------
 
-func Test_I28_CharHashsetMap_AddLock_NilItemsInit(t *testing.T) {
+func Test_CharHashsetMap_AddLock_NilItemsInit(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_AddLock_NilItemsInit", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(4, 4)
@@ -91,7 +91,7 @@ func Test_I28_CharHashsetMap_AddLock_NilItemsInit(t *testing.T) {
 
 // ---------- CharHashsetMap: Add triggers nil items init ----------
 
-func Test_I28_CharHashsetMap_Add_NilItemsInit(t *testing.T) {
+func Test_CharHashsetMap_Add_NilItemsInit(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_Add_NilItemsInit", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(4, 4)
@@ -108,7 +108,7 @@ func Test_I28_CharHashsetMap_Add_NilItemsInit(t *testing.T) {
 
 // ---------- CharHashsetMap: AddStrings empty/nil ----------
 
-func Test_I28_CharHashsetMap_AddStrings_Empty(t *testing.T) {
+func Test_CharHashsetMap_AddStrings_Empty(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_AddStrings_Empty", func() {
 		// Arrange
 		chm := corestr.New.CharHashsetMap.Cap(4, 4)
@@ -125,7 +125,7 @@ func Test_I28_CharHashsetMap_AddStrings_Empty(t *testing.T) {
 
 // ---------- SimpleSlice: IsEqualUnorderedLines nil receiver ----------
 
-func Test_I28_SimpleSlice_IsEqualUnorderedLines_NilReceiver(t *testing.T) {
+func Test_SimpleSlice_IsEqualUnorderedLines_NilReceiver(t *testing.T) {
 	safeTest(t, "Test_I28_SimpleSlice_IsEqualUnorderedLines_NilReceiver", func() {
 		// Arrange
 		var ss *corestr.SimpleSlice
@@ -142,7 +142,7 @@ func Test_I28_SimpleSlice_IsEqualUnorderedLines_NilReceiver(t *testing.T) {
 
 // ---------- SimpleSlice: IsEqualUnorderedLinesClone nil receiver ----------
 
-func Test_I28_SimpleSlice_IsEqualUnorderedLinesClone_NilReceiver(t *testing.T) {
+func Test_SimpleSlice_IsEqualUnorderedLinesClone_NilReceiver(t *testing.T) {
 	safeTest(t, "Test_I28_SimpleSlice_IsEqualUnorderedLinesClone_NilReceiver", func() {
 		// Arrange
 		var ss *corestr.SimpleSlice
@@ -159,7 +159,7 @@ func Test_I28_SimpleSlice_IsEqualUnorderedLinesClone_NilReceiver(t *testing.T) {
 
 // ---------- SimpleSlice: IsEqualByFuncLinesSplit both empty ----------
 
-func Test_I28_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
+func Test_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty", func() {
 		// Arrange
 		ss := corestr.SimpleSlice{}
@@ -183,7 +183,7 @@ func Test_I28_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 
 // ---------- ValidValue: ParseInjectUsingJson error path ----------
 
-func Test_I28_ValidValue_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_ValidValue_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_I28_ValidValue_ParseInjectUsingJson_Error", func() {
 		// Arrange
 		vv := &corestr.ValidValue{}

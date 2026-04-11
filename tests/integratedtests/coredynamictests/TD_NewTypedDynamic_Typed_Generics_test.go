@@ -13,7 +13,7 @@ import (
 // TypedDynamic — constructors / accessors
 // =============================================================================
 
-func Test_Cov49_TD_NewTypedDynamic(t *testing.T) {
+func Test_TD_NewTypedDynamic(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 
@@ -35,7 +35,7 @@ func Test_Cov49_TD_NewTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamic", actual)
 }
 
-func Test_Cov49_TD_NewTypedDynamicValid(t *testing.T) {
+func Test_TD_NewTypedDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid(42)
 
@@ -53,7 +53,7 @@ func Test_Cov49_TD_NewTypedDynamicValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamicValid", actual)
 }
 
-func Test_Cov49_TD_NewTypedDynamicPtr(t *testing.T) {
+func Test_TD_NewTypedDynamicPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("x", true)
 
@@ -71,7 +71,7 @@ func Test_Cov49_TD_NewTypedDynamicPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamicPtr", actual)
 }
 
-func Test_Cov49_TD_InvalidTypedDynamic(t *testing.T) {
+func Test_TD_InvalidTypedDynamic(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidTypedDynamic[string]()
 
@@ -89,7 +89,7 @@ func Test_Cov49_TD_InvalidTypedDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidTypedDynamic", actual)
 }
 
-func Test_Cov49_TD_InvalidTypedDynamicPtr(t *testing.T) {
+func Test_TD_InvalidTypedDynamicPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidTypedDynamicPtr[int]()
 
@@ -107,7 +107,7 @@ func Test_Cov49_TD_InvalidTypedDynamicPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidTypedDynamicPtr", actual)
 }
 
-func Test_Cov49_TD_String(t *testing.T) {
+func Test_TD_String(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(42, true)
 
@@ -123,7 +123,7 @@ func Test_Cov49_TD_String(t *testing.T) {
 // TypedDynamic — JSON
 // =============================================================================
 
-func Test_Cov49_TD_JsonBytes(t *testing.T) {
+func Test_TD_JsonBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	b, err := d.JsonBytes()
@@ -142,7 +142,7 @@ func Test_Cov49_TD_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonBytes", actual)
 }
 
-func Test_Cov49_TD_JsonResult(t *testing.T) {
+func Test_TD_JsonResult(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	r := d.JsonResult()
@@ -155,7 +155,7 @@ func Test_Cov49_TD_JsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonResult", actual)
 }
 
-func Test_Cov49_TD_JsonString(t *testing.T) {
+func Test_TD_JsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	s, err := d.JsonString()
@@ -174,7 +174,7 @@ func Test_Cov49_TD_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonString", actual)
 }
 
-func Test_Cov49_TD_MarshalJSON(t *testing.T) {
+func Test_TD_MarshalJSON(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	b, err := json.Marshal(d)
@@ -193,7 +193,7 @@ func Test_Cov49_TD_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic MarshalJSON", actual)
 }
 
-func Test_Cov49_TD_UnmarshalJSON(t *testing.T) {
+func Test_TD_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	err := json.Unmarshal([]byte(`"world"`), d)
@@ -214,7 +214,7 @@ func Test_Cov49_TD_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic UnmarshalJSON", actual)
 }
 
-func Test_Cov49_TD_ValueMarshal(t *testing.T) {
+func Test_TD_ValueMarshal(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	b, err := d.ValueMarshal()
@@ -233,7 +233,7 @@ func Test_Cov49_TD_ValueMarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueMarshal", actual)
 }
 
-func Test_Cov49_TD_Bytes_IsBytes(t *testing.T) {
+func Test_TD_Bytes_IsBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic([]byte("hello"), true)
 	b, ok := d.Bytes()
@@ -252,7 +252,7 @@ func Test_Cov49_TD_Bytes_IsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Bytes isBytes", actual)
 }
 
-func Test_Cov49_TD_Bytes_NotBytes(t *testing.T) {
+func Test_TD_Bytes_NotBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	b, ok := d.Bytes()
@@ -275,7 +275,7 @@ func Test_Cov49_TD_Bytes_NotBytes(t *testing.T) {
 // TypedDynamic — GetAs* / Value*
 // =============================================================================
 
-func Test_Cov49_TD_GetAsString(t *testing.T) {
+func Test_TD_GetAsString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	v, ok := d.GetAsString()
@@ -294,7 +294,7 @@ func Test_Cov49_TD_GetAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsString", actual)
 }
 
-func Test_Cov49_TD_GetAsInt(t *testing.T) {
+func Test_TD_GetAsInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(42, true)
 	v, ok := d.GetAsInt()
@@ -313,7 +313,7 @@ func Test_Cov49_TD_GetAsInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsInt", actual)
 }
 
-func Test_Cov49_TD_GetAsInt64(t *testing.T) {
+func Test_TD_GetAsInt64(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(int64(99), true)
 	v, ok := d.GetAsInt64()
@@ -332,7 +332,7 @@ func Test_Cov49_TD_GetAsInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsInt64", actual)
 }
 
-func Test_Cov49_TD_GetAsUint(t *testing.T) {
+func Test_TD_GetAsUint(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(uint(5), true)
 	v, ok := d.GetAsUint()
@@ -351,7 +351,7 @@ func Test_Cov49_TD_GetAsUint(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsUint", actual)
 }
 
-func Test_Cov49_TD_GetAsFloat64(t *testing.T) {
+func Test_TD_GetAsFloat64(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(3.14, true)
 	v, ok := d.GetAsFloat64()
@@ -365,7 +365,7 @@ func Test_Cov49_TD_GetAsFloat64(t *testing.T) {
 	_ = v
 }
 
-func Test_Cov49_TD_GetAsFloat32(t *testing.T) {
+func Test_TD_GetAsFloat32(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(float32(1.5), true)
 	_, ok := d.GetAsFloat32()
@@ -378,7 +378,7 @@ func Test_Cov49_TD_GetAsFloat32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsFloat32", actual)
 }
 
-func Test_Cov49_TD_GetAsBool(t *testing.T) {
+func Test_TD_GetAsBool(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(true, true)
 	v, ok := d.GetAsBool()
@@ -397,7 +397,7 @@ func Test_Cov49_TD_GetAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsBool", actual)
 }
 
-func Test_Cov49_TD_GetAsBytes(t *testing.T) {
+func Test_TD_GetAsBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic([]byte("hi"), true)
 	_, ok := d.GetAsBytes()
@@ -410,7 +410,7 @@ func Test_Cov49_TD_GetAsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsBytes", actual)
 }
 
-func Test_Cov49_TD_GetAsStrings(t *testing.T) {
+func Test_TD_GetAsStrings(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic([]string{"a"}, true)
 	_, ok := d.GetAsStrings()
@@ -423,7 +423,7 @@ func Test_Cov49_TD_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsStrings", actual)
 }
 
-func Test_Cov49_TD_ValueString_IsString(t *testing.T) {
+func Test_TD_ValueString_IsString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 
@@ -435,7 +435,7 @@ func Test_Cov49_TD_ValueString_IsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueString isString", actual)
 }
 
-func Test_Cov49_TD_ValueString_NotString(t *testing.T) {
+func Test_TD_ValueString_NotString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(42, true)
 
@@ -447,7 +447,7 @@ func Test_Cov49_TD_ValueString_NotString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueString notString", actual)
 }
 
-func Test_Cov49_TD_ValueInt(t *testing.T) {
+func Test_TD_ValueInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(42, true)
 
@@ -459,7 +459,7 @@ func Test_Cov49_TD_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueInt", actual)
 }
 
-func Test_Cov49_TD_ValueInt_Fail(t *testing.T) {
+func Test_TD_ValueInt_Fail(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -471,7 +471,7 @@ func Test_Cov49_TD_ValueInt_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueInt fail", actual)
 }
 
-func Test_Cov49_TD_ValueInt64(t *testing.T) {
+func Test_TD_ValueInt64(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(int64(99), true)
 
@@ -483,7 +483,7 @@ func Test_Cov49_TD_ValueInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueInt64", actual)
 }
 
-func Test_Cov49_TD_ValueBool(t *testing.T) {
+func Test_TD_ValueBool(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic(true, true)
 
@@ -495,7 +495,7 @@ func Test_Cov49_TD_ValueBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueBool", actual)
 }
 
-func Test_Cov49_TD_ValueBool_Fail(t *testing.T) {
+func Test_TD_ValueBool_Fail(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -511,7 +511,7 @@ func Test_Cov49_TD_ValueBool_Fail(t *testing.T) {
 // TypedDynamic — Clone / NonPtr / Ptr / ToDynamic / Deserialize
 // =============================================================================
 
-func Test_Cov49_TD_Clone(t *testing.T) {
+func Test_TD_Clone(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	c := d.Clone()
@@ -524,7 +524,7 @@ func Test_Cov49_TD_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Clone", actual)
 }
 
-func Test_Cov49_TD_ClonePtr_Nil(t *testing.T) {
+func Test_TD_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.TypedDynamic[string]
 
@@ -536,7 +536,7 @@ func Test_Cov49_TD_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ClonePtr nil", actual)
 }
 
-func Test_Cov49_TD_ClonePtr_Valid(t *testing.T) {
+func Test_TD_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("x", true)
 	c := d.ClonePtr()
@@ -549,7 +549,7 @@ func Test_Cov49_TD_ClonePtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ClonePtr valid", actual)
 }
 
-func Test_Cov49_TD_NonPtr(t *testing.T) {
+func Test_TD_NonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -561,7 +561,7 @@ func Test_Cov49_TD_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic NonPtr", actual)
 }
 
-func Test_Cov49_TD_ToDynamic(t *testing.T) {
+func Test_TD_ToDynamic(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("hello", true)
 	dyn := d.ToDynamic()
@@ -574,7 +574,7 @@ func Test_Cov49_TD_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ToDynamic", actual)
 }
 
-func Test_Cov49_TD_Deserialize_Valid(t *testing.T) {
+func Test_TD_Deserialize_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	err := d.Deserialize([]byte(`"world"`))
@@ -595,7 +595,7 @@ func Test_Cov49_TD_Deserialize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize valid", actual)
 }
 
-func Test_Cov49_TD_Deserialize_Nil(t *testing.T) {
+func Test_TD_Deserialize_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.TypedDynamic[string]
 	err := d.Deserialize([]byte(`"x"`))
@@ -608,7 +608,7 @@ func Test_Cov49_TD_Deserialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize nil", actual)
 }
 
-func Test_Cov49_TD_Deserialize_Invalid(t *testing.T) {
+func Test_TD_Deserialize_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	err := d.Deserialize([]byte(`bad`))
@@ -627,7 +627,7 @@ func Test_Cov49_TD_Deserialize_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize invalid", actual)
 }
 
-func Test_Cov49_TD_JsonModel(t *testing.T) {
+func Test_TD_JsonModel(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -639,7 +639,7 @@ func Test_Cov49_TD_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonModel", actual)
 }
 
-func Test_Cov49_TD_JsonModelAny(t *testing.T) {
+func Test_TD_JsonModelAny(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -651,7 +651,7 @@ func Test_Cov49_TD_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonModelAny", actual)
 }
 
-func Test_Cov49_TD_Json(t *testing.T) {
+func Test_TD_Json(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 	r := d.Json()
@@ -664,7 +664,7 @@ func Test_Cov49_TD_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Json", actual)
 }
 
-func Test_Cov49_TD_JsonPtr(t *testing.T) {
+func Test_TD_JsonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamic("x", true)
 
@@ -680,7 +680,7 @@ func Test_Cov49_TD_JsonPtr(t *testing.T) {
 // TypedSimpleResult
 // =============================================================================
 
-func Test_Cov49_TSR_NewValid(t *testing.T) {
+func Test_TSR_NewValid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("ok")
 
@@ -702,7 +702,7 @@ func Test_Cov49_TSR_NewValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR NewValid", actual)
 }
 
-func Test_Cov49_TSR_Invalid(t *testing.T) {
+func Test_TSR_Invalid(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidTypedSimpleResult[string]("fail")
 
@@ -722,7 +722,7 @@ func Test_Cov49_TSR_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR Invalid", actual)
 }
 
-func Test_Cov49_TSR_InvalidNoMessage(t *testing.T) {
+func Test_TSR_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidTypedSimpleResultNoMessage[int]()
 
@@ -740,7 +740,7 @@ func Test_Cov49_TSR_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR InvalidNoMessage", actual)
 }
 
-func Test_Cov49_TSR_IsValid_Nil(t *testing.T) {
+func Test_TSR_IsValid_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -758,7 +758,7 @@ func Test_Cov49_TSR_IsValid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR IsValid nil", actual)
 }
 
-func Test_Cov49_TSR_Message_Nil(t *testing.T) {
+func Test_TSR_Message_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -770,7 +770,7 @@ func Test_Cov49_TSR_Message_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR Message nil", actual)
 }
 
-func Test_Cov49_TSR_String_Nil(t *testing.T) {
+func Test_TSR_String_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -782,7 +782,7 @@ func Test_Cov49_TSR_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR String nil", actual)
 }
 
-func Test_Cov49_TSR_String_Valid(t *testing.T) {
+func Test_TSR_String_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid(42)
 
@@ -794,7 +794,7 @@ func Test_Cov49_TSR_String_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR String valid", actual)
 }
 
-func Test_Cov49_TSR_InvalidError_Nil(t *testing.T) {
+func Test_TSR_InvalidError_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -806,7 +806,7 @@ func Test_Cov49_TSR_InvalidError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR InvalidError nil", actual)
 }
 
-func Test_Cov49_TSR_InvalidError_NoMessage(t *testing.T) {
+func Test_TSR_InvalidError_NoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResult("x", false, "")
 
@@ -818,7 +818,7 @@ func Test_Cov49_TSR_InvalidError_NoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR InvalidError no message", actual)
 }
 
-func Test_Cov49_TSR_InvalidError_WithMessage(t *testing.T) {
+func Test_TSR_InvalidError_WithMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResult("x", false, "fail")
 	e1 := r.InvalidError()
@@ -838,7 +838,7 @@ func Test_Cov49_TSR_InvalidError_WithMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR InvalidError with message cached", actual)
 }
 
-func Test_Cov49_TSR_Clone_Nil(t *testing.T) {
+func Test_TSR_Clone_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 	c := r.Clone()
@@ -851,7 +851,7 @@ func Test_Cov49_TSR_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR Clone nil", actual)
 }
 
-func Test_Cov49_TSR_ClonePtr_Nil(t *testing.T) {
+func Test_TSR_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 
@@ -863,7 +863,7 @@ func Test_Cov49_TSR_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ClonePtr nil", actual)
 }
 
-func Test_Cov49_TSR_ClonePtr_Valid(t *testing.T) {
+func Test_TSR_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("ok")
 	c := r.ClonePtr()
@@ -882,7 +882,7 @@ func Test_Cov49_TSR_ClonePtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ClonePtr valid", actual)
 }
 
-func Test_Cov49_TSR_ToSimpleResult_Nil(t *testing.T) {
+func Test_TSR_ToSimpleResult_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 	sr := r.ToSimpleResult()
@@ -895,7 +895,7 @@ func Test_Cov49_TSR_ToSimpleResult_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ToSimpleResult nil", actual)
 }
 
-func Test_Cov49_TSR_ToTypedDynamic_Nil(t *testing.T) {
+func Test_TSR_ToTypedDynamic_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 	td := r.ToTypedDynamic()
@@ -908,7 +908,7 @@ func Test_Cov49_TSR_ToTypedDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ToTypedDynamic nil", actual)
 }
 
-func Test_Cov49_TSR_ToDynamic_Nil(t *testing.T) {
+func Test_TSR_ToDynamic_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleResult[string]
 	d := r.ToDynamic()
@@ -921,7 +921,7 @@ func Test_Cov49_TSR_ToDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ToDynamic nil", actual)
 }
 
-func Test_Cov49_TSR_ToSimpleResult_Valid(t *testing.T) {
+func Test_TSR_ToSimpleResult_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("ok")
 	sr := r.ToSimpleResult()
@@ -934,7 +934,7 @@ func Test_Cov49_TSR_ToSimpleResult_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR ToSimpleResult valid", actual)
 }
 
-func Test_Cov49_TSR_GetAs(t *testing.T) {
+func Test_TSR_GetAs(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	s, ok := r.GetAsString()
@@ -953,7 +953,7 @@ func Test_Cov49_TSR_GetAs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSR GetAsString", actual)
 }
 
-func Test_Cov49_TSR_JSON(t *testing.T) {
+func Test_TSR_JSON(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	b, err := r.JsonBytes()
@@ -986,7 +986,7 @@ func Test_Cov49_TSR_JSON(t *testing.T) {
 // TypedSimpleRequest
 // =============================================================================
 
-func Test_Cov49_TSReq_NewValid(t *testing.T) {
+func Test_TSReq_NewValid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("input")
 
@@ -1008,7 +1008,7 @@ func Test_Cov49_TSReq_NewValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq NewValid", actual)
 }
 
-func Test_Cov49_TSReq_Invalid(t *testing.T) {
+func Test_TSReq_Invalid(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidTypedSimpleRequest[string]("bad")
 
@@ -1028,7 +1028,7 @@ func Test_Cov49_TSReq_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq Invalid", actual)
 }
 
-func Test_Cov49_TSReq_Nil(t *testing.T) {
+func Test_TSReq_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 
@@ -1050,7 +1050,7 @@ func Test_Cov49_TSReq_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq nil accessors", actual)
 }
 
-func Test_Cov49_TSReq_InvalidError_Nil(t *testing.T) {
+func Test_TSReq_InvalidError_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 
@@ -1062,7 +1062,7 @@ func Test_Cov49_TSReq_InvalidError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq InvalidError nil", actual)
 }
 
-func Test_Cov49_TSReq_InvalidError_Cached(t *testing.T) {
+func Test_TSReq_InvalidError_Cached(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequest("x", false, "fail")
 	e1 := r.InvalidError()
@@ -1082,7 +1082,7 @@ func Test_Cov49_TSReq_InvalidError_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq InvalidError cached", actual)
 }
 
-func Test_Cov49_TSReq_Clone_Nil(t *testing.T) {
+func Test_TSReq_Clone_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 
@@ -1094,7 +1094,7 @@ func Test_Cov49_TSReq_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq Clone nil", actual)
 }
 
-func Test_Cov49_TSReq_Clone_Valid(t *testing.T) {
+func Test_TSReq_Clone_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("x")
 	c := r.Clone()
@@ -1107,7 +1107,7 @@ func Test_Cov49_TSReq_Clone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq Clone valid", actual)
 }
 
-func Test_Cov49_TSReq_ToSimpleRequest_Nil(t *testing.T) {
+func Test_TSReq_ToSimpleRequest_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 	sr := r.ToSimpleRequest()
@@ -1120,7 +1120,7 @@ func Test_Cov49_TSReq_ToSimpleRequest_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq ToSimpleRequest nil", actual)
 }
 
-func Test_Cov49_TSReq_ToSimpleRequest_Valid(t *testing.T) {
+func Test_TSReq_ToSimpleRequest_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("x")
 	sr := r.ToSimpleRequest()
@@ -1133,7 +1133,7 @@ func Test_Cov49_TSReq_ToSimpleRequest_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq ToSimpleRequest valid", actual)
 }
 
-func Test_Cov49_TSReq_ToTypedDynamic_Nil(t *testing.T) {
+func Test_TSReq_ToTypedDynamic_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 	td := r.ToTypedDynamic()
@@ -1146,7 +1146,7 @@ func Test_Cov49_TSReq_ToTypedDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq ToTypedDynamic nil", actual)
 }
 
-func Test_Cov49_TSReq_ToDynamic_Nil(t *testing.T) {
+func Test_TSReq_ToDynamic_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.TypedSimpleRequest[string]
 	d := r.ToDynamic()
@@ -1159,7 +1159,7 @@ func Test_Cov49_TSReq_ToDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TSReq ToDynamic nil", actual)
 }
 
-func Test_Cov49_TSReq_GetAs(t *testing.T) {
+func Test_TSReq_GetAs(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid("hello")
 	s, ok := r.GetAsString()
@@ -1203,7 +1203,7 @@ func Test_Cov49_TSReq_GetAs(t *testing.T) {
 // SimpleRequest
 // =============================================================================
 
-func Test_Cov49_SR_NewValid(t *testing.T) {
+func Test_SR_NewValid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid("input")
 
@@ -1221,7 +1221,7 @@ func Test_Cov49_SR_NewValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest NewValid", actual)
 }
 
-func Test_Cov49_SR_Invalid(t *testing.T) {
+func Test_SR_Invalid(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidSimpleRequest("fail")
 
@@ -1239,7 +1239,7 @@ func Test_Cov49_SR_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest Invalid", actual)
 }
 
-func Test_Cov49_SR_InvalidNoMessage(t *testing.T) {
+func Test_SR_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidSimpleRequestNoMessage()
 
@@ -1257,7 +1257,7 @@ func Test_Cov49_SR_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidNoMessage", actual)
 }
 
-func Test_Cov49_SR_Request_Nil(t *testing.T) {
+func Test_SR_Request_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 
@@ -1275,7 +1275,7 @@ func Test_Cov49_SR_Request_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest Request nil", actual)
 }
 
-func Test_Cov49_SR_Value_Nil(t *testing.T) {
+func Test_SR_Value_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 
@@ -1287,7 +1287,7 @@ func Test_Cov49_SR_Value_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest Value nil", actual)
 }
 
-func Test_Cov49_SR_GetErrorOnTypeMismatch_Nil(t *testing.T) {
+func Test_SR_GetErrorOnTypeMismatch_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -1300,7 +1300,7 @@ func Test_Cov49_SR_GetErrorOnTypeMismatch_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch nil", actual)
 }
 
-func Test_Cov49_SR_GetErrorOnTypeMismatch_Match(t *testing.T) {
+func Test_SR_GetErrorOnTypeMismatch_Match(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid("hello")
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -1313,7 +1313,7 @@ func Test_Cov49_SR_GetErrorOnTypeMismatch_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch match", actual)
 }
 
-func Test_Cov49_SR_GetErrorOnTypeMismatch_Mismatch(t *testing.T) {
+func Test_SR_GetErrorOnTypeMismatch_Mismatch(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid(42)
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -1326,7 +1326,7 @@ func Test_Cov49_SR_GetErrorOnTypeMismatch_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch mismatch", actual)
 }
 
-func Test_Cov49_SR_GetErrorOnTypeMismatch_Include(t *testing.T) {
+func Test_SR_GetErrorOnTypeMismatch_Include(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequest(42, true, "extra")
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), true)
@@ -1339,7 +1339,7 @@ func Test_Cov49_SR_GetErrorOnTypeMismatch_Include(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch include", actual)
 }
 
-func Test_Cov49_SR_IsReflectKind_Nil(t *testing.T) {
+func Test_SR_IsReflectKind_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 
@@ -1351,7 +1351,7 @@ func Test_Cov49_SR_IsReflectKind_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest IsReflectKind nil", actual)
 }
 
-func Test_Cov49_SR_IsPointer_Nil(t *testing.T) {
+func Test_SR_IsPointer_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 
@@ -1363,7 +1363,7 @@ func Test_Cov49_SR_IsPointer_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest IsPointer nil", actual)
 }
 
-func Test_Cov49_SR_IsPointer_Value(t *testing.T) {
+func Test_SR_IsPointer_Value(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid("hello")
 
@@ -1375,7 +1375,7 @@ func Test_Cov49_SR_IsPointer_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest IsPointer value", actual)
 }
 
-func Test_Cov49_SR_IsPointer_Cached(t *testing.T) {
+func Test_SR_IsPointer_Cached(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequestValid("hello")
 	r.IsPointer() // first call caches
@@ -1388,7 +1388,7 @@ func Test_Cov49_SR_IsPointer_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest IsPointer cached", actual)
 }
 
-func Test_Cov49_SR_InvalidError_Nil(t *testing.T) {
+func Test_SR_InvalidError_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleRequest
 
@@ -1400,7 +1400,7 @@ func Test_Cov49_SR_InvalidError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidError nil", actual)
 }
 
-func Test_Cov49_SR_InvalidError_NoMessage(t *testing.T) {
+func Test_SR_InvalidError_NoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequest(nil, false, "")
 
@@ -1412,7 +1412,7 @@ func Test_Cov49_SR_InvalidError_NoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidError no message", actual)
 }
 
-func Test_Cov49_SR_InvalidError_WithMessage(t *testing.T) {
+func Test_SR_InvalidError_WithMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleRequest(nil, false, "fail")
 	e1 := r.InvalidError()

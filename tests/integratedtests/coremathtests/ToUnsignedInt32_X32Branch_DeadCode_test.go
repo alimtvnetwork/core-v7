@@ -16,7 +16,7 @@ import (
 // We temporarily flip the var to exercise it.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_ToUnsignedInt32_X32Branch_InRange(t *testing.T) {
+func Test_ToUnsignedInt32_X32Branch_InRange(t *testing.T) {
 	// Arrange
 	original := osconsts.IsX32Architecture
 	osconsts.IsX32Architecture = true
@@ -31,7 +31,7 @@ func Test_Cov4_ToUnsignedInt32_X32Branch_InRange(t *testing.T) {
 	})
 }
 
-func Test_Cov4_ToUnsignedInt32_X32Branch_Negative(t *testing.T) {
+func Test_ToUnsignedInt32_X32Branch_Negative(t *testing.T) {
 	// Arrange
 	original := osconsts.IsX32Architecture
 	osconsts.IsX32Architecture = true

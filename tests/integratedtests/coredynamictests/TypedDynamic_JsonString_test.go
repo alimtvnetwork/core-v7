@@ -9,7 +9,7 @@ import (
 
 // ── TypedDynamic.JsonString valid (line 117) ──
 
-func Test_Cov75_TypedDynamic_JsonString_Valid_I29(t *testing.T) {
+func Test_TypedDynamic_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic[string]("hello", true)
 

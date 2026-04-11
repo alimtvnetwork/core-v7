@@ -13,7 +13,7 @@ import (
 // KeyValCollection — constructors and basic accessors
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_EmptyCollection(t *testing.T) {
+func Test_KVC_EmptyCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -33,7 +33,7 @@ func Test_I16_KVC_EmptyCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyKeyValCollection returns empty -- with args", actual)
 }
 
-func Test_I16_KVC_NewWithCapacity(t *testing.T) {
+func Test_KVC_NewWithCapacity(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 
@@ -51,7 +51,7 @@ func Test_I16_KVC_NewWithCapacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewKeyValCollection returns correct value -- with args", actual)
 }
 
-func Test_I16_KVC_NilReceiver_Length(t *testing.T) {
+func Test_KVC_NilReceiver_Length(t *testing.T) {
 	// Arrange
 	var c *coredynamic.KeyValCollection
 
@@ -63,7 +63,7 @@ func Test_I16_KVC_NilReceiver_Length(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns nil -- nil Length", actual)
 }
 
-func Test_I16_KVC_NilReceiver_Items(t *testing.T) {
+func Test_KVC_NilReceiver_Items(t *testing.T) {
 	// Arrange
 	var c *coredynamic.KeyValCollection
 
@@ -79,7 +79,7 @@ func Test_I16_KVC_NilReceiver_Items(t *testing.T) {
 // KeyValCollection — Add methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_Add(t *testing.T) {
+func Test_KVC_Add(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -93,7 +93,7 @@ func Test_I16_KVC_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Add", actual)
 }
 
-func Test_I16_KVC_AddPtr(t *testing.T) {
+func Test_KVC_AddPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	kv := &coredynamic.KeyVal{Key: "a", Value: 1}
@@ -108,7 +108,7 @@ func Test_I16_KVC_AddPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- AddPtr", actual)
 }
 
-func Test_I16_KVC_AddMany(t *testing.T) {
+func Test_KVC_AddMany(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.AddMany(
@@ -125,7 +125,7 @@ func Test_I16_KVC_AddMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- AddMany", actual)
 }
 
-func Test_I16_KVC_AddMany_Empty(t *testing.T) {
+func Test_KVC_AddMany_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.AddMany()
@@ -138,7 +138,7 @@ func Test_I16_KVC_AddMany_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns empty -- AddMany empty", actual)
 }
 
-func Test_I16_KVC_AddManyPtr(t *testing.T) {
+func Test_KVC_AddManyPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	kv1 := &coredynamic.KeyVal{Key: "a", Value: 1}
@@ -152,7 +152,7 @@ func Test_I16_KVC_AddManyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- AddManyPtr", actual)
 }
 
-func Test_I16_KVC_AddManyPtr_Empty(t *testing.T) {
+func Test_KVC_AddManyPtr_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.AddManyPtr()
@@ -169,7 +169,7 @@ func Test_I16_KVC_AddManyPtr_Empty(t *testing.T) {
 // KeyValCollection — query methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_MapAnyItems(t *testing.T) {
+func Test_KVC_MapAnyItems(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "name", Value: "Alice"})
@@ -183,7 +183,7 @@ func Test_I16_KVC_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- MapAnyItems", actual)
 }
 
-func Test_I16_KVC_MapAnyItems_Empty(t *testing.T) {
+func Test_KVC_MapAnyItems_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	m := c.MapAnyItems()
@@ -196,7 +196,7 @@ func Test_I16_KVC_MapAnyItems_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns empty -- MapAnyItems empty", actual)
 }
 
-func Test_I16_KVC_AllKeys(t *testing.T) {
+func Test_KVC_AllKeys(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "b", Value: 2})
@@ -211,7 +211,7 @@ func Test_I16_KVC_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- AllKeys", actual)
 }
 
-func Test_I16_KVC_AllKeys_Empty(t *testing.T) {
+func Test_KVC_AllKeys_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -223,7 +223,7 @@ func Test_I16_KVC_AllKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns empty -- AllKeys empty", actual)
 }
 
-func Test_I16_KVC_AllKeysSorted(t *testing.T) {
+func Test_KVC_AllKeysSorted(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "z", Value: 1})
@@ -238,7 +238,7 @@ func Test_I16_KVC_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- AllKeysSorted", actual)
 }
 
-func Test_I16_KVC_AllValues(t *testing.T) {
+func Test_KVC_AllValues(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 42})
@@ -253,7 +253,7 @@ func Test_I16_KVC_AllValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns non-empty -- AllValues", actual)
 }
 
-func Test_I16_KVC_AllValues_Empty(t *testing.T) {
+func Test_KVC_AllValues_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -269,7 +269,7 @@ func Test_I16_KVC_AllValues_Empty(t *testing.T) {
 // KeyValCollection — paging
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_GetPagesSize(t *testing.T) {
+func Test_KVC_GetPagesSize(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	for i := 0; i < 10; i++ {
@@ -284,7 +284,7 @@ func Test_I16_KVC_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- GetPagesSize", actual)
 }
 
-func Test_I16_KVC_GetPagesSize_Zero(t *testing.T) {
+func Test_KVC_GetPagesSize_Zero(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -296,7 +296,7 @@ func Test_I16_KVC_GetPagesSize_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- GetPagesSize zero", actual)
 }
 
-func Test_I16_KVC_GetPagedCollection(t *testing.T) {
+func Test_KVC_GetPagedCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	for i := 0; i < 10; i++ {
@@ -312,7 +312,7 @@ func Test_I16_KVC_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- GetPagedCollection", actual)
 }
 
-func Test_I16_KVC_GetPagedCollection_SmallSet(t *testing.T) {
+func Test_KVC_GetPagedCollection_SmallSet(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: 1})
@@ -326,7 +326,7 @@ func Test_I16_KVC_GetPagedCollection_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- GetPagedCollection small", actual)
 }
 
-func Test_I16_KVC_GetSinglePageCollection(t *testing.T) {
+func Test_KVC_GetSinglePageCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	for i := 0; i < 10; i++ {
@@ -346,7 +346,7 @@ func Test_I16_KVC_GetSinglePageCollection(t *testing.T) {
 // KeyValCollection — JSON and serialization
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_String(t *testing.T) {
+func Test_KVC_String(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -359,7 +359,7 @@ func Test_I16_KVC_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- String", actual)
 }
 
-func Test_I16_KVC_String_Nil(t *testing.T) {
+func Test_KVC_String_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.KeyValCollection
 
@@ -371,7 +371,7 @@ func Test_I16_KVC_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns nil -- String nil", actual)
 }
 
-func Test_I16_KVC_Json(t *testing.T) {
+func Test_KVC_Json(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -385,7 +385,7 @@ func Test_I16_KVC_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Json", actual)
 }
 
-func Test_I16_KVC_JsonPtr(t *testing.T) {
+func Test_KVC_JsonPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	jr := c.JsonPtr()
@@ -398,7 +398,7 @@ func Test_I16_KVC_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonPtr", actual)
 }
 
-func Test_I16_KVC_JsonModel(t *testing.T) {
+func Test_KVC_JsonModel(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -410,7 +410,7 @@ func Test_I16_KVC_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonModel", actual)
 }
 
-func Test_I16_KVC_JsonModelAny(t *testing.T) {
+func Test_KVC_JsonModelAny(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 
@@ -422,7 +422,7 @@ func Test_I16_KVC_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonModelAny", actual)
 }
 
-func Test_I16_KVC_Serialize(t *testing.T) {
+func Test_KVC_Serialize(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -442,7 +442,7 @@ func Test_I16_KVC_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Serialize", actual)
 }
 
-func Test_I16_KVC_JsonString(t *testing.T) {
+func Test_KVC_JsonString(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -463,7 +463,7 @@ func Test_I16_KVC_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonString", actual)
 }
 
-func Test_I16_KVC_JsonStringMust(t *testing.T) {
+func Test_KVC_JsonStringMust(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -486,7 +486,7 @@ func Test_I16_KVC_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonStringMust panics on empty JSON", actual)
 }
 
-func Test_I16_KVC_JsonMapResults(t *testing.T) {
+func Test_KVC_JsonMapResults(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -506,7 +506,7 @@ func Test_I16_KVC_JsonMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonMapResults", actual)
 }
 
-func Test_I16_KVC_JsonMapResults_Empty(t *testing.T) {
+func Test_KVC_JsonMapResults_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	mr, err := c.JsonMapResults()
@@ -525,7 +525,7 @@ func Test_I16_KVC_JsonMapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns empty -- JsonMapResults empty", actual)
 }
 
-func Test_I16_KVC_JsonResultsCollection(t *testing.T) {
+func Test_KVC_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -539,7 +539,7 @@ func Test_I16_KVC_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_I16_KVC_JsonResultsPtrCollection(t *testing.T) {
+func Test_KVC_JsonResultsPtrCollection(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -553,7 +553,7 @@ func Test_I16_KVC_JsonResultsPtrCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonResultsPtrCollection", actual)
 }
 
-func Test_I16_KVC_ParseInjectUsingJson(t *testing.T) {
+func Test_KVC_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -575,7 +575,7 @@ func Test_I16_KVC_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_I16_KVC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_KVC_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -591,7 +591,7 @@ func Test_I16_KVC_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ParseInjectUsingJsonMust", actual)
 }
 
-func Test_I16_KVC_JsonParseSelfInject(t *testing.T) {
+func Test_KVC_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
@@ -611,7 +611,7 @@ func Test_I16_KVC_JsonParseSelfInject(t *testing.T) {
 // KeyValCollection — Clone
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_KVC_Clone(t *testing.T) {
+func Test_KVC_Clone(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -625,7 +625,7 @@ func Test_I16_KVC_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Clone", actual)
 }
 
-func Test_I16_KVC_ClonePtr(t *testing.T) {
+func Test_KVC_ClonePtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -645,7 +645,7 @@ func Test_I16_KVC_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ClonePtr", actual)
 }
 
-func Test_I16_KVC_ClonePtr_Nil(t *testing.T) {
+func Test_KVC_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.KeyValCollection
 
@@ -657,7 +657,7 @@ func Test_I16_KVC_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns nil -- ClonePtr nil", actual)
 }
 
-func Test_I16_KVC_NonPtr(t *testing.T) {
+func Test_KVC_NonPtr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	np := c.NonPtr()
@@ -670,7 +670,7 @@ func Test_I16_KVC_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- NonPtr", actual)
 }
 
-func Test_I16_KVC_Ptr(t *testing.T) {
+func Test_KVC_Ptr(t *testing.T) {
 	// Arrange
 	c := coredynamic.EmptyKeyValCollection()
 	p := c.Ptr()
@@ -687,7 +687,7 @@ func Test_I16_KVC_Ptr(t *testing.T) {
 // DynamicCollection — core methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_DC_EmptyCollection(t *testing.T) {
+func Test_DC_EmptyCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -709,7 +709,7 @@ func Test_I16_DC_EmptyCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyDynamicCollection returns empty -- with args", actual)
 }
 
-func Test_I16_DC_NilReceiver_Length(t *testing.T) {
+func Test_DC_NilReceiver_Length(t *testing.T) {
 	// Arrange
 	var dc *coredynamic.DynamicCollection
 
@@ -727,7 +727,7 @@ func Test_I16_DC_NilReceiver_Length(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns nil -- nil Length", actual)
 }
 
-func Test_I16_DC_NilReceiver_Items(t *testing.T) {
+func Test_DC_NilReceiver_Items(t *testing.T) {
 	// Arrange
 	var dc *coredynamic.DynamicCollection
 	items := dc.Items()
@@ -740,7 +740,7 @@ func Test_I16_DC_NilReceiver_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns nil -- nil Items", actual)
 }
 
-func Test_I16_DC_Add_And_At(t *testing.T) {
+func Test_DC_Add_And_At(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	d := coredynamic.NewDynamic("hello", true)
@@ -761,7 +761,7 @@ func Test_I16_DC_Add_And_At(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Add+At", actual)
 }
 
-func Test_I16_DC_AddAny(t *testing.T) {
+func Test_DC_AddAny(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("val1", true)
@@ -775,7 +775,7 @@ func Test_I16_DC_AddAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AddAny", actual)
 }
 
-func Test_I16_DC_AddAnyNonNull(t *testing.T) {
+func Test_DC_AddAnyNonNull(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyNonNull("val", true)
@@ -789,7 +789,7 @@ func Test_I16_DC_AddAnyNonNull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AddAnyNonNull", actual)
 }
 
-func Test_I16_DC_AddAnyMany(t *testing.T) {
+func Test_DC_AddAnyMany(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -802,7 +802,7 @@ func Test_I16_DC_AddAnyMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AddAnyMany", actual)
 }
 
-func Test_I16_DC_AddAnyMany_Nil(t *testing.T) {
+func Test_DC_AddAnyMany_Nil(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany()
@@ -815,7 +815,7 @@ func Test_I16_DC_AddAnyMany_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns nil -- AddAnyMany nil", actual)
 }
 
-func Test_I16_DC_AddPtr(t *testing.T) {
+func Test_DC_AddPtr(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	d := coredynamic.NewDynamic("x", true)
@@ -830,7 +830,7 @@ func Test_I16_DC_AddPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AddPtr", actual)
 }
 
-func Test_I16_DC_AddManyPtr(t *testing.T) {
+func Test_DC_AddManyPtr(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	d1 := coredynamic.NewDynamic("a", true)
@@ -845,7 +845,7 @@ func Test_I16_DC_AddManyPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AddManyPtr", actual)
 }
 
-func Test_I16_DC_AddManyPtr_Nil(t *testing.T) {
+func Test_DC_AddManyPtr_Nil(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddManyPtr()
@@ -862,7 +862,7 @@ func Test_I16_DC_AddManyPtr_Nil(t *testing.T) {
 // DynamicCollection — First/Last/Skip/Take/Limit
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_DC_First_Last(t *testing.T) {
+func Test_DC_First_Last(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("first", true)
@@ -889,7 +889,7 @@ func Test_I16_DC_First_Last(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- First/Last", actual)
 }
 
-func Test_I16_DC_FirstOrDefault_NonEmpty(t *testing.T) {
+func Test_DC_FirstOrDefault_NonEmpty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("item", true)
@@ -909,7 +909,7 @@ func Test_I16_DC_FirstOrDefault_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- FirstOrDefault non-empty", actual)
 }
 
-func Test_I16_DC_FirstOrDefault_Empty(t *testing.T) {
+func Test_DC_FirstOrDefault_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -921,7 +921,7 @@ func Test_I16_DC_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- FirstOrDefault empty", actual)
 }
 
-func Test_I16_DC_LastOrDefault_NonEmpty(t *testing.T) {
+func Test_DC_LastOrDefault_NonEmpty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("item", true)
@@ -941,7 +941,7 @@ func Test_I16_DC_LastOrDefault_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- LastOrDefault non-empty", actual)
 }
 
-func Test_I16_DC_LastOrDefault_Empty(t *testing.T) {
+func Test_DC_LastOrDefault_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -953,7 +953,7 @@ func Test_I16_DC_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- LastOrDefault empty", actual)
 }
 
-func Test_I16_DC_Skip_Take_Limit(t *testing.T) {
+func Test_DC_Skip_Take_Limit(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c", "d", "e")
@@ -976,7 +976,7 @@ func Test_I16_DC_Skip_Take_Limit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Skip/Take/Limit", actual)
 }
 
-func Test_I16_DC_SkipCollection(t *testing.T) {
+func Test_DC_SkipCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -990,7 +990,7 @@ func Test_I16_DC_SkipCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- SkipCollection", actual)
 }
 
-func Test_I16_DC_TakeCollection(t *testing.T) {
+func Test_DC_TakeCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -1004,7 +1004,7 @@ func Test_I16_DC_TakeCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- TakeCollection", actual)
 }
 
-func Test_I16_DC_LimitCollection(t *testing.T) {
+func Test_DC_LimitCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -1018,7 +1018,7 @@ func Test_I16_DC_LimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- LimitCollection", actual)
 }
 
-func Test_I16_DC_SafeLimitCollection(t *testing.T) {
+func Test_DC_SafeLimitCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1036,7 +1036,7 @@ func Test_I16_DC_SafeLimitCollection(t *testing.T) {
 // DynamicCollection — RemoveAt, Loop, AnyItems, Strings
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_DC_RemoveAt_Success(t *testing.T) {
+func Test_DC_RemoveAt_Success(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -1056,7 +1056,7 @@ func Test_I16_DC_RemoveAt_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- RemoveAt success", actual)
 }
 
-func Test_I16_DC_RemoveAt_InvalidIndex(t *testing.T) {
+func Test_DC_RemoveAt_InvalidIndex(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("a", true)
@@ -1070,7 +1070,7 @@ func Test_I16_DC_RemoveAt_InvalidIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns error -- RemoveAt invalid", actual)
 }
 
-func Test_I16_DC_Loop(t *testing.T) {
+func Test_DC_Loop(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -1088,7 +1088,7 @@ func Test_I16_DC_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Loop", actual)
 }
 
-func Test_I16_DC_Loop_Break(t *testing.T) {
+func Test_DC_Loop_Break(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c")
@@ -1106,7 +1106,7 @@ func Test_I16_DC_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Loop break", actual)
 }
 
-func Test_I16_DC_Loop_Empty(t *testing.T) {
+func Test_DC_Loop_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	called := false
@@ -1123,7 +1123,7 @@ func Test_I16_DC_Loop_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- Loop empty", actual)
 }
 
-func Test_I16_DC_AnyItems(t *testing.T) {
+func Test_DC_AnyItems(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", 42)
@@ -1137,7 +1137,7 @@ func Test_I16_DC_AnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AnyItems", actual)
 }
 
-func Test_I16_DC_AnyItems_Empty(t *testing.T) {
+func Test_DC_AnyItems_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -1149,7 +1149,7 @@ func Test_I16_DC_AnyItems_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- AnyItems empty", actual)
 }
 
-func Test_I16_DC_AnyItemsCollection(t *testing.T) {
+func Test_DC_AnyItemsCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1163,7 +1163,7 @@ func Test_I16_DC_AnyItemsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- AnyItemsCollection", actual)
 }
 
-func Test_I16_DC_Strings(t *testing.T) {
+func Test_DC_Strings(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1177,7 +1177,7 @@ func Test_I16_DC_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Strings", actual)
 }
 
-func Test_I16_DC_String(t *testing.T) {
+func Test_DC_String(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1190,7 +1190,7 @@ func Test_I16_DC_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- String", actual)
 }
 
-func Test_I16_DC_ListStrings(t *testing.T) {
+func Test_DC_ListStrings(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("hello", "world")
@@ -1208,7 +1208,7 @@ func Test_I16_DC_ListStrings(t *testing.T) {
 // DynamicCollection — type validation add
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_DC_AddAnyWithTypeValidation_Success(t *testing.T) {
+func Test_DC_AddAnyWithTypeValidation_Success(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), "hello")
@@ -1227,7 +1227,7 @@ func Test_I16_DC_AddAnyWithTypeValidation_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyWithTypeValidation success", actual)
 }
 
-func Test_I16_DC_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
+func Test_DC_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), 42)
@@ -1246,7 +1246,7 @@ func Test_I16_DC_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyWithTypeValidation mismatch", actual)
 }
 
-func Test_I16_DC_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
+func Test_DC_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyItemsWithTypeValidation(true, false, reflect.TypeOf(""), "ok", 42, "also ok")
@@ -1265,7 +1265,7 @@ func Test_I16_DC_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyItemsWithTypeValidation continue", actual)
 }
 
-func Test_I16_DC_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
+func Test_DC_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyItemsWithTypeValidation(false, false, reflect.TypeOf(""), "ok", 42, "unreachable")
@@ -1284,7 +1284,7 @@ func Test_I16_DC_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyItemsWithTypeValidation stop", actual)
 }
 
-func Test_I16_DC_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
+func Test_DC_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyItemsWithTypeValidation(false, false, reflect.TypeOf(""))
@@ -1301,7 +1301,7 @@ func Test_I16_DC_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 // DynamicCollection — JSON and paging
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_DC_JsonString(t *testing.T) {
+func Test_DC_JsonString(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1321,7 +1321,7 @@ func Test_I16_DC_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonString", actual)
 }
 
-func Test_I16_DC_JsonStringMust(t *testing.T) {
+func Test_DC_JsonStringMust(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")
@@ -1335,7 +1335,7 @@ func Test_I16_DC_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonStringMust", actual)
 }
 
-func Test_I16_DC_JsonModel(t *testing.T) {
+func Test_DC_JsonModel(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	m := dc.JsonModel()
@@ -1348,7 +1348,7 @@ func Test_I16_DC_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonModel", actual)
 }
 
-func Test_I16_DC_JsonModelAny(t *testing.T) {
+func Test_DC_JsonModelAny(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -1360,7 +1360,7 @@ func Test_I16_DC_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonModelAny", actual)
 }
 
-func Test_I16_DC_Json(t *testing.T) {
+func Test_DC_Json(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	jr := dc.Json()
@@ -1373,7 +1373,7 @@ func Test_I16_DC_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Json", actual)
 }
 
-func Test_I16_DC_JsonPtr(t *testing.T) {
+func Test_DC_JsonPtr(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -1385,7 +1385,7 @@ func Test_I16_DC_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonPtr", actual)
 }
 
-func Test_I16_DC_JsonResultsCollection(t *testing.T) {
+func Test_DC_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")
@@ -1399,7 +1399,7 @@ func Test_I16_DC_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_I16_DC_JsonResultsPtrCollection(t *testing.T) {
+func Test_DC_JsonResultsPtrCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")
@@ -1413,7 +1413,7 @@ func Test_I16_DC_JsonResultsPtrCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonResultsPtrCollection", actual)
 }
 
-func Test_I16_DC_GetPagesSize(t *testing.T) {
+func Test_DC_GetPagesSize(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c", "d", "e", "f", "g")
@@ -1432,7 +1432,7 @@ func Test_I16_DC_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- GetPagesSize", actual)
 }
 
-func Test_I16_DC_GetPagedCollection(t *testing.T) {
+func Test_DC_GetPagedCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c", "d", "e", "f", "g")
@@ -1446,7 +1446,7 @@ func Test_I16_DC_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- GetPagedCollection", actual)
 }
 
-func Test_I16_DC_GetPagedCollection_SmallSet(t *testing.T) {
+func Test_DC_GetPagedCollection_SmallSet(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")
@@ -1460,7 +1460,7 @@ func Test_I16_DC_GetPagedCollection_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- GetPagedCollection small", actual)
 }
 
-func Test_I16_DC_GetSinglePageCollection(t *testing.T) {
+func Test_DC_GetSinglePageCollection(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b", "c", "d", "e", "f", "g")
@@ -1474,7 +1474,7 @@ func Test_I16_DC_GetSinglePageCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- GetSinglePageCollection", actual)
 }
 
-func Test_I16_DC_MarshalUnmarshalJSON(t *testing.T) {
+func Test_DC_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1494,7 +1494,7 @@ func Test_I16_DC_MarshalUnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- MarshalJSON", actual)
 }
 
-func Test_I16_DC_ParseInjectUsingJson(t *testing.T) {
+func Test_DC_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a", "b")
@@ -1511,7 +1511,7 @@ func Test_I16_DC_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- ParseInjectUsingJson fails on unmarshal", actual)
 }
 
-func Test_I16_DC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_DC_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")
@@ -1535,7 +1535,7 @@ func Test_I16_DC_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- ParseInjectUsingJsonMust panics", actual)
 }
 
-func Test_I16_DC_JsonParseSelfInject(t *testing.T) {
+func Test_DC_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyMany("a")

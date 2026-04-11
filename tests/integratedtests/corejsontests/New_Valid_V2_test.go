@@ -11,7 +11,7 @@ type cov9Mini struct {
 	Name string `json:"name"`
 }
 
-func Test_Cov9_New_Valid(t *testing.T) {
+func Test_New_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.New(map[string]string{"k": "v"})
 
@@ -29,7 +29,7 @@ func Test_Cov9_New_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid", actual)
 }
 
-func Test_Cov9_NewPtr_Nil(t *testing.T) {
+func Test_NewPtr_Nil(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(nil)
 
@@ -47,7 +47,7 @@ func Test_Cov9_NewPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr returns nil -- nil", actual)
 }
 
-func Test_Cov9_BytesCloneIf_True(t *testing.T) {
+func Test_BytesCloneIf_True(t *testing.T) {
 	// Arrange
 	original := []byte(`"hello"`)
 	cloned := corejson.BytesCloneIf(true, original)
@@ -66,7 +66,7 @@ func Test_Cov9_BytesCloneIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns non-empty -- true", actual)
 }
 
-func Test_Cov9_Deserialize_BytesTo_String(t *testing.T) {
+func Test_Deserialize_BytesTo_String(t *testing.T) {
 	// Arrange
 	s, err := corejson.Deserialize.BytesTo.String([]byte(`"hello"`))
 
@@ -84,7 +84,7 @@ func Test_Cov9_Deserialize_BytesTo_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.String returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Deserialize_BytesTo_MapStringString(t *testing.T) {
+func Test_Deserialize_BytesTo_MapStringString(t *testing.T) {
 	// Arrange
 	m, err := corejson.Deserialize.BytesTo.MapStringString([]byte(`{"k":"v"}`))
 
@@ -102,7 +102,7 @@ func Test_Cov9_Deserialize_BytesTo_MapStringString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.MapStringString returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Deserialize_BytesTo_StringMust(t *testing.T) {
+func Test_Deserialize_BytesTo_StringMust(t *testing.T) {
 	// Arrange
 	s := corejson.Deserialize.BytesTo.StringMust([]byte(`"hello"`))
 
@@ -114,7 +114,7 @@ func Test_Cov9_Deserialize_BytesTo_StringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.StringMust returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Deserialize_BytesTo_IntegerMust(t *testing.T) {
+func Test_Deserialize_BytesTo_IntegerMust(t *testing.T) {
 	// Arrange
 	i := corejson.Deserialize.BytesTo.IntegerMust([]byte(`42`))
 
@@ -126,7 +126,7 @@ func Test_Cov9_Deserialize_BytesTo_IntegerMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.IntegerMust returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Serialize_Raw_Valid(t *testing.T) {
+func Test_Serialize_Raw_Valid(t *testing.T) {
 	// Arrange
 	b, err := corejson.Serialize.Raw(map[string]string{"k": "v"})
 
@@ -144,7 +144,7 @@ func Test_Cov9_Serialize_Raw_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize.Raw returns non-empty -- valid", actual)
 }
 
-func Test_Cov9_Empty_Result(t *testing.T) {
+func Test_Empty_Result(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.Result()
 
@@ -156,7 +156,7 @@ func Test_Cov9_Empty_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Result returns empty -- with args", actual)
 }
 
-func Test_Cov9_Result_Clone_NilPtr(t *testing.T) {
+func Test_Result_Clone_NilPtr(t *testing.T) {
 	// Arrange
 	var r *corejson.Result
 	cloned := r.ClonePtr(true)
@@ -169,7 +169,7 @@ func Test_Cov9_Result_Clone_NilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
-func Test_Cov9_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault(t *testing.T) {
 	// Arrange
 	// CastAny.FromToDefault serializes source then deserializes into target
 	var casted map[string]string
@@ -189,7 +189,7 @@ func Test_Cov9_CastAny_FromToDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastAny.FromToDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Pretty_Bytes_SafeDefault(t *testing.T) {
+func Test_Pretty_Bytes_SafeDefault(t *testing.T) {
 	// Arrange
 	pretty := corejson.Pretty.Bytes.SafeDefault([]byte(`{"k":"v"}`))
 
@@ -201,7 +201,7 @@ func Test_Cov9_Pretty_Bytes_SafeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Pretty.Bytes.SafeDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov9_Pretty_String_SafeDefault(t *testing.T) {
+func Test_Pretty_String_SafeDefault(t *testing.T) {
 	// Arrange
 	pretty := corejson.Pretty.String.SafeDefault(`{"k":"v"}`)
 
@@ -213,7 +213,7 @@ func Test_Cov9_Pretty_String_SafeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Pretty.String.SafeDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov9_AnyTo_JsonString(t *testing.T) {
+func Test_AnyTo_JsonString(t *testing.T) {
 	// Arrange
 	jsonString := corejson.AnyTo.JsonString(cov9Mini{Name: "alice"})
 
@@ -225,7 +225,7 @@ func Test_Cov9_AnyTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonString returns correct value -- with args", actual)
 }
 
-func Test_Cov9_AnyTo_PrettyStringWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError(t *testing.T) {
 	// Arrange
 	pretty, err := corejson.AnyTo.PrettyStringWithError(map[string]string{"k": "v"})
 

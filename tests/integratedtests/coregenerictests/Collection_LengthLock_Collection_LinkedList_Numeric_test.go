@@ -10,7 +10,7 @@ import (
 
 // === Collection uncovered ===
 
-func Test_Cov_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1, 2})
 
@@ -22,7 +22,7 @@ func Test_Cov_Collection_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Collection_IsEmptyLock(t *testing.T) {
+func Test_Collection_IsEmptyLock(t *testing.T) {
 	// Arrange
 	c := coregeneric.EmptyCollection[int]()
 
@@ -34,7 +34,7 @@ func Test_Cov_Collection_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov_Collection_AddLock(t *testing.T) {
+func Test_Collection_AddLock(t *testing.T) {
 	// Arrange
 	c := coregeneric.EmptyCollection[int]()
 	c.AddLock(1)
@@ -47,7 +47,7 @@ func Test_Cov_Collection_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_Collection_AddsLock(t *testing.T) {
+func Test_Collection_AddsLock(t *testing.T) {
 	// Arrange
 	c := coregeneric.EmptyCollection[int]()
 	c.AddsLock(1, 2)
@@ -60,7 +60,7 @@ func Test_Cov_Collection_AddsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Collection_AddIfMany(t *testing.T) {
+func Test_Collection_AddIfMany(t *testing.T) {
 	// Arrange
 	c := coregeneric.EmptyCollection[int]()
 	c.AddIfMany(false, 1, 2)
@@ -77,7 +77,7 @@ func Test_Cov_Collection_AddIfMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Collection_ForEachBreak(t *testing.T) {
+func Test_Collection_ForEachBreak(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1, 2, 3})
 	count := 0
@@ -94,7 +94,7 @@ func Test_Cov_Collection_ForEachBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Collection_CountFunc(t *testing.T) {
+func Test_Collection_CountFunc(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1, 2, 3, 4})
 	n := c.CountFunc(func(v int) bool { return v > 2 })
@@ -107,7 +107,7 @@ func Test_Cov_Collection_CountFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Collection_SortFunc(t *testing.T) {
+func Test_Collection_SortFunc(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{3, 1, 2})
 	c.SortFunc(func(a, b int) bool { return a < b })
@@ -120,7 +120,7 @@ func Test_Cov_Collection_SortFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_Collection_Reverse(t *testing.T) {
+func Test_Collection_Reverse(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1, 2, 3})
 	c.Reverse()
@@ -133,7 +133,7 @@ func Test_Cov_Collection_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_Cov_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1})
 	n := c.ConcatNew(2, 3)
@@ -146,7 +146,7 @@ func Test_Cov_Collection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_Cov_Collection_String(t *testing.T) {
+func Test_Collection_String(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionFrom([]int{1})
 
@@ -158,7 +158,7 @@ func Test_Cov_Collection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov_Collection_CollectionLenCap(t *testing.T) {
+func Test_Collection_CollectionLenCap(t *testing.T) {
 	// Arrange
 	c := coregeneric.CollectionLenCap[int](3, 10)
 
@@ -172,7 +172,7 @@ func Test_Cov_Collection_CollectionLenCap(t *testing.T) {
 
 // === LinkedList uncovered ===
 
-func Test_Cov_LinkedList_LengthLock(t *testing.T) {
+func Test_LinkedList_LengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 
@@ -184,7 +184,7 @@ func Test_Cov_LinkedList_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_LinkedList_IsEmptyLock(t *testing.T) {
+func Test_LinkedList_IsEmptyLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 
@@ -196,7 +196,7 @@ func Test_Cov_LinkedList_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddLock(1)
@@ -209,7 +209,7 @@ func Test_Cov_LinkedList_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_LinkedList_AddsIf(t *testing.T) {
+func Test_LinkedList_AddsIf(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddsIf(false, 1, 2)
@@ -226,7 +226,7 @@ func Test_Cov_LinkedList_AddsIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_LinkedList_AppendChainOfNodes(t *testing.T) {
+func Test_LinkedList_AppendChainOfNodes(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.Add(1)
@@ -241,7 +241,7 @@ func Test_Cov_LinkedList_AppendChainOfNodes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_Cov_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
+func Test_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	chain := coregeneric.LinkedListFrom([]int{1, 2})
@@ -255,7 +255,7 @@ func Test_Cov_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_LinkedList_ForEachBreak(t *testing.T) {
+func Test_LinkedList_ForEachBreak(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2, 3})
 	count := 0
@@ -272,7 +272,7 @@ func Test_Cov_LinkedList_ForEachBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_LinkedList_ForEachBreak_FirstItem(t *testing.T) {
+func Test_LinkedList_ForEachBreak_FirstItem(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 	count := 0
@@ -289,7 +289,7 @@ func Test_Cov_LinkedList_ForEachBreak_FirstItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_LinkedList_IndexAt(t *testing.T) {
+func Test_LinkedList_IndexAt(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{10, 20, 30})
 	node := ll.IndexAt(2)
@@ -308,7 +308,7 @@ func Test_Cov_LinkedList_IndexAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for out of range", actual)
 }
 
-func Test_Cov_LinkedList_Collection(t *testing.T) {
+func Test_LinkedList_Collection(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 	c := ll.Collection()
@@ -321,7 +321,7 @@ func Test_Cov_LinkedList_Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1})
 
@@ -335,7 +335,7 @@ func Test_Cov_LinkedList_String(t *testing.T) {
 
 // === Numeric funcs uncovered ===
 
-func Test_Cov_CompareNumeric(t *testing.T) {
+func Test_CompareNumeric(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.CompareNumeric(1, 2) != corecomparator.LeftLess}
 
@@ -350,7 +350,7 @@ func Test_Cov_CompareNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Cov_Clamp(t *testing.T) {
+func Test_Clamp(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Clamp(5, 1, 10) != 5}
 
@@ -365,7 +365,7 @@ func Test_Cov_Clamp(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "above max", actual)
 }
 
-func Test_Cov_Abs(t *testing.T) {
+func Test_Abs(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Abs(-5) != 5}
 
@@ -374,7 +374,7 @@ func Test_Cov_Abs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
-func Test_Cov_AbsDiff(t *testing.T) {
+func Test_AbsDiff(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.AbsDiff(3, 5) != 2}
 
@@ -383,7 +383,7 @@ func Test_Cov_AbsDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_Sign(t *testing.T) {
+func Test_Sign(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Sign(-5) != -1}
 
@@ -398,7 +398,7 @@ func Test_Cov_Sign(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_SafeDiv(t *testing.T) {
+func Test_SafeDiv(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.SafeDiv(10, 0) != 0}
 
@@ -410,7 +410,7 @@ func Test_Cov_SafeDiv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
-func Test_Cov_SafeDivOrDefault(t *testing.T) {
+func Test_SafeDivOrDefault(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.SafeDivOrDefault(10, 0, -1) != -1}
 
@@ -419,7 +419,7 @@ func Test_Cov_SafeDivOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
-func Test_Cov_MinOfSlice(t *testing.T) {
+func Test_MinOfSlice(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.MinOfSlice([]int{3, 1, 2}) != 1}
 
@@ -428,7 +428,7 @@ func Test_Cov_MinOfSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_MaxOfSlice(t *testing.T) {
+func Test_MaxOfSlice(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.MaxOfSlice([]int{3, 1, 2}) != 3}
 
@@ -437,7 +437,7 @@ func Test_Cov_MaxOfSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_Cov_InRangeExclusive(t *testing.T) {
+func Test_InRangeExclusive(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.InRangeExclusive(5, 0, 10)}
 
@@ -449,7 +449,7 @@ func Test_Cov_InRangeExclusive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for boundary", actual)
 }
 
-func Test_Cov_IsNegative(t *testing.T) {
+func Test_IsNegative(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNegative(-1)}
 
@@ -458,7 +458,7 @@ func Test_Cov_IsNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_Cov_IsNonNegative(t *testing.T) {
+func Test_IsNonNegative(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNonNegative(0)}
 

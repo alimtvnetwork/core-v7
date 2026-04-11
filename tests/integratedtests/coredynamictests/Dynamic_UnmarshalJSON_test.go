@@ -10,7 +10,7 @@ import (
 
 // ── Dynamic.UnmarshalJSON on nil receiver (line 54) ──
 
-func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
+func Test_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -34,7 +34,7 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 // We serialize the raw map, then unmarshal it into a Dynamic whose innerData
 // is a *map[string]any.
 
-func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
+func Test_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
 	innerMap := map[string]any{
 		"key": "value",
@@ -64,7 +64,7 @@ func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 
 // ── Dynamic.JsonStringMust valid (line 149-163) ──
 
-func Test_Cov75_Dynamic_JsonStringMust_Valid_I29(t *testing.T) {
+func Test_Dynamic_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 

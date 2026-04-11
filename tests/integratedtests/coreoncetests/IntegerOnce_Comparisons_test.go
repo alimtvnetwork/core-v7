@@ -11,7 +11,7 @@ import (
 // IntegerOnce — comparison methods
 // ==========================================================================
 
-func Test_Cov4_IntegerOnce_Comparisons(t *testing.T) {
+func Test_IntegerOnce_Comparisons(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 5 })
 
@@ -40,7 +40,7 @@ func Test_Cov4_IntegerOnce_Comparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce comparisons -- value 5", actual)
 }
 
-func Test_Cov4_IntegerOnce_Negative(t *testing.T) {
+func Test_IntegerOnce_Negative(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return -1 })
 
@@ -59,7 +59,7 @@ func Test_Cov4_IntegerOnce_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce negative comparisons -- value -1", actual)
 }
 
-func Test_Cov4_IntegerOnce_Serialize(t *testing.T) {
+func Test_IntegerOnce_Serialize(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	bytes, err := io.Serialize()
@@ -78,7 +78,7 @@ func Test_Cov4_IntegerOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce Serialize -- 42", actual)
 }
 
-func Test_Cov4_IntegerOnce_MarshalUnmarshal(t *testing.T) {
+func Test_IntegerOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	mb, _ := io.MarshalJSON()
@@ -103,7 +103,7 @@ func Test_Cov4_IntegerOnce_MarshalUnmarshal(t *testing.T) {
 // IntegersOnce — Sorted, RangesMap, IsEqual, etc
 // ==========================================================================
 
-func Test_Cov4_IntegersOnce_Sorted(t *testing.T) {
+func Test_IntegersOnce_Sorted(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{3, 1, 2} })
 	sorted := io.Sorted()
@@ -125,7 +125,7 @@ func Test_Cov4_IntegersOnce_Sorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce Sorted returns sorted -- 3,1,2", actual)
 }
 
-func Test_Cov4_IntegersOnce_RangesMap(t *testing.T) {
+func Test_IntegersOnce_RangesMap(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{10, 20} })
 	rm := io.RangesMap()
@@ -146,7 +146,7 @@ func Test_Cov4_IntegersOnce_RangesMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce maps -- 2 items", actual)
 }
 
-func Test_Cov4_IntegersOnce_RangesMap_Empty(t *testing.T) {
+func Test_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{} })
 	rm := io.RangesMap()
@@ -169,7 +169,7 @@ func Test_Cov4_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce maps empty -- empty", actual)
 }
 
-func Test_Cov4_IntegersOnce_IsEqual(t *testing.T) {
+func Test_IntegersOnce_IsEqual(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{1, 2} })
 
@@ -189,7 +189,7 @@ func Test_Cov4_IntegersOnce_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce IsEqual -- various", actual)
 }
 
-func Test_Cov4_IntegersOnce_Aliases(t *testing.T) {
+func Test_IntegersOnce_Aliases(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{1} })
 
@@ -212,7 +212,7 @@ func Test_Cov4_IntegersOnce_Aliases(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce aliases -- 1 item", actual)
 }
 
-func Test_Cov4_IntegersOnce_Serialize(t *testing.T) {
+func Test_IntegersOnce_Serialize(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{1, 2} })
 	bytes, err := io.Serialize()
@@ -231,7 +231,7 @@ func Test_Cov4_IntegersOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegersOnce Serialize -- valid", actual)
 }
 
-func Test_Cov4_IntegersOnce_MarshalUnmarshal(t *testing.T) {
+func Test_IntegersOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{1, 2} })
 	mb, _ := io.MarshalJSON()
@@ -256,7 +256,7 @@ func Test_Cov4_IntegersOnce_MarshalUnmarshal(t *testing.T) {
 // StringsOnce — extensive
 // ==========================================================================
 
-func Test_Cov4_StringsOnce_UniqueMap(t *testing.T) {
+func Test_StringsOnce_UniqueMap(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b", "a"} })
 	um := so.UniqueMap()
@@ -277,7 +277,7 @@ func Test_Cov4_StringsOnce_UniqueMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce UniqueMap -- 2 unique", actual)
 }
 
-func Test_Cov4_StringsOnce_UniqueMapLock(t *testing.T) {
+func Test_StringsOnce_UniqueMapLock(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 	um := so.UniqueMapLock()
@@ -290,7 +290,7 @@ func Test_Cov4_StringsOnce_UniqueMapLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce UniqueMapLock -- 2 items", actual)
 }
 
-func Test_Cov4_StringsOnce_Has(t *testing.T) {
+func Test_StringsOnce_Has(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 
@@ -310,7 +310,7 @@ func Test_Cov4_StringsOnce_Has(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce Has/IsContains -- a and c", actual)
 }
 
-func Test_Cov4_StringsOnce_HasAll(t *testing.T) {
+func Test_StringsOnce_HasAll(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b", "c"} })
 
@@ -328,7 +328,7 @@ func Test_Cov4_StringsOnce_HasAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce HasAll -- present and missing", actual)
 }
 
-func Test_Cov4_StringsOnce_Sorted(t *testing.T) {
+func Test_StringsOnce_Sorted(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"c", "a", "b"} })
 	sorted := so.Sorted()
@@ -348,7 +348,7 @@ func Test_Cov4_StringsOnce_Sorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce Sorted -- c,a,b", actual)
 }
 
-func Test_Cov4_StringsOnce_RangesMap(t *testing.T) {
+func Test_StringsOnce_RangesMap(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"x", "y"} })
 	rm := so.RangesMap()
@@ -361,7 +361,7 @@ func Test_Cov4_StringsOnce_RangesMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce RangesMap -- 2 items", actual)
 }
 
-func Test_Cov4_StringsOnce_RangesMap_Empty(t *testing.T) {
+func Test_StringsOnce_RangesMap_Empty(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{} })
 	rm := so.RangesMap()
@@ -374,7 +374,7 @@ func Test_Cov4_StringsOnce_RangesMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce RangesMap empty -- empty", actual)
 }
 
-func Test_Cov4_StringsOnce_Csv(t *testing.T) {
+func Test_StringsOnce_Csv(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 
@@ -396,7 +396,7 @@ func Test_Cov4_StringsOnce_Csv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce Csv methods -- 2 items", actual)
 }
 
-func Test_Cov4_StringsOnce_SafeStrings(t *testing.T) {
+func Test_StringsOnce_SafeStrings(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 
@@ -408,7 +408,7 @@ func Test_Cov4_StringsOnce_SafeStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce SafeStrings -- 1 item", actual)
 }
 
-func Test_Cov4_StringsOnce_SafeStrings_Empty(t *testing.T) {
+func Test_StringsOnce_SafeStrings_Empty(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return nil })
 
@@ -420,7 +420,7 @@ func Test_Cov4_StringsOnce_SafeStrings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce SafeStrings empty -- nil", actual)
 }
 
-func Test_Cov4_StringsOnce_IsEqual(t *testing.T) {
+func Test_StringsOnce_IsEqual(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 
@@ -440,7 +440,7 @@ func Test_Cov4_StringsOnce_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce IsEqual -- various", actual)
 }
 
-func Test_Cov4_StringsOnce_Aliases(t *testing.T) {
+func Test_StringsOnce_Aliases(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 
@@ -464,7 +464,7 @@ func Test_Cov4_StringsOnce_Aliases(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce aliases -- 1 item", actual)
 }
 
-func Test_Cov4_StringsOnce_Serialize(t *testing.T) {
+func Test_StringsOnce_Serialize(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 	bytes, err := so.Serialize()
@@ -483,7 +483,7 @@ func Test_Cov4_StringsOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce Serialize -- valid", actual)
 }
 
-func Test_Cov4_StringsOnce_JsonStringMust(t *testing.T) {
+func Test_StringsOnce_JsonStringMust(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 	jsonStr := so.JsonStringMust()
@@ -496,7 +496,7 @@ func Test_Cov4_StringsOnce_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsOnce JsonStringMust -- valid", actual)
 }
 
-func Test_Cov4_StringsOnce_MarshalUnmarshal(t *testing.T) {
+func Test_StringsOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{"x"} })
 	mb, _ := so.MarshalJSON()
@@ -521,7 +521,7 @@ func Test_Cov4_StringsOnce_MarshalUnmarshal(t *testing.T) {
 // MapStringStringOnce — AllKeys, AllValues, IsEqual
 // ==========================================================================
 
-func Test_Cov4_MapStringStringOnce_AllKeys(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -545,7 +545,7 @@ func Test_Cov4_MapStringStringOnce_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce AllKeys/AllValues -- 2 entries", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_AllKeysSorted(t *testing.T) {
+func Test_MapStringStringOnce_AllKeysSorted(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"b": "2", "a": "1"}
@@ -571,7 +571,7 @@ func Test_Cov4_MapStringStringOnce_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce AllKeysSorted -- b,a sorted", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_GetValue(t *testing.T) {
+func Test_MapStringStringOnce_GetValue(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -598,7 +598,7 @@ func Test_Cov4_MapStringStringOnce_GetValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce GetValue -- k", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_IsEqual(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -621,7 +621,7 @@ func Test_Cov4_MapStringStringOnce_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce IsEqual -- various", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_Strings(t *testing.T) {
+func Test_MapStringStringOnce_Strings(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -643,7 +643,7 @@ func Test_Cov4_MapStringStringOnce_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce Strings -- 1 entry", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_Strings_Empty(t *testing.T) {
+func Test_MapStringStringOnce_Strings_Empty(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
 	strs := mso.Strings()
@@ -656,7 +656,7 @@ func Test_Cov4_MapStringStringOnce_Strings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce Strings empty -- empty", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_Aliases(t *testing.T) {
+func Test_MapStringStringOnce_Aliases(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -685,7 +685,7 @@ func Test_Cov4_MapStringStringOnce_Aliases(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce aliases -- 1 entry", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_HasAll_Missing(t *testing.T) {
+func Test_MapStringStringOnce_HasAll_Missing(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -699,7 +699,7 @@ func Test_Cov4_MapStringStringOnce_HasAll_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce HasAll missing -- b missing", actual)
 }
 
-func Test_Cov4_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
 	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
 
@@ -725,7 +725,7 @@ func Test_Cov4_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
 // AnyOnce — Serialize, IsInitialized, IsStringEmpty
 // ==========================================================================
 
-func Test_Cov4_AnyOnce_Serialize(t *testing.T) {
+func Test_AnyOnce_Serialize(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "hello" })
 	bytes, err := ao.Serialize()
@@ -744,7 +744,7 @@ func Test_Cov4_AnyOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce Serialize -- valid", actual)
 }
 
-func Test_Cov4_AnyOnce_SerializeMust(t *testing.T) {
+func Test_AnyOnce_SerializeMust(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	bytes := ao.SerializeMust()
@@ -757,7 +757,7 @@ func Test_Cov4_AnyOnce_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce SerializeMust -- 42", actual)
 }
 
-func Test_Cov4_AnyOnce_SerializeSkipExistingError(t *testing.T) {
+func Test_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "test" })
 	bytes, err := ao.SerializeSkipExistingError()
@@ -776,7 +776,7 @@ func Test_Cov4_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce SerializeSkipExistingError -- valid", actual)
 }
 
-func Test_Cov4_AnyOnce_IsInitialized(t *testing.T) {
+func Test_AnyOnce_IsInitialized(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 	before := ao.IsInitialized()
@@ -797,7 +797,7 @@ func Test_Cov4_AnyOnce_IsInitialized(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce IsInitialized -- before and after", actual)
 }
 
-func Test_Cov4_AnyOnce_IsStringEmpty(t *testing.T) {
+func Test_AnyOnce_IsStringEmpty(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 
@@ -815,7 +815,7 @@ func Test_Cov4_AnyOnce_IsStringEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce IsStringEmpty -- nil value", actual)
 }
 
-func Test_Cov4_AnyOnce_CastSuccess(t *testing.T) {
+func Test_AnyOnce_CastSuccess(t *testing.T) {
 	// Arrange
 	aoStr := coreonce.NewAnyOnce(func() any { return "hello" })
 	aoStrings := coreonce.NewAnyOnce(func() any { return []string{"a"} })
@@ -849,7 +849,7 @@ func Test_Cov4_AnyOnce_CastSuccess(t *testing.T) {
 // BoolOnce — Execute, String, Serialize
 // ==========================================================================
 
-func Test_Cov4_BoolOnce_Methods(t *testing.T) {
+func Test_BoolOnce_Methods(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 
@@ -867,7 +867,7 @@ func Test_Cov4_BoolOnce_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce Execute and String -- true", actual)
 }
 
-func Test_Cov4_BoolOnce_Serialize(t *testing.T) {
+func Test_BoolOnce_Serialize(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 	bytes, err := bo.Serialize()
@@ -886,7 +886,7 @@ func Test_Cov4_BoolOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce Serialize -- false", actual)
 }
 
-func Test_Cov4_BoolOnce_MarshalUnmarshal(t *testing.T) {
+func Test_BoolOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	mb, _ := bo.MarshalJSON()
@@ -911,7 +911,7 @@ func Test_Cov4_BoolOnce_MarshalUnmarshal(t *testing.T) {
 // ByteOnce — Int, Execute, String, Serialize
 // ==========================================================================
 
-func Test_Cov4_ByteOnce_Methods(t *testing.T) {
+func Test_ByteOnce_Methods(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 42 })
 
@@ -931,7 +931,7 @@ func Test_Cov4_ByteOnce_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ByteOnce methods -- 42", actual)
 }
 
-func Test_Cov4_ByteOnce_Serialize(t *testing.T) {
+func Test_ByteOnce_Serialize(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 1 })
 	bytes, err := bo.Serialize()
@@ -950,7 +950,7 @@ func Test_Cov4_ByteOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ByteOnce Serialize -- 1", actual)
 }
 
-func Test_Cov4_ByteOnce_MarshalUnmarshal(t *testing.T) {
+func Test_ByteOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 5 })
 	mb, _ := bo.MarshalJSON()
@@ -975,7 +975,7 @@ func Test_Cov4_ByteOnce_MarshalUnmarshal(t *testing.T) {
 // BytesOnce — Execute, nil init, String, Length
 // ==========================================================================
 
-func Test_Cov4_BytesOnce_NilInit(t *testing.T) {
+func Test_BytesOnce_NilInit(t *testing.T) {
 	// Arrange
 	bo := &coreonce.BytesOnce{}
 	val := bo.Value()
@@ -994,7 +994,7 @@ func Test_Cov4_BytesOnce_NilInit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesOnce nil init -- no func", actual)
 }
 
-func Test_Cov4_BytesOnce_Execute(t *testing.T) {
+func Test_BytesOnce_Execute(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOnce(func() []byte { return []byte("hi") })
 
@@ -1014,7 +1014,7 @@ func Test_Cov4_BytesOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesOnce Execute/String/Length -- hi", actual)
 }
 
-func Test_Cov4_BytesOnce_Serialize(t *testing.T) {
+func Test_BytesOnce_Serialize(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOnce(func() []byte { return []byte("test") })
 	bytes, err := bo.Serialize()
@@ -1033,7 +1033,7 @@ func Test_Cov4_BytesOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesOnce Serialize -- test", actual)
 }
 
-func Test_Cov4_BytesOnce_MarshalUnmarshal(t *testing.T) {
+func Test_BytesOnce_MarshalUnmarshal(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBytesOnce(func() []byte { return []byte("ab") })
 	mb, _ := bo.MarshalJSON()
@@ -1058,7 +1058,7 @@ func Test_Cov4_BytesOnce_MarshalUnmarshal(t *testing.T) {
 // BytesErrorOnce — Deserialize, IsStringEmpty, etc
 // ==========================================================================
 
-func Test_Cov4_BytesErrorOnce_Deserialize(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte(`"hello"`), nil })
 	var result string
@@ -1078,7 +1078,7 @@ func Test_Cov4_BytesErrorOnce_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce Deserialize -- valid", actual)
 }
 
-func Test_Cov4_BytesErrorOnce_StringMethods(t *testing.T) {
+func Test_BytesErrorOnce_StringMethods(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("ab"), nil })
 
@@ -1106,7 +1106,7 @@ func Test_Cov4_BytesErrorOnce_StringMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce string methods -- ab", actual)
 }
 
-func Test_Cov4_BytesErrorOnce_HasIssuesOrEmpty(t *testing.T) {
+func Test_BytesErrorOnce_HasIssuesOrEmpty(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("ok"), nil })
 
@@ -1124,7 +1124,7 @@ func Test_Cov4_BytesErrorOnce_HasIssuesOrEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce HasIssuesOrEmpty -- valid", actual)
 }
 
-func Test_Cov4_BytesErrorOnce_ValueWithError(t *testing.T) {
+func Test_BytesErrorOnce_ValueWithError(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("ok"), nil })
 	val, err := beo.ValueWithError()
@@ -1143,7 +1143,7 @@ func Test_Cov4_BytesErrorOnce_ValueWithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce ValueWithError -- valid", actual)
 }
 
-func Test_Cov4_BytesErrorOnce_Serialize(t *testing.T) {
+func Test_BytesErrorOnce_Serialize(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("ok"), nil })
 	bytes, err := beo.Serialize()
@@ -1162,7 +1162,7 @@ func Test_Cov4_BytesErrorOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce Serialize -- valid", actual)
 }
 
-func Test_Cov4_BytesErrorOnce_MarshalJSON(t *testing.T) {
+func Test_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("ok"), nil })
 	bytes, err := beo.MarshalJSON()
@@ -1185,7 +1185,7 @@ func Test_Cov4_BytesErrorOnce_MarshalJSON(t *testing.T) {
 // AnyErrorOnce — ValueStringOnly, SafeString, IsStringEmpty
 // ==========================================================================
 
-func Test_Cov4_AnyErrorOnce_ValueStringOnly(t *testing.T) {
+func Test_AnyErrorOnce_ValueStringOnly(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 
@@ -1203,7 +1203,7 @@ func Test_Cov4_AnyErrorOnce_ValueStringOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce string aliases -- hello", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_StringMethods(t *testing.T) {
+func Test_AnyErrorOnce_StringMethods(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "hello", nil })
 
@@ -1223,7 +1223,7 @@ func Test_Cov4_AnyErrorOnce_StringMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce string methods -- hello", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_ValueOnly(t *testing.T) {
+func Test_AnyErrorOnce_ValueOnly(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	val := aeo.ValueOnly()
@@ -1242,7 +1242,7 @@ func Test_Cov4_AnyErrorOnce_ValueOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueOnly -- 42", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_Serialize(t *testing.T) {
+func Test_AnyErrorOnce_Serialize(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "test", nil })
 	bytes, err := aeo.Serialize()
@@ -1261,7 +1261,7 @@ func Test_Cov4_AnyErrorOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce Serialize -- valid", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
+func Test_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	bytes, err := aeo.SerializeSkipExistingError()
@@ -1280,7 +1280,7 @@ func Test_Cov4_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce SerializeSkipExistingError -- 42", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_SerializeMust(t *testing.T) {
+func Test_AnyErrorOnce_SerializeMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "ok", nil })
 	bytes := aeo.SerializeMust()
@@ -1293,7 +1293,7 @@ func Test_Cov4_AnyErrorOnce_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce SerializeMust -- valid", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_ValueMust(t *testing.T) {
+func Test_AnyErrorOnce_ValueMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return "ok", nil })
 	val := aeo.ValueMust()
@@ -1306,7 +1306,7 @@ func Test_Cov4_AnyErrorOnce_ValueMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueMust -- ok", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_ExecuteMust(t *testing.T) {
+func Test_AnyErrorOnce_ExecuteMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	val := aeo.ExecuteMust()
@@ -1319,7 +1319,7 @@ func Test_Cov4_AnyErrorOnce_ExecuteMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ExecuteMust -- 42", actual)
 }
 
-func Test_Cov4_AnyErrorOnce_ValueString_Cached(t *testing.T) {
+func Test_AnyErrorOnce_ValueString_Cached(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	first, _ := aeo.ValueString()
@@ -1337,7 +1337,7 @@ func Test_Cov4_AnyErrorOnce_ValueString_Cached(t *testing.T) {
 // ErrorOnce — MarshalJSON, UnmarshalJSON, Serialize
 // ==========================================================================
 
-func Test_Cov4_ErrorOnce_MarshalJSON_NoError(t *testing.T) {
+func Test_ErrorOnce_MarshalJSON_NoError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	mb, err := eo.MarshalJSON()
@@ -1356,7 +1356,7 @@ func Test_Cov4_ErrorOnce_MarshalJSON_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce MarshalJSON no error -- nil", actual)
 }
 
-func Test_Cov4_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
+func Test_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	mb, _ := eo.MarshalJSON()
@@ -1371,7 +1371,7 @@ func Test_Cov4_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce UnmarshalJSON -- roundtrip", actual)
 }
 
-func Test_Cov4_ErrorOnce_Serialize(t *testing.T) {
+func Test_ErrorOnce_Serialize(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	bytes, err := eo.Serialize()
@@ -1390,7 +1390,7 @@ func Test_Cov4_ErrorOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce Serialize -- nil error", actual)
 }
 
-func Test_Cov4_ErrorOnce_ConcatNewString_NoError(t *testing.T) {
+func Test_ErrorOnce_ConcatNewString_NoError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	result := eo.ConcatNewString("extra")

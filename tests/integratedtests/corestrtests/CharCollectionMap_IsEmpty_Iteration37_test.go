@@ -12,7 +12,7 @@ import (
 
 // ─── CharCollectionMap: IsEmpty / HasItems / Length ──────────────
 
-func Test_Cov41_CharCollectionMap_IsEmpty_Empty(t *testing.T) {
+func Test_CharCollectionMap_IsEmpty_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEmpty_Empty", func() {
 		// Arrange
 		m := corestr.New.CharCollectionMap.Empty()
@@ -27,7 +27,7 @@ func Test_Cov41_CharCollectionMap_IsEmpty_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEmpty_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_IsEmpty_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEmpty_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -43,7 +43,7 @@ func Test_Cov41_CharCollectionMap_IsEmpty_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasItems_Empty(t *testing.T) {
+func Test_CharCollectionMap_HasItems_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasItems_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -58,7 +58,7 @@ func Test_Cov41_CharCollectionMap_HasItems_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasItems_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_HasItems_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasItems_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("world")
@@ -74,7 +74,7 @@ func Test_Cov41_CharCollectionMap_HasItems_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Length_Empty(t *testing.T) {
+func Test_CharCollectionMap_Length_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Length_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -89,7 +89,7 @@ func Test_Cov41_CharCollectionMap_Length_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Length_WithItems(t *testing.T) {
+func Test_CharCollectionMap_Length_WithItems(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Length_WithItems", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -106,7 +106,7 @@ func Test_Cov41_CharCollectionMap_Length_WithItems(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEmptyLock(t *testing.T) {
+func Test_CharCollectionMap_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEmptyLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -121,7 +121,7 @@ func Test_Cov41_CharCollectionMap_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthLock(t *testing.T) {
+func Test_CharCollectionMap_LengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("cat")
@@ -139,7 +139,7 @@ func Test_Cov41_CharCollectionMap_LengthLock(t *testing.T) {
 
 // ─── Add / AddStrings / AddLock ──────────────
 
-func Test_Cov41_CharCollectionMap_Add_SameChar(t *testing.T) {
+func Test_CharCollectionMap_Add_SameChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Add_SameChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -156,7 +156,7 @@ func Test_Cov41_CharCollectionMap_Add_SameChar(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Add_AllLengthsSum(t *testing.T) {
+func Test_CharCollectionMap_Add_AllLengthsSum(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Add_AllLengthsSum", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -174,7 +174,7 @@ func Test_Cov41_CharCollectionMap_Add_AllLengthsSum(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddStrings_Empty(t *testing.T) {
+func Test_CharCollectionMap_AddStrings_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddStrings_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddStrings()
@@ -190,7 +190,7 @@ func Test_Cov41_CharCollectionMap_AddStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddStrings_Multiple(t *testing.T) {
+func Test_CharCollectionMap_AddStrings_Multiple(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddStrings_Multiple", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddStrings("apple", "banana", "cherry")
@@ -206,7 +206,7 @@ func Test_Cov41_CharCollectionMap_AddStrings_Multiple(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddLock(t *testing.T) {
+func Test_CharCollectionMap_AddLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddLock("hello")
@@ -222,7 +222,7 @@ func Test_Cov41_CharCollectionMap_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddLock_ExistingChar(t *testing.T) {
+func Test_CharCollectionMap_AddLock_ExistingChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddLock_ExistingChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddLock("hello")
@@ -241,7 +241,7 @@ func Test_Cov41_CharCollectionMap_AddLock_ExistingChar(t *testing.T) {
 
 // ─── GetChar / Has / HasWithCollection ──────────────
 
-func Test_Cov41_CharCollectionMap_GetChar_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_GetChar_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetChar_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -256,7 +256,7 @@ func Test_Cov41_CharCollectionMap_GetChar_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetChar_EmptyString(t *testing.T) {
+func Test_CharCollectionMap_GetChar_EmptyString(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetChar_EmptyString", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -271,7 +271,7 @@ func Test_Cov41_CharCollectionMap_GetChar_EmptyString(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Has_Found(t *testing.T) {
+func Test_CharCollectionMap_Has_Found(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Has_Found", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -287,7 +287,7 @@ func Test_Cov41_CharCollectionMap_Has_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Has_NotFound(t *testing.T) {
+func Test_CharCollectionMap_Has_NotFound(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Has_NotFound", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -303,7 +303,7 @@ func Test_Cov41_CharCollectionMap_Has_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Has_Empty(t *testing.T) {
+func Test_CharCollectionMap_Has_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Has_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -318,7 +318,7 @@ func Test_Cov41_CharCollectionMap_Has_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollection_Found(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollection_Found(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollection_Found", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -335,7 +335,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollection_NotFound(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollection_NotFound(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollection_NotFound", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -352,7 +352,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollection_Empty(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollection_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		found, _ := m.HasWithCollection("anything")
@@ -368,7 +368,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Found(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollectionLock_Found(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollectionLock_Found", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -385,7 +385,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Empty(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollectionLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollectionLock_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		found, _ := m.HasWithCollectionLock("anything")
@@ -401,7 +401,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HasWithCollectionLock_MissingChar(t *testing.T) {
+func Test_CharCollectionMap_HasWithCollectionLock_MissingChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HasWithCollectionLock_MissingChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -420,7 +420,7 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_MissingChar(t *testing.T
 
 // ─── LengthOf / LengthOfLock / LengthOfCollectionFromFirstChar ──────────────
 
-func Test_Cov41_CharCollectionMap_LengthOf_Exists(t *testing.T) {
+func Test_CharCollectionMap_LengthOf_Exists(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOf_Exists", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -437,7 +437,7 @@ func Test_Cov41_CharCollectionMap_LengthOf_Exists(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthOf_Missing(t *testing.T) {
+func Test_CharCollectionMap_LengthOf_Missing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOf_Missing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -452,7 +452,7 @@ func Test_Cov41_CharCollectionMap_LengthOf_Missing(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthOfLock_Exists(t *testing.T) {
+func Test_CharCollectionMap_LengthOfLock_Exists(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOfLock_Exists", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -468,7 +468,7 @@ func Test_Cov41_CharCollectionMap_LengthOfLock_Exists(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthOfLock_Empty(t *testing.T) {
+func Test_CharCollectionMap_LengthOfLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOfLock_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -483,7 +483,7 @@ func Test_Cov41_CharCollectionMap_LengthOfLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) {
+func Test_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -500,7 +500,7 @@ func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) 
 	})
 }
 
-func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar_Missing(t *testing.T) {
+func Test_CharCollectionMap_LengthOfCollectionFromFirstChar_Missing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar_Missing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -517,7 +517,7 @@ func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar_Missing(t *tes
 
 // ─── AllLengthsSum / AllLengthsSumLock ──────────────
 
-func Test_Cov41_CharCollectionMap_AllLengthsSum_Empty(t *testing.T) {
+func Test_CharCollectionMap_AllLengthsSum_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AllLengthsSum_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -532,7 +532,7 @@ func Test_Cov41_CharCollectionMap_AllLengthsSum_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AllLengthsSumLock(t *testing.T) {
+func Test_CharCollectionMap_AllLengthsSumLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AllLengthsSumLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -551,7 +551,7 @@ func Test_Cov41_CharCollectionMap_AllLengthsSumLock(t *testing.T) {
 
 // ─── List / ListLock / SortedListAsc ──────────────
 
-func Test_Cov41_CharCollectionMap_List_Empty(t *testing.T) {
+func Test_CharCollectionMap_List_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_List_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -566,7 +566,7 @@ func Test_Cov41_CharCollectionMap_List_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_List_WithItems(t *testing.T) {
+func Test_CharCollectionMap_List_WithItems(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_List_WithItems", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -583,7 +583,7 @@ func Test_Cov41_CharCollectionMap_List_WithItems(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_ListLock(t *testing.T) {
+func Test_CharCollectionMap_ListLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_ListLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -599,7 +599,7 @@ func Test_Cov41_CharCollectionMap_ListLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_SortedListAsc_Empty(t *testing.T) {
+func Test_CharCollectionMap_SortedListAsc_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_SortedListAsc_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -614,7 +614,7 @@ func Test_Cov41_CharCollectionMap_SortedListAsc_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_SortedListAsc_Sorted(t *testing.T) {
+func Test_CharCollectionMap_SortedListAsc_Sorted(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_SortedListAsc_Sorted", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("banana")
@@ -634,7 +634,7 @@ func Test_Cov41_CharCollectionMap_SortedListAsc_Sorted(t *testing.T) {
 
 // ─── GetMap / GetCopyMapLock / GetCollection / GetCollectionLock ──────────────
 
-func Test_Cov41_CharCollectionMap_GetMap(t *testing.T) {
+func Test_CharCollectionMap_GetMap(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetMap", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -650,7 +650,7 @@ func Test_Cov41_CharCollectionMap_GetMap(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCopyMapLock_Empty(t *testing.T) {
+func Test_CharCollectionMap_GetCopyMapLock_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCopyMapLock_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -665,7 +665,7 @@ func Test_Cov41_CharCollectionMap_GetCopyMapLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCopyMapLock_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_GetCopyMapLock_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCopyMapLock_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("abc")
@@ -681,7 +681,7 @@ func Test_Cov41_CharCollectionMap_GetCopyMapLock_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCollection_Exists(t *testing.T) {
+func Test_CharCollectionMap_GetCollection_Exists(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCollection_Exists", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -698,7 +698,7 @@ func Test_Cov41_CharCollectionMap_GetCollection_Exists(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCollection_Missing_NoAdd(t *testing.T) {
+func Test_CharCollectionMap_GetCollection_Missing_NoAdd(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCollection_Missing_NoAdd", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := m.GetCollection("z", false)
@@ -714,7 +714,7 @@ func Test_Cov41_CharCollectionMap_GetCollection_Missing_NoAdd(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCollection_Missing_AddNew(t *testing.T) {
+func Test_CharCollectionMap_GetCollection_Missing_AddNew(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCollection_Missing_AddNew", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := m.GetCollection("z", true)
@@ -730,7 +730,7 @@ func Test_Cov41_CharCollectionMap_GetCollection_Missing_AddNew(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCollectionLock(t *testing.T) {
+func Test_CharCollectionMap_GetCollectionLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCollectionLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -747,7 +747,7 @@ func Test_Cov41_CharCollectionMap_GetCollectionLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCollectionByChar(t *testing.T) {
+func Test_CharCollectionMap_GetCollectionByChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCollectionByChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -766,7 +766,7 @@ func Test_Cov41_CharCollectionMap_GetCollectionByChar(t *testing.T) {
 
 // ─── AddSameStartingCharItems ──────────────
 
-func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_New(t *testing.T) {
+func Test_CharCollectionMap_AddSameStartingCharItems_New(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameStartingCharItems_New", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddSameStartingCharItems(byte('a'), []string{"apple", "avocado"}, false)
@@ -782,7 +782,7 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_New(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Existing(t *testing.T) {
+func Test_CharCollectionMap_AddSameStartingCharItems_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Existing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -799,7 +799,7 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Existing(t *testing.T
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Empty(t *testing.T) {
+func Test_CharCollectionMap_AddSameStartingCharItems_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddSameStartingCharItems(byte('a'), []string{}, false)
@@ -817,7 +817,7 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Empty(t *testing.T) {
 
 // ─── AddSameCharsCollection / AddSameCharsCollectionLock ──────────────
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollection_New(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollection_New(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollection_New", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := corestr.New.Collection.Strings([]string{"apple", "avocado"})
@@ -834,7 +834,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_New(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollection_Existing(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollection_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollection_Existing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -852,7 +852,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_Existing(t *testing.T) 
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollection_NilCollection(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollection_NilCollection(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollection_NilCollection", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.AddSameCharsCollection("abc", nil)
@@ -868,7 +868,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_NilCollection(t *testin
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollection_ExistingNilCol(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollection_ExistingNilCol(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollection_ExistingNilCol", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -885,7 +885,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_ExistingNilCol(t *testi
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_New(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollectionLock_New(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_New", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := corestr.New.Collection.Strings([]string{"banana"})
@@ -902,7 +902,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_New(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_Existing(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollectionLock_Existing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_Existing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("banana")
@@ -920,7 +920,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_Existing(t *testing
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_NilCol(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollectionLock_NilCol(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_NilCol", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.AddSameCharsCollectionLock("bbb", nil)
@@ -936,7 +936,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_NilCol(t *testing.T
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_ExistingNil(t *testing.T) {
+func Test_CharCollectionMap_AddSameCharsCollectionLock_ExistingNil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_ExistingNil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("banana")
@@ -955,7 +955,7 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_ExistingNil(t *test
 
 // ─── AddCollectionItems / AddHashmapsValues / AddHashmapsKeysValuesBoth ──────
 
-func Test_Cov41_CharCollectionMap_AddCollectionItems_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddCollectionItems_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddCollectionItems_Nil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddCollectionItems(nil)
@@ -971,7 +971,7 @@ func Test_Cov41_CharCollectionMap_AddCollectionItems_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddCollectionItems_Valid(t *testing.T) {
+func Test_CharCollectionMap_AddCollectionItems_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddCollectionItems_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := corestr.New.Collection.Strings([]string{"alpha", "beta"})
@@ -988,7 +988,7 @@ func Test_Cov41_CharCollectionMap_AddCollectionItems_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsValues_Nil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddHashmapsValues(nil)
@@ -1004,7 +1004,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsValues_Valid(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsValues_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsValues_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "val1"})
@@ -1021,7 +1021,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsValues_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddHashmapsKeysValuesBoth(nil)
@@ -1037,7 +1037,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Valid(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysValuesBoth_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "key", Value: "val"})
@@ -1056,7 +1056,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Valid(t *testing.T) 
 
 // ─── AddHashmapsKeysOrValuesBothUsingFilter ──────
 
-func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddHashmapsKeysOrValuesBothUsingFilter(nil, nil)
@@ -1072,7 +1072,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Accept(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Accept(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Accept", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -1092,7 +1092,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Accept(
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Break(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Break(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Break", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -1114,7 +1114,7 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Break(t
 
 // ─── AddCharHashsetMap ──────
 
-func Test_Cov41_CharCollectionMap_AddCharHashsetMap(t *testing.T) {
+func Test_CharCollectionMap_AddCharHashsetMap(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddCharHashsetMap", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
@@ -1134,7 +1134,7 @@ func Test_Cov41_CharCollectionMap_AddCharHashsetMap(t *testing.T) {
 
 // ─── IsEquals / IsEqualsCaseSensitive / IsEqualsLock ──────────────
 
-func Test_Cov41_CharCollectionMap_IsEquals_Same(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_Same(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_Same", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1150,7 +1150,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_Same(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEquals_Nil(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_Nil", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -1165,7 +1165,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEquals_BothEmpty(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_BothEmpty", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m2 := corestr.New.CharCollectionMap.Empty()
@@ -1181,7 +1181,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_BothEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEquals_DiffLen(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_DiffLen(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_DiffLen", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("a")
@@ -1198,7 +1198,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_DiffLen(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEquals_DiffContent(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_DiffContent(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_DiffContent", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("apple")
@@ -1216,7 +1216,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_DiffContent(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEquals_MissingKey(t *testing.T) {
+func Test_CharCollectionMap_IsEquals_MissingKey(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEquals_MissingKey", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("apple")
@@ -1234,7 +1234,7 @@ func Test_Cov41_CharCollectionMap_IsEquals_MissingKey(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEqualsLock(t *testing.T) {
+func Test_CharCollectionMap_IsEqualsLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEqualsLock", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("x")
@@ -1252,7 +1252,7 @@ func Test_Cov41_CharCollectionMap_IsEqualsLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitive_Insensitive(t *testing.T) {
+func Test_CharCollectionMap_IsEqualsCaseSensitive_Insensitive(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEqualsCaseSensitive_Insensitive", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("Hello")
@@ -1270,7 +1270,7 @@ func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitive_Insensitive(t *testing.T
 	})
 }
 
-func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitiveLock(t *testing.T) {
+func Test_CharCollectionMap_IsEqualsCaseSensitiveLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_IsEqualsCaseSensitiveLock", func() {
 		m1 := corestr.New.CharCollectionMap.Empty()
 		m1.Add("test")
@@ -1290,7 +1290,7 @@ func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitiveLock(t *testing.T) {
 
 // ─── Hashset methods ──────────────
 
-func Test_Cov41_CharCollectionMap_HashsetByChar_Found(t *testing.T) {
+func Test_CharCollectionMap_HashsetByChar_Found(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByChar_Found", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1307,7 +1307,7 @@ func Test_Cov41_CharCollectionMap_HashsetByChar_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetByChar_Missing(t *testing.T) {
+func Test_CharCollectionMap_HashsetByChar_Missing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByChar_Missing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hs := m.HashsetByChar(byte('z'))
@@ -1323,7 +1323,7 @@ func Test_Cov41_CharCollectionMap_HashsetByChar_Missing(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetByCharLock_Found(t *testing.T) {
+func Test_CharCollectionMap_HashsetByCharLock_Found(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByCharLock_Found", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1340,7 +1340,7 @@ func Test_Cov41_CharCollectionMap_HashsetByCharLock_Found(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetByCharLock_Missing(t *testing.T) {
+func Test_CharCollectionMap_HashsetByCharLock_Missing(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByCharLock_Missing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hs := m.HashsetByCharLock(byte('z'))
@@ -1356,7 +1356,7 @@ func Test_Cov41_CharCollectionMap_HashsetByCharLock_Missing(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetByStringFirstChar(t *testing.T) {
+func Test_CharCollectionMap_HashsetByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByStringFirstChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1373,7 +1373,7 @@ func Test_Cov41_CharCollectionMap_HashsetByStringFirstChar(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetByStringFirstCharLock(t *testing.T) {
+func Test_CharCollectionMap_HashsetByStringFirstCharLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetByStringFirstCharLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1390,7 +1390,7 @@ func Test_Cov41_CharCollectionMap_HashsetByStringFirstCharLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollection_Empty(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollection_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hsc := m.HashsetsCollection()
@@ -1406,7 +1406,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollection_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollection_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollection_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1424,7 +1424,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollection_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Empty(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollectionByChars_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hsc := m.HashsetsCollectionByChars(byte('a'))
@@ -1440,7 +1440,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Empty(t *testing.T) 
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Valid(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollectionByChars_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -1457,7 +1457,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Valid(t *testing.T) 
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Empty(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollectionByStringFirstChar_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hsc := m.HashsetsCollectionByStringFirstChar("apple")
@@ -1473,7 +1473,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Empty(t *t
 	})
 }
 
-func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Valid(t *testing.T) {
+func Test_CharCollectionMap_HashsetsCollectionByStringFirstChar_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("apple")
@@ -1492,7 +1492,7 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Valid(t *t
 
 // ─── Resize / AddLength ──────────────
 
-func Test_Cov41_CharCollectionMap_Resize_Larger(t *testing.T) {
+func Test_CharCollectionMap_Resize_Larger(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Resize_Larger", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -1509,7 +1509,7 @@ func Test_Cov41_CharCollectionMap_Resize_Larger(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Resize_AlreadyLarger(t *testing.T) {
+func Test_CharCollectionMap_Resize_AlreadyLarger(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Resize_AlreadyLarger", func() {
 		m := corestr.New.CharCollectionMap.CapSelfCap(100, 10)
 		m.Resize(5)
@@ -1525,7 +1525,7 @@ func Test_Cov41_CharCollectionMap_Resize_AlreadyLarger(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddLength(t *testing.T) {
+func Test_CharCollectionMap_AddLength(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddLength", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddLength(50)
@@ -1541,7 +1541,7 @@ func Test_Cov41_CharCollectionMap_AddLength(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AddLength_Empty(t *testing.T) {
+func Test_CharCollectionMap_AddLength_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AddLength_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddLength()
@@ -1559,7 +1559,7 @@ func Test_Cov41_CharCollectionMap_AddLength_Empty(t *testing.T) {
 
 // ─── GetCharsGroups ──────────────
 
-func Test_Cov41_CharCollectionMap_GetCharsGroups_Empty(t *testing.T) {
+func Test_CharCollectionMap_GetCharsGroups_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCharsGroups_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.GetCharsGroups([]string{})
@@ -1575,7 +1575,7 @@ func Test_Cov41_CharCollectionMap_GetCharsGroups_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_GetCharsGroups_Valid(t *testing.T) {
+func Test_CharCollectionMap_GetCharsGroups_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_GetCharsGroups_Valid", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.GetCharsGroups([]string{"apple", "banana", "avocado"})
@@ -1593,7 +1593,7 @@ func Test_Cov41_CharCollectionMap_GetCharsGroups_Valid(t *testing.T) {
 
 // ─── String / SummaryString / Print / PrintLock ──────────────
 
-func Test_Cov41_CharCollectionMap_String(t *testing.T) {
+func Test_CharCollectionMap_String(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_String", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1610,7 +1610,7 @@ func Test_Cov41_CharCollectionMap_String(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_StringLock(t *testing.T) {
+func Test_CharCollectionMap_StringLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_StringLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1627,7 +1627,7 @@ func Test_Cov41_CharCollectionMap_StringLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_SummaryString(t *testing.T) {
+func Test_CharCollectionMap_SummaryString(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_SummaryString", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -1644,7 +1644,7 @@ func Test_Cov41_CharCollectionMap_SummaryString(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_SummaryStringLock(t *testing.T) {
+func Test_CharCollectionMap_SummaryStringLock(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_SummaryStringLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -1661,7 +1661,7 @@ func Test_Cov41_CharCollectionMap_SummaryStringLock(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Print_Skip(t *testing.T) {
+func Test_CharCollectionMap_Print_Skip(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Print_Skip", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Print(false) // should not panic
@@ -1677,7 +1677,7 @@ func Test_Cov41_CharCollectionMap_Print_Skip(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_PrintLock_Skip(t *testing.T) {
+func Test_CharCollectionMap_PrintLock_Skip(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_PrintLock_Skip", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.PrintLock(false) // should not panic
@@ -1695,7 +1695,7 @@ func Test_Cov41_CharCollectionMap_PrintLock_Skip(t *testing.T) {
 
 // ─── JSON methods ──────────────
 
-func Test_Cov41_CharCollectionMap_MarshalJSON(t *testing.T) {
+func Test_CharCollectionMap_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_MarshalJSON", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -1712,7 +1712,7 @@ func Test_Cov41_CharCollectionMap_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_UnmarshalJSON(t *testing.T) {
+func Test_CharCollectionMap_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_UnmarshalJSON", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -1731,7 +1731,7 @@ func Test_Cov41_CharCollectionMap_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Json(t *testing.T) {
+func Test_CharCollectionMap_Json(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Json", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -1748,7 +1748,7 @@ func Test_Cov41_CharCollectionMap_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_JsonPtr(t *testing.T) {
+func Test_CharCollectionMap_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_JsonPtr", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -1765,7 +1765,7 @@ func Test_Cov41_CharCollectionMap_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_JsonModel(t *testing.T) {
+func Test_CharCollectionMap_JsonModel(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_JsonModel", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("x")
@@ -1782,7 +1782,7 @@ func Test_Cov41_CharCollectionMap_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_JsonModelAny(t *testing.T) {
+func Test_CharCollectionMap_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_JsonModelAny", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.JsonModelAny()
@@ -1798,7 +1798,7 @@ func Test_Cov41_CharCollectionMap_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_ParseInjectUsingJson(t *testing.T) {
+func Test_CharCollectionMap_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_ParseInjectUsingJson", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1817,7 +1817,7 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_CharCollectionMap_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_ParseInjectUsingJson_Error", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		badJson := corejson.NewPtr("invalid")
@@ -1834,7 +1834,7 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_CharCollectionMap_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_ParseInjectUsingJsonMust", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1853,7 +1853,7 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_JsonParseSelfInject(t *testing.T) {
+func Test_CharCollectionMap_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_JsonParseSelfInject", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1874,7 +1874,7 @@ func Test_Cov41_CharCollectionMap_JsonParseSelfInject(t *testing.T) {
 
 // ─── Interface casts ──────────────
 
-func Test_Cov41_CharCollectionMap_AsJsoner(t *testing.T) {
+func Test_CharCollectionMap_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AsJsoner", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -1889,7 +1889,7 @@ func Test_Cov41_CharCollectionMap_AsJsoner(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AsJsonContractsBinder(t *testing.T) {
+func Test_CharCollectionMap_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AsJsonContractsBinder", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -1904,7 +1904,7 @@ func Test_Cov41_CharCollectionMap_AsJsonContractsBinder(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AsJsonMarshaller(t *testing.T) {
+func Test_CharCollectionMap_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AsJsonMarshaller", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -1919,7 +1919,7 @@ func Test_Cov41_CharCollectionMap_AsJsonMarshaller(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_AsJsonParseSelfInjector(t *testing.T) {
+func Test_CharCollectionMap_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_AsJsonParseSelfInjector", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -1936,7 +1936,7 @@ func Test_Cov41_CharCollectionMap_AsJsonParseSelfInjector(t *testing.T) {
 
 // ─── Clear / Dispose ──────────────
 
-func Test_Cov41_CharCollectionMap_Clear_Empty(t *testing.T) {
+func Test_CharCollectionMap_Clear_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Clear_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Clear()
@@ -1952,7 +1952,7 @@ func Test_Cov41_CharCollectionMap_Clear_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Clear_NonEmpty(t *testing.T) {
+func Test_CharCollectionMap_Clear_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Clear_NonEmpty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1969,7 +1969,7 @@ func Test_Cov41_CharCollectionMap_Clear_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_CharCollectionMap_Dispose(t *testing.T) {
+func Test_CharCollectionMap_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov41_CharCollectionMap_Dispose", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -1988,7 +1988,7 @@ func Test_Cov41_CharCollectionMap_Dispose(t *testing.T) {
 
 // ─── newCharCollectionMapCreator ──────────────
 
-func Test_Cov41_newCharCollectionMapCreator_Empty(t *testing.T) {
+func Test_newCharCollectionMapCreator_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		tc := caseV1Compat{
@@ -2003,7 +2003,7 @@ func Test_Cov41_newCharCollectionMapCreator_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_CapSelfCap(t *testing.T) {
+func Test_newCharCollectionMapCreator_CapSelfCap(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_CapSelfCap", func() {
 		m := corestr.New.CharCollectionMap.CapSelfCap(20, 5)
 		tc := caseV1Compat{
@@ -2018,7 +2018,7 @@ func Test_Cov41_newCharCollectionMapCreator_CapSelfCap(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_CapSelfCap_BelowMin(t *testing.T) {
+func Test_newCharCollectionMapCreator_CapSelfCap_BelowMin(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_CapSelfCap_BelowMin", func() {
 		m := corestr.New.CharCollectionMap.CapSelfCap(1, 1)
 		tc := caseV1Compat{
@@ -2033,7 +2033,7 @@ func Test_Cov41_newCharCollectionMapCreator_CapSelfCap_BelowMin(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_Items(t *testing.T) {
+func Test_newCharCollectionMapCreator_Items(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_Items", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
 		tc := caseV1Compat{
@@ -2048,7 +2048,7 @@ func Test_Cov41_newCharCollectionMapCreator_Items(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_Items_Empty(t *testing.T) {
+func Test_newCharCollectionMapCreator_Items_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_Items_Empty", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{})
 		tc := caseV1Compat{
@@ -2063,7 +2063,7 @@ func Test_Cov41_newCharCollectionMapCreator_Items_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap(t *testing.T) {
+func Test_newCharCollectionMapCreator_ItemsPtrWithCap(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap", func() {
 		m := corestr.New.CharCollectionMap.ItemsPtrWithCap(5, 10, []string{"apple"})
 		tc := caseV1Compat{
@@ -2078,7 +2078,7 @@ func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap(t *testing.T) {
 	})
 }
 
-func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap_Empty(t *testing.T) {
+func Test_newCharCollectionMapCreator_ItemsPtrWithCap_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap_Empty", func() {
 		m := corestr.New.CharCollectionMap.ItemsPtrWithCap(5, 10, []string{})
 		tc := caseV1Compat{
@@ -2095,7 +2095,7 @@ func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap_Empty(t *testing.T) 
 
 // ─── CharCollectionDataModel ──────────────
 
-func Test_Cov41_NewCharCollectionMapUsingDataModel(t *testing.T) {
+func Test_NewCharCollectionMapUsingDataModel(t *testing.T) {
 	safeTest(t, "Test_Cov41_NewCharCollectionMapUsingDataModel", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -2113,7 +2113,7 @@ func Test_Cov41_NewCharCollectionMapUsingDataModel(t *testing.T) {
 	})
 }
 
-func Test_Cov41_NewCharCollectionMapDataModelUsing(t *testing.T) {
+func Test_NewCharCollectionMapDataModelUsing(t *testing.T) {
 	safeTest(t, "Test_Cov41_NewCharCollectionMapDataModelUsing", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("hello")
@@ -2132,7 +2132,7 @@ func Test_Cov41_NewCharCollectionMapDataModelUsing(t *testing.T) {
 
 // ─── emptyCreator ──────────────
 
-func Test_Cov41_EmptyCreator_CharCollectionMap(t *testing.T) {
+func Test_EmptyCreator_CharCollectionMap(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_CharCollectionMap", func() {
 		m := corestr.Empty.CharCollectionMap()
 		tc := caseV1Compat{
@@ -2147,7 +2147,7 @@ func Test_Cov41_EmptyCreator_CharCollectionMap(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_CharHashsetMap(t *testing.T) {
+func Test_EmptyCreator_CharHashsetMap(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_CharHashsetMap", func() {
 		m := corestr.Empty.CharHashsetMap()
 		tc := caseV1Compat{
@@ -2162,7 +2162,7 @@ func Test_Cov41_EmptyCreator_CharHashsetMap(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_CollectionsOfCollection(t *testing.T) {
+func Test_EmptyCreator_CollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_CollectionsOfCollection", func() {
 		c := corestr.Empty.CollectionsOfCollection()
 		tc := caseV1Compat{
@@ -2177,7 +2177,7 @@ func Test_Cov41_EmptyCreator_CollectionsOfCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_KeyValuesCollection(t *testing.T) {
+func Test_EmptyCreator_KeyValuesCollection(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_KeyValuesCollection", func() {
 		c := corestr.Empty.KeyValuesCollection()
 		tc := caseV1Compat{
@@ -2192,7 +2192,7 @@ func Test_Cov41_EmptyCreator_KeyValuesCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_SimpleStringOnce(t *testing.T) {
+func Test_EmptyCreator_SimpleStringOnce(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_SimpleStringOnce", func() {
 		s := corestr.Empty.SimpleStringOnce()
 		tc := caseV1Compat{
@@ -2207,7 +2207,7 @@ func Test_Cov41_EmptyCreator_SimpleStringOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_SimpleStringOncePtr(t *testing.T) {
+func Test_EmptyCreator_SimpleStringOncePtr(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_SimpleStringOncePtr", func() {
 		s := corestr.Empty.SimpleStringOncePtr()
 		tc := caseV1Compat{
@@ -2222,7 +2222,7 @@ func Test_Cov41_EmptyCreator_SimpleStringOncePtr(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_KeyAnyValuePair(t *testing.T) {
+func Test_EmptyCreator_KeyAnyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_KeyAnyValuePair", func() {
 		p := corestr.Empty.KeyAnyValuePair()
 		tc := caseV1Compat{
@@ -2237,7 +2237,7 @@ func Test_Cov41_EmptyCreator_KeyAnyValuePair(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_KeyValuePair(t *testing.T) {
+func Test_EmptyCreator_KeyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_KeyValuePair", func() {
 		p := corestr.Empty.KeyValuePair()
 		tc := caseV1Compat{
@@ -2252,7 +2252,7 @@ func Test_Cov41_EmptyCreator_KeyValuePair(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_KeyValueCollection(t *testing.T) {
+func Test_EmptyCreator_KeyValueCollection(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_KeyValueCollection", func() {
 		c := corestr.Empty.KeyValueCollection()
 		tc := caseV1Compat{
@@ -2267,7 +2267,7 @@ func Test_Cov41_EmptyCreator_KeyValueCollection(t *testing.T) {
 	})
 }
 
-func Test_Cov41_EmptyCreator_LeftRight(t *testing.T) {
+func Test_EmptyCreator_LeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov41_EmptyCreator_LeftRight", func() {
 		lr := corestr.Empty.LeftRight()
 		tc := caseV1Compat{
@@ -2284,7 +2284,7 @@ func Test_Cov41_EmptyCreator_LeftRight(t *testing.T) {
 
 // ─── StringUtils ──────────────
 
-func Test_Cov41_StringUtils_WrapDouble(t *testing.T) {
+func Test_StringUtils_WrapDouble(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapDouble", func() {
 		tc := caseV1Compat{
 			Name:     "WrapDouble",
@@ -2298,7 +2298,7 @@ func Test_Cov41_StringUtils_WrapDouble(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapSingle(t *testing.T) {
+func Test_StringUtils_WrapSingle(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapSingle", func() {
 		tc := caseV1Compat{
 			Name:     "WrapSingle",
@@ -2312,7 +2312,7 @@ func Test_Cov41_StringUtils_WrapSingle(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapTilda(t *testing.T) {
+func Test_StringUtils_WrapTilda(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapTilda", func() {
 		tc := caseV1Compat{
 			Name:     "WrapTilda",
@@ -2326,7 +2326,7 @@ func Test_Cov41_StringUtils_WrapTilda(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapDoubleIfMissing_Already(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_Already(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapDoubleIfMissing_Already", func() {
 		tc := caseV1Compat{
 			Name:     "WrapDoubleIfMissing already wrapped",
@@ -2340,7 +2340,7 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_Already(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapDoubleIfMissing_NotWrapped", func() {
 		tc := caseV1Compat{
 			Name:     "WrapDoubleIfMissing not wrapped",
@@ -2354,7 +2354,7 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
+func Test_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapDoubleIfMissing_Empty", func() {
 		tc := caseV1Compat{
 			Name:     "WrapDoubleIfMissing empty",
@@ -2368,7 +2368,7 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapSingleIfMissing_Already(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_Already(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapSingleIfMissing_Already", func() {
 		tc := caseV1Compat{
 			Name:     "WrapSingleIfMissing already wrapped",
@@ -2382,7 +2382,7 @@ func Test_Cov41_StringUtils_WrapSingleIfMissing_Already(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapSingleIfMissing_NotWrapped", func() {
 		tc := caseV1Compat{
 			Name:     "WrapSingleIfMissing not wrapped",
@@ -2396,7 +2396,7 @@ func Test_Cov41_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 	})
 }
 
-func Test_Cov41_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
+func Test_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov41_StringUtils_WrapSingleIfMissing_Empty", func() {
 		tc := caseV1Compat{
 			Name:     "WrapSingleIfMissing empty",

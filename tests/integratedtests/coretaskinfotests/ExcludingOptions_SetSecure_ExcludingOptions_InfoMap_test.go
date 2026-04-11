@@ -7,7 +7,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Cov_ExcludingOptions_SetSecure_Nil(t *testing.T) {
+func Test_ExcludingOptions_SetSecure_Nil(t *testing.T) {
 	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.SetSecure()
@@ -20,7 +20,7 @@ func Test_Cov_ExcludingOptions_SetSecure_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected secure", actual)
 }
 
-func Test_Cov_ExcludingOptions_SetPlainText_Nil(t *testing.T) {
+func Test_ExcludingOptions_SetPlainText_Nil(t *testing.T) {
 	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.SetPlainText()
@@ -33,7 +33,7 @@ func Test_Cov_ExcludingOptions_SetPlainText_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected plain text", actual)
 }
 
-func Test_Cov_ExcludingOptions_ClonePtr_Nil(t *testing.T) {
+func Test_ExcludingOptions_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.ClonePtr()
@@ -46,7 +46,7 @@ func Test_Cov_ExcludingOptions_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov_ExcludingOptions_IsEmpty(t *testing.T) {
+func Test_ExcludingOptions_IsEmpty(t *testing.T) {
 	// Arrange
 	opt := &coretaskinfo.ExcludingOptions{}
 
@@ -62,7 +62,7 @@ func Test_Cov_ExcludingOptions_IsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
-func Test_Cov_ExcludingOptions_IsZero(t *testing.T) {
+func Test_ExcludingOptions_IsZero(t *testing.T) {
 	// Arrange
 	opt := &coretaskinfo.ExcludingOptions{}
 
@@ -74,7 +74,7 @@ func Test_Cov_ExcludingOptions_IsZero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected zero", actual)
 }
 
-func Test_Cov_ExcludingOptions_AllIncludes(t *testing.T) {
+func Test_ExcludingOptions_AllIncludes(t *testing.T) {
 	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 
@@ -113,7 +113,7 @@ func Test_Cov_ExcludingOptions_AllIncludes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil should include payloads", actual)
 }
 
-func Test_Cov_ExcludingOptions_Clone(t *testing.T) {
+func Test_ExcludingOptions_Clone(t *testing.T) {
 	// Arrange
 	opt := coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
 	cloned := opt.Clone()
@@ -126,7 +126,7 @@ func Test_Cov_ExcludingOptions_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cloned", actual)
 }
 
-func Test_Cov_ExcludingOptions_ToPtr_ToNonPtr(t *testing.T) {
+func Test_ExcludingOptions_ToPtr_ToNonPtr(t *testing.T) {
 	// Arrange
 	opt := coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
 	p := opt.ToPtr()

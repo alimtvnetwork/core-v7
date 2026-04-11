@@ -11,7 +11,7 @@ import (
 // LeftRight — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov13_LeftRight_Empty(t *testing.T) {
+func Test_LeftRight_Empty(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{}
 	var nilLR *coredynamic.LeftRight
@@ -32,7 +32,7 @@ func Test_Cov13_LeftRight_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns empty -- empty", actual)
 }
 
-func Test_Cov13_LeftRight_HasLeftRight(t *testing.T) {
+func Test_LeftRight_HasLeftRight(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: "b"}
 
@@ -52,7 +52,7 @@ func Test_Cov13_LeftRight_HasLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- HasLeft/Right", actual)
 }
 
-func Test_Cov13_LeftRight_NilHasLeftRight(t *testing.T) {
+func Test_LeftRight_NilHasLeftRight(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -74,7 +74,7 @@ func Test_Cov13_LeftRight_NilHasLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- nil HasLeft/Right", actual)
 }
 
-func Test_Cov13_LeftRight_ReflectSet(t *testing.T) {
+func Test_LeftRight_ReflectSet(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "hello", Right: "world"}
 	var l, r string
@@ -99,7 +99,7 @@ func Test_Cov13_LeftRight_ReflectSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- ReflectSet", actual)
 }
 
-func Test_Cov13_LeftRight_ReflectSet_Nil(t *testing.T) {
+func Test_LeftRight_ReflectSet_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	errL := lr.LeftReflectSet(nil)
@@ -119,7 +119,7 @@ func Test_Cov13_LeftRight_ReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- ReflectSet nil", actual)
 }
 
-func Test_Cov13_LeftRight_Deserialize(t *testing.T) {
+func Test_LeftRight_Deserialize(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: "b"}
 	dl := lr.DeserializeLeft()
@@ -139,7 +139,7 @@ func Test_Cov13_LeftRight_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Deserialize", actual)
 }
 
-func Test_Cov13_LeftRight_Deserialize_Nil(t *testing.T) {
+func Test_LeftRight_Deserialize_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	dl := lr.DeserializeLeft()
@@ -159,7 +159,7 @@ func Test_Cov13_LeftRight_Deserialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- Deserialize nil", actual)
 }
 
-func Test_Cov13_LeftRight_ToDynamic(t *testing.T) {
+func Test_LeftRight_ToDynamic(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: "b"}
 	ld := lr.LeftToDynamic()
@@ -179,7 +179,7 @@ func Test_Cov13_LeftRight_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- ToDynamic", actual)
 }
 
-func Test_Cov13_LeftRight_ToDynamic_Nil(t *testing.T) {
+func Test_LeftRight_ToDynamic_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	ld := lr.LeftToDynamic()
@@ -199,7 +199,7 @@ func Test_Cov13_LeftRight_ToDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- ToDynamic nil", actual)
 }
 
-func Test_Cov13_LeftRight_TypeStatus(t *testing.T) {
+func Test_LeftRight_TypeStatus(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: "b"}
 	ts := lr.TypeStatus()
@@ -212,7 +212,7 @@ func Test_Cov13_LeftRight_TypeStatus(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- TypeStatus", actual)
 }
 
-func Test_Cov13_LeftRight_TypeStatus_Nil(t *testing.T) {
+func Test_LeftRight_TypeStatus_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	ts := lr.TypeStatus()
@@ -229,7 +229,7 @@ func Test_Cov13_LeftRight_TypeStatus_Nil(t *testing.T) {
 // KeyValCollection — core methods
 // ═══════════════════════════════════════════
 
-func Test_Cov13_KeyValCollection_Basic(t *testing.T) {
+func Test_KeyValCollection_Basic(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(5)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -254,7 +254,7 @@ func Test_Cov13_KeyValCollection_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- basic", actual)
 }
 
-func Test_Cov13_KeyValCollection_Items_Nil(t *testing.T) {
+func Test_KeyValCollection_Items_Nil(t *testing.T) {
 	// Arrange
 	var kvc *coredynamic.KeyValCollection
 
@@ -266,7 +266,7 @@ func Test_Cov13_KeyValCollection_Items_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns nil -- Items nil", actual)
 }
 
-func Test_Cov13_KeyValCollection_AllKeys(t *testing.T) {
+func Test_KeyValCollection_AllKeys(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(5)
 	kvc.Add(coredynamic.KeyVal{Key: "b", Value: 2})
@@ -291,7 +291,7 @@ func Test_Cov13_KeyValCollection_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeys returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_AllKeys_Empty(t *testing.T) {
+func Test_KeyValCollection_AllKeys_Empty(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 
@@ -311,7 +311,7 @@ func Test_Cov13_KeyValCollection_AllKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeys returns empty -- empty", actual)
 }
 
-func Test_Cov13_KeyValCollection_String(t *testing.T) {
+func Test_KeyValCollection_String(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -333,7 +333,7 @@ func Test_Cov13_KeyValCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_MapAnyItems(t *testing.T) {
+func Test_KeyValCollection_MapAnyItems(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -347,7 +347,7 @@ func Test_Cov13_KeyValCollection_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_MapAnyItems_Empty(t *testing.T) {
+func Test_KeyValCollection_MapAnyItems_Empty(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	m := kvc.MapAnyItems()
@@ -360,7 +360,7 @@ func Test_Cov13_KeyValCollection_MapAnyItems_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- empty", actual)
 }
 
-func Test_Cov13_KeyValCollection_Json(t *testing.T) {
+func Test_KeyValCollection_Json(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -387,7 +387,7 @@ func Test_Cov13_KeyValCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Json", actual)
 }
 
-func Test_Cov13_KeyValCollection_CloneNonPtrPtr(t *testing.T) {
+func Test_KeyValCollection_CloneNonPtrPtr(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -418,7 +418,7 @@ func Test_Cov13_KeyValCollection_CloneNonPtrPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone/NonPtr/Ptr returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_Serialize(t *testing.T) {
+func Test_KeyValCollection_Serialize(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -444,7 +444,7 @@ func Test_Cov13_KeyValCollection_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_Paging(t *testing.T) {
+func Test_KeyValCollection_Paging(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 5; i++ {
@@ -473,7 +473,7 @@ func Test_Cov13_KeyValCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Paging", actual)
 }
 
-func Test_Cov13_KeyValCollection_JsonMapResults(t *testing.T) {
+func Test_KeyValCollection_JsonMapResults(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -493,7 +493,7 @@ func Test_Cov13_KeyValCollection_JsonMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonMapResults returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_JsonMapResults_Empty(t *testing.T) {
+func Test_KeyValCollection_JsonMapResults_Empty(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	mr, _ := kvc.JsonMapResults()
@@ -506,7 +506,7 @@ func Test_Cov13_KeyValCollection_JsonMapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonMapResults returns empty -- empty", actual)
 }
 
-func Test_Cov13_KeyValCollection_JsonResultsCollection(t *testing.T) {
+func Test_KeyValCollection_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -527,7 +527,7 @@ func Test_Cov13_KeyValCollection_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonResultsCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov13_KeyValCollection_JsonResultsCollection_Empty(t *testing.T) {
+func Test_KeyValCollection_JsonResultsCollection_Empty(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	rc := kvc.JsonResultsCollection()
@@ -547,7 +547,7 @@ func Test_Cov13_KeyValCollection_JsonResultsCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonResultsCollection returns empty -- empty", actual)
 }
 
-func Test_Cov13_KeyValCollection_AddMany_Nil(t *testing.T) {
+func Test_KeyValCollection_AddMany_Nil(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.AddMany()

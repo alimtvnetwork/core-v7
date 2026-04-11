@@ -11,7 +11,7 @@ import (
 // GetMap
 // ═══════════════════════════════════════════
 
-func Test_Cov_GetMap_NilSlice(t *testing.T) {
+func Test_GetMap_NilSlice(t *testing.T) {
 	// Arrange
 	result := intunique.GetMap(nil)
 
@@ -23,7 +23,7 @@ func Test_Cov_GetMap_NilSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetMap returns nil -- nil input", actual)
 }
 
-func Test_Cov_GetMap_EmptySlice(t *testing.T) {
+func Test_GetMap_EmptySlice(t *testing.T) {
 	// Arrange
 	input := []int{}
 	result := intunique.GetMap(&input)
@@ -42,7 +42,7 @@ func Test_Cov_GetMap_EmptySlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetMap returns empty map -- empty slice", actual)
 }
 
-func Test_Cov_GetMap_WithDuplicates(t *testing.T) {
+func Test_GetMap_WithDuplicates(t *testing.T) {
 	// Arrange
 	input := []int{1, 2, 2, 3, 3, 3}
 	result := intunique.GetMap(&input)
@@ -71,7 +71,7 @@ func Test_Cov_GetMap_WithDuplicates(t *testing.T) {
 // Get — additional branch coverage
 // ═══════════════════════════════════════════
 
-func Test_Cov_Get_NilSlice(t *testing.T) {
+func Test_Get_NilSlice(t *testing.T) {
 	// Arrange
 	result := intunique.Get(nil)
 
@@ -83,7 +83,7 @@ func Test_Cov_Get_NilSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Get returns nil -- nil input", actual)
 }
 
-func Test_Cov_Get_SingleElement(t *testing.T) {
+func Test_Get_SingleElement(t *testing.T) {
 	// Arrange
 	input := []int{42}
 	result := intunique.Get(&input)

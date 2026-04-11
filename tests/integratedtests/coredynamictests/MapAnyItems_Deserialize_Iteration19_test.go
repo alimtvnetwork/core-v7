@@ -13,7 +13,7 @@ import (
 // MapAnyItems — Deserialize, GetItemRef, Paging, Diff, Clone, JSON model
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I19_MapAnyItems_Deserialize_Success(t *testing.T) {
+func Test_MapAnyItems_Deserialize_Success(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "hello"})
 	var target string
@@ -33,7 +33,7 @@ func Test_I19_MapAnyItems_Deserialize_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Deserialize", actual)
 }
 
-func Test_I19_MapAnyItems_Deserialize_MissingKey(t *testing.T) {
+func Test_MapAnyItems_Deserialize_MissingKey(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var target string
@@ -47,7 +47,7 @@ func Test_I19_MapAnyItems_Deserialize_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Deserialize missing key", actual)
 }
 
-func Test_I19_MapAnyItems_DeserializeMust(t *testing.T) {
+func Test_MapAnyItems_DeserializeMust(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": 42})
 	var target int
@@ -61,7 +61,7 @@ func Test_I19_MapAnyItems_DeserializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- DeserializeMust", actual)
 }
 
-func Test_I19_MapAnyItems_GetUsingUnmarshallManyAt_Success(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallManyAt_Success(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "x", "b": "y"})
 	var a, b string
@@ -86,7 +86,7 @@ func Test_I19_MapAnyItems_GetUsingUnmarshallManyAt_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetUsingUnmarshallManyAt", actual)
 }
 
-func Test_I19_MapAnyItems_GetUsingUnmarshallManyAt_Error(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallManyAt_Error(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var a string
@@ -102,7 +102,7 @@ func Test_I19_MapAnyItems_GetUsingUnmarshallManyAt_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns error -- GetUsingUnmarshallManyAt error", actual)
 }
 
-func Test_I19_MapAnyItems_GetItemRef_Success(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_Success(t *testing.T) {
 	// Arrange
 	val := "hello"
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": &val})
@@ -123,7 +123,7 @@ func Test_I19_MapAnyItems_GetItemRef_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetItemRef", actual)
 }
 
-func Test_I19_MapAnyItems_GetItemRef_Missing(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_Missing(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var target string
@@ -137,7 +137,7 @@ func Test_I19_MapAnyItems_GetItemRef_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetItemRef missing", actual)
 }
 
-func Test_I19_MapAnyItems_GetItemRef_NilRef(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NilRef(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "v"})
 	err := m.GetItemRef("k", nil)
@@ -150,7 +150,7 @@ func Test_I19_MapAnyItems_GetItemRef_NilRef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- GetItemRef nil ref", actual)
 }
 
-func Test_I19_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "v"})
 	var target string
@@ -164,7 +164,7 @@ func Test_I19_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetItemRef not pointer", actual)
 }
 
-func Test_I19_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
+func Test_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.GetManyItemsRefs()
@@ -177,7 +177,7 @@ func Test_I19_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- GetManyItemsRefs empty", actual)
 }
 
-func Test_I19_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
+func Test_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
 	// Arrange
 	inner := map[string]any{"x": 1}
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": inner})
@@ -199,7 +199,7 @@ func Test_I19_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetFieldsMap", actual)
 }
 
-func Test_I19_MapAnyItems_GetFieldsMap_NotFound(t *testing.T) {
+func Test_MapAnyItems_GetFieldsMap_NotFound(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	_, _, found := m.GetFieldsMap("missing")
@@ -212,7 +212,7 @@ func Test_I19_MapAnyItems_GetFieldsMap_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetFieldsMap not found", actual)
 }
 
-func Test_I19_MapAnyItems_GetSafeFieldsMap(t *testing.T) {
+func Test_MapAnyItems_GetSafeFieldsMap(t *testing.T) {
 	// Arrange
 	inner := map[string]any{"x": 1}
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": inner})
@@ -232,7 +232,7 @@ func Test_I19_MapAnyItems_GetSafeFieldsMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetSafeFieldsMap", actual)
 }
 
-func Test_I19_MapAnyItems_AddKeyAny(t *testing.T) {
+func Test_MapAnyItems_AddKeyAny(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	isNew := m.AddKeyAny(corejson.KeyAny{Key: "k", AnyInf: "v"})
@@ -251,7 +251,7 @@ func Test_I19_MapAnyItems_AddKeyAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddKeyAny", actual)
 }
 
-func Test_I19_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
+func Test_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddKeyAnyWithValidation(
@@ -267,7 +267,7 @@ func Test_I19_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns non-empty -- AddKeyAnyWithValidation match", actual)
 }
 
-func Test_I19_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
+func Test_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddKeyAnyWithValidation(
@@ -283,7 +283,7 @@ func Test_I19_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns non-empty -- AddKeyAnyWithValidation mismatch", actual)
 }
 
-func Test_I19_MapAnyItems_AddJsonResultPtr(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := corejson.NewPtr("val")
@@ -297,7 +297,7 @@ func Test_I19_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddJsonResultPtr", actual)
 }
 
-func Test_I19_MapAnyItems_AddJsonResultPtr_Nil(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr_Nil(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.AddJsonResultPtr("k", nil)
@@ -310,7 +310,7 @@ func Test_I19_MapAnyItems_AddJsonResultPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- AddJsonResultPtr nil", actual)
 }
 
-func Test_I19_MapAnyItems_AddMapResultOption_Override(t *testing.T) {
+func Test_MapAnyItems_AddMapResultOption_Override(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m.AddMapResultOption(true, map[string]any{"a": 2, "b": 3})
@@ -323,7 +323,7 @@ func Test_I19_MapAnyItems_AddMapResultOption_Override(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns error -- AddMapResultOption override", actual)
 }
 
-func Test_I19_MapAnyItems_AddMapResultOption_NoOverride(t *testing.T) {
+func Test_MapAnyItems_AddMapResultOption_NoOverride(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m.AddMapResultOption(false, map[string]any{"a": 2})
@@ -337,7 +337,7 @@ func Test_I19_MapAnyItems_AddMapResultOption_NoOverride(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- AddMapResultOption no override", actual)
 }
 
-func Test_I19_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.AddManyMapResultsUsingOption(true, map[string]any{"a": 1}, map[string]any{"b": 2})
@@ -350,7 +350,7 @@ func Test_I19_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddManyMapResultsUsingOption", actual)
 }
 
-func Test_I19_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.AddManyMapResultsUsingOption(true)
@@ -363,7 +363,7 @@ func Test_I19_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- AddManyMapResultsUsingOption empty", actual)
 }
 
-func Test_I19_MapAnyItems_ReflectSetTo_Success(t *testing.T) {
+func Test_MapAnyItems_ReflectSetTo_Success(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "hello"})
 	var target string
@@ -383,7 +383,7 @@ func Test_I19_MapAnyItems_ReflectSetTo_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ReflectSetTo", actual)
 }
 
-func Test_I19_MapAnyItems_ReflectSetTo_Missing(t *testing.T) {
+func Test_MapAnyItems_ReflectSetTo_Missing(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var target string
@@ -397,7 +397,7 @@ func Test_I19_MapAnyItems_ReflectSetTo_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ReflectSetTo missing", actual)
 }
 
-func Test_I19_MapAnyItems_GetPagedCollection(t *testing.T) {
+func Test_MapAnyItems_GetPagedCollection(t *testing.T) {
 	// Arrange
 	items := map[string]any{}
 	for i := 0; i < 5; i++ {
@@ -414,7 +414,7 @@ func Test_I19_MapAnyItems_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetPagedCollection", actual)
 }
 
-func Test_I19_MapAnyItems_GetPagedCollection_SmallPage(t *testing.T) {
+func Test_MapAnyItems_GetPagedCollection_SmallPage(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	pages := m.GetPagedCollection(10)
@@ -427,7 +427,7 @@ func Test_I19_MapAnyItems_GetPagedCollection_SmallPage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetPagedCollection small", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "v"})
 	jr := m.JsonResultOfKey("k")
@@ -446,7 +446,7 @@ func Test_I19_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKey found", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := m.JsonResultOfKey("missing")
@@ -459,7 +459,7 @@ func Test_I19_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKey missing", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultOfKeys(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	mr := m.JsonResultOfKeys("a", "b")
@@ -472,7 +472,7 @@ func Test_I19_MapAnyItems_JsonResultOfKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKeys", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultOfKeys_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	mr := m.JsonResultOfKeys()
@@ -485,7 +485,7 @@ func Test_I19_MapAnyItems_JsonResultOfKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonResultOfKeys empty", actual)
 }
 
-func Test_I19_MapAnyItems_JsonMapResults(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	mr, err := m.JsonMapResults()
@@ -504,7 +504,7 @@ func Test_I19_MapAnyItems_JsonMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonMapResults", actual)
 }
 
-func Test_I19_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	mr, err := m.JsonMapResults()
@@ -523,7 +523,7 @@ func Test_I19_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonMapResults empty", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultsCollection(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	rc := m.JsonResultsCollection()
@@ -536,7 +536,7 @@ func Test_I19_MapAnyItems_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	rc := m.JsonResultsCollection()
@@ -549,7 +549,7 @@ func Test_I19_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonResultsCollection empty", actual)
 }
 
-func Test_I19_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
+func Test_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	rc := m.JsonResultsPtrCollection()
@@ -562,7 +562,7 @@ func Test_I19_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultsPtrCollection", actual)
 }
 
-func Test_I19_MapAnyItems_JsonModel(t *testing.T) {
+func Test_MapAnyItems_JsonModel(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	model := m.JsonModel()
@@ -575,7 +575,7 @@ func Test_I19_MapAnyItems_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonModel", actual)
 }
 
-func Test_I19_MapAnyItems_JsonModelAny(t *testing.T) {
+func Test_MapAnyItems_JsonModelAny(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -587,7 +587,7 @@ func Test_I19_MapAnyItems_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonModelAny", actual)
 }
 
-func Test_I19_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jr := m.Json()
@@ -600,7 +600,7 @@ func Test_I19_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Json", actual)
 }
 
-func Test_I19_MapAnyItems_JsonPtr(t *testing.T) {
+func Test_MapAnyItems_JsonPtr(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jr := m.JsonPtr()
@@ -613,7 +613,7 @@ func Test_I19_MapAnyItems_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonPtr", actual)
 }
 
-func Test_I19_MapAnyItems_ParseInjectUsingJson(t *testing.T) {
+func Test_MapAnyItems_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := corejson.NewPtr(map[string]any{"a": 1})
@@ -633,7 +633,7 @@ func Test_I19_MapAnyItems_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_I19_MapAnyItems_JsonParseSelfInject(t *testing.T) {
+func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := corejson.NewPtr(map[string]any{"x": 2})
@@ -647,7 +647,7 @@ func Test_I19_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_I19_MapAnyItems_Strings(t *testing.T) {
+func Test_MapAnyItems_Strings(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	strs := m.Strings()
@@ -660,7 +660,7 @@ func Test_I19_MapAnyItems_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Strings", actual)
 }
 
-func Test_I19_MapAnyItems_String(t *testing.T) {
+func Test_MapAnyItems_String(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -672,7 +672,7 @@ func Test_I19_MapAnyItems_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- String", actual)
 }
 
-func Test_I19_MapAnyItems_DeepClear(t *testing.T) {
+func Test_MapAnyItems_DeepClear(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m.DeepClear()
@@ -685,7 +685,7 @@ func Test_I19_MapAnyItems_DeepClear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- DeepClear", actual)
 }
 
-func Test_I19_MapAnyItems_Dispose(t *testing.T) {
+func Test_MapAnyItems_Dispose(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m.Dispose()
@@ -698,7 +698,7 @@ func Test_I19_MapAnyItems_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Dispose", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqualRaw_Equal(t *testing.T) {
+func Test_MapAnyItems_IsEqualRaw_Equal(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -710,7 +710,7 @@ func Test_I19_MapAnyItems_IsEqualRaw_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqualRaw equal", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqualRaw_NotEqual(t *testing.T) {
+func Test_MapAnyItems_IsEqualRaw_NotEqual(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -722,7 +722,7 @@ func Test_I19_MapAnyItems_IsEqualRaw_NotEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqualRaw not equal", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqualRaw_DiffLen(t *testing.T) {
+func Test_MapAnyItems_IsEqualRaw_DiffLen(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -734,7 +734,7 @@ func Test_I19_MapAnyItems_IsEqualRaw_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqualRaw diff len", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqualRaw_MissingKey(t *testing.T) {
+func Test_MapAnyItems_IsEqualRaw_MissingKey(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -746,7 +746,7 @@ func Test_I19_MapAnyItems_IsEqualRaw_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqualRaw missing key", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqual(t *testing.T) {
+func Test_MapAnyItems_IsEqual(t *testing.T) {
 	// Arrange
 	m1 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
@@ -759,7 +759,7 @@ func Test_I19_MapAnyItems_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqual", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqual_BothNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var m1, m2 *coredynamic.MapAnyItems
 
@@ -771,7 +771,7 @@ func Test_I19_MapAnyItems_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- IsEqual both nil", actual)
 }
 
-func Test_I19_MapAnyItems_IsEqual_OneNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	m1 := coredynamic.EmptyMapAnyItems()
 
@@ -783,7 +783,7 @@ func Test_I19_MapAnyItems_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- IsEqual one nil", actual)
 }
 
-func Test_I19_MapAnyItems_ClonePtr(t *testing.T) {
+func Test_MapAnyItems_ClonePtr(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	cloned, err := m.ClonePtr()
@@ -802,7 +802,7 @@ func Test_I19_MapAnyItems_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ClonePtr", actual)
 }
 
-func Test_I19_MapAnyItems_ClonePtr_Nil(t *testing.T) {
+func Test_MapAnyItems_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 	_, err := m.ClonePtr()
@@ -815,7 +815,7 @@ func Test_I19_MapAnyItems_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- ClonePtr nil", actual)
 }
 
-func Test_I19_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
+func Test_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 	diff := m.RawMapStringAnyDiff()
@@ -828,7 +828,7 @@ func Test_I19_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- RawMapStringAnyDiff nil", actual)
 }
 
-func Test_I19_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
+func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -840,7 +840,7 @@ func Test_I19_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- MapAnyItems self", actual)
 }
 
-func Test_I19_MapAnyItems_NewUsingAnyTypeMap_Success(t *testing.T) {
+func Test_MapAnyItems_NewUsingAnyTypeMap_Success(t *testing.T) {
 	// Arrange
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]int{"a": 1})
 
@@ -858,7 +858,7 @@ func Test_I19_MapAnyItems_NewUsingAnyTypeMap_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- NewUsingAnyTypeMap", actual)
 }
 
-func Test_I19_MapAnyItems_NewUsingAnyTypeMap_Nil(t *testing.T) {
+func Test_MapAnyItems_NewUsingAnyTypeMap_Nil(t *testing.T) {
 	// Arrange
 	_, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(nil)
 
@@ -874,7 +874,7 @@ func Test_I19_MapAnyItems_NewUsingAnyTypeMap_Nil(t *testing.T) {
 // CollectionMethods — AddIf, AddCollection, ConcatNew, Clone, Capacity, etc.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I19_CollectionMethods_AddIf_True(t *testing.T) {
+func Test_CollectionMethods_AddIf_True(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddIf(true, "x")
@@ -887,7 +887,7 @@ func Test_I19_CollectionMethods_AddIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns non-empty -- AddIf true", actual)
 }
 
-func Test_I19_CollectionMethods_AddIf_False(t *testing.T) {
+func Test_CollectionMethods_AddIf_False(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddIf(false, "x")
@@ -900,7 +900,7 @@ func Test_I19_CollectionMethods_AddIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns non-empty -- AddIf false", actual)
 }
 
-func Test_I19_CollectionMethods_AddManyIf(t *testing.T) {
+func Test_CollectionMethods_AddManyIf(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddManyIf(true, "a", "b")
@@ -914,7 +914,7 @@ func Test_I19_CollectionMethods_AddManyIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddManyIf", actual)
 }
 
-func Test_I19_CollectionMethods_AddCollection(t *testing.T) {
+func Test_CollectionMethods_AddCollection(t *testing.T) {
 	// Arrange
 	c1 := coredynamic.New.Collection.String.From([]string{"a"})
 	c2 := coredynamic.New.Collection.String.From([]string{"b", "c"})
@@ -928,7 +928,7 @@ func Test_I19_CollectionMethods_AddCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCollection", actual)
 }
 
-func Test_I19_CollectionMethods_AddCollections(t *testing.T) {
+func Test_CollectionMethods_AddCollections(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c1 := coredynamic.New.Collection.String.From([]string{"a"})
@@ -943,7 +943,7 @@ func Test_I19_CollectionMethods_AddCollections(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCollections", actual)
 }
 
-func Test_I19_CollectionMethods_ConcatNew(t *testing.T) {
+func Test_CollectionMethods_ConcatNew(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a"})
 	c2 := c.ConcatNew("b", "c")
@@ -962,7 +962,7 @@ func Test_I19_CollectionMethods_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- ConcatNew", actual)
 }
 
-func Test_I19_CollectionMethods_Clone(t *testing.T) {
+func Test_CollectionMethods_Clone(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 	cloned := c.Clone()
@@ -975,7 +975,7 @@ func Test_I19_CollectionMethods_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Clone", actual)
 }
 
-func Test_I19_CollectionMethods_Clone_Nil(t *testing.T) {
+func Test_CollectionMethods_Clone_Nil(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[string]
 	cloned := c.Clone()
@@ -988,7 +988,7 @@ func Test_I19_CollectionMethods_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns nil -- Clone nil", actual)
 }
 
-func Test_I19_CollectionMethods_Capacity(t *testing.T) {
+func Test_CollectionMethods_Capacity(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Cap(10)
 
@@ -1000,7 +1000,7 @@ func Test_I19_CollectionMethods_Capacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Capacity", actual)
 }
 
-func Test_I19_CollectionMethods_AddCapacity(t *testing.T) {
+func Test_CollectionMethods_AddCapacity(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddCapacity(5)
@@ -1013,7 +1013,7 @@ func Test_I19_CollectionMethods_AddCapacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCapacity", actual)
 }
 
-func Test_I19_CollectionMethods_Resize(t *testing.T) {
+func Test_CollectionMethods_Resize(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.Resize(20)
@@ -1026,7 +1026,7 @@ func Test_I19_CollectionMethods_Resize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Resize", actual)
 }
 
-func Test_I19_CollectionMethods_Reverse(t *testing.T) {
+func Test_CollectionMethods_Reverse(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b", "c"})
 	c.Reverse()
@@ -1045,7 +1045,7 @@ func Test_I19_CollectionMethods_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Reverse", actual)
 }
 
-func Test_I19_CollectionMethods_InsertAt(t *testing.T) {
+func Test_CollectionMethods_InsertAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "c"})
 	c.InsertAt(1, "b")
@@ -1065,7 +1065,7 @@ func Test_I19_CollectionMethods_InsertAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- InsertAt", actual)
 }
 
-func Test_I19_CollectionMethods_IndexOfFunc(t *testing.T) {
+func Test_CollectionMethods_IndexOfFunc(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b", "c"})
 	idx := c.IndexOfFunc(func(s string) bool { return s == "b" })
@@ -1078,7 +1078,7 @@ func Test_I19_CollectionMethods_IndexOfFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- IndexOfFunc", actual)
 }
 
-func Test_I19_CollectionMethods_IndexOfFunc_NotFound(t *testing.T) {
+func Test_CollectionMethods_IndexOfFunc_NotFound(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a"})
 	idx := c.IndexOfFunc(func(s string) bool { return s == "z" })
@@ -1091,7 +1091,7 @@ func Test_I19_CollectionMethods_IndexOfFunc_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- IndexOfFunc not found", actual)
 }
 
-func Test_I19_CollectionMethods_ContainsFunc(t *testing.T) {
+func Test_CollectionMethods_ContainsFunc(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 
@@ -1103,7 +1103,7 @@ func Test_I19_CollectionMethods_ContainsFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- ContainsFunc", actual)
 }
 
-func Test_I19_CollectionMethods_SafeAt(t *testing.T) {
+func Test_CollectionMethods_SafeAt(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 
@@ -1121,7 +1121,7 @@ func Test_I19_CollectionMethods_SafeAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- SafeAt", actual)
 }
 
-func Test_I19_CollectionMethods_SprintItems(t *testing.T) {
+func Test_CollectionMethods_SprintItems(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 	strs := c.SprintItems("[%s]")
@@ -1138,7 +1138,7 @@ func Test_I19_CollectionMethods_SprintItems(t *testing.T) {
 // ReflectSetFromTo — additional paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I19_ReflectSetFromTo_BothNil(t *testing.T) {
+func Test_ReflectSetFromTo_BothNil(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo(nil, nil)
 
@@ -1150,7 +1150,7 @@ func Test_I19_ReflectSetFromTo_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns nil -- both nil", actual)
 }
 
-func Test_I19_ReflectSetFromTo_SamePointerType(t *testing.T) {
+func Test_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	// Arrange
 	x := "hello"
 	src := &x
@@ -1171,7 +1171,7 @@ func Test_I19_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same pointer type", actual)
 }
 
-func Test_I19_ReflectSetFromTo_NonPointerToPointer(t *testing.T) {
+func Test_ReflectSetFromTo_NonPointerToPointer(t *testing.T) {
 	// Arrange
 	var dst int
 	err := coredynamic.ReflectSetFromTo(42, &dst)
@@ -1190,7 +1190,7 @@ func Test_I19_ReflectSetFromTo_NonPointerToPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns non-empty -- non-ptr to ptr", actual)
 }
 
-func Test_I19_ReflectSetFromTo_BytesToStruct(t *testing.T) {
+func Test_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	// Arrange
 	type s struct{ X int }
 	var dst s
@@ -1210,7 +1210,7 @@ func Test_I19_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bytes to struct", actual)
 }
 
-func Test_I19_ReflectSetFromTo_StructToBytes(t *testing.T) {
+func Test_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	// Arrange
 	type s struct{ X int }
 	src := s{X: 7}
@@ -1231,7 +1231,7 @@ func Test_I19_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- struct to bytes", actual)
 }
 
-func Test_I19_ReflectSetFromTo_DestNotPointer(t *testing.T) {
+func Test_ReflectSetFromTo_DestNotPointer(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo("hello", "not a pointer")
 
@@ -1243,7 +1243,7 @@ func Test_I19_ReflectSetFromTo_DestNotPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- dest not pointer", actual)
 }
 
-func Test_I19_ReflectSetFromTo_TypeMismatch(t *testing.T) {
+func Test_ReflectSetFromTo_TypeMismatch(t *testing.T) {
 	// Arrange
 	var dst int
 	err := coredynamic.ReflectSetFromTo("hello", &dst)
@@ -1256,7 +1256,7 @@ func Test_I19_ReflectSetFromTo_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- type mismatch", actual)
 }
 
-func Test_I19_ReflectSetFromTo_DestNil(t *testing.T) {
+func Test_ReflectSetFromTo_DestNil(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo("hello", nil)
 

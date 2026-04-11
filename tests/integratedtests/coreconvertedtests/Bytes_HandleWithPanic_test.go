@@ -8,7 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/converters/coreconverted"
 )
 
-func Test_Cov2_Bytes_HandleWithPanic_NoError(t *testing.T) {
+func Test_Bytes_HandleWithPanic_NoError(t *testing.T) {
 	// Arrange
 	b := &coreconverted.Bytes{Values: []byte{1}, CombinedError: nil}
 	// Should not panic
@@ -22,7 +22,7 @@ func Test_Cov2_Bytes_HandleWithPanic_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HandleWithPanic_NoError panics -- with args", actual)
 }
 
-func Test_Cov2_Bytes_HandleWithPanic_WithError(t *testing.T) {
+func Test_Bytes_HandleWithPanic_WithError(t *testing.T) {
 	// Arrange
 	b := &coreconverted.Bytes{Values: nil, CombinedError: errors.New("err")}
 	panicked := false
@@ -43,7 +43,7 @@ func Test_Cov2_Bytes_HandleWithPanic_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HandleWithPanic_WithError panics -- with args", actual)
 }
 
-func Test_Cov2_Integers_HandleWithPanic_NoError(t *testing.T) {
+func Test_Integers_HandleWithPanic_NoError(t *testing.T) {
 	// Arrange
 	i := &coreconverted.Integers{Values: []int{1}, CombinedError: nil}
 	i.HandleWithPanic()
@@ -56,7 +56,7 @@ func Test_Cov2_Integers_HandleWithPanic_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integers_HandleWithPanic_NoError panics -- with args", actual)
 }
 
-func Test_Cov2_Integers_HandleWithPanic_WithError(t *testing.T) {
+func Test_Integers_HandleWithPanic_WithError(t *testing.T) {
 	// Arrange
 	i := &coreconverted.Integers{Values: nil, CombinedError: errors.New("err")}
 	panicked := false
@@ -77,7 +77,7 @@ func Test_Cov2_Integers_HandleWithPanic_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integers_HandleWithPanic_WithError panics -- with args", actual)
 }
 
-func Test_Cov2_Bytes_HasAnyItem_Empty(t *testing.T) {
+func Test_Bytes_HasAnyItem_Empty(t *testing.T) {
 	// Arrange
 	b := &coreconverted.Bytes{Values: []byte{}}
 
@@ -95,7 +95,7 @@ func Test_Cov2_Bytes_HasAnyItem_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Bytes_HasAnyItem_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_Integers_HasAnyItem_Empty(t *testing.T) {
+func Test_Integers_HasAnyItem_Empty(t *testing.T) {
 	// Arrange
 	i := &coreconverted.Integers{Values: []int{}}
 

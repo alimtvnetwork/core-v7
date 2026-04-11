@@ -8,7 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Cov_PrependAppendAnyItemsToStringsUsingFunc_SkipEmpty(t *testing.T) {
+func Test_PrependAppendAnyItemsToStringsUsingFunc_SkipEmpty(t *testing.T) {
 	// Arrange
 	result := coreappend.PrependAppendAnyItemsToStringsUsingFunc(
 		true,
@@ -28,7 +28,7 @@ func Test_Cov_PrependAppendAnyItemsToStringsUsingFunc_SkipEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 2 items", actual)
 }
 
-func Test_Cov_PrependAppendAnyItemsToStringsUsingFunc_SkipEmptyString_InLoop(t *testing.T) {
+func Test_PrependAppendAnyItemsToStringsUsingFunc_SkipEmptyString_InLoop(t *testing.T) {
 	// Arrange
 	// This specifically targets the branch: isSkipEmptyString && currentStr == ""
 	result := coreappend.PrependAppendAnyItemsToStringsUsingFunc(

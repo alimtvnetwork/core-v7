@@ -11,7 +11,7 @@ import (
 // CloneSlice
 // ==========================================================================
 
-func Test_Cov5_CloneSlice_NonEmpty(t *testing.T) {
+func Test_CloneSlice_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_CloneSlice_NonEmpty", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{"a", "b"})
@@ -31,7 +31,7 @@ func Test_Cov5_CloneSlice_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov5_CloneSlice_Empty(t *testing.T) {
+func Test_CloneSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov5_CloneSlice_Empty", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{})
@@ -49,7 +49,7 @@ func Test_Cov5_CloneSlice_Empty(t *testing.T) {
 // ValidValue
 // ==========================================================================
 
-func Test_Cov5_ValidValue_Constructors(t *testing.T) {
+func Test_ValidValue_Constructors(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Constructors", func() {
 		// Arrange
 		v1 := corestr.NewValidValue("hello")
@@ -76,7 +76,7 @@ func Test_Cov5_ValidValue_Constructors(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_StringChecks(t *testing.T) {
+func Test_ValidValue_StringChecks(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_StringChecks", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -105,7 +105,7 @@ func Test_Cov5_ValidValue_StringChecks(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_TypeConversions(t *testing.T) {
+func Test_ValidValue_TypeConversions(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_TypeConversions", func() {
 		// Arrange
 		vBool := corestr.NewValidValue("true")
@@ -134,7 +134,7 @@ func Test_Cov5_ValidValue_TypeConversions(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_TypeConversions_Invalid(t *testing.T) {
+func Test_ValidValue_TypeConversions_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_TypeConversions_Invalid", func() {
 		// Arrange
 		v := corestr.NewValidValue("abc")
@@ -155,7 +155,7 @@ func Test_Cov5_ValidValue_TypeConversions_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_IsAnyOf", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -177,7 +177,7 @@ func Test_Cov5_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_IsAnyContains(t *testing.T) {
+func Test_ValidValue_IsAnyContains(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_IsAnyContains", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello world")
@@ -199,7 +199,7 @@ func Test_Cov5_ValidValue_IsAnyContains(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Split", func() {
 		// Arrange
 		v := corestr.NewValidValue("a,b,c")
@@ -214,7 +214,7 @@ func Test_Cov5_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Clone", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -237,7 +237,7 @@ func Test_Cov5_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_String(t *testing.T) {
+func Test_ValidValue_String(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_String", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -260,7 +260,7 @@ func Test_Cov5_ValidValue_String(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_ValueBytesOnce(t *testing.T) {
+func Test_ValidValue_ValueBytesOnce(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_ValueBytesOnce", func() {
 		// Arrange
 		v := corestr.NewValidValue("hi")
@@ -285,7 +285,7 @@ func Test_Cov5_ValidValue_ValueBytesOnce(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_ClearDispose", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -306,7 +306,7 @@ func Test_Cov5_ValidValue_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValue_Dispose_Nil(t *testing.T) {
+func Test_ValidValue_Dispose_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Dispose_Nil", func() {
 		// Arrange
 		var v *corestr.ValidValue
@@ -325,7 +325,7 @@ func Test_Cov5_ValidValue_Dispose_Nil(t *testing.T) {
 // ValidValues
 // ==========================================================================
 
-func Test_Cov5_ValidValues_Basics(t *testing.T) {
+func Test_ValidValues_Basics(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_Basics", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -350,7 +350,7 @@ func Test_Cov5_ValidValues_Basics(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_SafeValueAt", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -371,7 +371,7 @@ func Test_Cov5_ValidValues_SafeValueAt(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_Strings", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -392,7 +392,7 @@ func Test_Cov5_ValidValues_Strings(t *testing.T) {
 	})
 }
 
-func Test_Cov5_ValidValues_NilLength(t *testing.T) {
+func Test_ValidValues_NilLength(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_NilLength", func() {
 		// Arrange
 		var vv *corestr.ValidValues
@@ -410,7 +410,7 @@ func Test_Cov5_ValidValues_NilLength(t *testing.T) {
 // KeyValuePair
 // ==========================================================================
 
-func Test_Cov5_KeyValuePair_Basics(t *testing.T) {
+func Test_KeyValuePair_Basics(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_Basics", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "name", Value: "alice"}
@@ -448,7 +448,7 @@ func Test_Cov5_KeyValuePair_Basics(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_TypeConversions(t *testing.T) {
+func Test_KeyValuePair_TypeConversions(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_TypeConversions", func() {
 		// Arrange
 		kvBool := &corestr.KeyValuePair{Key: "k", Value: "true"}
@@ -477,7 +477,7 @@ func Test_Cov5_KeyValuePair_TypeConversions(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_Is(t *testing.T) {
+func Test_KeyValuePair_Is(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_Is", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -499,7 +499,7 @@ func Test_Cov5_KeyValuePair_Is(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_ValueValid", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -520,7 +520,7 @@ func Test_Cov5_KeyValuePair_ValueValid(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_Clear(t *testing.T) {
+func Test_KeyValuePair_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_Clear", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -541,7 +541,7 @@ func Test_Cov5_KeyValuePair_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_Dispose_Nil(t *testing.T) {
+func Test_KeyValuePair_Dispose_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_Dispose_Nil", func() {
 		// Arrange
 		var kv *corestr.KeyValuePair
@@ -556,7 +556,7 @@ func Test_Cov5_KeyValuePair_Dispose_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_FormatString(t *testing.T) {
+func Test_KeyValuePair_FormatString(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_FormatString", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "name", Value: "alice"}
@@ -571,7 +571,7 @@ func Test_Cov5_KeyValuePair_FormatString(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_BoolEmpty(t *testing.T) {
+func Test_KeyValuePair_BoolEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_BoolEmpty", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: ""}
@@ -585,7 +585,7 @@ func Test_Cov5_KeyValuePair_BoolEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov5_KeyValuePair_ByteOverflow(t *testing.T) {
+func Test_KeyValuePair_ByteOverflow(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_ByteOverflow", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "999"}

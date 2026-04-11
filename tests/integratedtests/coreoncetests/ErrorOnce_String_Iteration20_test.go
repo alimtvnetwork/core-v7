@@ -10,7 +10,7 @@ import (
 
 // ===== ErrorOnce coverage =====
 
-func Test_I20_ErrorOnce_String_HasError(t *testing.T) {
+func Test_ErrorOnce_String_HasError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("test-err") })
 	s := o.String()
@@ -23,7 +23,7 @@ func Test_I20_ErrorOnce_String_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'test-err', got ''", actual)
 }
 
-func Test_I20_ErrorOnce_Message_NilError(t *testing.T) {
+func Test_ErrorOnce_Message_NilError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 
@@ -35,7 +35,7 @@ func Test_I20_ErrorOnce_Message_NilError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty message for nil error", actual)
 }
 
-func Test_I20_ErrorOnce_Message_HasError(t *testing.T) {
+func Test_ErrorOnce_Message_HasError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("msg") })
 
@@ -47,7 +47,7 @@ func Test_I20_ErrorOnce_Message_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'msg'", actual)
 }
 
-func Test_I20_ErrorOnce_IsMessageEqual(t *testing.T) {
+func Test_ErrorOnce_IsMessageEqual(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("hello") })
 
@@ -62,7 +62,7 @@ func Test_I20_ErrorOnce_IsMessageEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_ErrorOnce_IsMessageEqual_Nil(t *testing.T) {
+func Test_ErrorOnce_IsMessageEqual_Nil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 
@@ -74,13 +74,13 @@ func Test_I20_ErrorOnce_IsMessageEqual_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for nil error", actual)
 }
 
-func Test_I20_ErrorOnce_HandleError_NoError(t *testing.T) {
+func Test_ErrorOnce_HandleError_NoError(t *testing.T) {
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 	// Should not panic
 	o.HandleError()
 }
 
-func Test_I20_ErrorOnce_HandleError_Panic(t *testing.T) {
+func Test_ErrorOnce_HandleError_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("boom") })
 	defer func() {
@@ -96,12 +96,12 @@ func Test_I20_ErrorOnce_HandleError_Panic(t *testing.T) {
 	o.HandleError()
 }
 
-func Test_I20_ErrorOnce_HandleErrorWith_NoError(t *testing.T) {
+func Test_ErrorOnce_HandleErrorWith_NoError(t *testing.T) {
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 	o.HandleErrorWith("extra")
 }
 
-func Test_I20_ErrorOnce_HandleErrorWith_Panic(t *testing.T) {
+func Test_ErrorOnce_HandleErrorWith_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("boom") })
 	defer func() {
@@ -117,7 +117,7 @@ func Test_I20_ErrorOnce_HandleErrorWith_Panic(t *testing.T) {
 	o.HandleErrorWith("context")
 }
 
-func Test_I20_ErrorOnce_ConcatNewString_NoError(t *testing.T) {
+func Test_ErrorOnce_ConcatNewString_NoError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 	s := o.ConcatNewString("a", "b")
@@ -130,7 +130,7 @@ func Test_I20_ErrorOnce_ConcatNewString_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty concat", actual)
 }
 
-func Test_I20_ErrorOnce_ConcatNewString_HasError(t *testing.T) {
+func Test_ErrorOnce_ConcatNewString_HasError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("err") })
 	s := o.ConcatNewString("extra")
@@ -143,7 +143,7 @@ func Test_I20_ErrorOnce_ConcatNewString_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_ErrorOnce_ConcatNew(t *testing.T) {
+func Test_ErrorOnce_ConcatNew(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("base") })
 	err := o.ConcatNew("more")
@@ -156,7 +156,7 @@ func Test_I20_ErrorOnce_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_ErrorOnce_MarshalJSON(t *testing.T) {
+func Test_ErrorOnce_MarshalJSON(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("test") })
 	b, err := o.MarshalJSON()
@@ -172,7 +172,7 @@ func Test_I20_ErrorOnce_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
-func Test_I20_ErrorOnce_MarshalJSON_NilError(t *testing.T) {
+func Test_ErrorOnce_MarshalJSON_NilError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 	b, err := o.MarshalJSON()
@@ -188,7 +188,7 @@ func Test_I20_ErrorOnce_MarshalJSON_NilError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty string json", actual)
 }
 
-func Test_I20_ErrorOnce_UnmarshalJSON(t *testing.T) {
+func Test_ErrorOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return nil })
 	err := o.UnmarshalJSON([]byte(`"test-error"`))
@@ -204,7 +204,7 @@ func Test_I20_ErrorOnce_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected unmarshalled error message", actual)
 }
 
-func Test_I20_ErrorOnce_Predicates(t *testing.T) {
+func Test_ErrorOnce_Predicates(t *testing.T) {
 	// Arrange
 	oErr := coreonce.NewErrorOncePtr(func() error { return errors.New("e") })
 	oNil := coreonce.NewErrorOncePtr(func() error { return nil })
@@ -241,7 +241,7 @@ func Test_I20_ErrorOnce_Predicates(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for nil error", actual)
 }
 
-func Test_I20_ErrorOnce_Execute(t *testing.T) {
+func Test_ErrorOnce_Execute(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("ex") })
 
@@ -253,7 +253,7 @@ func Test_I20_ErrorOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I20_ErrorOnce_Serialize(t *testing.T) {
+func Test_ErrorOnce_Serialize(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOncePtr(func() error { return errors.New("ser") })
 	b, err := o.Serialize()
@@ -271,7 +271,7 @@ func Test_I20_ErrorOnce_Serialize(t *testing.T) {
 
 // ===== BytesErrorOnce additional coverage =====
 
-func Test_I20_BytesErrorOnce_MarshalJSON(t *testing.T) {
+func Test_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte(`"hello"`), nil
@@ -289,7 +289,7 @@ func Test_I20_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_BytesErrorOnce_SerializeMust_Success(t *testing.T) {
+func Test_BytesErrorOnce_SerializeMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte(`"ok"`), nil
@@ -304,7 +304,7 @@ func Test_I20_BytesErrorOnce_SerializeMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_BytesErrorOnce_SerializeMust_Panic(t *testing.T) {
+func Test_BytesErrorOnce_SerializeMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return nil, errors.New("fail")
@@ -322,7 +322,7 @@ func Test_I20_BytesErrorOnce_SerializeMust_Panic(t *testing.T) {
 	o.SerializeMust()
 }
 
-func Test_I20_BytesErrorOnce_DeserializeMust_Success(t *testing.T) {
+func Test_BytesErrorOnce_DeserializeMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte(`"value"`), nil
@@ -338,7 +338,7 @@ func Test_I20_BytesErrorOnce_DeserializeMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'value', got ''", actual)
 }
 
-func Test_I20_BytesErrorOnce_DeserializeMust_Panic(t *testing.T) {
+func Test_BytesErrorOnce_DeserializeMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return nil, errors.New("err")
@@ -357,7 +357,7 @@ func Test_I20_BytesErrorOnce_DeserializeMust_Panic(t *testing.T) {
 	o.DeserializeMust(&s)
 }
 
-func Test_I20_BytesErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
+func Test_BytesErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte(`not-valid-json`), nil
@@ -373,14 +373,14 @@ func Test_I20_BytesErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error", actual)
 }
 
-func Test_I20_BytesErrorOnce_MustHaveSafeItems_Success(t *testing.T) {
+func Test_BytesErrorOnce_MustHaveSafeItems_Success(t *testing.T) {
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte("data"), nil
 	})
 	o.MustHaveSafeItems()
 }
 
-func Test_I20_BytesErrorOnce_MustHaveSafeItems_PanicOnError(t *testing.T) {
+func Test_BytesErrorOnce_MustHaveSafeItems_PanicOnError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return nil, errors.New("err")
@@ -398,7 +398,7 @@ func Test_I20_BytesErrorOnce_MustHaveSafeItems_PanicOnError(t *testing.T) {
 	o.MustHaveSafeItems()
 }
 
-func Test_I20_BytesErrorOnce_MustHaveSafeItems_PanicOnEmpty(t *testing.T) {
+func Test_BytesErrorOnce_MustHaveSafeItems_PanicOnEmpty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte{}, nil
@@ -416,14 +416,14 @@ func Test_I20_BytesErrorOnce_MustHaveSafeItems_PanicOnEmpty(t *testing.T) {
 	o.MustHaveSafeItems()
 }
 
-func Test_I20_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_MustBeEmptyError_NoError(t *testing.T) {
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte("ok"), nil
 	})
 	o.MustBeEmptyError()
 }
 
-func Test_I20_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
+func Test_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return nil, errors.New("e")
@@ -441,7 +441,7 @@ func Test_I20_BytesErrorOnce_MustBeEmptyError_Panic(t *testing.T) {
 	o.MustBeEmptyError()
 }
 
-func Test_I20_BytesErrorOnce_Predicates(t *testing.T) {
+func Test_BytesErrorOnce_Predicates(t *testing.T) {
 	// Arrange
 	oOk := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte("data"), nil
@@ -479,7 +479,7 @@ func Test_I20_BytesErrorOnce_Predicates(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true", actual)
 }
 
-func Test_I20_BytesErrorOnce_IsEmptyBytes(t *testing.T) {
+func Test_BytesErrorOnce_IsEmptyBytes(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte{}, nil
@@ -493,7 +493,7 @@ func Test_I20_BytesErrorOnce_IsEmptyBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsEmptyBytes true", actual)
 }
 
-func Test_I20_BytesErrorOnce_ValueWithError(t *testing.T) {
+func Test_BytesErrorOnce_ValueWithError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) {
 		return []byte("val"), nil
@@ -510,7 +510,7 @@ func Test_I20_BytesErrorOnce_ValueWithError(t *testing.T) {
 
 // ===== AnyOnce additional coverage =====
 
-func Test_I20_AnyOnce_CastValueString(t *testing.T) {
+func Test_AnyOnce_CastValueString(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "hello" })
 	val, ok := o.CastValueString()
@@ -523,7 +523,7 @@ func Test_I20_AnyOnce_CastValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful cast", actual)
 }
 
-func Test_I20_AnyOnce_CastValueString_Fail(t *testing.T) {
+func Test_AnyOnce_CastValueString_Fail(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return 42 })
 	_, ok := o.CastValueString()
@@ -536,7 +536,7 @@ func Test_I20_AnyOnce_CastValueString_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected failed cast", actual)
 }
 
-func Test_I20_AnyOnce_CastValueStrings(t *testing.T) {
+func Test_AnyOnce_CastValueStrings(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return []string{"a", "b"} })
 	val, ok := o.CastValueStrings()
@@ -549,7 +549,7 @@ func Test_I20_AnyOnce_CastValueStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful cast", actual)
 }
 
-func Test_I20_AnyOnce_CastValueHashmapMap(t *testing.T) {
+func Test_AnyOnce_CastValueHashmapMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return map[string]string{"k": "v"} })
 	val, ok := o.CastValueHashmapMap()
@@ -562,7 +562,7 @@ func Test_I20_AnyOnce_CastValueHashmapMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful cast", actual)
 }
 
-func Test_I20_AnyOnce_CastValueMapStringAnyMap(t *testing.T) {
+func Test_AnyOnce_CastValueMapStringAnyMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return map[string]any{"k": 1} })
 	val, ok := o.CastValueMapStringAnyMap()
@@ -575,7 +575,7 @@ func Test_I20_AnyOnce_CastValueMapStringAnyMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful cast", actual)
 }
 
-func Test_I20_AnyOnce_CastValueBytes(t *testing.T) {
+func Test_AnyOnce_CastValueBytes(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return []byte("hi") })
 	val, ok := o.CastValueBytes()
@@ -588,7 +588,7 @@ func Test_I20_AnyOnce_CastValueBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful cast", actual)
 }
 
-func Test_I20_AnyOnce_Serialize_Success(t *testing.T) {
+func Test_AnyOnce_Serialize_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "test" })
 	b, err := o.Serialize()
@@ -601,7 +601,7 @@ func Test_I20_AnyOnce_Serialize_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected successful serialize", actual)
 }
 
-func Test_I20_AnyOnce_SerializeSkipExistingError(t *testing.T) {
+func Test_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "test" })
 	b, err := o.SerializeSkipExistingError()
@@ -614,7 +614,7 @@ func Test_I20_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyOnce_SerializeMust_Success(t *testing.T) {
+func Test_AnyOnce_SerializeMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "val" })
 	b := o.SerializeMust()
@@ -627,7 +627,7 @@ func Test_I20_AnyOnce_SerializeMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_AnyOnce_SerializeMust_Panic(t *testing.T) {
+func Test_AnyOnce_SerializeMust_Panic(t *testing.T) {
 	// Arrange
 	ch := make(chan int)
 	o := coreonce.NewAnyOncePtr(func() any { return ch })
@@ -644,7 +644,7 @@ func Test_I20_AnyOnce_SerializeMust_Panic(t *testing.T) {
 	o.SerializeMust()
 }
 
-func Test_I20_AnyOnce_ValueStringMust(t *testing.T) {
+func Test_AnyOnce_ValueStringMust(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "abc" })
 	s := o.ValueStringMust()
@@ -657,7 +657,7 @@ func Test_I20_AnyOnce_ValueStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_AnyOnce_SafeString(t *testing.T) {
+func Test_AnyOnce_SafeString(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "abc" })
 	s := o.SafeString()
@@ -670,7 +670,7 @@ func Test_I20_AnyOnce_SafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_AnyOnce_ValueString_Nil(t *testing.T) {
+func Test_AnyOnce_ValueString_Nil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return nil })
 	s := o.ValueString()
@@ -683,7 +683,7 @@ func Test_I20_AnyOnce_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil bracket string", actual)
 }
 
-func Test_I20_AnyOnce_ValueString_Cached(t *testing.T) {
+func Test_AnyOnce_ValueString_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return "cached" })
 	_ = o.ValueString()
@@ -697,13 +697,13 @@ func Test_I20_AnyOnce_ValueString_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cached value", actual)
 }
 
-func Test_I20_AnyOnce_IsStringEmptyOrWhitespace(t *testing.T) {
+func Test_AnyOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	o := coreonce.NewAnyOncePtr(func() any { return "  " })
 	// String() returns formatted, not just spaces
 	_ = o.IsStringEmptyOrWhitespace()
 }
 
-func Test_I20_AnyOnce_ValueOnly(t *testing.T) {
+func Test_AnyOnce_ValueOnly(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return 42 })
 
@@ -715,7 +715,7 @@ func Test_I20_AnyOnce_ValueOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
-func Test_I20_AnyOnce_IsInitialized(t *testing.T) {
+func Test_AnyOnce_IsInitialized(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return 1 })
 
@@ -733,7 +733,7 @@ func Test_I20_AnyOnce_IsInitialized(t *testing.T) {
 
 // ===== AnyErrorOnce additional coverage =====
 
-func Test_I20_AnyErrorOnce_ExecuteMust_Success(t *testing.T) {
+func Test_AnyErrorOnce_ExecuteMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "ok", nil })
 	v := o.ExecuteMust()
@@ -746,7 +746,7 @@ func Test_I20_AnyErrorOnce_ExecuteMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'ok'", actual)
 }
 
-func Test_I20_AnyErrorOnce_ExecuteMust_Panic(t *testing.T) {
+func Test_AnyErrorOnce_ExecuteMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("e") })
 	defer func() {
@@ -762,7 +762,7 @@ func Test_I20_AnyErrorOnce_ExecuteMust_Panic(t *testing.T) {
 	o.ExecuteMust()
 }
 
-func Test_I20_AnyErrorOnce_ValueMust_Success(t *testing.T) {
+func Test_AnyErrorOnce_ValueMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return 99, nil })
 
@@ -774,7 +774,7 @@ func Test_I20_AnyErrorOnce_ValueMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 99", actual)
 }
 
-func Test_I20_AnyErrorOnce_ValueMust_Panic(t *testing.T) {
+func Test_AnyErrorOnce_ValueMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("e") })
 	defer func() {
@@ -790,7 +790,7 @@ func Test_I20_AnyErrorOnce_ValueMust_Panic(t *testing.T) {
 	o.ValueMust()
 }
 
-func Test_I20_AnyErrorOnce_ValueStringMust_Success(t *testing.T) {
+func Test_AnyErrorOnce_ValueStringMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "val", nil })
 	s := o.ValueStringMust()
@@ -803,7 +803,7 @@ func Test_I20_AnyErrorOnce_ValueStringMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_AnyErrorOnce_ValueStringMust_Panic(t *testing.T) {
+func Test_AnyErrorOnce_ValueStringMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("err") })
 	defer func() {
@@ -819,7 +819,7 @@ func Test_I20_AnyErrorOnce_ValueStringMust_Panic(t *testing.T) {
 	o.ValueStringMust()
 }
 
-func Test_I20_AnyErrorOnce_ValueString_Nil(t *testing.T) {
+func Test_AnyErrorOnce_ValueString_Nil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, nil })
 	s, err := o.ValueString()
@@ -835,7 +835,7 @@ func Test_I20_AnyErrorOnce_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil bracket", actual)
 }
 
-func Test_I20_AnyErrorOnce_ValueString_Cached(t *testing.T) {
+func Test_AnyErrorOnce_ValueString_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "x", nil })
 	_, _ = o.ValueString()
@@ -849,7 +849,7 @@ func Test_I20_AnyErrorOnce_ValueString_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cached", actual)
 }
 
-func Test_I20_AnyErrorOnce_CastValueString(t *testing.T) {
+func Test_AnyErrorOnce_CastValueString(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "hi", nil })
 	val, err, ok := o.CastValueString()
@@ -862,7 +862,7 @@ func Test_I20_AnyErrorOnce_CastValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_CastValueStrings(t *testing.T) {
+func Test_AnyErrorOnce_CastValueStrings(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return []string{"a"}, nil })
 	val, err, ok := o.CastValueStrings()
@@ -875,7 +875,7 @@ func Test_I20_AnyErrorOnce_CastValueStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_CastValueHashmapMap(t *testing.T) {
+func Test_AnyErrorOnce_CastValueHashmapMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return map[string]string{"k": "v"}, nil })
 	val, err, ok := o.CastValueHashmapMap()
@@ -888,7 +888,7 @@ func Test_I20_AnyErrorOnce_CastValueHashmapMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_CastValueMapStringAnyMap(t *testing.T) {
+func Test_AnyErrorOnce_CastValueMapStringAnyMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return map[string]any{"k": 1}, nil })
 	val, err, ok := o.CastValueMapStringAnyMap()
@@ -901,7 +901,7 @@ func Test_I20_AnyErrorOnce_CastValueMapStringAnyMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_CastValueBytes(t *testing.T) {
+func Test_AnyErrorOnce_CastValueBytes(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return []byte("b"), nil })
 	val, err, ok := o.CastValueBytes()
@@ -914,7 +914,7 @@ func Test_I20_AnyErrorOnce_CastValueBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
+func Test_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "v", nil })
 	b, err := o.SerializeSkipExistingError()
@@ -927,7 +927,7 @@ func Test_I20_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
-func Test_I20_AnyErrorOnce_SerializeMust_Success(t *testing.T) {
+func Test_AnyErrorOnce_SerializeMust_Success(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "v", nil })
 	b := o.SerializeMust()
@@ -940,7 +940,7 @@ func Test_I20_AnyErrorOnce_SerializeMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_I20_AnyErrorOnce_SerializeMust_Panic(t *testing.T) {
+func Test_AnyErrorOnce_SerializeMust_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("e") })
 	defer func() {
@@ -956,7 +956,7 @@ func Test_I20_AnyErrorOnce_SerializeMust_Panic(t *testing.T) {
 	o.SerializeMust()
 }
 
-func Test_I20_AnyErrorOnce_Serialize_MarshalError(t *testing.T) {
+func Test_AnyErrorOnce_Serialize_MarshalError(t *testing.T) {
 	// Arrange
 	ch := make(chan int)
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return ch, nil })
@@ -970,7 +970,7 @@ func Test_I20_AnyErrorOnce_Serialize_MarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected marshal error", actual)
 }
 
-func Test_I20_AnyErrorOnce_ValueOnly_Initialized(t *testing.T) {
+func Test_AnyErrorOnce_ValueOnly_Initialized(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "v", nil })
 	o.Value() // initialize
@@ -984,7 +984,7 @@ func Test_I20_AnyErrorOnce_ValueOnly_Initialized(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'v'", actual)
 }
 
-func Test_I20_AnyErrorOnce_IsStringEmpty(t *testing.T) {
+func Test_AnyErrorOnce_IsStringEmpty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, nil })
 
@@ -996,7 +996,7 @@ func Test_I20_AnyErrorOnce_IsStringEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_AnyErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
+func Test_AnyErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, nil })
 
@@ -1008,7 +1008,7 @@ func Test_I20_AnyErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
+func Test_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("e") })
 	o.Value() // initialize
@@ -1022,7 +1022,7 @@ func Test_I20_AnyErrorOnce_Error_AlreadyInitialized(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I20_AnyErrorOnce_IsEmpty_NilValue(t *testing.T) {
+func Test_AnyErrorOnce_IsEmpty_NilValue(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, nil })
 
@@ -1036,7 +1036,7 @@ func Test_I20_AnyErrorOnce_IsEmpty_NilValue(t *testing.T) {
 
 // ===== IntegerOnce additional coverage =====
 
-func Test_I20_IntegerOnce_Comparisons(t *testing.T) {
+func Test_IntegerOnce_Comparisons(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegerOncePtr(func() int { return 5 })
 
@@ -1081,7 +1081,7 @@ func Test_I20_IntegerOnce_Comparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_IntegerOnce_NegativeComparisons(t *testing.T) {
+func Test_IntegerOnce_NegativeComparisons(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegerOncePtr(func() int { return -1 })
 
@@ -1104,7 +1104,7 @@ func Test_I20_IntegerOnce_NegativeComparisons(t *testing.T) {
 
 // ===== ByteOnce additional coverage =====
 
-func Test_I20_ByteOnce_Methods(t *testing.T) {
+func Test_ByteOnce_Methods(t *testing.T) {
 	// Arrange
 	o := coreonce.NewByteOncePtr(func() byte { return 5 })
 
@@ -1128,7 +1128,7 @@ func Test_I20_ByteOnce_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_ByteOnce_Zero(t *testing.T) {
+func Test_ByteOnce_Zero(t *testing.T) {
 	// Arrange
 	o := coreonce.NewByteOncePtr(func() byte { return 0 })
 
@@ -1145,7 +1145,7 @@ func Test_I20_ByteOnce_Zero(t *testing.T) {
 
 // ===== BytesOnce additional coverage =====
 
-func Test_I20_BytesOnce_NilInitializer(t *testing.T) {
+func Test_BytesOnce_NilInitializer(t *testing.T) {
 	// Arrange
 	o := &coreonce.BytesOnce{}
 	// initializerFunc is nil
@@ -1163,7 +1163,7 @@ func Test_I20_BytesOnce_NilInitializer(t *testing.T) {
 
 // ===== StringOnce additional coverage =====
 
-func Test_I20_StringOnce_SplitLeftRightTrim(t *testing.T) {
+func Test_StringOnce_SplitLeftRightTrim(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return " left : right " })
 	l, r := o.SplitLeftRightTrim(":")
@@ -1176,7 +1176,7 @@ func Test_I20_StringOnce_SplitLeftRightTrim(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'left','right', got '',''", actual)
 }
 
-func Test_I20_StringOnce_HasPrefix(t *testing.T) {
+func Test_StringOnce_HasPrefix(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "hello-world" })
 
@@ -1191,7 +1191,7 @@ func Test_I20_StringOnce_HasPrefix(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_StringOnce_HasSuffix(t *testing.T) {
+func Test_StringOnce_HasSuffix(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "hello-world" })
 
@@ -1206,7 +1206,7 @@ func Test_I20_StringOnce_HasSuffix(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_StringOnce_IsContains(t *testing.T) {
+func Test_StringOnce_IsContains(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "hello-world" })
 
@@ -1218,7 +1218,7 @@ func Test_I20_StringOnce_IsContains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_StringOnce_IsEmptyOrWhitespace(t *testing.T) {
+func Test_StringOnce_IsEmptyOrWhitespace(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "  " })
 
@@ -1230,7 +1230,7 @@ func Test_I20_StringOnce_IsEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_StringOnce_Bytes(t *testing.T) {
+func Test_StringOnce_Bytes(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "abc" })
 
@@ -1242,7 +1242,7 @@ func Test_I20_StringOnce_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'abc'", actual)
 }
 
-func Test_I20_StringOnce_Error(t *testing.T) {
+func Test_StringOnce_Error(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "err-msg" })
 
@@ -1254,7 +1254,7 @@ func Test_I20_StringOnce_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'err-msg'", actual)
 }
 
-func Test_I20_StringOnce_SplitBy(t *testing.T) {
+func Test_StringOnce_SplitBy(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "a,b,c" })
 	parts := o.SplitBy(",")
@@ -1267,7 +1267,7 @@ func Test_I20_StringOnce_SplitBy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3 parts", actual)
 }
 
-func Test_I20_StringOnce_ValuePtr(t *testing.T) {
+func Test_StringOnce_ValuePtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringOncePtr(func() string { return "ptr" })
 	p := o.ValuePtr()
@@ -1282,7 +1282,7 @@ func Test_I20_StringOnce_ValuePtr(t *testing.T) {
 
 // ===== MapStringStringOnce additional coverage =====
 
-func Test_I20_MapStringStringOnce_AllValuesSorted(t *testing.T) {
+func Test_MapStringStringOnce_AllValuesSorted(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"b": "z", "a": "y"}
@@ -1302,7 +1302,7 @@ func Test_I20_MapStringStringOnce_AllValuesSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected cached 2", actual)
 }
 
-func Test_I20_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
+func Test_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -1321,7 +1321,7 @@ func Test_I20_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
-func Test_I20_MapStringStringOnce_ValuesPtr(t *testing.T) {
+func Test_MapStringStringOnce_ValuesPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -1336,7 +1336,7 @@ func Test_I20_MapStringStringOnce_ValuesPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil ptr", actual)
 }
 
-func Test_I20_MapStringStringOnce_Strings_Cached(t *testing.T) {
+func Test_MapStringStringOnce_Strings_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -1352,7 +1352,7 @@ func Test_I20_MapStringStringOnce_Strings_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I20_MapStringStringOnce_IsMissing(t *testing.T) {
+func Test_MapStringStringOnce_IsMissing(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}
@@ -1369,7 +1369,7 @@ func Test_I20_MapStringStringOnce_IsMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_MapStringStringOnce_String(t *testing.T) {
+func Test_MapStringStringOnce_String(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -1386,7 +1386,7 @@ func Test_I20_MapStringStringOnce_String(t *testing.T) {
 
 // ===== StringsOnce additional coverage =====
 
-func Test_I20_StringsOnce_HasAll_Missing(t *testing.T) {
+func Test_StringsOnce_HasAll_Missing(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 
@@ -1398,7 +1398,7 @@ func Test_I20_StringsOnce_HasAll_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_StringsOnce_UniqueMapLock(t *testing.T) {
+func Test_StringsOnce_UniqueMapLock(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 	m := o.UniqueMapLock()
@@ -1411,7 +1411,7 @@ func Test_I20_StringsOnce_UniqueMapLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_I20_StringsOnce_CsvLines(t *testing.T) {
+func Test_StringsOnce_CsvLines(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 	lines := o.CsvLines()
@@ -1424,7 +1424,7 @@ func Test_I20_StringsOnce_CsvLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_StringsOnce_RangesMap(t *testing.T) {
+func Test_StringsOnce_RangesMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"x", "y"} })
 	m := o.RangesMap()
@@ -1437,7 +1437,7 @@ func Test_I20_StringsOnce_RangesMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_I20_StringsOnce_SafeStrings(t *testing.T) {
+func Test_StringsOnce_SafeStrings(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a"} })
 
@@ -1449,7 +1449,7 @@ func Test_I20_StringsOnce_SafeStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I20_StringsOnce_SafeStrings_Empty(t *testing.T) {
+func Test_StringsOnce_SafeStrings_Empty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{} })
 
@@ -1461,7 +1461,7 @@ func Test_I20_StringsOnce_SafeStrings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I20_StringsOnce_String(t *testing.T) {
+func Test_StringsOnce_String(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 	s := o.String()
@@ -1474,7 +1474,7 @@ func Test_I20_StringsOnce_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I20_StringsOnce_Length_NilValues(t *testing.T) {
+func Test_StringsOnce_Length_NilValues(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -1486,7 +1486,7 @@ func Test_I20_StringsOnce_Length_NilValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I20_StringsOnce_UniqueMap_NilValues(t *testing.T) {
+func Test_StringsOnce_UniqueMap_NilValues(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return nil })
 	m := o.UniqueMap()
@@ -1499,7 +1499,7 @@ func Test_I20_StringsOnce_UniqueMap_NilValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty map", actual)
 }
 
-func Test_I20_StringsOnce_UniqueMap_Cached(t *testing.T) {
+func Test_StringsOnce_UniqueMap_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a"} })
 	_ = o.UniqueMap()
@@ -1515,7 +1515,7 @@ func Test_I20_StringsOnce_UniqueMap_Cached(t *testing.T) {
 
 // ===== IntegersOnce additional coverage =====
 
-func Test_I20_IntegersOnce_RangesBoolMap(t *testing.T) {
+func Test_IntegersOnce_RangesBoolMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2, 3} })
 	m := o.RangesBoolMap()
@@ -1528,7 +1528,7 @@ func Test_I20_IntegersOnce_RangesBoolMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_I20_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
+func Test_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := o.RangesBoolMap()
@@ -1541,7 +1541,7 @@ func Test_I20_IntegersOnce_RangesBoolMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I20_IntegersOnce_UniqueMap(t *testing.T) {
+func Test_IntegersOnce_UniqueMap(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 1, 2} })
 	m := o.UniqueMap()
@@ -1554,7 +1554,7 @@ func Test_I20_IntegersOnce_UniqueMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2 unique", actual)
 }
 
-func Test_I20_IntegersOnce_UniqueMap_Empty(t *testing.T) {
+func Test_IntegersOnce_UniqueMap_Empty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := o.UniqueMap()
@@ -1567,7 +1567,7 @@ func Test_I20_IntegersOnce_UniqueMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I20_IntegersOnce_Sorted_Cached(t *testing.T) {
+func Test_IntegersOnce_Sorted_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{3, 1, 2} })
 	_ = o.Sorted()
@@ -1581,7 +1581,7 @@ func Test_I20_IntegersOnce_Sorted_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 }
 
-func Test_I20_IntegersOnce_RangesMap_Empty(t *testing.T) {
+func Test_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{} })
 	m := o.RangesMap()
@@ -1594,7 +1594,7 @@ func Test_I20_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I20_IntegersOnce_Aliases(t *testing.T) {
+func Test_IntegersOnce_Aliases(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2} })
 
@@ -1617,7 +1617,7 @@ func Test_I20_IntegersOnce_Aliases(t *testing.T) {
 
 // ===== MapStringStringOnce.HasAll =====
 
-func Test_I20_MapStringStringOnce_HasAll(t *testing.T) {
+func Test_MapStringStringOnce_HasAll(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -1636,7 +1636,7 @@ func Test_I20_MapStringStringOnce_HasAll(t *testing.T) {
 
 // ===== MapStringStringOnce.AllKeys cached =====
 
-func Test_I20_MapStringStringOnce_AllKeys_Cached(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -1652,7 +1652,7 @@ func Test_I20_MapStringStringOnce_AllKeys_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I20_MapStringStringOnce_AllValues_Cached(t *testing.T) {
+func Test_MapStringStringOnce_AllValues_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -1668,7 +1668,7 @@ func Test_I20_MapStringStringOnce_AllValues_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I20_MapStringStringOnce_AllKeysSorted_Cached(t *testing.T) {
+func Test_MapStringStringOnce_AllKeysSorted_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"b": "2", "a": "1"}
@@ -1686,7 +1686,7 @@ func Test_I20_MapStringStringOnce_AllKeysSorted_Cached(t *testing.T) {
 
 // ===== NewAnyOnce / NewAnyErrorOnce (non-ptr constructors) =====
 
-func Test_I20_AnyOnce_NonPtr(t *testing.T) {
+func Test_AnyOnce_NonPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOnce(func() any { return "np" })
 
@@ -1698,7 +1698,7 @@ func Test_I20_AnyOnce_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'np'", actual)
 }
 
-func Test_I20_AnyErrorOnce_NonPtr(t *testing.T) {
+func Test_AnyErrorOnce_NonPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOnce(func() (any, error) { return "np", nil })
 	v, err := o.Value()
@@ -1711,7 +1711,7 @@ func Test_I20_AnyErrorOnce_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'np'", actual)
 }
 
-func Test_I20_ErrorOnce_NonPtr(t *testing.T) {
+func Test_ErrorOnce_NonPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -1723,7 +1723,7 @@ func Test_I20_ErrorOnce_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I20_BytesErrorOnce_NonPtr(t *testing.T) {
+func Test_BytesErrorOnce_NonPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("x"), nil })
 	v, err := o.Value()
@@ -1738,7 +1738,7 @@ func Test_I20_BytesErrorOnce_NonPtr(t *testing.T) {
 
 // ===== StringsOnce.Sorted cached =====
 
-func Test_I20_StringsOnce_Sorted_Cached(t *testing.T) {
+func Test_StringsOnce_Sorted_Cached(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"c", "a", "b"} })
 	_ = o.Sorted()
@@ -1754,7 +1754,7 @@ func Test_I20_StringsOnce_Sorted_Cached(t *testing.T) {
 
 // ===== IntegersOnce.IsEqual nil paths =====
 
-func Test_I20_IntegersOnce_IsEqual_BothNil(t *testing.T) {
+func Test_IntegersOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return nil })
 
@@ -1766,7 +1766,7 @@ func Test_I20_IntegersOnce_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true - both nil/empty", actual)
 }
 
-func Test_I20_IntegersOnce_IsEqual_OneSideNil(t *testing.T) {
+func Test_IntegersOnce_IsEqual_OneSideNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return nil })
 
@@ -1778,7 +1778,7 @@ func Test_I20_IntegersOnce_IsEqual_OneSideNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_IntegersOnce_IsEqual_LengthMismatch(t *testing.T) {
+func Test_IntegersOnce_IsEqual_LengthMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 2} })
 
@@ -1792,7 +1792,7 @@ func Test_I20_IntegersOnce_IsEqual_LengthMismatch(t *testing.T) {
 
 // ===== StringsOnce.IsEqual nil paths =====
 
-func Test_I20_StringsOnce_IsEqual_BothNil(t *testing.T) {
+func Test_StringsOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -1804,7 +1804,7 @@ func Test_I20_StringsOnce_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_StringsOnce_IsEqual_OneSideNil(t *testing.T) {
+func Test_StringsOnce_IsEqual_OneSideNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return nil })
 
@@ -1816,7 +1816,7 @@ func Test_I20_StringsOnce_IsEqual_OneSideNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_StringsOnce_IsEqual_LengthMismatch(t *testing.T) {
+func Test_StringsOnce_IsEqual_LengthMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "b"} })
 
@@ -1830,7 +1830,7 @@ func Test_I20_StringsOnce_IsEqual_LengthMismatch(t *testing.T) {
 
 // ===== MapStringStringOnce.IsEqual nil paths =====
 
-func Test_I20_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 
@@ -1842,7 +1842,7 @@ func Test_I20_MapStringStringOnce_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_MapStringStringOnce_IsEqual_OneSideNil(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_OneSideNil(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 
@@ -1854,7 +1854,7 @@ func Test_I20_MapStringStringOnce_IsEqual_OneSideNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I20_MapStringStringOnce_IsEqual_LengthMismatch(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_LengthMismatch(t *testing.T) {
 	// Arrange
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -1870,7 +1870,7 @@ func Test_I20_MapStringStringOnce_IsEqual_LengthMismatch(t *testing.T) {
 
 // ===== BytesErrorOnce.IsEmpty =====
 
-func Test_I20_BytesErrorOnce_IsEmpty_True(t *testing.T) {
+func Test_BytesErrorOnce_IsEmpty_True(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, nil })
 
@@ -1882,7 +1882,7 @@ func Test_I20_BytesErrorOnce_IsEmpty_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I20_BytesErrorOnce_IsStringEmpty(t *testing.T) {
+func Test_BytesErrorOnce_IsStringEmpty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, nil })
 
@@ -1894,7 +1894,7 @@ func Test_I20_BytesErrorOnce_IsStringEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 }
 
-func Test_I20_BytesErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
+func Test_BytesErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("  "), nil })
 
@@ -1906,12 +1906,12 @@ func Test_I20_BytesErrorOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected whitespace-empty", actual)
 }
 
-func Test_I20_BytesErrorOnce_HandleError_NoError(t *testing.T) {
+func Test_BytesErrorOnce_HandleError_NoError(t *testing.T) {
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return []byte("ok"), nil })
 	o.HandleError()
 }
 
-func Test_I20_BytesErrorOnce_HandleError_Panic(t *testing.T) {
+func Test_BytesErrorOnce_HandleError_Panic(t *testing.T) {
 	// Arrange
 	o := coreonce.NewBytesErrorOncePtr(func() ([]byte, error) { return nil, errors.New("e") })
 	defer func() {
@@ -1929,7 +1929,7 @@ func Test_I20_BytesErrorOnce_HandleError_Panic(t *testing.T) {
 
 // ===== AnyOnce.IsStringEmpty & IsNull =====
 
-func Test_I20_AnyOnce_IsStringEmpty(t *testing.T) {
+func Test_AnyOnce_IsStringEmpty(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return nil })
 
@@ -1941,7 +1941,7 @@ func Test_I20_AnyOnce_IsStringEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I20_AnyOnce_IsNull(t *testing.T) {
+func Test_AnyOnce_IsNull(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return nil })
 
@@ -1955,7 +1955,7 @@ func Test_I20_AnyOnce_IsNull(t *testing.T) {
 
 // ===== Bug-fix tests: Deserialize unmarshal error paths (previously unreachable) =====
 
-func Test_I20_AnyOnce_Deserialize_UnmarshalError(t *testing.T) {
+func Test_AnyOnce_Deserialize_UnmarshalError(t *testing.T) {
 	// Arrange
 	// Value is valid JSON ("hello") but cannot unmarshal into *int
 	o := coreonce.NewAnyOncePtr(func() any { return "hello" })
@@ -1977,7 +1977,7 @@ func Test_I20_AnyOnce_Deserialize_UnmarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error starting with '', got ''", actual)
 }
 
-func Test_I20_AnyOnce_Deserialize_UnmarshalError_NilToPtr(t *testing.T) {
+func Test_AnyOnce_Deserialize_UnmarshalError_NilToPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyOncePtr(func() any { return map[string]any{"a": 1} })
 	err := o.Deserialize(nil)
@@ -1990,7 +1990,7 @@ func Test_I20_AnyOnce_Deserialize_UnmarshalError_NilToPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error for nil toPtr", actual)
 }
 
-func Test_I20_AnyErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return "hello", nil })
 	var result int
@@ -2008,7 +2008,7 @@ func Test_I20_AnyErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error starting with '', got ''", actual)
 }
 
-func Test_I20_AnyErrorOnce_Deserialize_UnmarshalError_NilToPtr(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_UnmarshalError_NilToPtr(t *testing.T) {
 	// Arrange
 	o := coreonce.NewAnyErrorOncePtr(func() (any, error) { return map[string]any{"a": 1}, nil })
 	err := o.Deserialize(nil)

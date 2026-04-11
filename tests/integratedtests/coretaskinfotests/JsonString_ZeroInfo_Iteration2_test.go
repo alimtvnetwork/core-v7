@@ -8,7 +8,7 @@ import (
 )
 
 // Test_Cov3_JsonString_ZeroInfo exercises JsonString on a zero-value Info.
-func Test_Cov3_JsonString_ZeroInfo(t *testing.T) {
+func Test_JsonString_ZeroInfo(t *testing.T) {
 	// Arrange
 	info := coretaskinfo.Info{}
 
@@ -20,7 +20,7 @@ func Test_Cov3_JsonString_ZeroInfo(t *testing.T) {
 }
 
 // Test_Cov3_MapWithPayloadAsAny_SerializeError tests the HasError branch in MapWithPayloadAsAny.
-func Test_Cov3_MapWithPayloadAsAny_SerializeError(t *testing.T) {
+func Test_MapWithPayloadAsAny_SerializeError(t *testing.T) {
 	// Arrange
 	info := &coretaskinfo.Info{
 		RootName:    "test",

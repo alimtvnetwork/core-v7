@@ -11,7 +11,7 @@ import (
 // LeftMiddleRight — Constructors
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_InvalidLeftMiddleRightNoMessage(t *testing.T) {
+func Test_InvalidLeftMiddleRightNoMessage(t *testing.T) {
 	safeTest(t, "Test_Cov70_InvalidLeftMiddleRightNoMessage", func() {
 		// Arrange
 		lmr := corestr.InvalidLeftMiddleRightNoMessage()
@@ -35,7 +35,7 @@ func Test_Cov70_InvalidLeftMiddleRightNoMessage(t *testing.T) {
 	})
 }
 
-func Test_Cov70_InvalidLeftMiddleRight(t *testing.T) {
+func Test_InvalidLeftMiddleRight(t *testing.T) {
 	safeTest(t, "Test_Cov70_InvalidLeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.InvalidLeftMiddleRight("err msg")
@@ -55,7 +55,7 @@ func Test_Cov70_InvalidLeftMiddleRight(t *testing.T) {
 	})
 }
 
-func Test_Cov70_NewLeftMiddleRight(t *testing.T) {
+func Test_NewLeftMiddleRight(t *testing.T) {
 	safeTest(t, "Test_Cov70_NewLeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -83,7 +83,7 @@ func Test_Cov70_NewLeftMiddleRight(t *testing.T) {
 // LeftMiddleRight — Bytes methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_LMR_LeftBytes(t *testing.T) {
+func Test_LMR_LeftBytes(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_LeftBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "d", "e")
@@ -97,7 +97,7 @@ func Test_Cov70_LMR_LeftBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_RightBytes(t *testing.T) {
+func Test_LMR_RightBytes(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_RightBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "cde")
@@ -111,7 +111,7 @@ func Test_Cov70_LMR_RightBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_MiddleBytes(t *testing.T) {
+func Test_LMR_MiddleBytes(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_MiddleBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "mid", "c")
@@ -129,7 +129,7 @@ func Test_Cov70_LMR_MiddleBytes(t *testing.T) {
 // LeftMiddleRight — Trim methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_LMR_LeftTrim(t *testing.T) {
+func Test_LMR_LeftTrim(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_LeftTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight(" x ", "m", "r")
@@ -143,7 +143,7 @@ func Test_Cov70_LMR_LeftTrim(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_RightTrim(t *testing.T) {
+func Test_LMR_RightTrim(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_RightTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", " y ")
@@ -157,7 +157,7 @@ func Test_Cov70_LMR_RightTrim(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_MiddleTrim(t *testing.T) {
+func Test_LMR_MiddleTrim(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_MiddleTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", " z ", "r")
@@ -175,7 +175,7 @@ func Test_Cov70_LMR_MiddleTrim(t *testing.T) {
 // LeftMiddleRight — Empty/Whitespace checks
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_LMR_IsLeftEmpty(t *testing.T) {
+func Test_LMR_IsLeftEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsLeftEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("", "m", "r")
@@ -189,7 +189,7 @@ func Test_Cov70_LMR_IsLeftEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsRightEmpty(t *testing.T) {
+func Test_LMR_IsRightEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsRightEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "")
@@ -203,7 +203,7 @@ func Test_Cov70_LMR_IsRightEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsMiddleEmpty(t *testing.T) {
+func Test_LMR_IsMiddleEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsMiddleEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "", "r")
@@ -217,7 +217,7 @@ func Test_Cov70_LMR_IsMiddleEmpty(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsMiddleWhitespace(t *testing.T) {
+func Test_LMR_IsMiddleWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsMiddleWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "  ", "r")
@@ -231,7 +231,7 @@ func Test_Cov70_LMR_IsMiddleWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsLeftWhitespace(t *testing.T) {
+func Test_LMR_IsLeftWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsLeftWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("  ", "m", "r")
@@ -245,7 +245,7 @@ func Test_Cov70_LMR_IsLeftWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsRightWhitespace(t *testing.T) {
+func Test_LMR_IsRightWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsRightWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "  ")
@@ -263,7 +263,7 @@ func Test_Cov70_LMR_IsRightWhitespace(t *testing.T) {
 // LeftMiddleRight — HasValid* methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_LMR_HasValidNonEmptyLeft(t *testing.T) {
+func Test_LMR_HasValidNonEmptyLeft(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonEmptyLeft", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -277,7 +277,7 @@ func Test_Cov70_LMR_HasValidNonEmptyLeft(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonEmptyLeft_Empty(t *testing.T) {
+func Test_LMR_HasValidNonEmptyLeft_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonEmptyLeft_Empty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("", "b", "c")
@@ -291,7 +291,7 @@ func Test_Cov70_LMR_HasValidNonEmptyLeft_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonEmptyRight(t *testing.T) {
+func Test_LMR_HasValidNonEmptyRight(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonEmptyRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -305,7 +305,7 @@ func Test_Cov70_LMR_HasValidNonEmptyRight(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonEmptyMiddle(t *testing.T) {
+func Test_LMR_HasValidNonEmptyMiddle(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonEmptyMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -319,7 +319,7 @@ func Test_Cov70_LMR_HasValidNonEmptyMiddle(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonEmptyMiddle_Empty(t *testing.T) {
+func Test_LMR_HasValidNonEmptyMiddle_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonEmptyMiddle_Empty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "", "c")
@@ -333,7 +333,7 @@ func Test_Cov70_LMR_HasValidNonEmptyMiddle_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonWhitespaceLeft(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceLeft(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonWhitespaceLeft", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -347,7 +347,7 @@ func Test_Cov70_LMR_HasValidNonWhitespaceLeft(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonWhitespaceLeft_Ws", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("  ", "b", "c")
@@ -361,7 +361,7 @@ func Test_Cov70_LMR_HasValidNonWhitespaceLeft_Ws(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonWhitespaceRight(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceRight(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonWhitespaceRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -375,7 +375,7 @@ func Test_Cov70_LMR_HasValidNonWhitespaceRight(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonWhitespaceMiddle(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceMiddle(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonWhitespaceMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -389,7 +389,7 @@ func Test_Cov70_LMR_HasValidNonWhitespaceMiddle(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasValidNonWhitespaceMiddle_Ws(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceMiddle_Ws(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasValidNonWhitespaceMiddle_Ws", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", " ", "c")
@@ -407,7 +407,7 @@ func Test_Cov70_LMR_HasValidNonWhitespaceMiddle_Ws(t *testing.T) {
 // LeftMiddleRight — HasSafeNonEmpty, IsAll, Is, Clone, ToLeftRight, Clear, Dispose
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov70_LMR_HasSafeNonEmpty_True(t *testing.T) {
+func Test_LMR_HasSafeNonEmpty_True(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasSafeNonEmpty_True", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -421,7 +421,7 @@ func Test_Cov70_LMR_HasSafeNonEmpty_True(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_HasSafeNonEmpty_EmptyMiddle(t *testing.T) {
+func Test_LMR_HasSafeNonEmpty_EmptyMiddle(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_HasSafeNonEmpty_EmptyMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "", "c")
@@ -435,7 +435,7 @@ func Test_Cov70_LMR_HasSafeNonEmpty_EmptyMiddle(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_IsAll(t *testing.T) {
+func Test_LMR_IsAll(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_IsAll", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -455,7 +455,7 @@ func Test_Cov70_LMR_IsAll(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Is(t *testing.T) {
+func Test_LMR_Is(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Is", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -475,7 +475,7 @@ func Test_Cov70_LMR_Is(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Clone(t *testing.T) {
+func Test_LMR_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Clone", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -500,7 +500,7 @@ func Test_Cov70_LMR_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_ToLeftRight(t *testing.T) {
+func Test_LMR_ToLeftRight(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_ToLeftRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -523,7 +523,7 @@ func Test_Cov70_LMR_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Clear(t *testing.T) {
+func Test_LMR_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Clear", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -546,7 +546,7 @@ func Test_Cov70_LMR_Clear(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Clear_Nil(t *testing.T) {
+func Test_LMR_Clear_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Clear_Nil", func() {
 		// Arrange
 		var lmr *corestr.LeftMiddleRight
@@ -561,7 +561,7 @@ func Test_Cov70_LMR_Clear_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Dispose(t *testing.T) {
+func Test_LMR_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Dispose", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -584,7 +584,7 @@ func Test_Cov70_LMR_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Cov70_LMR_Dispose_Nil(t *testing.T) {
+func Test_LMR_Dispose_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov70_LMR_Dispose_Nil", func() {
 		// Arrange
 		var lmr *corestr.LeftMiddleRight

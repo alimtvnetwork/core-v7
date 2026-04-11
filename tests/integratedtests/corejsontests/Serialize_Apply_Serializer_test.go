@@ -11,7 +11,7 @@ import (
 // serializerLogic — Apply
 // =============================================================================
 
-func Test_Cov41_Serialize_Apply_Verification(t *testing.T) {
+func Test_Serialize_Apply_Verification(t *testing.T) {
 	for caseIndex, tc := range serializeApplyTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -29,7 +29,7 @@ func Test_Cov41_Serialize_Apply_Verification(t *testing.T) {
 	}
 }
 
-func Test_Cov41_Serialize_Apply_Unmarshalable(t *testing.T) {
+func Test_Serialize_Apply_Unmarshalable(t *testing.T) {
 	tc := serializeApplyUnmarshalableTestCase
 
 	// Arrange
@@ -49,7 +49,7 @@ func Test_Cov41_Serialize_Apply_Unmarshalable(t *testing.T) {
 // serializerLogic — From* methods
 // =============================================================================
 
-func Test_Cov41_Serialize_FromBytes(t *testing.T) {
+func Test_Serialize_FromBytes(t *testing.T) {
 	tc := serializeFromBytesTestCase
 
 	// Arrange
@@ -65,7 +65,7 @@ func Test_Cov41_Serialize_FromBytes(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromStrings(t *testing.T) {
+func Test_Serialize_FromStrings(t *testing.T) {
 	tc := serializeFromStringsTestCase
 
 	// Arrange
@@ -81,7 +81,7 @@ func Test_Cov41_Serialize_FromStrings(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromStringsSpread(t *testing.T) {
+func Test_Serialize_FromStringsSpread(t *testing.T) {
 	tc := serializeFromStringsSpreadTestCase
 
 	// Arrange
@@ -97,7 +97,7 @@ func Test_Cov41_Serialize_FromStringsSpread(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromString(t *testing.T) {
+func Test_Serialize_FromString(t *testing.T) {
 	tc := serializeFromStringTestCase
 
 	// Arrange
@@ -113,7 +113,7 @@ func Test_Cov41_Serialize_FromString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromInteger(t *testing.T) {
+func Test_Serialize_FromInteger(t *testing.T) {
 	tc := serializeFromIntegerTestCase
 
 	// Arrange
@@ -129,7 +129,7 @@ func Test_Cov41_Serialize_FromInteger(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromInteger64(t *testing.T) {
+func Test_Serialize_FromInteger64(t *testing.T) {
 	tc := serializeFromInteger64TestCase
 
 	// Arrange
@@ -145,7 +145,7 @@ func Test_Cov41_Serialize_FromInteger64(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromBool(t *testing.T) {
+func Test_Serialize_FromBool(t *testing.T) {
 	tc := serializeFromBoolTestCase
 
 	// Arrange
@@ -161,7 +161,7 @@ func Test_Cov41_Serialize_FromBool(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_FromIntegers(t *testing.T) {
+func Test_Serialize_FromIntegers(t *testing.T) {
 	tc := serializeFromIntegersTestCase
 
 	// Arrange
@@ -181,7 +181,7 @@ func Test_Cov41_Serialize_FromIntegers(t *testing.T) {
 // serializerLogic — UsingAnyPtr / UsingAny
 // =============================================================================
 
-func Test_Cov41_Serialize_UsingAnyPtr_Valid(t *testing.T) {
+func Test_Serialize_UsingAnyPtr_Valid(t *testing.T) {
 	tc := serializeUsingAnyPtrValidTestCase
 
 	// Arrange
@@ -197,7 +197,7 @@ func Test_Cov41_Serialize_UsingAnyPtr_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_UsingAnyPtr_Unmarshalable(t *testing.T) {
+func Test_Serialize_UsingAnyPtr_Unmarshalable(t *testing.T) {
 	tc := serializeUsingAnyPtrUnmarshalableTestCase
 
 	// Arrange
@@ -213,7 +213,7 @@ func Test_Cov41_Serialize_UsingAnyPtr_Unmarshalable(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_UsingAny(t *testing.T) {
+func Test_Serialize_UsingAny(t *testing.T) {
 	tc := serializeUsingAnyTestCase
 
 	// Arrange
@@ -233,7 +233,7 @@ func Test_Cov41_Serialize_UsingAny(t *testing.T) {
 // serializerLogic — Raw / Marshal / ApplyMust / ToBytesMust / etc.
 // =============================================================================
 
-func Test_Cov41_Serialize_Raw(t *testing.T) {
+func Test_Serialize_Raw(t *testing.T) {
 	tc := serializeRawTestCase
 
 	// Arrange
@@ -250,7 +250,7 @@ func Test_Cov41_Serialize_Raw(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_Marshal(t *testing.T) {
+func Test_Serialize_Marshal(t *testing.T) {
 	tc := serializeMarshalTestCase
 
 	// Arrange
@@ -267,7 +267,7 @@ func Test_Cov41_Serialize_Marshal(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ApplyMust(t *testing.T) {
+func Test_Serialize_ApplyMust(t *testing.T) {
 	tc := serializeApplyMustTestCase
 
 	// Arrange
@@ -283,7 +283,7 @@ func Test_Cov41_Serialize_ApplyMust(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToBytesMust(t *testing.T) {
+func Test_Serialize_ToBytesMust(t *testing.T) {
 	tc := serializeToBytesMustTestCase
 
 	// Arrange
@@ -299,7 +299,7 @@ func Test_Cov41_Serialize_ToBytesMust(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToSafeBytesMust(t *testing.T) {
+func Test_Serialize_ToSafeBytesMust(t *testing.T) {
 	tc := serializeToSafeBytesMustTestCase
 
 	// Arrange
@@ -319,7 +319,7 @@ func Test_Cov41_Serialize_ToSafeBytesMust(t *testing.T) {
 // serializerLogic — Swallow / ToString / ToPretty
 // =============================================================================
 
-func Test_Cov41_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	tc := serializeToSafeBytesSwallowErrTestCase
 
 	// Arrange
@@ -335,7 +335,7 @@ func Test_Cov41_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToBytesSwallowErr(t *testing.T) {
 	tc := serializeToBytesSwallowErrTestCase
 
 	// Arrange
@@ -351,7 +351,7 @@ func Test_Cov41_Serialize_ToBytesSwallowErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToBytesErr(t *testing.T) {
+func Test_Serialize_ToBytesErr(t *testing.T) {
 	tc := serializeToBytesErrTestCase
 
 	// Arrange
@@ -368,7 +368,7 @@ func Test_Cov41_Serialize_ToBytesErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToString(t *testing.T) {
+func Test_Serialize_ToString(t *testing.T) {
 	tc := serializeToStringTestCase
 
 	// Arrange
@@ -384,7 +384,7 @@ func Test_Cov41_Serialize_ToString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToStringMust(t *testing.T) {
+func Test_Serialize_ToStringMust(t *testing.T) {
 	tc := serializeToStringMustTestCase
 
 	// Arrange
@@ -400,7 +400,7 @@ func Test_Cov41_Serialize_ToStringMust(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToStringErr(t *testing.T) {
+func Test_Serialize_ToStringErr(t *testing.T) {
 	tc := serializeToStringErrTestCase
 
 	// Arrange
@@ -417,7 +417,7 @@ func Test_Cov41_Serialize_ToStringErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToPrettyStringErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringErr(t *testing.T) {
 	tc := serializeToPrettyStringErrTestCase
 
 	// Arrange
@@ -434,7 +434,7 @@ func Test_Cov41_Serialize_ToPrettyStringErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	tc := serializeToPrettyStringIncludingErrTestCase
 
 	// Arrange
@@ -450,7 +450,7 @@ func Test_Cov41_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov41_Serialize_Pretty(t *testing.T) {
+func Test_Serialize_Pretty(t *testing.T) {
 	tc := serializePrettyTestCase
 
 	// Arrange

@@ -9,7 +9,7 @@ import (
 
 // ── numericfuncs uncovered branches ──
 
-func Test_Cov2_InRangeExclusive_OutOfRange(t *testing.T) {
+func Test_InRangeExclusive_OutOfRange(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"atMin":    coregeneric.InRangeExclusive(1, 1, 10),
@@ -28,7 +28,7 @@ func Test_Cov2_InRangeExclusive_OutOfRange(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InRangeExclusive returns correct value -- with args", actual)
 }
 
-func Test_Cov2_SafeDivOrDefault(t *testing.T) {
+func Test_SafeDivOrDefault(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"normal": coregeneric.SafeDivOrDefault(10, 3, -1),
@@ -43,7 +43,7 @@ func Test_Cov2_SafeDivOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeDivOrDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov2_IsNonNegative(t *testing.T) {
+func Test_IsNonNegative(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"positive": coregeneric.IsNonNegative(5),
@@ -60,7 +60,7 @@ func Test_Cov2_IsNonNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNonNegative returns correct value -- with args", actual)
 }
 
-func Test_Cov2_Sign(t *testing.T) {
+func Test_Sign(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"negative": coregeneric.Sign(-5),
@@ -77,7 +77,7 @@ func Test_Cov2_Sign(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Sign returns correct value -- with args", actual)
 }
 
-func Test_Cov2_IsNotEqual(t *testing.T) {
+func Test_IsNotEqual(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"same": coregeneric.IsNotEqual(5, 5),
@@ -92,7 +92,7 @@ func Test_Cov2_IsNotEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNotEqual returns correct value -- with args", actual)
 }
 
-func Test_Cov2_IsNumericEqual(t *testing.T) {
+func Test_IsNumericEqual(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"same": coregeneric.IsNumericEqual(5, 5),
@@ -109,7 +109,7 @@ func Test_Cov2_IsNumericEqual(t *testing.T) {
 
 // ── Collection uncovered branches ──
 
-func Test_Cov2_Collection_Capacity_Nil(t *testing.T) {
+func Test_Collection_Capacity_Nil(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 
@@ -121,7 +121,7 @@ func Test_Cov2_Collection_Capacity_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Capacity empty", actual)
 }
 
-func Test_Cov2_Collection_HasAnyItem(t *testing.T) {
+func Test_Collection_HasAnyItem(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1})
 
@@ -133,7 +133,7 @@ func Test_Cov2_Collection_HasAnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasAnyItem", actual)
 }
 
-func Test_Cov2_Collection_AddIfMany_Skip(t *testing.T) {
+func Test_Collection_AddIfMany_Skip(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddIfMany(false, 1, 2, 3)
@@ -146,7 +146,7 @@ func Test_Cov2_Collection_AddIfMany_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddIfMany returns correct value -- skip", actual)
 }
 
-func Test_Cov2_Collection_AddFunc(t *testing.T) {
+func Test_Collection_AddFunc(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddFunc(func() int { return 42 })
@@ -159,7 +159,7 @@ func Test_Cov2_Collection_AddFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov2_Collection_CountFunc(t *testing.T) {
+func Test_Collection_CountFunc(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3, 4, 5})
 	count := col.CountFunc(func(v int) bool { return v > 3 })
@@ -172,7 +172,7 @@ func Test_Cov2_Collection_CountFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CountFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov2_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2})
 	result := col.ConcatNew(3, 4)
@@ -185,7 +185,7 @@ func Test_Cov2_Collection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConcatNew returns correct value -- with args", actual)
 }
 
-func Test_Cov2_Collection_Reverse(t *testing.T) {
+func Test_Collection_Reverse(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 	col.Reverse()
@@ -206,7 +206,7 @@ func Test_Cov2_Collection_Reverse(t *testing.T) {
 
 // ── Hashmap uncovered branches ──
 
-func Test_Cov2_Hashmap_Set_ReturnsBool(t *testing.T) {
+func Test_Hashmap_Set_ReturnsBool(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	isNew := hm.Set("a", 1)
@@ -227,7 +227,7 @@ func Test_Cov2_Hashmap_Set_ReturnsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Set return", actual)
 }
 
-func Test_Cov2_Hashmap_ForEachBreak(t *testing.T) {
+func Test_Hashmap_ForEachBreak(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -246,7 +246,7 @@ func Test_Cov2_Hashmap_ForEachBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ForEachBreak", actual)
 }
 
-func Test_Cov2_Hashmap_ConcatNew_NilOther(t *testing.T) {
+func Test_Hashmap_ConcatNew_NilOther(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -262,7 +262,7 @@ func Test_Cov2_Hashmap_ConcatNew_NilOther(t *testing.T) {
 
 // ── Hashset uncovered branches ──
 
-func Test_Cov2_Hashset_AddBool(t *testing.T) {
+func Test_Hashset_AddBool(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	existed1 := hs.AddBool("a")
@@ -282,7 +282,7 @@ func Test_Cov2_Hashset_AddBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- AddBool", actual)
 }
 
-func Test_Cov2_Hashset_AddIfMany_Skip(t *testing.T) {
+func Test_Hashset_AddIfMany_Skip(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddIfMany(false, "a", "b")
@@ -295,7 +295,7 @@ func Test_Cov2_Hashset_AddIfMany_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- AddIfMany skip", actual)
 }
 
-func Test_Cov2_Hashset_AddItemsMap_FalseValue(t *testing.T) {
+func Test_Hashset_AddItemsMap_FalseValue(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddItemsMap(map[string]bool{"a": true, "b": false})
@@ -308,7 +308,7 @@ func Test_Cov2_Hashset_AddItemsMap_FalseValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashset returns non-empty -- AddItemsMap false value", actual)
 }
 
-func Test_Cov2_Hashset_Resize_TooSmall(t *testing.T) {
+func Test_Hashset_Resize_TooSmall(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a", "b", "c"})
 	hs.Resize(1) // smaller than current, should not resize
@@ -323,7 +323,7 @@ func Test_Cov2_Hashset_Resize_TooSmall(t *testing.T) {
 
 // ── MapSimpleSlice nil ──
 
-func Test_Cov2_MapSimpleSlice_Nil(t *testing.T) {
+func Test_MapSimpleSlice_Nil(t *testing.T) {
 	// Arrange
 	result := coregeneric.MapSimpleSlice[int, string](nil, func(i int) string { return "" })
 
@@ -337,7 +337,7 @@ func Test_Cov2_MapSimpleSlice_Nil(t *testing.T) {
 
 // ── DistinctSimpleSlice nil ──
 
-func Test_Cov2_DistinctSimpleSlice_Nil(t *testing.T) {
+func Test_DistinctSimpleSlice_Nil(t *testing.T) {
 	// Arrange
 	result := coregeneric.DistinctSimpleSlice[int](nil)
 
@@ -351,7 +351,7 @@ func Test_Cov2_DistinctSimpleSlice_Nil(t *testing.T) {
 
 // ── ContainsSimpleSliceItem nil ──
 
-func Test_Cov2_ContainsSimpleSliceItem_Nil(t *testing.T) {
+func Test_ContainsSimpleSliceItem_Nil(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.ContainsSimpleSliceItem[int](nil, 1)}
 

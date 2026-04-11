@@ -9,7 +9,7 @@ import (
 
 // ── Collection.JsonString valid (line 355) ──
 
-func Test_Cov75_Collection_JsonString_Valid_I29(t *testing.T) {
+func Test_Collection_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](3)
 	coll.Add("a")
@@ -32,7 +32,7 @@ func Test_Cov75_Collection_JsonString_Valid_I29(t *testing.T) {
 
 // ── Collection.JsonStringMust valid (line 364) ──
 
-func Test_Cov75_Collection_JsonStringMust_Valid_I29(t *testing.T) {
+func Test_Collection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](2)
 	coll.Add("test")

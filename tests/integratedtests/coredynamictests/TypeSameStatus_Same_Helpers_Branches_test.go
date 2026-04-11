@@ -12,7 +12,7 @@ import (
 // TypeSameStatus
 // =============================================================================
 
-func Test_Cov45_TypeSameStatus_Same(t *testing.T) {
+func Test_TypeSameStatus_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -24,7 +24,7 @@ func Test_Cov45_TypeSameStatus_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus same type", actual)
 }
 
-func Test_Cov45_TypeSameStatus_Different(t *testing.T) {
+func Test_TypeSameStatus_Different(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -42,7 +42,7 @@ func Test_Cov45_TypeSameStatus_Different(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus different", actual)
 }
 
-func Test_Cov45_TypeSameStatus_NilLeft(t *testing.T) {
+func Test_TypeSameStatus_NilLeft(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "b")
 
@@ -60,7 +60,7 @@ func Test_Cov45_TypeSameStatus_NilLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus nil left", actual)
 }
 
-func Test_Cov45_TypeSameStatus_Pointers(t *testing.T) {
+func Test_TypeSameStatus_Pointers(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "b")
@@ -81,7 +81,7 @@ func Test_Cov45_TypeSameStatus_Pointers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus pointers", actual)
 }
 
-func Test_Cov45_TypeSameStatus_BothPointers(t *testing.T) {
+func Test_TypeSameStatus_BothPointers(t *testing.T) {
 	// Arrange
 	a := "a"
 	b := "b"
@@ -99,7 +99,7 @@ func Test_Cov45_TypeSameStatus_BothPointers(t *testing.T) {
 // TypeStatus — methods
 // =============================================================================
 
-func Test_Cov45_TypeStatus_IsValid_Nil(t *testing.T) {
+func Test_TypeStatus_IsValid_Nil(t *testing.T) {
 	// Arrange
 	var ts *coredynamic.TypeStatus
 
@@ -117,7 +117,7 @@ func Test_Cov45_TypeStatus_IsValid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsValid nil", actual)
 }
 
-func Test_Cov45_TypeStatus_IsValid_Valid(t *testing.T) {
+func Test_TypeStatus_IsValid_Valid(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -129,7 +129,7 @@ func Test_Cov45_TypeStatus_IsValid_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsValid valid", actual)
 }
 
-func Test_Cov45_TypeStatus_IsValid_Cached(t *testing.T) {
+func Test_TypeStatus_IsValid_Cached(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 	ts.IsValid() // first call caches
@@ -142,7 +142,7 @@ func Test_Cov45_TypeStatus_IsValid_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsValid cached", actual)
 }
 
-func Test_Cov45_TypeStatus_IsNotEqualTypes(t *testing.T) {
+func Test_TypeStatus_IsNotEqualTypes(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -154,7 +154,7 @@ func Test_Cov45_TypeStatus_IsNotEqualTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsNotEqualTypes", actual)
 }
 
-func Test_Cov45_TypeStatus_NonPointerLeft(t *testing.T) {
+func Test_TypeStatus_NonPointerLeft(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -166,7 +166,7 @@ func Test_Cov45_TypeStatus_NonPointerLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NonPointerLeft", actual)
 }
 
-func Test_Cov45_TypeStatus_NonPointerRight(t *testing.T) {
+func Test_TypeStatus_NonPointerRight(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -178,7 +178,7 @@ func Test_Cov45_TypeStatus_NonPointerRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NonPointerRight", actual)
 }
 
-func Test_Cov45_TypeStatus_NonPointerLeft_Pointer(t *testing.T) {
+func Test_TypeStatus_NonPointerLeft_Pointer(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "b")
@@ -191,7 +191,7 @@ func Test_Cov45_TypeStatus_NonPointerLeft_Pointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NonPointerLeft pointer", actual)
 }
 
-func Test_Cov45_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
+func Test_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -203,7 +203,7 @@ func Test_Cov45_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsSameRegardlessPointer same", actual)
 }
 
-func Test_Cov45_TypeStatus_IsSameRegardlessPointer_PtrVsVal(t *testing.T) {
+func Test_TypeStatus_IsSameRegardlessPointer_PtrVsVal(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "b")
@@ -216,7 +216,7 @@ func Test_Cov45_TypeStatus_IsSameRegardlessPointer_PtrVsVal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsSameRegardlessPointer ptr vs val", actual)
 }
 
-func Test_Cov45_TypeStatus_LeftName_Nil(t *testing.T) {
+func Test_TypeStatus_LeftName_Nil(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "b")
 
@@ -228,7 +228,7 @@ func Test_Cov45_TypeStatus_LeftName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus LeftName nil", actual)
 }
 
-func Test_Cov45_TypeStatus_RightName_Nil(t *testing.T) {
+func Test_TypeStatus_RightName_Nil(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", nil)
 
@@ -240,7 +240,7 @@ func Test_Cov45_TypeStatus_RightName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus RightName nil", actual)
 }
 
-func Test_Cov45_TypeStatus_LeftFullName_Nil(t *testing.T) {
+func Test_TypeStatus_LeftFullName_Nil(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "b")
 
@@ -252,7 +252,7 @@ func Test_Cov45_TypeStatus_LeftFullName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus LeftFullName nil", actual)
 }
 
-func Test_Cov45_TypeStatus_RightFullName_Nil(t *testing.T) {
+func Test_TypeStatus_RightFullName_Nil(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", nil)
 
@@ -264,7 +264,7 @@ func Test_Cov45_TypeStatus_RightFullName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus RightFullName nil", actual)
 }
 
-func Test_Cov45_TypeStatus_LeftName_Valid(t *testing.T) {
+func Test_TypeStatus_LeftName_Valid(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -276,7 +276,7 @@ func Test_Cov45_TypeStatus_LeftName_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus LeftName valid", actual)
 }
 
-func Test_Cov45_TypeStatus_NotMatchMessage_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -288,7 +288,7 @@ func Test_Cov45_TypeStatus_NotMatchMessage_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotMatchMessage same", actual)
 }
 
-func Test_Cov45_TypeStatus_NotMatchMessage_Diff(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage_Diff(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 	msg := ts.NotMatchMessage("left", "right")
@@ -301,7 +301,7 @@ func Test_Cov45_TypeStatus_NotMatchMessage_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotMatchMessage diff", actual)
 }
 
-func Test_Cov45_TypeStatus_NotMatchErr_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchErr_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -313,7 +313,7 @@ func Test_Cov45_TypeStatus_NotMatchErr_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotMatchErr same", actual)
 }
 
-func Test_Cov45_TypeStatus_NotMatchErr_Diff(t *testing.T) {
+func Test_TypeStatus_NotMatchErr_Diff(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -325,7 +325,7 @@ func Test_Cov45_TypeStatus_NotMatchErr_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotMatchErr diff", actual)
 }
 
-func Test_Cov45_TypeStatus_ValidationError_Same(t *testing.T) {
+func Test_TypeStatus_ValidationError_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -337,7 +337,7 @@ func Test_Cov45_TypeStatus_ValidationError_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus ValidationError same", actual)
 }
 
-func Test_Cov45_TypeStatus_ValidationError_Diff(t *testing.T) {
+func Test_TypeStatus_ValidationError_Diff(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -349,7 +349,7 @@ func Test_Cov45_TypeStatus_ValidationError_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus ValidationError diff", actual)
 }
 
-func Test_Cov45_TypeStatus_MustBeSame_Same(t *testing.T) {
+func Test_TypeStatus_MustBeSame_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 	ts.MustBeSame() // should not panic
@@ -362,7 +362,7 @@ func Test_Cov45_TypeStatus_MustBeSame_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus MustBeSame same", actual)
 }
 
-func Test_Cov45_TypeStatus_MustBeSame_Panics(t *testing.T) {
+func Test_TypeStatus_MustBeSame_Panics(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 	defer func() {
@@ -378,7 +378,7 @@ func Test_Cov45_TypeStatus_MustBeSame_Panics(t *testing.T) {
 	ts.MustBeSame()
 }
 
-func Test_Cov45_TypeStatus_SrcDestinationMustBeSame_Same(t *testing.T) {
+func Test_TypeStatus_SrcDestinationMustBeSame_Same(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 	ts.SrcDestinationMustBeSame() // no panic
@@ -391,7 +391,7 @@ func Test_Cov45_TypeStatus_SrcDestinationMustBeSame_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus SrcDestMustBeSame same", actual)
 }
 
-func Test_Cov45_TypeStatus_SrcDestinationMustBeSame_Panics(t *testing.T) {
+func Test_TypeStatus_SrcDestinationMustBeSame_Panics(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 	defer func() {
@@ -407,7 +407,7 @@ func Test_Cov45_TypeStatus_SrcDestinationMustBeSame_Panics(t *testing.T) {
 	ts.SrcDestinationMustBeSame()
 }
 
-func Test_Cov45_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 	msg := ts.NotEqualSrcDestinationMessage()
@@ -420,7 +420,7 @@ func Test_Cov45_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotEqualSrcDestMsg", actual)
 }
 
-func Test_Cov45_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -432,7 +432,7 @@ func Test_Cov45_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus NotEqualSrcDestErr", actual)
 }
 
-func Test_Cov45_TypeStatus_IsEqual_BothNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var a, b *coredynamic.TypeStatus
 
@@ -444,7 +444,7 @@ func Test_Cov45_TypeStatus_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsEqual both nil", actual)
 }
 
-func Test_Cov45_TypeStatus_IsEqual_OneNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -456,7 +456,7 @@ func Test_Cov45_TypeStatus_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsEqual one nil", actual)
 }
 
-func Test_Cov45_TypeStatus_IsEqual_Same(t *testing.T) {
+func Test_TypeStatus_IsEqual_Same(t *testing.T) {
 	// Arrange
 	ts1 := coredynamic.TypeSameStatus("a", "b")
 	ts2 := coredynamic.TypeSameStatus("c", "d")
@@ -469,7 +469,7 @@ func Test_Cov45_TypeStatus_IsEqual_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsEqual same", actual)
 }
 
-func Test_Cov45_TypeStatus_IsEqual_DiffSame(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffSame(t *testing.T) {
 	// Arrange
 	ts1 := coredynamic.TypeSameStatus("a", "b")
 	ts2 := coredynamic.TypeSameStatus("a", 42)
@@ -482,7 +482,7 @@ func Test_Cov45_TypeStatus_IsEqual_DiffSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsEqual diff IsSame", actual)
 }
 
-func Test_Cov45_TypeStatus_IsEqual_DiffRight(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffRight(t *testing.T) {
 	// Arrange
 	ts1 := coredynamic.TypeSameStatus("a", "b")
 	ts2 := coredynamic.TypeSameStatus("a", 42)
@@ -500,7 +500,7 @@ func Test_Cov45_TypeStatus_IsEqual_DiffRight(t *testing.T) {
 // ValueStatus
 // =============================================================================
 
-func Test_Cov45_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatus("bad")
 
@@ -520,7 +520,7 @@ func Test_Cov45_ValueStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStatus Invalid", actual)
 }
 
-func Test_Cov45_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
@@ -542,7 +542,7 @@ func Test_Cov45_ValueStatus_InvalidNoMessage(t *testing.T) {
 // SafeTypeName
 // =============================================================================
 
-func Test_Cov45_SafeTypeName_Nil(t *testing.T) {
+func Test_SafeTypeName_Nil(t *testing.T) {
 	// Act
 	actual := args.Map{"r": coredynamic.SafeTypeName(nil)}
 
@@ -551,7 +551,7 @@ func Test_Cov45_SafeTypeName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeTypeName nil", actual)
 }
 
-func Test_Cov45_SafeTypeName_String(t *testing.T) {
+func Test_SafeTypeName_String(t *testing.T) {
 	// Act
 	actual := args.Map{"r": coredynamic.SafeTypeName("hello")}
 
@@ -564,7 +564,7 @@ func Test_Cov45_SafeTypeName_String(t *testing.T) {
 // LengthOfReflect
 // =============================================================================
 
-func Test_Cov45_LengthOfReflect_Slice(t *testing.T) {
+func Test_LengthOfReflect_Slice(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf([]int{1, 2, 3})
 
@@ -576,7 +576,7 @@ func Test_Cov45_LengthOfReflect_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect slice", actual)
 }
 
-func Test_Cov45_LengthOfReflect_Array(t *testing.T) {
+func Test_LengthOfReflect_Array(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf([2]int{1, 2})
 
@@ -588,7 +588,7 @@ func Test_Cov45_LengthOfReflect_Array(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect array", actual)
 }
 
-func Test_Cov45_LengthOfReflect_Map(t *testing.T) {
+func Test_LengthOfReflect_Map(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf(map[string]int{"a": 1})
 
@@ -600,7 +600,7 @@ func Test_Cov45_LengthOfReflect_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect map", actual)
 }
 
-func Test_Cov45_LengthOfReflect_Default(t *testing.T) {
+func Test_LengthOfReflect_Default(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf(42)
 
@@ -616,7 +616,7 @@ func Test_Cov45_LengthOfReflect_Default(t *testing.T) {
 // IsAnyTypesOf
 // =============================================================================
 
-func Test_Cov45_IsAnyTypesOf_Found(t *testing.T) {
+func Test_IsAnyTypesOf_Found(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -629,7 +629,7 @@ func Test_Cov45_IsAnyTypesOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsAnyTypesOf found", actual)
 }
 
-func Test_Cov45_IsAnyTypesOf_NotFound(t *testing.T) {
+func Test_IsAnyTypesOf_NotFound(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)

@@ -15,7 +15,7 @@ import (
 
 // ── CastTo: null pointer with non-pointer output ──
 
-func Test_Cov74_CastTo_NullPointerNonPointerOutput(t *testing.T) {
+func Test_CastTo_NullPointerNonPointerOutput(t *testing.T) {
 	// Arrange
 	var nilPtr *string
 	acceptedType := reflect.TypeOf(nilPtr)
@@ -35,7 +35,7 @@ func Test_Cov74_CastTo_NullPointerNonPointerOutput(t *testing.T) {
 
 // ── MapAnyItems.GetItemRef: nil/null referenceOut, type mismatch, non-ptr found ──
 
-func Test_Cov74_MapAnyItems_GetItemRef_NilReferenceOut(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NilReferenceOut(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": "v"}}
 
@@ -48,7 +48,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_NilReferenceOut(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil referenceOut", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetItemRef_NonPointerRef(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NonPointerRef(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": "v"}}
 
@@ -61,7 +61,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_NonPointerRef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for non-pointer referenceOut", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetItemRef_NilPointerValues(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NilPointerValues(t *testing.T) {
 	// Arrange
 	var nilPtr *string
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": nilPtr}}
@@ -76,7 +76,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_NilPointerValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil pointer values", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetItemRef_TypeMismatch(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_TypeMismatch(t *testing.T) {
 	// Arrange
 	val := "hello"
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": &val}}
@@ -91,7 +91,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for type mismatch", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetItemRef_NonPtrFoundItem(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NonPtrFoundItem(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": "hello"}}
 	var out string
@@ -113,7 +113,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_NonPtrFoundItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected panic for IsNil on non-pointer stored value, but did not panic", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetItemRef_PtrFoundItem(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_PtrFoundItem(t *testing.T) {
 	// Arrange
 	val := "world"
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": &val}}
@@ -133,7 +133,7 @@ func Test_Cov74_MapAnyItems_GetItemRef_PtrFoundItem(t *testing.T) {
 
 // ── MapAnyItems.GetUsingUnmarshallAt: marshal error & unmarshal error ──
 
-func Test_Cov74_MapAnyItems_GetUsingUnmarshallAt_MarshalError(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallAt_MarshalError(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": make(chan int)}}
 	var out string
@@ -147,7 +147,7 @@ func Test_Cov74_MapAnyItems_GetUsingUnmarshallAt_MarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected marshal error for channel value", actual)
 }
 
-func Test_Cov74_MapAnyItems_GetUsingUnmarshallAt_UnmarshalError(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallAt_UnmarshalError(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": "not-a-number"}}
 	var out int
@@ -165,7 +165,7 @@ func Test_Cov74_MapAnyItems_GetUsingUnmarshallAt_UnmarshalError(t *testing.T) {
 // NOTE: DiffRaw internally compares rightMap against itself (it.Items is unused),
 // so HashmapDiffUsingRaw always returns an empty map regardless of it.Items content.
 
-func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_WithDiff(t *testing.T) {
+func Test_MapAnyItems_HashmapDiffUsingRaw_WithDiff(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{
 		"a": 1,
@@ -184,7 +184,7 @@ func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_WithDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty diff due to self-compare", actual)
 }
 
-func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
+func Test_MapAnyItems_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{
 		"a": 1,
@@ -203,7 +203,7 @@ func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
 
 // ── MapAnyItems paging: length != allKeys ──
 
-func Test_Cov74_MapAnyItems_GetSinglePageCollection_LengthMismatchPanics(t *testing.T) {
+func Test_MapAnyItems_GetSinglePageCollection_LengthMismatchPanics(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1, "b": 2, "c": 3}}
 	defer func() {
@@ -219,7 +219,7 @@ func Test_Cov74_MapAnyItems_GetSinglePageCollection_LengthMismatchPanics(t *test
 
 // ── MapAnyItems paging: negative page index ──
 
-func Test_Cov74_MapAnyItems_GetSinglePageCollection_NegativePageIndexPanics(t *testing.T) {
+func Test_MapAnyItems_GetSinglePageCollection_NegativePageIndexPanics(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1, "b": 2, "c": 3}}
 	allKeys := m.AllKeys()
@@ -236,7 +236,7 @@ func Test_Cov74_MapAnyItems_GetSinglePageCollection_NegativePageIndexPanics(t *t
 
 // ── MapAnyItems.GetNewMapUsingKeys: isPanicOnMissing ──
 
-func Test_Cov74_MapAnyItems_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
+func Test_MapAnyItems_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1}}
 	defer func() {
@@ -252,7 +252,7 @@ func Test_Cov74_MapAnyItems_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
 
 // ── MapAnyItems.NewFromAnyMap: reflect error ──
 
-func Test_Cov74_MapAnyItems_NewUsingAnyTypeMap_NonMapType(t *testing.T) {
+func Test_MapAnyItems_NewUsingAnyTypeMap_NonMapType(t *testing.T) {
 	// Arrange
 	notAMap := "hello"
 
@@ -267,7 +267,7 @@ func Test_Cov74_MapAnyItems_NewUsingAnyTypeMap_NonMapType(t *testing.T) {
 
 // ── MapAnyItems.JsonString/JsonStringMust error branches ──
 
-func Test_Cov74_MapAnyItems_JsonString_MarshalError(t *testing.T) {
+func Test_MapAnyItems_JsonString_MarshalError(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": make(chan int)}}
 
@@ -280,7 +280,7 @@ func Test_Cov74_MapAnyItems_JsonString_MarshalError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected marshal error", actual)
 }
 
-func Test_Cov74_MapAnyItems_JsonStringMust_Panics(t *testing.T) {
+func Test_MapAnyItems_JsonStringMust_Panics(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": make(chan int)}}
 	defer func() {
@@ -296,7 +296,7 @@ func Test_Cov74_MapAnyItems_JsonStringMust_Panics(t *testing.T) {
 
 // ── MapAnyItems.ClonePtr: HasError branch ──
 
-func Test_Cov74_MapAnyItems_ClonePtr_MarshalError(t *testing.T) {
+func Test_MapAnyItems_ClonePtr_MarshalError(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": math.NaN()}}
 
@@ -309,7 +309,7 @@ func Test_Cov74_MapAnyItems_ClonePtr_MarshalError(t *testing.T) {
 
 // ── MapAnyItems.JsonMapResults: exercises conversion ──
 
-func Test_Cov74_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": "1", "b": "2"}}
 
@@ -327,7 +327,7 @@ func Test_Cov74_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
 
 // ── SafeZeroSet: settable pointer elem ──
 
-func Test_Cov74_SafeZeroSet_Settable(t *testing.T) {
+func Test_SafeZeroSet_Settable(t *testing.T) {
 	// Arrange
 	val := 42
 	rv := reflect.ValueOf(&val)

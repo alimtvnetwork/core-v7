@@ -9,7 +9,7 @@ import (
 
 // ── BytesCollection — AddSerializer ──
 
-func Test_Cov51_BytesCollection_AddSerializer(t *testing.T) {
+func Test_BytesCollection_AddSerializer(t *testing.T) {
 	// Arrange
 	item := exampleStruct{Name: "Alice", Age: 30}
 	result := corejson.New(item)
@@ -26,7 +26,7 @@ func Test_Cov51_BytesCollection_AddSerializer(t *testing.T) {
 
 // ── BytesCollection — AddSerializers ──
 
-func Test_Cov51_BytesCollection_AddSerializers(t *testing.T) {
+func Test_BytesCollection_AddSerializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -43,7 +43,7 @@ func Test_Cov51_BytesCollection_AddSerializers(t *testing.T) {
 
 // ── BytesCollection — AddJsoners with error ──
 
-func Test_Cov51_BytesCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+func Test_BytesCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 	// Arrange
 	coll := corejson.NewBytesCollection.Empty()
 	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
@@ -59,7 +59,7 @@ func Test_Cov51_BytesCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 
 // ── BytesCollection — GetPagedItems negative index panic ──
 
-func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+func Test_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 	// Arrange
 	coll, _ := corejson.NewBytesCollection.AnyItems("a", "b", "c")
 	didPanic := false
@@ -82,7 +82,7 @@ func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) 
 
 // ── MapResults — SafeUnmarshal fallthrough ──
 
-func Test_Cov51_MapResults_SafeUnmarshal_NotFound(t *testing.T) {
+func Test_MapResults_SafeUnmarshal_NotFound(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 
@@ -97,7 +97,7 @@ func Test_Cov51_MapResults_SafeUnmarshal_NotFound(t *testing.T) {
 
 // ── MapResults — AddAnyItem error ──
 
-func Test_Cov51_MapResults_AddAnyItem_Error(t *testing.T) {
+func Test_MapResults_AddAnyItem_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 
@@ -112,7 +112,7 @@ func Test_Cov51_MapResults_AddAnyItem_Error(t *testing.T) {
 
 // ── MapResults — GetPagedItems negative index panic ──
 
-func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+func Test_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	mr.Add("a", corejson.New("val"))
@@ -136,7 +136,7 @@ func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 
 // ── Result — MeaningfulError with error and payload ──
 
-func Test_Cov51_Result_MeaningfulError_WithErrorAndPayload(t *testing.T) {
+func Test_Result_MeaningfulError_WithErrorAndPayload(t *testing.T) {
 	// Arrange
 	r := corejson.Result{
 		Bytes:    []byte(`{"data":"test"}`),
@@ -155,7 +155,7 @@ func Test_Cov51_Result_MeaningfulError_WithErrorAndPayload(t *testing.T) {
 
 // ── Result — IsEqualPtr with matching jsonString ──
 
-func Test_Cov51_Result_IsEqualPtr_JsonStringMatch(t *testing.T) {
+func Test_Result_IsEqualPtr_JsonStringMatch(t *testing.T) {
 	// Arrange
 	r1 := corejson.New("hello")
 	r2 := corejson.New("hello")
@@ -171,7 +171,7 @@ func Test_Cov51_Result_IsEqualPtr_JsonStringMatch(t *testing.T) {
 
 // ── Result — IsEqual with matching jsonString ──
 
-func Test_Cov51_Result_IsEqual_JsonStringMatch(t *testing.T) {
+func Test_Result_IsEqual_JsonStringMatch(t *testing.T) {
 	// Arrange
 	r1 := corejson.New("hello")
 	r2 := corejson.New("hello")
@@ -187,7 +187,7 @@ func Test_Cov51_Result_IsEqual_JsonStringMatch(t *testing.T) {
 
 // ── ResultCollection — AddSerializer ──
 
-func Test_Cov51_ResultCollection_AddSerializer(t *testing.T) {
+func Test_ResultCollection_AddSerializer(t *testing.T) {
 	// Arrange
 	item := corejson.New(exampleStruct{Name: "A", Age: 1})
 	coll := corejson.NewResultsCollection.Empty()
@@ -203,7 +203,7 @@ func Test_Cov51_ResultCollection_AddSerializer(t *testing.T) {
 
 // ── ResultCollection — AddSerializers ──
 
-func Test_Cov51_ResultCollection_AddSerializers(t *testing.T) {
+func Test_ResultCollection_AddSerializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -220,7 +220,7 @@ func Test_Cov51_ResultCollection_AddSerializers(t *testing.T) {
 
 // ── ResultCollection — AddJsoners with error ──
 
-func Test_Cov51_ResultCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+func Test_ResultCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()
 	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
@@ -236,7 +236,7 @@ func Test_Cov51_ResultCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 
 // ── ResultCollection — GetPagedItems negative index panic ──
 
-func Test_Cov51_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+func Test_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.AnyItems("a", "b")
 	didPanic := false
@@ -259,7 +259,7 @@ func Test_Cov51_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T)
 
 // ── ResultsPtrCollection — AddSerializer ──
 
-func Test_Cov51_ResultsPtrCollection_AddSerializer(t *testing.T) {
+func Test_ResultsPtrCollection_AddSerializer(t *testing.T) {
 	// Arrange
 	item := corejson.New(exampleStruct{Name: "A", Age: 1})
 	coll := corejson.NewResultsPtrCollection.Empty()
@@ -275,7 +275,7 @@ func Test_Cov51_ResultsPtrCollection_AddSerializer(t *testing.T) {
 
 // ── ResultsPtrCollection — AddSerializers ──
 
-func Test_Cov51_ResultsPtrCollection_AddSerializers(t *testing.T) {
+func Test_ResultsPtrCollection_AddSerializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -292,7 +292,7 @@ func Test_Cov51_ResultsPtrCollection_AddSerializers(t *testing.T) {
 
 // ── ResultsPtrCollection — AddJsoners with error ──
 
-func Test_Cov51_ResultsPtrCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+func Test_ResultsPtrCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.Empty()
 	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
@@ -308,7 +308,7 @@ func Test_Cov51_ResultsPtrCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 
 // ── ResultsPtrCollection — GetPagedItems negative index panic ──
 
-func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+func Test_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b")
 	didPanic := false
@@ -331,7 +331,7 @@ func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testin
 
 // ── CastAny — Result type switch ──
 
-func Test_Cov51_CastAny_Result(t *testing.T) {
+func Test_CastAny_Result(t *testing.T) {
 	// Arrange — Result implements Jsoner, so CastAny dispatches via Jsoner path
 	// which double-marshals. Use bytes directly for reliable deserialization.
 	r := corejson.New("hello")
@@ -352,7 +352,7 @@ func Test_Cov51_CastAny_Result(t *testing.T) {
 
 // ── CastAny — *Result type switch ──
 
-func Test_Cov51_CastAny_ResultPtr(t *testing.T) {
+func Test_CastAny_ResultPtr(t *testing.T) {
 	// Arrange — *Result also implements Jsoner, dispatches via Jsoner path
 	r := corejson.New("world")
 	var target string
@@ -372,7 +372,7 @@ func Test_Cov51_CastAny_ResultPtr(t *testing.T) {
 
 // ── CastAny — bytesSerializer type switch ──
 
-func Test_Cov51_CastAny_BytesSerializer(t *testing.T) {
+func Test_CastAny_BytesSerializer(t *testing.T) {
 	// Arrange — *Result implements Jsoner before bytesSerializer in type switch
 	item := corejson.New(exampleStruct{Name: "Test", Age: 5})
 	var target exampleStruct
@@ -392,7 +392,7 @@ func Test_Cov51_CastAny_BytesSerializer(t *testing.T) {
 
 // ── CastAny — serializer func type switch ──
 
-func Test_Cov51_CastAny_SerializerFunc(t *testing.T) {
+func Test_CastAny_SerializerFunc(t *testing.T) {
 	// Arrange
 	serializerFunc := func() ([]byte, error) {
 		return []byte(`"funcResult"`), nil
@@ -416,7 +416,7 @@ func Test_Cov51_CastAny_SerializerFunc(t *testing.T) {
 
 // ── CastAny — error nil type switch ──
 
-func Test_Cov51_CastAny_ErrorNil(t *testing.T) {
+func Test_CastAny_ErrorNil(t *testing.T) {
 	// Arrange
 	var errInput error
 	var target string
@@ -432,7 +432,7 @@ func Test_Cov51_CastAny_ErrorNil(t *testing.T) {
 
 // ── DeserializeFromBytesTo — StringsMust panic ──
 
-func Test_Cov51_DeserializeFromBytesTo_StringsMust_Panic(t *testing.T) {
+func Test_DeserializeFromBytesTo_StringsMust_Panic(t *testing.T) {
 	// Arrange
 	didPanic := false
 
@@ -454,7 +454,7 @@ func Test_Cov51_DeserializeFromBytesTo_StringsMust_Panic(t *testing.T) {
 
 // ── DeserializerLogic — UsingMapSkipOnEmpty error ──
 
-func Test_Cov51_DeserializerLogic_UsingMapSkipOnEmpty_Error(t *testing.T) {
+func Test_DeserializerLogic_UsingMapSkipOnEmpty_Error(t *testing.T) {
 	// Arrange
 	badMap := map[string]any{"ch": make(chan int)}
 	var target exampleStruct
@@ -470,7 +470,7 @@ func Test_Cov51_DeserializerLogic_UsingMapSkipOnEmpty_Error(t *testing.T) {
 
 // ── DeserializerLogic — UsingDeserializer nil ──
 
-func Test_Cov51_DeserializerLogic_UsingDeserializer_Nil(t *testing.T) {
+func Test_DeserializerLogic_UsingDeserializer_Nil(t *testing.T) {
 	// Arrange — passing nil deserializer
 	var target exampleStruct
 
@@ -485,7 +485,7 @@ func Test_Cov51_DeserializerLogic_UsingDeserializer_Nil(t *testing.T) {
 
 // ── DeserializerLogic — UsingJsoner nil ──
 
-func Test_Cov51_DeserializerLogic_UsingJsoner_Nil(t *testing.T) {
+func Test_DeserializerLogic_UsingJsoner_Nil(t *testing.T) {
 	// Arrange
 	var target exampleStruct
 
@@ -500,7 +500,7 @@ func Test_Cov51_DeserializerLogic_UsingJsoner_Nil(t *testing.T) {
 
 // ── NewBytesCollectionCreator — Deserialize error ──
 
-func Test_Cov51_NewBytesCollectionCreator_Deserialize_Error(t *testing.T) {
+func Test_NewBytesCollectionCreator_Deserialize_Error(t *testing.T) {
 	// Arrange
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
@@ -521,7 +521,7 @@ func Test_Cov51_NewBytesCollectionCreator_Deserialize_Error(t *testing.T) {
 
 // ── NewBytesCollectionCreator — Serializers ──
 
-func Test_Cov51_NewBytesCollectionCreator_Serializers(t *testing.T) {
+func Test_NewBytesCollectionCreator_Serializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -537,7 +537,7 @@ func Test_Cov51_NewBytesCollectionCreator_Serializers(t *testing.T) {
 
 // ── NewMapResultsCreator — Deserialize error ──
 
-func Test_Cov51_NewMapResultsCreator_Deserialize_Error(t *testing.T) {
+func Test_NewMapResultsCreator_Deserialize_Error(t *testing.T) {
 	// Arrange
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
@@ -558,7 +558,7 @@ func Test_Cov51_NewMapResultsCreator_Deserialize_Error(t *testing.T) {
 
 // ── NewResultCreator — Deserialize error ──
 
-func Test_Cov51_NewResultCreator_Deserialize_Error(t *testing.T) {
+func Test_NewResultCreator_Deserialize_Error(t *testing.T) {
 	// Arrange
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
@@ -573,7 +573,7 @@ func Test_Cov51_NewResultCreator_Deserialize_Error(t *testing.T) {
 
 // ── NewResultCreator — UsingJsoner nil ──
 
-func Test_Cov51_NewResultCreator_UsingJsoner_Nil(t *testing.T) {
+func Test_NewResultCreator_UsingJsoner_Nil(t *testing.T) {
 	// Arrange & Act
 	result := corejson.NewResult.UsingJsoner(nil)
 
@@ -585,7 +585,7 @@ func Test_Cov51_NewResultCreator_UsingJsoner_Nil(t *testing.T) {
 
 // ── NewResultsCollectionCreator — Deserialize error ──
 
-func Test_Cov51_NewResultsCollectionCreator_Deserialize_Error(t *testing.T) {
+func Test_NewResultsCollectionCreator_Deserialize_Error(t *testing.T) {
 	// Arrange
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
@@ -606,7 +606,7 @@ func Test_Cov51_NewResultsCollectionCreator_Deserialize_Error(t *testing.T) {
 
 // ── NewResultsCollectionCreator — UsingResultsPtrPlusCap empty ──
 
-func Test_Cov51_NewResultsCollectionCreator_UsingResultsPtrPlusCap_Empty(t *testing.T) {
+func Test_NewResultsCollectionCreator_UsingResultsPtrPlusCap_Empty(t *testing.T) {
 	// Arrange
 	var emptyPtrs []*corejson.Result
 
@@ -621,7 +621,7 @@ func Test_Cov51_NewResultsCollectionCreator_UsingResultsPtrPlusCap_Empty(t *test
 
 // ── NewResultsCollectionCreator — UsingResultsPlusCap empty ──
 
-func Test_Cov51_NewResultsCollectionCreator_UsingResultsPlusCap_Empty(t *testing.T) {
+func Test_NewResultsCollectionCreator_UsingResultsPlusCap_Empty(t *testing.T) {
 	// Arrange
 	var emptyResults []corejson.Result
 
@@ -636,7 +636,7 @@ func Test_Cov51_NewResultsCollectionCreator_UsingResultsPlusCap_Empty(t *testing
 
 // ── NewResultsCollectionCreator — Serializers ──
 
-func Test_Cov51_NewResultsCollectionCreator_Serializers(t *testing.T) {
+func Test_NewResultsCollectionCreator_Serializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -652,7 +652,7 @@ func Test_Cov51_NewResultsCollectionCreator_Serializers(t *testing.T) {
 
 // ── NewResultsPtrCollectionCreator — Deserialize error ──
 
-func Test_Cov51_NewResultsPtrCollectionCreator_Deserialize_Error(t *testing.T) {
+func Test_NewResultsPtrCollectionCreator_Deserialize_Error(t *testing.T) {
 	// Arrange
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
@@ -673,7 +673,7 @@ func Test_Cov51_NewResultsPtrCollectionCreator_Deserialize_Error(t *testing.T) {
 
 // ── NewResultsPtrCollectionCreator — Serializers ──
 
-func Test_Cov51_NewResultsPtrCollectionCreator_Serializers(t *testing.T) {
+func Test_NewResultsPtrCollectionCreator_Serializers(t *testing.T) {
 	// Arrange
 	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
 	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
@@ -689,7 +689,7 @@ func Test_Cov51_NewResultsPtrCollectionCreator_Serializers(t *testing.T) {
 
 // ── AnyTo — bytesSerializer branch ──
 
-func Test_Cov51_AnyTo_SerializedJsonResult_BytesSerializer(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_BytesSerializer(t *testing.T) {
 	// Arrange
 	item := corejson.New(exampleStruct{Name: "Test", Age: 5})
 
@@ -710,7 +710,7 @@ func Test_Cov51_AnyTo_SerializedJsonResult_BytesSerializer(t *testing.T) {
 
 // ── ResultsPtrCollection — SafeUnmarshalAt with error result ──
 
-func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
+func Test_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	// Arrange
 	errResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 	errResult.Error = corejson.Deserialize.UsingBytes([]byte(`{bad`), &struct{}{})
@@ -727,7 +727,7 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 
 // ── ResultsPtrCollection — SafeUnmarshalAt with empty bytes ──
 
-func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
+func Test_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	// Arrange
 	emptyResult := corejson.NewResult.UsingBytes([]byte{})
 	coll := corejson.NewResultsPtrCollection.UsingResults(&emptyResult)
@@ -743,7 +743,7 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 
 // ── DeserializerLogic — UsingDeserializerToOption with valid deserializer (line 363) ──
 
-func Test_Cov51_DeserializerLogic_UsingDeserializerToOption_Valid(t *testing.T) {
+func Test_DeserializerLogic_UsingDeserializerToOption_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.New(exampleStruct{Name: "Test", Age: 5})
 	var target exampleStruct
@@ -765,7 +765,7 @@ func Test_Cov51_DeserializerLogic_UsingDeserializerToOption_Valid(t *testing.T) 
 
 // ── DeserializerLogic — UsingJsonerToAnyMust nil (lines 434-436) ──
 
-func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Nil(t *testing.T) {
+func Test_DeserializerLogic_UsingJsonerToAnyMust_Nil(t *testing.T) {
 	// Arrange
 	var target exampleStruct
 
@@ -780,7 +780,7 @@ func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Nil(t *testing.T) {
 
 // ── DeserializerLogic — UsingJsonerToAnyMust valid (line 434) ──
 
-func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Valid(t *testing.T) {
+func Test_DeserializerLogic_UsingJsonerToAnyMust_Valid(t *testing.T) {
 	// Arrange — UsingJsonerToAnyMust calls JsonPtr() which double-marshals
 	r := corejson.New(exampleStruct{Name: "Valid", Age: 10})
 	var target exampleStruct
@@ -800,7 +800,7 @@ func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Valid(t *testing.T) {
 
 // ── DeserializerLogic — MapAnyToPointer error on HasIssuesOrEmpty (line 157-159) ──
 
-func Test_Cov51_DeserializerLogic_MapAnyToPointer_UnserializableMap(t *testing.T) {
+func Test_DeserializerLogic_MapAnyToPointer_UnserializableMap(t *testing.T) {
 	// Arrange
 	badMap := map[string]any{"ch": make(chan int)}
 	var target exampleStruct

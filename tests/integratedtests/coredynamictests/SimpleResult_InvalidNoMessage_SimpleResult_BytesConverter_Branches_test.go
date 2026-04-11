@@ -13,7 +13,7 @@ import (
 // SimpleResult — constructors
 // =============================================================================
 
-func Test_Cov42_SimpleResult_InvalidNoMessage(t *testing.T) {
+func Test_SimpleResult_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidSimpleResultNoMessage()
 
@@ -31,7 +31,7 @@ func Test_Cov42_SimpleResult_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidNoMessage", actual)
 }
 
-func Test_Cov42_SimpleResult_Invalid(t *testing.T) {
+func Test_SimpleResult_Invalid(t *testing.T) {
 	// Arrange
 	r := coredynamic.InvalidSimpleResult("fail reason")
 
@@ -49,7 +49,7 @@ func Test_Cov42_SimpleResult_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Invalid", actual)
 }
 
-func Test_Cov42_SimpleResult_NewValid(t *testing.T) {
+func Test_SimpleResult_NewValid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResultValid(42)
 
@@ -67,7 +67,7 @@ func Test_Cov42_SimpleResult_NewValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult NewValid", actual)
 }
 
-func Test_Cov42_SimpleResult_New(t *testing.T) {
+func Test_SimpleResult_New(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult("data", true, "")
 
@@ -89,7 +89,7 @@ func Test_Cov42_SimpleResult_New(t *testing.T) {
 // SimpleResult — GetErrorOnTypeMismatch
 // =============================================================================
 
-func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Nil(t *testing.T) {
+func Test_SimpleResult_GetErrorOnTypeMismatch_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleResult
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -102,7 +102,7 @@ func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult GetErrorOnTypeMismatch nil", actual)
 }
 
-func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Match(t *testing.T) {
+func Test_SimpleResult_GetErrorOnTypeMismatch_Match(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult("data", true, "")
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -115,7 +115,7 @@ func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult GetErrorOnTypeMismatch match", actual)
 }
 
-func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_NoInclude(t *testing.T) {
+func Test_SimpleResult_GetErrorOnTypeMismatch_NoInclude(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult(42, true, "msg")
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)
@@ -128,7 +128,7 @@ func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_NoInclude(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult GetErrorOnTypeMismatch no include", actual)
 }
 
-func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Include(t *testing.T) {
+func Test_SimpleResult_GetErrorOnTypeMismatch_Include(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult(42, true, "extra msg")
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), true)
@@ -145,7 +145,7 @@ func Test_Cov42_SimpleResult_GetErrorOnTypeMismatch_Include(t *testing.T) {
 // SimpleResult — InvalidError
 // =============================================================================
 
-func Test_Cov42_SimpleResult_InvalidError_Nil(t *testing.T) {
+func Test_SimpleResult_InvalidError_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleResult
 	err := r.InvalidError()
@@ -158,7 +158,7 @@ func Test_Cov42_SimpleResult_InvalidError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidError nil", actual)
 }
 
-func Test_Cov42_SimpleResult_InvalidError_NoMessage(t *testing.T) {
+func Test_SimpleResult_InvalidError_NoMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult(nil, false, "")
 	err := r.InvalidError()
@@ -171,7 +171,7 @@ func Test_Cov42_SimpleResult_InvalidError_NoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidError no message", actual)
 }
 
-func Test_Cov42_SimpleResult_InvalidError_WithMessage(t *testing.T) {
+func Test_SimpleResult_InvalidError_WithMessage(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult(nil, false, "bad input")
 	err := r.InvalidError()
@@ -184,7 +184,7 @@ func Test_Cov42_SimpleResult_InvalidError_WithMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidError with message", actual)
 }
 
-func Test_Cov42_SimpleResult_InvalidError_Cached(t *testing.T) {
+func Test_SimpleResult_InvalidError_Cached(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult(nil, false, "bad")
 	e1 := r.InvalidError()
@@ -202,7 +202,7 @@ func Test_Cov42_SimpleResult_InvalidError_Cached(t *testing.T) {
 // SimpleResult — Clone / ClonePtr
 // =============================================================================
 
-func Test_Cov42_SimpleResult_Clone_Nil(t *testing.T) {
+func Test_SimpleResult_Clone_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleResult
 	c := r.Clone()
@@ -215,7 +215,7 @@ func Test_Cov42_SimpleResult_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone nil", actual)
 }
 
-func Test_Cov42_SimpleResult_Clone_Valid(t *testing.T) {
+func Test_SimpleResult_Clone_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult("data", true, "msg")
 	c := r.Clone()
@@ -234,7 +234,7 @@ func Test_Cov42_SimpleResult_Clone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone valid", actual)
 }
 
-func Test_Cov42_SimpleResult_ClonePtr_Nil(t *testing.T) {
+func Test_SimpleResult_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var r *coredynamic.SimpleResult
 
@@ -246,7 +246,7 @@ func Test_Cov42_SimpleResult_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr nil", actual)
 }
 
-func Test_Cov42_SimpleResult_ClonePtr_Valid(t *testing.T) {
+func Test_SimpleResult_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewSimpleResult("data", true, "")
 	c := r.ClonePtr()
@@ -269,7 +269,7 @@ func Test_Cov42_SimpleResult_ClonePtr_Valid(t *testing.T) {
 // Dynamic — Clone / ClonePtr / NonPtr / Ptr / Constructors
 // =============================================================================
 
-func Test_Cov42_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	c := d.Clone()
@@ -282,7 +282,7 @@ func Test_Cov42_Dynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Clone", actual)
 }
 
-func Test_Cov42_Dynamic_ClonePtr_Nil(t *testing.T) {
+func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -294,7 +294,7 @@ func Test_Cov42_Dynamic_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr nil", actual)
 }
 
-func Test_Cov42_Dynamic_ClonePtr_Valid(t *testing.T) {
+func Test_Dynamic_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	c := d.ClonePtr()
@@ -313,7 +313,7 @@ func Test_Cov42_Dynamic_ClonePtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr valid", actual)
 }
 
-func Test_Cov42_Dynamic_NonPtr(t *testing.T) {
+func Test_Dynamic_NonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 	np := d.NonPtr()
@@ -326,7 +326,7 @@ func Test_Cov42_Dynamic_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic NonPtr", actual)
 }
 
-func Test_Cov42_Dynamic_Ptr(t *testing.T) {
+func Test_Dynamic_Ptr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 	p := d.Ptr()
@@ -339,7 +339,7 @@ func Test_Cov42_Dynamic_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Ptr", actual)
 }
 
-func Test_Cov42_Dynamic_InvalidDynamic(t *testing.T) {
+func Test_Dynamic_InvalidDynamic(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -351,7 +351,7 @@ func Test_Cov42_Dynamic_InvalidDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic", actual)
 }
 
-func Test_Cov42_Dynamic_NewDynamicValid(t *testing.T) {
+func Test_Dynamic_NewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -367,7 +367,7 @@ func Test_Cov42_Dynamic_NewDynamicValid(t *testing.T) {
 // DynamicStatus — constructors / clone
 // =============================================================================
 
-func Test_Cov42_DynamicStatus_InvalidNoMessage(t *testing.T) {
+func Test_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
@@ -385,7 +385,7 @@ func Test_Cov42_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidNoMessage", actual)
 }
 
-func Test_Cov42_DynamicStatus_Invalid(t *testing.T) {
+func Test_DynamicStatus_Invalid(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("fail")
 
@@ -403,7 +403,7 @@ func Test_Cov42_DynamicStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Invalid", actual)
 }
 
-func Test_Cov42_DynamicStatus_Clone(t *testing.T) {
+func Test_DynamicStatus_Clone(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("msg")
 	c := ds.Clone()
@@ -416,7 +416,7 @@ func Test_Cov42_DynamicStatus_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone", actual)
 }
 
-func Test_Cov42_DynamicStatus_ClonePtr_Nil(t *testing.T) {
+func Test_DynamicStatus_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var ds *coredynamic.DynamicStatus
 
@@ -428,7 +428,7 @@ func Test_Cov42_DynamicStatus_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr nil", actual)
 }
 
-func Test_Cov42_DynamicStatus_ClonePtr_Valid(t *testing.T) {
+func Test_DynamicStatus_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("msg")
 	c := ds.ClonePtr()
@@ -451,7 +451,7 @@ func Test_Cov42_DynamicStatus_ClonePtr_Valid(t *testing.T) {
 // LeftRight — all branches
 // =============================================================================
 
-func Test_Cov42_LeftRight_IsEmpty_Nil(t *testing.T) {
+func Test_LeftRight_IsEmpty_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -463,7 +463,7 @@ func Test_Cov42_LeftRight_IsEmpty_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsEmpty nil", actual)
 }
 
-func Test_Cov42_LeftRight_IsEmpty_BothNil(t *testing.T) {
+func Test_LeftRight_IsEmpty_BothNil(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: nil, Right: nil}
 
@@ -475,7 +475,7 @@ func Test_Cov42_LeftRight_IsEmpty_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsEmpty both nil", actual)
 }
 
-func Test_Cov42_LeftRight_IsEmpty_HasData(t *testing.T) {
+func Test_LeftRight_IsEmpty_HasData(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: nil}
 
@@ -487,7 +487,7 @@ func Test_Cov42_LeftRight_IsEmpty_HasData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsEmpty has data", actual)
 }
 
-func Test_Cov42_LeftRight_HasAnyItem(t *testing.T) {
+func Test_LeftRight_HasAnyItem(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: nil}
 
@@ -499,7 +499,7 @@ func Test_Cov42_LeftRight_HasAnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight HasAnyItem", actual)
 }
 
-func Test_Cov42_LeftRight_HasLeft_True(t *testing.T) {
+func Test_LeftRight_HasLeft_True(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: nil}
 
@@ -511,7 +511,7 @@ func Test_Cov42_LeftRight_HasLeft_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight HasLeft true", actual)
 }
 
-func Test_Cov42_LeftRight_HasLeft_Nil(t *testing.T) {
+func Test_LeftRight_HasLeft_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -523,7 +523,7 @@ func Test_Cov42_LeftRight_HasLeft_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight HasLeft nil", actual)
 }
 
-func Test_Cov42_LeftRight_HasRight_True(t *testing.T) {
+func Test_LeftRight_HasRight_True(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: nil, Right: "b"}
 
@@ -535,7 +535,7 @@ func Test_Cov42_LeftRight_HasRight_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight HasRight true", actual)
 }
 
-func Test_Cov42_LeftRight_HasRight_Nil(t *testing.T) {
+func Test_LeftRight_HasRight_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -547,7 +547,7 @@ func Test_Cov42_LeftRight_HasRight_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight HasRight nil", actual)
 }
 
-func Test_Cov42_LeftRight_IsLeftEmpty_True(t *testing.T) {
+func Test_LeftRight_IsLeftEmpty_True(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: nil, Right: "b"}
 
@@ -559,7 +559,7 @@ func Test_Cov42_LeftRight_IsLeftEmpty_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsLeftEmpty true", actual)
 }
 
-func Test_Cov42_LeftRight_IsLeftEmpty_Nil(t *testing.T) {
+func Test_LeftRight_IsLeftEmpty_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -571,7 +571,7 @@ func Test_Cov42_LeftRight_IsLeftEmpty_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsLeftEmpty nil", actual)
 }
 
-func Test_Cov42_LeftRight_IsRightEmpty_True(t *testing.T) {
+func Test_LeftRight_IsRightEmpty_True(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: nil}
 
@@ -583,7 +583,7 @@ func Test_Cov42_LeftRight_IsRightEmpty_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsRightEmpty true", actual)
 }
 
-func Test_Cov42_LeftRight_IsRightEmpty_Nil(t *testing.T) {
+func Test_LeftRight_IsRightEmpty_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -595,7 +595,7 @@ func Test_Cov42_LeftRight_IsRightEmpty_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight IsRightEmpty nil", actual)
 }
 
-func Test_Cov42_LeftRight_LeftReflectSet_Nil(t *testing.T) {
+func Test_LeftRight_LeftReflectSet_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	err := lr.LeftReflectSet(nil)
@@ -608,7 +608,7 @@ func Test_Cov42_LeftRight_LeftReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight LeftReflectSet nil", actual)
 }
 
-func Test_Cov42_LeftRight_RightReflectSet_Nil(t *testing.T) {
+func Test_LeftRight_RightReflectSet_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	err := lr.RightReflectSet(nil)
@@ -621,7 +621,7 @@ func Test_Cov42_LeftRight_RightReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight RightReflectSet nil", actual)
 }
 
-func Test_Cov42_LeftRight_DeserializeLeft_Nil(t *testing.T) {
+func Test_LeftRight_DeserializeLeft_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -633,7 +633,7 @@ func Test_Cov42_LeftRight_DeserializeLeft_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight DeserializeLeft nil", actual)
 }
 
-func Test_Cov42_LeftRight_DeserializeLeft_Valid(t *testing.T) {
+func Test_LeftRight_DeserializeLeft_Valid(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "data", Right: nil}
 	r := lr.DeserializeLeft()
@@ -646,7 +646,7 @@ func Test_Cov42_LeftRight_DeserializeLeft_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight DeserializeLeft valid", actual)
 }
 
-func Test_Cov42_LeftRight_DeserializeRight_Nil(t *testing.T) {
+func Test_LeftRight_DeserializeRight_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -658,7 +658,7 @@ func Test_Cov42_LeftRight_DeserializeRight_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight DeserializeRight nil", actual)
 }
 
-func Test_Cov42_LeftRight_DeserializeRight_Valid(t *testing.T) {
+func Test_LeftRight_DeserializeRight_Valid(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: nil, Right: "data"}
 	r := lr.DeserializeRight()
@@ -671,7 +671,7 @@ func Test_Cov42_LeftRight_DeserializeRight_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight DeserializeRight valid", actual)
 }
 
-func Test_Cov42_LeftRight_LeftToDynamic_Nil(t *testing.T) {
+func Test_LeftRight_LeftToDynamic_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -683,7 +683,7 @@ func Test_Cov42_LeftRight_LeftToDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight LeftToDynamic nil", actual)
 }
 
-func Test_Cov42_LeftRight_LeftToDynamic_Valid(t *testing.T) {
+func Test_LeftRight_LeftToDynamic_Valid(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: nil}
 	d := lr.LeftToDynamic()
@@ -702,7 +702,7 @@ func Test_Cov42_LeftRight_LeftToDynamic_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight LeftToDynamic valid", actual)
 }
 
-func Test_Cov42_LeftRight_RightToDynamic_Nil(t *testing.T) {
+func Test_LeftRight_RightToDynamic_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 
@@ -714,7 +714,7 @@ func Test_Cov42_LeftRight_RightToDynamic_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight RightToDynamic nil", actual)
 }
 
-func Test_Cov42_LeftRight_RightToDynamic_Valid(t *testing.T) {
+func Test_LeftRight_RightToDynamic_Valid(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: nil, Right: "b"}
 	d := lr.RightToDynamic()
@@ -733,7 +733,7 @@ func Test_Cov42_LeftRight_RightToDynamic_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight RightToDynamic valid", actual)
 }
 
-func Test_Cov42_LeftRight_TypeStatus_Nil(t *testing.T) {
+func Test_LeftRight_TypeStatus_Nil(t *testing.T) {
 	// Arrange
 	var lr *coredynamic.LeftRight
 	ts := lr.TypeStatus()
@@ -746,7 +746,7 @@ func Test_Cov42_LeftRight_TypeStatus_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight TypeStatus nil", actual)
 }
 
-func Test_Cov42_LeftRight_TypeStatus_Valid(t *testing.T) {
+func Test_LeftRight_TypeStatus_Valid(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: "b"}
 	ts := lr.TypeStatus()
@@ -759,7 +759,7 @@ func Test_Cov42_LeftRight_TypeStatus_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight TypeStatus valid same type", actual)
 }
 
-func Test_Cov42_LeftRight_TypeStatus_DiffType(t *testing.T) {
+func Test_LeftRight_TypeStatus_DiffType(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "a", Right: 42}
 	ts := lr.TypeStatus()
@@ -776,7 +776,7 @@ func Test_Cov42_LeftRight_TypeStatus_DiffType(t *testing.T) {
 // CastedResult — all branches
 // =============================================================================
 
-func Test_Cov42_CastedResult_IsInvalid_Nil(t *testing.T) {
+func Test_CastedResult_IsInvalid_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -788,7 +788,7 @@ func Test_Cov42_CastedResult_IsInvalid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsInvalid nil", actual)
 }
 
-func Test_Cov42_CastedResult_IsInvalid_Invalid(t *testing.T) {
+func Test_CastedResult_IsInvalid_Invalid(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: false}
 
@@ -800,7 +800,7 @@ func Test_Cov42_CastedResult_IsInvalid_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsInvalid invalid", actual)
 }
 
-func Test_Cov42_CastedResult_IsInvalid_Valid(t *testing.T) {
+func Test_CastedResult_IsInvalid_Valid(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: true}
 
@@ -812,7 +812,7 @@ func Test_Cov42_CastedResult_IsInvalid_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsInvalid valid", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotNull_Nil(t *testing.T) {
+func Test_CastedResult_IsNotNull_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -824,7 +824,7 @@ func Test_Cov42_CastedResult_IsNotNull_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotNull nil", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotNull_True(t *testing.T) {
+func Test_CastedResult_IsNotNull_True(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsNull: false}
 
@@ -836,7 +836,7 @@ func Test_Cov42_CastedResult_IsNotNull_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotNull true", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotPointer_Nil(t *testing.T) {
+func Test_CastedResult_IsNotPointer_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -848,7 +848,7 @@ func Test_Cov42_CastedResult_IsNotPointer_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotPointer nil", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotPointer_True(t *testing.T) {
+func Test_CastedResult_IsNotPointer_True(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsPointer: false}
 
@@ -860,7 +860,7 @@ func Test_Cov42_CastedResult_IsNotPointer_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotPointer true", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotMatchingAcceptedType_Nil(t *testing.T) {
+func Test_CastedResult_IsNotMatchingAcceptedType_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -872,7 +872,7 @@ func Test_Cov42_CastedResult_IsNotMatchingAcceptedType_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotMatchingAcceptedType nil", actual)
 }
 
-func Test_Cov42_CastedResult_IsNotMatchingAcceptedType_True(t *testing.T) {
+func Test_CastedResult_IsNotMatchingAcceptedType_True(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsMatchingAcceptedType: false}
 
@@ -884,7 +884,7 @@ func Test_Cov42_CastedResult_IsNotMatchingAcceptedType_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsNotMatchingAcceptedType true", actual)
 }
 
-func Test_Cov42_CastedResult_IsSourceKind_Nil(t *testing.T) {
+func Test_CastedResult_IsSourceKind_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -896,7 +896,7 @@ func Test_Cov42_CastedResult_IsSourceKind_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsSourceKind nil", actual)
 }
 
-func Test_Cov42_CastedResult_IsSourceKind_Match(t *testing.T) {
+func Test_CastedResult_IsSourceKind_Match(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{SourceKind: reflect.String}
 
@@ -908,7 +908,7 @@ func Test_Cov42_CastedResult_IsSourceKind_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult IsSourceKind match", actual)
 }
 
-func Test_Cov42_CastedResult_HasError_Nil(t *testing.T) {
+func Test_CastedResult_HasError_Nil(t *testing.T) {
 	// Arrange
 	var cr *coredynamic.CastedResult
 
@@ -920,7 +920,7 @@ func Test_Cov42_CastedResult_HasError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult HasError nil", actual)
 }
 
-func Test_Cov42_CastedResult_HasError_NoError(t *testing.T) {
+func Test_CastedResult_HasError_NoError(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{}
 
@@ -932,7 +932,7 @@ func Test_Cov42_CastedResult_HasError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult HasError no error", actual)
 }
 
-func Test_Cov42_CastedResult_HasAnyIssues_Invalid(t *testing.T) {
+func Test_CastedResult_HasAnyIssues_Invalid(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: false}
 
@@ -944,7 +944,7 @@ func Test_Cov42_CastedResult_HasAnyIssues_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult HasAnyIssues invalid", actual)
 }
 
-func Test_Cov42_CastedResult_HasAnyIssues_Null(t *testing.T) {
+func Test_CastedResult_HasAnyIssues_Null(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: true, IsNull: true}
 
@@ -956,7 +956,7 @@ func Test_Cov42_CastedResult_HasAnyIssues_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult HasAnyIssues null", actual)
 }
 
-func Test_Cov42_CastedResult_HasAnyIssues_NotMatching(t *testing.T) {
+func Test_CastedResult_HasAnyIssues_NotMatching(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: true, IsNull: false, IsMatchingAcceptedType: false}
 
@@ -968,7 +968,7 @@ func Test_Cov42_CastedResult_HasAnyIssues_NotMatching(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastedResult HasAnyIssues not matching", actual)
 }
 
-func Test_Cov42_CastedResult_HasAnyIssues_AllGood(t *testing.T) {
+func Test_CastedResult_HasAnyIssues_AllGood(t *testing.T) {
 	// Arrange
 	cr := &coredynamic.CastedResult{IsValid: true, IsNull: false, IsMatchingAcceptedType: true}
 
@@ -984,7 +984,7 @@ func Test_Cov42_CastedResult_HasAnyIssues_AllGood(t *testing.T) {
 // BytesConverter — basic conversions
 // =============================================================================
 
-func Test_Cov42_BytesConverter_SafeCastString_Empty(t *testing.T) {
+func Test_BytesConverter_SafeCastString_Empty(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter(nil)
 
@@ -996,7 +996,7 @@ func Test_Cov42_BytesConverter_SafeCastString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter SafeCastString empty", actual)
 }
 
-func Test_Cov42_BytesConverter_SafeCastString_Valid(t *testing.T) {
+func Test_BytesConverter_SafeCastString_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("hello"))
 
@@ -1008,7 +1008,7 @@ func Test_Cov42_BytesConverter_SafeCastString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter SafeCastString valid", actual)
 }
 
-func Test_Cov42_BytesConverter_CastString_Empty(t *testing.T) {
+func Test_BytesConverter_CastString_Empty(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter(nil)
 	_, err := bc.CastString()
@@ -1021,7 +1021,7 @@ func Test_Cov42_BytesConverter_CastString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString empty", actual)
 }
 
-func Test_Cov42_BytesConverter_CastString_Valid(t *testing.T) {
+func Test_BytesConverter_CastString_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("hello"))
 	s, err := bc.CastString()
@@ -1040,7 +1040,7 @@ func Test_Cov42_BytesConverter_CastString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToBool_Valid(t *testing.T) {
+func Test_BytesConverter_ToBool_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("true"))
 	r, err := bc.ToBool()
@@ -1059,7 +1059,7 @@ func Test_Cov42_BytesConverter_ToBool_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToBoolMust_Valid(t *testing.T) {
+func Test_BytesConverter_ToBoolMust_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("false"))
 
@@ -1071,7 +1071,7 @@ func Test_Cov42_BytesConverter_ToBoolMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBoolMust valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToString_Valid(t *testing.T) {
+func Test_BytesConverter_ToString_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	s, err := bc.ToString()
@@ -1090,7 +1090,7 @@ func Test_Cov42_BytesConverter_ToString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToStringMust_Valid(t *testing.T) {
+func Test_BytesConverter_ToStringMust_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hi"`))
 
@@ -1102,7 +1102,7 @@ func Test_Cov42_BytesConverter_ToStringMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringMust valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToStrings_Valid(t *testing.T) {
+func Test_BytesConverter_ToStrings_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	s, err := bc.ToStrings()
@@ -1121,7 +1121,7 @@ func Test_Cov42_BytesConverter_ToStrings_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToStringsMust_Valid(t *testing.T) {
+func Test_BytesConverter_ToStringsMust_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["x"]`))
 	s := bc.ToStringsMust()
@@ -1134,7 +1134,7 @@ func Test_Cov42_BytesConverter_ToStringsMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringsMust valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToInt64_Valid(t *testing.T) {
+func Test_BytesConverter_ToInt64_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("42"))
 	v, err := bc.ToInt64()
@@ -1153,7 +1153,7 @@ func Test_Cov42_BytesConverter_ToInt64_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64 valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToInt64Must_Valid(t *testing.T) {
+func Test_BytesConverter_ToInt64Must_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("99"))
 
@@ -1165,7 +1165,7 @@ func Test_Cov42_BytesConverter_ToInt64Must_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64Must valid", actual)
 }
 
-func Test_Cov42_BytesConverter_Deserialize_Valid(t *testing.T) {
+func Test_BytesConverter_Deserialize_Valid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"data"`))
 	var out string
@@ -1185,7 +1185,7 @@ func Test_Cov42_BytesConverter_Deserialize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize valid", actual)
 }
 
-func Test_Cov42_BytesConverter_Deserialize_Invalid(t *testing.T) {
+func Test_BytesConverter_Deserialize_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("not json"))
 	var out string
@@ -1199,7 +1199,7 @@ func Test_Cov42_BytesConverter_Deserialize_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToHashmap_Valid(t *testing.T) {
+func Test_BytesConverter_ToHashmap_Valid(t *testing.T) {
 	// Arrange
 	data := map[string]string{"a": "1"}
 	b, _ := json.Marshal(data)
@@ -1220,7 +1220,7 @@ func Test_Cov42_BytesConverter_ToHashmap_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashmap valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToHashmap_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashmap_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToHashmap()
@@ -1233,7 +1233,7 @@ func Test_Cov42_BytesConverter_ToHashmap_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashmap invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToHashset_Valid(t *testing.T) {
+func Test_BytesConverter_ToHashset_Valid(t *testing.T) {
 	// Arrange
 	data := map[string]bool{"a": true, "b": true}
 	b, _ := json.Marshal(data)
@@ -1254,7 +1254,7 @@ func Test_Cov42_BytesConverter_ToHashset_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashset valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToHashset_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashset_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToHashset()
@@ -1267,7 +1267,7 @@ func Test_Cov42_BytesConverter_ToHashset_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashset invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToCollection()
@@ -1280,7 +1280,7 @@ func Test_Cov42_BytesConverter_ToCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToCollection invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
+func Test_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToSimpleSlice()
@@ -1293,7 +1293,7 @@ func Test_Cov42_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToSimpleSlice invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToKeyValCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToKeyValCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToKeyValCollection()
@@ -1306,7 +1306,7 @@ func Test_Cov42_BytesConverter_ToKeyValCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToKeyValCollection invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToAnyCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToAnyCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToAnyCollection()
@@ -1319,7 +1319,7 @@ func Test_Cov42_BytesConverter_ToAnyCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToAnyCollection invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToMapAnyItems_Invalid(t *testing.T) {
+func Test_BytesConverter_ToMapAnyItems_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToMapAnyItems()
@@ -1332,7 +1332,7 @@ func Test_Cov42_BytesConverter_ToMapAnyItems_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToMapAnyItems invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToMapAnyItems_Valid(t *testing.T) {
+func Test_BytesConverter_ToMapAnyItems_Valid(t *testing.T) {
 	// Arrange
 	b, _ := json.Marshal(map[string]any{"Items": map[string]any{"a": 1}})
 	bc := coredynamic.NewBytesConverter(b)
@@ -1352,7 +1352,7 @@ func Test_Cov42_BytesConverter_ToMapAnyItems_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToMapAnyItems valid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToDynamicCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToDynamicCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToDynamicCollection()
@@ -1365,7 +1365,7 @@ func Test_Cov42_BytesConverter_ToDynamicCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToDynamicCollection invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToJsonResultCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToJsonResultCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToJsonResultCollection()
@@ -1378,7 +1378,7 @@ func Test_Cov42_BytesConverter_ToJsonResultCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToJsonResultCollection invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToJsonMapResults_Invalid(t *testing.T) {
+func Test_BytesConverter_ToJsonMapResults_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToJsonMapResults()
@@ -1391,7 +1391,7 @@ func Test_Cov42_BytesConverter_ToJsonMapResults_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToJsonMapResults invalid", actual)
 }
 
-func Test_Cov42_BytesConverter_ToBytesCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToBytesCollection_Invalid(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("bad"))
 	_, err := bc.ToBytesCollection()

@@ -10,7 +10,7 @@ import (
 
 // ── MaxInt / MinInt equal values ──
 
-func Test_Cov2_MaxInt_Equal(t *testing.T) {
+func Test_MaxInt_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MaxInt(5, 5)}
 
@@ -19,7 +19,7 @@ func Test_Cov2_MaxInt_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MaxInt returns correct value -- equal", actual)
 }
 
-func Test_Cov2_MinInt_Equal(t *testing.T) {
+func Test_MinInt_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MinInt(5, 5)}
 
@@ -30,7 +30,7 @@ func Test_Cov2_MinInt_Equal(t *testing.T) {
 
 // ── MaxByte / MinByte equal ──
 
-func Test_Cov2_MaxByte_Equal(t *testing.T) {
+func Test_MaxByte_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MaxByte(5, 5)}
 
@@ -39,7 +39,7 @@ func Test_Cov2_MaxByte_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MaxByte returns correct value -- equal", actual)
 }
 
-func Test_Cov2_MinByte_Equal(t *testing.T) {
+func Test_MinByte_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MinByte(5, 5)}
 
@@ -50,7 +50,7 @@ func Test_Cov2_MinByte_Equal(t *testing.T) {
 
 // ── MaxFloat32 / MinFloat32 equal ──
 
-func Test_Cov2_MaxFloat32_Equal(t *testing.T) {
+func Test_MaxFloat32_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MaxFloat32(3.14, 3.14)}
 
@@ -59,7 +59,7 @@ func Test_Cov2_MaxFloat32_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MaxFloat32 returns correct value -- equal", actual)
 }
 
-func Test_Cov2_MinFloat32_Equal(t *testing.T) {
+func Test_MinFloat32_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.MinFloat32(3.14, 3.14)}
 
@@ -70,7 +70,7 @@ func Test_Cov2_MinFloat32_Equal(t *testing.T) {
 
 // ── Integer boundary edge cases ──
 
-func Test_Cov2_IntegerWithin_ToByte_Exact(t *testing.T) {
+func Test_IntegerWithin_ToByte_Exact(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"min": coremath.IsRangeWithin.Integer.ToByte(0),
@@ -85,7 +85,7 @@ func Test_Cov2_IntegerWithin_ToByte_Exact(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerWithin returns non-empty -- ToByte exact boundaries", actual)
 }
 
-func Test_Cov2_IntegerOutOfRange_ToInt_Negative(t *testing.T) {
+func Test_IntegerOutOfRange_ToInt_Negative(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"negative": coremath.IsOutOfRange.Integer.ToInt(-1),
@@ -98,7 +98,7 @@ func Test_Cov2_IntegerOutOfRange_ToInt_Negative(t *testing.T) {
 
 // ── Integer64 boundary edges ──
 
-func Test_Cov2_Integer64OutOfRange_Int32_ExactMax(t *testing.T) {
+func Test_Integer64OutOfRange_Int32_ExactMax(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"exactMax": coremath.IsOutOfRange.Integer64.Int32(int64(math.MaxInt32)),
@@ -109,7 +109,7 @@ func Test_Cov2_Integer64OutOfRange_Int32_ExactMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange returns correct value -- Int32 exact max", actual)
 }
 
-func Test_Cov2_Integer64OutOfRange_Int_Large(t *testing.T) {
+func Test_Integer64OutOfRange_Int_Large(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"normal": coremath.IsOutOfRange.Integer64.Int(1000),
@@ -122,7 +122,7 @@ func Test_Cov2_Integer64OutOfRange_Int_Large(t *testing.T) {
 
 // ── Integer32 boundary edges ──
 
-func Test_Cov2_Integer32Within_ToByte_Negative(t *testing.T) {
+func Test_Integer32Within_ToByte_Negative(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.IsRangeWithin.Integer32.ToByte(-1)}
 
@@ -133,7 +133,7 @@ func Test_Cov2_Integer32Within_ToByte_Negative(t *testing.T) {
 
 // ── UnsignedInteger16 ──
 
-func Test_Cov2_UnsignedInt16Within_ToInt8_Boundary(t *testing.T) {
+func Test_UnsignedInt16Within_ToInt8_Boundary(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"exact127": coremath.IsRangeWithin.UnsignedInteger16.ToInt8(127),

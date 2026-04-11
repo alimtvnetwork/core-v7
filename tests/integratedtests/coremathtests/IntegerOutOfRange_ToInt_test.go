@@ -7,7 +7,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Cov2_IntegerOutOfRange_ToInt(t *testing.T) {
+func Test_IntegerOutOfRange_ToInt(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coremath.IsOutOfRange.Integer.ToInt(0)}
 

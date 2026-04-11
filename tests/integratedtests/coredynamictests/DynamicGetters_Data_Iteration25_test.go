@@ -13,7 +13,7 @@ import (
 // DynamicGetters — Data, Value, Length, String, type checks, value extraction
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I25_DynamicGetters_Data_Value(t *testing.T) {
+func Test_DynamicGetters_Data_Value(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -31,7 +31,7 @@ func Test_I25_DynamicGetters_Data_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Data/Value returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_Length_Nil(t *testing.T) {
+func Test_DynamicGetters_Length_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -43,7 +43,7 @@ func Test_I25_DynamicGetters_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_Length_Slice(t *testing.T) {
+func Test_DynamicGetters_Length_Slice(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{1, 2, 3}, true)
 
@@ -55,7 +55,7 @@ func Test_I25_DynamicGetters_Length_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns correct value -- slice", actual)
 }
 
-func Test_I25_DynamicGetters_StructStringPtr_Nil(t *testing.T) {
+func Test_DynamicGetters_StructStringPtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -67,7 +67,7 @@ func Test_I25_DynamicGetters_StructStringPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StructStringPtr returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_StructStringPtr_Cached(t *testing.T) {
+func Test_DynamicGetters_StructStringPtr_Cached(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	ptr1 := d.StructStringPtr()
@@ -87,7 +87,7 @@ func Test_I25_DynamicGetters_StructStringPtr_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StructStringPtr returns correct value -- cached", actual)
 }
 
-func Test_I25_DynamicGetters_String_Nil(t *testing.T) {
+func Test_DynamicGetters_String_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -99,7 +99,7 @@ func Test_I25_DynamicGetters_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_StructString_Nil(t *testing.T) {
+func Test_DynamicGetters_StructString_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -111,7 +111,7 @@ func Test_I25_DynamicGetters_StructString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StructString returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_IsNull(t *testing.T) {
+func Test_DynamicGetters_IsNull(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic(nil, false)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -130,7 +130,7 @@ func Test_I25_DynamicGetters_IsNull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNull returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsValid_IsInvalid(t *testing.T) {
+func Test_DynamicGetters_IsValid_IsInvalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -148,7 +148,7 @@ func Test_I25_DynamicGetters_IsValid_IsInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid/IsInvalid returns error -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsPointer_Nil(t *testing.T) {
+func Test_DynamicGetters_IsPointer_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -160,7 +160,7 @@ func Test_I25_DynamicGetters_IsPointer_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPointer returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_IsPointer_True(t *testing.T) {
+func Test_DynamicGetters_IsPointer_True(t *testing.T) {
 	// Arrange
 	s := "hello"
 	d := coredynamic.NewDynamic(&s, true)
@@ -173,7 +173,7 @@ func Test_I25_DynamicGetters_IsPointer_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPointer returns non-empty -- true", actual)
 }
 
-func Test_I25_DynamicGetters_IsPointer_Cached(t *testing.T) {
+func Test_DynamicGetters_IsPointer_Cached(t *testing.T) {
 	// Arrange
 	s := "hello"
 	d := coredynamic.NewDynamic(&s, true)
@@ -187,7 +187,7 @@ func Test_I25_DynamicGetters_IsPointer_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPointer returns correct value -- cached", actual)
 }
 
-func Test_I25_DynamicGetters_IsValueType(t *testing.T) {
+func Test_DynamicGetters_IsValueType(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -199,7 +199,7 @@ func Test_I25_DynamicGetters_IsValueType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValueType returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsValueType_Nil(t *testing.T) {
+func Test_DynamicGetters_IsValueType_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -211,7 +211,7 @@ func Test_I25_DynamicGetters_IsValueType_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValueType returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_IsStructStringNullOrEmpty(t *testing.T) {
+func Test_DynamicGetters_IsStructStringNullOrEmpty(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic("", true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -233,7 +233,7 @@ func Test_I25_DynamicGetters_IsStructStringNullOrEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmpty returns empty -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsStructStringNullOrEmptyOrWhitespace(t *testing.T) {
+func Test_DynamicGetters_IsStructStringNullOrEmptyOrWhitespace(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic("  ", true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -255,7 +255,7 @@ func Test_I25_DynamicGetters_IsStructStringNullOrEmptyOrWhitespace(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmptyOrWhitespace returns empty -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsPrimitive(t *testing.T) {
+func Test_DynamicGetters_IsPrimitive(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic("hello", true)
 	d2 := coredynamic.NewDynamic([]int{1}, true)
@@ -277,7 +277,7 @@ func Test_I25_DynamicGetters_IsPrimitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPrimitive returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsNumber(t *testing.T) {
+func Test_DynamicGetters_IsNumber(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic(42, true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -299,7 +299,7 @@ func Test_I25_DynamicGetters_IsNumber(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNumber returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsStringType(t *testing.T) {
+func Test_DynamicGetters_IsStringType(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic("hello", true)
 	d2 := coredynamic.NewDynamic(42, true)
@@ -321,7 +321,7 @@ func Test_I25_DynamicGetters_IsStringType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringType returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsStruct(t *testing.T) {
+func Test_DynamicGetters_IsStruct(t *testing.T) {
 	// Arrange
 	type s struct{}
 	d1 := coredynamic.NewDynamic(s{}, true)
@@ -344,7 +344,7 @@ func Test_I25_DynamicGetters_IsStruct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStruct returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsFunc(t *testing.T) {
+func Test_DynamicGetters_IsFunc(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic(func() {}, true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -366,7 +366,7 @@ func Test_I25_DynamicGetters_IsFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsFunc returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsSliceOrArray(t *testing.T) {
+func Test_DynamicGetters_IsSliceOrArray(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic([]int{1}, true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -388,7 +388,7 @@ func Test_I25_DynamicGetters_IsSliceOrArray(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArray returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsSliceOrArrayOrMap(t *testing.T) {
+func Test_DynamicGetters_IsSliceOrArrayOrMap(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic(map[string]int{"a": 1}, true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -410,7 +410,7 @@ func Test_I25_DynamicGetters_IsSliceOrArrayOrMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArrayOrMap returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IsMap(t *testing.T) {
+func Test_DynamicGetters_IsMap(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewDynamic(map[string]int{"a": 1}, true)
 	d2 := coredynamic.NewDynamic("x", true)
@@ -432,7 +432,7 @@ func Test_I25_DynamicGetters_IsMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMap returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_IntDefault_Valid(t *testing.T) {
+func Test_DynamicGetters_IntDefault_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 	val, ok := d.IntDefault(0)
@@ -451,7 +451,7 @@ func Test_I25_DynamicGetters_IntDefault_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntDefault returns non-empty -- valid", actual)
 }
 
-func Test_I25_DynamicGetters_IntDefault_Nil(t *testing.T) {
+func Test_DynamicGetters_IntDefault_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	val, ok := d.IntDefault(99)
@@ -470,7 +470,7 @@ func Test_I25_DynamicGetters_IntDefault_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntDefault returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_IntDefault_ParseFail(t *testing.T) {
+func Test_DynamicGetters_IntDefault_ParseFail(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("abc", true)
 	val, ok := d.IntDefault(77)
@@ -489,7 +489,7 @@ func Test_I25_DynamicGetters_IntDefault_ParseFail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntDefault returns correct value -- parse fail", actual)
 }
 
-func Test_I25_DynamicGetters_Float64_Valid(t *testing.T) {
+func Test_DynamicGetters_Float64_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("3.14", true)
 	val, err := d.Float64()
@@ -508,7 +508,7 @@ func Test_I25_DynamicGetters_Float64_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Float64 returns non-empty -- valid", actual)
 }
 
-func Test_I25_DynamicGetters_Float64_Nil(t *testing.T) {
+func Test_DynamicGetters_Float64_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.Float64()
@@ -521,7 +521,7 @@ func Test_I25_DynamicGetters_Float64_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Float64 returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_Float64_ParseFail(t *testing.T) {
+func Test_DynamicGetters_Float64_ParseFail(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("abc", true)
 	_, err := d.Float64()
@@ -534,7 +534,7 @@ func Test_I25_DynamicGetters_Float64_ParseFail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Float64 returns correct value -- parse fail", actual)
 }
 
-func Test_I25_DynamicGetters_ValueInt(t *testing.T) {
+func Test_DynamicGetters_ValueInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 
@@ -546,7 +546,7 @@ func Test_I25_DynamicGetters_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_ValueInt_NotInt(t *testing.T) {
+func Test_DynamicGetters_ValueInt_NotInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -558,7 +558,7 @@ func Test_I25_DynamicGetters_ValueInt_NotInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt returns correct value -- not int", actual)
 }
 
-func Test_I25_DynamicGetters_ValueUInt(t *testing.T) {
+func Test_DynamicGetters_ValueUInt(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(uint(7), true)
 
@@ -570,7 +570,7 @@ func Test_I25_DynamicGetters_ValueUInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueUInt returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_ValueUInt_NotUint(t *testing.T) {
+func Test_DynamicGetters_ValueUInt_NotUint(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -582,7 +582,7 @@ func Test_I25_DynamicGetters_ValueUInt_NotUint(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueUInt returns correct value -- not uint", actual)
 }
 
-func Test_I25_DynamicGetters_ValueStrings(t *testing.T) {
+func Test_DynamicGetters_ValueStrings(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]string{"a", "b"}, true)
 
@@ -594,7 +594,7 @@ func Test_I25_DynamicGetters_ValueStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStrings returns non-empty -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_ValueStrings_NotStrings(t *testing.T) {
+func Test_DynamicGetters_ValueStrings_NotStrings(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -606,7 +606,7 @@ func Test_I25_DynamicGetters_ValueStrings_NotStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStrings returns non-empty -- not strings", actual)
 }
 
-func Test_I25_DynamicGetters_ValueBool(t *testing.T) {
+func Test_DynamicGetters_ValueBool(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(true, true)
 
@@ -618,7 +618,7 @@ func Test_I25_DynamicGetters_ValueBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueBool returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_ValueBool_NotBool(t *testing.T) {
+func Test_DynamicGetters_ValueBool_NotBool(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -630,7 +630,7 @@ func Test_I25_DynamicGetters_ValueBool_NotBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueBool returns correct value -- not bool", actual)
 }
 
-func Test_I25_DynamicGetters_ValueInt64(t *testing.T) {
+func Test_DynamicGetters_ValueInt64(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(int64(99), true)
 
@@ -642,7 +642,7 @@ func Test_I25_DynamicGetters_ValueInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt64 returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicGetters_ValueInt64_NotInt64(t *testing.T) {
+func Test_DynamicGetters_ValueInt64_NotInt64(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -654,7 +654,7 @@ func Test_I25_DynamicGetters_ValueInt64_NotInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt64 returns correct value -- not int64", actual)
 }
 
-func Test_I25_DynamicGetters_ValueNullErr_Nil(t *testing.T) {
+func Test_DynamicGetters_ValueNullErr_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -666,7 +666,7 @@ func Test_I25_DynamicGetters_ValueNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueNullErr returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_ValueNullErr_NullData(t *testing.T) {
+func Test_DynamicGetters_ValueNullErr_NullData(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(nil, false)
 
@@ -678,7 +678,7 @@ func Test_I25_DynamicGetters_ValueNullErr_NullData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueNullErr returns error -- null data", actual)
 }
 
-func Test_I25_DynamicGetters_ValueNullErr_Valid(t *testing.T) {
+func Test_DynamicGetters_ValueNullErr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 
@@ -690,7 +690,7 @@ func Test_I25_DynamicGetters_ValueNullErr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueNullErr returns error -- valid", actual)
 }
 
-func Test_I25_DynamicGetters_ValueString_Nil(t *testing.T) {
+func Test_DynamicGetters_ValueString_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -702,7 +702,7 @@ func Test_I25_DynamicGetters_ValueString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_ValueString_String(t *testing.T) {
+func Test_DynamicGetters_ValueString_String(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -714,7 +714,7 @@ func Test_I25_DynamicGetters_ValueString_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns non-empty -- string", actual)
 }
 
-func Test_I25_DynamicGetters_ValueString_NonString(t *testing.T) {
+func Test_DynamicGetters_ValueString_NonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 	val := d.ValueString()
@@ -727,7 +727,7 @@ func Test_I25_DynamicGetters_ValueString_NonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns non-empty -- non-string", actual)
 }
 
-func Test_I25_DynamicGetters_Bytes_Valid(t *testing.T) {
+func Test_DynamicGetters_Bytes_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]byte{1, 2, 3}, true)
 	b, ok := d.Bytes()
@@ -746,7 +746,7 @@ func Test_I25_DynamicGetters_Bytes_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Bytes returns non-empty -- valid", actual)
 }
 
-func Test_I25_DynamicGetters_Bytes_Nil(t *testing.T) {
+func Test_DynamicGetters_Bytes_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	b, ok := d.Bytes()
@@ -765,7 +765,7 @@ func Test_I25_DynamicGetters_Bytes_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Bytes returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicGetters_Bytes_NotBytes(t *testing.T) {
+func Test_DynamicGetters_Bytes_NotBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("x", true)
 	_, ok := d.Bytes()
@@ -782,7 +782,7 @@ func Test_I25_DynamicGetters_Bytes_NotBytes(t *testing.T) {
 // DynamicJson — JSON serialization/deserialization
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I25_DynamicJson_Deserialize_Nil(t *testing.T) {
+func Test_DynamicJson_Deserialize_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.Deserialize([]byte(`{}`))
@@ -795,7 +795,7 @@ func Test_I25_DynamicJson_Deserialize_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicJson_ValueMarshal(t *testing.T) {
+func Test_DynamicJson_ValueMarshal(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	b, err := d.ValueMarshal()
@@ -814,7 +814,7 @@ func Test_I25_DynamicJson_ValueMarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueMarshal returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_ValueMarshal_Nil(t *testing.T) {
+func Test_DynamicJson_ValueMarshal_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.ValueMarshal()
@@ -827,7 +827,7 @@ func Test_I25_DynamicJson_ValueMarshal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueMarshal returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicJson_JsonPayloadMust(t *testing.T) {
+func Test_DynamicJson_JsonPayloadMust(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	b := d.JsonPayloadMust()
@@ -840,7 +840,7 @@ func Test_I25_DynamicJson_JsonPayloadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonPayloadMust returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonBytesPtr_Null(t *testing.T) {
+func Test_DynamicJson_JsonBytesPtr_Null(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(nil, false)
 	b, err := d.JsonBytesPtr()
@@ -859,7 +859,7 @@ func Test_I25_DynamicJson_JsonBytesPtr_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonBytesPtr returns correct value -- null", actual)
 }
 
-func Test_I25_DynamicJson_JsonBytesPtr_Valid(t *testing.T) {
+func Test_DynamicJson_JsonBytesPtr_Valid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	b, err := d.JsonBytesPtr()
@@ -878,7 +878,7 @@ func Test_I25_DynamicJson_JsonBytesPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonBytesPtr returns non-empty -- valid", actual)
 }
 
-func Test_I25_DynamicJson_MarshalJSON(t *testing.T) {
+func Test_DynamicJson_MarshalJSON(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	b, err := d.MarshalJSON()
@@ -897,7 +897,7 @@ func Test_I25_DynamicJson_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_UnmarshalJSON_Nil(t *testing.T) {
+func Test_DynamicJson_UnmarshalJSON_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.UnmarshalJSON([]byte(`{}`))
@@ -910,7 +910,7 @@ func Test_I25_DynamicJson_UnmarshalJSON_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicJson_JsonModel(t *testing.T) {
+func Test_DynamicJson_JsonModel(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -922,7 +922,7 @@ func Test_I25_DynamicJson_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonModel returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonModelAny(t *testing.T) {
+func Test_DynamicJson_JsonModelAny(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -934,7 +934,7 @@ func Test_I25_DynamicJson_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonModelAny returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_Json(t *testing.T) {
+func Test_DynamicJson_Json(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	jr := d.Json()
@@ -947,7 +947,7 @@ func Test_I25_DynamicJson_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Json returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonPtr(t *testing.T) {
+func Test_DynamicJson_JsonPtr(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	jr := d.JsonPtr()
@@ -960,7 +960,7 @@ func Test_I25_DynamicJson_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonPtr returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_DynamicJson_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	jr := corejson.New("invalid but let's try")
@@ -976,7 +976,7 @@ func Test_I25_DynamicJson_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonParseSelfInject(t *testing.T) {
+func Test_DynamicJson_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	jr := corejson.New("test")
@@ -990,7 +990,7 @@ func Test_I25_DynamicJson_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonBytes(t *testing.T) {
+func Test_DynamicJson_JsonBytes(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	b, err := d.JsonBytes()
@@ -1009,7 +1009,7 @@ func Test_I25_DynamicJson_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonBytes returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonString(t *testing.T) {
+func Test_DynamicJson_JsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	s, err := d.JsonString()
@@ -1028,7 +1028,7 @@ func Test_I25_DynamicJson_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonString returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicJson_JsonStringMust(t *testing.T) {
+func Test_DynamicJson_JsonStringMust(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	s := d.JsonStringMust()
@@ -1045,7 +1045,7 @@ func Test_I25_DynamicJson_JsonStringMust(t *testing.T) {
 // DynamicReflect — Reflection ops, loops, filters
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I25_DynamicReflect_ReflectValue(t *testing.T) {
+func Test_DynamicReflect_ReflectValue(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	rv := d.ReflectValue()
@@ -1058,7 +1058,7 @@ func Test_I25_DynamicReflect_ReflectValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectValue returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ReflectValue_Cached(t *testing.T) {
+func Test_DynamicReflect_ReflectValue_Cached(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	rv1 := d.ReflectValue()
@@ -1072,7 +1072,7 @@ func Test_I25_DynamicReflect_ReflectValue_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectValue returns correct value -- cached", actual)
 }
 
-func Test_I25_DynamicReflect_MapToKeyVal(t *testing.T) {
+func Test_DynamicReflect_MapToKeyVal(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(map[string]any{"a": 1}, true)
 	kvc, err := d.MapToKeyVal()
@@ -1091,7 +1091,7 @@ func Test_I25_DynamicReflect_MapToKeyVal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapToKeyVal returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ReflectKind(t *testing.T) {
+func Test_DynamicReflect_ReflectKind(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, true)
 
@@ -1103,7 +1103,7 @@ func Test_I25_DynamicReflect_ReflectKind(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectKind returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ReflectTypeName(t *testing.T) {
+func Test_DynamicReflect_ReflectTypeName(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	name := d.ReflectTypeName()
@@ -1116,7 +1116,7 @@ func Test_I25_DynamicReflect_ReflectTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeName returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ReflectType_Cached(t *testing.T) {
+func Test_DynamicReflect_ReflectType_Cached(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	rt1 := d.ReflectType()
@@ -1130,7 +1130,7 @@ func Test_I25_DynamicReflect_ReflectType_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectType returns correct value -- cached", actual)
 }
 
-func Test_I25_DynamicReflect_IsReflectTypeOf(t *testing.T) {
+func Test_DynamicReflect_IsReflectTypeOf(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -1148,7 +1148,7 @@ func Test_I25_DynamicReflect_IsReflectTypeOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsReflectTypeOf returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_IsReflectKind(t *testing.T) {
+func Test_DynamicReflect_IsReflectKind(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 
@@ -1166,7 +1166,7 @@ func Test_I25_DynamicReflect_IsReflectKind(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsReflectKind returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ItemUsingIndex(t *testing.T) {
+func Test_DynamicReflect_ItemUsingIndex(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{10, 20, 30}, true)
 
@@ -1178,7 +1178,7 @@ func Test_I25_DynamicReflect_ItemUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemUsingIndex returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ItemReflectValueUsingIndex(t *testing.T) {
+func Test_DynamicReflect_ItemReflectValueUsingIndex(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{10, 20}, true)
 	rv := d.ItemReflectValueUsingIndex(0)
@@ -1191,7 +1191,7 @@ func Test_I25_DynamicReflect_ItemReflectValueUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemReflectValueUsingIndex returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ItemUsingKey(t *testing.T) {
+func Test_DynamicReflect_ItemUsingKey(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(map[string]int{"a": 42}, true)
 
@@ -1203,7 +1203,7 @@ func Test_I25_DynamicReflect_ItemUsingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemUsingKey returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ItemReflectValueUsingKey(t *testing.T) {
+func Test_DynamicReflect_ItemReflectValueUsingKey(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(map[string]int{"x": 7}, true)
 	rv := d.ItemReflectValueUsingKey("x")
@@ -1216,7 +1216,7 @@ func Test_I25_DynamicReflect_ItemReflectValueUsingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemReflectValueUsingKey returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_ReflectSetTo_Nil(t *testing.T) {
+func Test_DynamicReflect_ReflectSetTo_Nil(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.ReflectSetTo(&struct{}{})
@@ -1229,7 +1229,7 @@ func Test_I25_DynamicReflect_ReflectSetTo_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetTo returns nil -- nil", actual)
 }
 
-func Test_I25_DynamicReflect_ConvertUsingFunc(t *testing.T) {
+func Test_DynamicReflect_ConvertUsingFunc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello", true)
 	converter := func(in any, typeMust reflect.Type) *coredynamic.SimpleResult {
@@ -1245,7 +1245,7 @@ func Test_I25_DynamicReflect_ConvertUsingFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConvertUsingFunc returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_Loop_Slice(t *testing.T) {
+func Test_DynamicReflect_Loop_Slice(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{1, 2, 3}, true)
 	count := 0
@@ -1268,7 +1268,7 @@ func Test_I25_DynamicReflect_Loop_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- slice", actual)
 }
 
-func Test_I25_DynamicReflect_Loop_Break(t *testing.T) {
+func Test_DynamicReflect_Loop_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{1, 2, 3}, true)
 	count := 0
@@ -1285,7 +1285,7 @@ func Test_I25_DynamicReflect_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- break", actual)
 }
 
-func Test_I25_DynamicReflect_Loop_Invalid(t *testing.T) {
+func Test_DynamicReflect_Loop_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(nil, false)
 	called := d.Loop(func(index int, item any) bool { return false })
@@ -1298,7 +1298,7 @@ func Test_I25_DynamicReflect_Loop_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns error -- invalid", actual)
 }
 
-func Test_I25_DynamicReflect_FilterAsDynamicCollection(t *testing.T) {
+func Test_DynamicReflect_FilterAsDynamicCollection(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{1, 2, 3, 4}, true)
 	result := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -1313,7 +1313,7 @@ func Test_I25_DynamicReflect_FilterAsDynamicCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FilterAsDynamicCollection returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_FilterAsDynamicCollection_Break(t *testing.T) {
+func Test_DynamicReflect_FilterAsDynamicCollection_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic([]int{1, 2, 3, 4}, true)
 	result := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -1328,7 +1328,7 @@ func Test_I25_DynamicReflect_FilterAsDynamicCollection_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FilterAsDynamicCollection returns correct value -- break", actual)
 }
 
-func Test_I25_DynamicReflect_FilterAsDynamicCollection_Empty(t *testing.T) {
+func Test_DynamicReflect_FilterAsDynamicCollection_Empty(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(nil, false)
 	result := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -1343,7 +1343,7 @@ func Test_I25_DynamicReflect_FilterAsDynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FilterAsDynamicCollection returns empty -- empty", actual)
 }
 
-func Test_I25_DynamicReflect_LoopMap(t *testing.T) {
+func Test_DynamicReflect_LoopMap(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(map[string]int{"a": 1, "b": 2}, true)
 	count := 0
@@ -1366,7 +1366,7 @@ func Test_I25_DynamicReflect_LoopMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- with args", actual)
 }
 
-func Test_I25_DynamicReflect_LoopMap_Break(t *testing.T) {
+func Test_DynamicReflect_LoopMap_Break(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(map[string]int{"a": 1, "b": 2, "c": 3}, true)
 	count := 0
@@ -1383,7 +1383,7 @@ func Test_I25_DynamicReflect_LoopMap_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- break", actual)
 }
 
-func Test_I25_DynamicReflect_LoopMap_Invalid(t *testing.T) {
+func Test_DynamicReflect_LoopMap_Invalid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(nil, false)
 	called := d.LoopMap(func(index int, key, value any) bool { return false })
@@ -1400,7 +1400,7 @@ func Test_I25_DynamicReflect_LoopMap_Invalid(t *testing.T) {
 // New Creator — collection factories
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I25_NewCreator_Collection_String(t *testing.T) {
+func Test_NewCreator_Collection_String(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Cap(5)
 
@@ -1418,7 +1418,7 @@ func Test_I25_NewCreator_Collection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Cap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_Empty(t *testing.T) {
+func Test_NewCreator_Collection_String_Empty(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 
@@ -1430,7 +1430,7 @@ func Test_I25_NewCreator_Collection_String_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Empty returns empty -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_From(t *testing.T) {
+func Test_NewCreator_Collection_String_From(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 
@@ -1442,7 +1442,7 @@ func Test_I25_NewCreator_Collection_String_From(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.From returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_Clone(t *testing.T) {
+func Test_NewCreator_Collection_String_Clone(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Clone([]string{"a", "b"})
 
@@ -1454,7 +1454,7 @@ func Test_I25_NewCreator_Collection_String_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Clone returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_Items(t *testing.T) {
+func Test_NewCreator_Collection_String_Items(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Items("a", "b", "c")
 
@@ -1466,7 +1466,7 @@ func Test_I25_NewCreator_Collection_String_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_Create(t *testing.T) {
+func Test_NewCreator_Collection_String_Create(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Create([]string{"x"})
 
@@ -1478,7 +1478,7 @@ func Test_I25_NewCreator_Collection_String_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Create returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_String_LenCap(t *testing.T) {
+func Test_NewCreator_Collection_String_LenCap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.LenCap(3, 10)
 
@@ -1490,7 +1490,7 @@ func Test_I25_NewCreator_Collection_String_LenCap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.LenCap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Int_LenCap(t *testing.T) {
+func Test_NewCreator_Collection_Int_LenCap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Int.LenCap(2, 5)
 
@@ -1502,7 +1502,7 @@ func Test_I25_NewCreator_Collection_Int_LenCap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Int.LenCap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Int64_LenCap(t *testing.T) {
+func Test_NewCreator_Collection_Int64_LenCap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Int64.LenCap(1, 5)
 
@@ -1514,7 +1514,7 @@ func Test_I25_NewCreator_Collection_Int64_LenCap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Int64.LenCap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Byte_LenCap(t *testing.T) {
+func Test_NewCreator_Collection_Byte_LenCap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Byte.LenCap(4, 8)
 
@@ -1526,7 +1526,7 @@ func Test_I25_NewCreator_Collection_Byte_LenCap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Byte.LenCap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Any_Cap(t *testing.T) {
+func Test_NewCreator_Collection_Any_Cap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Any.Cap(5)
 
@@ -1538,7 +1538,7 @@ func Test_I25_NewCreator_Collection_Any_Cap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Any.Cap returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Bool(t *testing.T) {
+func Test_NewCreator_Collection_Bool(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Bool.Items(true, false)
 
@@ -1550,7 +1550,7 @@ func Test_I25_NewCreator_Collection_Bool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Bool.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Float64(t *testing.T) {
+func Test_NewCreator_Collection_Float64(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Float64.Items(1.1, 2.2)
 
@@ -1562,7 +1562,7 @@ func Test_I25_NewCreator_Collection_Float64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Float64.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_Float32(t *testing.T) {
+func Test_NewCreator_Collection_Float32(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.Float32.Items(1.1, 2.2)
 
@@ -1574,7 +1574,7 @@ func Test_I25_NewCreator_Collection_Float32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.Float32.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_ByteSlice(t *testing.T) {
+func Test_NewCreator_Collection_ByteSlice(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.ByteSlice.Items([]byte{1}, []byte{2})
 
@@ -1586,7 +1586,7 @@ func Test_I25_NewCreator_Collection_ByteSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.ByteSlice.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_AnyMap(t *testing.T) {
+func Test_NewCreator_Collection_AnyMap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.AnyMap.Items(map[string]any{"a": 1})
 
@@ -1598,7 +1598,7 @@ func Test_I25_NewCreator_Collection_AnyMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.AnyMap.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_StringMap(t *testing.T) {
+func Test_NewCreator_Collection_StringMap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.StringMap.Items(map[string]string{"a": "b"})
 
@@ -1610,7 +1610,7 @@ func Test_I25_NewCreator_Collection_StringMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Collection.StringMap.Items returns correct value -- with args", actual)
 }
 
-func Test_I25_NewCreator_Collection_IntMap(t *testing.T) {
+func Test_NewCreator_Collection_IntMap(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.IntMap.Items(map[string]int{"a": 1})
 

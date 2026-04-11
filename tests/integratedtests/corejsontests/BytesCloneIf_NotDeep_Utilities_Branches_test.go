@@ -11,7 +11,7 @@ import (
 // BytesCloneIf
 // =============================================================================
 
-func Test_Cov40_BytesCloneIf_NotDeep(t *testing.T) {
+func Test_BytesCloneIf_NotDeep(t *testing.T) {
 	// Arrange
 	b := []byte("hello")
 	c := corejson.BytesCloneIf(false, b)
@@ -24,7 +24,7 @@ func Test_Cov40_BytesCloneIf_NotDeep(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf not deep", actual)
 }
 
-func Test_Cov40_BytesCloneIf_DeepEmpty(t *testing.T) {
+func Test_BytesCloneIf_DeepEmpty(t *testing.T) {
 	// Arrange
 	c := corejson.BytesCloneIf(true, []byte{})
 
@@ -36,7 +36,7 @@ func Test_Cov40_BytesCloneIf_DeepEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf deep empty", actual)
 }
 
-func Test_Cov40_BytesCloneIf_DeepValid(t *testing.T) {
+func Test_BytesCloneIf_DeepValid(t *testing.T) {
 	// Arrange
 	b := []byte("hello")
 	c := corejson.BytesCloneIf(true, b)
@@ -59,7 +59,7 @@ func Test_Cov40_BytesCloneIf_DeepValid(t *testing.T) {
 // BytesDeepClone
 // =============================================================================
 
-func Test_Cov40_BytesDeepClone_Empty(t *testing.T) {
+func Test_BytesDeepClone_Empty(t *testing.T) {
 	// Arrange
 	c := corejson.BytesDeepClone([]byte{})
 
@@ -71,7 +71,7 @@ func Test_Cov40_BytesDeepClone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesDeepClone empty", actual)
 }
 
-func Test_Cov40_BytesDeepClone_Valid(t *testing.T) {
+func Test_BytesDeepClone_Valid(t *testing.T) {
 	// Arrange
 	b := []byte("hello")
 	c := corejson.BytesDeepClone(b)
@@ -88,7 +88,7 @@ func Test_Cov40_BytesDeepClone_Valid(t *testing.T) {
 // BytesToString / BytesToPrettyString
 // =============================================================================
 
-func Test_Cov40_BytesToString_Empty(t *testing.T) {
+func Test_BytesToString_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"r": corejson.BytesToString([]byte{})}
 
@@ -97,7 +97,7 @@ func Test_Cov40_BytesToString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString empty", actual)
 }
 
-func Test_Cov40_BytesToString_Valid(t *testing.T) {
+func Test_BytesToString_Valid(t *testing.T) {
 	// Act
 	actual := args.Map{"r": corejson.BytesToString([]byte("hello"))}
 
@@ -106,7 +106,7 @@ func Test_Cov40_BytesToString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString valid", actual)
 }
 
-func Test_Cov40_BytesToPrettyString_Empty(t *testing.T) {
+func Test_BytesToPrettyString_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"r": corejson.BytesToPrettyString([]byte{})}
 
@@ -115,7 +115,7 @@ func Test_Cov40_BytesToPrettyString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToPrettyString empty", actual)
 }
 
-func Test_Cov40_BytesToPrettyString_Valid(t *testing.T) {
+func Test_BytesToPrettyString_Valid(t *testing.T) {
 	// Arrange
 	b := []byte(`{"a":1}`)
 	s := corejson.BytesToPrettyString(b)
@@ -132,7 +132,7 @@ func Test_Cov40_BytesToPrettyString_Valid(t *testing.T) {
 // JsonStringOrErrMsg
 // =============================================================================
 
-func Test_Cov40_JsonStringOrErrMsg_Valid(t *testing.T) {
+func Test_JsonStringOrErrMsg_Valid(t *testing.T) {
 	// Arrange
 	s := corejson.JsonStringOrErrMsg("hello")
 
@@ -144,7 +144,7 @@ func Test_Cov40_JsonStringOrErrMsg_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonStringOrErrMsg valid", actual)
 }
 
-func Test_Cov40_JsonStringOrErrMsg_Unmarshalable(t *testing.T) {
+func Test_JsonStringOrErrMsg_Unmarshalable(t *testing.T) {
 	// Arrange
 	s := corejson.JsonStringOrErrMsg(make(chan int))
 
@@ -160,7 +160,7 @@ func Test_Cov40_JsonStringOrErrMsg_Unmarshalable(t *testing.T) {
 // New / NewPtr
 // =============================================================================
 
-func Test_Cov40_New_Valid(t *testing.T) {
+func Test_New_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -178,7 +178,7 @@ func Test_Cov40_New_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New valid", actual)
 }
 
-func Test_Cov40_New_Unmarshalable(t *testing.T) {
+func Test_New_Unmarshalable(t *testing.T) {
 	// Arrange
 	r := corejson.New(make(chan int))
 
@@ -190,7 +190,7 @@ func Test_Cov40_New_Unmarshalable(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New unmarshalable", actual)
 }
 
-func Test_Cov40_NewPtr_Valid(t *testing.T) {
+func Test_NewPtr_Valid(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr("hello")
 
@@ -208,7 +208,7 @@ func Test_Cov40_NewPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr valid", actual)
 }
 
-func Test_Cov40_NewPtr_Unmarshalable(t *testing.T) {
+func Test_NewPtr_Unmarshalable(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(make(chan int))
 
@@ -224,7 +224,7 @@ func Test_Cov40_NewPtr_Unmarshalable(t *testing.T) {
 // emptyCreator
 // =============================================================================
 
-func Test_Cov40_Empty_Result(t *testing.T) {
+func Test_Empty_Result(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.Result()
 
@@ -236,7 +236,7 @@ func Test_Cov40_Empty_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Result", actual)
 }
 
-func Test_Cov40_Empty_ResultPtr(t *testing.T) {
+func Test_Empty_ResultPtr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultPtr()
 
@@ -254,7 +254,7 @@ func Test_Cov40_Empty_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr", actual)
 }
 
-func Test_Cov40_Empty_ResultWithErr(t *testing.T) {
+func Test_Empty_ResultWithErr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultWithErr("int", nil)
 
@@ -266,7 +266,7 @@ func Test_Cov40_Empty_ResultWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultWithErr", actual)
 }
 
-func Test_Cov40_Empty_ResultPtrWithErr(t *testing.T) {
+func Test_Empty_ResultPtrWithErr(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultPtrWithErr("int", nil)
 
@@ -284,7 +284,7 @@ func Test_Cov40_Empty_ResultPtrWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtrWithErr", actual)
 }
 
-func Test_Cov40_Empty_BytesCollection(t *testing.T) {
+func Test_Empty_BytesCollection(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollection()
 
@@ -296,7 +296,7 @@ func Test_Cov40_Empty_BytesCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.BytesCollection", actual)
 }
 
-func Test_Cov40_Empty_BytesCollectionPtr(t *testing.T) {
+func Test_Empty_BytesCollectionPtr(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollectionPtr()
 
@@ -308,7 +308,7 @@ func Test_Cov40_Empty_BytesCollectionPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.BytesCollectionPtr", actual)
 }
 
-func Test_Cov40_Empty_ResultsCollection(t *testing.T) {
+func Test_Empty_ResultsCollection(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsCollection()
 
@@ -326,7 +326,7 @@ func Test_Cov40_Empty_ResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultsCollection", actual)
 }
 
-func Test_Cov40_Empty_ResultsPtrCollection(t *testing.T) {
+func Test_Empty_ResultsPtrCollection(t *testing.T) {
 	// Arrange
 	rc := corejson.Empty.ResultsPtrCollection()
 
@@ -338,7 +338,7 @@ func Test_Cov40_Empty_ResultsPtrCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultsPtrCollection", actual)
 }
 
-func Test_Cov40_Empty_MapResults(t *testing.T) {
+func Test_Empty_MapResults(t *testing.T) {
 	// Arrange
 	mr := corejson.Empty.MapResults()
 
@@ -360,7 +360,7 @@ func Test_Cov40_Empty_MapResults(t *testing.T) {
 // KeyAny / KeyWithResult
 // =============================================================================
 
-func Test_Cov40_KeyAny(t *testing.T) {
+func Test_KeyAny(t *testing.T) {
 	// Arrange
 	ka := corejson.KeyAny{Key: "x", AnyInf: 42}
 
@@ -378,7 +378,7 @@ func Test_Cov40_KeyAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyAny", actual)
 }
 
-func Test_Cov40_KeyWithResult(t *testing.T) {
+func Test_KeyWithResult(t *testing.T) {
 	// Arrange
 	kwr := corejson.KeyWithResult{Key: "x", Result: corejson.New("hello")}
 

@@ -9,7 +9,7 @@ import (
 
 // ── BoolOnce ──
 
-func Test_Cov5_BoolOnce_Value(t *testing.T) {
+func Test_BoolOnce_Value(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 
@@ -29,7 +29,7 @@ func Test_Cov5_BoolOnce_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns true -- true func", actual)
 }
 
-func Test_Cov5_BoolOnce_False(t *testing.T) {
+func Test_BoolOnce_False(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 
@@ -47,7 +47,7 @@ func Test_Cov5_BoolOnce_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns false -- false func", actual)
 }
 
-func Test_Cov5_BoolOnce_Serialize(t *testing.T) {
+func Test_BoolOnce_Serialize(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	b, err := bo.Serialize()
@@ -66,7 +66,7 @@ func Test_Cov5_BoolOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce.Serialize succeeds -- true", actual)
 }
 
-func Test_Cov5_BoolOnce_MarshalJSON(t *testing.T) {
+func Test_BoolOnce_MarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	b, err := bo.MarshalJSON()
@@ -85,7 +85,7 @@ func Test_Cov5_BoolOnce_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce.MarshalJSON succeeds -- true", actual)
 }
 
-func Test_Cov5_BoolOnce_UnmarshalJSON(t *testing.T) {
+func Test_BoolOnce_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOncePtr(func() bool { return false })
 	err := bo.UnmarshalJSON([]byte("true"))
@@ -98,7 +98,7 @@ func Test_Cov5_BoolOnce_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce.UnmarshalJSON succeeds -- true bytes", actual)
 }
 
-func Test_Cov5_BoolOnce_Ptr(t *testing.T) {
+func Test_BoolOnce_Ptr(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOncePtr(func() bool { return true })
 

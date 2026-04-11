@@ -12,7 +12,7 @@ import (
 // LeftRight
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_LeftRight_NewLeftRight(t *testing.T) {
+func Test_LeftRight_NewLeftRight(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_NewLeftRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("key", "value")
@@ -34,7 +34,7 @@ func Test_I26_LeftRight_NewLeftRight(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftRight_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_InvalidNoMessage", func() {
 		// Arrange
 		lr := corestr.InvalidLeftRightNoMessage()
@@ -48,7 +48,7 @@ func Test_I26_LeftRight_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_InvalidWithMessage(t *testing.T) {
+func Test_LeftRight_InvalidWithMessage(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_InvalidWithMessage", func() {
 		// Arrange
 		lr := corestr.InvalidLeftRight("bad")
@@ -68,7 +68,7 @@ func Test_I26_LeftRight_InvalidWithMessage(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_UsingSlice_Two(t *testing.T) {
+func Test_LeftRight_UsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_UsingSlice_Two", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
@@ -90,7 +90,7 @@ func Test_I26_LeftRight_UsingSlice_Two(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_UsingSlice_One(t *testing.T) {
+func Test_LeftRight_UsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_UsingSlice_One", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{"only"})
@@ -112,7 +112,7 @@ func Test_I26_LeftRight_UsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_UsingSlice_Empty(t *testing.T) {
+func Test_LeftRight_UsingSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_UsingSlice_Empty", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{})
@@ -126,7 +126,7 @@ func Test_I26_LeftRight_UsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_UsingSlicePtr_Empty(t *testing.T) {
+func Test_LeftRight_UsingSlicePtr_Empty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_UsingSlicePtr_Empty", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlicePtr([]string{})
@@ -140,7 +140,7 @@ func Test_I26_LeftRight_UsingSlicePtr_Empty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_UsingSlicePtr_NonEmpty(t *testing.T) {
+func Test_LeftRight_UsingSlicePtr_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_UsingSlicePtr_NonEmpty", func() {
 		// Arrange
 		lr := corestr.LeftRightUsingSlicePtr([]string{"a", "b"})
@@ -160,7 +160,7 @@ func Test_I26_LeftRight_UsingSlicePtr_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_TrimmedUsingSlice_Two", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
@@ -180,7 +180,7 @@ func Test_I26_LeftRight_TrimmedUsingSlice_Two(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_TrimmedUsingSlice_Nil", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice(nil)
@@ -194,7 +194,7 @@ func Test_I26_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_TrimmedUsingSlice_Empty(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_TrimmedUsingSlice_Empty", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{})
@@ -208,7 +208,7 @@ func Test_I26_LeftRight_TrimmedUsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_TrimmedUsingSlice_One", func() {
 		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" only "})
@@ -228,7 +228,7 @@ func Test_I26_LeftRight_TrimmedUsingSlice_One(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_Bytes(t *testing.T) {
+func Test_LeftRight_Bytes(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_Bytes", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc", "xyz")
@@ -248,7 +248,7 @@ func Test_I26_LeftRight_Bytes(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_Trim(t *testing.T) {
+func Test_LeftRight_Trim(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_Trim", func() {
 		// Arrange
 		lr := corestr.NewLeftRight(" a ", " b ")
@@ -268,7 +268,7 @@ func Test_I26_LeftRight_Trim(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_IsEmpty(t *testing.T) {
+func Test_LeftRight_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_IsEmpty", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("", "x")
@@ -288,7 +288,7 @@ func Test_I26_LeftRight_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_IsWhitespace(t *testing.T) {
+func Test_LeftRight_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_IsWhitespace", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("  ", "x")
@@ -308,7 +308,7 @@ func Test_I26_LeftRight_IsWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_HasValidNonEmpty(t *testing.T) {
+func Test_LeftRight_HasValidNonEmpty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_HasValidNonEmpty", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -330,7 +330,7 @@ func Test_I26_LeftRight_HasValidNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_HasValidNonWhitespace(t *testing.T) {
+func Test_LeftRight_HasValidNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_HasValidNonWhitespace", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", " ")
@@ -350,7 +350,7 @@ func Test_I26_LeftRight_HasValidNonWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_NonPtr_Ptr(t *testing.T) {
+func Test_LeftRight_NonPtr_Ptr(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_NonPtr_Ptr", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -372,7 +372,7 @@ func Test_I26_LeftRight_NonPtr_Ptr(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_RegexMatch(t *testing.T) {
+func Test_LeftRight_RegexMatch(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_RegexMatch", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("abc123", "xyz")
@@ -395,7 +395,7 @@ func Test_I26_LeftRight_RegexMatch(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_Is_IsKey_IsVal(t *testing.T) {
+func Test_LeftRight_Is_IsKey_IsVal(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_Is_IsKey_IsVal", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("k", "v")
@@ -419,7 +419,7 @@ func Test_I26_LeftRight_Is_IsKey_IsVal(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_IsEqual(t *testing.T) {
+func Test_LeftRight_IsEqual(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_IsEqual", func() {
 		// Arrange
 		lr1 := corestr.NewLeftRight("a", "b")
@@ -445,7 +445,7 @@ func Test_I26_LeftRight_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_Clone", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -468,7 +468,7 @@ func Test_I26_LeftRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRight_Clear_Dispose(t *testing.T) {
+func Test_LeftRight_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRight_Clear_Dispose", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -503,7 +503,7 @@ func Test_I26_LeftRight_Clear_Dispose(t *testing.T) {
 // LeftRightFromSplit
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRightFromSplit", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("key=value", "=")
@@ -523,7 +523,7 @@ func Test_I26_LeftRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRightFromSplitTrimmed", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
@@ -543,7 +543,7 @@ func Test_I26_LeftRightFromSplitTrimmed(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRightFromSplitFull(t *testing.T) {
+func Test_LeftRightFromSplitFull(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRightFromSplitFull", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
@@ -563,7 +563,7 @@ func Test_I26_LeftRightFromSplitFull(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftRightFromSplitFullTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
 	safeTest(t, "Test_I26_LeftRightFromSplitFullTrimmed", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
@@ -587,7 +587,7 @@ func Test_I26_LeftRightFromSplitFullTrimmed(t *testing.T) {
 // LeftMiddleRight
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_LeftMiddleRight_New(t *testing.T) {
+func Test_LeftMiddleRight_New(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_New", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -611,7 +611,7 @@ func Test_I26_LeftMiddleRight_New(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_Invalid(t *testing.T) {
+func Test_LeftMiddleRight_Invalid(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_Invalid", func() {
 		// Arrange
 		lmr1 := corestr.InvalidLeftMiddleRightNoMessage()
@@ -634,7 +634,7 @@ func Test_I26_LeftMiddleRight_Invalid(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_Bytes(t *testing.T) {
+func Test_LeftMiddleRight_Bytes(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_Bytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("ab", "cd", "ef")
@@ -656,7 +656,7 @@ func Test_I26_LeftMiddleRight_Bytes(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_Trim(t *testing.T) {
+func Test_LeftMiddleRight_Trim(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_Trim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight(" a ", " b ", " c ")
@@ -678,7 +678,7 @@ func Test_I26_LeftMiddleRight_Trim(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_IsEmpty(t *testing.T) {
+func Test_LeftMiddleRight_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_IsEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("", "x", "")
@@ -700,7 +700,7 @@ func Test_I26_LeftMiddleRight_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_IsWhitespace(t *testing.T) {
+func Test_LeftMiddleRight_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_IsWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("  ", "x", "  ")
@@ -722,7 +722,7 @@ func Test_I26_LeftMiddleRight_IsWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_HasValidNonEmpty(t *testing.T) {
+func Test_LeftMiddleRight_HasValidNonEmpty(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_HasValidNonEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -744,7 +744,7 @@ func Test_I26_LeftMiddleRight_HasValidNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_HasValidNonWhitespace(t *testing.T) {
+func Test_LeftMiddleRight_HasValidNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_HasValidNonWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", " ", "c")
@@ -764,7 +764,7 @@ func Test_I26_LeftMiddleRight_HasValidNonWhitespace(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_IsAll_Is(t *testing.T) {
+func Test_LeftMiddleRight_IsAll_Is(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_IsAll_Is", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -784,7 +784,7 @@ func Test_I26_LeftMiddleRight_IsAll_Is(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_Clone(t *testing.T) {
+func Test_LeftMiddleRight_Clone(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_Clone", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -805,7 +805,7 @@ func Test_I26_LeftMiddleRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_ToLeftRight(t *testing.T) {
+func Test_LeftMiddleRight_ToLeftRight(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_ToLeftRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -828,7 +828,7 @@ func Test_I26_LeftMiddleRight_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRight_Clear_Dispose(t *testing.T) {
+func Test_LeftMiddleRight_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRight_Clear_Dispose", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -852,7 +852,7 @@ func Test_I26_LeftMiddleRight_Clear_Dispose(t *testing.T) {
 // LeftMiddleRightFromSplit
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_LeftMiddleRightFromSplit(t *testing.T) {
+func Test_LeftMiddleRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRightFromSplit", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
@@ -874,7 +874,7 @@ func Test_I26_LeftMiddleRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRightFromSplitTrimmed", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitTrimmed(" a . b . c ", ".")
@@ -896,7 +896,7 @@ func Test_I26_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRightFromSplitN(t *testing.T) {
+func Test_LeftMiddleRightFromSplitN(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRightFromSplitN", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitN("a:b:c:d:e", ":")
@@ -918,7 +918,7 @@ func Test_I26_LeftMiddleRightFromSplitN(t *testing.T) {
 	})
 }
 
-func Test_I26_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
+func Test_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
 	safeTest(t, "Test_I26_LeftMiddleRightFromSplitNTrimmed", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplitNTrimmed(" a : b : c : d ", ":")
@@ -942,7 +942,7 @@ func Test_I26_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
 // KeyValuePair
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_KeyValuePair_Basic(t *testing.T) {
+func Test_KeyValuePair_Basic(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Basic", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "name", Value: "alice"}
@@ -965,7 +965,7 @@ func Test_I26_KeyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Json(t *testing.T) {
+func Test_KeyValuePair_Json(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Json", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -980,7 +980,7 @@ func Test_I26_KeyValuePair_Json(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_JsonPtr(t *testing.T) {
+func Test_KeyValuePair_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_JsonPtr", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -994,7 +994,7 @@ func Test_I26_KeyValuePair_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Serialize(t *testing.T) {
+func Test_KeyValuePair_Serialize(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Serialize", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1015,7 +1015,7 @@ func Test_I26_KeyValuePair_Serialize(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_SerializeMust(t *testing.T) {
+func Test_KeyValuePair_SerializeMust(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_SerializeMust", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1030,7 +1030,7 @@ func Test_I26_KeyValuePair_SerializeMust(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Compile_String(t *testing.T) {
+func Test_KeyValuePair_Compile_String(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Compile_String", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1050,7 +1050,7 @@ func Test_I26_KeyValuePair_Compile_String(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_EmptyChecks(t *testing.T) {
+func Test_KeyValuePair_EmptyChecks(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_EmptyChecks", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "", Value: ""}
@@ -1072,7 +1072,7 @@ func Test_I26_KeyValuePair_EmptyChecks(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Trim(t *testing.T) {
+func Test_KeyValuePair_Trim(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Trim", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: " k ", Value: " v "}
@@ -1092,7 +1092,7 @@ func Test_I26_KeyValuePair_Trim(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueBool(t *testing.T) {
+func Test_KeyValuePair_ValueBool(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueBool", func() {
 		// Arrange
 		kv1 := corestr.KeyValuePair{Value: "true"}
@@ -1116,7 +1116,7 @@ func Test_I26_KeyValuePair_ValueBool(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueInt(t *testing.T) {
+func Test_KeyValuePair_ValueInt(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueInt", func() {
 		// Arrange
 		kv1 := corestr.KeyValuePair{Value: "42"}
@@ -1139,7 +1139,7 @@ func Test_I26_KeyValuePair_ValueInt(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueByte(t *testing.T) {
+func Test_KeyValuePair_ValueByte(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueByte", func() {
 		// Arrange
 		kv1 := corestr.KeyValuePair{Value: "100"}
@@ -1163,7 +1163,7 @@ func Test_I26_KeyValuePair_ValueByte(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueDefByte(t *testing.T) {
+func Test_KeyValuePair_ValueDefByte(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueDefByte", func() {
 		// Arrange
 		kv1 := corestr.KeyValuePair{Value: "50"}
@@ -1187,7 +1187,7 @@ func Test_I26_KeyValuePair_ValueDefByte(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueFloat64(t *testing.T) {
+func Test_KeyValuePair_ValueFloat64(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueFloat64", func() {
 		// Arrange
 		kv1 := corestr.KeyValuePair{Value: "3.14"}
@@ -1210,7 +1210,7 @@ func Test_I26_KeyValuePair_ValueFloat64(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueValid", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Value: "test"}
@@ -1231,7 +1231,7 @@ func Test_I26_KeyValuePair_ValueValid(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_ValueValidOptions(t *testing.T) {
+func Test_KeyValuePair_ValueValidOptions(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_ValueValidOptions", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Value: "test"}
@@ -1252,7 +1252,7 @@ func Test_I26_KeyValuePair_ValueValidOptions(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Is_IsKey_IsVal(t *testing.T) {
+func Test_KeyValuePair_Is_IsKey_IsVal(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Is_IsKey_IsVal", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1274,7 +1274,7 @@ func Test_I26_KeyValuePair_Is_IsKey_IsVal(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_FormatString(t *testing.T) {
+func Test_KeyValuePair_FormatString(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_FormatString", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "name", Value: "bob"}
@@ -1288,7 +1288,7 @@ func Test_I26_KeyValuePair_FormatString(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_Clear_Dispose(t *testing.T) {
+func Test_KeyValuePair_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_Clear_Dispose", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -1314,7 +1314,7 @@ func Test_I26_KeyValuePair_Clear_Dispose(t *testing.T) {
 	})
 }
 
-func Test_I26_KeyValuePair_NilChecks(t *testing.T) {
+func Test_KeyValuePair_NilChecks(t *testing.T) {
 	safeTest(t, "Test_I26_KeyValuePair_NilChecks", func() {
 		// Arrange
 		var kv *corestr.KeyValuePair
@@ -1332,7 +1332,7 @@ func Test_I26_KeyValuePair_NilChecks(t *testing.T) {
 // TextWithLineNumber
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_TextWithLineNumber_Valid(t *testing.T) {
+func Test_TextWithLineNumber_Valid(t *testing.T) {
 	safeTest(t, "Test_I26_TextWithLineNumber_Valid", func() {
 		// Arrange
 		tl := &corestr.TextWithLineNumber{LineNumber: 5, Text: "hello"}
@@ -1354,7 +1354,7 @@ func Test_I26_TextWithLineNumber_Valid(t *testing.T) {
 	})
 }
 
-func Test_I26_TextWithLineNumber_Nil(t *testing.T) {
+func Test_TextWithLineNumber_Nil(t *testing.T) {
 	safeTest(t, "Test_I26_TextWithLineNumber_Nil", func() {
 		// Arrange
 		var tl *corestr.TextWithLineNumber
@@ -1374,7 +1374,7 @@ func Test_I26_TextWithLineNumber_Nil(t *testing.T) {
 	})
 }
 
-func Test_I26_TextWithLineNumber_EmptyText(t *testing.T) {
+func Test_TextWithLineNumber_EmptyText(t *testing.T) {
 	safeTest(t, "Test_I26_TextWithLineNumber_EmptyText", func() {
 		// Arrange
 		tl := &corestr.TextWithLineNumber{LineNumber: 5, Text: ""}
@@ -1398,7 +1398,7 @@ func Test_I26_TextWithLineNumber_EmptyText(t *testing.T) {
 // CloneSlice / CloneSliceIf
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_CloneSlice_Normal(t *testing.T) {
+func Test_CloneSlice_Normal(t *testing.T) {
 	safeTest(t, "Test_I26_CloneSlice_Normal", func() {
 		// Arrange
 		s := []string{"a", "b", "c"}
@@ -1419,7 +1419,7 @@ func Test_I26_CloneSlice_Normal(t *testing.T) {
 	})
 }
 
-func Test_I26_CloneSlice_Empty(t *testing.T) {
+func Test_CloneSlice_Empty(t *testing.T) {
 	safeTest(t, "Test_I26_CloneSlice_Empty", func() {
 		// Arrange
 		cloned := corestr.CloneSlice([]string{})
@@ -1433,7 +1433,7 @@ func Test_I26_CloneSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_I26_CloneSliceIf_Clone(t *testing.T) {
+func Test_CloneSliceIf_Clone(t *testing.T) {
 	safeTest(t, "Test_I26_CloneSliceIf_Clone", func() {
 		// Arrange
 		cloned := corestr.CloneSliceIf(true, "a", "b")
@@ -1453,7 +1453,7 @@ func Test_I26_CloneSliceIf_Clone(t *testing.T) {
 	})
 }
 
-func Test_I26_CloneSliceIf_NoClone(t *testing.T) {
+func Test_CloneSliceIf_NoClone(t *testing.T) {
 	safeTest(t, "Test_I26_CloneSliceIf_NoClone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(false, "a", "b")
@@ -1467,7 +1467,7 @@ func Test_I26_CloneSliceIf_NoClone(t *testing.T) {
 	})
 }
 
-func Test_I26_CloneSliceIf_Empty(t *testing.T) {
+func Test_CloneSliceIf_Empty(t *testing.T) {
 	safeTest(t, "Test_I26_CloneSliceIf_Empty", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true)
@@ -1485,7 +1485,7 @@ func Test_I26_CloneSliceIf_Empty(t *testing.T) {
 // AnyToString
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName(t *testing.T) {
 	safeTest(t, "Test_I26_AnyToString_WithFieldName", func() {
 		// Arrange
 		result := corestr.AnyToString(true, 42)
@@ -1499,7 +1499,7 @@ func Test_I26_AnyToString_WithFieldName(t *testing.T) {
 	})
 }
 
-func Test_I26_AnyToString_WithoutFieldName(t *testing.T) {
+func Test_AnyToString_WithoutFieldName(t *testing.T) {
 	safeTest(t, "Test_I26_AnyToString_WithoutFieldName", func() {
 		// Arrange
 		result := corestr.AnyToString(false, 42)
@@ -1513,7 +1513,7 @@ func Test_I26_AnyToString_WithoutFieldName(t *testing.T) {
 	})
 }
 
-func Test_I26_AnyToString_EmptyString(t *testing.T) {
+func Test_AnyToString_EmptyString(t *testing.T) {
 	safeTest(t, "Test_I26_AnyToString_EmptyString", func() {
 		// Arrange
 		result := corestr.AnyToString(false, "")
@@ -1531,7 +1531,7 @@ func Test_I26_AnyToString_EmptyString(t *testing.T) {
 // AllIndividualStringsOfStringsLength / AllIndividualsLengthOfSimpleSlices
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_AllIndividualStringsOfStringsLength_Valid(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Valid(t *testing.T) {
 	safeTest(t, "Test_I26_AllIndividualStringsOfStringsLength_Valid", func() {
 		// Arrange
 		items := [][]string{{"a", "b"}, {"c"}}
@@ -1545,7 +1545,7 @@ func Test_I26_AllIndividualStringsOfStringsLength_Valid(t *testing.T) {
 	})
 }
 
-func Test_I26_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 	safeTest(t, "Test_I26_AllIndividualStringsOfStringsLength_Nil", func() {
 		// Act
 		actual := args.Map{"len": corestr.AllIndividualStringsOfStringsLength(nil)}
@@ -1556,7 +1556,7 @@ func Test_I26_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 	})
 }
 
-func Test_I26_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
 	safeTest(t, "Test_I26_AllIndividualsLengthOfSimpleSlices_Nil", func() {
 		// Act
 		actual := args.Map{"len": corestr.AllIndividualsLengthOfSimpleSlices(nil)}
@@ -1571,7 +1571,7 @@ func Test_I26_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
 // ValueStatus
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I26_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid(t *testing.T) {
 	safeTest(t, "Test_I26_ValueStatus_Invalid", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatus("bad")
@@ -1591,7 +1591,7 @@ func Test_I26_ValueStatus_Invalid(t *testing.T) {
 	})
 }
 
-func Test_I26_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 	safeTest(t, "Test_I26_ValueStatus_InvalidNoMessage", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatusNoMessage()
@@ -1605,7 +1605,7 @@ func Test_I26_ValueStatus_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_I26_ValueStatus_Clone(t *testing.T) {
+func Test_ValueStatus_Clone(t *testing.T) {
 	safeTest(t, "Test_I26_ValueStatus_Clone", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatus("test")

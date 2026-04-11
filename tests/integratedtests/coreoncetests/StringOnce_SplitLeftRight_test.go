@@ -9,7 +9,7 @@ import (
 
 // ── StringOnce ──
 
-func Test_Cov6_StringOnce_SplitLeftRight(t *testing.T) {
+func Test_StringOnce_SplitLeftRight(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "key=value" })
 	l, r := so.SplitLeftRight("=")
@@ -33,7 +33,7 @@ func Test_Cov6_StringOnce_SplitLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- SplitLeftRight", actual)
 }
 
-func Test_Cov6_StringOnce_SplitLeftRight_NoSep(t *testing.T) {
+func Test_StringOnce_SplitLeftRight_NoSep(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "nosep" })
 	l, r := so.SplitLeftRight("=")
@@ -52,7 +52,7 @@ func Test_Cov6_StringOnce_SplitLeftRight_NoSep(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns empty -- SplitLeftRight no separator", actual)
 }
 
-func Test_Cov6_StringOnce_Helpers(t *testing.T) {
+func Test_StringOnce_Helpers(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "Hello World" })
 
@@ -81,7 +81,7 @@ func Test_Cov6_StringOnce_Helpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- helpers", actual)
 }
 
-func Test_Cov6_StringOnce_SplitBy(t *testing.T) {
+func Test_StringOnce_SplitBy(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "a,b,c" })
 	result := so.SplitBy(",")
@@ -94,7 +94,7 @@ func Test_Cov6_StringOnce_SplitBy(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- SplitBy", actual)
 }
 
-func Test_Cov6_StringOnce_Execute(t *testing.T) {
+func Test_StringOnce_Execute(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "exec" })
 
@@ -106,7 +106,7 @@ func Test_Cov6_StringOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- Execute", actual)
 }
 
-func Test_Cov6_StringOnce_Serialize(t *testing.T) {
+func Test_StringOnce_Serialize(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "test" })
 	data, err := so.Serialize()
@@ -125,7 +125,7 @@ func Test_Cov6_StringOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- Serialize", actual)
 }
 
-func Test_Cov6_StringOnce_MarshalUnmarshalJSON(t *testing.T) {
+func Test_StringOnce_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "hello" })
 	data, err := so.MarshalJSON()
@@ -149,7 +149,7 @@ func Test_Cov6_StringOnce_MarshalUnmarshalJSON(t *testing.T) {
 
 // ── BoolOnce ──
 
-func Test_Cov6_BoolOnce_Execute(t *testing.T) {
+func Test_BoolOnce_Execute(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 
@@ -169,7 +169,7 @@ func Test_Cov6_BoolOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Execute", actual)
 }
 
-func Test_Cov6_BoolOnce_Serialize(t *testing.T) {
+func Test_BoolOnce_Serialize(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 	data, err := bo.Serialize()
@@ -188,7 +188,7 @@ func Test_Cov6_BoolOnce_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Serialize", actual)
 }
 
-func Test_Cov6_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
+func Test_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	data, err := bo.MarshalJSON()
@@ -213,7 +213,7 @@ func Test_Cov6_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
 
 // ── IntegerOnce ──
 
-func Test_Cov6_IntegerOnce_Comparisons(t *testing.T) {
+func Test_IntegerOnce_Comparisons(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 5 })
 
@@ -253,7 +253,7 @@ func Test_Cov6_IntegerOnce_Comparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce returns correct value -- Comparisons", actual)
 }
 
-func Test_Cov6_IntegerOnce_Serialize(t *testing.T) {
+func Test_IntegerOnce_Serialize(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	data, err := io.Serialize()
@@ -274,7 +274,7 @@ func Test_Cov6_IntegerOnce_Serialize(t *testing.T) {
 
 // ── ErrorOnce ──
 
-func Test_Cov6_ErrorOnce_NilError(t *testing.T) {
+func Test_ErrorOnce_NilError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -302,7 +302,7 @@ func Test_Cov6_ErrorOnce_NilError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce returns nil -- nil error", actual)
 }
 
-func Test_Cov6_ErrorOnce_IsMessageEqual(t *testing.T) {
+func Test_ErrorOnce_IsMessageEqual(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -314,7 +314,7 @@ func Test_Cov6_ErrorOnce_IsMessageEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce returns nil -- IsMessageEqual nil", actual)
 }
 
-func Test_Cov6_ErrorOnce_ConcatNew_NilError(t *testing.T) {
+func Test_ErrorOnce_ConcatNew_NilError(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	result := eo.ConcatNewString("extra")
@@ -329,7 +329,7 @@ func Test_Cov6_ErrorOnce_ConcatNew_NilError(t *testing.T) {
 
 // ── MapStringStringOnce ──
 
-func Test_Cov6_MapStringStringOnce_AllKeys(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -364,7 +364,7 @@ func Test_Cov6_MapStringStringOnce_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- AllKeys", actual)
 }
 
-func Test_Cov6_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
+func Test_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"key": "val"}
@@ -386,7 +386,7 @@ func Test_Cov6_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns non-empty -- GetValueWithStatus", actual)
 }
 
-func Test_Cov6_MapStringStringOnce_IsEqual(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -408,7 +408,7 @@ func Test_Cov6_MapStringStringOnce_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov6_MapStringStringOnce_String(t *testing.T) {
+func Test_MapStringStringOnce_String(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -422,7 +422,7 @@ func Test_Cov6_MapStringStringOnce_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- String", actual)
 }
 
-func Test_Cov6_MapStringStringOnce_JsonStringMust(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -439,7 +439,7 @@ func Test_Cov6_MapStringStringOnce_JsonStringMust(t *testing.T) {
 
 // ── AnyOnce ──
 
-func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
+func Test_AnyOnce_CastMethods(t *testing.T) {
 	// Arrange
 	aoStr := coreonce.NewAnyOnce(func() any { return "hello" })
 	aoStrings := coreonce.NewAnyOnce(func() any { return []string{"a", "b"} })
@@ -473,7 +473,7 @@ func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce returns correct value -- CastMethods", actual)
 }
 
-func Test_Cov6_AnyOnce_Null(t *testing.T) {
+func Test_AnyOnce_Null(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 	isInit := ao.IsInitialized()
@@ -494,7 +494,7 @@ func Test_Cov6_AnyOnce_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce returns correct value -- null value", actual)
 }
 
-func Test_Cov6_AnyOnce_SerializeMust(t *testing.T) {
+func Test_AnyOnce_SerializeMust(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "test" })
 	result := ao.SerializeMust()
@@ -507,7 +507,7 @@ func Test_Cov6_AnyOnce_SerializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce returns correct value -- SerializeMust", actual)
 }
 
-func Test_Cov6_AnyOnce_ValueString(t *testing.T) {
+func Test_AnyOnce_ValueString(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	v1 := ao.ValueString()

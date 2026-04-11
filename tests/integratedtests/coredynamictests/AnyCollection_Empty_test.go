@@ -12,7 +12,7 @@ import (
 // AnyCollection — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_Cov9_AnyCollection_Empty(t *testing.T) {
+func Test_AnyCollection_Empty(t *testing.T) {
 	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	var nilAC *coredynamic.AnyCollection
@@ -36,7 +36,7 @@ func Test_Cov9_AnyCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- Empty", actual)
 }
 
-func Test_Cov9_AnyCollection_Add(t *testing.T) {
+func Test_AnyCollection_Add(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("a")
@@ -60,7 +60,7 @@ func Test_Cov9_AnyCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Add", actual)
 }
 
-func Test_Cov9_AnyCollection_AddMany(t *testing.T) {
+func Test_AnyCollection_AddMany(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", "b", "c")
@@ -74,7 +74,7 @@ func Test_Cov9_AnyCollection_AddMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddMany", actual)
 }
 
-func Test_Cov9_AnyCollection_AddMany_SkipsNil(t *testing.T) {
+func Test_AnyCollection_AddMany_SkipsNil(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", nil, "b")
@@ -87,7 +87,7 @@ func Test_Cov9_AnyCollection_AddMany_SkipsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns nil -- AddMany skips nil", actual)
 }
 
-func Test_Cov9_AnyCollection_AddNonNull(t *testing.T) {
+func Test_AnyCollection_AddNonNull(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddNonNull("a")
@@ -101,7 +101,7 @@ func Test_Cov9_AnyCollection_AddNonNull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddNonNull", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAny(t *testing.T) {
+func Test_AnyCollection_AddAny(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddAny("hello", true)
@@ -114,7 +114,7 @@ func Test_Cov9_AnyCollection_AddAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddAny", actual)
 }
 
-func Test_Cov9_AnyCollection_AddNonNullDynamic(t *testing.T) {
+func Test_AnyCollection_AddNonNullDynamic(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddNonNullDynamic("x", true)
@@ -128,7 +128,7 @@ func Test_Cov9_AnyCollection_AddNonNullDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddNonNullDynamic", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyManyDynamic(t *testing.T) {
+func Test_AnyCollection_AddAnyManyDynamic(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddAnyManyDynamic("a", "b")
@@ -142,7 +142,7 @@ func Test_Cov9_AnyCollection_AddAnyManyDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddAnyManyDynamic", actual)
 }
 
-func Test_Cov9_AnyCollection_Items(t *testing.T) {
+func Test_AnyCollection_Items(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("a")
@@ -162,7 +162,7 @@ func Test_Cov9_AnyCollection_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Items", actual)
 }
 
-func Test_Cov9_AnyCollection_At(t *testing.T) {
+func Test_AnyCollection_At(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -175,7 +175,7 @@ func Test_Cov9_AnyCollection_At(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- At", actual)
 }
 
-func Test_Cov9_AnyCollection_AtAsDynamic(t *testing.T) {
+func Test_AnyCollection_AtAsDynamic(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -195,7 +195,7 @@ func Test_Cov9_AnyCollection_AtAsDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AtAsDynamic", actual)
 }
 
-func Test_Cov9_AnyCollection_FirstLastOrDefault(t *testing.T) {
+func Test_AnyCollection_FirstLastOrDefault(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("first")
@@ -227,7 +227,7 @@ func Test_Cov9_AnyCollection_FirstLastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- FirstLast", actual)
 }
 
-func Test_Cov9_AnyCollection_SkipTakeLimitSlice(t *testing.T) {
+func Test_AnyCollection_SkipTakeLimitSlice(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(10)
 	ac.AddMany("a", "b", "c", "d", "e")
@@ -256,7 +256,7 @@ func Test_Cov9_AnyCollection_SkipTakeLimitSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Skip/Take/Limit", actual)
 }
 
-func Test_Cov9_AnyCollection_RemoveAt(t *testing.T) {
+func Test_AnyCollection_RemoveAt(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", "b", "c")
@@ -279,7 +279,7 @@ func Test_Cov9_AnyCollection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- RemoveAt", actual)
 }
 
-func Test_Cov9_AnyCollection_DynamicItems(t *testing.T) {
+func Test_AnyCollection_DynamicItems(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -301,7 +301,7 @@ func Test_Cov9_AnyCollection_DynamicItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- DynamicItems", actual)
 }
 
-func Test_Cov9_AnyCollection_DynamicCollection(t *testing.T) {
+func Test_AnyCollection_DynamicCollection(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -323,7 +323,7 @@ func Test_Cov9_AnyCollection_DynamicCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- DynamicCollection", actual)
 }
 
-func Test_Cov9_AnyCollection_Loop_Sync(t *testing.T) {
+func Test_AnyCollection_Loop_Sync(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", "b", "c")
@@ -341,7 +341,7 @@ func Test_Cov9_AnyCollection_Loop_Sync(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Loop sync", actual)
 }
 
-func Test_Cov9_AnyCollection_Loop_Break(t *testing.T) {
+func Test_AnyCollection_Loop_Break(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", "b", "c")
@@ -359,7 +359,7 @@ func Test_Cov9_AnyCollection_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Loop break", actual)
 }
 
-func Test_Cov9_AnyCollection_Loop_Empty(t *testing.T) {
+func Test_AnyCollection_Loop_Empty(t *testing.T) {
 	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	count := 0
@@ -376,7 +376,7 @@ func Test_Cov9_AnyCollection_Loop_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- Loop empty", actual)
 }
 
-func Test_Cov9_AnyCollection_Loop_Async(t *testing.T) {
+func Test_AnyCollection_Loop_Async(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddMany("a", "b", "c")
@@ -394,7 +394,7 @@ func Test_Cov9_AnyCollection_Loop_Async(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Loop async", actual)
 }
 
-func Test_Cov9_AnyCollection_LoopDynamic_Sync(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Sync(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -413,7 +413,7 @@ func Test_Cov9_AnyCollection_LoopDynamic_Sync(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- LoopDynamic sync", actual)
 }
 
-func Test_Cov9_AnyCollection_LoopDynamic_Break(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Break(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -432,7 +432,7 @@ func Test_Cov9_AnyCollection_LoopDynamic_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- LoopDynamic break", actual)
 }
 
-func Test_Cov9_AnyCollection_LoopDynamic_Async(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Async(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -448,7 +448,7 @@ func Test_Cov9_AnyCollection_LoopDynamic_Async(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- LoopDynamic async", actual)
 }
 
-func Test_Cov9_AnyCollection_LoopDynamic_Empty(t *testing.T) {
+func Test_AnyCollection_LoopDynamic_Empty(t *testing.T) {
 	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	count := 0
@@ -465,7 +465,7 @@ func Test_Cov9_AnyCollection_LoopDynamic_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- LoopDynamic empty", actual)
 }
 
-func Test_Cov9_AnyCollection_ListStrings(t *testing.T) {
+func Test_AnyCollection_ListStrings(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -490,7 +490,7 @@ func Test_Cov9_AnyCollection_ListStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- ListStrings", actual)
 }
 
-func Test_Cov9_AnyCollection_Strings(t *testing.T) {
+func Test_AnyCollection_Strings(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("a")
@@ -516,7 +516,7 @@ func Test_Cov9_AnyCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Strings", actual)
 }
 
-func Test_Cov9_AnyCollection_Json(t *testing.T) {
+func Test_AnyCollection_Json(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -547,7 +547,7 @@ func Test_Cov9_AnyCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Json", actual)
 }
 
-func Test_Cov9_AnyCollection_JsonResultsCollection(t *testing.T) {
+func Test_AnyCollection_JsonResultsCollection(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -572,7 +572,7 @@ func Test_Cov9_AnyCollection_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_Cov9_AnyCollection_Paging(t *testing.T) {
+func Test_AnyCollection_Paging(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(10)
 	ac.AddMany("a", "b", "c", "d", "e")
@@ -596,7 +596,7 @@ func Test_Cov9_AnyCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Paging", actual)
 }
 
-func Test_Cov9_AnyCollection_Paging_SmallSet(t *testing.T) {
+func Test_AnyCollection_Paging_SmallSet(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("a")
@@ -620,7 +620,7 @@ func Test_Cov9_AnyCollection_Paging_SmallSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Paging small set", actual)
 }
 
-func Test_Cov9_AnyCollection_ParseJson(t *testing.T) {
+func Test_AnyCollection_ParseJson(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -639,7 +639,7 @@ func Test_Cov9_AnyCollection_ParseJson(t *testing.T) {
 	}
 }
 
-func Test_Cov9_AnyCollection_JsonParseSelfInject(t *testing.T) {
+func Test_AnyCollection_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")
@@ -661,7 +661,7 @@ func Test_Cov9_AnyCollection_JsonParseSelfInject(t *testing.T) {
 // AnyCollection.AddAnySliceFromSingleItem
 // ═══════════════════════════════════════════
 
-func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem(t *testing.T) {
+func Test_AnyCollection_AddAnySliceFromSingleItem(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddAnySliceFromSingleItem([]string{"a", "b", "c"})
@@ -674,7 +674,7 @@ func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AddAnySliceFromSingleItem", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
+func Test_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddAnySliceFromSingleItem(nil) // no-op
@@ -687,7 +687,7 @@ func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns nil -- AddAnySliceFromSingleItem nil", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem_IntSlice(t *testing.T) {
+func Test_AnyCollection_AddAnySliceFromSingleItem_IntSlice(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.AddAnySliceFromSingleItem([]int{1, 2})
@@ -704,7 +704,7 @@ func Test_Cov9_AnyCollection_AddAnySliceFromSingleItem_IntSlice(t *testing.T) {
 // DynamicCollection.AddAnySliceFromSingleItem
 // ═══════════════════════════════════════════
 
-func Test_Cov9_DynamicCollection_AddAnySliceFromSingleItem(t *testing.T) {
+func Test_DynamicCollection_AddAnySliceFromSingleItem(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnySliceFromSingleItem(true, []string{"x", "y"})
@@ -717,7 +717,7 @@ func Test_Cov9_DynamicCollection_AddAnySliceFromSingleItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddAnySliceFromSingleItem", actual)
 }
 
-func Test_Cov9_DynamicCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
+func Test_DynamicCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnySliceFromSingleItem(true, nil) // no-op
@@ -734,7 +734,7 @@ func Test_Cov9_DynamicCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
 // AddAnyItemsWithTypeValidation — AnyCollection
 // ═══════════════════════════════════════════
 
-func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -754,7 +754,7 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation valid", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_TypeMismatch(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_TypeMismatch(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -774,7 +774,7 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_TypeMismatch(t *testi
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation mismatch stops", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -794,7 +794,7 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *te
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns error -- AddAnyItemsWithTypeValidation continueOnError", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -814,7 +814,7 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- AddAnyItemsWithTypeValidation empty", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_NullNotAllowed(t *testing.T) {
+func Test_AnyCollection_AddAnyItemsWithTypeValidation_NullNotAllowed(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -828,7 +828,7 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_NullNotAllowed(t *tes
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation null not allowed", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
+func Test_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -848,7 +848,7 @@ func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyWithTypeValidation valid", actual)
 }
 
-func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
+func Test_AnyCollection_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	strType := reflect.TypeOf("")
@@ -872,7 +872,7 @@ func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_TypeMismatch(t *testing.T)
 // AddAnyItemsWithTypeValidation — DynamicCollection
 // ═══════════════════════════════════════════
 
-func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
+func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	strType := reflect.TypeOf("")
@@ -892,7 +892,7 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation valid", actual)
 }
 
-func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Mismatch(t *testing.T) {
+func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Mismatch(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	strType := reflect.TypeOf("")
@@ -912,7 +912,7 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Mismatch(t *testi
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation mismatch", actual)
 }
 
-func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
+func Test_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	strType := reflect.TypeOf("")
@@ -932,7 +932,7 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns error -- AddAnyItemsWithTypeValidation continueOnError", actual)
 }
 
-func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
+func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	strType := reflect.TypeOf("")
@@ -952,7 +952,7 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- AddAnyItemsWithTypeValidation empty", actual)
 }
 
-func Test_Cov9_DynamicCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
+func Test_DynamicCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	strType := reflect.TypeOf("")
@@ -976,7 +976,7 @@ func Test_Cov9_DynamicCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 // MapAnyItems.Diff / DiffRaw / HashmapDiffUsingRaw
 // ═══════════════════════════════════════════
 
-func Test_Cov9_MapAnyItems_Diff(t *testing.T) {
+func Test_MapAnyItems_Diff(t *testing.T) {
 	// Arrange
 	left := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	right := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 3})
@@ -990,7 +990,7 @@ func Test_Cov9_MapAnyItems_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Diff", actual)
 }
 
-func Test_Cov9_MapAnyItems_DiffRaw(t *testing.T) {
+func Test_MapAnyItems_DiffRaw(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	diffMap := m.DiffRaw(true, map[string]any{"a": 1, "b": 3})
@@ -1003,7 +1003,7 @@ func Test_Cov9_MapAnyItems_DiffRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- DiffRaw", actual)
 }
 
-func Test_Cov9_MapAnyItems_HashmapDiffUsingRaw(t *testing.T) {
+func Test_MapAnyItems_HashmapDiffUsingRaw(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	diff := m.HashmapDiffUsingRaw(true, map[string]any{"a": 1})
@@ -1016,7 +1016,7 @@ func Test_Cov9_MapAnyItems_HashmapDiffUsingRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- HashmapDiffUsingRaw no diff", actual)
 }
 
-func Test_Cov9_MapAnyItems_IsRawEqual(t *testing.T) {
+func Test_MapAnyItems_IsRawEqual(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -1034,7 +1034,7 @@ func Test_Cov9_MapAnyItems_IsRawEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsRawEqual", actual)
 }
 
-func Test_Cov9_MapAnyItems_MapStringAnyDiff(t *testing.T) {
+func Test_MapAnyItems_MapStringAnyDiff(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	diff := m.MapStringAnyDiff()
@@ -1047,7 +1047,7 @@ func Test_Cov9_MapAnyItems_MapStringAnyDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- MapStringAnyDiff", actual)
 }
 
-func Test_Cov9_MapAnyItems_DiffJsonMessage(t *testing.T) {
+func Test_MapAnyItems_DiffJsonMessage(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	msg := m.DiffJsonMessage(true, map[string]any{"a": 2})
@@ -1060,7 +1060,7 @@ func Test_Cov9_MapAnyItems_DiffJsonMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- DiffJsonMessage", actual)
 }
 
-func Test_Cov9_MapAnyItems_ShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItems_ShouldDiffMessage(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	msg := m.ShouldDiffMessage(true, "test", map[string]any{"a": 2})
@@ -1073,7 +1073,7 @@ func Test_Cov9_MapAnyItems_ShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ShouldDiffMessage", actual)
 }
 
-func Test_Cov9_MapAnyItems_LogShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItems_LogShouldDiffMessage(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	msg := m.LogShouldDiffMessage(true, "test", map[string]any{"a": 2})
@@ -1086,7 +1086,7 @@ func Test_Cov9_MapAnyItems_LogShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- LogShouldDiffMessage", actual)
 }
 
-func Test_Cov9_MapAnyItems_ToStringsSliceOfDiffMap(t *testing.T) {
+func Test_MapAnyItems_ToStringsSliceOfDiffMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	diffMap := map[string]any{"a": 2}
@@ -1104,7 +1104,7 @@ func Test_Cov9_MapAnyItems_ToStringsSliceOfDiffMap(t *testing.T) {
 // MapAnyItemDiff — methods
 // ═══════════════════════════════════════════
 
-func Test_Cov9_MapAnyItemDiff_Basic(t *testing.T) {
+func Test_MapAnyItemDiff_Basic(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1, "b": 2})
 	var nilDiff *coredynamic.MapAnyItemDiff
@@ -1127,7 +1127,7 @@ func Test_Cov9_MapAnyItemDiff_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Basic", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
+func Test_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"b": 2, "a": 1})
 	sorted := diff.AllKeysSorted()
@@ -1146,7 +1146,7 @@ func Test_Cov9_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- AllKeysSorted", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_IsRawEqual(t *testing.T) {
+func Test_MapAnyItemDiff_IsRawEqual(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 
@@ -1164,7 +1164,7 @@ func Test_Cov9_MapAnyItemDiff_IsRawEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- IsRawEqual", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
+func Test_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 
@@ -1182,7 +1182,7 @@ func Test_Cov9_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- HasAnyChanges", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_DiffRaw(t *testing.T) {
+func Test_MapAnyItemDiff_DiffRaw(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	rawDiff := diff.DiffRaw(true, map[string]any{"a": 2})
@@ -1195,7 +1195,7 @@ func Test_Cov9_MapAnyItemDiff_DiffRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- DiffRaw", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_HashmapDiffUsingRaw(t *testing.T) {
+func Test_MapAnyItemDiff_HashmapDiffUsingRaw(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	hashDiff := diff.HashmapDiffUsingRaw(true, map[string]any{"a": 1})
@@ -1208,7 +1208,7 @@ func Test_Cov9_MapAnyItemDiff_HashmapDiffUsingRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns empty -- HashmapDiffUsingRaw no diff", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_MapAnyItems(t *testing.T) {
+func Test_MapAnyItemDiff_MapAnyItems(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	m := diff.MapAnyItems()
@@ -1227,7 +1227,7 @@ func Test_Cov9_MapAnyItemDiff_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- MapAnyItems", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
+func Test_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	rawDiffer := diff.RawMapDiffer()
@@ -1240,7 +1240,7 @@ func Test_Cov9_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- RawMapDiffer", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_Raw(t *testing.T) {
+func Test_MapAnyItemDiff_Raw(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	raw := diff.Raw()
@@ -1253,7 +1253,7 @@ func Test_Cov9_MapAnyItemDiff_Raw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Raw", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_Clear(t *testing.T) {
+func Test_MapAnyItemDiff_Clear(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1, "b": 2})
 	cleared := diff.Clear()
@@ -1274,7 +1274,7 @@ func Test_Cov9_MapAnyItemDiff_Clear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Clear", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_Json(t *testing.T) {
+func Test_MapAnyItemDiff_Json(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	jsonResult := diff.Json()
@@ -1297,7 +1297,7 @@ func Test_Cov9_MapAnyItemDiff_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Json", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
+func Test_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	msg := diff.DiffJsonMessage(true, map[string]any{"a": 2})
@@ -1310,7 +1310,7 @@ func Test_Cov9_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- DiffJsonMessage", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	msg := diff.ShouldDiffMessage(true, "test", map[string]any{"a": 2})
@@ -1323,7 +1323,7 @@ func Test_Cov9_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- ShouldDiffMessage", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_LogShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItemDiff_LogShouldDiffMessage(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	msg := diff.LogShouldDiffMessage(true, "test", map[string]any{"a": 2})
@@ -1336,7 +1336,7 @@ func Test_Cov9_MapAnyItemDiff_LogShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- LogShouldDiffMessage", actual)
 }
 
-func Test_Cov9_MapAnyItemDiff_ToStringsSliceOfDiffMap(t *testing.T) {
+func Test_MapAnyItemDiff_ToStringsSliceOfDiffMap(t *testing.T) {
 	// Arrange
 	diff := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	strs := diff.ToStringsSliceOfDiffMap(map[string]any{"a": 2})
@@ -1353,7 +1353,7 @@ func Test_Cov9_MapAnyItemDiff_ToStringsSliceOfDiffMap(t *testing.T) {
 // ReflectTypeValidation standalone
 // ═══════════════════════════════════════════
 
-func Test_Cov9_ReflectTypeValidation_Valid(t *testing.T) {
+func Test_ReflectTypeValidation_Valid(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	err := coredynamic.ReflectTypeValidation(false, strType, "hello")
@@ -1366,7 +1366,7 @@ func Test_Cov9_ReflectTypeValidation_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation returns non-empty -- valid", actual)
 }
 
-func Test_Cov9_ReflectTypeValidation_TypeMismatch(t *testing.T) {
+func Test_ReflectTypeValidation_TypeMismatch(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	err := coredynamic.ReflectTypeValidation(false, strType, 42)
@@ -1379,7 +1379,7 @@ func Test_Cov9_ReflectTypeValidation_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation returns non-empty -- type mismatch", actual)
 }
 
-func Test_Cov9_ReflectTypeValidation_NilNotAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilNotAllowed(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	err := coredynamic.ReflectTypeValidation(true, strType, nil)
@@ -1392,7 +1392,7 @@ func Test_Cov9_ReflectTypeValidation_NilNotAllowed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation returns nil -- nil not allowed", actual)
 }
 
-func Test_Cov9_ReflectTypeValidation_NilAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilAllowed(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	err := coredynamic.ReflectTypeValidation(false, strType, nil)
@@ -1409,7 +1409,7 @@ func Test_Cov9_ReflectTypeValidation_NilAllowed(t *testing.T) {
 // AnyCollection.ReflectSetAt
 // ═══════════════════════════════════════════
 
-func Test_Cov9_AnyCollection_ReflectSetAt(t *testing.T) {
+func Test_AnyCollection_ReflectSetAt(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(5)
 	ac.Add("hello")

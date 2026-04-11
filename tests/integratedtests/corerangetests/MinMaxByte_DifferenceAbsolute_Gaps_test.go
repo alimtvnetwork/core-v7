@@ -19,7 +19,7 @@ import (
 //   <= MaxInt32. Dead code.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov7_MinMaxByte_DifferenceAbsolute(t *testing.T) {
+func Test_MinMaxByte_DifferenceAbsolute(t *testing.T) {
 	// Arrange
 	mmb := corerange.MinMaxByte{
 		Min: 10,
@@ -35,7 +35,7 @@ func Test_Cov7_MinMaxByte_DifferenceAbsolute(t *testing.T) {
 	})
 }
 
-func Test_Cov7_Within_StringRangeUint32_Valid(t *testing.T) {
+func Test_Within_StringRangeUint32_Valid(t *testing.T) {
 	// Arrange & Act
 	val, isInRange := corerange.Within.StringRangeUint32("100")
 

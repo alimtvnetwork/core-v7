@@ -12,7 +12,7 @@ import (
 // ResultsPtrCollection — Length / IsEmpty / HasAnyItem
 // =============================================================================
 
-func Test_Cov46_PtrColl_NilLength(t *testing.T) {
+func Test_PtrColl_NilLength(t *testing.T) {
 	tc := ptrCollNilLengthTestCase
 
 	// Arrange
@@ -27,7 +27,7 @@ func Test_Cov46_PtrColl_NilLength(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_IsEmpty(t *testing.T) {
+func Test_PtrColl_IsEmpty(t *testing.T) {
 	tc := ptrCollIsEmptyTestCase
 
 	// Arrange
@@ -42,7 +42,7 @@ func Test_Cov46_PtrColl_IsEmpty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_HasAnyItem(t *testing.T) {
+func Test_PtrColl_HasAnyItem(t *testing.T) {
 	tc := ptrCollHasAnyItemTestCase
 
 	// Arrange
@@ -62,7 +62,7 @@ func Test_Cov46_PtrColl_HasAnyItem(t *testing.T) {
 // ResultsPtrCollection — FirstOrDefault / LastOrDefault
 // =============================================================================
 
-func Test_Cov46_PtrColl_FirstOrDefault_Empty(t *testing.T) {
+func Test_PtrColl_FirstOrDefault_Empty(t *testing.T) {
 	tc := ptrCollFirstOrDefaultEmptyTestCase
 
 	// Arrange
@@ -77,7 +77,7 @@ func Test_Cov46_PtrColl_FirstOrDefault_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_FirstOrDefault_Valid(t *testing.T) {
+func Test_PtrColl_FirstOrDefault_Valid(t *testing.T) {
 	tc := ptrCollFirstOrDefaultValidTestCase
 
 	// Arrange
@@ -93,7 +93,7 @@ func Test_Cov46_PtrColl_FirstOrDefault_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_LastOrDefault_Empty(t *testing.T) {
+func Test_PtrColl_LastOrDefault_Empty(t *testing.T) {
 	tc := ptrCollLastOrDefaultEmptyTestCase
 
 	// Arrange
@@ -108,7 +108,7 @@ func Test_Cov46_PtrColl_LastOrDefault_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_LastOrDefault_Valid(t *testing.T) {
+func Test_PtrColl_LastOrDefault_Valid(t *testing.T) {
 	tc := ptrCollLastOrDefaultValidTestCase
 
 	// Arrange
@@ -128,7 +128,7 @@ func Test_Cov46_PtrColl_LastOrDefault_Valid(t *testing.T) {
 // ResultsPtrCollection — Take / Limit / Skip
 // =============================================================================
 
-func Test_Cov46_PtrColl_Take_Empty(t *testing.T) {
+func Test_PtrColl_Take_Empty(t *testing.T) {
 	tc := ptrCollTakeEmptyTestCase
 
 	// Arrange
@@ -144,7 +144,7 @@ func Test_Cov46_PtrColl_Take_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Take_Valid(t *testing.T) {
+func Test_PtrColl_Take_Valid(t *testing.T) {
 	tc := ptrCollTakeValidTestCase
 
 	// Arrange
@@ -161,7 +161,7 @@ func Test_Cov46_PtrColl_Take_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Limit_TakeAll(t *testing.T) {
+func Test_PtrColl_Limit_TakeAll(t *testing.T) {
 	tc := ptrCollLimitTakeAllTestCase
 
 	// Arrange
@@ -178,7 +178,7 @@ func Test_Cov46_PtrColl_Limit_TakeAll(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Skip_Empty(t *testing.T) {
+func Test_PtrColl_Skip_Empty(t *testing.T) {
 	tc := ptrCollSkipEmptyTestCase
 
 	// Arrange
@@ -194,7 +194,7 @@ func Test_Cov46_PtrColl_Skip_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Skip_Valid(t *testing.T) {
+func Test_PtrColl_Skip_Valid(t *testing.T) {
 	tc := ptrCollSkipValidTestCase
 
 	// Arrange
@@ -215,7 +215,7 @@ func Test_Cov46_PtrColl_Skip_Valid(t *testing.T) {
 // ResultsPtrCollection — Add variants
 // =============================================================================
 
-func Test_Cov46_PtrColl_AddSkipOnNil_Nil(t *testing.T) {
+func Test_PtrColl_AddSkipOnNil_Nil(t *testing.T) {
 	tc := ptrCollAddSkipOnNilNilTestCase
 
 	// Arrange
@@ -231,7 +231,7 @@ func Test_Cov46_PtrColl_AddSkipOnNil_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddSkipOnNil_Valid(t *testing.T) {
+func Test_PtrColl_AddSkipOnNil_Valid(t *testing.T) {
 	tc := ptrCollAddSkipOnNilValidTestCase
 
 	// Arrange
@@ -247,7 +247,7 @@ func Test_Cov46_PtrColl_AddSkipOnNil_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddNonNilNonError_Nil(t *testing.T) {
+func Test_PtrColl_AddNonNilNonError_Nil(t *testing.T) {
 	tc := ptrCollAddNonNilNonErrorNilTestCase
 
 	// Arrange
@@ -263,7 +263,7 @@ func Test_Cov46_PtrColl_AddNonNilNonError_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddNonNilNonError_Valid(t *testing.T) {
+func Test_PtrColl_AddNonNilNonError_Valid(t *testing.T) {
 	tc := ptrCollAddNonNilNonErrorValidTestCase
 
 	// Arrange
@@ -279,7 +279,7 @@ func Test_Cov46_PtrColl_AddNonNilNonError_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddResult(t *testing.T) {
+func Test_PtrColl_AddResult(t *testing.T) {
 	tc := ptrCollAddResultTestCase
 
 	// Arrange
@@ -295,7 +295,7 @@ func Test_Cov46_PtrColl_AddResult(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Adds_Nil(t *testing.T) {
+func Test_PtrColl_Adds_Nil(t *testing.T) {
 	tc := ptrCollAddsNilTestCase
 
 	// Arrange
@@ -312,7 +312,7 @@ func Test_Cov46_PtrColl_Adds_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddAny_Nil(t *testing.T) {
+func Test_PtrColl_AddAny_Nil(t *testing.T) {
 	tc := ptrCollAddAnyNilTestCase
 
 	// Arrange
@@ -328,7 +328,7 @@ func Test_Cov46_PtrColl_AddAny_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddAny_Valid(t *testing.T) {
+func Test_PtrColl_AddAny_Valid(t *testing.T) {
 	tc := ptrCollAddAnyValidTestCase
 
 	// Arrange
@@ -344,7 +344,7 @@ func Test_Cov46_PtrColl_AddAny_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddAnyItems_Nil(t *testing.T) {
+func Test_PtrColl_AddAnyItems_Nil(t *testing.T) {
 	tc := ptrCollAddAnyItemsNilTestCase
 
 	// Arrange
@@ -360,7 +360,7 @@ func Test_Cov46_PtrColl_AddAnyItems_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AddResultsCollection_Nil(t *testing.T) {
+func Test_PtrColl_AddResultsCollection_Nil(t *testing.T) {
 	tc := ptrCollAddResultsCollectionNilTestCase
 
 	// Arrange
@@ -380,7 +380,7 @@ func Test_Cov46_PtrColl_AddResultsCollection_Nil(t *testing.T) {
 // ResultsPtrCollection — HasError / AllErrors / GetErrorsStrings
 // =============================================================================
 
-func Test_Cov46_PtrColl_HasError_False(t *testing.T) {
+func Test_PtrColl_HasError_False(t *testing.T) {
 	tc := ptrCollHasErrorFalseTestCase
 
 	// Arrange
@@ -396,7 +396,7 @@ func Test_Cov46_PtrColl_HasError_False(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_HasError_True(t *testing.T) {
+func Test_PtrColl_HasError_True(t *testing.T) {
 	tc := ptrCollHasErrorTrueTestCase
 
 	// Arrange
@@ -412,7 +412,7 @@ func Test_Cov46_PtrColl_HasError_True(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_AllErrors_Empty(t *testing.T) {
+func Test_PtrColl_AllErrors_Empty(t *testing.T) {
 	tc := ptrCollAllErrorsEmptyTestCase
 
 	// Arrange
@@ -429,7 +429,7 @@ func Test_Cov46_PtrColl_AllErrors_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_GetErrorsStrings_Empty(t *testing.T) {
+func Test_PtrColl_GetErrorsStrings_Empty(t *testing.T) {
 	tc := ptrCollGetErrorsStringsEmptyTestCase
 
 	// Arrange
@@ -444,7 +444,7 @@ func Test_Cov46_PtrColl_GetErrorsStrings_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_GetErrorsAsSingleString(t *testing.T) {
+func Test_PtrColl_GetErrorsAsSingleString(t *testing.T) {
 	tc := ptrCollGetErrorsAsSingleStringTestCase
 
 	// Arrange
@@ -465,7 +465,7 @@ func Test_Cov46_PtrColl_GetErrorsAsSingleString(t *testing.T) {
 // ResultsPtrCollection — GetAtSafe / Clear / Dispose / Clone / GetStrings
 // =============================================================================
 
-func Test_Cov46_PtrColl_GetAtSafe_OutOfRange(t *testing.T) {
+func Test_PtrColl_GetAtSafe_OutOfRange(t *testing.T) {
 	tc := ptrCollGetAtSafeOutOfRangeTestCase
 
 	// Arrange
@@ -480,7 +480,7 @@ func Test_Cov46_PtrColl_GetAtSafe_OutOfRange(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_GetAtSafeUsingLength_Out(t *testing.T) {
+func Test_PtrColl_GetAtSafeUsingLength_Out(t *testing.T) {
 	tc := ptrCollGetAtSafeUsingLengthOutTestCase
 
 	// Arrange
@@ -495,7 +495,7 @@ func Test_Cov46_PtrColl_GetAtSafeUsingLength_Out(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Clear(t *testing.T) {
+func Test_PtrColl_Clear(t *testing.T) {
 	tc := ptrCollClearTestCase
 
 	// Arrange
@@ -512,7 +512,7 @@ func Test_Cov46_PtrColl_Clear(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Clear_Nil(t *testing.T) {
+func Test_PtrColl_Clear_Nil(t *testing.T) {
 	tc := ptrCollClearNilTestCase
 
 	// Arrange
@@ -528,7 +528,7 @@ func Test_Cov46_PtrColl_Clear_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Dispose(t *testing.T) {
+func Test_PtrColl_Dispose(t *testing.T) {
 	tc := ptrCollDisposeTestCase
 
 	// Arrange
@@ -545,7 +545,7 @@ func Test_Cov46_PtrColl_Dispose(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_GetStrings_Empty(t *testing.T) {
+func Test_PtrColl_GetStrings_Empty(t *testing.T) {
 	tc := ptrCollGetStringsEmptyTestCase
 
 	// Arrange
@@ -560,7 +560,7 @@ func Test_Cov46_PtrColl_GetStrings_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_GetPagesSize_Zero(t *testing.T) {
+func Test_PtrColl_GetPagesSize_Zero(t *testing.T) {
 	tc := ptrCollGetPagesSizeZeroTestCase
 
 	// Arrange
@@ -575,7 +575,7 @@ func Test_Cov46_PtrColl_GetPagesSize_Zero(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Clone_Nil(t *testing.T) {
+func Test_PtrColl_Clone_Nil(t *testing.T) {
 	tc := ptrCollCloneNilTestCase
 
 	// Arrange
@@ -591,7 +591,7 @@ func Test_Cov46_PtrColl_Clone_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_PtrColl_Json(t *testing.T) {
+func Test_PtrColl_Json(t *testing.T) {
 	tc := ptrCollJsonTestCase
 
 	// Arrange
@@ -612,7 +612,7 @@ func Test_Cov46_PtrColl_Json(t *testing.T) {
 // MapResults — Length / IsEmpty / HasAnyItem
 // =============================================================================
 
-func Test_Cov46_MapResults_NilLength(t *testing.T) {
+func Test_MapResults_NilLength(t *testing.T) {
 	tc := mapResultsNilLengthTestCase
 
 	// Arrange
@@ -627,7 +627,7 @@ func Test_Cov46_MapResults_NilLength(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_IsEmpty(t *testing.T) {
+func Test_MapResults_IsEmpty(t *testing.T) {
 	tc := mapResultsIsEmptyTestCase
 
 	// Arrange
@@ -642,7 +642,7 @@ func Test_Cov46_MapResults_IsEmpty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_HasAnyItem(t *testing.T) {
+func Test_MapResults_HasAnyItem(t *testing.T) {
 	tc := mapResultsHasAnyItemTestCase
 
 	// Arrange
@@ -662,7 +662,7 @@ func Test_Cov46_MapResults_HasAnyItem(t *testing.T) {
 // MapResults — GetByKey / AddSkipOnNil / HasError / AllErrors
 // =============================================================================
 
-func Test_Cov46_MapResults_GetByKey_Missing(t *testing.T) {
+func Test_MapResults_GetByKey_Missing(t *testing.T) {
 	tc := mapResultsGetByKeyMissingTestCase
 
 	// Arrange
@@ -677,7 +677,7 @@ func Test_Cov46_MapResults_GetByKey_Missing(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_GetByKey_Found(t *testing.T) {
+func Test_MapResults_GetByKey_Found(t *testing.T) {
 	tc := mapResultsGetByKeyFoundTestCase
 
 	// Arrange
@@ -693,7 +693,7 @@ func Test_Cov46_MapResults_GetByKey_Found(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddSkipOnNil_Nil(t *testing.T) {
+func Test_MapResults_AddSkipOnNil_Nil(t *testing.T) {
 	tc := mapResultsAddSkipOnNilNilTestCase
 
 	// Arrange
@@ -709,7 +709,7 @@ func Test_Cov46_MapResults_AddSkipOnNil_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddSkipOnNil_Valid(t *testing.T) {
+func Test_MapResults_AddSkipOnNil_Valid(t *testing.T) {
 	tc := mapResultsAddSkipOnNilValidTestCase
 
 	// Arrange
@@ -726,7 +726,7 @@ func Test_Cov46_MapResults_AddSkipOnNil_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_HasError_False(t *testing.T) {
+func Test_MapResults_HasError_False(t *testing.T) {
 	tc := mapResultsHasErrorFalseTestCase
 
 	// Arrange
@@ -742,7 +742,7 @@ func Test_Cov46_MapResults_HasError_False(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AllErrors_Empty(t *testing.T) {
+func Test_MapResults_AllErrors_Empty(t *testing.T) {
 	tc := mapResultsAllErrorsEmptyTestCase
 
 	// Arrange
@@ -759,7 +759,7 @@ func Test_Cov46_MapResults_AllErrors_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_GetErrorsStrings_Empty(t *testing.T) {
+func Test_MapResults_GetErrorsStrings_Empty(t *testing.T) {
 	tc := mapResultsGetErrorsStringsEmptyTestCase
 
 	// Arrange
@@ -778,7 +778,7 @@ func Test_Cov46_MapResults_GetErrorsStrings_Empty(t *testing.T) {
 // MapResults — Add / AddPtr / AddAny / AddAnySkipOnNil
 // =============================================================================
 
-func Test_Cov46_MapResults_Add(t *testing.T) {
+func Test_MapResults_Add(t *testing.T) {
 	tc := mapResultsAddTestCase
 
 	// Arrange
@@ -794,7 +794,7 @@ func Test_Cov46_MapResults_Add(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddPtr_Nil(t *testing.T) {
+func Test_MapResults_AddPtr_Nil(t *testing.T) {
 	tc := mapResultsAddPtrNilTestCase
 
 	// Arrange
@@ -810,7 +810,7 @@ func Test_Cov46_MapResults_AddPtr_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddAny_Nil(t *testing.T) {
+func Test_MapResults_AddAny_Nil(t *testing.T) {
 	tc := mapResultsAddAnyNilTestCase
 
 	// Arrange
@@ -826,7 +826,7 @@ func Test_Cov46_MapResults_AddAny_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddAny_Valid(t *testing.T) {
+func Test_MapResults_AddAny_Valid(t *testing.T) {
 	tc := mapResultsAddAnyValidTestCase
 
 	// Arrange
@@ -843,7 +843,7 @@ func Test_Cov46_MapResults_AddAny_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
+func Test_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
 	tc := mapResultsAddAnySkipOnNilNilTestCase
 
 	// Arrange
@@ -864,7 +864,7 @@ func Test_Cov46_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
 // MapResults — AllKeys / AllKeysSorted / AllValues / Clear / Dispose
 // =============================================================================
 
-func Test_Cov46_MapResults_AllKeys_Empty(t *testing.T) {
+func Test_MapResults_AllKeys_Empty(t *testing.T) {
 	tc := mapResultsAllKeysEmptyTestCase
 
 	// Arrange
@@ -879,7 +879,7 @@ func Test_Cov46_MapResults_AllKeys_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AllKeysSorted_Empty(t *testing.T) {
+func Test_MapResults_AllKeysSorted_Empty(t *testing.T) {
 	tc := mapResultsAllKeysSortedEmptyTestCase
 
 	// Arrange
@@ -894,7 +894,7 @@ func Test_Cov46_MapResults_AllKeysSorted_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AllValues_Empty(t *testing.T) {
+func Test_MapResults_AllValues_Empty(t *testing.T) {
 	tc := mapResultsAllValuesEmptyTestCase
 
 	// Arrange
@@ -909,7 +909,7 @@ func Test_Cov46_MapResults_AllValues_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_Clear(t *testing.T) {
+func Test_MapResults_Clear(t *testing.T) {
 	tc := mapResultsClearTestCase
 
 	// Arrange
@@ -926,7 +926,7 @@ func Test_Cov46_MapResults_Clear(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_Clear_Nil(t *testing.T) {
+func Test_MapResults_Clear_Nil(t *testing.T) {
 	tc := mapResultsClearNilTestCase
 
 	// Arrange
@@ -942,7 +942,7 @@ func Test_Cov46_MapResults_Clear_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_Dispose(t *testing.T) {
+func Test_MapResults_Dispose(t *testing.T) {
 	tc := mapResultsDisposeTestCase
 
 	// Arrange
@@ -959,7 +959,7 @@ func Test_Cov46_MapResults_Dispose(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_Json(t *testing.T) {
+func Test_MapResults_Json(t *testing.T) {
 	tc := mapResultsJsonTestCase
 
 	// Arrange
@@ -976,7 +976,7 @@ func Test_Cov46_MapResults_Json(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_GetPagesSize_Zero(t *testing.T) {
+func Test_MapResults_GetPagesSize_Zero(t *testing.T) {
 	tc := mapResultsGetPagesSizeZeroTestCase
 
 	// Arrange
@@ -991,7 +991,7 @@ func Test_Cov46_MapResults_GetPagesSize_Zero(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddMapResults_Nil(t *testing.T) {
+func Test_MapResults_AddMapResults_Nil(t *testing.T) {
 	tc := mapResultsAddMapResultsNilTestCase
 
 	// Arrange
@@ -1007,7 +1007,7 @@ func Test_Cov46_MapResults_AddMapResults_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddMapAnyItems_Empty(t *testing.T) {
+func Test_MapResults_AddMapAnyItems_Empty(t *testing.T) {
 	tc := mapResultsAddMapAnyItemsEmptyTestCase
 
 	// Arrange
@@ -1023,7 +1023,7 @@ func Test_Cov46_MapResults_AddMapAnyItems_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_ResultCollection_Empty(t *testing.T) {
+func Test_MapResults_ResultCollection_Empty(t *testing.T) {
 	tc := mapResultsResultCollectionEmptyTestCase
 
 	// Arrange
@@ -1038,7 +1038,7 @@ func Test_Cov46_MapResults_ResultCollection_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AllResultsCollection_Empty(t *testing.T) {
+func Test_MapResults_AllResultsCollection_Empty(t *testing.T) {
 	tc := mapResultsAllResultsCollectionEmptyTestCase
 
 	// Arrange
@@ -1053,7 +1053,7 @@ func Test_Cov46_MapResults_AllResultsCollection_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_GetStrings_Empty(t *testing.T) {
+func Test_MapResults_GetStrings_Empty(t *testing.T) {
 	tc := mapResultsGetStringsEmptyTestCase
 
 	// Arrange
@@ -1068,7 +1068,7 @@ func Test_Cov46_MapResults_GetStrings_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddJsoner_Nil(t *testing.T) {
+func Test_MapResults_AddJsoner_Nil(t *testing.T) {
 	tc := mapResultsAddJsonerNilTestCase
 
 	// Arrange
@@ -1084,7 +1084,7 @@ func Test_Cov46_MapResults_AddJsoner_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddNonEmptyNonErrorPtr_Nil(t *testing.T) {
+func Test_MapResults_AddNonEmptyNonErrorPtr_Nil(t *testing.T) {
 	tc := mapResultsAddNonEmptyNonErrorPtrNilTestCase
 
 	// Arrange
@@ -1100,7 +1100,7 @@ func Test_Cov46_MapResults_AddNonEmptyNonErrorPtr_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_GetNewMapUsingKeys_Empty(t *testing.T) {
+func Test_MapResults_GetNewMapUsingKeys_Empty(t *testing.T) {
 	tc := mapResultsGetNewMapUsingKeysEmptyTestCase
 
 	// Arrange
@@ -1116,7 +1116,7 @@ func Test_Cov46_MapResults_GetNewMapUsingKeys_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddMapResultsUsingCloneOption_Empty(t *testing.T) {
+func Test_MapResults_AddMapResultsUsingCloneOption_Empty(t *testing.T) {
 	tc := mapResultsAddMapResultsUsingCloneOptionEmptyTestCase
 
 	// Arrange
@@ -1132,7 +1132,7 @@ func Test_Cov46_MapResults_AddMapResultsUsingCloneOption_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov46_MapResults_AddKeysWithJsoners_Nil(t *testing.T) {
+func Test_MapResults_AddKeysWithJsoners_Nil(t *testing.T) {
 	tc := mapResultsAddKeysWithJsonersNilTestCase
 
 	// Arrange
