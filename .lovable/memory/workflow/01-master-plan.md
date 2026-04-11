@@ -102,5 +102,5 @@
 2. **Compile-first gate.** `./run.ps1 PC` before `TC`.
 3. **Version bump on every change.** (S-015)
 4. **`.release` folder is off-limits.** Never modify.
-5. **Test naming**: `Test_Cov[N]_{Method}_{Context}`
+5. **Test naming**: `Test_{TypeOrFunc}_{Scenario}_{ExpectedOutcome}` (no `Cov`/`I12` prefixes)
 6. **Assertion style**: `args.Map` + `ShouldBeEqual`
