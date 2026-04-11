@@ -26,18 +26,14 @@
 - **dependencies**: External consumer audit (user must grep across auk-go repos)
 - **completion notes**: Detailed 349-line audit plan created but execution not started.
 
-### S-013: Sync.Mutex → sync.RWMutex Audit
+### ~~S-013: Sync.Mutex → sync.RWMutex Audit~~ → **CLOSED (Complete)**
 - **suggestionId**: S-013
 - **createdAt**: 2026-03-21
 - **source**: Lovable (codebase audit)
 - **affectedProject**: core
-- **description**: 27 `sync.Mutex` usages found. Read-heavy collection types (Collection, Hashmap, Hashset) may benefit from `sync.RWMutex` for concurrent read performance.
-- **rationale**: `RWMutex` allows multiple concurrent readers, improving throughput for read-heavy workloads.
-- **proposed change**: Audit each mutex usage. Migrate to `RWMutex` where read methods (Get, Contains, Len, IsEmpty) dominate.
-- **acceptance criteria**: Identified candidates migrated. Benchmark showing improvement for read-heavy scenarios.
-- **status**: open (depends on S-010 benchmarks — now complete)
-- **dependencies**: S-010 (✅ done — benchmarks available as baseline)
-- **completion notes**: —
+- **description**: 27 `sync.Mutex` usages audited. 16 collection/data types migrated to `sync.RWMutex` with 84 read methods converted to `RLock()`. 3 global mutex vars kept as `sync.Mutex` (write-only guards).
+- **status**: **done** (closed 2026-04-11)
+- **completion notes**: Migrated: corestr (Collection, Hashmap, Hashset, LinkedList, CharCollectionMap, CharHashsetMap, CollectionsOfCollection, LinkedCollections), coregeneric (Collection, Hashmap, Hashset, LinkedList), coredynamic (Collection), coreonce (StringsOnce, MapStringStringOnce), corepayload (TypedPayloadCollection). Kept Mutex: chmodhelper/vars.go, mutexbykey/mutexMap.go, regexnew/vars.go.
 
 ### S-015: Version Bump Discipline
 - **suggestionId**: S-015
