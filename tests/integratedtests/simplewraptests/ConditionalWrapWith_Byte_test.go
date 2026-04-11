@@ -9,7 +9,7 @@ import (
 
 // ── ConditionalWrapWith (startChar byte, input string, endChar byte) ──
 
-func Test_Cov5_ConditionalWrapWith_Wrapped(t *testing.T) {
+func Test_ConditionalWrapWith_Wrapped(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('[', "x", ']')}
 
@@ -18,7 +18,7 @@ func Test_Cov5_ConditionalWrapWith_Wrapped(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith wraps -- not already wrapped", actual)
 }
 
-func Test_Cov5_ConditionalWrapWith_AlreadyWrapped(t *testing.T) {
+func Test_ConditionalWrapWith_AlreadyWrapped(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('[', "[x]", ']')}
 
@@ -27,7 +27,7 @@ func Test_Cov5_ConditionalWrapWith_AlreadyWrapped(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith no-op -- already wrapped", actual)
 }
 
-func Test_Cov5_ConditionalWrapWith_Empty(t *testing.T) {
+func Test_ConditionalWrapWith_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "", ']')
 
@@ -41,7 +41,7 @@ func Test_Cov5_ConditionalWrapWith_Empty(t *testing.T) {
 
 // ── MsgWrapMsg ──
 
-func Test_Cov5_MsgWrapMsg(t *testing.T) {
+func Test_MsgWrapMsg(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgWrapMsg("hello", "world")
 
@@ -55,7 +55,7 @@ func Test_Cov5_MsgWrapMsg(t *testing.T) {
 
 // ── CurlyWrapOption (isSkipIfExists bool, source any) ──
 
-func Test_Cov5_CurlyWrapOption_NonEmpty(t *testing.T) {
+func Test_CurlyWrapOption_NonEmpty(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrapOption(false, "hello")
 
@@ -67,7 +67,7 @@ func Test_Cov5_CurlyWrapOption_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption non-empty -- wrapped", actual)
 }
 
-func Test_Cov5_CurlyWrapOption_SkipIfExists(t *testing.T) {
+func Test_CurlyWrapOption_SkipIfExists(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrapOption(true, "{hello}")
 
@@ -79,7 +79,7 @@ func Test_Cov5_CurlyWrapOption_SkipIfExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption skip if exists -- no double wrap", actual)
 }
 
-func Test_Cov5_CurlyWrapOption_Empty(t *testing.T) {
+func Test_CurlyWrapOption_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrapOption(false, "")
 
@@ -93,7 +93,7 @@ func Test_Cov5_CurlyWrapOption_Empty(t *testing.T) {
 
 // ── WithBracketsQuotation ──
 
-func Test_Cov5_WithBracketsQuotation(t *testing.T) {
+func Test_WithBracketsQuotation(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithBracketsQuotation("x")
 
@@ -107,7 +107,7 @@ func Test_Cov5_WithBracketsQuotation(t *testing.T) {
 
 // ── WithCurlyQuotation ──
 
-func Test_Cov5_WithCurlyQuotation(t *testing.T) {
+func Test_WithCurlyQuotation(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithCurlyQuotation("x")
 
@@ -121,7 +121,7 @@ func Test_Cov5_WithCurlyQuotation(t *testing.T) {
 
 // ── WithParenthesisQuotation ──
 
-func Test_Cov5_WithParenthesisQuotation(t *testing.T) {
+func Test_WithParenthesisQuotation(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithParenthesisQuotation("x")
 
@@ -135,7 +135,7 @@ func Test_Cov5_WithParenthesisQuotation(t *testing.T) {
 
 // ── MsgCsvItems ──
 
-func Test_Cov5_MsgCsvItems_Empty(t *testing.T) {
+func Test_MsgCsvItems_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgCsvItems("msg")
 

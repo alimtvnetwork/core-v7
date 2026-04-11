@@ -7,7 +7,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Cov_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
+func Test_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(true, "hello", "\"already\"")
 
@@ -19,7 +19,7 @@ func Test_Cov_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_DoubleQuoteWrapElements_NoSkip(t *testing.T) {
+func Test_DoubleQuoteWrapElements_NoSkip(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false, "hello")
 
@@ -31,7 +31,7 @@ func Test_Cov_DoubleQuoteWrapElements_NoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_DoubleQuoteWrapElements_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false)
 
@@ -43,7 +43,7 @@ func Test_Cov_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_Cov_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
 
@@ -55,7 +55,7 @@ func Test_Cov_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes()
 

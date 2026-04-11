@@ -18,7 +18,7 @@ import (
 
 // ── non-recursive valid ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -50,7 +50,7 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 
 // ── non-recursive with error ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -77,7 +77,7 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T)
 
 // ── recursive valid ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -107,7 +107,7 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 
 // ── recursive error ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -134,7 +134,7 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
 
 // ── recursive continue-on-error ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveContinueOnError(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveContinueOnError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -163,7 +163,7 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveContinueOnError(t *tes
 
 // ── non-recursive continue-on-error ──
 
-func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveContinueOnError(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveContinueOnError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}

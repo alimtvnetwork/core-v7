@@ -12,7 +12,7 @@ import (
 
 // ── SimpleFileReaderWriter.Write ──
 
-func Test_Cov12_Write_Error(t *testing.T) {
+func Test_Write_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -29,7 +29,7 @@ func Test_Cov12_Write_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_Write_Success(t *testing.T) {
+func Test_Write_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_write")
 	os.MkdirAll(tmpDir, 0755)
@@ -48,7 +48,7 @@ func Test_Cov12_Write_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.WritePath ──
 
-func Test_Cov12_WritePath_Error(t *testing.T) {
+func Test_WritePath_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -65,7 +65,7 @@ func Test_Cov12_WritePath_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_WritePath_Success(t *testing.T) {
+func Test_WritePath_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writepath")
 	os.MkdirAll(tmpDir, 0755)
@@ -85,7 +85,7 @@ func Test_Cov12_WritePath_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.WriteRelativePath ──
 
-func Test_Cov12_WriteRelativePath_Error(t *testing.T) {
+func Test_WriteRelativePath_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -102,7 +102,7 @@ func Test_Cov12_WriteRelativePath_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_WriteRelativePath_Success(t *testing.T) {
+func Test_WriteRelativePath_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writerel")
 	os.MkdirAll(tmpDir, 0755)
@@ -121,7 +121,7 @@ func Test_Cov12_WriteRelativePath_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.WriteString ──
 
-func Test_Cov12_WriteString_Error(t *testing.T) {
+func Test_WriteString_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -138,7 +138,7 @@ func Test_Cov12_WriteString_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_WriteString_Success(t *testing.T) {
+func Test_WriteString_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writestr")
 	os.MkdirAll(tmpDir, 0755)
@@ -157,7 +157,7 @@ func Test_Cov12_WriteString_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.WriteAny ──
 
-func Test_Cov12_WriteAny_Error(t *testing.T) {
+func Test_WriteAny_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -176,7 +176,7 @@ func Test_Cov12_WriteAny_Error(t *testing.T) {
 
 // ── SimpleFileReaderWriter.Read ──
 
-func Test_Cov12_Read_Error(t *testing.T) {
+func Test_Read_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -193,7 +193,7 @@ func Test_Cov12_Read_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_Read_Success(t *testing.T) {
+func Test_Read_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_read")
 	os.MkdirAll(tmpDir, 0755)
@@ -217,7 +217,7 @@ func Test_Cov12_Read_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.ReadMust ──
 
-func Test_Cov12_ReadMust_Panic(t *testing.T) {
+func Test_ReadMust_Panic(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -239,7 +239,7 @@ func Test_Cov12_ReadMust_Panic(t *testing.T) {
 
 // ── SimpleFileReaderWriter.ReadString ──
 
-func Test_Cov12_ReadString_Error(t *testing.T) {
+func Test_ReadString_Error(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -256,7 +256,7 @@ func Test_Cov12_ReadString_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_ReadString_Success(t *testing.T) {
+func Test_ReadString_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_readstr")
 	os.MkdirAll(tmpDir, 0755)
@@ -277,7 +277,7 @@ func Test_Cov12_ReadString_Success(t *testing.T) {
 
 // ── SimpleFileReaderWriter.ReadStringMust ──
 
-func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
+func Test_ReadStringMust_Panic(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -299,7 +299,7 @@ func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
 
 // ── SimpleFileReaderWriter.GetSet ──
 
-func Test_Cov12_GetSet_GenerateError(t *testing.T) {
+func Test_GetSet_GenerateError(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_getset")
 	os.MkdirAll(tmpDir, 0755)
@@ -322,7 +322,7 @@ func Test_Cov12_GetSet_GenerateError(t *testing.T) {
 
 // ── SimpleFileReaderWriter.errorWrap / errorWrapFilePath ──
 
-func Test_Cov12_ErrorWrap_Nil(t *testing.T) {
+func Test_ErrorWrap_Nil(t *testing.T) {
 	// Arrange
 	// errorWrap with nil returns nil - covered through successful write
 	tmpDir := filepath.Join(os.TempDir(), "cov12_errwrap")
@@ -340,7 +340,7 @@ func Test_Cov12_ErrorWrap_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov12_ErrorWrapFilePath_Nil(t *testing.T) {
+func Test_ErrorWrapFilePath_Nil(t *testing.T) {
 	// Covered through successful WritePath
 }
 
@@ -348,7 +348,7 @@ func Test_Cov12_ErrorWrapFilePath_Nil(t *testing.T) {
 
 // ── SimpleFileReaderWriter.name (unexported, tested indirectly via errorWrap) ──
 
-func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
+func Test_Name_CoveredViaErrorWrap(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -370,7 +370,7 @@ func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
 
 // ── SimpleFileReaderWriter.getOnExist ──
 
-func Test_Cov12_GetOnExist_ReadError(t *testing.T) {
+func Test_GetOnExist_ReadError(t *testing.T) {
 	// Arrange
 	rw := newTestRW("/nonexistent/cov12", "cache.json")
 	// File doesn't exist but Get calls getOnExist only if IsExist
@@ -384,7 +384,7 @@ func Test_Cov12_GetOnExist_ReadError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov12_GetOnExist_Valid(t *testing.T) {
+func Test_GetOnExist_Valid(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_getonexist")
 	os.MkdirAll(tmpDir, 0755)

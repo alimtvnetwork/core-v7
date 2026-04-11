@@ -11,7 +11,7 @@ import (
 
 // ── IsPathExists ──
 
-func Test_Cov_IsPathExists_Valid(t *testing.T) {
+func Test_IsPathExists_Valid(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 
@@ -23,7 +23,7 @@ func Test_Cov_IsPathExists_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathExists returns true -- existing dir", actual)
 }
 
-func Test_Cov_IsPathExists_Invalid(t *testing.T) {
+func Test_IsPathExists_Invalid(t *testing.T) {
 	// Act
 	actual := args.Map{"result": fsinternal.IsPathExists("/nonexistent/path/xyz123")}
 
@@ -32,7 +32,7 @@ func Test_Cov_IsPathExists_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathExists returns false -- nonexistent path", actual)
 }
 
-func Test_Cov_IsPathExists_File(t *testing.T) {
+func Test_IsPathExists_File(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "test.txt")
@@ -48,7 +48,7 @@ func Test_Cov_IsPathExists_File(t *testing.T) {
 
 // ── IsPathInvalid ──
 
-func Test_Cov_IsPathInvalid_Valid(t *testing.T) {
+func Test_IsPathInvalid_Valid(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 
@@ -60,7 +60,7 @@ func Test_Cov_IsPathInvalid_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathInvalid returns false -- existing dir", actual)
 }
 
-func Test_Cov_IsPathInvalid_Invalid(t *testing.T) {
+func Test_IsPathInvalid_Invalid(t *testing.T) {
 	// Act
 	actual := args.Map{"result": fsinternal.IsPathInvalid("/nonexistent/path/xyz123")}
 
@@ -71,7 +71,7 @@ func Test_Cov_IsPathInvalid_Invalid(t *testing.T) {
 
 // ── IsDirectory ──
 
-func Test_Cov_IsDirectory_Dir(t *testing.T) {
+func Test_IsDirectory_Dir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 
@@ -83,7 +83,7 @@ func Test_Cov_IsDirectory_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsDirectory returns true -- existing dir", actual)
 }
 
-func Test_Cov_IsDirectory_File(t *testing.T) {
+func Test_IsDirectory_File(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "test.txt")
@@ -97,7 +97,7 @@ func Test_Cov_IsDirectory_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsDirectory returns false -- file not dir", actual)
 }
 
-func Test_Cov_IsDirectory_Nonexistent(t *testing.T) {
+func Test_IsDirectory_Nonexistent(t *testing.T) {
 	// Act
 	actual := args.Map{"result": fsinternal.IsDirectory("/nonexistent/path/xyz123")}
 
@@ -108,7 +108,7 @@ func Test_Cov_IsDirectory_Nonexistent(t *testing.T) {
 
 // ── GetPathExistStat ──
 
-func Test_Cov_GetPathExistStat_Exists(t *testing.T) {
+func Test_GetPathExistStat_Exists(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	info, isExist, err := fsinternal.GetPathExistStat(tmpDir)
@@ -131,7 +131,7 @@ func Test_Cov_GetPathExistStat_Exists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPathExistStat returns valid info -- existing dir", actual)
 }
 
-func Test_Cov_GetPathExistStat_NotExists(t *testing.T) {
+func Test_GetPathExistStat_NotExists(t *testing.T) {
 	// Arrange
 	_, isExist, _ := fsinternal.GetPathExistStat("/nonexistent/path/xyz123")
 
@@ -143,7 +143,7 @@ func Test_Cov_GetPathExistStat_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPathExistStat returns false -- nonexistent path", actual)
 }
 
-func Test_Cov_GetPathExistStat_File(t *testing.T) {
+func Test_GetPathExistStat_File(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "test.txt")

@@ -14,7 +14,7 @@ import (
 
 // ── GetRecursivePaths — error on invalid root ──
 
-func Test_Cov18_GetRecursivePaths_InvalidRoot(t *testing.T) {
+func Test_GetRecursivePaths_InvalidRoot(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 
@@ -35,7 +35,7 @@ func Test_Cov18_GetRecursivePaths_InvalidRoot(t *testing.T) {
 
 // ── GetRecursivePathsContinueOnError — error on invalid root ──
 
-func Test_Cov18_GetRecursivePathsContinueOnError_InvalidRoot(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_InvalidRoot(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 
@@ -56,7 +56,7 @@ func Test_Cov18_GetRecursivePathsContinueOnError_InvalidRoot(t *testing.T) {
 
 // ── MergeRwxWildcardWithFixedRwx — ParseRwxToVarAttribute error ──
 
-func Test_Cov18_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
+func Test_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 	// Arrange
 	existingRwx := "rwx"
 	invalidWildcard := "zzzz" // invalid length (not 3)
@@ -78,7 +78,7 @@ func Test_Cov18_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 
 // ── PathExistStat — MeaningFullError with error ──
 
-func Test_Cov18_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 	// Arrange
 	stat := &chmodhelper.PathExistStat{
 		Location: "/some/path",
@@ -96,7 +96,7 @@ func Test_Cov18_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 
 // ── PathExistStat — MeaningFullError without error ──
 
-func Test_Cov18_PathExistStat_MeaningFullError_NoError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_NoError(t *testing.T) {
 	// Arrange
 	stat := &chmodhelper.PathExistStat{
 		Location: "/some/path",
@@ -113,7 +113,7 @@ func Test_Cov18_PathExistStat_MeaningFullError_NoError(t *testing.T) {
 
 // ── RwxInstructionExecutor — ApplyOnPathsDirect delegates ──
 
-func Test_Cov18_RwxInstructionExecutor_ApplyOnPathsDirect_EmptyLocations(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPathsDirect_EmptyLocations(t *testing.T) {
 	// Arrange
 	instruction := &chmodins.RwxInstruction{}
 	executor, _ := chmodhelper.ParseRwxInstructionToExecutor(instruction)
@@ -132,7 +132,7 @@ func Test_Cov18_RwxInstructionExecutor_ApplyOnPathsDirect_EmptyLocations(t *test
 
 // ── RwxInstructionExecutor — ApplyOnPaths delegates ──
 
-func Test_Cov18_RwxInstructionExecutor_ApplyOnPaths_EmptyLocations(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPaths_EmptyLocations(t *testing.T) {
 	// Arrange
 	instruction := &chmodins.RwxInstruction{}
 	executor, _ := chmodhelper.ParseRwxInstructionToExecutor(instruction)
@@ -151,7 +151,7 @@ func Test_Cov18_RwxInstructionExecutor_ApplyOnPaths_EmptyLocations(t *testing.T)
 
 // ── RwxVariableWrapper — IsEqualUsingFileInfo nil ──
 
-func Test_Cov18_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	// Arrange
 	varWrapper, err := chmodhelper.NewRwxVariableWrapper("rwx")
 	if err != nil {
@@ -169,7 +169,7 @@ func Test_Cov18_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 
 // ── RwxVariableWrapper — IsEqualUsingLocation with valid file ──
 
-func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	// Arrange
 	varWrapper, err := chmodhelper.NewRwxVariableWrapper("rwx")
 	if err != nil {
@@ -187,7 +187,7 @@ func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T
 
 // ── RwxVariableWrapper — IsEqualUsingLocation with existing file ──
 
-func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_ExistingFile(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_ExistingFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "test.txt")
@@ -212,7 +212,7 @@ func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_ExistingFile(t *testing.
 
 // ── fwChmodVerifier — IsEqualFile ──
 
-func Test_Cov18_FwChmodVerifier_IsEqualFile(t *testing.T) {
+func Test_FwChmodVerifier_IsEqualFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "verify.txt")
@@ -236,7 +236,7 @@ func Test_Cov18_FwChmodVerifier_IsEqualFile(t *testing.T) {
 
 // ── fwChmodApplier — OnDiffFile already equal ──
 
-func Test_Cov18_FwChmodApplier_OnDiffFile_AlreadyEqual(t *testing.T) {
+func Test_FwChmodApplier_OnDiffFile_AlreadyEqual(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -264,7 +264,7 @@ func Test_Cov18_FwChmodApplier_OnDiffFile_AlreadyEqual(t *testing.T) {
 
 // ── tempDirGetter — TempOption isPermanent=false ──
 
-func Test_Cov18_TempDirGetter_TempOption_NotPermanent(t *testing.T) {
+func Test_TempDirGetter_TempOption_NotPermanent(t *testing.T) {
 	// Arrange & Act
 	result := chmodhelper.TempDirGetter.TempOption(false)
 
@@ -276,7 +276,7 @@ func Test_Cov18_TempDirGetter_TempOption_NotPermanent(t *testing.T) {
 
 // ── chmodVerifier — PathIf isVerify=true with valid path ──
 
-func Test_Cov18_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
+func Test_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "verifyif.txt")
@@ -300,7 +300,7 @@ func Test_Cov18_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
 
 // ── chmodVerifier — IsEqualRwxFullSkipInvalid with invalid path ──
 
-func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
 	// Arrange — use truly non-existent path (os.IsNotExist returns true)
 	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
@@ -315,7 +315,7 @@ func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T
 
 // ── chmodVerifier — IsEqualSkipInvalid with invalid path ──
 
-func Test_Cov18_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 	// Arrange — use truly non-existent path
 	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
@@ -330,7 +330,7 @@ func Test_Cov18_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 
 // ── chmodVerifier — GetRwx9 ──
 
-func Test_Cov18_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9(t *testing.T) {
 	// Arrange
 	fileMode := os.FileMode(0755)
 
@@ -351,7 +351,7 @@ func Test_Cov18_ChmodVerifier_GetRwx9(t *testing.T) {
 
 // ── chmodVerifier — PathsUsingRwxFull continueOnError ──
 
-func Test_Cov18_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
 	// Arrange — use non-existent paths to trigger errors
 	locations := []string{"/non/existent/path1", "/non/existent/path2"}
 
@@ -366,7 +366,7 @@ func Test_Cov18_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
 
 // ── chmodVerifier — PathsUsingRwxFull no continue on error ──
 
-func Test_Cov18_ChmodVerifier_PathsUsingRwxFull_NoContinue(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_NoContinue(t *testing.T) {
 	// Arrange
 	locations := []string{"/non/existent/path"}
 
@@ -381,7 +381,7 @@ func Test_Cov18_ChmodVerifier_PathsUsingRwxFull_NoContinue(t *testing.T) {
 
 // ── chmodVerifier — PathsUsingFileMode ──
 
-func Test_Cov18_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 	// Arrange
 	locations := []string{"/non/existent/path"}
 
@@ -396,7 +396,7 @@ func Test_Cov18_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 
 // ── chmodVerifier — PathsUsingPartialRwxOptions ──
 
-func Test_Cov18_ChmodVerifier_PathsUsingPartialRwxOptions_InvalidPartial(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingPartialRwxOptions_InvalidPartial(t *testing.T) {
 	// Arrange
 	locations := []string{"/some/path"}
 
@@ -411,7 +411,7 @@ func Test_Cov18_ChmodVerifier_PathsUsingPartialRwxOptions_InvalidPartial(t *test
 
 // ── SimpleFileReaderWriter — WriteBytes error ──
 
-func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -433,7 +433,7 @@ func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 
 // ── DirFilesWithContent — Create with invalid path ──
 
-func Test_Cov18_DirFilesWithContent_Create_InvalidPath(t *testing.T) {
+func Test_DirFilesWithContent_Create_InvalidPath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	content := chmodhelper.DirFilesWithContent{
@@ -457,7 +457,7 @@ func Test_Cov18_DirFilesWithContent_Create_InvalidPath(t *testing.T) {
 
 // ── RwxWrapper — ApplyChmodSafe skip invalid ──
 
-func Test_Cov18_RwxWrapper_ApplyChmodSkipInvalid_InvalidPath(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodSkipInvalid_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -481,7 +481,7 @@ func Test_Cov18_RwxWrapper_ApplyChmodSkipInvalid_InvalidPath(t *testing.T) {
 
 // ── chmodApplier — RwxStringApplyChmod error ──
 
-func Test_Cov18_ChmodApplier_RwxStringApplyChmod_NilCondition(t *testing.T) {
+func Test_ChmodApplier_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	// Arrange & Act
 	err := chmodhelper.RwxStringApplyChmod("-rwxrwxrwx", nil, "/some/path")
 
@@ -493,7 +493,7 @@ func Test_Cov18_ChmodApplier_RwxStringApplyChmod_NilCondition(t *testing.T) {
 
 // ── chmodApplier — RwxOwnerGroupOtherApplyChmod nil condition ──
 
-func Test_Cov18_ChmodApplier_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
+func Test_ChmodApplier_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 	// Arrange
 	ogo := &chmodins.RwxOwnerGroupOther{}
 
@@ -508,7 +508,7 @@ func Test_Cov18_ChmodApplier_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testin
 
 // ── CreateDirWithFiles — removeDirIf error ──
 
-func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
+func Test_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	dirWithFile := chmodhelper.DirWithFiles{
@@ -531,7 +531,7 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 
 // ── GetRecursivePaths — valid dir ──
 
-func Test_Cov18_GetRecursivePaths_ValidDir(t *testing.T) {
+func Test_GetRecursivePaths_ValidDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	subDir := filepath.Join(tmpDir, "sub")
@@ -555,7 +555,7 @@ func Test_Cov18_GetRecursivePaths_ValidDir(t *testing.T) {
 
 // ── GetRecursivePathsContinueOnError — valid dir ──
 
-func Test_Cov18_GetRecursivePathsContinueOnError_ValidDir(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_ValidDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	_ = os.WriteFile(filepath.Join(tmpDir, "file.txt"), []byte("hi"), 0644)

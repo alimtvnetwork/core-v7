@@ -13,7 +13,7 @@ import (
 
 // ── RwxInstructionExecutor: VerifyRwxModifiers mismatch path (line 261, 269) ──
 
-func Test_Cov19_RwxInstructionExecutor_VerifyMismatch(t *testing.T) {
+func Test_RwxInstructionExecutor_VerifyMismatch(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -57,7 +57,7 @@ func Test_Cov19_RwxInstructionExecutor_VerifyMismatch(t *testing.T) {
 
 // ── RwxVariableWrapper: VerifyRwxModifiers with wildcard rwx (line 46) ──
 
-func Test_Cov19_RwxVariableWrapper_VerifyWithNilRwx(t *testing.T) {
+func Test_RwxVariableWrapper_VerifyWithNilRwx(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -99,7 +99,7 @@ func Test_Cov19_RwxVariableWrapper_VerifyWithNilRwx(t *testing.T) {
 
 // ── RwxVariableWrapper: VerifyOnLocationsApplyChmod paths (line 186-218) ──
 
-func Test_Cov19_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.T) {
+func Test_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -140,7 +140,7 @@ func Test_Cov19_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.
 
 // ── RwxInstructionExecutor: ApplyOnPath with exit-on-invalid ──
 
-func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -179,7 +179,7 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 
 // ── RwxInstructionExecutor: ApplyOnPath with skip-on-invalid ──
 
-func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -218,7 +218,7 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 
 // ── RwxInstructionExecutor: ApplyOnPath recursive valid dir ──
 
-func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}

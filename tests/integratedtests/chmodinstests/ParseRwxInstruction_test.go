@@ -10,7 +10,7 @@ import (
 
 // ── ParseRwxInstructionUsingJsonResult ──
 
-func Test_Cov_ParseRwxInstruction_Nil(t *testing.T) {
+func Test_ParseRwxInstruction_Nil(t *testing.T) {
 	// Arrange
 	// Act
 	result, err := chmodins.ParseRwxInstructionUsingJsonResult(nil)
@@ -26,7 +26,7 @@ func Test_Cov_ParseRwxInstruction_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseRwxInstruction returns nil -- nil", actual)
 }
 
-func Test_Cov_ParseRwxInstruction_EmptyBytes(t *testing.T) {
+func Test_ParseRwxInstruction_EmptyBytes(t *testing.T) {
 	// Arrange
 	r := &corejson.Result{}
 	// Act
@@ -43,7 +43,7 @@ func Test_Cov_ParseRwxInstruction_EmptyBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseRwxInstruction returns empty -- empty bytes", actual)
 }
 
-func Test_Cov_ParseRwxInstruction_InvalidJson(t *testing.T) {
+func Test_ParseRwxInstruction_InvalidJson(t *testing.T) {
 	// Arrange — valid JSON but not an RwxInstruction shape causes unmarshal to succeed
 	// Use a raw string that's valid JSON but wrong type to trigger unmarshal error
 	r := corejson.NewPtr("not-an-instruction")
@@ -54,7 +54,7 @@ func Test_Cov_ParseRwxInstruction_InvalidJson(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov_ParseRwxInstruction_Success(t *testing.T) {
+func Test_ParseRwxInstruction_Success(t *testing.T) {
 	// Arrange
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "r--"),
@@ -82,7 +82,7 @@ func Test_Cov_ParseRwxInstruction_Success(t *testing.T) {
 
 // ── ParseRwxInstructionUsingJsonResultMust ──
 
-func Test_Cov_ParseRwxInstructionMust_Success(t *testing.T) {
+func Test_ParseRwxInstructionMust_Success(t *testing.T) {
 	// Arrange
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "r--"),
@@ -103,7 +103,7 @@ func Test_Cov_ParseRwxInstructionMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseRwxInstructionMust returns correct value -- success", actual)
 }
 
-func Test_Cov_ParseRwxInstructionMust_Panic(t *testing.T) {
+func Test_ParseRwxInstructionMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() { recover() }()
 	// Act
@@ -116,7 +116,7 @@ func Test_Cov_ParseRwxInstructionMust_Panic(t *testing.T) {
 
 // ── ParseBaseRwxInstructionsUsingJsonResult ──
 
-func Test_Cov_ParseBaseRwxInstructions_Nil(t *testing.T) {
+func Test_ParseBaseRwxInstructions_Nil(t *testing.T) {
 	// Arrange
 	// Act
 	result, err := chmodins.ParseBaseRwxInstructionsUsingJsonResult(nil)
@@ -132,7 +132,7 @@ func Test_Cov_ParseBaseRwxInstructions_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseBaseRwxInstructions returns nil -- nil", actual)
 }
 
-func Test_Cov_ParseBaseRwxInstructions_EmptyBytes(t *testing.T) {
+func Test_ParseBaseRwxInstructions_EmptyBytes(t *testing.T) {
 	// Arrange
 	r := &corejson.Result{}
 	// Act
@@ -149,7 +149,7 @@ func Test_Cov_ParseBaseRwxInstructions_EmptyBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseBaseRwxInstructions returns empty -- empty bytes", actual)
 }
 
-func Test_Cov_ParseBaseRwxInstructions_InvalidJson(t *testing.T) {
+func Test_ParseBaseRwxInstructions_InvalidJson(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr("not-a-base-instruction")
 	// Act
@@ -158,7 +158,7 @@ func Test_Cov_ParseBaseRwxInstructions_InvalidJson(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov_ParseBaseRwxInstructions_Success(t *testing.T) {
+func Test_ParseBaseRwxInstructions_Success(t *testing.T) {
 	// Arrange
 	base := chmodins.BaseRwxInstructions{
 		RwxInstructions: []chmodins.RwxInstruction{
@@ -187,7 +187,7 @@ func Test_Cov_ParseBaseRwxInstructions_Success(t *testing.T) {
 
 // ── ParseBaseRwxInstructionsUsingJsonResultMust ──
 
-func Test_Cov_ParseBaseRwxInstructionsMust_Success(t *testing.T) {
+func Test_ParseBaseRwxInstructionsMust_Success(t *testing.T) {
 	// Arrange
 	base := chmodins.BaseRwxInstructions{
 		RwxInstructions: []chmodins.RwxInstruction{
@@ -206,7 +206,7 @@ func Test_Cov_ParseBaseRwxInstructionsMust_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseBaseRwxInstructionsMust returns correct value -- success", actual)
 }
 
-func Test_Cov_ParseBaseRwxInstructionsMust_Panic(t *testing.T) {
+func Test_ParseBaseRwxInstructionsMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() { recover() }()
 	// Act

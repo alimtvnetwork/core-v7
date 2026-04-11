@@ -13,7 +13,7 @@ type testStringer struct{}
 
 func (s testStringer) String() string { return "stringer" }
 
-func Test_Cov2_TitleCurlyMeta(t *testing.T) {
+func Test_TitleCurlyMeta(t *testing.T) {
 	// Arrange
 	r := simplewrap.TitleCurlyMeta("title", "val", "meta")
 
@@ -31,7 +31,7 @@ func Test_Cov2_TitleCurlyMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleCurlyMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleSquareMeta(t *testing.T) {
+func Test_TitleSquareMeta(t *testing.T) {
 	// Arrange
 	r := simplewrap.TitleSquareMeta("title", "val", "meta")
 
@@ -49,7 +49,7 @@ func Test_Cov2_TitleSquareMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleQuotationMeta(t *testing.T) {
+func Test_TitleQuotationMeta(t *testing.T) {
 	// Arrange
 	r := simplewrap.TitleQuotationMeta("title", "val", "meta")
 
@@ -67,7 +67,7 @@ func Test_Cov2_TitleQuotationMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleQuotationMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleSquareCsvMeta(t *testing.T) {
+func Test_TitleSquareCsvMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.TitleSquareCsvMeta("title", "val", "a", "b") != ""}
 
@@ -76,7 +76,7 @@ func Test_Cov2_TitleSquareCsvMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareCsvMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleSquareMetaUsingFmt(t *testing.T) {
+func Test_TitleSquareMetaUsingFmt(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.TitleSquareMetaUsingFmt(testStringer{}, testStringer{}, testStringer{}) != ""}
 
@@ -85,7 +85,7 @@ func Test_Cov2_TitleSquareMetaUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareMetaUsingFmt returns correct value -- with args", actual)
 }
 
-func Test_Cov2_WithBracketsQuotation(t *testing.T) {
+func Test_WithBracketsQuotation(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithBracketsQuotation("hello") != ""}
 
@@ -94,7 +94,7 @@ func Test_Cov2_WithBracketsQuotation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithBracketsQuotation returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_WithCurlyQuotation(t *testing.T) {
+func Test_WithCurlyQuotation(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithCurlyQuotation("hello") != ""}
 
@@ -103,7 +103,7 @@ func Test_Cov2_WithCurlyQuotation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithCurlyQuotation returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_WithParenthesisQuotation(t *testing.T) {
+func Test_WithParenthesisQuotation(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithParenthesisQuotation("hello") != ""}
 
@@ -112,7 +112,7 @@ func Test_Cov2_WithParenthesisQuotation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithParenthesisQuotation returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_CurlyWrapOption(t *testing.T) {
+func Test_CurlyWrapOption(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"skipIfExists":    simplewrap.CurlyWrapOption(true, "{hello}"),
@@ -129,7 +129,7 @@ func Test_Cov2_CurlyWrapOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption returns correct value -- with args", actual)
 }
 
-func Test_Cov2_DoubleQuoteWrapElements_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	// Arrange
 	r := simplewrap.DoubleQuoteWrapElements(false, nil...)
 
@@ -141,7 +141,7 @@ func Test_Cov2_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements_Nil returns nil -- with args", actual)
 }
 
-func Test_Cov2_DoubleQuoteWrapElements_EmptySlice(t *testing.T) {
+func Test_DoubleQuoteWrapElements_EmptySlice(t *testing.T) {
 	// Act
 	actual := args.Map{"len": len(simplewrap.DoubleQuoteWrapElements(false))}
 
@@ -150,7 +150,7 @@ func Test_Cov2_DoubleQuoteWrapElements_EmptySlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements_EmptySlice returns empty -- with args", actual)
 }
 
-func Test_Cov2_DoubleQuoteWrapElements_SkipExistence(t *testing.T) {
+func Test_DoubleQuoteWrapElements_SkipExistence(t *testing.T) {
 	// Act
 	actual := args.Map{"len": len(simplewrap.DoubleQuoteWrapElements(true, `"already"`, "naked"))}
 
@@ -159,7 +159,7 @@ func Test_Cov2_DoubleQuoteWrapElements_SkipExistence(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements_SkipExistence returns correct value -- with args", actual)
 }
 
-func Test_Cov2_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"nilNotNil":     simplewrap.DoubleQuoteWrapElementsWithIndexes(nil...) != nil,
@@ -178,7 +178,7 @@ func Test_Cov2_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_WithDoubleQuote_Empty(t *testing.T) {
+func Test_WithDoubleQuote_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.WithDoubleQuote("")}
 
@@ -187,7 +187,7 @@ func Test_Cov2_WithDoubleQuote_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithDoubleQuote_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_WithDoubleQuoteAny_Int(t *testing.T) {
+func Test_WithDoubleQuoteAny_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithDoubleQuoteAny(42) != ""}
 
@@ -196,7 +196,7 @@ func Test_Cov2_WithDoubleQuoteAny_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithDoubleQuoteAny_Int returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_WithSingleQuote_Empty(t *testing.T) {
+func Test_WithSingleQuote_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.WithSingleQuote("")}
 
@@ -205,7 +205,7 @@ func Test_Cov2_WithSingleQuote_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithSingleQuote_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_ToJsonName_Int(t *testing.T) {
+func Test_ToJsonName_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.ToJsonName(42) != ""}
 
@@ -214,7 +214,7 @@ func Test_Cov2_ToJsonName_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToJsonName_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_WithCurly_Int(t *testing.T) {
+func Test_WithCurly_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"contains42": strings.Contains(simplewrap.WithCurly(42), "42")}
 
@@ -223,7 +223,7 @@ func Test_Cov2_WithCurly_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithCurly_Int returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_With_Empty(t *testing.T) {
+func Test_With_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.With("", "", "")}
 
@@ -232,7 +232,7 @@ func Test_Cov2_With_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "With_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_WithStartEnd_Empty(t *testing.T) {
+func Test_WithStartEnd_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.WithStartEnd("", "")}
 
@@ -241,7 +241,7 @@ func Test_Cov2_WithStartEnd_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithStartEnd_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_MsgWrapNumber_Int64(t *testing.T) {
+func Test_MsgWrapNumber_Int64(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.MsgWrapNumber("total", int64(100)) != ""}
 
@@ -250,7 +250,7 @@ func Test_Cov2_MsgWrapNumber_Int64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MsgWrapNumber_Int64 returns correct value -- with args", actual)
 }
 
-func Test_Cov2_MsgCsvItems_Empty(t *testing.T) {
+func Test_MsgCsvItems_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.MsgCsvItems("msg") != ""}
 
@@ -259,7 +259,7 @@ func Test_Cov2_MsgCsvItems_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MsgCsvItems_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov2_ConditionalWrapWith_BothPresent2Char(t *testing.T) {
+func Test_ConditionalWrapWith_BothPresent2Char(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('{', "{}", '}')}
 
@@ -268,7 +268,7 @@ func Test_Cov2_ConditionalWrapWith_BothPresent2Char(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith_BothPresent2Char returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_CurlyWrap_Int(t *testing.T) {
+func Test_CurlyWrap_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"contains42": strings.Contains(simplewrap.CurlyWrap(42), "42")}
 
@@ -277,7 +277,7 @@ func Test_Cov2_CurlyWrap_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrap_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_SquareWrap_Int(t *testing.T) {
+func Test_SquareWrap_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.SquareWrap(42) != ""}
 
@@ -286,7 +286,7 @@ func Test_Cov2_SquareWrap_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SquareWrap_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_ParenthesisWrap_Int(t *testing.T) {
+func Test_ParenthesisWrap_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.ParenthesisWrap(42) != ""}
 
@@ -295,7 +295,7 @@ func Test_Cov2_ParenthesisWrap_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParenthesisWrap_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleCurlyWrap_Int(t *testing.T) {
+func Test_TitleCurlyWrap_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.TitleCurlyWrap("t", 42) != ""}
 
@@ -304,7 +304,7 @@ func Test_Cov2_TitleCurlyWrap_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleCurlyWrap_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_TitleSquare_Int(t *testing.T) {
+func Test_TitleSquare_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.TitleSquare("t", 42) != ""}
 
@@ -313,7 +313,7 @@ func Test_Cov2_TitleSquare_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquare_Int returns correct value -- with args", actual)
 }
 
-func Test_Cov2_WithBrackets_Int(t *testing.T) {
+func Test_WithBrackets_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithBrackets(42) != ""}
 
@@ -322,7 +322,7 @@ func Test_Cov2_WithBrackets_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithBrackets_Int returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_WithParenthesis_Int(t *testing.T) {
+func Test_WithParenthesis_Int(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithParenthesis(42) != ""}
 
@@ -331,7 +331,7 @@ func Test_Cov2_WithParenthesis_Int(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithParenthesis_Int returns non-empty -- with args", actual)
 }
 
-func Test_Cov2_CurlyWrapIf_Stringer(t *testing.T) {
+func Test_CurlyWrapIf_Stringer(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.CurlyWrapIf(true, testStringer{}) != ""}
 
@@ -340,7 +340,7 @@ func Test_Cov2_CurlyWrapIf_Stringer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapIf_Stringer returns correct value -- with args", actual)
 }
 
-func Test_Cov2_CurlyWrapIf_FmtStringer(t *testing.T) {
+func Test_CurlyWrapIf_FmtStringer(t *testing.T) {
 	// Arrange
 	var s fmt.Stringer = testStringer{}
 

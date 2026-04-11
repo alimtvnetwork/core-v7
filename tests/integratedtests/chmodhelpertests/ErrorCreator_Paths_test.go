@@ -14,7 +14,7 @@ import (
 
 // ── errorCreator.dirError ──
 
-func Test_Cov8_ErrorCreator_DirError_NonExistentPath(t *testing.T) {
+func Test_ErrorCreator_DirError_NonExistentPath(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov8_dir_error_test_nonexist")
 	os.RemoveAll(tmpDir)
 	os.MkdirAll(tmpDir, 0755)
@@ -23,12 +23,12 @@ func Test_Cov8_ErrorCreator_DirError_NonExistentPath(t *testing.T) {
 
 // ── errorCreator.notDirError ──
 
-func Test_Cov8_NotDirError_PathInvalid(t *testing.T) {
+func Test_NotDirError_PathInvalid(t *testing.T) {
 	// For non-existent path, IsPathInvalid returns true, returns nil
 	// Tested indirectly through dirCreator.ByChecking
 }
 
-func Test_Cov8_NotDirError_ExistsButNotDir(t *testing.T) {
+func Test_NotDirError_ExistsButNotDir(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -51,7 +51,7 @@ func Test_Cov8_NotDirError_ExistsButNotDir(t *testing.T) {
 
 // ── errorCreator.pathError ──
 
-func Test_Cov8_PathError_NilErr(t *testing.T) {
+func Test_PathError_NilErr(t *testing.T) {
 	// Arrange
 	// pathError returns nil when err is nil - covered through ApplyChmod on valid path
 	tmpDir := filepath.Join(os.TempDir(), "cov8_path_error_nil")
@@ -69,7 +69,7 @@ func Test_Cov8_PathError_NilErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov8_PathError_WithErr(t *testing.T) {
+func Test_PathError_WithErr(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -88,7 +88,7 @@ func Test_Cov8_PathError_WithErr(t *testing.T) {
 
 // ── errorCreator.pathErrorWithDirValidate ──
 
-func Test_Cov8_PathErrorWithDirValidate_NotDir(t *testing.T) {
+func Test_PathErrorWithDirValidate_NotDir(t *testing.T) {
 	// Covered indirectly through CreateDirWithFiles with bad path
 	tmpFile := filepath.Join(os.TempDir(), "cov8_dirvalidate_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -96,7 +96,7 @@ func Test_Cov8_PathErrorWithDirValidate_NotDir(t *testing.T) {
 	// No direct access to unexported dirCreator, exercise via public APIs
 }
 
-func Test_Cov8_PathErrorWithDirValidate_ErrNil(t *testing.T) {
+func Test_PathErrorWithDirValidate_ErrNil(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov8_dirvalidate_nil")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -105,7 +105,7 @@ func Test_Cov8_PathErrorWithDirValidate_ErrNil(t *testing.T) {
 
 // ── errorCreator.chmodApplyFailed ──
 
-func Test_Cov8_ChmodApplyFailed_WithErr(t *testing.T) {
+func Test_ChmodApplyFailed_WithErr(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -122,7 +122,7 @@ func Test_Cov8_ChmodApplyFailed_WithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov8_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ChmodApplyFailed_NilErr(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov8_chmod_apply_nil")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -133,7 +133,7 @@ func Test_Cov8_ChmodApplyFailed_NilErr(t *testing.T) {
 
 // ── pathErrorMessage ──
 
-func Test_Cov8_PathErrorMessage(t *testing.T) {
+func Test_PathErrorMessage(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -155,7 +155,7 @@ func Test_Cov8_PathErrorMessage(t *testing.T) {
 
 // ── dirCreator via CreateDirWithFiles ──
 
-func Test_Cov8_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
+func Test_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_ifmissing_exists")
 	os.MkdirAll(tmpDir, 0755)
@@ -171,7 +171,7 @@ func Test_Cov8_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov8_DirCreator_IfMissing_CreateNew(t *testing.T) {
+func Test_DirCreator_IfMissing_CreateNew(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_ifmissing_new")
 	os.RemoveAll(tmpDir)
@@ -186,7 +186,7 @@ func Test_Cov8_DirCreator_IfMissing_CreateNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov8_DirCreator_IfMissing_Error(t *testing.T) {
+func Test_DirCreator_IfMissing_Error(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_ifmissing_err_file")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -203,7 +203,7 @@ func Test_Cov8_DirCreator_IfMissing_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error creating dir under file", actual)
 }
 
-func Test_Cov8_DirCreator_Default_Error(t *testing.T) {
+func Test_DirCreator_Default_Error(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_default_err")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -222,7 +222,7 @@ func Test_Cov8_DirCreator_Default_Error(t *testing.T) {
 
 // ── tempDirGetter.TempPermanent ──
 
-func Test_Cov8_TempDirGetter_TempPermanent(t *testing.T) {
+func Test_TempDirGetter_TempPermanent(t *testing.T) {
 	// Arrange
 	result := chmodhelper.TempDirGetter.TempPermanent()
 
@@ -236,14 +236,14 @@ func Test_Cov8_TempDirGetter_TempPermanent(t *testing.T) {
 
 // ── PathExistStat.MeaningFullError ──
 
-func Test_Cov8_PathExistStat_MeaningFullError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError(t *testing.T) {
 	stat := chmodhelper.GetPathExistStat("/nonexistent/cov8/path")
 	err := stat.MeaningFullError()
 	// non-existent path may have Error set
 	_ = err
 }
 
-func Test_Cov8_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 	// Arrange
 	stat := &chmodhelper.PathExistStat{
 		Location: "/test",
@@ -262,7 +262,7 @@ func Test_Cov8_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 
 // ── PathExistStat.NotAFileError ──
 
-func Test_Cov8_PathExistStat_NotAFileError_NotExist(t *testing.T) {
+func Test_PathExistStat_NotAFileError_NotExist(t *testing.T) {
 	stat := chmodhelper.GetPathExistStat("/nonexistent/cov8/not_a_file")
 	err := stat.NotAFileError()
 	if err == nil {
@@ -270,7 +270,7 @@ func Test_Cov8_PathExistStat_NotAFileError_NotExist(t *testing.T) {
 	}
 }
 
-func Test_Cov8_PathExistStat_NotAFileError_IsDir(t *testing.T) {
+func Test_PathExistStat_NotAFileError_IsDir(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat(os.TempDir())
 	err := stat.NotAFileError()
@@ -283,7 +283,7 @@ func Test_Cov8_PathExistStat_NotAFileError_IsDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error: dir is not a file", actual)
 }
 
-func Test_Cov8_PathExistStat_NotAFileError_IsFile(t *testing.T) {
+func Test_PathExistStat_NotAFileError_IsFile(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_notafile_isfile.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -302,13 +302,13 @@ func Test_Cov8_PathExistStat_NotAFileError_IsFile(t *testing.T) {
 
 // ── PathExistStat.NotADirError ──
 
-func Test_Cov8_PathExistStat_NotADirError_NotExist(t *testing.T) {
+func Test_PathExistStat_NotADirError_NotExist(t *testing.T) {
 	stat := chmodhelper.GetPathExistStat("/nonexistent/cov8/not_a_dir")
 	err := stat.NotADirError()
 	_ = err
 }
 
-func Test_Cov8_PathExistStat_NotADirError_IsFile(t *testing.T) {
+func Test_PathExistStat_NotADirError_IsFile(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_notadir_isfile.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -325,7 +325,7 @@ func Test_Cov8_PathExistStat_NotADirError_IsFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error: file is not a dir", actual)
 }
 
-func Test_Cov8_PathExistStat_NotADirError_IsDir(t *testing.T) {
+func Test_PathExistStat_NotADirError_IsDir(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat(os.TempDir())
 	err := stat.NotADirError()
@@ -340,7 +340,7 @@ func Test_Cov8_PathExistStat_NotADirError_IsDir(t *testing.T) {
 
 // ── FilteredPathFileInfoMap.ValidLocations empty ──
 
-func Test_Cov8_FilteredPathFileInfoMap_ValidLocations_Empty(t *testing.T) {
+func Test_FilteredPathFileInfoMap_ValidLocations_Empty(t *testing.T) {
 	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	locs := m.ValidLocations()
@@ -355,7 +355,7 @@ func Test_Cov8_FilteredPathFileInfoMap_ValidLocations_Empty(t *testing.T) {
 
 // ── FilteredPathFileInfoMap.ValidFileInfos empty ──
 
-func Test_Cov8_FilteredPathFileInfoMap_ValidFileInfos_Empty(t *testing.T) {
+func Test_FilteredPathFileInfoMap_ValidFileInfos_Empty(t *testing.T) {
 	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	infos := m.ValidFileInfos()
@@ -370,7 +370,7 @@ func Test_Cov8_FilteredPathFileInfoMap_ValidFileInfos_Empty(t *testing.T) {
 
 // ── FilteredPathFileInfoMap.ValidLocationFileInfoRwxWrappers empty ──
 
-func Test_Cov8_FilteredPathFileInfoMap_ValidLocationFileInfoRwxWrappers_Empty(t *testing.T) {
+func Test_FilteredPathFileInfoMap_ValidLocationFileInfoRwxWrappers_Empty(t *testing.T) {
 	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	wrappers := m.ValidLocationFileInfoRwxWrappers()
@@ -385,7 +385,7 @@ func Test_Cov8_FilteredPathFileInfoMap_ValidLocationFileInfoRwxWrappers_Empty(t 
 
 // ── FilteredPathFileInfoMap with valid entries ──
 
-func Test_Cov8_FilteredPathFileInfoMap_WithEntries(t *testing.T) {
+func Test_FilteredPathFileInfoMap_WithEntries(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_filtered_entries.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -412,7 +412,7 @@ func Test_Cov8_FilteredPathFileInfoMap_WithEntries(t *testing.T) {
 
 // ── GetExistingChmodRwxWrapperMustPtr ──
 
-func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Valid(t *testing.T) {
+func Test_GetExistingChmodRwxWrapperMustPtr_Valid(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_must_ptr.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -428,7 +428,7 @@ func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Panic(t *testing.T) {
+func Test_GetExistingChmodRwxWrapperMustPtr_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -445,7 +445,7 @@ func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Panic(t *testing.T) {
 
 // ── GetExistingChmodRwxWrappers ──
 
-func Test_Cov8_GetExistingChmodRwxWrappers_ContinueOnError(t *testing.T) {
+func Test_GetExistingChmodRwxWrappers_ContinueOnError(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_wrappers_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -463,7 +463,7 @@ func Test_Cov8_GetExistingChmodRwxWrappers_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least one result", actual)
 }
 
-func Test_Cov8_GetExistingChmodRwxWrappers_ImmediateExit(t *testing.T) {
+func Test_GetExistingChmodRwxWrappers_ImmediateExit(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetExistingChmodRwxWrappers(
 		false, "/nonexistent/cov8/wrap1", "/nonexistent/cov8/wrap2")
@@ -476,7 +476,7 @@ func Test_Cov8_GetExistingChmodRwxWrappers_ImmediateExit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov8_GetExistingChmodRwxWrappers_Empty(t *testing.T) {
+func Test_GetExistingChmodRwxWrappers_Empty(t *testing.T) {
 	// Arrange
 	results, err := chmodhelper.GetExistingChmodRwxWrappers(false)
 
@@ -493,7 +493,7 @@ func Test_Cov8_GetExistingChmodRwxWrappers_Empty(t *testing.T) {
 
 // ── IsChmodEqualUsingRwxOwnerGroupOther ──
 
-func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Nil(t *testing.T) {
+func Test_IsChmodEqualUsingRwxOwnerGroupOther_Nil(t *testing.T) {
 	// Arrange
 	result := chmodhelper.IsChmodEqualUsingRwxOwnerGroupOther("/tmp", nil)
 
@@ -505,7 +505,7 @@ func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
-func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Valid(t *testing.T) {
+func Test_IsChmodEqualUsingRwxOwnerGroupOther_Valid(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov8_chmod_equal_rwx")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -520,7 +520,7 @@ func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Valid(t *testing.T) {
 
 // ── GetRecursivePaths ──
 
-func Test_Cov8_GetRecursivePaths_NonExistent(t *testing.T) {
+func Test_GetRecursivePaths_NonExistent(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePaths(false, "/nonexistent/cov8/recursive")
 
@@ -532,7 +532,7 @@ func Test_Cov8_GetRecursivePaths_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov8_GetRecursivePaths_File(t *testing.T) {
+func Test_GetRecursivePaths_File(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_recursive_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -551,7 +551,7 @@ func Test_Cov8_GetRecursivePaths_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
-func Test_Cov8_GetRecursivePaths_Dir(t *testing.T) {
+func Test_GetRecursivePaths_Dir(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recursive_dir")
 	os.MkdirAll(filepath.Join(tmpDir, "sub"), 0755)
@@ -571,7 +571,7 @@ func Test_Cov8_GetRecursivePaths_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected multiple paths", actual)
 }
 
-func Test_Cov8_GetRecursivePaths_ContinueOnError(t *testing.T) {
+func Test_GetRecursivePaths_ContinueOnError(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recursive_cont")
 	os.MkdirAll(tmpDir, 0755)
@@ -591,7 +591,7 @@ func Test_Cov8_GetRecursivePaths_ContinueOnError(t *testing.T) {
 
 // ── GetRecursivePathsContinueOnError ──
 
-func Test_Cov8_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePathsContinueOnError("/nonexistent/cov8/recur_cont")
 
@@ -603,7 +603,7 @@ func Test_Cov8_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov8_GetRecursivePathsContinueOnError_File(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_recur_cont_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -622,7 +622,7 @@ func Test_Cov8_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
-func Test_Cov8_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recur_cont_dir")
 	os.MkdirAll(tmpDir, 0755)

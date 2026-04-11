@@ -11,7 +11,7 @@ import (
 // ── ParseRwxOwnerGroupOtherToRwxVariableWrapper: Owner error ──
 // Covers ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper.go L16-18
 
-func Test_Cov16_ParseVarWrapper_OwnerError(t *testing.T) {
+func Test_ParseVarWrapper_OwnerError(t *testing.T) {
 	// Arrange — invalid Owner (length != 3)
 	rwx := chmodins.NewRwxOwnerGroupOther("rw", "rwx", "rwx")
 
@@ -33,7 +33,7 @@ func Test_Cov16_ParseVarWrapper_OwnerError(t *testing.T) {
 // ── ParseRwxOwnerGroupOtherToRwxVariableWrapper: Group error ──
 // Covers ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper.go L22-24
 
-func Test_Cov16_ParseVarWrapper_GroupError(t *testing.T) {
+func Test_ParseVarWrapper_GroupError(t *testing.T) {
 	// Arrange — valid Owner, invalid Group
 	rwx := chmodins.NewRwxOwnerGroupOther("rwx", "ab", "rwx")
 
@@ -55,7 +55,7 @@ func Test_Cov16_ParseVarWrapper_GroupError(t *testing.T) {
 // ── ParseRwxOwnerGroupOtherToRwxVariableWrapper: Other error ──
 // Covers ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper.go L28-30
 
-func Test_Cov16_ParseVarWrapper_OtherError(t *testing.T) {
+func Test_ParseVarWrapper_OtherError(t *testing.T) {
 	// Arrange — valid Owner+Group, invalid Other
 	rwx := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "zz")
 
@@ -77,7 +77,7 @@ func Test_Cov16_ParseVarWrapper_OtherError(t *testing.T) {
 // ── ParseRwxInstructionsToExecutors: invalid instruction error ──
 // Covers ParseRwxInstructionsToExecutors.go L24-26
 
-func Test_Cov16_ParseInstructionsToExecutors_InvalidInstruction(t *testing.T) {
+func Test_ParseInstructionsToExecutors_InvalidInstruction(t *testing.T) {
 	// Arrange — instruction with invalid Owner rwx (length != 3)
 	instructions := []chmodins.RwxInstruction{
 		{
@@ -108,7 +108,7 @@ func Test_Cov16_ParseInstructionsToExecutors_InvalidInstruction(t *testing.T) {
 // ── ParseRwxOwnerGroupOtherToFileModeMust: invalid input panics ──
 // Covers ParseRwxInstructionToFileMode.go L15-16
 
-func Test_Cov16_ParseFileModeMust_Panic(t *testing.T) {
+func Test_ParseFileModeMust_Panic(t *testing.T) {
 	// Arrange — invalid Owner (length != 3)
 	rwx := chmodins.NewRwxOwnerGroupOther("ab", "rwx", "rwx")
 
@@ -132,7 +132,7 @@ func Test_Cov16_ParseFileModeMust_Panic(t *testing.T) {
 // ── MergeRwxWildcardWithFixedRwx: ParseRwxToVarAttribute error ──
 // Covers MergeRwxWildcardWithFixedRwx.go L38-40
 
-func Test_Cov16_MergeRwxWildcard_ParseError(t *testing.T) {
+func Test_MergeRwxWildcard_ParseError(t *testing.T) {
 	// Arrange — valid length but invalid char (e.g., "zzz") triggers ParseRwxToVarAttribute error
 	fixedRwx := "rwx"
 	wildcardRwx := "zzz"
@@ -155,7 +155,7 @@ func Test_Cov16_MergeRwxWildcard_ParseError(t *testing.T) {
 // ── RwxInstructionExecutors: nil items Length ──
 // Covers RwxInstructionExecutors.go L53-55
 
-func Test_Cov16_RwxInstructionExecutors_NilItemsLength(t *testing.T) {
+func Test_RwxInstructionExecutors_NilItemsLength(t *testing.T) {
 	// Arrange — zero-value struct has nil items
 	executors := &chmodhelper.RwxInstructionExecutors{}
 
@@ -171,7 +171,7 @@ func Test_Cov16_RwxInstructionExecutors_NilItemsLength(t *testing.T) {
 // ── RwxInstructionExecutors: VerifyRwxModifiers non-continue error return ──
 // Covers RwxInstructionExecutors.go L105
 
-func Test_Cov16_RwxInstructionExecutors_VerifyError(t *testing.T) {
+func Test_RwxInstructionExecutors_VerifyError(t *testing.T) {
 	// Arrange — executors with invalid paths
 	executors := chmodhelper.NewRwxInstructionExecutors(0)
 
@@ -187,7 +187,7 @@ func Test_Cov16_RwxInstructionExecutors_VerifyError(t *testing.T) {
 // ── RwxInstructionExecutors: ApplyOnPaths with empty locations ──
 // Covers RwxInstructionExecutors.go L155
 
-func Test_Cov16_RwxInstructionExecutors_ApplyOnPathsEmpty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPathsEmpty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(0)
 
@@ -203,7 +203,7 @@ func Test_Cov16_RwxInstructionExecutors_ApplyOnPathsEmpty(t *testing.T) {
 // ── NewRwxVariableWrapper: mergedErr path ──
 // Covers RwxVariableWrapper.go L46-48
 
-func Test_Cov16_NewRwxVariableWrapper_InvalidChar(t *testing.T) {
+func Test_NewRwxVariableWrapper_InvalidChar(t *testing.T) {
 	// Arrange — partial rwx with invalid chars after fixing length
 	// "-zzz" → after FixRwxFullStringWithWildcards → "-zzz******" → owner="zzz" → invalid
 	wrapper, err := chmodhelper.NewRwxVariableWrapper("-zzz")
@@ -223,7 +223,7 @@ func Test_Cov16_NewRwxVariableWrapper_InvalidChar(t *testing.T) {
 // ── RwxVariableWrapper: IsEqualUsingLocation non-existent ──
 // Covers RwxVariableWrapper.go L295-296
 
-func Test_Cov16_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -239,7 +239,7 @@ func Test_Cov16_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T
 // ── RwxVariableWrapper: IsEqualUsingFileInfo nil ──
 // Covers RwxVariableWrapper.go L309-310
 
-func Test_Cov16_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -255,7 +255,7 @@ func Test_Cov16_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 // ── RwxWrapper: IsRwxEqualFileInfo nil ──
 // Covers RwxWrapper.go L686-688
 
-func Test_Cov16_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -271,7 +271,7 @@ func Test_Cov16_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
 // ── RwxWrapper: IsRwxEqualLocation non-existent ──
 // Covers RwxWrapper.go L700-702
 
-func Test_Cov16_RwxWrapper_IsRwxEqualLocation_NonExistent(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualLocation_NonExistent(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -287,7 +287,7 @@ func Test_Cov16_RwxWrapper_IsRwxEqualLocation_NonExistent(t *testing.T) {
 // ── RwxWrapper: ToUint32Octal error path ──
 // Covers RwxWrapper.go L86-93 (ParseUint error → panic)
 
-func Test_Cov16_RwxWrapper_ToFileModeString(t *testing.T) {
+func Test_RwxWrapper_ToFileModeString(t *testing.T) {
 	// Arrange — valid wrapper
 	wrapper, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 

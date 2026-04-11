@@ -9,7 +9,7 @@ import (
 
 // ── Condition ──
 
-func Test_Cov_Condition_Defaults(t *testing.T) {
+func Test_Condition_Defaults(t *testing.T) {
 	// Arrange
 	allTrue := chmodins.DefaultAllTrueCondition()
 	allFalse := chmodins.DefaultAllFalseCondition()
@@ -31,7 +31,7 @@ func Test_Cov_Condition_Defaults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition returns correct value -- Defaults", actual)
 }
 
-func Test_Cov_Condition_IsExitOnInvalid(t *testing.T) {
+func Test_Condition_IsExitOnInvalid(t *testing.T) {
 	// Arrange
 	c := &chmodins.Condition{IsSkipOnInvalid: true}
 	var nilC *chmodins.Condition
@@ -52,7 +52,7 @@ func Test_Cov_Condition_IsExitOnInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition returns error -- IsExitOnInvalid", actual)
 }
 
-func Test_Cov_Condition_Clone(t *testing.T) {
+func Test_Condition_Clone(t *testing.T) {
 	// Arrange
 	c := &chmodins.Condition{IsSkipOnInvalid: true, IsContinueOnError: true, IsRecursive: true}
 	cloned := c.Clone()
@@ -76,7 +76,7 @@ func Test_Cov_Condition_Clone(t *testing.T) {
 
 // ── RwxOwnerGroupOther ──
 
-func Test_Cov_RwxOGO_Methods(t *testing.T) {
+func Test_RwxOGO_Methods(t *testing.T) {
 	// Arrange
 	ogo := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "-w-")
 
@@ -100,7 +100,7 @@ func Test_Cov_RwxOGO_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxOGO returns correct value -- Methods", actual)
 }
 
-func Test_Cov_RwxOGO_ExpandChars(t *testing.T) {
+func Test_RwxOGO_ExpandChars(t *testing.T) {
 	// Arrange
 	ogo := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "-w-")
 	or, ow, ox := ogo.ExpandCharOwner()
@@ -123,7 +123,7 @@ func Test_Cov_RwxOGO_ExpandChars(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxOGO returns correct value -- ExpandChars", actual)
 }
 
-func Test_Cov_RwxOGO_IsEqual(t *testing.T) {
+func Test_RwxOGO_IsEqual(t *testing.T) {
 	// Arrange
 	a := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "-w-")
 	b := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "-w-")
@@ -148,7 +148,7 @@ func Test_Cov_RwxOGO_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxOGO returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov_RwxOGO_Clone(t *testing.T) {
+func Test_RwxOGO_Clone(t *testing.T) {
 	// Arrange
 	a := chmodins.NewRwxOwnerGroupOther("rwx", "r-x", "-w-")
 	cloned := a.Clone()
@@ -169,7 +169,7 @@ func Test_Cov_RwxOGO_Clone(t *testing.T) {
 
 // ── RwxInstruction ──
 
-func Test_Cov_RwxInstruction_Clone(t *testing.T) {
+func Test_RwxInstruction_Clone(t *testing.T) {
 	// Arrange
 	ri := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "-w-"},
@@ -196,7 +196,7 @@ func Test_Cov_RwxInstruction_Clone(t *testing.T) {
 
 // ── BaseRwxInstructions ──
 
-func Test_Cov_BaseRwxInstructions_Methods(t *testing.T) {
+func Test_BaseRwxInstructions_Methods(t *testing.T) {
 	// Arrange
 	base := &chmodins.BaseRwxInstructions{
 		RwxInstructions: []chmodins.RwxInstruction{
@@ -220,7 +220,7 @@ func Test_Cov_BaseRwxInstructions_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseRwxInstructions returns correct value -- Methods", actual)
 }
 
-func Test_Cov_BaseRwxInstructions_Nil(t *testing.T) {
+func Test_BaseRwxInstructions_Nil(t *testing.T) {
 	// Arrange
 	var base *chmodins.BaseRwxInstructions
 
@@ -240,7 +240,7 @@ func Test_Cov_BaseRwxInstructions_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseRwxInstructions returns nil -- Nil", actual)
 }
 
-func Test_Cov_BaseRwxInstructions_Clone(t *testing.T) {
+func Test_BaseRwxInstructions_Clone(t *testing.T) {
 	// Arrange
 	base := &chmodins.BaseRwxInstructions{
 		RwxInstructions: []chmodins.RwxInstruction{
@@ -266,7 +266,7 @@ func Test_Cov_BaseRwxInstructions_Clone(t *testing.T) {
 
 // ── ExpandRwxFullString ──
 
-func Test_Cov_ExpandRwxFullString(t *testing.T) {
+func Test_ExpandRwxFullString(t *testing.T) {
 	// Arrange
 	result, err := chmodins.ExpandRwxFullStringToOwnerGroupOther("-rwxr-x-w-")
 	_, errBad := chmodins.ExpandRwxFullStringToOwnerGroupOther("short")
@@ -285,7 +285,7 @@ func Test_Cov_ExpandRwxFullString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpandRwxFullString returns correct value -- with args", actual)
 }
 
-func Test_Cov_ExpandRwxFullStringByFixingFirst(t *testing.T) {
+func Test_ExpandRwxFullStringByFixingFirst(t *testing.T) {
 	// Arrange
 	result, err := chmodins.ExpandRwxFullStringToOwnerGroupOtherByFixingFirst("-rwx")
 
@@ -305,7 +305,7 @@ func Test_Cov_ExpandRwxFullStringByFixingFirst(t *testing.T) {
 
 // ── FixRwxFullStringWithWildcards ──
 
-func Test_Cov_FixRwxFullString(t *testing.T) {
+func Test_FixRwxFullString(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"full":   chmodins.FixRwxFullStringWithWildcards("-rwxr-xr-x"),
@@ -323,7 +323,7 @@ func Test_Cov_FixRwxFullString(t *testing.T) {
 
 // ── GetRwxFullLengthError ──
 
-func Test_Cov_GetRwxFullLengthError(t *testing.T) {
+func Test_GetRwxFullLengthError(t *testing.T) {
 	// Arrange
 	noErr := chmodins.GetRwxFullLengthError("-rwxr-xr-x")
 	hasErr := chmodins.GetRwxFullLengthError("short")

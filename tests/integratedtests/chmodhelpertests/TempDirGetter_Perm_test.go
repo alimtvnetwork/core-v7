@@ -13,7 +13,7 @@ import (
 
 // ── tempDirGetter ──
 
-func Test_Cov4_TempDirGetter_TempDefault(t *testing.T) {
+func Test_TempDirGetter_TempDefault(t *testing.T) {
 	// Arrange
 	result := chmodhelper.TempDirGetter.TempDefault()
 
@@ -25,7 +25,7 @@ func Test_Cov4_TempDirGetter_TempDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TempDirGetter.TempDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
+func Test_TempDirGetter_TempPermanent(t *testing.T) {
 	// Arrange
 	result := chmodhelper.TempDirGetter.TempPermanent()
 
@@ -37,7 +37,7 @@ func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TempDirGetter.TempPermanent returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
+func Test_TempDirGetter_TempOption_Permanent(t *testing.T) {
 	// Arrange
 	result := chmodhelper.TempDirGetter.TempOption(true)
 
@@ -50,7 +50,7 @@ func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "TempOption returns correct value -- permanent", actual)
 }
 
-func Test_Cov4_TempDirGetter_TempOption_Default(t *testing.T) {
+func Test_TempDirGetter_TempOption_Default(t *testing.T) {
 	// Arrange
 	result := chmodhelper.TempDirGetter.TempOption(false)
 
@@ -65,7 +65,7 @@ func Test_Cov4_TempDirGetter_TempOption_Default(t *testing.T) {
 
 // ── fileReader via SimpleFileWriter ──
 
-func Test_Cov4_FileReader_Read_InvalidPath(t *testing.T) {
+func Test_FileReader_Read_InvalidPath(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.SimpleFileWriter.FileReader.Read("/nonexistent/path/file.txt")
 
@@ -77,7 +77,7 @@ func Test_Cov4_FileReader_Read_InvalidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileReader.Read returns error -- invalid", actual)
 }
 
-func Test_Cov4_FileReader_ReadBytes_InvalidPath(t *testing.T) {
+func Test_FileReader_ReadBytes_InvalidPath(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.SimpleFileWriter.FileReader.ReadBytes("/nonexistent/path/file.txt")
 
@@ -89,7 +89,7 @@ func Test_Cov4_FileReader_ReadBytes_InvalidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileReader.ReadBytes returns error -- invalid", actual)
 }
 
-func Test_Cov4_FileReader_Read_ValidFile(t *testing.T) {
+func Test_FileReader_Read_ValidFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "test.txt")
@@ -113,7 +113,7 @@ func Test_Cov4_FileReader_Read_ValidFile(t *testing.T) {
 
 // ── fileWriter ──
 
-func Test_Cov4_FileWriter_Remove_NonExistent(t *testing.T) {
+func Test_FileWriter_Remove_NonExistent(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.FileWriter.Remove("/nonexistent/path")
 	// RemoveAll on non-existent is OK
@@ -126,7 +126,7 @@ func Test_Cov4_FileWriter_Remove_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.Remove returns non-empty -- non-existent", actual)
 }
 
-func Test_Cov4_FileWriter_RemoveIf_False(t *testing.T) {
+func Test_FileWriter_RemoveIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.FileWriter.RemoveIf(false, "/any/path")
 
@@ -138,7 +138,7 @@ func Test_Cov4_FileWriter_RemoveIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.RemoveIf returns non-empty -- false", actual)
 }
 
-func Test_Cov4_FileWriter_RemoveIf_True_NonExistent(t *testing.T) {
+func Test_FileWriter_RemoveIf_True_NonExistent(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.FileWriter.RemoveIf(true, "/nonexistent/file")
 
@@ -150,7 +150,7 @@ func Test_Cov4_FileWriter_RemoveIf_True_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.RemoveIf returns non-empty -- true non-existent", actual)
 }
 
-func Test_Cov4_FileWriter_ParentDir(t *testing.T) {
+func Test_FileWriter_ParentDir(t *testing.T) {
 	// Arrange
 	result := chmodhelper.SimpleFileWriter.FileWriter.ParentDir("/a/b/c.txt")
 
@@ -162,7 +162,7 @@ func Test_Cov4_FileWriter_ParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.ParentDir returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileWriter_Chmod(t *testing.T) {
+func Test_FileWriter_Chmod(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "test.txt")
@@ -178,7 +178,7 @@ func Test_Cov4_FileWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.Chmod returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileWriter_ChmodFile(t *testing.T) {
+func Test_FileWriter_ChmodFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "test2.txt")
@@ -194,7 +194,7 @@ func Test_Cov4_FileWriter_ChmodFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWriter.ChmodFile returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileWriter_AllLock(t *testing.T) {
+func Test_FileWriter_AllLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "lock-test.txt")
@@ -213,7 +213,7 @@ func Test_Cov4_FileWriter_AllLock(t *testing.T) {
 
 // ── fileBytesWriter ──
 
-func Test_Cov4_FileBytesWriter_WithDir(t *testing.T) {
+func Test_FileBytesWriter_WithDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "bytes-test.txt")
@@ -229,7 +229,7 @@ func Test_Cov4_FileBytesWriter_WithDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDir returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_FileBytesWriter_Default(t *testing.T) {
+func Test_FileBytesWriter_Default(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "bytes-default.txt")
@@ -245,7 +245,7 @@ func Test_Cov4_FileBytesWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileBytesWriter_WithDirLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "bytes-lock.txt")
@@ -261,7 +261,7 @@ func Test_Cov4_FileBytesWriter_WithDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDirLock returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_FileBytesWriter_WithDirChmodLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "bytes-chmod-lock.txt")
@@ -277,7 +277,7 @@ func Test_Cov4_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDirChmodLock returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_FileBytesWriter_Chmod(t *testing.T) {
+func Test_FileBytesWriter_Chmod(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "bytes-chmod.txt")
@@ -295,7 +295,7 @@ func Test_Cov4_FileBytesWriter_Chmod(t *testing.T) {
 
 // ── fileStringWriter ──
 
-func Test_Cov4_FileStringWriter_Default(t *testing.T) {
+func Test_FileStringWriter_Default(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-default.txt")
@@ -311,7 +311,7 @@ func Test_Cov4_FileStringWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileStringWriter_DefaultLock(t *testing.T) {
+func Test_FileStringWriter_DefaultLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-lock.txt")
@@ -327,7 +327,7 @@ func Test_Cov4_FileStringWriter_DefaultLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.DefaultLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileStringWriter_Chmod(t *testing.T) {
+func Test_FileStringWriter_Chmod(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-chmod.txt")
@@ -343,7 +343,7 @@ func Test_Cov4_FileStringWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.Chmod returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileStringWriter_ChmodLock(t *testing.T) {
+func Test_FileStringWriter_ChmodLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-chmod-lock.txt")
@@ -359,7 +359,7 @@ func Test_Cov4_FileStringWriter_ChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.ChmodLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FileStringWriter_All(t *testing.T) {
+func Test_FileStringWriter_All(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-all.txt")
@@ -378,7 +378,7 @@ func Test_Cov4_FileStringWriter_All(t *testing.T) {
 
 // ── anyItemWriter ──
 
-func Test_Cov4_AnyItemWriter_Default(t *testing.T) {
+func Test_AnyItemWriter_Default(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "any-default.json")
@@ -394,7 +394,7 @@ func Test_Cov4_AnyItemWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "anyItemWriter.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov4_AnyItemWriter_DefaultLock(t *testing.T) {
+func Test_AnyItemWriter_DefaultLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "any-lock.json")
@@ -410,7 +410,7 @@ func Test_Cov4_AnyItemWriter_DefaultLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "anyItemWriter.DefaultLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_AnyItemWriter_Chmod(t *testing.T) {
+func Test_AnyItemWriter_Chmod(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "any-chmod.json")
@@ -426,7 +426,7 @@ func Test_Cov4_AnyItemWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "anyItemWriter.Chmod returns correct value -- with args", actual)
 }
 
-func Test_Cov4_AnyItemWriter_ChmodLock(t *testing.T) {
+func Test_AnyItemWriter_ChmodLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "any-chmod-lock.json")
@@ -442,7 +442,7 @@ func Test_Cov4_AnyItemWriter_ChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "anyItemWriter.ChmodLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_AnyItemWriter_Chmod_InvalidJson(t *testing.T) {
+func Test_AnyItemWriter_Chmod_InvalidJson(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "any-invalid.json")
@@ -461,7 +461,7 @@ func Test_Cov4_AnyItemWriter_Chmod_InvalidJson(t *testing.T) {
 
 // ── dirCreator via SimpleFileWriter.CreateDir ──
 
-func Test_Cov4_DirCreator_If_False(t *testing.T) {
+func Test_DirCreator_If_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.CreateDir.If(false, 0755, "/any/path")
 
@@ -473,7 +473,7 @@ func Test_Cov4_DirCreator_If_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.If returns non-empty -- false", actual)
 }
 
-func Test_Cov4_DirCreator_IfMissing(t *testing.T) {
+func Test_DirCreator_IfMissing(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "new-sub")
@@ -488,7 +488,7 @@ func Test_Cov4_DirCreator_IfMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissing returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
+func Test_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.SimpleFileWriter.CreateDir.IfMissing(0755, tmpDir)
@@ -501,7 +501,7 @@ func Test_Cov4_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissing returns correct value -- existing", actual)
 }
 
-func Test_Cov4_DirCreator_IfMissingLock(t *testing.T) {
+func Test_DirCreator_IfMissingLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "lock-sub")
@@ -516,7 +516,7 @@ func Test_Cov4_DirCreator_IfMissingLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissingLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_Default(t *testing.T) {
+func Test_DirCreator_Default(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "default-sub")
@@ -531,7 +531,7 @@ func Test_Cov4_DirCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_DefaultLock(t *testing.T) {
+func Test_DirCreator_DefaultLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "default-lock-sub")
@@ -546,7 +546,7 @@ func Test_Cov4_DirCreator_DefaultLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.DefaultLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_Direct(t *testing.T) {
+func Test_DirCreator_Direct(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "direct-sub")
@@ -561,7 +561,7 @@ func Test_Cov4_DirCreator_Direct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.Direct returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_DirectLock(t *testing.T) {
+func Test_DirCreator_DirectLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "direct-lock-sub")
@@ -576,7 +576,7 @@ func Test_Cov4_DirCreator_DirectLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.DirectLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_DirCreator_ByChecking_ExistsAndIsDir(t *testing.T) {
+func Test_DirCreator_ByChecking_ExistsAndIsDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.SimpleFileWriter.CreateDir.ByChecking(0755, tmpDir)
@@ -589,7 +589,7 @@ func Test_Cov4_DirCreator_ByChecking_ExistsAndIsDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.ByChecking returns correct value -- existing dir", actual)
 }
 
-func Test_Cov4_DirCreator_ByChecking_ExistsButIsFile(t *testing.T) {
+func Test_DirCreator_ByChecking_ExistsButIsFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "file.txt")
@@ -605,7 +605,7 @@ func Test_Cov4_DirCreator_ByChecking_ExistsButIsFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.ByChecking returns correct value -- file not dir", actual)
 }
 
-func Test_Cov4_DirCreator_ByChecking_NotExists(t *testing.T) {
+func Test_DirCreator_ByChecking_NotExists(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	newDir := filepath.Join(tmpDir, "checking-new")
@@ -622,7 +622,7 @@ func Test_Cov4_DirCreator_ByChecking_NotExists(t *testing.T) {
 
 // ── chmodVerifier ──
 
-func Test_Cov4_ChmodVerifier_GetRwxFull(t *testing.T) {
+func Test_ChmodVerifier_GetRwxFull(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwxFull(0755)
 
@@ -634,7 +634,7 @@ func Test_Cov4_ChmodVerifier_GetRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetRwxFull returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwx9(0755)
 
@@ -646,7 +646,7 @@ func Test_Cov4_ChmodVerifier_GetRwx9(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetRwx9 returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_IsEqual_ValidPath(t *testing.T) {
+func Test_ChmodVerifier_IsEqual_ValidPath(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -665,7 +665,7 @@ func Test_Cov4_ChmodVerifier_IsEqual_ValidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqual returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_IsMismatch(t *testing.T) {
+func Test_ChmodVerifier_IsMismatch(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "mismatch.txt")
@@ -681,7 +681,7 @@ func Test_Cov4_ChmodVerifier_IsMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsMismatch returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_MismatchError(t *testing.T) {
+func Test_ChmodVerifier_MismatchError(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "mismatch-err.txt")
@@ -697,7 +697,7 @@ func Test_Cov4_ChmodVerifier_MismatchError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.MismatchError returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_MismatchErrorUsingRwxFull(t *testing.T) {
+func Test_ChmodVerifier_MismatchErrorUsingRwxFull(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "mismatch-rwx.txt")
@@ -713,7 +713,7 @@ func Test_Cov4_ChmodVerifier_MismatchErrorUsingRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.MismatchErrorUsingRwxFull returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_PathIf_False(t *testing.T) {
+func Test_ChmodVerifier_PathIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.PathIf(false, "/any", 0644)
 
@@ -725,7 +725,7 @@ func Test_Cov4_ChmodVerifier_PathIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.PathIf returns non-empty -- false", actual)
 }
 
-func Test_Cov4_ChmodVerifier_PathIf_True(t *testing.T) {
+func Test_ChmodVerifier_PathIf_True(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -744,7 +744,7 @@ func Test_Cov4_ChmodVerifier_PathIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.PathIf returns non-empty -- true", actual)
 }
 
-func Test_Cov4_ChmodVerifier_Path(t *testing.T) {
+func Test_ChmodVerifier_Path(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -763,7 +763,7 @@ func Test_Cov4_ChmodVerifier_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.Path returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_IsEqualRwxFull(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFull(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -782,7 +782,7 @@ func Test_Cov4_ChmodVerifier_IsEqualRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqualRwxFull returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -798,7 +798,7 @@ func Test_Cov4_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqualRwxFullSkipInvalid returns error -- invalid path", actual)
 }
 
-func Test_Cov4_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -814,7 +814,7 @@ func Test_Cov4_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqualSkipInvalid returns error -- invalid path", actual)
 }
 
-func Test_Cov4_ChmodVerifier_GetExisting(t *testing.T) {
+func Test_ChmodVerifier_GetExisting(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "exist.txt")
@@ -836,7 +836,7 @@ func Test_Cov4_ChmodVerifier_GetExisting(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetExisting returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
+func Test_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rwxw.txt")
@@ -858,7 +858,7 @@ func Test_Cov4_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetExistingRwxWrapper returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_GetExistingRwxWrapperMust(t *testing.T) {
+func Test_ChmodVerifier_GetExistingRwxWrapperMust(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "must.txt")
@@ -874,7 +874,7 @@ func Test_Cov4_ChmodVerifier_GetExistingRwxWrapperMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetExistingRwxWrapperMust returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingFileModeImmediateReturn(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingFileModeImmediateReturn(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -893,7 +893,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileModeImmediateReturn(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.PathsUsingFileModeImmediateReturn returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingFileModeContinueOnError(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingFileModeContinueOnError(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -912,7 +912,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileModeContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.PathsUsingFileModeContinueOnError returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -931,7 +931,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.PathsUsingFileMode returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/any", "short")
 
@@ -943,7 +943,7 @@ func Test_Cov4_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.RwxFull returns error -- invalid length", actual)
 }
 
-func Test_Cov4_ChmodVerifier_RwxFull_NonExistentPath(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_NonExistentPath(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/nonexistent/path", "-rw-r--r--")
 
@@ -957,7 +957,7 @@ func Test_Cov4_ChmodVerifier_RwxFull_NonExistentPath(t *testing.T) {
 
 // ── chmodApplier ──
 
-func Test_Cov4_ChmodApplier_ApplyIf_False(t *testing.T) {
+func Test_ChmodApplier_ApplyIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.ApplyIf(false, 0644, "/any")
 
@@ -969,7 +969,7 @@ func Test_Cov4_ChmodApplier_ApplyIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.ApplyIf returns non-empty -- false", actual)
 }
 
-func Test_Cov4_ChmodApplier_ApplyIf_True(t *testing.T) {
+func Test_ChmodApplier_ApplyIf_True(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "apply.txt")
@@ -985,7 +985,7 @@ func Test_Cov4_ChmodApplier_ApplyIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.ApplyIf returns non-empty -- true", actual)
 }
 
-func Test_Cov4_ChmodApplier_Default(t *testing.T) {
+func Test_ChmodApplier_Default(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "default.txt")
@@ -1001,7 +1001,7 @@ func Test_Cov4_ChmodApplier_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_OnMismatchOption_SkipApply(t *testing.T) {
+func Test_ChmodApplier_OnMismatchOption_SkipApply(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.OnMismatchOption(false, false, 0644, "/any")
 
@@ -1013,7 +1013,7 @@ func Test_Cov4_ChmodApplier_OnMismatchOption_SkipApply(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.OnMismatchOption returns correct value -- skip", actual)
 }
 
-func Test_Cov4_ChmodApplier_OnMismatch(t *testing.T) {
+func Test_ChmodApplier_OnMismatch(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "mismatch.txt")
@@ -1029,7 +1029,7 @@ func Test_Cov4_ChmodApplier_OnMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.OnMismatch returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_OnMismatchSkipInvalid(t *testing.T) {
+func Test_ChmodApplier_OnMismatchSkipInvalid(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "skip-invalid.txt")
@@ -1045,7 +1045,7 @@ func Test_Cov4_ChmodApplier_OnMismatchSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.OnMismatchSkipInvalid returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_SkipInvalidFile(t *testing.T) {
+func Test_ChmodApplier_SkipInvalidFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "skipinv.txt")
@@ -1061,7 +1061,7 @@ func Test_Cov4_ChmodApplier_SkipInvalidFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.SkipInvalidFile returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_Options_NonRecursive(t *testing.T) {
+func Test_ChmodApplier_Options_NonRecursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "opts.txt")
@@ -1077,7 +1077,7 @@ func Test_Cov4_ChmodApplier_Options_NonRecursive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.Options returns non-empty -- non-recursive", actual)
 }
 
-func Test_Cov4_ChmodApplier_Options_Recursive(t *testing.T) {
+func Test_ChmodApplier_Options_Recursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.Options(true, true, 0755, tmpDir)
@@ -1090,7 +1090,7 @@ func Test_Cov4_ChmodApplier_Options_Recursive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.Options returns correct value -- recursive", actual)
 }
 
-func Test_Cov4_ChmodApplier_RecursivePath(t *testing.T) {
+func Test_ChmodApplier_RecursivePath(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.RecursivePath(true, 0755, tmpDir)
@@ -1103,7 +1103,7 @@ func Test_Cov4_ChmodApplier_RecursivePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply.RecursivePath returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_PathsUsingFileModeConditions_EmptyLocations(t *testing.T) {
+func Test_ChmodApplier_PathsUsingFileModeConditions_EmptyLocations(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0644, &chmodins.Condition{})
 
@@ -1115,7 +1115,7 @@ func Test_Cov4_ChmodApplier_PathsUsingFileModeConditions_EmptyLocations(t *testi
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeConditions returns empty -- empty", actual)
 }
 
-func Test_Cov4_ChmodApplier_PathsUsingFileModeConditions_NilCondition(t *testing.T) {
+func Test_ChmodApplier_PathsUsingFileModeConditions_NilCondition(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0644, nil, "/some/path")
 
@@ -1127,7 +1127,7 @@ func Test_Cov4_ChmodApplier_PathsUsingFileModeConditions_NilCondition(t *testing
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeConditions returns nil -- nil condition", actual)
 }
 
-func Test_Cov4_ChmodApplier_PathsUsingFileModeOptions(t *testing.T) {
+func Test_ChmodApplier_PathsUsingFileModeOptions(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.PathsUsingFileModeOptions(
@@ -1141,7 +1141,7 @@ func Test_Cov4_ChmodApplier_PathsUsingFileModeOptions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeOptions returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_PathsUsingFileModeContinueOnErr(t *testing.T) {
+func Test_ChmodApplier_PathsUsingFileModeContinueOnErr(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.PathsUsingFileModeContinueOnErr(
@@ -1155,7 +1155,7 @@ func Test_Cov4_ChmodApplier_PathsUsingFileModeContinueOnErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeContinueOnErr returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_PathsUsingFileModeRecursive(t *testing.T) {
+func Test_ChmodApplier_PathsUsingFileModeRecursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.PathsUsingFileModeRecursive(
@@ -1169,7 +1169,7 @@ func Test_Cov4_ChmodApplier_PathsUsingFileModeRecursive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeRecursive returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_RecursivePaths(t *testing.T) {
+func Test_ChmodApplier_RecursivePaths(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.RecursivePaths(false, true, 0755, tmpDir)
@@ -1182,7 +1182,7 @@ func Test_Cov4_ChmodApplier_RecursivePaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RecursivePaths returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_RecursivePathsContinueOnError(t *testing.T) {
+func Test_ChmodApplier_RecursivePathsContinueOnError(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.RecursivePathsContinueOnError(true, 0755, tmpDir)
@@ -1195,7 +1195,7 @@ func Test_Cov4_ChmodApplier_RecursivePathsContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RecursivePathsContinueOnError returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_RecursivePathsCaptureInvalids(t *testing.T) {
+func Test_ChmodApplier_RecursivePathsCaptureInvalids(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	err := chmodhelper.ChmodApply.RecursivePathsCaptureInvalids(0755, tmpDir)
@@ -1208,7 +1208,7 @@ func Test_Cov4_ChmodApplier_RecursivePathsCaptureInvalids(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RecursivePathsCaptureInvalids returns error -- with args", actual)
 }
 
-func Test_Cov4_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.RwxPartial("-rwx", &chmodins.Condition{})
 
@@ -1220,7 +1220,7 @@ func Test_Cov4_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxPartial returns empty -- empty locations", actual)
 }
 
-func Test_Cov4_RwxStringApplyChmod_EmptyLocations(t *testing.T) {
+func Test_RwxStringApplyChmod_EmptyLocations(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr--", &chmodins.Condition{})
 
@@ -1232,7 +1232,7 @@ func Test_Cov4_RwxStringApplyChmod_EmptyLocations(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxStringApplyChmod returns empty -- empty", actual)
 }
 
-func Test_Cov4_RwxStringApplyChmod_InvalidRwxLength(t *testing.T) {
+func Test_RwxStringApplyChmod_InvalidRwxLength(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("short", &chmodins.Condition{}, "/tmp")
 
@@ -1244,7 +1244,7 @@ func Test_Cov4_RwxStringApplyChmod_InvalidRwxLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxStringApplyChmod returns error -- invalid length", actual)
 }
 
-func Test_Cov4_RwxStringApplyChmod_NilCondition(t *testing.T) {
+func Test_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr--", nil, "/tmp")
 
@@ -1256,7 +1256,7 @@ func Test_Cov4_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxStringApplyChmod returns nil -- nil condition", actual)
 }
 
-func Test_Cov4_RwxOwnerGroupOtherApplyChmod_EmptyLocations(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_EmptyLocations(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(nil, nil)
 
@@ -1268,7 +1268,7 @@ func Test_Cov4_RwxOwnerGroupOtherApplyChmod_EmptyLocations(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxOwnerGroupOtherApplyChmod returns empty -- empty", actual)
 }
 
-func Test_Cov4_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(nil, nil, "/tmp")
 
@@ -1280,7 +1280,7 @@ func Test_Cov4_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxOwnerGroupOtherApplyChmod returns nil -- nil rwx", actual)
 }
 
-func Test_Cov4_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 	// Arrange
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "r--"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, nil, "/tmp")
@@ -1295,7 +1295,7 @@ func Test_Cov4_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 
 // ── SimpleFileReaderWriter ──
 
-func Test_Cov4_SimpleFileReaderWriter_Creation(t *testing.T) {
+func Test_SimpleFileReaderWriter_Creation(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rw-test.txt")
@@ -1316,7 +1316,7 @@ func Test_Cov4_SimpleFileReaderWriter_Creation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter returns correct value -- creation", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rw-write.txt")
@@ -1339,7 +1339,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter returns correct value -- WriteAndRead", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteString(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rw-writestr.txt")
@@ -1355,7 +1355,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter returns correct value -- WriteString", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteAny(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAny(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rw-any.json")
@@ -1371,7 +1371,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter returns correct value -- WriteAny", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "nonexistent.txt")
@@ -1393,7 +1393,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadOnExist returns correct value -- not exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "nonexistent2.txt")
@@ -1415,7 +1415,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExist returns correct value -- not exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "expire-ne.txt")
@@ -1431,7 +1431,7 @@ func Test_Cov4_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Expire returns correct value -- not exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Expire_Exist(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire_Exist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "expire-exist.txt")
@@ -1454,7 +1454,7 @@ func Test_Cov4_SimpleFileReaderWriter_Expire_Exist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Expire returns correct value -- exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Clone(t *testing.T) {
+func Test_SimpleFileReaderWriter_Clone(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "clone.txt")
@@ -1470,7 +1470,7 @@ func Test_Cov4_SimpleFileReaderWriter_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
+func Test_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var rw *chmodhelper.SimpleFileReaderWriter
 	cloned := rw.ClonePtr()
@@ -1483,7 +1483,7 @@ func Test_Cov4_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_String(t *testing.T) {
+func Test_SimpleFileReaderWriter_String(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str.txt")
@@ -1499,7 +1499,7 @@ func Test_Cov4_SimpleFileReaderWriter_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_JoinRelPath_Empty(t *testing.T) {
+func Test_SimpleFileReaderWriter_JoinRelPath_Empty(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "join.txt")
@@ -1515,7 +1515,7 @@ func Test_Cov4_SimpleFileReaderWriter_JoinRelPath_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinRelPath returns empty -- empty", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_JoinRelPath_NonEmpty(t *testing.T) {
+func Test_SimpleFileReaderWriter_JoinRelPath_NonEmpty(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "join2.txt")
@@ -1531,7 +1531,7 @@ func Test_Cov4_SimpleFileReaderWriter_JoinRelPath_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinRelPath returns empty -- non-empty", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1554,7 +1554,7 @@ func Test_Cov4_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InitializeDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1571,7 +1571,7 @@ func Test_Cov4_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "InitializeDefaultApplyChmod returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1588,7 +1588,7 @@ func Test_Cov4_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InitializeDefaultNew returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_NewPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1611,7 +1611,7 @@ func Test_Cov4_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPath returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1629,7 +1629,7 @@ func Test_Cov4_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPathJoin returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_HasAnyIssues(t *testing.T) {
+func Test_SimpleFileReaderWriter_HasAnyIssues(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath:  "/nonexistent/path.txt",
@@ -1644,7 +1644,7 @@ func Test_Cov4_SimpleFileReaderWriter_HasAnyIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAnyIssues returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_HasPathIssues(t *testing.T) {
+func Test_SimpleFileReaderWriter_HasPathIssues(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath: "/nonexistent/path.txt",
@@ -1658,7 +1658,7 @@ func Test_Cov4_SimpleFileReaderWriter_HasPathIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasPathIssues returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_JsonRoundTrip(t *testing.T) {
+func Test_SimpleFileReaderWriter_JsonRoundTrip(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "json-rt.txt")
@@ -1674,7 +1674,7 @@ func Test_Cov4_SimpleFileReaderWriter_JsonRoundTrip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Json returns correct value -- round trip", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ExpireParentDir_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ExpireParentDir_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath:  "/nonexistent/test.txt",
@@ -1690,7 +1690,7 @@ func Test_Cov4_SimpleFileReaderWriter_ExpireParentDir_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpireParentDir returns correct value -- not exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_OsFile(t *testing.T) {
+func Test_SimpleFileReaderWriter_OsFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "osfile.txt")
@@ -1716,7 +1716,7 @@ func Test_Cov4_SimpleFileReaderWriter_OsFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OsFile returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_RemoveOnExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_RemoveOnExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "remove.txt")
@@ -1733,7 +1733,7 @@ func Test_Cov4_SimpleFileReaderWriter_RemoveOnExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveOnExist returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_RemoveDirOnExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_RemoveDirOnExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	subDir := filepath.Join(tmpDir, "subdir")
@@ -1753,7 +1753,7 @@ func Test_Cov4_SimpleFileReaderWriter_RemoveDirOnExist(t *testing.T) {
 
 // ── newSimpleFileReaderWriterCreator ──
 
-func Test_Cov4_NewSimpleFileReaderWriter_Create(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_Create(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Create(false, 0755, 0644, "/tmp", "/tmp/test.txt")
 
@@ -1765,7 +1765,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.Create returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_All(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_All(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.All(0755, 0644, false, true, true, "/tmp", "/tmp/test.txt")
 
@@ -1777,7 +1777,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.All returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_Options(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_Options(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Options(false, true, true, "/tmp/test.txt")
 
@@ -1789,7 +1789,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_Options(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.Options returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_CreateClean(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_CreateClean(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.CreateClean(false, 0755, 0644, "/tmp", "/tmp/test.txt")
 
@@ -1801,7 +1801,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_CreateClean(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.CreateClean returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_DefaultCleanPath(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_DefaultCleanPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.DefaultCleanPath(false, "/tmp/test.txt")
 
@@ -1813,7 +1813,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_DefaultCleanPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.DefaultCleanPath returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_Path(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_Path(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Path(false, 0755, 0644, "/tmp/test.txt")
 
@@ -1825,7 +1825,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.Path returns correct value -- with args", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_PathCondition_Clean(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_PathCondition_Clean(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.PathCondition(false, true, 0755, 0644, "/tmp/test.txt")
 
@@ -1837,7 +1837,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_PathCondition_Clean(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.PathCondition returns correct value -- clean", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_PathCondition_NoClean(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_PathCondition_NoClean(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.PathCondition(false, false, 0755, 0644, "/tmp/test.txt")
 
@@ -1849,7 +1849,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_PathCondition_NoClean(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileReaderWriter.PathCondition returns empty -- no clean", actual)
 }
 
-func Test_Cov4_NewSimpleFileReaderWriter_PathDirDefaultChmod(t *testing.T) {
+func Test_NewSimpleFileReaderWriter_PathDirDefaultChmod(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.PathDirDefaultChmod(false, 0644, "/tmp/test.txt")
 
@@ -1863,7 +1863,7 @@ func Test_Cov4_NewSimpleFileReaderWriter_PathDirDefaultChmod(t *testing.T) {
 
 // ── simpleFileWriter Lock/Unlock ──
 
-func Test_Cov4_SimpleFileWriter_LockUnlock(t *testing.T) {
+func Test_SimpleFileWriter_LockUnlock(t *testing.T) {
 	// Arrange
 	chmodhelper.SimpleFileWriter.Lock()
 	chmodhelper.SimpleFileWriter.Unlock()
@@ -1878,7 +1878,7 @@ func Test_Cov4_SimpleFileWriter_LockUnlock(t *testing.T) {
 
 // ── RwxInstructionExecutors ──
 
-func Test_Cov4_RwxInstructionExecutors_Empty(t *testing.T) {
+func Test_RwxInstructionExecutors_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 
@@ -1900,7 +1900,7 @@ func Test_Cov4_RwxInstructionExecutors_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxInstructionExecutors returns empty -- empty", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_AddNil(t *testing.T) {
+func Test_RwxInstructionExecutors_AddNil(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	executors.Add(nil)
@@ -1913,7 +1913,7 @@ func Test_Cov4_RwxInstructionExecutors_AddNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxInstructionExecutors returns nil -- add nil", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_AddsNil(t *testing.T) {
+func Test_RwxInstructionExecutors_AddsNil(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	executors.Adds(nil...)
@@ -1926,7 +1926,7 @@ func Test_Cov4_RwxInstructionExecutors_AddsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxInstructionExecutors returns nil -- adds nil", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_ApplyOnPath_Empty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPath_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	err := executors.ApplyOnPath("/tmp")
@@ -1939,7 +1939,7 @@ func Test_Cov4_RwxInstructionExecutors_ApplyOnPath_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ApplyOnPath returns empty -- empty", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_Empty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPaths_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	err := executors.ApplyOnPaths([]string{})
@@ -1952,7 +1952,7 @@ func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ApplyOnPaths returns empty -- empty locations", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_ApplyOnPathsPtr_Empty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPathsPtr_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	err := executors.ApplyOnPathsPtr([]string{})
@@ -1965,7 +1965,7 @@ func Test_Cov4_RwxInstructionExecutors_ApplyOnPathsPtr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ApplyOnPathsPtr returns empty -- empty executors", actual)
 }
 
-func Test_Cov4_RwxInstructionExecutors_VerifyRwxModifiers_EmptyLocations(t *testing.T) {
+func Test_RwxInstructionExecutors_VerifyRwxModifiers_EmptyLocations(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	err := executors.VerifyRwxModifiers(false, false, []string{})
@@ -1980,7 +1980,7 @@ func Test_Cov4_RwxInstructionExecutors_VerifyRwxModifiers_EmptyLocations(t *test
 
 // ── FileModeFriendlyString ──
 
-func Test_Cov4_FileModeFriendlyString(t *testing.T) {
+func Test_FileModeFriendlyString(t *testing.T) {
 	// Arrange
 	result := chmodhelper.FileModeFriendlyString(0755)
 
@@ -1994,7 +1994,7 @@ func Test_Cov4_FileModeFriendlyString(t *testing.T) {
 
 // ── fwChmodVerifier / fwChmodApplier ──
 
-func Test_Cov4_FwChmodApplier_OnAll(t *testing.T) {
+func Test_FwChmodApplier_OnAll(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-apply.txt")
@@ -2012,7 +2012,7 @@ func Test_Cov4_FwChmodApplier_OnAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodApplier.OnAll returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodVerifier_IsEqualFile(t *testing.T) {
+func Test_FwChmodVerifier_IsEqualFile(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -2032,7 +2032,7 @@ func Test_Cov4_FwChmodVerifier_IsEqualFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.IsEqualFile returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodVerifier_HasMismatchFile(t *testing.T) {
+func Test_FwChmodVerifier_HasMismatchFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-mismatch.txt")
@@ -2049,7 +2049,7 @@ func Test_Cov4_FwChmodVerifier_HasMismatchFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.HasMismatchFile returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodVerifier_IsEqualParentDir(t *testing.T) {
+func Test_FwChmodVerifier_IsEqualParentDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-pardir.txt")
@@ -2073,7 +2073,7 @@ func Test_Cov4_FwChmodVerifier_IsEqualParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.IsEqualParentDir returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodVerifier_MismatchErrorFile(t *testing.T) {
+func Test_FwChmodVerifier_MismatchErrorFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-mismatch-err.txt")
@@ -2091,7 +2091,7 @@ func Test_Cov4_FwChmodVerifier_MismatchErrorFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.MismatchErrorFile returns error -- with args", actual)
 }
 
-func Test_Cov4_FwChmodVerifier_MismatchErrorParentDir(t *testing.T) {
+func Test_FwChmodVerifier_MismatchErrorParentDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-mismatch-dir.txt")
@@ -2109,7 +2109,7 @@ func Test_Cov4_FwChmodVerifier_MismatchErrorParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.MismatchErrorParentDir returns error -- with args", actual)
 }
 
-func Test_Cov4_FwChmodApplier_OnMismatch_Neither(t *testing.T) {
+func Test_FwChmodApplier_OnMismatch_Neither(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-neither.txt")
@@ -2127,7 +2127,7 @@ func Test_Cov4_FwChmodApplier_OnMismatch_Neither(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodApplier.OnMismatch returns correct value -- neither", actual)
 }
 
-func Test_Cov4_FwChmodApplier_OnDiffFile(t *testing.T) {
+func Test_FwChmodApplier_OnDiffFile(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-diff.txt")
@@ -2145,7 +2145,7 @@ func Test_Cov4_FwChmodApplier_OnDiffFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodApplier.OnDiffFile returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodApplier_OnDiffDir(t *testing.T) {
+func Test_FwChmodApplier_OnDiffDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-diffdir.txt")
@@ -2162,7 +2162,7 @@ func Test_Cov4_FwChmodApplier_OnDiffDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodApplier.OnDiffDir returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodApplier_DirRecursive(t *testing.T) {
+func Test_FwChmodApplier_DirRecursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-rec.txt")
@@ -2179,7 +2179,7 @@ func Test_Cov4_FwChmodApplier_DirRecursive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fwChmodApplier.DirRecursive returns correct value -- with args", actual)
 }
 
-func Test_Cov4_FwChmodApplier_OnParentRecursive(t *testing.T) {
+func Test_FwChmodApplier_OnParentRecursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-par-rec.txt")
@@ -2198,7 +2198,7 @@ func Test_Cov4_FwChmodApplier_OnParentRecursive(t *testing.T) {
 
 // ── SimpleFileReaderWriter Lock variants ──
 
-func Test_Cov4_SimpleFileReaderWriter_WriteLockVariants(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteLockVariants(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "lock-variants.txt")
@@ -2214,7 +2214,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteLockVariants(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WriteAnyLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "read-lock.txt")
@@ -2237,7 +2237,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "read-str-lock.txt")
@@ -2260,7 +2260,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadStringLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "exist-lock.txt")
@@ -2283,7 +2283,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadOnExistLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str-exist-lock.txt")
@@ -2306,7 +2306,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExistLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ExpireLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ExpireLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "expire-lock.txt")
@@ -2323,7 +2323,7 @@ func Test_Cov4_SimpleFileReaderWriter_ExpireLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpireLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ExpireParentDirLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ExpireParentDirLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	subDir := filepath.Join(tmpDir, "expire-par-lock")
@@ -2341,7 +2341,7 @@ func Test_Cov4_SimpleFileReaderWriter_ExpireParentDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpireParentDirLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Serialize(t *testing.T) {
+func Test_SimpleFileReaderWriter_Serialize(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "serialize.txt")
@@ -2364,7 +2364,7 @@ func Test_Cov4_SimpleFileReaderWriter_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "serialize-lock.txt")
@@ -2387,7 +2387,7 @@ func Test_Cov4_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SerializeLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Set(t *testing.T) {
+func Test_SimpleFileReaderWriter_Set(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "set.json")
@@ -2403,7 +2403,7 @@ func Test_Cov4_SimpleFileReaderWriter_Set(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Set returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_SetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_SetLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "set-lock.json")
@@ -2419,7 +2419,7 @@ func Test_Cov4_SimpleFileReaderWriter_SetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Deserialize(t *testing.T) {
+func Test_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "deser.json")
@@ -2443,7 +2443,7 @@ func Test_Cov4_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "deser-lock.json")
@@ -2467,7 +2467,7 @@ func Test_Cov4_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_GetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "get-lock.json")
@@ -2491,7 +2491,7 @@ func Test_Cov4_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetLock returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_Get_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_Get_NotExist(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "get-ne.json")
@@ -2508,7 +2508,7 @@ func Test_Cov4_SimpleFileReaderWriter_Get_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Get returns correct value -- not exist", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadMust(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadMust(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "readmust.txt")
@@ -2525,7 +2525,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadMust returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "readstrmust.txt")
@@ -2542,7 +2542,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadStringMust returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WritePath(t *testing.T) {
+func Test_SimpleFileReaderWriter_WritePath(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "writepath.txt")
@@ -2559,7 +2559,7 @@ func Test_Cov4_SimpleFileReaderWriter_WritePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WritePath returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "writerel.txt")
@@ -2575,7 +2575,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WriteRelativePath returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ReadWrite(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadWrite(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "readwrite.json")
@@ -2602,7 +2602,7 @@ func Test_Cov4_SimpleFileReaderWriter_ReadWrite(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadWrite returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_CacheGetSet(t *testing.T) {
+func Test_SimpleFileReaderWriter_CacheGetSet(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "cache.json")
@@ -2628,7 +2628,7 @@ func Test_Cov4_SimpleFileReaderWriter_CacheGetSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CacheGetSet returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_AsJsonContractsBinder(t *testing.T) {
+func Test_SimpleFileReaderWriter_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "binder.txt")
@@ -2643,7 +2643,7 @@ func Test_Cov4_SimpleFileReaderWriter_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SimpleFileReaderWriter_name_Nil(t *testing.T) {
+func Test_SimpleFileReaderWriter_name_Nil(t *testing.T) {
 	// Arrange
 	var rw *chmodhelper.SimpleFileReaderWriter
 	// The name() method is unexported but called by errorWrapFilePath

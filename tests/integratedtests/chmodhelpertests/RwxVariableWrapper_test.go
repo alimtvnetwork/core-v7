@@ -13,7 +13,7 @@ import (
 
 // ── NewRwxVariableWrapper error ──
 
-func Test_Cov11_NewRwxVariableWrapper_Valid(t *testing.T) {
+func Test_NewRwxVariableWrapper_Valid(t *testing.T) {
 	// Arrange
 	vw, err := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -25,7 +25,7 @@ func Test_Cov11_NewRwxVariableWrapper_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid wrapper", actual)
 }
 
-func Test_Cov11_NewRwxVariableWrapper_WithWildcard(t *testing.T) {
+func Test_NewRwxVariableWrapper_WithWildcard(t *testing.T) {
 	// Arrange
 	vw, err := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 
@@ -37,7 +37,7 @@ func Test_Cov11_NewRwxVariableWrapper_WithWildcard(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid wrapper", actual)
 }
 
-func Test_Cov11_NewRwxVariableWrapper_Error(t *testing.T) {
+func Test_NewRwxVariableWrapper_Error(t *testing.T) {
 	// Invalid chars like 'Z' are NOT rejected by ParseRwxToVarAttribute —
 	// they're simply treated as "no permission" (false). No error is returned.
 	vw, err := chmodhelper.NewRwxVariableWrapper("-rZxr-xr-x")
@@ -47,7 +47,7 @@ func Test_Cov11_NewRwxVariableWrapper_Error(t *testing.T) {
 
 // ── RwxVariableWrapper.ToCompileFixedPtr ──
 
-func Test_Cov11_ToCompileFixedPtr_Fixed(t *testing.T) {
+func Test_ToCompileFixedPtr_Fixed(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	ptr := vw.ToCompileFixedPtr()
@@ -60,7 +60,7 @@ func Test_Cov11_ToCompileFixedPtr_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil for fixed type", actual)
 }
 
-func Test_Cov11_ToCompileFixedPtr_Var(t *testing.T) {
+func Test_ToCompileFixedPtr_Var(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 	ptr := vw.ToCompileFixedPtr()
@@ -75,7 +75,7 @@ func Test_Cov11_ToCompileFixedPtr_Var(t *testing.T) {
 
 // ── RwxVariableWrapper.ToCompileWrapperUsingLocationPtr ──
 
-func Test_Cov11_ToCompileWrapperUsingLocationPtr_Fixed(t *testing.T) {
+func Test_ToCompileWrapperUsingLocationPtr_Fixed(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	w, err := vw.ToCompileWrapperUsingLocationPtr("/any")
@@ -88,7 +88,7 @@ func Test_Cov11_ToCompileWrapperUsingLocationPtr_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper for fixed type", actual)
 }
 
-func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Valid(t *testing.T) {
+func Test_ToCompileWrapperUsingLocationPtr_Var_Valid(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov11_compile_loc.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -105,7 +105,7 @@ func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Error(t *testing.T) {
+func Test_ToCompileWrapperUsingLocationPtr_Var_Error(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 	_, err := vw.ToCompileWrapperUsingLocationPtr("/nonexistent/cov11/loc")
@@ -120,7 +120,7 @@ func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Error(t *testing.T) {
 
 // ── RwxVariableWrapper.ApplyRwxOnLocations ──
 
-func Test_Cov11_ApplyRwxOnLocations_ContinueOnError(t *testing.T) {
+func Test_ApplyRwxOnLocations_ContinueOnError(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov11_apply_rwx_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -130,7 +130,7 @@ func Test_Cov11_ApplyRwxOnLocations_ContinueOnError(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov11_ApplyRwxOnLocations_NoContinue(t *testing.T) {
+func Test_ApplyRwxOnLocations_NoContinue(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov11_apply_rwx_nocont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -140,7 +140,7 @@ func Test_Cov11_ApplyRwxOnLocations_NoContinue(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov11_ApplyRwxOnLocations_NoContinue_Error(t *testing.T) {
+func Test_ApplyRwxOnLocations_NoContinue_Error(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	err := vw.ApplyRwxOnLocations(false, false, "/nonexistent/cov11/apply2")
@@ -153,13 +153,13 @@ func Test_Cov11_ApplyRwxOnLocations_NoContinue_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov11_ApplyRwxOnLocations_SkipInvalid(t *testing.T) {
+func Test_ApplyRwxOnLocations_SkipInvalid(t *testing.T) {
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	err := vw.ApplyRwxOnLocations(true, true, "/nonexistent/cov11/apply_skip")
 	_ = err
 }
 
-func Test_Cov11_ApplyRwxOnLocations_NilRwx(t *testing.T) {
+func Test_ApplyRwxOnLocations_NilRwx(t *testing.T) {
 	// rwx == nil branch in the loop
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-***r--r--")
 	err := vw.ApplyRwxOnLocations(true, true, "/nonexistent/cov11/nil_rwx")
@@ -168,7 +168,7 @@ func Test_Cov11_ApplyRwxOnLocations_NilRwx(t *testing.T) {
 
 // ── RwxVariableWrapper.RwxMatchingStatus ──
 
-func Test_Cov11_RwxMatchingStatus_Match(t *testing.T) {
+func Test_RwxMatchingStatus_Match(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
@@ -189,7 +189,7 @@ func Test_Cov11_RwxMatchingStatus_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected all matching", actual)
 }
 
-func Test_Cov11_RwxMatchingStatus_Mismatch(t *testing.T) {
+func Test_RwxMatchingStatus_Mismatch(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov11_rwx_mismatch.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -207,7 +207,7 @@ func Test_Cov11_RwxMatchingStatus_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
-func Test_Cov11_RwxMatchingStatus_Error_NoContinue(t *testing.T) {
+func Test_RwxMatchingStatus_Error_NoContinue(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	status := vw.RwxMatchingStatus(false, false, []string{"/nonexistent/cov11/status"})
@@ -222,7 +222,7 @@ func Test_Cov11_RwxMatchingStatus_Error_NoContinue(t *testing.T) {
 
 // ── RwxVariableWrapper.IsEqualPartialFullRwx short input ──
 
-func Test_Cov11_IsEqualPartialFullRwx_Short(t *testing.T) {
+func Test_IsEqualPartialFullRwx_Short(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	result := vw.IsEqualPartialFullRwx("rwx")
@@ -237,7 +237,7 @@ func Test_Cov11_IsEqualPartialFullRwx_Short(t *testing.T) {
 
 // ── RwxVariableWrapper.IsEqualRwxWrapperPtr nil ──
 
-func Test_Cov11_IsEqualRwxWrapperPtr_Nil(t *testing.T) {
+func Test_IsEqualRwxWrapperPtr_Nil(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	result := vw.IsEqualRwxWrapperPtr(nil)
@@ -250,7 +250,7 @@ func Test_Cov11_IsEqualRwxWrapperPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_Cov11_IsEqualRwxWrapperPtr_Valid(t *testing.T) {
+func Test_IsEqualRwxWrapperPtr_Valid(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	rwx := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
@@ -266,7 +266,7 @@ func Test_Cov11_IsEqualRwxWrapperPtr_Valid(t *testing.T) {
 
 // ── RwxVariableWrapper.IsEqualUsingFileInfo nil ──
 
-func Test_Cov11_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -278,7 +278,7 @@ func Test_Cov11_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_Cov11_IsEqualUsingFileInfo_Valid(t *testing.T) {
+func Test_IsEqualUsingFileInfo_Valid(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
@@ -302,7 +302,7 @@ func Test_Cov11_IsEqualUsingFileInfo_Valid(t *testing.T) {
 
 // ── RwxVariableWrapper.IsEqualUsingLocation ──
 
-func Test_Cov11_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -314,7 +314,7 @@ func Test_Cov11_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_Cov11_IsEqualUsingLocation_Valid(t *testing.T) {
+func Test_IsEqualUsingLocation_Valid(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
@@ -337,7 +337,7 @@ func Test_Cov11_IsEqualUsingLocation_Valid(t *testing.T) {
 
 // ── VarAttribute.IsEqualPtr nil branches ──
 
-func Test_Cov11_VarAttribute_IsEqualPtr_BothNil(t *testing.T) {
+func Test_VarAttribute_IsEqualPtr_BothNil(t *testing.T) {
 	// Covered through RwxVariableWrapper.IsEqualPtr with both nil
 	var vw1 *chmodhelper.RwxVariableWrapper
 	var vw2 *chmodhelper.RwxVariableWrapper
@@ -347,7 +347,7 @@ func Test_Cov11_VarAttribute_IsEqualPtr_BothNil(t *testing.T) {
 
 // ── MergeRwxWildcardWithFixedRwx error ──
 
-func Test_Cov11_MergeRwxWildcard_Error(t *testing.T) {
+func Test_MergeRwxWildcard_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.MergeRwxWildcardWithFixedRwx("rwx", "rw")
 
@@ -359,7 +359,7 @@ func Test_Cov11_MergeRwxWildcard_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
 
-func Test_Cov11_MergeRwxWildcard_Error2(t *testing.T) {
+func Test_MergeRwxWildcard_Error2(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.MergeRwxWildcardWithFixedRwx("rw", "rwx")
 
@@ -373,7 +373,7 @@ func Test_Cov11_MergeRwxWildcard_Error2(t *testing.T) {
 
 // ── ParseRwxOwnerGroupOtherToFileModeMust panic ──
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToFileModeMust_Panic(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToFileModeMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -390,7 +390,7 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToFileModeMust_Panic(t *testing.T) {
 
 // ── ParseRwxInstructionToVarWrapper nil ──
 
-func Test_Cov11_ParseRwxInstructionToVarWrapper_Nil(t *testing.T) {
+func Test_ParseRwxInstructionToVarWrapper_Nil(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.ParseRwxInstructionToVarWrapper(nil)
 
@@ -402,7 +402,7 @@ func Test_Cov11_ParseRwxInstructionToVarWrapper_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
-func Test_Cov11_ParseRwxInstructionToVarWrapper_Valid(t *testing.T) {
+func Test_ParseRwxInstructionToVarWrapper_Valid(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -421,7 +421,7 @@ func Test_Cov11_ParseRwxInstructionToVarWrapper_Valid(t *testing.T) {
 
 // ── ParseRwxInstructionsToExecutors ──
 
-func Test_Cov11_ParseRwxInstructionsToExecutors_Error(t *testing.T) {
+func Test_ParseRwxInstructionsToExecutors_Error(t *testing.T) {
 	// Invalid chars like 'Z' are NOT rejected — treated as "no permission".
 	instructions := []chmodins.RwxInstruction{
 		{
@@ -437,7 +437,7 @@ func Test_Cov11_ParseRwxInstructionsToExecutors_Error(t *testing.T) {
 
 // ── ParseRwxOwnerGroupOtherToRwxVariableWrapper branches ──
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_Nil(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToRwxVariableWrapper_Nil(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(nil)
 
@@ -449,7 +449,7 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OwnerError(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OwnerError(t *testing.T) {
 	// Invalid chars like 'Z' don't cause errors in ParseRwxToVarAttribute —
 	// they're treated as "no permission". Exercise the code path.
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
@@ -458,14 +458,14 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OwnerError(t *testin
 	_ = err
 }
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_GroupError(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToRwxVariableWrapper_GroupError(t *testing.T) {
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
 		&chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "rZx", Other: "rwx"})
 	_ = result
 	_ = err
 }
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OtherError(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OtherError(t *testing.T) {
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
 		&chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "rwx", Other: "rZx"})
 	_ = result
@@ -474,7 +474,7 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_OtherError(t *testin
 
 // ── ParseRwxOwnerGroupOtherToFileMode error ──
 
-func Test_Cov11_ParseRwxOwnerGroupOtherToFileMode_Error(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToFileMode_Error(t *testing.T) {
 	defer func() { recover() }() // may panic on nil via reflect
 	_, err := chmodhelper.ParseRwxOwnerGroupOtherToFileMode(nil)
 	_ = err
@@ -482,7 +482,7 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToFileMode_Error(t *testing.T) {
 
 // ── RwxPartialToInstructionExecutor ──
 
-func Test_Cov11_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.RwxPartialToInstructionExecutor("-rwxr-xr-x", nil)
 
@@ -494,7 +494,7 @@ func Test_Cov11_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil condition", actual)
 }
 
-func Test_Cov11_RwxPartialToInstructionExecutor_Valid(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_Valid(t *testing.T) {
 	// Arrange
 	exec, err := chmodhelper.RwxPartialToInstructionExecutor(
 		"-rwxr-xr-x",

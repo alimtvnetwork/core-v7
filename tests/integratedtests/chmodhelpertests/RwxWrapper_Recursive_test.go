@@ -11,7 +11,7 @@ import (
 
 // ── RwxWrapper.LinuxApplyRecursive valid dir (line 328-345) ──
 
-func Test_Cov19_RwxWrapper_LinuxApplyRecursive_ValidDir(t *testing.T) {
+func Test_RwxWrapper_LinuxApplyRecursive_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -34,7 +34,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_ValidDir(t *testing.T) {
 
 // ── RwxWrapper.LinuxApplyRecursive invalid path, skip=false ──
 
-func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidNotSkip(t *testing.T) {
+func Test_RwxWrapper_LinuxApplyRecursive_InvalidNotSkip(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -53,7 +53,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidNotSkip(t *testing.T) {
 
 // ── RwxWrapper.LinuxApplyRecursive invalid path, skip=true ──
 
-func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidSkip(t *testing.T) {
+func Test_RwxWrapper_LinuxApplyRecursive_InvalidSkip(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -72,7 +72,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidSkip(t *testing.T) {
 
 // ── RwxWrapper.ApplyRecursive valid dir ──
 
-func Test_Cov19_RwxWrapper_ApplyRecursive_ValidDir(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -93,7 +93,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_ValidDir(t *testing.T) {
 
 // ── RwxWrapper.ApplyRecursive invalid path not skip ──
 
-func Test_Cov19_RwxWrapper_ApplyRecursive_InvalidNotSkip(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_InvalidNotSkip(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -112,7 +112,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_InvalidNotSkip(t *testing.T) {
 
 // ── RwxWrapper.ApplyRecursive on a single file ──
 
-func Test_Cov19_RwxWrapper_ApplyRecursive_SingleFile(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_SingleFile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -134,7 +134,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_SingleFile(t *testing.T) {
 
 // ── RwxWrapper.ApplyRecursive_Dir_CmdPath — linux cmd-based recursive chmod ──
 
-func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}

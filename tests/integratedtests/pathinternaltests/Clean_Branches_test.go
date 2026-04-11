@@ -10,7 +10,7 @@ import (
 
 // ── Clean ──
 
-func Test_Cov2_Clean_Empty(t *testing.T) {
+func Test_Clean_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": pathinternal.Clean("")}
 
@@ -19,7 +19,7 @@ func Test_Cov2_Clean_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clean returns empty -- empty", actual)
 }
 
-func Test_Cov2_Clean_Valid(t *testing.T) {
+func Test_Clean_Valid(t *testing.T) {
 	// Arrange
 	result := pathinternal.Clean("/tmp/test/../other")
 
@@ -33,7 +33,7 @@ func Test_Cov2_Clean_Valid(t *testing.T) {
 
 // ── Join ──
 
-func Test_Cov2_Join(t *testing.T) {
+func Test_Join(t *testing.T) {
 	// Arrange
 	result := pathinternal.Join("a", "b", "c")
 
@@ -47,7 +47,7 @@ func Test_Cov2_Join(t *testing.T) {
 
 // ── JoinTemp ──
 
-func Test_Cov2_JoinTemp(t *testing.T) {
+func Test_JoinTemp(t *testing.T) {
 	// Arrange
 	result := pathinternal.JoinTemp("subdir", "file.txt")
 
@@ -61,7 +61,7 @@ func Test_Cov2_JoinTemp(t *testing.T) {
 
 // ── ParentDir ──
 
-func Test_Cov2_ParentDir_Empty(t *testing.T) {
+func Test_ParentDir_Empty(t *testing.T) {
 	// Act
 	actual := args.Map{"result": pathinternal.ParentDir("")}
 
@@ -70,7 +70,7 @@ func Test_Cov2_ParentDir_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParentDir returns empty -- empty", actual)
 }
 
-func Test_Cov2_ParentDir_Valid(t *testing.T) {
+func Test_ParentDir_Valid(t *testing.T) {
 	// Arrange
 	result := pathinternal.ParentDir("/tmp/test/file.txt")
 
@@ -84,7 +84,7 @@ func Test_Cov2_ParentDir_Valid(t *testing.T) {
 
 // ── Relative ──
 
-func Test_Cov2_Relative(t *testing.T) {
+func Test_Relative(t *testing.T) {
 	// Arrange
 	result := pathinternal.Relative("/tmp", "/tmp/sub/file.txt")
 
@@ -98,7 +98,7 @@ func Test_Cov2_Relative(t *testing.T) {
 
 // ── IsPathExists ──
 
-func Test_Cov2_IsPathExists_True(t *testing.T) {
+func Test_IsPathExists_True(t *testing.T) {
 	// Act
 	actual := args.Map{"exists": pathinternal.IsPathExists(os.TempDir())}
 
@@ -107,7 +107,7 @@ func Test_Cov2_IsPathExists_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathExists returns non-empty -- true", actual)
 }
 
-func Test_Cov2_IsPathExists_False(t *testing.T) {
+func Test_IsPathExists_False(t *testing.T) {
 	// Act
 	actual := args.Map{"exists": pathinternal.IsPathExists("/nonexistent/path/xyz")}
 
@@ -118,7 +118,7 @@ func Test_Cov2_IsPathExists_False(t *testing.T) {
 
 // ── GetTemp ──
 
-func Test_Cov2_GetTemp(t *testing.T) {
+func Test_GetTemp(t *testing.T) {
 	// Arrange
 	result := pathinternal.GetTemp()
 
@@ -132,7 +132,7 @@ func Test_Cov2_GetTemp(t *testing.T) {
 
 // ── RemoveDirIf ──
 
-func Test_Cov2_RemoveDirIf_FalseCondition(t *testing.T) {
+func Test_RemoveDirIf_FalseCondition(t *testing.T) {
 	// Arrange
 	err := pathinternal.RemoveDirIf(false, "/tmp/nonexist", "test")
 
@@ -144,7 +144,7 @@ func Test_Cov2_RemoveDirIf_FalseCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveDirIf returns non-empty -- false condition", actual)
 }
 
-func Test_Cov2_RemoveDirIf_NonExistentDir(t *testing.T) {
+func Test_RemoveDirIf_NonExistentDir(t *testing.T) {
 	// Arrange
 	err := pathinternal.RemoveDirIf(true, "/tmp/nonexistent_dir_xyz_test", "test")
 

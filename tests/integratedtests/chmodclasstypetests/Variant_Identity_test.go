@@ -9,7 +9,7 @@ import (
 
 // ── Variant identity checks ──
 
-func Test_Cov_Variant_Identity(t *testing.T) {
+func Test_Variant_Identity(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"invalidIsInvalid": chmodclasstype.Invalid.IsInvalid(),
@@ -42,7 +42,7 @@ func Test_Cov_Variant_Identity(t *testing.T) {
 
 // ── Variant value methods ──
 
-func Test_Cov_Variant_Values(t *testing.T) {
+func Test_Variant_Values(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 
@@ -74,7 +74,7 @@ func Test_Cov_Variant_Values(t *testing.T) {
 
 // ── Variant name methods ──
 
-func Test_Cov_Variant_Names(t *testing.T) {
+func Test_Variant_Names(t *testing.T) {
 	// Arrange
 	owner := chmodclasstype.Owner
 
@@ -98,7 +98,7 @@ func Test_Cov_Variant_Names(t *testing.T) {
 
 // ── Variant comparison methods ──
 
-func Test_Cov_Variant_Comparison(t *testing.T) {
+func Test_Variant_Comparison(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	ownerEnum := chmodclasstype.Owner
@@ -133,7 +133,7 @@ func Test_Cov_Variant_Comparison(t *testing.T) {
 
 // ── Variant IsAnyEnumsEqual ──
 
-func Test_Cov_Variant_IsAnyEnumsEqual(t *testing.T) {
+func Test_Variant_IsAnyEnumsEqual(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	group := chmodclasstype.Group
@@ -156,7 +156,7 @@ func Test_Cov_Variant_IsAnyEnumsEqual(t *testing.T) {
 
 // ── Variant enum metadata ──
 
-func Test_Cov_Variant_Metadata(t *testing.T) {
+func Test_Variant_Metadata(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 
@@ -198,7 +198,7 @@ func Test_Cov_Variant_Metadata(t *testing.T) {
 
 // ── Variant MinMaxAny ──
 
-func Test_Cov_Variant_MinMaxAny(t *testing.T) {
+func Test_Variant_MinMaxAny(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	min, max := v.MinMaxAny()
@@ -219,7 +219,7 @@ func Test_Cov_Variant_MinMaxAny(t *testing.T) {
 
 // ── Variant JSON ──
 
-func Test_Cov_Variant_MarshalJSON(t *testing.T) {
+func Test_Variant_MarshalJSON(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	bytes, err := v.MarshalJSON()
@@ -238,7 +238,7 @@ func Test_Cov_Variant_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant MarshalJSON returns bytes -- Owner", actual)
 }
 
-func Test_Cov_Variant_UnmarshalJSON(t *testing.T) {
+func Test_Variant_UnmarshalJSON(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	bytes, _ := v.MarshalJSON()
@@ -260,7 +260,7 @@ func Test_Cov_Variant_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant UnmarshalJSON roundtrip -- Owner", actual)
 }
 
-func Test_Cov_Variant_UnmarshalJSON_Invalid(t *testing.T) {
+func Test_Variant_UnmarshalJSON_Invalid(t *testing.T) {
 	// Arrange
 	var target chmodclasstype.Variant
 	err := target.UnmarshalJSON([]byte(`"invalid_enum_name"`))
@@ -275,7 +275,7 @@ func Test_Cov_Variant_UnmarshalJSON_Invalid(t *testing.T) {
 
 // ── Variant OnlySupportedErr ──
 
-func Test_Cov_Variant_OnlySupportedErr(t *testing.T) {
+func Test_Variant_OnlySupportedErr(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	// OnlySupportedErr checks ALL enum names against supported list.
@@ -290,7 +290,7 @@ func Test_Cov_Variant_OnlySupportedErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant OnlySupportedErr returns error -- subset supported", actual)
 }
 
-func Test_Cov_Variant_OnlySupportedMsgErr(t *testing.T) {
+func Test_Variant_OnlySupportedMsgErr(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	// Same: passing a subset means error is returned.
@@ -306,7 +306,7 @@ func Test_Cov_Variant_OnlySupportedMsgErr(t *testing.T) {
 
 // ── Variant AsContractsBinder ──
 
-func Test_Cov_Variant_AsContractsBinder(t *testing.T) {
+func Test_Variant_AsContractsBinder(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 
@@ -326,7 +326,7 @@ func Test_Cov_Variant_AsContractsBinder(t *testing.T) {
 
 // ── Variant UnmarshallEnumToValue ──
 
-func Test_Cov_Variant_UnmarshallEnumToValue(t *testing.T) {
+func Test_Variant_UnmarshallEnumToValue(t *testing.T) {
 	// Arrange
 	v := chmodclasstype.Owner
 	val, err := v.UnmarshallEnumToValue([]byte(`"Owner"`))

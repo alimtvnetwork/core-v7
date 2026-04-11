@@ -15,7 +15,7 @@ import (
 
 // ── RwxWrapper.ApplyChmod on valid file (lines 227-255) ──
 
-func Test_Cov19_RwxWrapper_ApplyChmod_ValidFile(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_ValidFile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -37,7 +37,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_ValidFile(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmod on invalid path (lines 237-239) ──
 
-func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -56,7 +56,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmod skipOnInvalid with invalid path ──
 
-func Test_Cov19_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -75,7 +75,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmodSkipInvalid (line 304-307) ──
 
-func Test_Cov19_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -94,7 +94,7 @@ func Test_Cov19_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
 
 // ── RwxWrapper: invalidPathErr (line 86-93) ──
 
-func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath_NotSkip(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_InvalidPath_NotSkip(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -113,7 +113,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath_NotSkip(t *testing.T) {
 
 // ── RwxWrapper.IsEqualVarWrapper (line 579-588) ──
 
-func Test_Cov19_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
+func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
 	wrapper := mustRwxWrapper("rwxr-xr-x")
 

@@ -14,7 +14,7 @@ import (
 
 // ── Attribute — uncovered branches ──
 
-func Test_Cov5_Attribute_AllMethods(t *testing.T) {
+func Test_Attribute_AllMethods(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
 	emptyAttr := chmodhelper.Attribute{}
@@ -46,7 +46,7 @@ func Test_Cov5_Attribute_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- all methods", actual)
 }
 
-func Test_Cov5_Attribute_ToSpecificBytes(t *testing.T) {
+func Test_Attribute_ToSpecificBytes(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.Attribute{IsRead: true, IsWrite: false, IsExecute: true}
 	r, w, e, sum := attr.ToSpecificBytes()
@@ -69,7 +69,7 @@ func Test_Cov5_Attribute_ToSpecificBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSpecificBytes returns correct value -- with args", actual)
 }
 
-func Test_Cov5_Attribute_ToAttributeValue(t *testing.T) {
+func Test_Attribute_ToAttributeValue(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: false}
 	av := attr.ToAttributeValue()
@@ -82,7 +82,7 @@ func Test_Cov5_Attribute_ToAttributeValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToAttributeValue returns correct value -- with args", actual)
 }
 
-func Test_Cov5_Attribute_ToRwx(t *testing.T) {
+func Test_Attribute_ToRwx(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.Attribute{IsRead: true, IsWrite: false, IsExecute: false}
 	rwx := attr.ToRwx()
@@ -103,7 +103,7 @@ func Test_Cov5_Attribute_ToRwx(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToRwx returns correct value -- with args", actual)
 }
 
-func Test_Cov5_Attribute_ToVariant(t *testing.T) {
+func Test_Attribute_ToVariant(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
 	v := attr.ToVariant()
@@ -116,7 +116,7 @@ func Test_Cov5_Attribute_ToVariant(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToVariant returns correct value -- with args", actual)
 }
 
-func Test_Cov5_Attribute_Clone_Nil(t *testing.T) {
+func Test_Attribute_Clone_Nil(t *testing.T) {
 	// Arrange
 	var nilAttr *chmodhelper.Attribute
 
@@ -128,7 +128,7 @@ func Test_Cov5_Attribute_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns nil -- nil", actual)
 }
 
-func Test_Cov5_Attribute_Clone_Valid(t *testing.T) {
+func Test_Attribute_Clone_Valid(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true}
 	c := attr.Clone()
@@ -141,7 +141,7 @@ func Test_Cov5_Attribute_Clone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns non-empty -- valid", actual)
 }
 
-func Test_Cov5_Attribute_IsEqualPtr(t *testing.T) {
+func Test_Attribute_IsEqualPtr(t *testing.T) {
 	// Arrange
 	a := &chmodhelper.Attribute{IsRead: true}
 	b := &chmodhelper.Attribute{IsRead: true}
@@ -164,7 +164,7 @@ func Test_Cov5_Attribute_IsEqualPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov5_Attribute_IsEqual(t *testing.T) {
+func Test_Attribute_IsEqual(t *testing.T) {
 	// Arrange
 	a := chmodhelper.Attribute{IsRead: true}
 	b := chmodhelper.Attribute{IsRead: true}
@@ -186,7 +186,7 @@ func Test_Cov5_Attribute_IsEqual(t *testing.T) {
 
 // ── AttrVariant ──
 
-func Test_Cov5_AttrVariant_All(t *testing.T) {
+func Test_AttrVariant_All(t *testing.T) {
 	// Arrange
 	v := chmodhelper.ReadWriteExecute
 
@@ -212,7 +212,7 @@ func Test_Cov5_AttrVariant_All(t *testing.T) {
 
 // ── Variant ──
 
-func Test_Cov5_Variant_String(t *testing.T) {
+func Test_Variant_String(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -224,7 +224,7 @@ func Test_Cov5_Variant_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- String", actual)
 }
 
-func Test_Cov5_Variant_ExpandOctalByte(t *testing.T) {
+func Test_Variant_ExpandOctalByte(t *testing.T) {
 	// Arrange
 	r, w, x := chmodhelper.X755.ExpandOctalByte()
 
@@ -244,7 +244,7 @@ func Test_Cov5_Variant_ExpandOctalByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ExpandOctalByte", actual)
 }
 
-func Test_Cov5_Variant_ToWrapper(t *testing.T) {
+func Test_Variant_ToWrapper(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapper()
 
@@ -262,7 +262,7 @@ func Test_Cov5_Variant_ToWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToWrapper", actual)
 }
 
-func Test_Cov5_Variant_ToWrapperPtr(t *testing.T) {
+func Test_Variant_ToWrapperPtr(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapperPtr()
 
@@ -282,7 +282,7 @@ func Test_Cov5_Variant_ToWrapperPtr(t *testing.T) {
 
 // ── ExpandCharRwx ──
 
-func Test_Cov5_ExpandCharRwx(t *testing.T) {
+func Test_ExpandCharRwx(t *testing.T) {
 	// Arrange
 	r, w, x := chmodhelper.ExpandCharRwx("755")
 
@@ -304,7 +304,7 @@ func Test_Cov5_ExpandCharRwx(t *testing.T) {
 
 // ── IsChmod ──
 
-func Test_Cov5_IsChmod_ShortString(t *testing.T) {
+func Test_IsChmod_ShortString(t *testing.T) {
 	// Act
 	actual := args.Map{"val": chmodhelper.IsChmod("/tmp", "rwx")}
 
@@ -313,7 +313,7 @@ func Test_Cov5_IsChmod_ShortString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsChmod returns correct value -- short", actual)
 }
 
-func Test_Cov5_IsChmod_EmptyLoc(t *testing.T) {
+func Test_IsChmod_EmptyLoc(t *testing.T) {
 	// Act
 	actual := args.Map{"val": chmodhelper.IsChmod("", "-rwxrwxrwx")}
 
@@ -322,7 +322,7 @@ func Test_Cov5_IsChmod_EmptyLoc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsChmod returns empty -- empty loc", actual)
 }
 
-func Test_Cov5_IsChmod_NonExistent(t *testing.T) {
+func Test_IsChmod_NonExistent(t *testing.T) {
 	// Act
 	actual := args.Map{"val": chmodhelper.IsChmod("/nonexistent_cov5_xyz", "-rwxrwxrwx")}
 
@@ -333,7 +333,7 @@ func Test_Cov5_IsChmod_NonExistent(t *testing.T) {
 
 // ── FileModeFriendlyString ──
 
-func Test_Cov5_FileModeFriendlyString(t *testing.T) {
+func Test_FileModeFriendlyString(t *testing.T) {
 	// Arrange
 	result := chmodhelper.FileModeFriendlyString(0755)
 
@@ -347,7 +347,7 @@ func Test_Cov5_FileModeFriendlyString(t *testing.T) {
 
 // ── RwxWrapper — uncovered branches ──
 
-func Test_Cov5_RwxWrapper_IsEqualPtr(t *testing.T) {
+func Test_RwxWrapper_IsEqualPtr(t *testing.T) {
 	// Arrange
 	a, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	b, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
@@ -372,7 +372,7 @@ func Test_Cov5_RwxWrapper_IsEqualPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- IsEqualPtr", actual)
 }
 
-func Test_Cov5_RwxWrapper_IsEqualFileMode(t *testing.T) {
+func Test_RwxWrapper_IsEqualFileMode(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -390,7 +390,7 @@ func Test_Cov5_RwxWrapper_IsEqualFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualFileMode returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_IsRwxFullEqual(t *testing.T) {
+func Test_RwxWrapper_IsRwxFullEqual(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -408,7 +408,7 @@ func Test_Cov5_RwxWrapper_IsRwxFullEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsRwxFullEqual returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_IsRwxEqualLocation(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualLocation(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -420,7 +420,7 @@ func Test_Cov5_RwxWrapper_IsRwxEqualLocation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsRwxEqualLocation returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_IsRwxEqualFileInfo(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualFileInfo(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -432,7 +432,7 @@ func Test_Cov5_RwxWrapper_IsRwxEqualFileInfo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsRwxEqualFileInfo returns nil -- nil", actual)
 }
 
-func Test_Cov5_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
+func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -444,7 +444,7 @@ func Test_Cov5_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualVarWrapper returns nil -- nil", actual)
 }
 
-func Test_Cov5_RwxWrapper_Clone_Nil(t *testing.T) {
+func Test_RwxWrapper_Clone_Nil(t *testing.T) {
 	// Arrange
 	var nilRwx *chmodhelper.RwxWrapper
 
@@ -456,7 +456,7 @@ func Test_Cov5_RwxWrapper_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns nil -- nil", actual)
 }
 
-func Test_Cov5_RwxWrapper_Clone_Valid(t *testing.T) {
+func Test_RwxWrapper_Clone_Valid(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	c := rwx.Clone()
@@ -469,7 +469,7 @@ func Test_Cov5_RwxWrapper_Clone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone returns non-empty -- valid", actual)
 }
 
-func Test_Cov5_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
+func Test_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	p := rwx.ToPtr()
@@ -489,7 +489,7 @@ func Test_Cov5_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToPtr/ToNonPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
+func Test_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	ogo := rwx.ToRwxOwnerGroupOther()
@@ -502,7 +502,7 @@ func Test_Cov5_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToRwxOwnerGroupOther returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_ToRwxInstruction(t *testing.T) {
+func Test_RwxWrapper_ToRwxInstruction(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	cond := &chmodins.Condition{}
@@ -516,7 +516,7 @@ func Test_Cov5_RwxWrapper_ToRwxInstruction(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToRwxInstruction returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_MarshalUnmarshalJSON(t *testing.T) {
+func Test_RwxWrapper_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	b, err := rwx.MarshalJSON()
@@ -539,7 +539,7 @@ func Test_Cov5_RwxWrapper_MarshalUnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MarshalUnmarshalJSON returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_FriendlyDisplay(t *testing.T) {
+func Test_RwxWrapper_FriendlyDisplay(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -551,7 +551,7 @@ func Test_Cov5_RwxWrapper_FriendlyDisplay(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FriendlyDisplay returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_Json(t *testing.T) {
+func Test_RwxWrapper_Json(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	r := rwx.Json()
@@ -571,7 +571,7 @@ func Test_Cov5_RwxWrapper_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Json/JsonPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_AsJsonContractsBinder(t *testing.T) {
+func Test_RwxWrapper_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 
@@ -583,7 +583,7 @@ func Test_Cov5_RwxWrapper_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_VerifyPaths(t *testing.T) {
+func Test_RwxWrapper_VerifyPaths(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod verification differs on Windows")
@@ -601,7 +601,7 @@ func Test_Cov5_RwxWrapper_VerifyPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyPaths returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_ApplyLinuxChmodOnMany(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
@@ -616,7 +616,7 @@ func Test_Cov5_RwxWrapper_ApplyLinuxChmodOnMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ApplyLinuxChmodOnMany returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
@@ -633,7 +633,7 @@ func Test_Cov5_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 
 // ── newRwxWrapperCreator — uncovered branches ──
 
-func Test_Cov5_NewRwxWrapper_CreatePtr(t *testing.T) {
+func Test_NewRwxWrapper_CreatePtr(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.New.RwxWrapper.CreatePtr("755")
 
@@ -651,7 +651,7 @@ func Test_Cov5_NewRwxWrapper_CreatePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewRwxWrapper returns correct value -- CreatePtr", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingBytes(t *testing.T) {
+func Test_NewRwxWrapper_UsingBytes(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingBytes([3]byte{7, 5, 5})
 
@@ -663,7 +663,7 @@ func Test_Cov5_NewRwxWrapper_UsingBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingBytes returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_Invalid(t *testing.T) {
+func Test_NewRwxWrapper_Invalid(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.Invalid()
 
@@ -675,7 +675,7 @@ func Test_Cov5_NewRwxWrapper_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invalid returns error -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_InvalidPtr(t *testing.T) {
+func Test_NewRwxWrapper_InvalidPtr(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.InvalidPtr()
 
@@ -687,7 +687,7 @@ func Test_Cov5_NewRwxWrapper_InvalidPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidPtr returns error -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_Empty(t *testing.T) {
+func Test_NewRwxWrapper_Empty(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.Empty()
 
@@ -699,7 +699,7 @@ func Test_Cov5_NewRwxWrapper_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty returns empty -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingFileMode_Zero(t *testing.T) {
+func Test_NewRwxWrapper_UsingFileMode_Zero(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0)
 
@@ -711,7 +711,7 @@ func Test_Cov5_NewRwxWrapper_UsingFileMode_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingFileMode returns correct value -- zero", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
+func Test_NewRwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileModePtr(0)
 
@@ -723,7 +723,7 @@ func Test_Cov5_NewRwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingFileModePtr returns correct value -- zero", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingAttrVariants(t *testing.T) {
+func Test_NewRwxWrapper_UsingAttrVariants(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingAttrVariants(chmodhelper.ReadWriteExecute, chmodhelper.ReadExecute, chmodhelper.ReadExecute)
 
@@ -735,7 +735,7 @@ func Test_Cov5_NewRwxWrapper_UsingAttrVariants(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingAttrVariants returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingAttrs(t *testing.T) {
+func Test_NewRwxWrapper_UsingAttrs(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingAttrs(
 		chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true},
@@ -751,7 +751,7 @@ func Test_Cov5_NewRwxWrapper_UsingAttrs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingAttrs returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_Rwx10(t *testing.T) {
+func Test_NewRwxWrapper_Rwx10(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.New.RwxWrapper.Rwx10("-rwxr-xr-x")
 
@@ -769,7 +769,7 @@ func Test_Cov5_NewRwxWrapper_Rwx10(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Rwx10 returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_Rwx9(t *testing.T) {
+func Test_NewRwxWrapper_Rwx9(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.New.RwxWrapper.Rwx9("rwxr-xr-x")
 
@@ -787,7 +787,7 @@ func Test_Cov5_NewRwxWrapper_Rwx9(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Rwx9 returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_RwxFullString_BadLen(t *testing.T) {
+func Test_NewRwxWrapper_RwxFullString_BadLen(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.New.RwxWrapper.RwxFullString("rwx")
 
@@ -799,7 +799,7 @@ func Test_Cov5_NewRwxWrapper_RwxFullString_BadLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxFullString returns correct value -- bad len", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_RwxFullStringWtHyphen_BadLen(t *testing.T) {
+func Test_NewRwxWrapper_RwxFullStringWtHyphen_BadLen(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rw")
 
@@ -811,7 +811,7 @@ func Test_Cov5_NewRwxWrapper_RwxFullStringWtHyphen_BadLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxFullStringWtHyphen returns correct value -- bad len", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingExistingFile(t *testing.T) {
+func Test_NewRwxWrapper_UsingExistingFile(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "exist.txt")
@@ -832,7 +832,7 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingExistingFile returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingExistingFileSkipInvalidFile(t *testing.T) {
+func Test_NewRwxWrapper_UsingExistingFileSkipInvalidFile(t *testing.T) {
 	// Arrange
 	rwx, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileSkipInvalidFile("/nonexistent_cov5")
 
@@ -850,7 +850,7 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileSkipInvalidFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileSkipInvalidFile returns error -- with args", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_Skip(t *testing.T) {
+func Test_NewRwxWrapper_UsingExistingFileOption_Skip(t *testing.T) {
 	// Arrange
 	rwx, err, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileOption(true, "/nonexistent_cov5")
 
@@ -870,7 +870,7 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileOption returns correct value -- skip", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_NoSkip(t *testing.T) {
+func Test_NewRwxWrapper_UsingExistingFileOption_NoSkip(t *testing.T) {
 	// Arrange
 	rwx, err, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileOption(false, "/nonexistent_cov5")
 
@@ -890,7 +890,7 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_NoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileOption returns correct value -- no-skip", actual)
 }
 
-func Test_Cov5_NewRwxWrapper_Instruction(t *testing.T) {
+func Test_NewRwxWrapper_Instruction(t *testing.T) {
 	// Arrange
 	ins, err := chmodhelper.New.RwxWrapper.Instruction("-rwxr-xr-x", chmodins.Condition{})
 
@@ -910,7 +910,7 @@ func Test_Cov5_NewRwxWrapper_Instruction(t *testing.T) {
 
 // ── SingleRwx ──
 
-func Test_Cov5_SingleRwx_AllClassTypes(t *testing.T) {
+func Test_SingleRwx_AllClassTypes(t *testing.T) {
 	// Arrange
 	classTypes := []chmodclasstype.Variant{
 		chmodclasstype.All, chmodclasstype.Owner, chmodclasstype.Group,
@@ -933,7 +933,7 @@ func Test_Cov5_SingleRwx_AllClassTypes(t *testing.T) {
 	}
 }
 
-func Test_Cov5_SingleRwx_BadLength(t *testing.T) {
+func Test_SingleRwx_BadLength(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.NewSingleRwx("rw", chmodclasstype.All)
 
@@ -945,7 +945,7 @@ func Test_Cov5_SingleRwx_BadLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- bad length", actual)
 }
 
-func Test_Cov5_SingleRwx_ToRwxInstruction(t *testing.T) {
+func Test_SingleRwx_ToRwxInstruction(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	cond := &chmodins.Condition{}
@@ -959,7 +959,7 @@ func Test_Cov5_SingleRwx_ToRwxInstruction(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToRwxInstruction", actual)
 }
 
-func Test_Cov5_SingleRwx_ToVarRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToVarRwxWrapper(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	vw, err := s.ToVarRwxWrapper()
@@ -978,7 +978,7 @@ func Test_Cov5_SingleRwx_ToVarRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToVarRwxWrapper", actual)
 }
 
-func Test_Cov5_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	rwx, err := s.ToDisabledRwxWrapper()
@@ -997,7 +997,7 @@ func Test_Cov5_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToDisabledRwxWrapper", actual)
 }
 
-func Test_Cov5_SingleRwx_ToRwxWrapper_All(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	rwx, err := s.ToRwxWrapper()
@@ -1016,7 +1016,7 @@ func Test_Cov5_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToRwxWrapper all", actual)
 }
 
-func Test_Cov5_SingleRwx_ToRwxWrapper_NonAll(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_NonAll(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	_, err := s.ToRwxWrapper()
@@ -1031,7 +1031,7 @@ func Test_Cov5_SingleRwx_ToRwxWrapper_NonAll(t *testing.T) {
 
 // ── RwxVariableWrapper ──
 
-func Test_Cov5_RwxVariableWrapper_Clone(t *testing.T) {
+func Test_RwxVariableWrapper_Clone(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	c := vw.Clone()
@@ -1051,7 +1051,7 @@ func Test_Cov5_RwxVariableWrapper_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxVariableWrapper returns correct value -- Clone", actual)
 }
 
-func Test_Cov5_RwxVariableWrapper_IsEqualPtr(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualPtr(t *testing.T) {
 	// Arrange
 	a, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	b, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
@@ -1073,7 +1073,7 @@ func Test_Cov5_RwxVariableWrapper_IsEqualPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov5_RwxVariableWrapper_ToString(t *testing.T) {
+func Test_RwxVariableWrapper_ToString(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	withH := vw.ToString(true)
@@ -1095,7 +1095,7 @@ func Test_Cov5_RwxVariableWrapper_ToString(t *testing.T) {
 
 // ── RwxMatchingStatus ──
 
-func Test_Cov5_RwxMatchingStatus_Invalid(t *testing.T) {
+func Test_RwxMatchingStatus_Invalid(t *testing.T) {
 	// Arrange
 	s := chmodhelper.InvalidRwxMatchingStatus(nil)
 
@@ -1113,7 +1113,7 @@ func Test_Cov5_RwxMatchingStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidRwxMatchingStatus returns error -- with args", actual)
 }
 
-func Test_Cov5_RwxMatchingStatus_Empty(t *testing.T) {
+func Test_RwxMatchingStatus_Empty(t *testing.T) {
 	// Arrange
 	s := chmodhelper.EmptyRwxMatchingStatus()
 
@@ -1131,7 +1131,7 @@ func Test_Cov5_RwxMatchingStatus_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyRwxMatchingStatus returns empty -- with args", actual)
 }
 
-func Test_Cov5_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
+func Test_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
 	// Arrange
 	s := &chmodhelper.RwxMatchingStatus{IsAllMatching: true}
 
@@ -1145,7 +1145,7 @@ func Test_Cov5_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
 
 // ── FilteredPathFileInfoMap ──
 
-func Test_Cov5_FilteredPathFileInfoMap_Invalid(t *testing.T) {
+func Test_FilteredPathFileInfoMap_Invalid(t *testing.T) {
 	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 
@@ -1170,7 +1170,7 @@ func Test_Cov5_FilteredPathFileInfoMap_Invalid(t *testing.T) {
 
 // ── PathExistStat ──
 
-func Test_Cov5_PathExistStat_AllMethods(t *testing.T) {
+func Test_PathExistStat_AllMethods(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "stat.txt")
@@ -1206,7 +1206,7 @@ func Test_Cov5_PathExistStat_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns correct value -- all", actual)
 }
 
-func Test_Cov5_PathExistStat_Nil(t *testing.T) {
+func Test_PathExistStat_Nil(t *testing.T) {
 	// Arrange
 	var stat *chmodhelper.PathExistStat
 
@@ -1232,7 +1232,7 @@ func Test_Cov5_PathExistStat_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns nil -- nil", actual)
 }
 
-func Test_Cov5_PathExistStat_NonExist(t *testing.T) {
+func Test_PathExistStat_NonExist(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat("/nonexistent_cov5_xyz")
 
@@ -1252,7 +1252,7 @@ func Test_Cov5_PathExistStat_NonExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns non-empty -- non-exist", actual)
 }
 
-func Test_Cov5_PathExistStat_Dispose(t *testing.T) {
+func Test_PathExistStat_Dispose(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat(t.TempDir())
 	stat.Dispose()
@@ -1271,7 +1271,7 @@ func Test_Cov5_PathExistStat_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns correct value -- Dispose", actual)
 }
 
-func Test_Cov5_PathExistStat_Parent(t *testing.T) {
+func Test_PathExistStat_Parent(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "sub.txt")
@@ -1300,7 +1300,7 @@ func Test_Cov5_PathExistStat_Parent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns correct value -- Parent", actual)
 }
 
-func Test_Cov5_PathExistStat_NotAFileError_Dir(t *testing.T) {
+func Test_PathExistStat_NotAFileError_Dir(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat(t.TempDir())
 	err := stat.NotAFileError()
@@ -1313,7 +1313,7 @@ func Test_Cov5_PathExistStat_NotAFileError_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NotAFileError returns error -- dir", actual)
 }
 
-func Test_Cov5_PathExistStat_NotADirError_File(t *testing.T) {
+func Test_PathExistStat_NotADirError_File(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "f.txt")
@@ -1331,7 +1331,7 @@ func Test_Cov5_PathExistStat_NotADirError_File(t *testing.T) {
 
 // ── SimpleFileReaderWriter — uncovered branches ──
 
-func Test_Cov5_SimpleFileRW_MarshalUnmarshalJSON(t *testing.T) {
+func Test_SimpleFileRW_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, ParentDir: "/tmp", FilePath: "/tmp/test.txt"}
 	b, err := rw.MarshalJSON()
@@ -1354,7 +1354,7 @@ func Test_Cov5_SimpleFileRW_MarshalUnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
-func Test_Cov5_SimpleFileRW_Clone(t *testing.T) {
+func Test_SimpleFileRW_Clone(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 	c := rw.Clone()
@@ -1367,7 +1367,7 @@ func Test_Cov5_SimpleFileRW_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- Clone", actual)
 }
 
-func Test_Cov5_SimpleFileRW_ClonePtr_Nil(t *testing.T) {
+func Test_SimpleFileRW_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var rw *chmodhelper.SimpleFileReaderWriter
 
@@ -1379,7 +1379,7 @@ func Test_Cov5_SimpleFileRW_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns nil -- ClonePtr nil", actual)
 }
 
-func Test_Cov5_SimpleFileRW_Json(t *testing.T) {
+func Test_SimpleFileRW_Json(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 	r := rw.Json()
@@ -1399,7 +1399,7 @@ func Test_Cov5_SimpleFileRW_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- Json", actual)
 }
 
-func Test_Cov5_SimpleFileRW_AsJsonContractsBinder(t *testing.T) {
+func Test_SimpleFileRW_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644}
 
@@ -1411,7 +1411,7 @@ func Test_Cov5_SimpleFileRW_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder returns correct value -- with args", actual)
 }
 
-func Test_Cov5_SimpleFileRW_String(t *testing.T) {
+func Test_SimpleFileRW_String(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 
@@ -1423,7 +1423,7 @@ func Test_Cov5_SimpleFileRW_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- String", actual)
 }
 
-func Test_Cov5_SimpleFileRW_Expire(t *testing.T) {
+func Test_SimpleFileRW_Expire(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "expire.txt")
@@ -1439,7 +1439,7 @@ func Test_Cov5_SimpleFileRW_Expire(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Expire returns correct value -- with args", actual)
 }
 
-func Test_Cov5_SimpleFileRW_Expire_NonExist(t *testing.T) {
+func Test_SimpleFileRW_Expire_NonExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent_cov5"}
 	err := rw.Expire()
@@ -1452,7 +1452,7 @@ func Test_Cov5_SimpleFileRW_Expire_NonExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Expire returns non-empty -- non-exist", actual)
 }
 
-func Test_Cov5_SimpleFileRW_RemoveOnExist(t *testing.T) {
+func Test_SimpleFileRW_RemoveOnExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent_cov5"}
 	err := rw.RemoveOnExist()
@@ -1465,7 +1465,7 @@ func Test_Cov5_SimpleFileRW_RemoveOnExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveOnExist returns correct value -- with args", actual)
 }
 
-func Test_Cov5_SimpleFileRW_RemoveDirOnExist(t *testing.T) {
+func Test_SimpleFileRW_RemoveDirOnExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ParentDir: "/nonexistent_cov5_dir"}
 	err := rw.RemoveDirOnExist()
@@ -1480,7 +1480,7 @@ func Test_Cov5_SimpleFileRW_RemoveDirOnExist(t *testing.T) {
 
 // ── newAttributeCreator — uncovered branches ──
 
-func Test_Cov5_NewAttribute_Create(t *testing.T) {
+func Test_NewAttribute_Create(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Create(true, false, true)
 
@@ -1500,7 +1500,7 @@ func Test_Cov5_NewAttribute_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewAttribute returns correct value -- Create", actual)
 }
 
-func Test_Cov5_NewAttribute_Default(t *testing.T) {
+func Test_NewAttribute_Default(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Default(false, true, false)
 
@@ -1512,7 +1512,7 @@ func Test_Cov5_NewAttribute_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewAttribute returns correct value -- Default", actual)
 }
 
-func Test_Cov5_NewAttribute_UsingByte(t *testing.T) {
+func Test_NewAttribute_UsingByte(t *testing.T) {
 	// Arrange
 	attr, err := chmodhelper.New.Attribute.UsingByte(5)
 
@@ -1532,7 +1532,7 @@ func Test_Cov5_NewAttribute_UsingByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UsingByte returns correct value -- with args", actual)
 }
 
-func Test_Cov5_NewAttribute_UsingVariant(t *testing.T) {
+func Test_NewAttribute_UsingVariant(t *testing.T) {
 	// Arrange
 	attr, err := chmodhelper.New.Attribute.UsingVariant(chmodhelper.ReadWrite)
 
@@ -1554,7 +1554,7 @@ func Test_Cov5_NewAttribute_UsingVariant(t *testing.T) {
 
 // ── VarAttribute — uncovered branches ──
 
-func Test_Cov5_VarAttribute_ToCompileFixAttr_NonFixed(t *testing.T) {
+func Test_VarAttribute_ToCompileFixAttr_NonFixed(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwx***r-x")
 	result := vw.Group.ToCompileFixAttr()
@@ -1567,7 +1567,7 @@ func Test_Cov5_VarAttribute_ToCompileFixAttr_NonFixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToCompileFixAttr returns non-empty -- non-fixed", actual)
 }
 
-func Test_Cov5_VarAttribute_ToCompileAttr_Wildcard(t *testing.T) {
+func Test_VarAttribute_ToCompileAttr_Wildcard(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwx***r-x")
 	fixed := &chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
@@ -1591,7 +1591,7 @@ func Test_Cov5_VarAttribute_ToCompileAttr_Wildcard(t *testing.T) {
 
 // ── newSimpleFileReaderWriterCreator ──
 
-func Test_Cov5_NewSimpleFileRW_Default(t *testing.T) {
+func Test_NewSimpleFileRW_Default(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Default(false, "/tmp/test.txt")
 
@@ -1603,7 +1603,7 @@ func Test_Cov5_NewSimpleFileRW_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileRW returns correct value -- Default", actual)
 }
 
-func Test_Cov5_NewSimpleFileRW_Path(t *testing.T) {
+func Test_NewSimpleFileRW_Path(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Path(false, 0755, 0644, "/tmp/test.txt")
 
@@ -1617,7 +1617,7 @@ func Test_Cov5_NewSimpleFileRW_Path(t *testing.T) {
 
 // ── RwxInstructionExecutors ──
 
-func Test_Cov5_RwxInstructionExecutors_Basic(t *testing.T) {
+func Test_RwxInstructionExecutors_Basic(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 
@@ -1643,7 +1643,7 @@ func Test_Cov5_RwxInstructionExecutors_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxInstructionExecutors returns correct value -- basic", actual)
 }
 
-func Test_Cov5_RwxInstructionExecutors_Add_Nil(t *testing.T) {
+func Test_RwxInstructionExecutors_Add_Nil(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 	execs.Add(nil)
@@ -1656,7 +1656,7 @@ func Test_Cov5_RwxInstructionExecutors_Add_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Add returns nil -- nil", actual)
 }
 
-func Test_Cov5_RwxInstructionExecutors_Items(t *testing.T) {
+func Test_RwxInstructionExecutors_Items(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 

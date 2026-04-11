@@ -18,7 +18,7 @@ func tempDir(t *testing.T) string {
 
 // ── CreateDirWithFiles ──
 
-func Test_Cov6_CreateDirWithFiles(t *testing.T) {
+func Test_CreateDirWithFiles(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "sub")
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: dir, Files: []string{"a.txt"}})
@@ -37,7 +37,7 @@ func Test_Cov6_CreateDirWithFiles(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirWithFiles returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_CreateDirWithFiles_NoFiles(t *testing.T) {
+func Test_CreateDirWithFiles_NoFiles(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "empty")
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: dir, Files: []string{}})
@@ -56,7 +56,7 @@ func Test_Cov6_CreateDirWithFiles_NoFiles(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirWithFiles_NoFiles returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_CreateDirWithFiles_RemoveBefore(t *testing.T) {
+func Test_CreateDirWithFiles_RemoveBefore(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "rmdir")
 	_ = os.MkdirAll(dir, 0755)
@@ -72,7 +72,7 @@ func Test_Cov6_CreateDirWithFiles_RemoveBefore(t *testing.T) {
 
 // ── CreateDirsWithFiles ──
 
-func Test_Cov6_CreateDirsWithFiles(t *testing.T) {
+func Test_CreateDirsWithFiles(t *testing.T) {
 	// Arrange
 	base := tempDir(t)
 	d1 := chmodhelper.DirWithFiles{Dir: filepath.Join(base, "d1"), Files: []string{"f1.txt"}}
@@ -87,7 +87,7 @@ func Test_Cov6_CreateDirsWithFiles(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirsWithFiles returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_CreateDirsWithFiles_Empty(t *testing.T) {
+func Test_CreateDirsWithFiles_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.CreateDirsWithFiles(false, 0755)
 
@@ -101,7 +101,7 @@ func Test_Cov6_CreateDirsWithFiles_Empty(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermission ──
 
-func Test_Cov6_CreateDirFilesWithRwxPermission(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermission(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "rwx")
 	perm := chmodhelper.DirFilesWithRwxPermission{
@@ -120,7 +120,7 @@ func Test_Cov6_CreateDirFilesWithRwxPermission(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermissions ──
 
-func Test_Cov6_CreateDirFilesWithRwxPermissions_Nil(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Nil(t *testing.T) {
 	// Arrange
 	err := chmodhelper.CreateDirFilesWithRwxPermissions(false, nil)
 
@@ -132,7 +132,7 @@ func Test_Cov6_CreateDirFilesWithRwxPermissions_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirFilesWithRwxPermissions_Nil returns nil -- with args", actual)
 }
 
-func Test_Cov6_CreateDirFilesWithRwxPermissions_Empty(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.CreateDirFilesWithRwxPermissions(false, []chmodhelper.DirFilesWithRwxPermission{})
 
@@ -144,7 +144,7 @@ func Test_Cov6_CreateDirFilesWithRwxPermissions_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirFilesWithRwxPermissions_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov6_CreateDirFilesWithRwxPermissions_Valid(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Valid(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "multi")
 	perms := []chmodhelper.DirFilesWithRwxPermission{
@@ -163,7 +163,7 @@ func Test_Cov6_CreateDirFilesWithRwxPermissions_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CreateDirFilesWithRwxPermissions_Valid returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_CreateDirFilesWithRwxPermissionsMust_Valid(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissionsMust_Valid(t *testing.T) {
 	dir := filepath.Join(tempDir(t), "must")
 	perms := []chmodhelper.DirFilesWithRwxPermission{
 		{
@@ -177,7 +177,7 @@ func Test_Cov6_CreateDirFilesWithRwxPermissionsMust_Valid(t *testing.T) {
 
 // ── DirFilesWithRwxPermission methods ──
 
-func Test_Cov6_DirFilesRwxPermission_GetPaths(t *testing.T) {
+func Test_DirFilesRwxPermission_GetPaths(t *testing.T) {
 	// Arrange
 	perm := chmodhelper.DirFilesWithRwxPermission{
 		DirWithFiles: chmodhelper.DirWithFiles{Dir: "/tmp/test", Files: []string{"a.txt", "b.txt"}},
@@ -192,7 +192,7 @@ func Test_Cov6_DirFilesRwxPermission_GetPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DirFilesRwxPermission_GetPaths returns correct value -- with args", actual)
 }
 
-func Test_Cov6_DirFilesRwxPermission_CreatePaths(t *testing.T) {
+func Test_DirFilesRwxPermission_CreatePaths(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "create")
 	perm := chmodhelper.DirFilesWithRwxPermission{
@@ -209,7 +209,7 @@ func Test_Cov6_DirFilesRwxPermission_CreatePaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DirFilesRwxPermission_CreatePaths returns correct value -- with args", actual)
 }
 
-func Test_Cov6_DirFilesRwxPermission_CreateUsingFileMode(t *testing.T) {
+func Test_DirFilesRwxPermission_CreateUsingFileMode(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "fmode")
 	perm := chmodhelper.DirFilesWithRwxPermission{
@@ -227,7 +227,7 @@ func Test_Cov6_DirFilesRwxPermission_CreateUsingFileMode(t *testing.T) {
 
 // ── DirWithFiles.CreatePaths ──
 
-func Test_Cov6_DirWithFiles_CreatePaths(t *testing.T) {
+func Test_DirWithFiles_CreatePaths(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "dwf")
 	dwf := chmodhelper.DirWithFiles{Dir: dir, Files: []string{"z.txt"}}
@@ -243,7 +243,7 @@ func Test_Cov6_DirWithFiles_CreatePaths(t *testing.T) {
 
 // ── DirFilesWithContent ──
 
-func Test_Cov6_DirFilesWithContent_GetPaths(t *testing.T) {
+func Test_DirFilesWithContent_GetPaths(t *testing.T) {
 	// Arrange
 	dfc := chmodhelper.DirFilesWithContent{
 		Dir:   "/tmp/test",
@@ -259,7 +259,7 @@ func Test_Cov6_DirFilesWithContent_GetPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DirFilesWithContent_GetPaths returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_DirFilesWithContent_Create(t *testing.T) {
+func Test_DirFilesWithContent_Create(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(tempDir(t), "dfc")
 	dfc := chmodhelper.DirFilesWithContent{
@@ -279,7 +279,7 @@ func Test_Cov6_DirFilesWithContent_Create(t *testing.T) {
 
 // ── FileWithContent ──
 
-func Test_Cov6_FileWithContent_Methods(t *testing.T) {
+func Test_FileWithContent_Methods(t *testing.T) {
 	// Arrange
 	fc := chmodhelper.FileWithContent{RelativePath: "sub/file.txt", FileMode: 0644, Content: []string{"line1", "line2"}}
 
@@ -299,7 +299,7 @@ func Test_Cov6_FileWithContent_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithContent_Methods returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_FileWithContent_ReadWrite(t *testing.T) {
+func Test_FileWithContent_ReadWrite(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	fc := chmodhelper.FileWithContent{RelativePath: "rw.txt", FileMode: 0644, Content: []string{"test content"}}
@@ -326,7 +326,7 @@ func Test_Cov6_FileWithContent_ReadWrite(t *testing.T) {
 
 // ── GetPathExistStats ──
 
-func Test_Cov6_GetPathExistStats_Empty(t *testing.T) {
+func Test_GetPathExistStats_Empty(t *testing.T) {
 	// Arrange
 	stats := chmodhelper.GetPathExistStats(false)
 
@@ -338,7 +338,7 @@ func Test_Cov6_GetPathExistStats_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPathExistStats_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov6_GetPathExistStats_ValidOnly(t *testing.T) {
+func Test_GetPathExistStats_ValidOnly(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "exist.txt")
@@ -353,7 +353,7 @@ func Test_Cov6_GetPathExistStats_ValidOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPathExistStats_ValidOnly returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_GetPathExistStats_All(t *testing.T) {
+func Test_GetPathExistStats_All(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "e.txt")
@@ -370,7 +370,7 @@ func Test_Cov6_GetPathExistStats_All(t *testing.T) {
 
 // ── GetExistingChmodRwxWrapperMustPtr ──
 
-func Test_Cov6_GetExistingChmodRwxWrapperMustPtr(t *testing.T) {
+func Test_GetExistingChmodRwxWrapperMustPtr(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "chmod.txt")
@@ -387,7 +387,7 @@ func Test_Cov6_GetExistingChmodRwxWrapperMustPtr(t *testing.T) {
 
 // ── GetFilesChmodRwxFullMapDirect ──
 
-func Test_Cov6_GetFilesChmodRwxFullMapDirect(t *testing.T) {
+func Test_GetFilesChmodRwxFullMapDirect(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "map.txt")
@@ -410,7 +410,7 @@ func Test_Cov6_GetFilesChmodRwxFullMapDirect(t *testing.T) {
 
 // ── GetFilteredExistsFilesInfosOnly ──
 
-func Test_Cov6_GetFilteredExistsFilesInfosOnly_Empty(t *testing.T) {
+func Test_GetFilteredExistsFilesInfosOnly_Empty(t *testing.T) {
 	// Arrange
 	result := chmodhelper.GetFilteredExistsFilesInfosOnly()
 
@@ -422,7 +422,7 @@ func Test_Cov6_GetFilteredExistsFilesInfosOnly_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetFilteredExistsFilesInfosOnly_Empty returns empty -- with args", actual)
 }
 
-func Test_Cov6_GetFilteredExistsFilesInfosOnly_Mixed(t *testing.T) {
+func Test_GetFilteredExistsFilesInfosOnly_Mixed(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "info.txt")
@@ -439,7 +439,7 @@ func Test_Cov6_GetFilteredExistsFilesInfosOnly_Mixed(t *testing.T) {
 
 // ── GetRecursivePathsContinueOnError ──
 
-func Test_Cov6_GetRecursivePathsContinueOnError_File(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "single.txt")
@@ -460,7 +460,7 @@ func Test_Cov6_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths_File returns correct value -- with args", actual)
 }
 
-func Test_Cov6_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	sub := filepath.Join(dir, "sub")
@@ -482,7 +482,7 @@ func Test_Cov6_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths_Dir returns correct value -- with args", actual)
 }
 
-func Test_Cov6_GetRecursivePathsContinueOnError_NonExist(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_NonExist(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePathsContinueOnError("/nonexistent/path/xyz123")
 
@@ -496,7 +496,7 @@ func Test_Cov6_GetRecursivePathsContinueOnError_NonExist(t *testing.T) {
 
 // ── SimpleFileReaderWriter ──
 
-func Test_Cov6_SimpleFileReaderWriter_ReadWriteLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadWriteLock(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "lock.json")
@@ -524,7 +524,7 @@ func Test_Cov6_SimpleFileReaderWriter_ReadWriteLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadWriteLock returns correct value -- with args", actual)
 }
 
-func Test_Cov6_SimpleFileReaderWriter_GetSetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_GetSetLock(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "getset.json")
@@ -550,7 +550,7 @@ func Test_Cov6_SimpleFileReaderWriter_GetSetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetSetLock returns correct value -- with args", actual)
 }
 
-func Test_Cov6_SimpleFileReaderWriter_CacheGetSetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_CacheGetSetLock(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "cache.json")
@@ -578,7 +578,7 @@ func Test_Cov6_SimpleFileReaderWriter_CacheGetSetLock(t *testing.T) {
 
 // ── DirFilesWithContent.GetFilesChmodMap ──
 
-func Test_Cov6_DirFilesWithContent_GetFilesChmodMap(t *testing.T) {
+func Test_DirFilesWithContent_GetFilesChmodMap(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "chm.txt")
@@ -599,7 +599,7 @@ func Test_Cov6_DirFilesWithContent_GetFilesChmodMap(t *testing.T) {
 
 // ── DirFilesWithRwxPermission.GetFilesChmodMap ──
 
-func Test_Cov6_DirFilesRwxPermission_GetFilesChmodMap(t *testing.T) {
+func Test_DirFilesRwxPermission_GetFilesChmodMap(t *testing.T) {
 	// Arrange
 	dir := tempDir(t)
 	f := filepath.Join(dir, "rwxmap.txt")

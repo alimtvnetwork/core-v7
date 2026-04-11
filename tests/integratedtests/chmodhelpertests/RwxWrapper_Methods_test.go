@@ -13,7 +13,7 @@ import (
 
 // ── RwxWrapper — comprehensive methods ──
 
-func Test_Cov3_RwxWrapper_Basic(t *testing.T) {
+func Test_RwxWrapper_Basic(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 
@@ -37,7 +37,7 @@ func Test_Cov3_RwxWrapper_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- basic", actual)
 }
 
-func Test_Cov3_RwxWrapper_NilReceiver(t *testing.T) {
+func Test_RwxWrapper_NilReceiver(t *testing.T) {
 	// Arrange
 	var rwx *chmodhelper.RwxWrapper
 
@@ -55,7 +55,7 @@ func Test_Cov3_RwxWrapper_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns nil -- nil", actual)
 }
 
-func Test_Cov3_RwxWrapper_Bytes(t *testing.T) {
+func Test_RwxWrapper_Bytes(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	bytes := rwx.Bytes()
@@ -76,7 +76,7 @@ func Test_Cov3_RwxWrapper_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- Bytes", actual)
 }
 
-func Test_Cov3_RwxWrapper_ToUint32Octal(t *testing.T) {
+func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	octal := rwx.ToUint32Octal()
@@ -89,7 +89,7 @@ func Test_Cov3_RwxWrapper_ToUint32Octal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ToUint32Octal", actual)
 }
 
-func Test_Cov3_RwxWrapper_ToCompiledOctalBytes(t *testing.T) {
+func Test_RwxWrapper_ToCompiledOctalBytes(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	b4 := rwx.ToCompiledOctalBytes4Digits()
@@ -116,7 +116,7 @@ func Test_Cov3_RwxWrapper_ToCompiledOctalBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- compiled bytes", actual)
 }
 
-func Test_Cov3_RwxWrapper_FileModeString(t *testing.T) {
+func Test_RwxWrapper_FileModeString(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	fms := rwx.ToFileModeString()
@@ -142,7 +142,7 @@ func Test_Cov3_RwxWrapper_FileModeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- string conversions", actual)
 }
 
-func Test_Cov3_RwxWrapper_ToFileMode(t *testing.T) {
+func Test_RwxWrapper_ToFileMode(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr--")
 	mode := rwx.ToFileMode()
@@ -155,7 +155,7 @@ func Test_Cov3_RwxWrapper_ToFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ToFileMode", actual)
 }
 
-func Test_Cov3_RwxWrapper_ApplyChmod(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "chmod_test.txt", "data")
@@ -170,7 +170,7 @@ func Test_Cov3_RwxWrapper_ApplyChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ApplyChmod", actual)
 }
 
-func Test_Cov3_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rw-r--r--")
 	err := rwx.ApplyChmodSkipInvalid("/nonexistent_xyz_cov3")
@@ -183,7 +183,7 @@ func Test_Cov3_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns error -- ApplyChmodSkipInvalid", actual)
 }
 
-func Test_Cov3_RwxWrapper_ApplyChmodOptions(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodOptions(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "opts.txt", "data")
@@ -205,7 +205,7 @@ func Test_Cov3_RwxWrapper_ApplyChmodOptions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ApplyChmodOptions", actual)
 }
 
-func Test_Cov3_RwxWrapper_Verify(t *testing.T) {
+func Test_RwxWrapper_Verify(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	_ = os.Chmod(dir, 0755)
@@ -221,7 +221,7 @@ func Test_Cov3_RwxWrapper_Verify(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- Verify", actual)
 }
 
-func Test_Cov3_RwxWrapper_HasChmod(t *testing.T) {
+func Test_RwxWrapper_HasChmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
@@ -235,7 +235,7 @@ func Test_Cov3_RwxWrapper_HasChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- HasChmod", actual)
 }
 
-func Test_Cov3_RwxWrapper_ApplyRecursive(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "sub")
@@ -252,7 +252,7 @@ func Test_Cov3_RwxWrapper_ApplyRecursive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ApplyRecursive", actual)
 }
 
-func Test_Cov3_RwxWrapper_ApplyRecursive_Invalid(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_Invalid(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
 	err := rwx.ApplyRecursive(true, "/nonexistent_cov3_dir")
@@ -267,7 +267,7 @@ func Test_Cov3_RwxWrapper_ApplyRecursive_Invalid(t *testing.T) {
 
 // ── SimpleFileReaderWriter — comprehensive ──
 
-func Test_Cov3_SimpleFileRW_InitializeDefault(t *testing.T) {
+func Test_SimpleFileRW_InitializeDefault(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "init.txt")
@@ -288,7 +288,7 @@ func Test_Cov3_SimpleFileRW_InitializeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- InitializeDefault", actual)
 }
 
-func Test_Cov3_SimpleFileRW_InitializeDefaultApplyChmod(t *testing.T) {
+func Test_SimpleFileRW_InitializeDefaultApplyChmod(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 	initialized := rw.InitializeDefaultApplyChmod()
@@ -301,7 +301,7 @@ func Test_Cov3_SimpleFileRW_InitializeDefaultApplyChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- InitializeDefaultApplyChmod", actual)
 }
 
-func Test_Cov3_SimpleFileRW_PathChecks(t *testing.T) {
+func Test_SimpleFileRW_PathChecks(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "check.txt", "data")
@@ -325,7 +325,7 @@ func Test_Cov3_SimpleFileRW_PathChecks(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- path checks", actual)
 }
 
-func Test_Cov3_SimpleFileRW_WriteRead(t *testing.T) {
+func Test_SimpleFileRW_WriteRead(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "writeread.txt")
@@ -349,7 +349,7 @@ func Test_Cov3_SimpleFileRW_WriteRead(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- WriteRead", actual)
 }
 
-func Test_Cov3_SimpleFileRW_WriteString(t *testing.T) {
+func Test_SimpleFileRW_WriteString(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "writestr.txt")
@@ -364,7 +364,7 @@ func Test_Cov3_SimpleFileRW_WriteString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- WriteString", actual)
 }
 
-func Test_Cov3_SimpleFileRW_WritePath(t *testing.T) {
+func Test_SimpleFileRW_WritePath(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "writepath.txt")
@@ -379,7 +379,7 @@ func Test_Cov3_SimpleFileRW_WritePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- WritePath", actual)
 }
 
-func Test_Cov3_SimpleFileRW_WriteRelativePath(t *testing.T) {
+func Test_SimpleFileRW_WriteRelativePath(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, ParentDir: dir, FilePath: filepath.Join(dir, "x.txt")}
@@ -393,7 +393,7 @@ func Test_Cov3_SimpleFileRW_WriteRelativePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- WriteRelativePath", actual)
 }
 
-func Test_Cov3_SimpleFileRW_JoinRelPath(t *testing.T) {
+func Test_SimpleFileRW_JoinRelPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ParentDir: "/tmp/parent"}
 	result := rw.JoinRelPath("sub/file.txt")
@@ -413,7 +413,7 @@ func Test_Cov3_SimpleFileRW_JoinRelPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- JoinRelPath", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ReadOnExist(t *testing.T) {
+func Test_SimpleFileRW_ReadOnExist(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "onexist.txt", "data")
@@ -439,7 +439,7 @@ func Test_Cov3_SimpleFileRW_ReadOnExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- ReadOnExist", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ReadOnExist_NotExist(t *testing.T) {
+func Test_SimpleFileRW_ReadOnExist_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent_cov3.txt"}
 	bytes, err := rw.ReadOnExist()
@@ -463,7 +463,7 @@ func Test_Cov3_SimpleFileRW_ReadOnExist_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- ReadOnExist not exist", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ReadLock(t *testing.T) {
+func Test_SimpleFileRW_ReadLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "readlock.txt", "locked")
@@ -484,7 +484,7 @@ func Test_Cov3_SimpleFileRW_ReadLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- ReadLock", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ReadStringLock(t *testing.T) {
+func Test_SimpleFileRW_ReadStringLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "strlock.txt", "strlocked")
@@ -505,7 +505,7 @@ func Test_Cov3_SimpleFileRW_ReadStringLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- ReadStringLock", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ReadOnExistLock(t *testing.T) {
+func Test_SimpleFileRW_ReadOnExistLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "existlock.txt", "existlocked")
@@ -531,7 +531,7 @@ func Test_Cov3_SimpleFileRW_ReadOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- ReadOnExistLock", actual)
 }
 
-func Test_Cov3_SimpleFileRW_NewPath(t *testing.T) {
+func Test_SimpleFileRW_NewPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, ParentDir: "/tmp"}
 	newRw := rw.NewPath(false, "/tmp/newfile.txt")
@@ -544,7 +544,7 @@ func Test_Cov3_SimpleFileRW_NewPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- NewPath", actual)
 }
 
-func Test_Cov3_SimpleFileRW_NewPathJoin(t *testing.T) {
+func Test_SimpleFileRW_NewPathJoin(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, ParentDir: "/tmp"}
 	newRw := rw.NewPathJoin(false, "sub", "file.txt")
@@ -557,7 +557,7 @@ func Test_Cov3_SimpleFileRW_NewPathJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- NewPathJoin", actual)
 }
 
-func Test_Cov3_SimpleFileRW_InitializeDefaultNew(t *testing.T) {
+func Test_SimpleFileRW_InitializeDefaultNew(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 	newRw := rw.InitializeDefaultNew()
@@ -570,7 +570,7 @@ func Test_Cov3_SimpleFileRW_InitializeDefaultNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- InitializeDefaultNew", actual)
 }
 
-func Test_Cov3_SimpleFileRW_ChmodApplierVerifier(t *testing.T) {
+func Test_SimpleFileRW_ChmodApplierVerifier(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "applier.txt", "data")
@@ -594,7 +594,7 @@ func Test_Cov3_SimpleFileRW_ChmodApplierVerifier(t *testing.T) {
 
 // ── chmodApplier — more methods ──
 
-func Test_Cov3_ChmodApply_OnMismatch(t *testing.T) {
+func Test_ChmodApply_OnMismatch(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodApply.OnMismatch(true, 0755, dir)
@@ -607,7 +607,7 @@ func Test_Cov3_ChmodApply_OnMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns correct value -- OnMismatch", actual)
 }
 
-func Test_Cov3_ChmodApply_OnMismatchSkipInvalid(t *testing.T) {
+func Test_ChmodApply_OnMismatchSkipInvalid(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.OnMismatchSkipInvalid(0755, "/nonexistent_cov3_skip")
 
@@ -619,7 +619,7 @@ func Test_Cov3_ChmodApply_OnMismatchSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns error -- OnMismatchSkipInvalid", actual)
 }
 
-func Test_Cov3_ChmodApply_OnMismatchOption(t *testing.T) {
+func Test_ChmodApply_OnMismatchOption(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodApply.OnMismatchOption(true, true, 0755, dir)
@@ -639,7 +639,7 @@ func Test_Cov3_ChmodApply_OnMismatchOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns correct value -- OnMismatchOption", actual)
 }
 
-func Test_Cov3_ChmodApply_SkipInvalidFile(t *testing.T) {
+func Test_ChmodApply_SkipInvalidFile(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.SkipInvalidFile(0755, "/nonexistent_cov3_skip2")
 
@@ -651,7 +651,7 @@ func Test_Cov3_ChmodApply_SkipInvalidFile(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns error -- SkipInvalidFile", actual)
 }
 
-func Test_Cov3_ChmodApply_ApplyIf(t *testing.T) {
+func Test_ChmodApply_ApplyIf(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodApply.ApplyIf(true, 0755, dir)
@@ -671,7 +671,7 @@ func Test_Cov3_ChmodApply_ApplyIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns correct value -- ApplyIf", actual)
 }
 
-func Test_Cov3_ChmodApply_Options(t *testing.T) {
+func Test_ChmodApply_Options(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodApply.Options(true, false, 0755, dir)
@@ -684,7 +684,7 @@ func Test_Cov3_ChmodApply_Options(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns correct value -- Options", actual)
 }
 
-func Test_Cov3_ChmodApply_RecursivePath(t *testing.T) {
+func Test_ChmodApply_RecursivePath(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodApply.RecursivePath(true, 0755, dir)
@@ -697,7 +697,7 @@ func Test_Cov3_ChmodApply_RecursivePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodApply returns correct value -- RecursivePath", actual)
 }
 
-func Test_Cov3_ChmodApply_PathsUsingFileModeConditions_Empty(t *testing.T) {
+func Test_ChmodApply_PathsUsingFileModeConditions_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0755, &chmodins.Condition{})
 
@@ -709,7 +709,7 @@ func Test_Cov3_ChmodApply_PathsUsingFileModeConditions_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PathsUsingFileModeConditions returns empty -- empty", actual)
 }
 
-func Test_Cov3_ChmodApply_PathsUsingFileModeConditions_NilCond(t *testing.T) {
+func Test_ChmodApply_PathsUsingFileModeConditions_NilCond(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0755, nil, "/tmp")
 
@@ -723,7 +723,7 @@ func Test_Cov3_ChmodApply_PathsUsingFileModeConditions_NilCond(t *testing.T) {
 
 // ── chmodVerifier — more methods ──
 
-func Test_Cov3_ChmodVerify_IsEqualRwxFull(t *testing.T) {
+func Test_ChmodVerify_IsEqualRwxFull(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	_ = os.Chmod(dir, 0755)
@@ -737,7 +737,7 @@ func Test_Cov3_ChmodVerify_IsEqualRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns correct value -- IsEqualRwxFull", actual)
 }
 
-func Test_Cov3_ChmodVerify_IsEqualRwxFullSkipInvalid(t *testing.T) {
+func Test_ChmodVerify_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid("/nonexistent_cov3", "-rwxr-xr-x")
 
@@ -749,7 +749,7 @@ func Test_Cov3_ChmodVerify_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns error -- IsEqualRwxFullSkipInvalid", actual)
 }
 
-func Test_Cov3_ChmodVerify_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerify_IsEqualSkipInvalid(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid("/nonexistent_cov3", 0755)
 
@@ -761,7 +761,7 @@ func Test_Cov3_ChmodVerify_IsEqualSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns error -- IsEqualSkipInvalid", actual)
 }
 
-func Test_Cov3_ChmodVerify_MismatchError(t *testing.T) {
+func Test_ChmodVerify_MismatchError(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodVerify.MismatchError(dir, 0755)
@@ -775,7 +775,7 @@ func Test_Cov3_ChmodVerify_MismatchError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns error -- MismatchError", actual)
 }
 
-func Test_Cov3_ChmodVerify_PathIf(t *testing.T) {
+func Test_ChmodVerify_PathIf(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	skipErr := chmodhelper.ChmodVerify.PathIf(false, dir, 0755)
@@ -788,7 +788,7 @@ func Test_Cov3_ChmodVerify_PathIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns non-empty -- PathIf false", actual)
 }
 
-func Test_Cov3_ChmodVerify_Path(t *testing.T) {
+func Test_ChmodVerify_Path(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	err := chmodhelper.ChmodVerify.Path(dir, 0755)
@@ -802,7 +802,7 @@ func Test_Cov3_ChmodVerify_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns correct value -- Path", actual)
 }
 
-func Test_Cov3_ChmodVerify_GetExistingRwxWrapper(t *testing.T) {
+func Test_ChmodVerify_GetExistingRwxWrapper(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	rwx, err := chmodhelper.ChmodVerify.GetExistingRwxWrapper(dir)
@@ -821,7 +821,7 @@ func Test_Cov3_ChmodVerify_GetExistingRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ChmodVerify returns correct value -- GetExistingRwxWrapper", actual)
 }
 
-func Test_Cov3_ChmodVerify_GetExistingRwxWrapperMust(t *testing.T) {
+func Test_ChmodVerify_GetExistingRwxWrapperMust(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	rwx := chmodhelper.ChmodVerify.GetExistingRwxWrapperMust(dir)
@@ -836,7 +836,7 @@ func Test_Cov3_ChmodVerify_GetExistingRwxWrapperMust(t *testing.T) {
 
 // ── Attribute ──
 
-func Test_Cov3_Attribute_Basic(t *testing.T) {
+func Test_Attribute_Basic(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
 	nilAttr := (*chmodhelper.Attribute)(nil)
@@ -860,7 +860,7 @@ func Test_Cov3_Attribute_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- basic", actual)
 }
 
-func Test_Cov3_Attribute_Clone(t *testing.T) {
+func Test_Attribute_Clone(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true}
 	cloned := attr.Clone()
@@ -880,7 +880,7 @@ func Test_Cov3_Attribute_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- Clone", actual)
 }
 
-func Test_Cov3_Attribute_IsEqual(t *testing.T) {
+func Test_Attribute_IsEqual(t *testing.T) {
 	// Arrange
 	a1 := &chmodhelper.Attribute{IsRead: true, IsWrite: true}
 	a2 := &chmodhelper.Attribute{IsRead: true, IsWrite: true}
@@ -907,7 +907,7 @@ func Test_Cov3_Attribute_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov3_Attribute_ToAttributeValue(t *testing.T) {
+func Test_Attribute_ToAttributeValue(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true, IsWrite: false, IsExecute: true}
 	av := attr.ToAttributeValue()
@@ -920,7 +920,7 @@ func Test_Cov3_Attribute_ToAttributeValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- ToAttributeValue", actual)
 }
 
-func Test_Cov3_Attribute_ToVariant(t *testing.T) {
+func Test_Attribute_ToVariant(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
 	v := attr.ToVariant()
@@ -935,7 +935,7 @@ func Test_Cov3_Attribute_ToVariant(t *testing.T) {
 
 // ── Variant ──
 
-func Test_Cov3_Variant_String(t *testing.T) {
+func Test_Variant_String(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -947,7 +947,7 @@ func Test_Cov3_Variant_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- String", actual)
 }
 
-func Test_Cov3_Variant_ExpandOctalByte(t *testing.T) {
+func Test_Variant_ExpandOctalByte(t *testing.T) {
 	// Arrange
 	r, w, x := chmodhelper.X755.ExpandOctalByte()
 
@@ -967,7 +967,7 @@ func Test_Cov3_Variant_ExpandOctalByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ExpandOctalByte", actual)
 }
 
-func Test_Cov3_Variant_ToWrapper(t *testing.T) {
+func Test_Variant_ToWrapper(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapper()
 
@@ -985,7 +985,7 @@ func Test_Cov3_Variant_ToWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToWrapper", actual)
 }
 
-func Test_Cov3_Variant_ToWrapperPtr(t *testing.T) {
+func Test_Variant_ToWrapperPtr(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapperPtr()
 
@@ -1005,7 +1005,7 @@ func Test_Cov3_Variant_ToWrapperPtr(t *testing.T) {
 
 // ── GetRecursivePaths ──
 
-func Test_Cov3_GetRecursivePaths(t *testing.T) {
+func Test_GetRecursivePaths(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	_ = os.WriteFile(filepath.Join(dir, "a.txt"), []byte("x"), 0644)
@@ -1025,7 +1025,7 @@ func Test_Cov3_GetRecursivePaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths returns correct value -- with args", actual)
 }
 
-func Test_Cov3_GetRecursivePaths_File(t *testing.T) {
+func Test_GetRecursivePaths_File(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "single.txt", "x")
@@ -1045,7 +1045,7 @@ func Test_Cov3_GetRecursivePaths_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths returns correct value -- file", actual)
 }
 
-func Test_Cov3_GetRecursivePaths_Invalid(t *testing.T) {
+func Test_GetRecursivePaths_Invalid(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePaths(false, "/nonexistent_cov3_rec")
 
@@ -1059,7 +1059,7 @@ func Test_Cov3_GetRecursivePaths_Invalid(t *testing.T) {
 
 // ── TempDirGetter ──
 
-func Test_Cov3_TempDirDefault(t *testing.T) {
+func Test_TempDirDefault(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": chmodhelper.TempDirDefault != ""}
 
@@ -1070,7 +1070,7 @@ func Test_Cov3_TempDirDefault(t *testing.T) {
 
 // ── GetPathExistStat ──
 
-func Test_Cov3_GetPathExistStat(t *testing.T) {
+func Test_GetPathExistStat(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	stat := chmodhelper.GetPathExistStat(dir)
@@ -1092,7 +1092,7 @@ func Test_Cov3_GetPathExistStat(t *testing.T) {
 
 // ── IsPathExists / IsPathInvalid / IsDirectory ──
 
-func Test_Cov3_IsPathExists(t *testing.T) {
+func Test_IsPathExists(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 
@@ -1114,7 +1114,7 @@ func Test_Cov3_IsPathExists(t *testing.T) {
 
 // ── New.RwxWrapper creators ──
 
-func Test_Cov3_NewRwxWrapper_UsingFileMode(t *testing.T) {
+func Test_NewRwxWrapper_UsingFileMode(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 
@@ -1126,7 +1126,7 @@ func Test_Cov3_NewRwxWrapper_UsingFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewRwxWrapper returns correct value -- UsingFileMode", actual)
 }
 
-func Test_Cov3_NewRwxWrapper_UsingFileModePtr(t *testing.T) {
+func Test_NewRwxWrapper_UsingFileModePtr(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 
@@ -1144,7 +1144,7 @@ func Test_Cov3_NewRwxWrapper_UsingFileModePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewRwxWrapper returns correct value -- UsingFileModePtr", actual)
 }
 
-func Test_Cov3_NewRwxWrapper_UsingVariant(t *testing.T) {
+func Test_NewRwxWrapper_UsingVariant(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.X755)
 
@@ -1164,7 +1164,7 @@ func Test_Cov3_NewRwxWrapper_UsingVariant(t *testing.T) {
 
 // ── New.SimpleFileReaderWriter ──
 
-func Test_Cov3_NewSimpleFileRW_Default(t *testing.T) {
+func Test_NewSimpleFileRW_Default(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Default(false, "/tmp/test.txt")
 
@@ -1176,7 +1176,7 @@ func Test_Cov3_NewSimpleFileRW_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileRW returns correct value -- Default", actual)
 }
 
-func Test_Cov3_NewSimpleFileRW_Path(t *testing.T) {
+func Test_NewSimpleFileRW_Path(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Path(false, 0755, 0644, "/tmp/test.txt")
 
@@ -1190,7 +1190,7 @@ func Test_Cov3_NewSimpleFileRW_Path(t *testing.T) {
 
 // ── New.Attribute ──
 
-func Test_Cov3_NewAttribute_UsingRwx(t *testing.T) {
+func Test_NewAttribute_UsingRwx(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.UsingRwxString("rwx")
 

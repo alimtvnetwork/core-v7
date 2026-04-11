@@ -12,7 +12,7 @@ import (
 
 // ── RwxInstructionExecutor.CompiledWrapper ──
 
-func Test_Cov10_CompiledWrapper_Fixed(t *testing.T) {
+func Test_CompiledWrapper_Fixed(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -33,7 +33,7 @@ func Test_Cov10_CompiledWrapper_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_Cov10_CompiledWrapper_Var(t *testing.T) {
+func Test_CompiledWrapper_Var(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -56,7 +56,7 @@ func Test_Cov10_CompiledWrapper_Var(t *testing.T) {
 
 // ── RwxInstructionExecutor.CompiledRwxWrapperUsingFixedRwxWrapper ──
 
-func Test_Cov10_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
+func Test_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -78,7 +78,7 @@ func Test_Cov10_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_Cov10_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
+func Test_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -102,7 +102,7 @@ func Test_Cov10_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 
 // ── RwxInstructionExecutor.ApplyOnPath ──
 
-func Test_Cov10_ApplyOnPath_ExitOnInvalid_Error(t *testing.T) {
+func Test_ApplyOnPath_ExitOnInvalid_Error(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -123,7 +123,7 @@ func Test_Cov10_ApplyOnPath_ExitOnInvalid_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov10_ApplyOnPath_SkipOnInvalid(t *testing.T) {
+func Test_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -144,7 +144,7 @@ func Test_Cov10_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for skip on invalid", actual)
 }
 
-func Test_Cov10_ApplyOnPath_Recursive(t *testing.T) {
+func Test_ApplyOnPath_Recursive(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov10_apply_recur")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -162,7 +162,7 @@ func Test_Cov10_ApplyOnPath_Recursive(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_ApplyOnPath_NonRecursive(t *testing.T) {
+func Test_ApplyOnPath_NonRecursive(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov10_apply_nonrecur.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -186,7 +186,7 @@ func Test_Cov10_ApplyOnPath_NonRecursive(t *testing.T) {
 
 // ── RwxInstructionExecutor.ApplyOnPaths / ApplyOnPathsDirect / ApplyOnPathsPtr ──
 
-func Test_Cov10_ApplyOnPaths_Empty(t *testing.T) {
+func Test_ApplyOnPaths_Empty(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -204,7 +204,7 @@ func Test_Cov10_ApplyOnPaths_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_ApplyOnPathsDirect_Empty(t *testing.T) {
+func Test_ApplyOnPathsDirect_Empty(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -222,7 +222,7 @@ func Test_Cov10_ApplyOnPathsDirect_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_ApplyOnPathsPtr_Nil(t *testing.T) {
+func Test_ApplyOnPathsPtr_Nil(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -240,7 +240,7 @@ func Test_Cov10_ApplyOnPathsPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_ApplyOnPathsPtr_ContinueOnError(t *testing.T) {
+func Test_ApplyOnPathsPtr_ContinueOnError(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -264,7 +264,7 @@ func Test_Cov10_ApplyOnPathsPtr_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_ApplyOnPathsPtr_StopOnError(t *testing.T) {
+func Test_ApplyOnPathsPtr_StopOnError(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov10_stop.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -289,7 +289,7 @@ func Test_Cov10_ApplyOnPathsPtr_StopOnError(t *testing.T) {
 
 // ── RwxInstructionExecutor.VerifyRwxModifiers ──
 
-func Test_Cov10_VerifyRwxModifiers_Empty(t *testing.T) {
+func Test_VerifyRwxModifiers_Empty(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -307,7 +307,7 @@ func Test_Cov10_VerifyRwxModifiers_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
+func Test_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov10_verify_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -326,7 +326,7 @@ func Test_Cov10_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_VerifyRwxModifiers_NoContinue(t *testing.T) {
+func Test_VerifyRwxModifiers_NoContinue(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov10_verify_nocont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -342,7 +342,7 @@ func Test_Cov10_VerifyRwxModifiers_NoContinue(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_VerifyRwxModifiers_RecursiveNotSupported(t *testing.T) {
+func Test_VerifyRwxModifiers_RecursiveNotSupported(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -363,7 +363,7 @@ func Test_Cov10_VerifyRwxModifiers_RecursiveNotSupported(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for recursive verify", actual)
 }
 
-func Test_Cov10_VerifyRwxModifiersDirect(t *testing.T) {
+func Test_VerifyRwxModifiersDirect(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov10_verify_direct.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -380,7 +380,7 @@ func Test_Cov10_VerifyRwxModifiersDirect(t *testing.T) {
 
 // ── RwxInstructionExecutor.verifyChmodLocationsNoContinue branches ──
 
-func Test_Cov10_VerifyNoContinue_ErrorWithSkip(t *testing.T) {
+func Test_VerifyNoContinue_ErrorWithSkip(t *testing.T) {
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 			Owner: "rw-", Group: "r--", Other: "r--",
@@ -394,7 +394,7 @@ func Test_Cov10_VerifyNoContinue_ErrorWithSkip(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_VerifyNoContinue_Mismatch(t *testing.T) {
+func Test_VerifyNoContinue_Mismatch(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov10_verify_mismatch.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -419,7 +419,7 @@ func Test_Cov10_VerifyNoContinue_Mismatch(t *testing.T) {
 
 // ── RwxInstructionExecutors ──
 
-func Test_Cov10_Executors_Adds(t *testing.T) {
+func Test_Executors_Adds(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 
@@ -446,13 +446,13 @@ func Test_Cov10_Executors_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Cov10_Executors_Adds_Nil(t *testing.T) {
+func Test_Executors_Adds_Nil(t *testing.T) {
 	executors := chmodhelper.NewRwxInstructionExecutors(5)
 	executors.Adds(nil)
 	// nil items get appended (not skipped in Adds)
 }
 
-func Test_Cov10_Executors_Length_Empty(t *testing.T) {
+func Test_Executors_Length_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(0)
 	l := executors.Length()
@@ -465,7 +465,7 @@ func Test_Cov10_Executors_Length_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_Cov10_Executors_ApplyOnPath(t *testing.T) {
+func Test_Executors_ApplyOnPath(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov10_exec_apply.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -490,7 +490,7 @@ func Test_Cov10_Executors_ApplyOnPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_Executors_ApplyOnPath_Error(t *testing.T) {
+func Test_Executors_ApplyOnPath_Error(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(2)
 	ins := &chmodins.RwxInstruction{
@@ -514,7 +514,7 @@ func Test_Cov10_Executors_ApplyOnPath_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov10_Executors_ApplyOnPaths(t *testing.T) {
+func Test_Executors_ApplyOnPaths(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(1)
 	ins := &chmodins.RwxInstruction{
@@ -535,7 +535,7 @@ func Test_Cov10_Executors_ApplyOnPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_Executors_ApplyOnPathsPtr(t *testing.T) {
+func Test_Executors_ApplyOnPathsPtr(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov10_exec_ptr.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -561,7 +561,7 @@ func Test_Cov10_Executors_ApplyOnPathsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov10_Executors_VerifyRwxModifiers(t *testing.T) {
+func Test_Executors_VerifyRwxModifiers(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov10_exec_verify.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -580,7 +580,7 @@ func Test_Cov10_Executors_VerifyRwxModifiers(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_Executors_VerifyRwxModifiers_ContinueOnErr(t *testing.T) {
+func Test_Executors_VerifyRwxModifiers_ContinueOnErr(t *testing.T) {
 	executors := chmodhelper.NewRwxInstructionExecutors(1)
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -594,7 +594,7 @@ func Test_Cov10_Executors_VerifyRwxModifiers_ContinueOnErr(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_Executors_VerifyRwxModifiers_Empty(t *testing.T) {
+func Test_Executors_VerifyRwxModifiers_Empty(t *testing.T) {
 	// Arrange
 	executors := chmodhelper.NewRwxInstructionExecutors(1)
 	err := executors.VerifyRwxModifiers(false, true, []string{})

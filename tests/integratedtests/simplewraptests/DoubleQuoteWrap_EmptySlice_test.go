@@ -9,7 +9,7 @@ import (
 
 // Test_Cov8_DoubleQuoteWrapElements_EmptyNonNilSlice tests the length==0 branch
 // with a non-nil empty slice.
-func Test_Cov8_DoubleQuoteWrapElements_EmptyNonNilSlice(t *testing.T) {
+func Test_DoubleQuoteWrapElements_EmptyNonNilSlice(t *testing.T) {
 	// Arrange
 	input := []string{}
 
@@ -23,7 +23,7 @@ func Test_Cov8_DoubleQuoteWrapElements_EmptyNonNilSlice(t *testing.T) {
 }
 
 // Test_Cov8_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice tests length==0 branch.
-func Test_Cov8_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice(t *testing.T) {
 	// Arrange
 	input := []string{}
 

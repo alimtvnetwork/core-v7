@@ -12,7 +12,7 @@ import (
 
 // ── ParseRwxOwnerGroupOtherToFileModeMust ──
 
-func Test_Cov7_ParseRwxOwnerGroupOtherToFileModeMust(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToFileModeMust(t *testing.T) {
 	// Arrange
 	rwx := &chmodins.RwxOwnerGroupOther{
 		Owner: "rwx",
@@ -31,7 +31,7 @@ func Test_Cov7_ParseRwxOwnerGroupOtherToFileModeMust(t *testing.T) {
 
 // ── ParseBaseRwxInstructionsToExecutors ──
 
-func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Nil(t *testing.T) {
+func Test_ParseBaseRwxInstructionsToExecutors_Nil(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.ParseBaseRwxInstructionsToExecutors(nil)
 
@@ -43,7 +43,7 @@ func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
+func Test_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
 	// Arrange
 	base := &chmodins.BaseRwxInstructions{
 		RwxInstructions: []chmodins.RwxInstruction{
@@ -72,7 +72,7 @@ func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
 
 // ── GetFilesChmodRwxFullMap ──
 
-func Test_Cov7_GetFilesChmodRwxFullMap_Empty(t *testing.T) {
+func Test_GetFilesChmodRwxFullMap_Empty(t *testing.T) {
 	// Arrange
 	hm, err := chmodhelper.GetFilesChmodRwxFullMap(nil)
 
@@ -84,7 +84,7 @@ func Test_Cov7_GetFilesChmodRwxFullMap_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_GetFilesChmodRwxFullMap_Valid(t *testing.T) {
+func Test_GetFilesChmodRwxFullMap_Valid(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "test.txt")
@@ -99,7 +99,7 @@ func Test_Cov7_GetFilesChmodRwxFullMap_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_GetFilesChmodRwxFullMap_Invalid(t *testing.T) {
+func Test_GetFilesChmodRwxFullMap_Invalid(t *testing.T) {
 	// Arrange
 	hm, err := chmodhelper.GetFilesChmodRwxFullMap([]string{"/nonexistent/path/xyz123"})
 
@@ -114,7 +114,7 @@ func Test_Cov7_GetFilesChmodRwxFullMap_Invalid(t *testing.T) {
 
 // ── SimpleFileReaderWriter additional methods ──
 
-func Test_Cov7_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "init.txt")
@@ -133,7 +133,7 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected parent dir", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "init2.txt")
@@ -152,7 +152,7 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
+func Test_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "exist.txt")
@@ -187,7 +187,7 @@ func Test_Cov7_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "wr.txt")
@@ -211,7 +211,7 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WriteString(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "ws.txt")
@@ -235,7 +235,7 @@ func Test_Cov7_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "roe.txt")
@@ -260,7 +260,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WritePath(t *testing.T) {
+func Test_SimpleFileReaderWriter_WritePath(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "wp.txt")
@@ -280,7 +280,7 @@ func Test_Cov7_SimpleFileReaderWriter_WritePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -299,7 +299,7 @@ func Test_Cov7_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ParentDir: "/tmp/base",
@@ -318,7 +318,7 @@ func Test_Cov7_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected path", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WriteAny(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAny(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "any.json")
@@ -339,7 +339,7 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_WriteAnyLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAnyLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "anylock.json")
@@ -360,7 +360,7 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAnyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "rl.txt")
@@ -381,7 +381,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "rsl.txt")
@@ -402,7 +402,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "roel.txt")
@@ -423,7 +423,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "rsoel.txt")
@@ -444,7 +444,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_String(t *testing.T) {
+func Test_SimpleFileReaderWriter_String(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -462,7 +462,7 @@ func Test_Cov7_SimpleFileReaderWriter_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_StringFilePath(t *testing.T) {
+func Test_SimpleFileReaderWriter_StringFilePath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -480,7 +480,7 @@ func Test_Cov7_SimpleFileReaderWriter_StringFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ChmodApplier(t *testing.T) {
+func Test_SimpleFileReaderWriter_ChmodApplier(t *testing.T) {
 	dir := t.TempDir()
 	f := filepath.Join(dir, "ca.txt")
 	_ = os.WriteFile(f, []byte("x"), 0644)
@@ -494,7 +494,7 @@ func Test_Cov7_SimpleFileReaderWriter_ChmodApplier(t *testing.T) {
 	_ = applier
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ChmodVerifier(t *testing.T) {
+func Test_SimpleFileReaderWriter_ChmodVerifier(t *testing.T) {
 	dir := t.TempDir()
 	f := filepath.Join(dir, "cv.txt")
 	_ = os.WriteFile(f, []byte("x"), 0644)
@@ -508,7 +508,7 @@ func Test_Cov7_SimpleFileReaderWriter_ChmodVerifier(t *testing.T) {
 	_ = verifier
 }
 
-func Test_Cov7_SimpleFileReaderWriter_NewPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -527,7 +527,7 @@ func Test_Cov7_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -546,7 +546,7 @@ func Test_Cov7_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -565,7 +565,7 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_Set(t *testing.T) {
+func Test_SimpleFileReaderWriter_Set(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "set.json")
@@ -586,7 +586,7 @@ func Test_Cov7_SimpleFileReaderWriter_Set(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_SetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_SetLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "setlock.json")
@@ -607,7 +607,7 @@ func Test_Cov7_SimpleFileReaderWriter_SetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_Get(t *testing.T) {
+func Test_SimpleFileReaderWriter_Get(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "get.json")
@@ -630,7 +630,7 @@ func Test_Cov7_SimpleFileReaderWriter_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_GetLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "getlock.json")
@@ -653,7 +653,7 @@ func Test_Cov7_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_Expire(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "expire.txt")
@@ -674,7 +674,7 @@ func Test_Cov7_SimpleFileReaderWriter_Expire(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected removed", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_Serialize(t *testing.T) {
+func Test_SimpleFileReaderWriter_Serialize(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "ser.txt")
@@ -695,7 +695,7 @@ func Test_Cov7_SimpleFileReaderWriter_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "serlock.txt")
@@ -716,7 +716,7 @@ func Test_Cov7_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_Deserialize(t *testing.T) {
+func Test_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "deser.json")
@@ -739,7 +739,7 @@ func Test_Cov7_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
+func Test_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "deserlock.json")
@@ -762,7 +762,7 @@ func Test_Cov7_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadMust(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadMust(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "readmust.txt")
@@ -783,7 +783,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_Cov7_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "readstrmust.txt")

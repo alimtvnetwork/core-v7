@@ -13,7 +13,7 @@ import (
 
 // ── RwxWrapper.ToUint32Octal ──
 
-func Test_Cov9_RwxWrapper_ToUint32Octal(t *testing.T) {
+func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	oct := rwx.ToUint32Octal()
@@ -28,7 +28,7 @@ func Test_Cov9_RwxWrapper_ToUint32Octal(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmod branches ──
 
-func Test_Cov9_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(true, "/nonexistent/cov9/skip")
@@ -41,7 +41,7 @@ func Test_Cov9_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for skip on invalid", actual)
 }
 
-func Test_Cov9_RwxWrapper_ApplyChmod_NotSkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_NotSkipInvalid(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -57,7 +57,7 @@ func Test_Cov9_RwxWrapper_ApplyChmod_NotSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for non-skip invalid path", actual)
 }
 
-func Test_Cov9_RwxWrapper_ApplyChmod_Success(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_Success(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov9_apply_chmod.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -74,7 +74,7 @@ func Test_Cov9_RwxWrapper_ApplyChmod_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov9_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
 	// Arrange
 	// On most systems, regular chmod doesn't fail on valid paths
 	// This covers the success path with error=nil
@@ -95,7 +95,7 @@ func Test_Cov9_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
 
 // ── RwxWrapper.invalidPathErr ──
 
-func Test_Cov9_RwxWrapper_InvalidPathErr(t *testing.T) {
+func Test_RwxWrapper_InvalidPathErr(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -113,7 +113,7 @@ func Test_Cov9_RwxWrapper_InvalidPathErr(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmodOptions ──
 
-func Test_Cov9_ApplyChmodOptions_SkipApply(t *testing.T) {
+func Test_ApplyChmodOptions_SkipApply(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(false, true, false, "/any")
@@ -126,7 +126,7 @@ func Test_Cov9_ApplyChmodOptions_SkipApply(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil when isApply=false", actual)
 }
 
-func Test_Cov9_ApplyChmodOptions_InvalidSkip(t *testing.T) {
+func Test_ApplyChmodOptions_InvalidSkip(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(true, true, true, "/nonexistent/cov9/opts")
@@ -139,7 +139,7 @@ func Test_Cov9_ApplyChmodOptions_InvalidSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
-func Test_Cov9_ApplyChmodOptions_InvalidNoSkip(t *testing.T) {
+func Test_ApplyChmodOptions_InvalidNoSkip(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(true, true, false, "/nonexistent/cov9/opts2")
@@ -152,7 +152,7 @@ func Test_Cov9_ApplyChmodOptions_InvalidNoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for invalid no-skip", actual)
 }
 
-func Test_Cov9_ApplyChmodOptions_MismatchApply(t *testing.T) {
+func Test_ApplyChmodOptions_MismatchApply(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov9_opts_mismatch.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -162,7 +162,7 @@ func Test_Cov9_ApplyChmodOptions_MismatchApply(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
+func Test_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov9_opts_match.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -182,7 +182,7 @@ func Test_Cov9_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
 
 // ── RwxWrapper.LinuxApplyRecursive ──
 
-func Test_Cov9_LinuxApplyRecursive_SkipInvalid_NotExists(t *testing.T) {
+func Test_LinuxApplyRecursive_SkipInvalid_NotExists(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.LinuxApplyRecursive(true, "/nonexistent/cov9/linux_recur")
@@ -195,7 +195,7 @@ func Test_Cov9_LinuxApplyRecursive_SkipInvalid_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
-func Test_Cov9_LinuxApplyRecursive_NoSkip_NotExists(t *testing.T) {
+func Test_LinuxApplyRecursive_NoSkip_NotExists(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -211,7 +211,7 @@ func Test_Cov9_LinuxApplyRecursive_NoSkip_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov9_LinuxApplyRecursive_Valid(t *testing.T) {
+func Test_LinuxApplyRecursive_Valid(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov9_linux_recur")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -223,7 +223,7 @@ func Test_Cov9_LinuxApplyRecursive_Valid(t *testing.T) {
 
 // ── RwxWrapper.ApplyRecursive ──
 
-func Test_Cov9_ApplyRecursive_SkipInvalid(t *testing.T) {
+func Test_ApplyRecursive_SkipInvalid(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyRecursive(true, "/nonexistent/cov9/recur_skip")
@@ -236,7 +236,7 @@ func Test_Cov9_ApplyRecursive_SkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov9_ApplyRecursive_NotExist_NoSkip(t *testing.T) {
+func Test_ApplyRecursive_NotExist_NoSkip(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyRecursive(false, "/nonexistent/cov9/recur_noskip")
@@ -249,7 +249,7 @@ func Test_Cov9_ApplyRecursive_NotExist_NoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov9_ApplyRecursive_File(t *testing.T) {
+func Test_ApplyRecursive_File(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov9_recur_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -259,7 +259,7 @@ func Test_Cov9_ApplyRecursive_File(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyRecursive_Dir(t *testing.T) {
+func Test_ApplyRecursive_Dir(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov9_recur_dir")
 	os.MkdirAll(filepath.Join(tmpDir, "sub"), 0755)
 	os.WriteFile(filepath.Join(tmpDir, "f.txt"), []byte("x"), 0644)
@@ -272,7 +272,7 @@ func Test_Cov9_ApplyRecursive_Dir(t *testing.T) {
 
 // ── RwxWrapper.MustApplyChmod ──
 
-func Test_Cov9_MustApplyChmod_Success(t *testing.T) {
+func Test_MustApplyChmod_Success(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov9_must_apply.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -281,7 +281,7 @@ func Test_Cov9_MustApplyChmod_Success(t *testing.T) {
 	rwx.MustApplyChmod(tmpFile) // should not panic
 }
 
-func Test_Cov9_MustApplyChmod_Panic(t *testing.T) {
+func Test_MustApplyChmod_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -299,7 +299,7 @@ func Test_Cov9_MustApplyChmod_Panic(t *testing.T) {
 
 // ── RwxWrapper.ApplyLinuxChmodOnMany ──
 
-func Test_Cov9_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov9_linux_many_recur")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -311,7 +311,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov9_linux_many_nonrecur.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -323,7 +323,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyLinuxChmodOnMany_ContinueOnError_NonRecursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_ContinueOnError_NonRecursive(t *testing.T) {
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyLinuxChmodOnMany(
 		&chmodins.Condition{IsContinueOnError: true, IsRecursive: false},
@@ -331,7 +331,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_ContinueOnError_NonRecursive(t *testing.T) 
 	_ = err
 }
 
-func Test_Cov9_ApplyLinuxChmodOnMany_ContinueOnError_Recursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_ContinueOnError_Recursive(t *testing.T) {
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyLinuxChmodOnMany(
 		&chmodins.Condition{IsContinueOnError: true, IsRecursive: true},
@@ -339,7 +339,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_ContinueOnError_Recursive(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyLinuxChmodOnMany_StopOnError_Recursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_StopOnError_Recursive(t *testing.T) {
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyLinuxChmodOnMany(
 		&chmodins.Condition{IsRecursive: true},
@@ -347,7 +347,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_StopOnError_Recursive(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov9_ApplyLinuxChmodOnMany_StopOnError_NonRecursive(t *testing.T) {
+func Test_ApplyLinuxChmodOnMany_StopOnError_NonRecursive(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov9_stop_nonrecur.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -361,7 +361,7 @@ func Test_Cov9_ApplyLinuxChmodOnMany_StopOnError_NonRecursive(t *testing.T) {
 
 // ── RwxWrapper.IsEqualVarWrapper ──
 
-func Test_Cov9_IsEqualVarWrapper_Nil(t *testing.T) {
+func Test_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 
@@ -373,7 +373,7 @@ func Test_Cov9_IsEqualVarWrapper_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
-func Test_Cov9_IsEqualVarWrapper_Match(t *testing.T) {
+func Test_IsEqualVarWrapper_Match(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	varW, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
@@ -389,7 +389,7 @@ func Test_Cov9_IsEqualVarWrapper_Match(t *testing.T) {
 
 // ── RwxWrapper.IsRwxEqualFileInfo ──
 
-func Test_Cov9_IsRwxEqualFileInfo_Nil(t *testing.T) {
+func Test_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 
@@ -401,7 +401,7 @@ func Test_Cov9_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_Cov9_IsRwxEqualFileInfo_Valid(t *testing.T) {
+func Test_IsRwxEqualFileInfo_Valid(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -425,7 +425,7 @@ func Test_Cov9_IsRwxEqualFileInfo_Valid(t *testing.T) {
 
 // ── RwxWrapper.IsRwxEqualLocation ──
 
-func Test_Cov9_IsRwxEqualLocation_NonExistent(t *testing.T) {
+func Test_IsRwxEqualLocation_NonExistent(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 
@@ -437,7 +437,7 @@ func Test_Cov9_IsRwxEqualLocation_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_Cov9_IsRwxEqualLocation_Valid(t *testing.T) {
+func Test_IsRwxEqualLocation_Valid(t *testing.T) {
 	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
@@ -460,7 +460,7 @@ func Test_Cov9_IsRwxEqualLocation_Valid(t *testing.T) {
 
 // ── RwxWrapper.getLinuxRecursiveCmdForChmod ──
 
-func Test_Cov9_GetLinuxRecursiveCmdForChmod(t *testing.T) {
+func Test_GetLinuxRecursiveCmdForChmod(t *testing.T) {
 	// Covered through LinuxApplyRecursive on valid dir
 	tmpDir := filepath.Join(os.TempDir(), "cov9_getcmd")
 	os.MkdirAll(tmpDir, 0755)
@@ -472,7 +472,7 @@ func Test_Cov9_GetLinuxRecursiveCmdForChmod(t *testing.T) {
 
 // ── RwxWrapper.applyLinuxRecursiveChmodUsingCmd ──
 
-func Test_Cov9_ApplyLinuxRecursiveChmodUsingCmd(t *testing.T) {
+func Test_ApplyLinuxRecursiveChmodUsingCmd(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov9_linuxcmd")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)

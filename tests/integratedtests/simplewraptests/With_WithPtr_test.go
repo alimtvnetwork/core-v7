@@ -11,7 +11,7 @@ import (
 
 // ── Basic wrap functions ──
 
-func Test_Cov4_With(t *testing.T) {
+func Test_With(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.With("[", "hello", "]")}
 
@@ -20,7 +20,7 @@ func Test_Cov4_With(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "With returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithPtr_AllPresent(t *testing.T) {
+func Test_WithPtr_AllPresent(t *testing.T) {
 	// Arrange
 	s, src, e := "[", "hello", "]"
 	result := simplewrap.WithPtr(&s, &src, &e)
@@ -33,7 +33,7 @@ func Test_Cov4_WithPtr_AllPresent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithPtr returns non-empty -- all present", actual)
 }
 
-func Test_Cov4_WithStartEnd(t *testing.T) {
+func Test_WithStartEnd(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.WithStartEnd("|", "hello")}
 
@@ -42,7 +42,7 @@ func Test_Cov4_WithStartEnd(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithStartEnd returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithStartEndPtr(t *testing.T) {
+func Test_WithStartEndPtr(t *testing.T) {
 	// Arrange
 	w, src := "|", "hello"
 	result := simplewrap.WithStartEndPtr(&w, &src)
@@ -55,7 +55,7 @@ func Test_Cov4_WithStartEndPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithStartEndPtr returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithDoubleQuote(t *testing.T) {
+func Test_WithDoubleQuote(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithDoubleQuote("hello")
 
@@ -67,7 +67,7 @@ func Test_Cov4_WithDoubleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithDoubleQuote returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithSingleQuote(t *testing.T) {
+func Test_WithSingleQuote(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithSingleQuote("hello")
 
@@ -79,7 +79,7 @@ func Test_Cov4_WithSingleQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithSingleQuote returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithDoubleQuoteAny(t *testing.T) {
+func Test_WithDoubleQuoteAny(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithDoubleQuoteAny(42)
 
@@ -91,7 +91,7 @@ func Test_Cov4_WithDoubleQuoteAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithDoubleQuoteAny returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_ToJsonName(t *testing.T) {
+func Test_ToJsonName(t *testing.T) {
 	// Arrange
 	result := simplewrap.ToJsonName("test")
 
@@ -105,7 +105,7 @@ func Test_Cov4_ToJsonName(t *testing.T) {
 
 // ── Bracket/Curly/Parenthesis wraps ──
 
-func Test_Cov4_WithBrackets(t *testing.T) {
+func Test_WithBrackets(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithBrackets("hello")
 
@@ -117,7 +117,7 @@ func Test_Cov4_WithBrackets(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithBrackets returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithCurly(t *testing.T) {
+func Test_WithCurly(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithCurly("hello")
 
@@ -129,7 +129,7 @@ func Test_Cov4_WithCurly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithCurly returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_WithParenthesis(t *testing.T) {
+func Test_WithParenthesis(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithParenthesis("hello")
 
@@ -141,7 +141,7 @@ func Test_Cov4_WithParenthesis(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithParenthesis returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_CurlyWrap(t *testing.T) {
+func Test_CurlyWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrap("hello")
 
@@ -153,7 +153,7 @@ func Test_Cov4_CurlyWrap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrap returns correct value -- with args", actual)
 }
 
-func Test_Cov4_SquareWrap(t *testing.T) {
+func Test_SquareWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.SquareWrap("hello")
 
@@ -165,7 +165,7 @@ func Test_Cov4_SquareWrap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SquareWrap returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ParenthesisWrap(t *testing.T) {
+func Test_ParenthesisWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.ParenthesisWrap("hello")
 
@@ -179,7 +179,7 @@ func Test_Cov4_ParenthesisWrap(t *testing.T) {
 
 // ── If variants ──
 
-func Test_Cov4_CurlyWrapIf_True(t *testing.T) {
+func Test_CurlyWrapIf_True(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.CurlyWrapIf(true, "x")}
 
@@ -188,7 +188,7 @@ func Test_Cov4_CurlyWrapIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapIf returns correct value -- true", actual)
 }
 
-func Test_Cov4_CurlyWrapIf_False(t *testing.T) {
+func Test_CurlyWrapIf_False(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.CurlyWrapIf(false, "x")}
 
@@ -197,7 +197,7 @@ func Test_Cov4_CurlyWrapIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapIf returns correct value -- false", actual)
 }
 
-func Test_Cov4_SquareWrapIf_True(t *testing.T) {
+func Test_SquareWrapIf_True(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.SquareWrapIf(true, "x")}
 
@@ -206,7 +206,7 @@ func Test_Cov4_SquareWrapIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SquareWrapIf returns correct value -- true", actual)
 }
 
-func Test_Cov4_SquareWrapIf_False(t *testing.T) {
+func Test_SquareWrapIf_False(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.SquareWrapIf(false, "x")}
 
@@ -215,7 +215,7 @@ func Test_Cov4_SquareWrapIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SquareWrapIf returns correct value -- false", actual)
 }
 
-func Test_Cov4_ParenthesisWrapIf_True(t *testing.T) {
+func Test_ParenthesisWrapIf_True(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.ParenthesisWrapIf(true, "x")}
 
@@ -224,7 +224,7 @@ func Test_Cov4_ParenthesisWrapIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParenthesisWrapIf returns correct value -- true", actual)
 }
 
-func Test_Cov4_ParenthesisWrapIf_False(t *testing.T) {
+func Test_ParenthesisWrapIf_False(t *testing.T) {
 	// Act
 	actual := args.Map{"result": simplewrap.ParenthesisWrapIf(false, "x")}
 
@@ -235,7 +235,7 @@ func Test_Cov4_ParenthesisWrapIf_False(t *testing.T) {
 
 // ── Title wraps ──
 
-func Test_Cov4_TitleCurlyWrap(t *testing.T) {
+func Test_TitleCurlyWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleCurlyWrap("title", "value")
 
@@ -253,7 +253,7 @@ func Test_Cov4_TitleCurlyWrap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleCurlyWrap returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TitleSquare(t *testing.T) {
+func Test_TitleSquare(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquare("title", "value")
 
@@ -271,7 +271,7 @@ func Test_Cov4_TitleSquare(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquare returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TitleCurlyMeta(t *testing.T) {
+func Test_TitleCurlyMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleCurlyMeta("title", "value", "meta")
 
@@ -283,7 +283,7 @@ func Test_Cov4_TitleCurlyMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleCurlyMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TitleSquareMeta(t *testing.T) {
+func Test_TitleSquareMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMeta("title", "value", "meta")
 
@@ -295,7 +295,7 @@ func Test_Cov4_TitleSquareMeta(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareMeta returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TitleSquareCsvMeta(t *testing.T) {
+func Test_TitleSquareCsvMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareCsvMeta("title", "value", "m1", "m2")
 
@@ -310,7 +310,7 @@ func Test_Cov4_TitleSquareCsvMeta(t *testing.T) {
 type cov4Stringer struct{ val string }
 func (s cov4Stringer) String() string { return s.val }
 
-func Test_Cov4_TitleSquareMetaUsingFmt(t *testing.T) {
+func Test_TitleSquareMetaUsingFmt(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMetaUsingFmt(
 		cov4Stringer{"title"},
@@ -326,7 +326,7 @@ func Test_Cov4_TitleSquareMetaUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareMetaUsingFmt returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TitleQuotationMeta(t *testing.T) {
+func Test_TitleQuotationMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleQuotationMeta("title", "value", "meta")
 
@@ -340,7 +340,7 @@ func Test_Cov4_TitleQuotationMeta(t *testing.T) {
 
 // ── MsgWrapNumber ──
 
-func Test_Cov4_MsgWrapNumber(t *testing.T) {
+func Test_MsgWrapNumber(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgWrapNumber("count", 42)
 
@@ -354,7 +354,7 @@ func Test_Cov4_MsgWrapNumber(t *testing.T) {
 
 // ── MsgCsvItems ──
 
-func Test_Cov4_MsgCsvItems(t *testing.T) {
+func Test_MsgCsvItems(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgCsvItems("msg", "a", "b")
 
@@ -368,7 +368,7 @@ func Test_Cov4_MsgCsvItems(t *testing.T) {
 
 // ── DoubleQuoteWrapElements ──
 
-func Test_Cov4_DoubleQuoteWrapElements_Normal(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Normal(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false, "a", "b")
 
@@ -383,7 +383,7 @@ func Test_Cov4_DoubleQuoteWrapElements_Normal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns correct value -- normal", actual)
 }
 
-func Test_Cov4_DoubleQuoteWrapElements_Empty(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false)
 
@@ -397,7 +397,7 @@ func Test_Cov4_DoubleQuoteWrapElements_Empty(t *testing.T) {
 
 // ── DoubleQuoteWrapElementsWithIndexes ──
 
-func Test_Cov4_DoubleQuoteWrapElementsWithIndexes_Normal(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Normal(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
 

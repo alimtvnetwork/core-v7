@@ -10,7 +10,7 @@ import (
 
 // ── CreateDirWithFiles: file-create error path (line 62) and chmod error (line 75) ──
 
-func Test_Cov19_CreateDirWithFiles_FileCreateError(t *testing.T) {
+func Test_CreateDirWithFiles_FileCreateError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}
@@ -35,7 +35,7 @@ func Test_Cov19_CreateDirWithFiles_FileCreateError(t *testing.T) {
 
 // ── GetRecursivePathsContinueOnError: walk error appended (line 47-51) ──
 
-func Test_Cov19_GetRecursivePathsContinueOnError_WalkError(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_WalkError(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 
@@ -56,7 +56,7 @@ func Test_Cov19_GetRecursivePathsContinueOnError_WalkError(t *testing.T) {
 
 // ── MergeRwxWildcardWithFixedRwx: bad existing rwx length (line 38-40) ──
 
-func Test_Cov19_MergeRwxWildcardWithFixedRwx_BadExistingLength(t *testing.T) {
+func Test_MergeRwxWildcardWithFixedRwx_BadExistingLength(t *testing.T) {
 	// Arrange
 	wildcardInput := "r-x"
 	existingBadRwx := "rw" // wrong length

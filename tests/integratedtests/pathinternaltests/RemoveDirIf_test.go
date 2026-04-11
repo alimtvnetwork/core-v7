@@ -11,7 +11,7 @@ import (
 
 // ── RemoveDirIf — true condition with existing dir ──
 
-func Test_Cov3_RemoveDirIf_ExistingDir(t *testing.T) {
+func Test_RemoveDirIf_ExistingDir(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(os.TempDir(), "pathinternal_test_cov3_removedir")
 	_ = os.MkdirAll(dir, 0755)
@@ -33,7 +33,7 @@ func Test_Cov3_RemoveDirIf_ExistingDir(t *testing.T) {
 
 // ── RemoveDirIfMust — no panic on non-existent ──
 
-func Test_Cov3_RemoveDirIfMust_NonExistent(t *testing.T) {
+func Test_RemoveDirIfMust_NonExistent(t *testing.T) {
 	// Act — should not panic
 	pathinternal.RemoveDirIfMust(true, "/tmp/nonexistent_pathcov3", "test")
 
@@ -43,7 +43,7 @@ func Test_Cov3_RemoveDirIfMust_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveDirIfMust returns non-empty -- non-existent", actual)
 }
 
-func Test_Cov3_RemoveDirIfMust_FalseCondition(t *testing.T) {
+func Test_RemoveDirIfMust_FalseCondition(t *testing.T) {
 	// Act
 	pathinternal.RemoveDirIfMust(false, "/tmp/whatever", "test")
 
@@ -55,7 +55,7 @@ func Test_Cov3_RemoveDirIfMust_FalseCondition(t *testing.T) {
 
 // ── RemoveDirMust ──
 
-func Test_Cov3_RemoveDirMust(t *testing.T) {
+func Test_RemoveDirMust(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(os.TempDir(), "pathinternal_test_cov3_removemust")
 	_ = os.MkdirAll(dir, 0755)
@@ -71,7 +71,7 @@ func Test_Cov3_RemoveDirMust(t *testing.T) {
 
 // ── RemoveDirMustSimple ──
 
-func Test_Cov3_RemoveDirMustSimple(t *testing.T) {
+func Test_RemoveDirMustSimple(t *testing.T) {
 	// Arrange
 	dir := filepath.Join(os.TempDir(), "pathinternal_test_cov3_removesimple")
 	_ = os.MkdirAll(dir, 0755)
@@ -87,7 +87,7 @@ func Test_Cov3_RemoveDirMustSimple(t *testing.T) {
 
 // ── Clean with triple/quadruple slashes ──
 
-func Test_Cov3_Clean_MultiSlash(t *testing.T) {
+func Test_Clean_MultiSlash(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"triple": pathinternal.Clean("/a///b"),

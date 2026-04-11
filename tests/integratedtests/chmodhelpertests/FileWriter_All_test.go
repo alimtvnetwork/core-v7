@@ -18,7 +18,7 @@ func isUnix() bool {
 
 // ── fileWriter.All ──
 
-func Test_Cov2_FileWriter_All(t *testing.T) {
+func Test_FileWriter_All(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "fw_all.txt")
@@ -38,7 +38,7 @@ func Test_Cov2_FileWriter_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.All writes file -- valid path", actual)
 }
 
-func Test_Cov2_FileWriter_AllLock(t *testing.T) {
+func Test_FileWriter_AllLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "fw_alllock.txt")
@@ -58,7 +58,7 @@ func Test_Cov2_FileWriter_AllLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.AllLock writes file -- with lock", actual)
 }
 
-func Test_Cov2_FileWriter_All_RemoveBeforeWrite(t *testing.T) {
+func Test_FileWriter_All_RemoveBeforeWrite(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "fw_remove.txt")
@@ -79,7 +79,7 @@ func Test_Cov2_FileWriter_All_RemoveBeforeWrite(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.All removes before write -- existing file", actual)
 }
 
-func Test_Cov2_FileWriter_Remove(t *testing.T) {
+func Test_FileWriter_Remove(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "fw_del.txt")
@@ -95,7 +95,7 @@ func Test_Cov2_FileWriter_Remove(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.Remove deletes file -- valid path", actual)
 }
 
-func Test_Cov2_FileWriter_RemoveIf_False(t *testing.T) {
+func Test_FileWriter_RemoveIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.FileWriter.RemoveIf(false, "/nonexistent")
 
@@ -107,7 +107,7 @@ func Test_Cov2_FileWriter_RemoveIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.RemoveIf skips -- isRemove false", actual)
 }
 
-func Test_Cov2_FileWriter_RemoveIf_NonExist(t *testing.T) {
+func Test_FileWriter_RemoveIf_NonExist(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.FileWriter.RemoveIf(true, "/nonexistent_xyz_99")
 
@@ -119,7 +119,7 @@ func Test_Cov2_FileWriter_RemoveIf_NonExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.RemoveIf skips -- path not exists", actual)
 }
 
-func Test_Cov2_FileWriter_ParentDir(t *testing.T) {
+func Test_FileWriter_ParentDir(t *testing.T) {
 	// Arrange
 	result := chmodhelper.SimpleFileWriter.FileWriter.ParentDir("/tmp/subdir/file.txt")
 
@@ -131,7 +131,7 @@ func Test_Cov2_FileWriter_ParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.ParentDir returns parent -- valid path", actual)
 }
 
-func Test_Cov2_FileWriter_Chmod(t *testing.T) {
+func Test_FileWriter_Chmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "chmod_test.txt")
@@ -148,7 +148,7 @@ func Test_Cov2_FileWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileWriter.Chmod writes with chmod -- valid path", actual)
 }
 
-func Test_Cov2_FileWriter_ChmodFile(t *testing.T) {
+func Test_FileWriter_ChmodFile(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "chmodfile_test.txt")
@@ -167,7 +167,7 @@ func Test_Cov2_FileWriter_ChmodFile(t *testing.T) {
 
 // ── fileBytesWriter ──
 
-func Test_Cov2_FileBytesWriter_Default(t *testing.T) {
+func Test_FileBytesWriter_Default(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "bytes_default.txt")
@@ -184,7 +184,7 @@ func Test_Cov2_FileBytesWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.Default writes file -- valid path", actual)
 }
 
-func Test_Cov2_FileBytesWriter_WithDir(t *testing.T) {
+func Test_FileBytesWriter_WithDir(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "sub", "bytes_withdir.txt")
@@ -201,7 +201,7 @@ func Test_Cov2_FileBytesWriter_WithDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDir creates dir and writes -- nested path", actual)
 }
 
-func Test_Cov2_FileBytesWriter_WithDirLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "bytes_withdirlock.txt")
@@ -218,7 +218,7 @@ func Test_Cov2_FileBytesWriter_WithDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDirLock writes -- with lock", actual)
 }
 
-func Test_Cov2_FileBytesWriter_WithDirChmod(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "bytes_chmod.txt")
@@ -235,7 +235,7 @@ func Test_Cov2_FileBytesWriter_WithDirChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDirChmod writes with chmod -- valid path", actual)
 }
 
-func Test_Cov2_FileBytesWriter_WithDirChmodLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "bytes_chmodlock.txt")
@@ -252,7 +252,7 @@ func Test_Cov2_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileBytesWriter.WithDirChmodLock writes -- with chmod and lock", actual)
 }
 
-func Test_Cov2_FileBytesWriter_Chmod(t *testing.T) {
+func Test_FileBytesWriter_Chmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "bytes_chmod2.txt")
@@ -271,7 +271,7 @@ func Test_Cov2_FileBytesWriter_Chmod(t *testing.T) {
 
 // ── fileStringWriter ──
 
-func Test_Cov2_FileStringWriter_Default(t *testing.T) {
+func Test_FileStringWriter_Default(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "str_default.txt")
@@ -288,7 +288,7 @@ func Test_Cov2_FileStringWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.Default writes -- valid path", actual)
 }
 
-func Test_Cov2_FileStringWriter_DefaultLock(t *testing.T) {
+func Test_FileStringWriter_DefaultLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "str_defaultlock.txt")
@@ -305,7 +305,7 @@ func Test_Cov2_FileStringWriter_DefaultLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.DefaultLock writes -- with lock", actual)
 }
 
-func Test_Cov2_FileStringWriter_All(t *testing.T) {
+func Test_FileStringWriter_All(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "str_all.txt")
@@ -323,7 +323,7 @@ func Test_Cov2_FileStringWriter_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.All writes -- valid path", actual)
 }
 
-func Test_Cov2_FileStringWriter_Chmod(t *testing.T) {
+func Test_FileStringWriter_Chmod(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "str_chmod.txt")
@@ -340,7 +340,7 @@ func Test_Cov2_FileStringWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileStringWriter.Chmod writes -- valid path", actual)
 }
 
-func Test_Cov2_FileStringWriter_ChmodLock(t *testing.T) {
+func Test_FileStringWriter_ChmodLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "str_chmodlock.txt")
@@ -359,7 +359,7 @@ func Test_Cov2_FileStringWriter_ChmodLock(t *testing.T) {
 
 // ── fileReader ──
 
-func Test_Cov2_FileReader_Read(t *testing.T) {
+func Test_FileReader_Read(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "reader.txt", "read me")
@@ -380,7 +380,7 @@ func Test_Cov2_FileReader_Read(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileReader.Read returns content -- valid file", actual)
 }
 
-func Test_Cov2_FileReader_Read_NotExist(t *testing.T) {
+func Test_FileReader_Read_NotExist(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.SimpleFileWriter.FileReader.Read("/nonexistent_xyz_99.txt")
 
@@ -392,7 +392,7 @@ func Test_Cov2_FileReader_Read_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "fileReader.Read returns error -- non-existing file", actual)
 }
 
-func Test_Cov2_FileReader_ReadBytes(t *testing.T) {
+func Test_FileReader_ReadBytes(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "readbytes.txt", "bytes here")
@@ -415,7 +415,7 @@ func Test_Cov2_FileReader_ReadBytes(t *testing.T) {
 
 // ── dirCreator ──
 
-func Test_Cov2_DirCreator_If_False(t *testing.T) {
+func Test_DirCreator_If_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.SimpleFileWriter.CreateDir.If(false, 0755, "/tmp/nodir")
 
@@ -427,7 +427,7 @@ func Test_Cov2_DirCreator_If_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.If skips -- isCreate false", actual)
 }
 
-func Test_Cov2_DirCreator_IfMissing(t *testing.T) {
+func Test_DirCreator_IfMissing(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "missing_sub")
@@ -448,7 +448,7 @@ func Test_Cov2_DirCreator_IfMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissing creates dir -- missing path", actual)
 }
 
-func Test_Cov2_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
+func Test_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 
@@ -462,7 +462,7 @@ func Test_Cov2_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissing skips -- already exists", actual)
 }
 
-func Test_Cov2_DirCreator_IfMissingLock(t *testing.T) {
+func Test_DirCreator_IfMissingLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "lockdir")
@@ -477,7 +477,7 @@ func Test_Cov2_DirCreator_IfMissingLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissingLock creates dir -- with lock", actual)
 }
 
-func Test_Cov2_DirCreator_Default(t *testing.T) {
+func Test_DirCreator_Default(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "defaultdir")
@@ -492,7 +492,7 @@ func Test_Cov2_DirCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.Default creates dir -- valid path", actual)
 }
 
-func Test_Cov2_DirCreator_DefaultLock(t *testing.T) {
+func Test_DirCreator_DefaultLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "defaultlockdir")
@@ -507,7 +507,7 @@ func Test_Cov2_DirCreator_DefaultLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.DefaultLock creates dir -- with lock", actual)
 }
 
-func Test_Cov2_DirCreator_Direct(t *testing.T) {
+func Test_DirCreator_Direct(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "directdir")
@@ -522,7 +522,7 @@ func Test_Cov2_DirCreator_Direct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.Direct creates dir -- default chmod", actual)
 }
 
-func Test_Cov2_DirCreator_DirectLock(t *testing.T) {
+func Test_DirCreator_DirectLock(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "directlockdir")
@@ -537,7 +537,7 @@ func Test_Cov2_DirCreator_DirectLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.DirectLock creates dir -- with lock default chmod", actual)
 }
 
-func Test_Cov2_DirCreator_ByChecking_NewDir(t *testing.T) {
+func Test_DirCreator_ByChecking_NewDir(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	subDir := filepath.Join(dir, "checkdir")
@@ -552,7 +552,7 @@ func Test_Cov2_DirCreator_ByChecking_NewDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.ByChecking creates new dir -- missing path", actual)
 }
 
-func Test_Cov2_DirCreator_ByChecking_ExistingDir(t *testing.T) {
+func Test_DirCreator_ByChecking_ExistingDir(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 
@@ -566,7 +566,7 @@ func Test_Cov2_DirCreator_ByChecking_ExistingDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.ByChecking applies chmod -- existing dir", actual)
 }
 
-func Test_Cov2_DirCreator_ByChecking_FileNotDir(t *testing.T) {
+func Test_DirCreator_ByChecking_FileNotDir(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "notdir.txt", "x")
@@ -583,7 +583,7 @@ func Test_Cov2_DirCreator_ByChecking_FileNotDir(t *testing.T) {
 
 // ── chmodVerifier simple methods ──
 
-func Test_Cov2_ChmodVerifier_GetRwxFull(t *testing.T) {
+func Test_ChmodVerifier_GetRwxFull(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwxFull(0755)
 
@@ -595,7 +595,7 @@ func Test_Cov2_ChmodVerifier_GetRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.GetRwxFull returns rwx string -- 0755", actual)
 }
 
-func Test_Cov2_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwx9(0755)
 
@@ -607,7 +607,7 @@ func Test_Cov2_ChmodVerifier_GetRwx9(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.GetRwx9 returns 9-char rwx -- 0755", actual)
 }
 
-func Test_Cov2_ChmodVerifier_IsEqual(t *testing.T) {
+func Test_ChmodVerifier_IsEqual(t *testing.T) {
 	// Arrange
 	if !isUnix() {
 		t.Skip("unix only")
@@ -625,7 +625,7 @@ func Test_Cov2_ChmodVerifier_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.IsEqual runs -- valid dir", actual)
 }
 
-func Test_Cov2_ChmodVerifier_IsMismatch(t *testing.T) {
+func Test_ChmodVerifier_IsMismatch(t *testing.T) {
 	// Arrange
 	if !isUnix() {
 		t.Skip("unix only")
@@ -642,7 +642,7 @@ func Test_Cov2_ChmodVerifier_IsMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.IsMismatch runs -- valid dir", actual)
 }
 
-func Test_Cov2_ChmodVerifier_GetExisting(t *testing.T) {
+func Test_ChmodVerifier_GetExisting(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "existing.txt", "x")
@@ -663,7 +663,7 @@ func Test_Cov2_ChmodVerifier_GetExisting(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.GetExisting returns mode -- valid file", actual)
 }
 
-func Test_Cov2_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
+func Test_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "rwxwrap.txt", "x")
@@ -684,7 +684,7 @@ func Test_Cov2_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.GetExistingRwxWrapper returns wrapper -- valid file", actual)
 }
 
-func Test_Cov2_ChmodVerifier_PathIf_False(t *testing.T) {
+func Test_ChmodVerifier_PathIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.PathIf(false, "/nonexistent", 0755)
 
@@ -696,7 +696,7 @@ func Test_Cov2_ChmodVerifier_PathIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.PathIf skips -- isVerify false", actual)
 }
 
-func Test_Cov2_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/tmp", "rwx")
 
@@ -708,7 +708,7 @@ func Test_Cov2_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodVerifier.RwxFull returns error -- invalid rwx length", actual)
 }
 
-func Test_Cov2_ChmodVerifier_RwxFull_NonExistPath(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_NonExistPath(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/nonexistent_xyz_99", "-rwxr-xr-x")
 
@@ -722,7 +722,7 @@ func Test_Cov2_ChmodVerifier_RwxFull_NonExistPath(t *testing.T) {
 
 // ── chmodApplier simple methods ──
 
-func Test_Cov2_ChmodApply_ApplyIf_False(t *testing.T) {
+func Test_ChmodApply_ApplyIf_False(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.ApplyIf(false, 0755, "/nonexistent")
 
@@ -734,7 +734,7 @@ func Test_Cov2_ChmodApply_ApplyIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodApplier.ApplyIf skips -- isApply false", actual)
 }
 
-func Test_Cov2_ChmodApply_OnMismatchOption_SkipApply(t *testing.T) {
+func Test_ChmodApply_OnMismatchOption_SkipApply(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.OnMismatchOption(false, false, 0755, "/nonexistent")
 
@@ -746,7 +746,7 @@ func Test_Cov2_ChmodApply_OnMismatchOption_SkipApply(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "chmodApplier.OnMismatchOption skips -- isApply false", actual)
 }
 
-func Test_Cov2_ChmodApply_PathsUsingFileModeConditions_EmptyLocations(t *testing.T) {
+func Test_ChmodApply_PathsUsingFileModeConditions_EmptyLocations(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0755, &chmodins.Condition{})
 
@@ -758,7 +758,7 @@ func Test_Cov2_ChmodApply_PathsUsingFileModeConditions_EmptyLocations(t *testing
 	expected.ShouldBeEqual(t, 0, "chmodApplier.PathsUsingFileModeConditions -- empty locations", actual)
 }
 
-func Test_Cov2_ChmodApply_PathsUsingFileModeConditions_NilCondition(t *testing.T) {
+func Test_ChmodApply_PathsUsingFileModeConditions_NilCondition(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.PathsUsingFileModeConditions(0755, nil, "/tmp")
 
@@ -770,7 +770,7 @@ func Test_Cov2_ChmodApply_PathsUsingFileModeConditions_NilCondition(t *testing.T
 	expected.ShouldBeEqual(t, 0, "chmodApplier.PathsUsingFileModeConditions -- nil condition error", actual)
 }
 
-func Test_Cov2_ChmodApply_Default(t *testing.T) {
+func Test_ChmodApply_Default(t *testing.T) {
 	// Arrange
 	if !isUnix() {
 		t.Skip("unix only")
@@ -791,7 +791,7 @@ func Test_Cov2_ChmodApply_Default(t *testing.T) {
 
 // ── SimpleFileReaderWriter ──
 
-func Test_Cov2_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -815,7 +815,7 @@ func Test_Cov2_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.InitializeDefault sets parent dir -- no parent", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -833,7 +833,7 @@ func Test_Cov2_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.InitializeDefaultApplyChmod creates -- defaults", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_IsExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_IsExist(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "rw_exist.txt", "x")
@@ -863,7 +863,7 @@ func Test_Cov2_SimpleFileReaderWriter_IsExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter path checks -- existing file", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "rw_write.txt")
@@ -894,7 +894,7 @@ func Test_Cov2_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter write then read -- valid path", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_WriteString(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := filepath.Join(dir, "rw_writestr.txt")
@@ -916,7 +916,7 @@ func Test_Cov2_SimpleFileReaderWriter_WriteString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.WriteString writes -- valid path", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath: "/nonexistent_xyz_99.txt",
@@ -938,7 +938,7 @@ func Test_Cov2_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.ReadOnExist returns nil -- non-existing", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath: "/nonexistent_xyz_99.txt",
@@ -960,7 +960,7 @@ func Test_Cov2_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.ReadStringOnExist returns empty -- non-existing", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_Expire(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "rw_expire.txt", "x")
@@ -986,7 +986,7 @@ func Test_Cov2_SimpleFileReaderWriter_Expire(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.Expire removes file -- existing file", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath: "/nonexistent_xyz_99.txt",
@@ -1002,7 +1002,7 @@ func Test_Cov2_SimpleFileReaderWriter_Expire_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.Expire returns nil -- non-existing", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_String(t *testing.T) {
+func Test_SimpleFileReaderWriter_String(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1021,7 +1021,7 @@ func Test_Cov2_SimpleFileReaderWriter_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.String returns non-empty -- with data", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_Clone(t *testing.T) {
+func Test_SimpleFileReaderWriter_Clone(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1047,7 +1047,7 @@ func Test_Cov2_SimpleFileReaderWriter_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.Clone preserves data -- cloned", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
+func Test_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var rw *chmodhelper.SimpleFileReaderWriter
 
@@ -1061,7 +1061,7 @@ func Test_Cov2_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.ClonePtr returns nil -- nil receiver", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_Json(t *testing.T) {
+func Test_SimpleFileReaderWriter_Json(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1087,7 +1087,7 @@ func Test_Cov2_SimpleFileReaderWriter_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.Json returns valid result -- with data", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ParentDir: "/tmp/parent",
@@ -1110,7 +1110,7 @@ func Test_Cov2_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.JoinRelPath joins paths -- with and without relpath", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_NewPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1127,7 +1127,7 @@ func Test_Cov2_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.NewPath creates new rw -- valid path", actual)
 }
 
-func Test_Cov2_SimpleFileReaderWriter_ChmodApplierVerifier(t *testing.T) {
+func Test_SimpleFileReaderWriter_ChmodApplierVerifier(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -1157,7 +1157,7 @@ func Test_Cov2_SimpleFileReaderWriter_ChmodApplierVerifier(t *testing.T) {
 
 // ── simpleFileWriter Lock/Unlock ──
 
-func Test_Cov2_SimpleFileWriter_LockUnlock(t *testing.T) {
+func Test_SimpleFileWriter_LockUnlock(t *testing.T) {
 	// Arrange
 	chmodhelper.SimpleFileWriter.Lock()
 	chmodhelper.SimpleFileWriter.Unlock()
@@ -1172,7 +1172,7 @@ func Test_Cov2_SimpleFileWriter_LockUnlock(t *testing.T) {
 
 // ── IsPathExistsPlusFileInfo ──
 
-func Test_Cov2_IsPathExistsPlusFileInfo_Valid(t *testing.T) {
+func Test_IsPathExistsPlusFileInfo_Valid(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 
@@ -1192,7 +1192,7 @@ func Test_Cov2_IsPathExistsPlusFileInfo_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathExistsPlusFileInfo returns valid -- existing dir", actual)
 }
 
-func Test_Cov2_IsPathExistsPlusFileInfo_Invalid(t *testing.T) {
+func Test_IsPathExistsPlusFileInfo_Invalid(t *testing.T) {
 	// Arrange
 	exists, info := chmodhelper.IsPathExistsPlusFileInfo("/nonexistent_xyz_99")
 

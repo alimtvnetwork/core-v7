@@ -10,7 +10,7 @@ import (
 
 // ── TitleCurlyWrap ──
 
-func Test_Cov6_TitleCurlyWrap(t *testing.T) {
+func Test_TitleCurlyWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleCurlyWrap("title", "value")
 
@@ -24,7 +24,7 @@ func Test_Cov6_TitleCurlyWrap(t *testing.T) {
 
 // ── TitleSquare ──
 
-func Test_Cov6_TitleSquare(t *testing.T) {
+func Test_TitleSquare(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquare("title", "value")
 
@@ -38,7 +38,7 @@ func Test_Cov6_TitleSquare(t *testing.T) {
 
 // ── TitleSquareMeta ──
 
-func Test_Cov6_TitleSquareMeta(t *testing.T) {
+func Test_TitleSquareMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMeta("title", "value", "meta")
 
@@ -56,7 +56,7 @@ type cov6Stringer struct{ val string }
 
 func (s cov6Stringer) String() string { return s.val }
 
-func Test_Cov6_TitleSquareMetaUsingFmt(t *testing.T) {
+func Test_TitleSquareMetaUsingFmt(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMetaUsingFmt(
 		cov6Stringer{"t"}, cov6Stringer{"v"}, cov6Stringer{"m"})
@@ -71,7 +71,7 @@ func Test_Cov6_TitleSquareMetaUsingFmt(t *testing.T) {
 
 // ── TitleSquareCsvMeta ──
 
-func Test_Cov6_TitleSquareCsvMeta(t *testing.T) {
+func Test_TitleSquareCsvMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareCsvMeta("title", "value", "a", "b")
 
@@ -85,7 +85,7 @@ func Test_Cov6_TitleSquareCsvMeta(t *testing.T) {
 
 // ── ToJsonName ──
 
-func Test_Cov6_ToJsonName(t *testing.T) {
+func Test_ToJsonName(t *testing.T) {
 	// Arrange
 	result := simplewrap.ToJsonName("hello")
 
@@ -99,7 +99,7 @@ func Test_Cov6_ToJsonName(t *testing.T) {
 
 // ── MsgWrapNumber ──
 
-func Test_Cov6_MsgWrapNumber(t *testing.T) {
+func Test_MsgWrapNumber(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgWrapNumber("count", 42)
 
@@ -113,7 +113,7 @@ func Test_Cov6_MsgWrapNumber(t *testing.T) {
 
 // ── With / WithPtr ──
 
-func Test_Cov6_With(t *testing.T) {
+func Test_With(t *testing.T) {
 	// Arrange
 	result := simplewrap.With("[", "hello", "]")
 
@@ -125,7 +125,7 @@ func Test_Cov6_With(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "With returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_WithPtr(t *testing.T) {
+func Test_WithPtr(t *testing.T) {
 	// Arrange
 	s, e, v := "[", "]", "hello"
 	result := simplewrap.WithPtr(&s, &v, &e)
@@ -138,7 +138,7 @@ func Test_Cov6_WithPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithPtr returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_WithPtr_Nils(t *testing.T) {
+func Test_WithPtr_Nils(t *testing.T) {
 	// Arrange
 	v := "hello"
 	result := simplewrap.WithPtr(nil, &v, nil)
@@ -151,7 +151,7 @@ func Test_Cov6_WithPtr_Nils(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithPtr returns nil -- nils", actual)
 }
 
-func Test_Cov6_WithPtr_NilSource(t *testing.T) {
+func Test_WithPtr_NilSource(t *testing.T) {
 	// Arrange
 	s, e := "[", "]"
 	result := simplewrap.WithPtr(&s, nil, &e)
@@ -166,7 +166,7 @@ func Test_Cov6_WithPtr_NilSource(t *testing.T) {
 
 // ── WithStartEnd / WithStartEndPtr ──
 
-func Test_Cov6_WithStartEnd(t *testing.T) {
+func Test_WithStartEnd(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithStartEnd("'", "hello")
 
@@ -178,7 +178,7 @@ func Test_Cov6_WithStartEnd(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithStartEnd returns non-empty -- with args", actual)
 }
 
-func Test_Cov6_WithStartEndPtr(t *testing.T) {
+func Test_WithStartEndPtr(t *testing.T) {
 	// Arrange
 	w, v := "'", "hello"
 	result := simplewrap.WithStartEndPtr(&w, &v)
@@ -193,7 +193,7 @@ func Test_Cov6_WithStartEndPtr(t *testing.T) {
 
 // ── WithDoubleQuoteAny ──
 
-func Test_Cov6_WithDoubleQuoteAny(t *testing.T) {
+func Test_WithDoubleQuoteAny(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithDoubleQuoteAny(42)
 
@@ -207,7 +207,7 @@ func Test_Cov6_WithDoubleQuoteAny(t *testing.T) {
 
 // ── WithSingleQuote ──
 
-func Test_Cov6_WithSingleQuote(t *testing.T) {
+func Test_WithSingleQuote(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithSingleQuote("hello")
 
@@ -221,7 +221,7 @@ func Test_Cov6_WithSingleQuote(t *testing.T) {
 
 // ── WithDoubleQuote ──
 
-func Test_Cov6_WithDoubleQuote(t *testing.T) {
+func Test_WithDoubleQuote(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithDoubleQuote("hello")
 
@@ -235,7 +235,7 @@ func Test_Cov6_WithDoubleQuote(t *testing.T) {
 
 // ── WithBrackets ──
 
-func Test_Cov6_WithBrackets(t *testing.T) {
+func Test_WithBrackets(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithBrackets("hello")
 
@@ -249,7 +249,7 @@ func Test_Cov6_WithBrackets(t *testing.T) {
 
 // ── WithCurly ──
 
-func Test_Cov6_WithCurly(t *testing.T) {
+func Test_WithCurly(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithCurly("hello")
 
@@ -263,7 +263,7 @@ func Test_Cov6_WithCurly(t *testing.T) {
 
 // ── WithParenthesis ──
 
-func Test_Cov6_WithParenthesis(t *testing.T) {
+func Test_WithParenthesis(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithParenthesis("hello")
 
@@ -277,7 +277,7 @@ func Test_Cov6_WithParenthesis(t *testing.T) {
 
 // ── CurlyWrap ──
 
-func Test_Cov6_CurlyWrap(t *testing.T) {
+func Test_CurlyWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrap("hello")
 
@@ -291,7 +291,7 @@ func Test_Cov6_CurlyWrap(t *testing.T) {
 
 // ── CurlyWrapIf ──
 
-func Test_Cov6_CurlyWrapIf(t *testing.T) {
+func Test_CurlyWrapIf(t *testing.T) {
 	// Arrange
 	result := simplewrap.CurlyWrapIf(true, "hello")
 	noWrap := simplewrap.CurlyWrapIf(false, "hello")
@@ -312,7 +312,7 @@ func Test_Cov6_CurlyWrapIf(t *testing.T) {
 
 // ── ParenthesisWrap ──
 
-func Test_Cov6_ParenthesisWrap(t *testing.T) {
+func Test_ParenthesisWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.ParenthesisWrap("hello")
 
@@ -326,7 +326,7 @@ func Test_Cov6_ParenthesisWrap(t *testing.T) {
 
 // ── ParenthesisWrapIf ──
 
-func Test_Cov6_ParenthesisWrapIf(t *testing.T) {
+func Test_ParenthesisWrapIf(t *testing.T) {
 	// Arrange
 	result := simplewrap.ParenthesisWrapIf(true, "hello")
 	noWrap := simplewrap.ParenthesisWrapIf(false, "hello")
@@ -347,7 +347,7 @@ func Test_Cov6_ParenthesisWrapIf(t *testing.T) {
 
 // ── SquareWrap ──
 
-func Test_Cov6_SquareWrap(t *testing.T) {
+func Test_SquareWrap(t *testing.T) {
 	// Arrange
 	result := simplewrap.SquareWrap("hello")
 
@@ -361,7 +361,7 @@ func Test_Cov6_SquareWrap(t *testing.T) {
 
 // ── SquareWrapIf ──
 
-func Test_Cov6_SquareWrapIf(t *testing.T) {
+func Test_SquareWrapIf(t *testing.T) {
 	// Arrange
 	result := simplewrap.SquareWrapIf(true, "hello")
 	noWrap := simplewrap.SquareWrapIf(false, "hello")
@@ -382,7 +382,7 @@ func Test_Cov6_SquareWrapIf(t *testing.T) {
 
 // ── TitleCurlyMeta ──
 
-func Test_Cov6_TitleCurlyMeta(t *testing.T) {
+func Test_TitleCurlyMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleCurlyMeta("title", "value", "meta")
 
@@ -396,7 +396,7 @@ func Test_Cov6_TitleCurlyMeta(t *testing.T) {
 
 // ── TitleQuotationMeta ──
 
-func Test_Cov6_TitleQuotationMeta(t *testing.T) {
+func Test_TitleQuotationMeta(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleQuotationMeta("title", "value", "meta")
 
@@ -410,7 +410,7 @@ func Test_Cov6_TitleQuotationMeta(t *testing.T) {
 
 // ── DoubleQuoteWrapElements — skip on existence ──
 
-func Test_Cov6_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
+func Test_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(true, `"hello"`, "world")
 
@@ -422,7 +422,7 @@ func Test_Cov6_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns correct value -- skip on existence", actual)
 }
 
-func Test_Cov6_DoubleQuoteWrapElements_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false, nil...)
 
@@ -434,7 +434,7 @@ func Test_Cov6_DoubleQuoteWrapElements_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns nil -- nil", actual)
 }
 
-func Test_Cov6_DoubleQuoteWrapElements_Empty(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false)
 
@@ -448,7 +448,7 @@ func Test_Cov6_DoubleQuoteWrapElements_Empty(t *testing.T) {
 
 // ── DoubleQuoteWrapElementsWithIndexes ──
 
-func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes(nil...)
 
@@ -460,7 +460,7 @@ func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns nil -- nil", actual)
 }
 
-func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Empty(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Empty(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes()
 
@@ -472,7 +472,7 @@ func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns empty -- empty", actual)
 }
 
-func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Items(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Items(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
 
@@ -492,7 +492,7 @@ func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Items(t *testing.T) {
 
 // ── ConditionalWrapWith — missing left/right ──
 
-func Test_Cov6_ConditionalWrapWith_MissingLeft(t *testing.T) {
+func Test_ConditionalWrapWith_MissingLeft(t *testing.T) {
 	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "x]", ']')
 
@@ -504,7 +504,7 @@ func Test_Cov6_ConditionalWrapWith_MissingLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith returns non-empty -- missing left", actual)
 }
 
-func Test_Cov6_ConditionalWrapWith_MissingRight(t *testing.T) {
+func Test_ConditionalWrapWith_MissingRight(t *testing.T) {
 	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "[x", ']')
 
@@ -516,7 +516,7 @@ func Test_Cov6_ConditionalWrapWith_MissingRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith returns non-empty -- missing right", actual)
 }
 
-func Test_Cov6_ConditionalWrapWith_SingleCharPresent(t *testing.T) {
+func Test_ConditionalWrapWith_SingleCharPresent(t *testing.T) {
 	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "[", ']')
 
@@ -530,7 +530,7 @@ func Test_Cov6_ConditionalWrapWith_SingleCharPresent(t *testing.T) {
 
 // ── MsgCsvItems with items ──
 
-func Test_Cov6_MsgCsvItems_WithItems(t *testing.T) {
+func Test_MsgCsvItems_WithItems(t *testing.T) {
 	// Arrange
 	result := simplewrap.MsgCsvItems("msg", "a", "b")
 

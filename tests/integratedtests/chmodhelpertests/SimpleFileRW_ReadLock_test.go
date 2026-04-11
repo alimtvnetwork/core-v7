@@ -35,7 +35,7 @@ func newRW(t *testing.T, content string) chmodhelper.SimpleFileReaderWriter {
 	}
 }
 
-func Test_I10_SFRW_ReadString(t *testing.T) {
+func Test_SFRW_ReadString(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "hello")
 	s, err := rw.ReadString()
@@ -48,7 +48,7 @@ func Test_I10_SFRW_ReadString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "got, err=", actual)
 }
 
-func Test_I10_SFRW_ReadStringMust(t *testing.T) {
+func Test_SFRW_ReadStringMust(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "world")
 	s := rw.ReadStringMust()
@@ -61,13 +61,13 @@ func Test_I10_SFRW_ReadStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "got", actual)
 }
 
-func Test_I10_SFRW_ReadStringMust_Panic(t *testing.T) {
+func Test_SFRW_ReadStringMust_Panic(t *testing.T) {
 	defer func() { recover() }()
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10"}
 	rw.ReadStringMust()
 }
 
-func Test_I10_SFRW_ReadMust(t *testing.T) {
+func Test_SFRW_ReadMust(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "data")
 	b := rw.ReadMust()
@@ -80,13 +80,13 @@ func Test_I10_SFRW_ReadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadMust_Panic(t *testing.T) {
+func Test_SFRW_ReadMust_Panic(t *testing.T) {
 	defer func() { recover() }()
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10"}
 	rw.ReadMust()
 }
 
-func Test_I10_SFRW_ReadLock(t *testing.T) {
+func Test_SFRW_ReadLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "lock")
 	b, err := rw.ReadLock()
@@ -99,7 +99,7 @@ func Test_I10_SFRW_ReadLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadStringLock(t *testing.T) {
+func Test_SFRW_ReadStringLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "slock")
 	s, err := rw.ReadStringLock()
@@ -112,7 +112,7 @@ func Test_I10_SFRW_ReadStringLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadOnExist_Exists(t *testing.T) {
+func Test_SFRW_ReadOnExist_Exists(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "exist")
 	b, err := rw.ReadOnExist()
@@ -125,7 +125,7 @@ func Test_I10_SFRW_ReadOnExist_Exists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadOnExist_NotExists(t *testing.T) {
+func Test_SFRW_ReadOnExist_NotExists(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10"}
 	b, err := rw.ReadOnExist()
@@ -138,7 +138,7 @@ func Test_I10_SFRW_ReadOnExist_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil, nil", actual)
 }
 
-func Test_I10_SFRW_ReadStringOnExist(t *testing.T) {
+func Test_SFRW_ReadStringOnExist(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "sexist")
 	s, err := rw.ReadStringOnExist()
@@ -151,7 +151,7 @@ func Test_I10_SFRW_ReadStringOnExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadStringOnExist_NotExists(t *testing.T) {
+func Test_SFRW_ReadStringOnExist_NotExists(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10"}
 	s, err := rw.ReadStringOnExist()
@@ -164,7 +164,7 @@ func Test_I10_SFRW_ReadStringOnExist_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_I10_SFRW_ReadStringOnExistLock(t *testing.T) {
+func Test_SFRW_ReadStringOnExistLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "lock2")
 	s, err := rw.ReadStringOnExistLock()
@@ -177,7 +177,7 @@ func Test_I10_SFRW_ReadStringOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_ReadOnExistLock(t *testing.T) {
+func Test_SFRW_ReadOnExistLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "lock3")
 	b, err := rw.ReadOnExistLock()
@@ -190,7 +190,7 @@ func Test_I10_SFRW_ReadOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_Read_Error(t *testing.T) {
+func Test_SFRW_Read_Error(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath:  "/nonexistent/i10/read.txt",
@@ -212,7 +212,7 @@ func Test_I10_SFRW_Read_Error(t *testing.T) {
 // SimpleFileReaderWriter — WriteString, WritePath, WriteRelativePath
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_SFRW_WriteString(t *testing.T) {
+func Test_SFRW_WriteString(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -233,7 +233,7 @@ func Test_I10_SFRW_WriteString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_WritePath(t *testing.T) {
+func Test_SFRW_WritePath(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -254,7 +254,7 @@ func Test_I10_SFRW_WritePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_WriteRelativePath(t *testing.T) {
+func Test_SFRW_WriteRelativePath(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -274,7 +274,7 @@ func Test_I10_SFRW_WriteRelativePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_JoinRelPath_Empty(t *testing.T) {
+func Test_SFRW_JoinRelPath_Empty(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ParentDir: "/tmp/i10"}
 	result := rw.JoinRelPath("")
@@ -287,7 +287,7 @@ func Test_I10_SFRW_JoinRelPath_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I10_SFRW_JoinRelPath_NonEmpty(t *testing.T) {
+func Test_SFRW_JoinRelPath_NonEmpty(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ParentDir: "/tmp/i10"}
 	result := rw.JoinRelPath("sub/file.txt")
@@ -304,7 +304,7 @@ func Test_I10_SFRW_JoinRelPath_NonEmpty(t *testing.T) {
 // SimpleFileReaderWriter — WriteAny, WriteAnyLock, Get, Set, Expire, etc.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_SFRW_WriteAny(t *testing.T) {
+func Test_SFRW_WriteAny(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -325,7 +325,7 @@ func Test_I10_SFRW_WriteAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_WriteAnyLock(t *testing.T) {
+func Test_SFRW_WriteAnyLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -346,7 +346,7 @@ func Test_I10_SFRW_WriteAnyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_Get_NotExist(t *testing.T) {
+func Test_SFRW_Get_NotExist(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath:  "/nonexistent/i10/get.json",
@@ -365,7 +365,7 @@ func Test_I10_SFRW_Get_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I10_SFRW_Get_Exists(t *testing.T) {
+func Test_SFRW_Get_Exists(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -391,7 +391,7 @@ func Test_I10_SFRW_Get_Exists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected value", actual)
 }
 
-func Test_I10_SFRW_GetLock(t *testing.T) {
+func Test_SFRW_GetLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "getlock.json")
@@ -413,7 +413,7 @@ func Test_I10_SFRW_GetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_Set(t *testing.T) {
+func Test_SFRW_Set(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -434,7 +434,7 @@ func Test_I10_SFRW_Set(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_SetLock(t *testing.T) {
+func Test_SFRW_SetLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -455,7 +455,7 @@ func Test_I10_SFRW_SetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_Expire_Exists(t *testing.T) {
+func Test_SFRW_Expire_Exists(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "expire")
 	err := rw.Expire()
@@ -468,7 +468,7 @@ func Test_I10_SFRW_Expire_Exists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_Expire_NotExists(t *testing.T) {
+func Test_SFRW_Expire_NotExists(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10/expire.txt"}
 	err := rw.Expire()
@@ -481,7 +481,7 @@ func Test_I10_SFRW_Expire_NotExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_ExpireLock(t *testing.T) {
+func Test_SFRW_ExpireLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "expirelock")
 	err := rw.ExpireLock()
@@ -494,7 +494,7 @@ func Test_I10_SFRW_ExpireLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_ExpireParentDir(t *testing.T) {
+func Test_SFRW_ExpireParentDir(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	sub := filepath.Join(dir, "sub")
@@ -517,7 +517,7 @@ func Test_I10_SFRW_ExpireParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_ExpireParentDirLock(t *testing.T) {
+func Test_SFRW_ExpireParentDirLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	sub := filepath.Join(dir, "sub2")
@@ -538,19 +538,19 @@ func Test_I10_SFRW_ExpireParentDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_RemoveOnExist(t *testing.T) {
+func Test_SFRW_RemoveOnExist(t *testing.T) {
 	rw := newRW(t, "rm")
 	_ = rw.RemoveOnExist()
 }
 
-func Test_I10_SFRW_RemoveDirOnExist(t *testing.T) {
+func Test_SFRW_RemoveDirOnExist(t *testing.T) {
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ParentDir: "/nonexistent/i10/rmdir",
 	}
 	_ = rw.RemoveDirOnExist()
 }
 
-func Test_I10_SFRW_OsFile(t *testing.T) {
+func Test_SFRW_OsFile(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "osfile")
 	f, err := rw.OsFile()
@@ -564,7 +564,7 @@ func Test_I10_SFRW_OsFile(t *testing.T) {
 	f.Close()
 }
 
-func Test_I10_SFRW_Clone(t *testing.T) {
+func Test_SFRW_Clone(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "clone")
 	c := rw.Clone()
@@ -577,7 +577,7 @@ func Test_I10_SFRW_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected same file path", actual)
 }
 
-func Test_I10_SFRW_ClonePtr(t *testing.T) {
+func Test_SFRW_ClonePtr(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "cptr")
 	cp := rw.ClonePtr()
@@ -590,7 +590,7 @@ func Test_I10_SFRW_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_SFRW_ClonePtr_Nil(t *testing.T) {
+func Test_SFRW_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var rw *chmodhelper.SimpleFileReaderWriter
 	cp := rw.ClonePtr()
@@ -603,7 +603,7 @@ func Test_I10_SFRW_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_I10_SFRW_String(t *testing.T) {
+func Test_SFRW_String(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "str")
 	s := rw.String()
@@ -616,7 +616,7 @@ func Test_I10_SFRW_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I10_SFRW_Json(t *testing.T) {
+func Test_SFRW_Json(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "json")
 	j := rw.Json()
@@ -629,7 +629,7 @@ func Test_I10_SFRW_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I10_SFRW_JsonPtr(t *testing.T) {
+func Test_SFRW_JsonPtr(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "jsonptr")
 	j := rw.JsonPtr()
@@ -642,7 +642,7 @@ func Test_I10_SFRW_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
-func Test_I10_SFRW_MarshalUnmarshalJSON(t *testing.T) {
+func Test_SFRW_MarshalUnmarshalJSON(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "marshal")
 	b, err := rw.MarshalJSON()
@@ -663,7 +663,7 @@ func Test_I10_SFRW_MarshalUnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected same path after unmarshal", actual)
 }
 
-func Test_I10_SFRW_AsJsonContractsBinder(t *testing.T) {
+func Test_SFRW_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "binder")
 	binder := rw.AsJsonContractsBinder()
@@ -676,7 +676,7 @@ func Test_I10_SFRW_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_SFRW_JsonParseSelfInject(t *testing.T) {
+func Test_SFRW_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "inject")
 	j := rw.JsonPtr()
@@ -691,7 +691,7 @@ func Test_I10_SFRW_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_NewPath(t *testing.T) {
+func Test_SFRW_NewPath(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "np")
 	newRw := rw.NewPath(false, filepath.Join(rw.ParentDir, "newfile.txt"))
@@ -704,7 +704,7 @@ func Test_I10_SFRW_NewPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_SFRW_NewPathJoin(t *testing.T) {
+func Test_SFRW_NewPathJoin(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "npj")
 	newRw := rw.NewPathJoin(false, "sub", "file.txt")
@@ -717,7 +717,7 @@ func Test_I10_SFRW_NewPathJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_SFRW_InitializeDefaultNew(t *testing.T) {
+func Test_SFRW_InitializeDefaultNew(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "idn")
 	newRw := rw.InitializeDefaultNew()
@@ -730,7 +730,7 @@ func Test_I10_SFRW_InitializeDefaultNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_SFRW_HasAnyIssues(t *testing.T) {
+func Test_SFRW_HasAnyIssues(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		FilePath:  "/nonexistent/i10/issues",
@@ -745,7 +745,7 @@ func Test_I10_SFRW_HasAnyIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected issues", actual)
 }
 
-func Test_I10_SFRW_IsPathInvalid(t *testing.T) {
+func Test_SFRW_IsPathInvalid(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{FilePath: "/nonexistent/i10"}
 
@@ -757,7 +757,7 @@ func Test_I10_SFRW_IsPathInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
-func Test_I10_SFRW_IsParentDirInvalid(t *testing.T) {
+func Test_SFRW_IsParentDirInvalid(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{ParentDir: "/nonexistent/i10"}
 
@@ -769,7 +769,7 @@ func Test_I10_SFRW_IsParentDirInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
-func Test_I10_SFRW_Serialize(t *testing.T) {
+func Test_SFRW_Serialize(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "serialize")
 	b, err := rw.Serialize()
@@ -782,7 +782,7 @@ func Test_I10_SFRW_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "got, err=", actual)
 }
 
-func Test_I10_SFRW_SerializeLock(t *testing.T) {
+func Test_SFRW_SerializeLock(t *testing.T) {
 	// Arrange
 	rw := newRW(t, "serlock")
 	b, err := rw.SerializeLock()
@@ -795,7 +795,7 @@ func Test_I10_SFRW_SerializeLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_SFRW_Deserialize(t *testing.T) {
+func Test_SFRW_Deserialize(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "deser.json")
@@ -817,7 +817,7 @@ func Test_I10_SFRW_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_SFRW_DeserializeLock(t *testing.T) {
+func Test_SFRW_DeserializeLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "deserlock.json")
@@ -852,7 +852,7 @@ func makeExecutor(t *testing.T, rwx string) *chmodhelper.RwxInstructionExecutor 
 	return exec
 }
 
-func Test_I10_Executor_IsFixedWrapper(t *testing.T) {
+func Test_Executor_IsFixedWrapper(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 
@@ -864,7 +864,7 @@ func Test_I10_Executor_IsFixedWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected fixed", actual)
 }
 
-func Test_I10_Executor_IsVarWrapper(t *testing.T) {
+func Test_Executor_IsVarWrapper(t *testing.T) {
 	// Arrange
 	exec, _ := chmodhelper.RwxPartialToInstructionExecutor("-rw*r-*r-*", &chmodins.Condition{})
 
@@ -876,7 +876,7 @@ func Test_I10_Executor_IsVarWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected var", actual)
 }
 
-func Test_I10_Executor_IsEqualFileMode(t *testing.T) {
+func Test_Executor_IsEqualFileMode(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 
@@ -888,7 +888,7 @@ func Test_I10_Executor_IsEqualFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_Executor_IsEqualRwxPartial(t *testing.T) {
+func Test_Executor_IsEqualRwxPartial(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 
@@ -900,7 +900,7 @@ func Test_I10_Executor_IsEqualRwxPartial(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_Executor_IsEqualRwxWrapper(t *testing.T) {
+func Test_Executor_IsEqualRwxWrapper(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	w := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
@@ -913,7 +913,7 @@ func Test_I10_Executor_IsEqualRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_Executor_IsEqualFileInfo(t *testing.T) {
+func Test_Executor_IsEqualFileInfo(t *testing.T) {
 	skipWin(t)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "ei.txt")
@@ -924,7 +924,7 @@ func Test_I10_Executor_IsEqualFileInfo(t *testing.T) {
 	_ = exec.IsEqualFileInfo(info)
 }
 
-func Test_I10_Executor_CompiledWrapper_Fixed(t *testing.T) {
+func Test_Executor_CompiledWrapper_Fixed(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	w, err := exec.CompiledWrapper(0755)
@@ -937,7 +937,7 @@ func Test_I10_Executor_CompiledWrapper_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_I10_Executor_CompiledWrapper_Var(t *testing.T) {
+func Test_Executor_CompiledWrapper_Var(t *testing.T) {
 	// Arrange
 	exec, _ := chmodhelper.RwxPartialToInstructionExecutor("-rw*r-*r-*", &chmodins.Condition{})
 	w, err := exec.CompiledWrapper(0644)
@@ -950,7 +950,7 @@ func Test_I10_Executor_CompiledWrapper_Var(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_I10_Executor_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
+func Test_Executor_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	w := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
@@ -964,7 +964,7 @@ func Test_I10_Executor_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_I10_Executor_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
+func Test_Executor_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 	// Arrange
 	exec, _ := chmodhelper.RwxPartialToInstructionExecutor("-rw*r-*r-*", &chmodins.Condition{})
 	w := chmodhelper.New.RwxWrapper.UsingFileMode(0644)
@@ -978,7 +978,7 @@ func Test_I10_Executor_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_I10_Executor_ApplyOnPath_Valid(t *testing.T) {
+func Test_Executor_ApplyOnPath_Valid(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -995,7 +995,7 @@ func Test_I10_Executor_ApplyOnPath_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_ApplyOnPath_SkipInvalid(t *testing.T) {
+func Test_Executor_ApplyOnPath_SkipInvalid(t *testing.T) {
 	// Arrange
 	exec, _ := chmodhelper.RwxPartialToInstructionExecutor(
 		"-rwxr-xr-x", &chmodins.Condition{IsSkipOnInvalid: true})
@@ -1009,7 +1009,7 @@ func Test_I10_Executor_ApplyOnPath_SkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil on skip", actual)
 }
 
-func Test_I10_Executor_ApplyOnPaths_Empty(t *testing.T) {
+func Test_Executor_ApplyOnPaths_Empty(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	err := exec.ApplyOnPaths(nil)
@@ -1022,7 +1022,7 @@ func Test_I10_Executor_ApplyOnPaths_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_ApplyOnPathsDirect_Empty(t *testing.T) {
+func Test_Executor_ApplyOnPathsDirect_Empty(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	err := exec.ApplyOnPathsDirect()
@@ -1035,7 +1035,7 @@ func Test_I10_Executor_ApplyOnPathsDirect_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_ApplyOnPaths_Valid(t *testing.T) {
+func Test_Executor_ApplyOnPaths_Valid(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1052,7 +1052,7 @@ func Test_I10_Executor_ApplyOnPaths_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_ApplyOnPathsPtr_Nil(t *testing.T) {
+func Test_Executor_ApplyOnPathsPtr_Nil(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	err := exec.ApplyOnPathsPtr(nil)
@@ -1065,14 +1065,14 @@ func Test_I10_Executor_ApplyOnPathsPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_ApplyOnPaths_ContinueOnError(t *testing.T) {
+func Test_Executor_ApplyOnPaths_ContinueOnError(t *testing.T) {
 	exec, _ := chmodhelper.RwxPartialToInstructionExecutor(
 		"-rwxr-xr-x", &chmodins.Condition{IsContinueOnError: true})
 	locs := []string{"/nonexistent/i10/a", "/nonexistent/i10/b"}
 	_ = exec.ApplyOnPathsPtr(&locs)
 }
 
-func Test_I10_Executor_VerifyRwxModifiers_Valid(t *testing.T) {
+func Test_Executor_VerifyRwxModifiers_Valid(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1090,7 +1090,7 @@ func Test_I10_Executor_VerifyRwxModifiers_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_VerifyRwxModifiersDirect(t *testing.T) {
+func Test_Executor_VerifyRwxModifiersDirect(t *testing.T) {
 	// Arrange
 	exec := makeExecutor(t, "-rwxr-xr-x")
 	err := exec.VerifyRwxModifiersDirect(true)
@@ -1103,7 +1103,7 @@ func Test_I10_Executor_VerifyRwxModifiersDirect(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executor_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
+func Test_Executor_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	skipWin(t)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "vcont.txt")
@@ -1114,7 +1114,7 @@ func Test_I10_Executor_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	_ = err
 }
 
-func Test_I10_Executor_VerifyRwxModifiers_Mismatch(t *testing.T) {
+func Test_Executor_VerifyRwxModifiers_Mismatch(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1136,7 +1136,7 @@ func Test_I10_Executor_VerifyRwxModifiers_Mismatch(t *testing.T) {
 // RwxInstructionExecutors — uncovered methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_Executors_LastIndex(t *testing.T) {
+func Test_Executors_LastIndex(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 
@@ -1148,7 +1148,7 @@ func Test_I10_Executors_LastIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
-func Test_I10_Executors_HasIndex(t *testing.T) {
+func Test_Executors_HasIndex(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 
@@ -1160,7 +1160,7 @@ func Test_I10_Executors_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I10_Executors_Items(t *testing.T) {
+func Test_Executors_Items(t *testing.T) {
 	// Arrange
 	execs := chmodhelper.NewRwxInstructionExecutors(2)
 
@@ -1172,7 +1172,7 @@ func Test_I10_Executors_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_Executors_ApplyOnPaths(t *testing.T) {
+func Test_Executors_ApplyOnPaths(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1192,7 +1192,7 @@ func Test_I10_Executors_ApplyOnPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_Executors_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
+func Test_Executors_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	skipWin(t)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "evfy.txt")
@@ -1205,7 +1205,7 @@ func Test_I10_Executors_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
 	_ = err
 }
 
-func Test_I10_Executors_VerifyRwxModifiers_NoContinue(t *testing.T) {
+func Test_Executors_VerifyRwxModifiers_NoContinue(t *testing.T) {
 	skipWin(t)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "evfy2.txt")
@@ -1222,7 +1222,7 @@ func Test_I10_Executors_VerifyRwxModifiers_NoContinue(t *testing.T) {
 // AttrVariant — uncovered methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_AttrVariant_IsGreaterThan(t *testing.T) {
+func Test_AttrVariant_IsGreaterThan(t *testing.T) {
 	// Arrange
 	v := chmodhelper.ReadWriteExecute
 	if !v.IsGreaterThan(8) {
@@ -1237,12 +1237,12 @@ func Test_I10_AttrVariant_IsGreaterThan(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false: 6 is not > 7", actual)
 }
 
-func Test_I10_AttrVariant_String(t *testing.T) {
+func Test_AttrVariant_String(t *testing.T) {
 	v := chmodhelper.Read
 	_ = v.String()
 }
 
-func Test_I10_AttrVariant_Value(t *testing.T) {
+func Test_AttrVariant_Value(t *testing.T) {
 	// Arrange
 	v := chmodhelper.Execute
 
@@ -1254,7 +1254,7 @@ func Test_I10_AttrVariant_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I10_AttrVariant_ToAttribute(t *testing.T) {
+func Test_AttrVariant_ToAttribute(t *testing.T) {
 	// Arrange
 	v := chmodhelper.ReadWriteExecute
 	a := v.ToAttribute()
@@ -1271,7 +1271,7 @@ func Test_I10_AttrVariant_ToAttribute(t *testing.T) {
 // FilteredPathFileInfoMap — uncovered methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_FPFIM_LazyValidLocations(t *testing.T) {
+func Test_FPFIM_LazyValidLocations(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "lazy.txt")
@@ -1292,7 +1292,7 @@ func Test_I10_FPFIM_LazyValidLocations(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "cache mismatch", actual)
 }
 
-func Test_I10_FPFIM_MissingPathsToString(t *testing.T) {
+func Test_FPFIM_MissingPathsToString(t *testing.T) {
 	// Arrange
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(true, "/nonexistent/i10/a", "/nonexistent/i10/b")
 	s := m.MissingPathsToString()
@@ -1305,7 +1305,7 @@ func Test_I10_FPFIM_MissingPathsToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I10_FPFIM_HasAnyIssues(t *testing.T) {
+func Test_FPFIM_HasAnyIssues(t *testing.T) {
 	// Arrange
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(false, "/nonexistent/i10/x")
 
@@ -1317,7 +1317,7 @@ func Test_I10_FPFIM_HasAnyIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected issues", actual)
 }
 
-func Test_I10_FPFIM_HasError(t *testing.T) {
+func Test_FPFIM_HasError(t *testing.T) {
 	// Arrange
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(false, "/nonexistent/i10/x")
 
@@ -1329,7 +1329,7 @@ func Test_I10_FPFIM_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I10_FPFIM_HasAnyMissingPaths(t *testing.T) {
+func Test_FPFIM_HasAnyMissingPaths(t *testing.T) {
 	// Arrange
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(true, "/nonexistent/i10/x")
 
@@ -1341,7 +1341,7 @@ func Test_I10_FPFIM_HasAnyMissingPaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected missing paths", actual)
 }
 
-func Test_I10_FPFIM_LengthOfIssues(t *testing.T) {
+func Test_FPFIM_LengthOfIssues(t *testing.T) {
 	// Arrange
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(true, "/nonexistent/i10/x")
 
@@ -1353,7 +1353,7 @@ func Test_I10_FPFIM_LengthOfIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_I10_FPFIM_IsEmptyIssues(t *testing.T) {
+func Test_FPFIM_IsEmptyIssues(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "noissue.txt")
@@ -1372,7 +1372,7 @@ func Test_I10_FPFIM_IsEmptyIssues(t *testing.T) {
 // RecursivePathsApply
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_RecursivePathsApply(t *testing.T) {
+func Test_RecursivePathsApply(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "a.txt"), []byte("x"), 0644)
@@ -1394,7 +1394,7 @@ func Test_I10_RecursivePathsApply(t *testing.T) {
 // GetFilteredExistsPaths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_GetFilteredExistsPaths_Mixed(t *testing.T) {
+func Test_GetFilteredExistsPaths_Mixed(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "exists.txt")
@@ -1409,7 +1409,7 @@ func Test_I10_GetFilteredExistsPaths_Mixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "found= missing=", actual)
 }
 
-func Test_I10_GetFilteredExistsPaths_Empty(t *testing.T) {
+func Test_GetFilteredExistsPaths_Empty(t *testing.T) {
 	// Arrange
 	found, missing := chmodhelper.GetFilteredExistsPaths(nil)
 
@@ -1425,7 +1425,7 @@ func Test_I10_GetFilteredExistsPaths_Empty(t *testing.T) {
 // MergeRwxWildcardWithFixedRwx — valid case
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_MergeRwxWildcard_Valid(t *testing.T) {
+func Test_MergeRwxWildcard_Valid(t *testing.T) {
 	// Arrange
 	attr, err := chmodhelper.MergeRwxWildcardWithFixedRwx("r-x", "r*-")
 
@@ -1442,7 +1442,7 @@ func Test_I10_MergeRwxWildcard_Valid(t *testing.T) {
 // RwxVariableWrapper — IsEqualPartialRwxPartial, IsEqualPartialUsingFileMode
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_VarWrapper_IsEqualPartialRwxPartial(t *testing.T) {
+func Test_VarWrapper_IsEqualPartialRwxPartial(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -1454,7 +1454,7 @@ func Test_I10_VarWrapper_IsEqualPartialRwxPartial(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_VarWrapper_IsEqualPartialUsingFileMode(t *testing.T) {
+func Test_VarWrapper_IsEqualPartialUsingFileMode(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -1466,7 +1466,7 @@ func Test_I10_VarWrapper_IsEqualPartialUsingFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_VarWrapper_IsMismatchPartialFullRwx(t *testing.T) {
+func Test_VarWrapper_IsMismatchPartialFullRwx(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -1478,7 +1478,7 @@ func Test_I10_VarWrapper_IsMismatchPartialFullRwx(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
-func Test_I10_VarWrapper_IsEqualUsingFileMode(t *testing.T) {
+func Test_VarWrapper_IsEqualUsingFileMode(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -1490,7 +1490,7 @@ func Test_I10_VarWrapper_IsEqualUsingFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_VarWrapper_String(t *testing.T) {
+func Test_VarWrapper_String(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	s := vw.String()
@@ -1503,7 +1503,7 @@ func Test_I10_VarWrapper_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_I10_VarWrapper_HasWildcard(t *testing.T) {
+func Test_VarWrapper_HasWildcard(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 
@@ -1515,7 +1515,7 @@ func Test_I10_VarWrapper_HasWildcard(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
-func Test_I10_VarWrapper_ToCompileWrapper(t *testing.T) {
+func Test_VarWrapper_ToCompileWrapper(t *testing.T) {
 	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	w := vw.ToCompileWrapper(nil)
@@ -1532,7 +1532,7 @@ func Test_I10_VarWrapper_ToCompileWrapper(t *testing.T) {
 // GetExistingChmodRwxWrappers — non-continue branch
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_GetExistingChmodRwxWrappers_NoContinue_Error(t *testing.T) {
+func Test_GetExistingChmodRwxWrappers_NoContinue_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetExistingChmodRwxWrappers(false, "/nonexistent/i10/nocont")
 
@@ -1544,7 +1544,7 @@ func Test_I10_GetExistingChmodRwxWrappers_NoContinue_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I10_GetExistingChmodRwxWrappers_NoContinue_Valid(t *testing.T) {
+func Test_GetExistingChmodRwxWrappers_NoContinue_Valid(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "wrappers.txt")
@@ -1563,7 +1563,7 @@ func Test_I10_GetExistingChmodRwxWrappers_NoContinue_Valid(t *testing.T) {
 // GetFilesChmodRwxFullMap (GetPathsChmodsHashmap)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_GetFilesChmodRwxFullMap_Error(t *testing.T) {
+func Test_GetFilesChmodRwxFullMap_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetFilesChmodRwxFullMap([]string{"/nonexistent/i10/hm"})
 
@@ -1579,7 +1579,7 @@ func Test_I10_GetFilesChmodRwxFullMap_Error(t *testing.T) {
 // ParseRwxInstructionToExecutor — nil
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_ParseRwxInstructionToExecutor_Nil(t *testing.T) {
+func Test_ParseRwxInstructionToExecutor_Nil(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.ParseRwxInstructionToExecutor(nil)
 
@@ -1595,7 +1595,7 @@ func Test_I10_ParseRwxInstructionToExecutor_Nil(t *testing.T) {
 // newSimpleFileReaderWriterCreator — Path method
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_NewSFRW_Path(t *testing.T) {
+func Test_NewSFRW_Path(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Path(false, 0755, 0644, "/tmp/i10/path.txt")
 
@@ -1607,7 +1607,7 @@ func Test_I10_NewSFRW_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_Create(t *testing.T) {
+func Test_NewSFRW_Create(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Create(false, 0755, 0644, "/tmp/i10", "/tmp/i10/c.txt")
 
@@ -1619,7 +1619,7 @@ func Test_I10_NewSFRW_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_All(t *testing.T) {
+func Test_NewSFRW_All(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.All(0755, 0644, false, true, true, "/tmp/i10", "/tmp/i10/a.txt")
 
@@ -1631,7 +1631,7 @@ func Test_I10_NewSFRW_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_Options(t *testing.T) {
+func Test_NewSFRW_Options(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Options(false, true, true, "/tmp/i10/opt.txt")
 
@@ -1643,7 +1643,7 @@ func Test_I10_NewSFRW_Options(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_CreateClean(t *testing.T) {
+func Test_NewSFRW_CreateClean(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.CreateClean(false, 0755, 0644, "/tmp/i10", "/tmp/i10/cc.txt")
 
@@ -1655,7 +1655,7 @@ func Test_I10_NewSFRW_CreateClean(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_DefaultCleanPath(t *testing.T) {
+func Test_NewSFRW_DefaultCleanPath(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.DefaultCleanPath(false, "/tmp/i10/dcp.txt")
 
@@ -1667,7 +1667,7 @@ func Test_I10_NewSFRW_DefaultCleanPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_PathCondition(t *testing.T) {
+func Test_NewSFRW_PathCondition(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.PathCondition(false, true, 0755, 0644, "/tmp/i10/pc.txt")
 
@@ -1683,7 +1683,7 @@ func Test_I10_NewSFRW_PathCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_I10_NewSFRW_PathDirDefaultChmod(t *testing.T) {
+func Test_NewSFRW_PathDirDefaultChmod(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.PathDirDefaultChmod(false, 0644, "/tmp/i10/pddc.txt")
 
@@ -1699,7 +1699,7 @@ func Test_I10_NewSFRW_PathDirDefaultChmod(t *testing.T) {
 // GetRecursivePaths — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_GetRecursivePaths_NonExistent(t *testing.T) {
+func Test_GetRecursivePaths_NonExistent(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePaths(false, "/nonexistent/i10/recurse")
 
@@ -1711,7 +1711,7 @@ func Test_I10_GetRecursivePaths_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I10_GetRecursivePaths_File(t *testing.T) {
+func Test_GetRecursivePaths_File(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "file.txt")
@@ -1726,7 +1726,7 @@ func Test_I10_GetRecursivePaths_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
-func Test_I10_GetRecursivePaths_Dir(t *testing.T) {
+func Test_GetRecursivePaths_Dir(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "a.txt"), []byte("x"), 0644)
@@ -1740,7 +1740,7 @@ func Test_I10_GetRecursivePaths_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected >= 2 paths", actual)
 }
 
-func Test_I10_GetRecursivePaths_ContinueOnError(t *testing.T) {
+func Test_GetRecursivePaths_ContinueOnError(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "b.txt"), []byte("x"), 0644)
@@ -1758,7 +1758,7 @@ func Test_I10_GetRecursivePaths_ContinueOnError(t *testing.T) {
 // fileBytesWriter — uncovered methods (via SimpleFileWriter)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_FileBytesWriter_WithDirChmod(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmod(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1773,7 +1773,7 @@ func Test_I10_FileBytesWriter_WithDirChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_FileBytesWriter_WithDirChmodLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1788,7 +1788,7 @@ func Test_I10_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_FileBytesWriter_Chmod(t *testing.T) {
+func Test_FileBytesWriter_Chmod(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1803,7 +1803,7 @@ func Test_I10_FileBytesWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_FileBytesWriter_WithDir(t *testing.T) {
+func Test_FileBytesWriter_WithDir(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1818,7 +1818,7 @@ func Test_I10_FileBytesWriter_WithDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_FileBytesWriter_WithDirLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1833,7 +1833,7 @@ func Test_I10_FileBytesWriter_WithDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_FileBytesWriter_Default(t *testing.T) {
+func Test_FileBytesWriter_Default(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1852,7 +1852,7 @@ func Test_I10_FileBytesWriter_Default(t *testing.T) {
 // anyItemWriter — error path (unmarshalable)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_AnyItemWriter_Chmod_Error(t *testing.T) {
+func Test_AnyItemWriter_Chmod_Error(t *testing.T) {
 	// Arrange
 	ch := make(chan int)
 	err := chmodhelper.SimpleFileWriter.FileWriter.Any.Chmod(
@@ -1866,7 +1866,7 @@ func Test_I10_AnyItemWriter_Chmod_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for channel", actual)
 }
 
-func Test_I10_AnyItemWriter_ChmodLock(t *testing.T) {
+func Test_AnyItemWriter_ChmodLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1882,7 +1882,7 @@ func Test_I10_AnyItemWriter_ChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_AnyItemWriter_Default(t *testing.T) {
+func Test_AnyItemWriter_Default(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1897,7 +1897,7 @@ func Test_I10_AnyItemWriter_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_I10_AnyItemWriter_DefaultLock(t *testing.T) {
+func Test_AnyItemWriter_DefaultLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1916,7 +1916,7 @@ func Test_I10_AnyItemWriter_DefaultLock(t *testing.T) {
 // fileReader — Read, ReadBytes
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I10_FileReader_Read(t *testing.T) {
+func Test_FileReader_Read(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "fr.txt")
@@ -1931,7 +1931,7 @@ func Test_I10_FileReader_Read(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_FileReader_ReadBytes(t *testing.T) {
+func Test_FileReader_ReadBytes(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "frb.txt")
@@ -1946,7 +1946,7 @@ func Test_I10_FileReader_ReadBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_I10_FileReader_ReadBytes_Error(t *testing.T) {
+func Test_FileReader_ReadBytes_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.SimpleFileWriter.FileReader.ReadBytes("/nonexistent/i10/fr.txt")
 
@@ -1958,7 +1958,7 @@ func Test_I10_FileReader_ReadBytes_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_I10_FileReader_Read_Error(t *testing.T) {
+func Test_FileReader_Read_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.SimpleFileWriter.FileReader.Read("/nonexistent/i10/fr.txt")
 

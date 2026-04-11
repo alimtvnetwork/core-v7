@@ -22,7 +22,7 @@ func skipOnWindows(t *testing.T) {
 
 // ── SingleRwx.ToRwxOwnerGroupOther default panic ──
 
-func Test_Cov13_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
+func Test_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
 	// Arrange
 	s := &chmodhelper.SingleRwx{
 		Rwx:       "rwx",
@@ -40,7 +40,7 @@ func Test_Cov13_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
 
 // ── SingleRwx.ToDisabledRwxWrapper ──
 
-func Test_Cov13_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	w, err := s.ToDisabledRwxWrapper()
@@ -53,7 +53,7 @@ func Test_Cov13_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_Cov13_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
+func Test_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
 	// Arrange
 	// Invalid chars are normalized as disabled permissions.
 	s := &chmodhelper.SingleRwx{
@@ -72,7 +72,7 @@ func Test_Cov13_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
 
 // ── SingleRwx.ToRwxWrapper ──
 
-func Test_Cov13_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	_, err := s.ToRwxWrapper()
@@ -85,7 +85,7 @@ func Test_Cov13_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for non-All class type", actual)
 }
 
-func Test_Cov13_SingleRwx_ToRwxWrapper_All(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	w, err := s.ToRwxWrapper()
@@ -98,7 +98,7 @@ func Test_Cov13_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
-func Test_Cov13_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
 	// Arrange
 	s := &chmodhelper.SingleRwx{
 		Rwx:       "rZx",
@@ -116,7 +116,7 @@ func Test_Cov13_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
 
 // ── SingleRwx.ApplyOnMany ──
 
-func Test_Cov13_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	err := s.ApplyOnMany(&chmodins.Condition{})
@@ -129,7 +129,7 @@ func Test_Cov13_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov13_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_apply_many.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -139,7 +139,7 @@ func Test_Cov13_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_SingleRwx_ApplyOnMany_Error(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Error(t *testing.T) {
 	// Arrange
 	s := &chmodhelper.SingleRwx{
 		Rwx:       "rZx",
@@ -157,7 +157,7 @@ func Test_Cov13_SingleRwx_ApplyOnMany_Error(t *testing.T) {
 
 // ── newRwxWrapperCreator.CreatePtr error ──
 
-func Test_Cov13_CreatePtr_Error(t *testing.T) {
+func Test_CreatePtr_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.New.RwxWrapper.CreatePtr("999")
 
@@ -169,7 +169,7 @@ func Test_Cov13_CreatePtr_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for invalid mode", actual)
 }
 
-func Test_Cov13_CreatePtr_Valid(t *testing.T) {
+func Test_CreatePtr_Valid(t *testing.T) {
 	// Arrange
 	ptr, err := chmodhelper.New.RwxWrapper.CreatePtr("755")
 
@@ -183,7 +183,7 @@ func Test_Cov13_CreatePtr_Valid(t *testing.T) {
 
 // ── newRwxWrapperCreator.Create invalid char ──
 
-func Test_Cov13_Create_InvalidChar(t *testing.T) {
+func Test_Create_InvalidChar(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.New.RwxWrapper.Create("89a")
 
@@ -197,7 +197,7 @@ func Test_Cov13_Create_InvalidChar(t *testing.T) {
 
 // ── newRwxWrapperCreator.Create invalid length ──
 
-func Test_Cov13_Create_InvalidLength(t *testing.T) {
+func Test_Create_InvalidLength(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -214,7 +214,7 @@ func Test_Cov13_Create_InvalidLength(t *testing.T) {
 
 // ── newRwxWrapperCreator.UsingChmod ──
 
-func Test_Cov13_UsingChmod_Valid(t *testing.T) {
+func Test_UsingChmod_Valid(t *testing.T) {
 	// Arrange
 	w := chmodhelper.New.RwxWrapper.UsingChmod(0755)
 
@@ -226,7 +226,7 @@ func Test_Cov13_UsingChmod_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper", actual)
 }
 
-func Test_Cov13_UsingChmod_Zero(t *testing.T) {
+func Test_UsingChmod_Zero(t *testing.T) {
 	// Arrange
 	w := chmodhelper.New.RwxWrapper.UsingChmod(0)
 
@@ -244,7 +244,7 @@ func Test_Cov13_UsingChmod_Zero(t *testing.T) {
 // ── newRwxWrapperCreator.UsingVariantPtr ──
 // Variant is a string type, so we use valid string values
 
-func Test_Cov13_UsingVariantPtr_Valid(t *testing.T) {
+func Test_UsingVariantPtr_Valid(t *testing.T) {
 	// Arrange
 	w, err := chmodhelper.New.RwxWrapper.UsingVariantPtr(chmodhelper.Variant("755"))
 
@@ -256,7 +256,7 @@ func Test_Cov13_UsingVariantPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid pointer", actual)
 }
 
-func Test_Cov13_UsingVariantPtr_Invalid(t *testing.T) {
+func Test_UsingVariantPtr_Invalid(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
 			// panics on length != 3 — expected
@@ -267,7 +267,7 @@ func Test_Cov13_UsingVariantPtr_Invalid(t *testing.T) {
 
 // ── newRwxWrapperCreator.Instruction ──
 
-func Test_Cov13_Instruction_Valid(t *testing.T) {
+func Test_Instruction_Valid(t *testing.T) {
 	// Arrange
 	ins, err := chmodhelper.New.RwxWrapper.Instruction(
 		"-rwxr-xr-x",
@@ -281,7 +281,7 @@ func Test_Cov13_Instruction_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected instruction", actual)
 }
 
-func Test_Cov13_Instruction_Error(t *testing.T) {
+func Test_Instruction_Error(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.New.RwxWrapper.Instruction(
 		"rwxr-xr-x",
@@ -297,7 +297,7 @@ func Test_Cov13_Instruction_Error(t *testing.T) {
 
 // ── newAttributeCreator.UsingByteMust panic ──
 
-func Test_Cov13_UsingByteMust_Panic(t *testing.T) {
+func Test_UsingByteMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -314,7 +314,7 @@ func Test_Cov13_UsingByteMust_Panic(t *testing.T) {
 
 // ── newAttributeCreator.UsingRwxString panic ──
 
-func Test_Cov13_UsingRwxString_Panic(t *testing.T) {
+func Test_UsingRwxString_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -331,7 +331,7 @@ func Test_Cov13_UsingRwxString_Panic(t *testing.T) {
 
 // ── chmodVerifier branches ──
 
-func Test_Cov13_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(
 		"/nonexistent/cov13/skip", "-rwxr-xr-x")
@@ -344,7 +344,7 @@ func Test_Cov13_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true for invalid path with skip", actual)
 }
 
-func Test_Cov13_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(
 		"/nonexistent/cov13/skip2", 0755)
@@ -357,7 +357,7 @@ func Test_Cov13_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true for invalid path with skip", actual)
 }
 
-func Test_Cov13_ChmodVerifier_GetRwx9_Short(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9_Short(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwx9(0)
 
@@ -369,7 +369,7 @@ func Test_Cov13_ChmodVerifier_GetRwx9_Short(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected ---------", actual)
 }
 
-func Test_Cov13_ChmodVerifier_GetRwx9_Valid(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9_Valid(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.GetRwx9(0755)
 
@@ -381,7 +381,7 @@ func Test_Cov13_ChmodVerifier_GetRwx9_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
-func Test_Cov13_ChmodVerifier_GetExistingRwxWrapperMust_Panic(t *testing.T) {
+func Test_ChmodVerifier_GetExistingRwxWrapperMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 
@@ -396,7 +396,7 @@ func Test_Cov13_ChmodVerifier_GetExistingRwxWrapperMust_Panic(t *testing.T) {
 	chmodhelper.ChmodVerify.GetExistingRwxWrapperMust("/nonexistent/cov13/must")
 }
 
-func Test_Cov13_ChmodVerifier_GetExistingChmodRwxWrappers(t *testing.T) {
+func Test_ChmodVerifier_GetExistingChmodRwxWrappers(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_verifier_wrappers.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -412,7 +412,7 @@ func Test_Cov13_ChmodVerifier_GetExistingChmodRwxWrappers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected results", actual)
 }
 
-func Test_Cov13_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
+func Test_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_verifier_filtered.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -428,7 +428,7 @@ func Test_Cov13_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Cov13_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/tmp", "rwx")
 
@@ -440,7 +440,7 @@ func Test_Cov13_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
 
-func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingPartialRwxOptions(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_partial_opts.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -451,7 +451,7 @@ func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
 	// Arrange
 	// PathsUsingPartialRwxOptions with valid-length partial rwx on matching path
 	// Parser accepts any chars and pads to 10; no error triggered for char content.
@@ -467,7 +467,7 @@ func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for empty locations", actual)
 }
 
-func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_Empty(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.PathsUsingRwxFull(false, "-rwxr-xr-x")
 
@@ -479,7 +479,7 @@ func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for empty locations", actual)
 }
 
-func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_rwxfull_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -490,7 +490,7 @@ func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
 
 // ── chmodVerifier.UsingHashmap ──
 
-func Test_Cov13_ChmodVerifier_UsingHashmap(t *testing.T) {
+func Test_ChmodVerifier_UsingHashmap(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_hashmap.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -503,7 +503,7 @@ func Test_Cov13_ChmodVerifier_UsingHashmap(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_ChmodVerifier_UsingHashmap_Mismatch(t *testing.T) {
+func Test_ChmodVerifier_UsingHashmap_Mismatch(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_hashmap_mm.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -525,7 +525,7 @@ func Test_Cov13_ChmodVerifier_UsingHashmap_Mismatch(t *testing.T) {
 
 // ── chmodVerifier.UsingRwxOwnerGroupOther ──
 
-func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Nil(t *testing.T) {
+func Test_ChmodVerifier_UsingRwxOwnerGroupOther_Nil(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.UsingRwxOwnerGroupOther(nil, "/tmp")
 
@@ -537,7 +537,7 @@ func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
-func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Valid(t *testing.T) {
+func Test_ChmodVerifier_UsingRwxOwnerGroupOther_Valid(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_usingogo.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -554,7 +554,7 @@ func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Valid(t *testing.T) {
 
 // ── chmodApplier.RwxPartial ──
 
-func Test_Cov13_ChmodApplier_RwxPartial_Empty(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodApply.RwxPartial("-rwxr-xr-x", &chmodins.Condition{})
 
@@ -566,7 +566,7 @@ func Test_Cov13_ChmodApplier_RwxPartial_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov13_ChmodApplier_RwxPartial_Error(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_Error(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	tmpFile := filepath.Join(os.TempDir(), "cov13_rwxpartial_err.txt")
@@ -583,7 +583,7 @@ func Test_Cov13_ChmodApplier_RwxPartial_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil condition", actual)
 }
 
-func Test_Cov13_ChmodApplier_RwxPartial_Valid(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_Valid(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_rwxpartial.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -594,7 +594,7 @@ func Test_Cov13_ChmodApplier_RwxPartial_Valid(t *testing.T) {
 
 // ── RwxStringApplyChmod ──
 
-func Test_Cov13_RwxStringApplyChmod_Empty(t *testing.T) {
+func Test_RwxStringApplyChmod_Empty(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr-x", &chmodins.Condition{})
 
@@ -606,7 +606,7 @@ func Test_Cov13_RwxStringApplyChmod_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov13_RwxStringApplyChmod_InvalidLength(t *testing.T) {
+func Test_RwxStringApplyChmod_InvalidLength(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("rwx", &chmodins.Condition{}, "/tmp")
 
@@ -618,7 +618,7 @@ func Test_Cov13_RwxStringApplyChmod_InvalidLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_RwxStringApplyChmod_NilCondition(t *testing.T) {
+func Test_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr-x", nil, "/tmp")
 
@@ -630,7 +630,7 @@ func Test_Cov13_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_RwxStringApplyChmod_Valid(t *testing.T) {
+func Test_RwxStringApplyChmod_Valid(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_rwxstr.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -639,7 +639,7 @@ func Test_Cov13_RwxStringApplyChmod_Valid(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
+func Test_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	// Parser does not validate individual rwx characters, only length.
@@ -656,7 +656,7 @@ func Test_Cov13_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
 
 // ── RwxOwnerGroupOtherApplyChmod ──
 
-func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Empty(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_Empty(t *testing.T) {
 	// Arrange
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "r-x"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, &chmodins.Condition{})
@@ -669,7 +669,7 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
 	// Arrange
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(nil, &chmodins.Condition{}, "/tmp")
 
@@ -681,7 +681,7 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 	// Arrange
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "r-x"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, nil, "/tmp")
@@ -694,7 +694,7 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Valid(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_Valid(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_ogo.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -704,7 +704,7 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Valid(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_RwxOwnerGroupOtherApplyChmod_InvalidRwx(t *testing.T) {
+func Test_RwxOwnerGroupOtherApplyChmod_InvalidRwx(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	// Use invalid length rwx to trigger parsing error
@@ -721,7 +721,7 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_InvalidRwx(t *testing.T) {
 
 // ── RwxMatchingStatus.CreateErrFinalError ──
 
-func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
+func Test_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
 	// Arrange
 	status := &chmodhelper.RwxMatchingStatus{
 		IsAllMatching: true,
@@ -736,7 +736,7 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "expected nil for all matching", actual)
 }
 
-func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithMismatch(t *testing.T) {
+func Test_RwxMatchingStatus_CreateErrFinalError_WithMismatch(t *testing.T) {
 	// Arrange
 	status := &chmodhelper.RwxMatchingStatus{
 		IsAllMatching: false,
@@ -754,7 +754,7 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithMismatch(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithError(t *testing.T) {
+func Test_RwxMatchingStatus_CreateErrFinalError_WithError(t *testing.T) {
 	// Arrange
 	status := &chmodhelper.RwxMatchingStatus{
 		IsAllMatching:    false,
@@ -773,7 +773,7 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithError(t *testing.T) {
 
 // ── fwChmodApplier ──
 
-func Test_Cov13_FwChmodApplier_Apply_Error(t *testing.T) {
+func Test_FwChmodApplier_Apply_Error(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -792,7 +792,7 @@ func Test_Cov13_FwChmodApplier_Apply_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_FwChmodApplier_OnDiffFile(t *testing.T) {
+func Test_FwChmodApplier_OnDiffFile(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwdiff")
 	os.MkdirAll(tmpDir, 0755)
 	tmpFile := filepath.Join(tmpDir, "diff.txt")
@@ -810,7 +810,7 @@ func Test_Cov13_FwChmodApplier_OnDiffFile(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
+func Test_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -829,7 +829,7 @@ func Test_Cov13_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
-func Test_Cov13_FwChmodApplier_OnDiffDir(t *testing.T) {
+func Test_FwChmodApplier_OnDiffDir(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwdiffdir")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -845,7 +845,7 @@ func Test_Cov13_FwChmodApplier_OnDiffDir(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_FwChmodApplier_OnDiffDir_SkipInvalid(t *testing.T) {
+func Test_FwChmodApplier_OnDiffDir_SkipInvalid(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -864,7 +864,7 @@ func Test_Cov13_FwChmodApplier_OnDiffDir_SkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Cov13_FwChmodApplier_OnAll(t *testing.T) {
+func Test_FwChmodApplier_OnAll(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwall")
 	os.MkdirAll(tmpDir, 0755)
 	tmpFile := filepath.Join(tmpDir, "all.txt")
@@ -882,7 +882,7 @@ func Test_Cov13_FwChmodApplier_OnAll(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_FwChmodApplier_OnAll_Error(t *testing.T) {
+func Test_FwChmodApplier_OnAll_Error(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -901,7 +901,7 @@ func Test_Cov13_FwChmodApplier_OnAll_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_FwChmodApplier_OnMismatch(t *testing.T) {
+func Test_FwChmodApplier_OnMismatch(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwmismatch")
 	os.MkdirAll(tmpDir, 0755)
 	tmpFile := filepath.Join(tmpDir, "mm.txt")
@@ -919,7 +919,7 @@ func Test_Cov13_FwChmodApplier_OnMismatch(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov13_FwChmodApplier_OnMismatch_BothFalse(t *testing.T) {
+func Test_FwChmodApplier_OnMismatch_BothFalse(t *testing.T) {
 	// Arrange
 	rw := &chmodhelper.SimpleFileReaderWriter{}
 	applier := rw.ChmodApplier()
@@ -935,7 +935,7 @@ func Test_Cov13_FwChmodApplier_OnMismatch_BothFalse(t *testing.T) {
 
 // ── fwChmodVerifier.HasMismatchParentDir ──
 
-func Test_Cov13_FwChmodVerifier_HasMismatchParentDir(t *testing.T) {
+func Test_FwChmodVerifier_HasMismatchParentDir(t *testing.T) {
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwverify")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -952,7 +952,7 @@ func Test_Cov13_FwChmodVerifier_HasMismatchParentDir(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermission error branches ──
 
-func Test_Cov13_CreateDirFilesWithRwxPermission_FileModeErr(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermission_FileModeErr(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	perm := &chmodhelper.DirFilesWithRwxPermission{
@@ -975,7 +975,7 @@ func Test_Cov13_CreateDirFilesWithRwxPermission_FileModeErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_CreateDirFilesWithRwxPermission_CreateErr(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermission_CreateErr(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_perm_file")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -1004,7 +1004,7 @@ func Test_Cov13_CreateDirFilesWithRwxPermission_CreateErr(t *testing.T) {
 
 // ── CreateDirWithFiles error branches ──
 
-func Test_Cov13_CreateDirWithFiles_RemoveDirErr(t *testing.T) {
+func Test_CreateDirWithFiles_RemoveDirErr(t *testing.T) {
 	// Arrange
 	// removeDirIf when dir doesn't exist and isRemove=true is fine
 	tmpDir := filepath.Join(os.TempDir(), "cov13_createdir")
@@ -1024,7 +1024,7 @@ func Test_Cov13_CreateDirWithFiles_RemoveDirErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_Cov13_CreateDirWithFiles_MkdirErr(t *testing.T) {
+func Test_CreateDirWithFiles_MkdirErr(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_mkdirerr")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -1042,7 +1042,7 @@ func Test_Cov13_CreateDirWithFiles_MkdirErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_CreateDirWithFiles_FileCreateErr(t *testing.T) {
+func Test_CreateDirWithFiles_FileCreateErr(t *testing.T) {
 	// Arrange
 	// Dir exists but create file fails (file path under a file)
 	tmpDir := filepath.Join(os.TempDir(), "cov13_filecreateerr")
@@ -1065,7 +1065,7 @@ func Test_Cov13_CreateDirWithFiles_FileCreateErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_CreateDirWithFiles_NoFiles(t *testing.T) {
+func Test_CreateDirWithFiles_NoFiles(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_nofiles")
 	os.RemoveAll(tmpDir)
@@ -1085,7 +1085,7 @@ func Test_Cov13_CreateDirWithFiles_NoFiles(t *testing.T) {
 
 // ── CreateDirsWithFiles error ──
 
-func Test_Cov13_CreateDirsWithFiles_Error(t *testing.T) {
+func Test_CreateDirsWithFiles_Error(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_dirsfiles_err")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -1104,7 +1104,7 @@ func Test_Cov13_CreateDirsWithFiles_Error(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermissions error ──
 
-func Test_Cov13_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	perms := []chmodhelper.DirFilesWithRwxPermission{
@@ -1125,7 +1125,7 @@ func Test_Cov13_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermissionsMust panic ──
 
-func Test_Cov13_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	defer func() {
@@ -1149,7 +1149,7 @@ func Test_Cov13_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 
 // ── DirFilesWithContent.Create error branches ──
 
-func Test_Cov13_DirFilesWithContent_Create_RemoveError(t *testing.T) {
+func Test_DirFilesWithContent_Create_RemoveError(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	invalidDir := filepath.Join("/proc", "nonexistent_cov13", "dfc")
@@ -1171,7 +1171,7 @@ func Test_Cov13_DirFilesWithContent_Create_RemoveError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_DirFilesWithContent_Create_Success(t *testing.T) {
+func Test_DirFilesWithContent_Create_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_dfc_ok")
 	os.RemoveAll(tmpDir)
@@ -1196,7 +1196,7 @@ func Test_Cov13_DirFilesWithContent_Create_Success(t *testing.T) {
 
 // ── FileWithContent.ReadLines error ──
 
-func Test_Cov13_FileWithContent_ReadLines_Error(t *testing.T) {
+func Test_FileWithContent_ReadLines_Error(t *testing.T) {
 	// Arrange
 	fc := chmodhelper.FileWithContent{
 		RelativePath: "nonexistent.txt",
@@ -1212,7 +1212,7 @@ func Test_Cov13_FileWithContent_ReadLines_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_FileWithContent_ReadLines_Success(t *testing.T) {
+func Test_FileWithContent_ReadLines_Success(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_readline")
 	os.MkdirAll(tmpDir, 0755)
@@ -1238,7 +1238,7 @@ func Test_Cov13_FileWithContent_ReadLines_Success(t *testing.T) {
 
 // ── fileWriter.All error branches ──
 
-func Test_Cov13_FileWriter_All_DirErr(t *testing.T) {
+func Test_FileWriter_All_DirErr(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov13_fwall_file")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -1255,7 +1255,7 @@ func Test_Cov13_FileWriter_All_DirErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Cov13_FileWriter_Remove(t *testing.T) {
+func Test_FileWriter_Remove(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwremove")
 	os.MkdirAll(tmpDir, 0755)
