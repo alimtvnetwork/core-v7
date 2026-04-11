@@ -99,7 +99,7 @@ func Test_RwxWrapper_Rwx9(t *testing.T) {
 	}
 }
 
-func Test_RwxWrapper_Bytes(t *testing.T) {
+func Test_RwxWrapper_Bytes_FromRwxWrapper(t *testing.T) {
 	for caseIndex, testCase := range rwxWrapperBytesTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -143,7 +143,7 @@ func Test_RwxWrapper_Clone(t *testing.T) {
 	}
 }
 
-func Test_RwxWrapper_IsEqualPtr(t *testing.T) {
+func Test_RwxWrapper_IsEqualPtr_FromRwxWrapper(t *testing.T) {
 	for caseIndex, testCase := range rwxWrapperIsEqualTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -214,7 +214,7 @@ func Test_RwxWrapper_IsEqualPtr_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected one nil IsEqualPtr to be false", actual)
 }
 
-func Test_RwxWrapper_ToFileMode(t *testing.T) {
+func Test_RwxWrapper_ToFileMode_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -228,7 +228,7 @@ func Test_RwxWrapper_ToFileMode(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected FileMode", actual)
 }
 
-func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
+func Test_RwxWrapper_ToUint32Octal_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -311,7 +311,7 @@ func Test_RwxWrapper_Empty(t *testing.T) {
 	}
 }
 
-func Test_RwxWrapper_ToCompiledOctalBytes(t *testing.T) {
+func Test_RwxWrapper_ToCompiledOctalBytes_FromRwxWrapper(t *testing.T) {
 	for caseIndex, testCase := range rwxWrapperOctalTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -352,7 +352,7 @@ func Test_RwxWrapper_ToCompiledSplitValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected other '', got ''", actual)
 }
 
-func Test_RwxWrapper_FriendlyDisplay(t *testing.T) {
+func Test_RwxWrapper_FriendlyDisplay_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -365,7 +365,7 @@ func Test_RwxWrapper_FriendlyDisplay(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected FriendlyDisplay to not be empty", actual)
 }
 
-func Test_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
+func Test_RwxWrapper_ToRwxOwnerGroupOther_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -387,7 +387,7 @@ func Test_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Other 'r-x', got ''", actual)
 }
 
-func Test_RwxWrapper_IsRwxFullEqual(t *testing.T) {
+func Test_RwxWrapper_IsRwxFullEqual_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -403,7 +403,7 @@ func Test_RwxWrapper_IsRwxFullEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('short') false for short string", actual)
 }
 
-func Test_RwxWrapper_IsEqualFileMode(t *testing.T) {
+func Test_RwxWrapper_IsEqualFileMode_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -433,7 +433,7 @@ func Test_RwxWrapper_HasAnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty wrapper", actual)
 }
 
-func Test_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
+func Test_RwxWrapper_ToPtr_ToNonPtr_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -450,7 +450,7 @@ func Test_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected ToNonPtr to preserve value, got ''", actual)
 }
 
-func Test_RwxWrapper_Json(t *testing.T) {
+func Test_RwxWrapper_Json_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -605,7 +605,7 @@ func Test_RwxWrapper_ToFullRwxValuesChars(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
-func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
+func Test_RwxWrapper_IsEqualVarWrapper_Nil_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -615,7 +615,7 @@ func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsEqualVarWrapper(nil) false", actual)
 }
 
-func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualFileInfo_Nil_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
@@ -625,7 +625,7 @@ func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsRwxEqualFileInfo(nil) false", actual)
 }
 
-func Test_FileModeFriendlyString(t *testing.T) {
+func Test_FileModeFriendlyString_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	mode := os.FileMode(0755)
 
@@ -673,7 +673,7 @@ func Test_AttrVariant_IsGreaterThan(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsGreaterThan(5) false (5 < 7)", actual)
 }
 
-func Test_Variant_String(t *testing.T) {
+func Test_Variant_String_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -686,7 +686,7 @@ func Test_Variant_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected '755', got ''", actual)
 }
 
-func Test_Variant_ExpandOctalByte(t *testing.T) {
+func Test_Variant_ExpandOctalByte_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -705,7 +705,7 @@ func Test_Variant_ExpandOctalByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected x='5' ()", actual)
 }
 
-func Test_Variant_ToWrapper(t *testing.T) {
+func Test_Variant_ToWrapper_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -721,7 +721,7 @@ func Test_Variant_ToWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
-func Test_Variant_ToWrapperPtr(t *testing.T) {
+func Test_Variant_ToWrapperPtr_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X644
 
@@ -767,7 +767,7 @@ func Test_Attribute_ToSum(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected ToSum 7", actual)
 }
 
-func Test_Attribute_ToRwx(t *testing.T) {
+func Test_Attribute_ToRwx_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Create(true, false, true)
 
@@ -793,7 +793,7 @@ func Test_Attribute_ToStringByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected '7' ()", actual)
 }
 
-func Test_Attribute_ToSpecificBytes(t *testing.T) {
+func Test_Attribute_ToSpecificBytes_FromRwxWrapper(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Create(true, true, false)
 

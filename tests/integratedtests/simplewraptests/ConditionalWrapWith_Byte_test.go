@@ -27,7 +27,7 @@ func Test_ConditionalWrapWith_AlreadyWrapped(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith no-op -- already wrapped", actual)
 }
 
-func Test_ConditionalWrapWith_Empty(t *testing.T) {
+func Test_ConditionalWrapWith_Empty_FromConditionalWrapWithB(t *testing.T) {
 	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "", ']')
 
@@ -93,7 +93,7 @@ func Test_CurlyWrapOption_Empty(t *testing.T) {
 
 // ── WithBracketsQuotation ──
 
-func Test_WithBracketsQuotation(t *testing.T) {
+func Test_WithBracketsQuotation_FromConditionalWrapWithB(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithBracketsQuotation("x")
 
@@ -107,7 +107,7 @@ func Test_WithBracketsQuotation(t *testing.T) {
 
 // ── WithCurlyQuotation ──
 
-func Test_WithCurlyQuotation(t *testing.T) {
+func Test_WithCurlyQuotation_FromConditionalWrapWithB(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithCurlyQuotation("x")
 
@@ -121,7 +121,7 @@ func Test_WithCurlyQuotation(t *testing.T) {
 
 // ── WithParenthesisQuotation ──
 
-func Test_WithParenthesisQuotation(t *testing.T) {
+func Test_WithParenthesisQuotation_FromConditionalWrapWithB(t *testing.T) {
 	// Arrange
 	result := simplewrap.WithParenthesisQuotation("x")
 

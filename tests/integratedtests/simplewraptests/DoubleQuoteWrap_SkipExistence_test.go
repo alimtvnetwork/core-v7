@@ -55,7 +55,7 @@ func Test_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Nil_FromDoubleQuoteWrapSkipE(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes()
 

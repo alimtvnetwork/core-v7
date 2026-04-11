@@ -603,7 +603,7 @@ func Test_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_GetRecursivePathsContinueOnError_File(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_File_FromErrorCreatorPaths(t *testing.T) {
 	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_recur_cont_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
@@ -622,7 +622,7 @@ func Test_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
-func Test_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_Dir_FromErrorCreatorPaths(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recur_cont_dir")
 	os.MkdirAll(tmpDir, 0755)

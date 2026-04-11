@@ -170,7 +170,7 @@ func Test_RwxWrapper_ApplyChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- ApplyChmod", actual)
 }
 
-func Test_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodSkipInvalid_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rw-r--r--")
 	err := rwx.ApplyChmodSkipInvalid("/nonexistent_xyz_cov3")
@@ -860,7 +860,7 @@ func Test_Attribute_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- basic", actual)
 }
 
-func Test_Attribute_Clone(t *testing.T) {
+func Test_Attribute_Clone_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true}
 	cloned := attr.Clone()
@@ -880,7 +880,7 @@ func Test_Attribute_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- Clone", actual)
 }
 
-func Test_Attribute_IsEqual(t *testing.T) {
+func Test_Attribute_IsEqual_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	a1 := &chmodhelper.Attribute{IsRead: true, IsWrite: true}
 	a2 := &chmodhelper.Attribute{IsRead: true, IsWrite: true}
@@ -907,7 +907,7 @@ func Test_Attribute_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- IsEqual", actual)
 }
 
-func Test_Attribute_ToAttributeValue(t *testing.T) {
+func Test_Attribute_ToAttributeValue_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true, IsWrite: false, IsExecute: true}
 	av := attr.ToAttributeValue()
@@ -920,7 +920,7 @@ func Test_Attribute_ToAttributeValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Attribute returns correct value -- ToAttributeValue", actual)
 }
 
-func Test_Attribute_ToVariant(t *testing.T) {
+func Test_Attribute_ToVariant_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	attr := &chmodhelper.Attribute{IsRead: true, IsWrite: true, IsExecute: true}
 	v := attr.ToVariant()
@@ -935,7 +935,7 @@ func Test_Attribute_ToVariant(t *testing.T) {
 
 // ── Variant ──
 
-func Test_Variant_String(t *testing.T) {
+func Test_Variant_String_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	v := chmodhelper.X755
 
@@ -947,7 +947,7 @@ func Test_Variant_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- String", actual)
 }
 
-func Test_Variant_ExpandOctalByte(t *testing.T) {
+func Test_Variant_ExpandOctalByte_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	r, w, x := chmodhelper.X755.ExpandOctalByte()
 
@@ -967,7 +967,7 @@ func Test_Variant_ExpandOctalByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ExpandOctalByte", actual)
 }
 
-func Test_Variant_ToWrapper(t *testing.T) {
+func Test_Variant_ToWrapper_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapper()
 
@@ -985,7 +985,7 @@ func Test_Variant_ToWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToWrapper", actual)
 }
 
-func Test_Variant_ToWrapperPtr(t *testing.T) {
+func Test_Variant_ToWrapperPtr_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	rwx, err := chmodhelper.X755.ToWrapperPtr()
 
@@ -1025,7 +1025,7 @@ func Test_GetRecursivePaths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths returns correct value -- with args", actual)
 }
 
-func Test_GetRecursivePaths_File(t *testing.T) {
+func Test_GetRecursivePaths_File_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 	filePath := covWriteFile(t, dir, "single.txt", "x")
@@ -1059,7 +1059,7 @@ func Test_GetRecursivePaths_Invalid(t *testing.T) {
 
 // ── TempDirGetter ──
 
-func Test_TempDirDefault(t *testing.T) {
+func Test_TempDirDefault_FromRwxWrapperMethods(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": chmodhelper.TempDirDefault != ""}
 
@@ -1092,7 +1092,7 @@ func Test_GetPathExistStat(t *testing.T) {
 
 // ── IsPathExists / IsPathInvalid / IsDirectory ──
 
-func Test_IsPathExists(t *testing.T) {
+func Test_IsPathExists_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 
@@ -1164,7 +1164,7 @@ func Test_NewRwxWrapper_UsingVariant(t *testing.T) {
 
 // ── New.SimpleFileReaderWriter ──
 
-func Test_NewSimpleFileRW_Default(t *testing.T) {
+func Test_NewSimpleFileRW_Default_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Default(false, "/tmp/test.txt")
 
@@ -1176,7 +1176,7 @@ func Test_NewSimpleFileRW_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSimpleFileRW returns correct value -- Default", actual)
 }
 
-func Test_NewSimpleFileRW_Path(t *testing.T) {
+func Test_NewSimpleFileRW_Path_FromRwxWrapperMethods(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Path(false, 0755, 0644, "/tmp/test.txt")
 

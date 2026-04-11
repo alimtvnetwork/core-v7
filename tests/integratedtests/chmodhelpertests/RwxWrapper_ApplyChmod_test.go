@@ -113,7 +113,7 @@ func Test_RwxWrapper_ApplyChmod_InvalidPath_NotSkip(t *testing.T) {
 
 // ── RwxWrapper.IsEqualVarWrapper (line 579-588) ──
 
-func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
+func Test_RwxWrapper_IsEqualVarWrapper_Nil_FromRwxWrapperApplyChmod(t *testing.T) {
 	// Arrange
 	wrapper := mustRwxWrapper("rwxr-xr-x")
 

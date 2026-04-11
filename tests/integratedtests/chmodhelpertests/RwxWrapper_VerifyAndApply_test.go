@@ -35,7 +35,7 @@ func Test_RwxWrapper_VerifyPaths_InvalidPaths(t *testing.T) {
 	})
 }
 
-func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualFileInfo_Nil_FromRwxWrapperVerifyAndA(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.X755)
 
@@ -48,7 +48,7 @@ func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	})
 }
 
-func Test_RwxWrapper_IsRwxEqualLocation_NonExistent(t *testing.T) {
+func Test_RwxWrapper_IsRwxEqualLocation_NonExistent_FromRwxWrapperVerifyAndA(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.X755)
 
@@ -188,7 +188,7 @@ func Test_RwxVariableWrapper_IsEqualPartialRwxPartial(t *testing.T) {
 	})
 }
 
-func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent_FromRwxWrapperVerifyAndA(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxrwxrwx")
 
@@ -201,7 +201,7 @@ func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	})
 }
 
-func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil_FromRwxWrapperVerifyAndA(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxrwxrwx")
 
@@ -233,7 +233,7 @@ func Test_SingleRwx_ToDisabledRwxWrapper_Valid(t *testing.T) {
 	})
 }
 
-func Test_SingleRwx_ToRwxWrapper_NonAll(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_NonAll_FromRwxWrapperVerifyAndA(t *testing.T) {
 	// Arrange
 	single := &chmodhelper.SingleRwx{
 		Rwx:       "rwx",
@@ -312,7 +312,7 @@ func Test_SimpleFileReaderWriter_WriteRelativePath_Error(t *testing.T) {
 
 // ── fwChmodVerifier ──────────────────────────────────────────────────────────
 
-func Test_FwChmodVerifier_IsEqualFile(t *testing.T) {
+func Test_FwChmodVerifier_IsEqualFile_FromRwxWrapperVerifyAndA(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Windows does not support Unix file permissions")
 	}

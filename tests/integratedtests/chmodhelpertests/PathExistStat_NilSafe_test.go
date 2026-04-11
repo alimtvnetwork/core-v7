@@ -223,7 +223,7 @@ func Test_PathExistStat_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NotExistError should return error for non-existent path", actual)
 }
 
-func Test_PathExistStat_Dispose(t *testing.T) {
+func Test_PathExistStat_Dispose_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	stat := chmodhelper.GetPathExistStat(os.TempDir())
 
@@ -271,7 +271,7 @@ func Test_PathExistStat_ParentWithGlobPatternFiles(t *testing.T) {
 
 // ── chmodVerifier tests ──
 
-func Test_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	fileMode := os.FileMode(0755)
 
@@ -284,7 +284,7 @@ func Test_ChmodVerifier_GetRwx9(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 9 chars, got:", actual)
 }
 
-func Test_ChmodVerifier_GetRwxFull(t *testing.T) {
+func Test_ChmodVerifier_GetRwxFull_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	fileMode := os.FileMode(0755)
 
@@ -297,7 +297,7 @@ func Test_ChmodVerifier_GetRwxFull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 10 chars, got:", actual)
 }
 
-func Test_ChmodVerifier_IsEqual(t *testing.T) {
+func Test_ChmodVerifier_IsEqual_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	tmpFile, _ := os.CreateTemp("", "test-*.txt")
 	defer os.Remove(tmpFile.Name())
@@ -315,7 +315,7 @@ func Test_ChmodVerifier_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual should return true for existing file mode", actual)
 }
 
-func Test_ChmodVerifier_IsMismatch(t *testing.T) {
+func Test_ChmodVerifier_IsMismatch_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	tmpFile, _ := os.CreateTemp("", "test-*.txt")
 	defer os.Remove(tmpFile.Name())
@@ -354,7 +354,7 @@ func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualRwxFullSkipInvalid should return true for invalid path", actual)
 }
 
-func Test_ChmodVerifier_GetExisting(t *testing.T) {
+func Test_ChmodVerifier_GetExisting_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	tmpFile, _ := os.CreateTemp("", "test-*.txt")
 	defer os.Remove(tmpFile.Name())
@@ -492,7 +492,7 @@ func Test_GetExistingChmodRwxWrapperPtr_InvalidPath(t *testing.T) {
 
 // ── dirCreator tests ──
 
-func Test_DirCreator_Direct(t *testing.T) {
+func Test_DirCreator_Direct_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	dir := os.TempDir() + "/chmodtest_direct_test"
 	defer os.RemoveAll(dir)
@@ -510,7 +510,7 @@ func Test_DirCreator_Direct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dir should exist after Direct", actual)
 }
 
-func Test_DirCreator_IfMissing(t *testing.T) {
+func Test_DirCreator_IfMissing_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	dir := os.TempDir() + "/chmodtest_ifmissing_test"
 	defer os.RemoveAll(dir)
@@ -532,7 +532,7 @@ func Test_DirCreator_IfMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfMissing second call error:", actual)
 }
 
-func Test_DirCreator_If_False(t *testing.T) {
+func Test_DirCreator_If_False_FromPathExistStatNilSafe(t *testing.T) {
 	// Act
 	err := chmodhelper.SimpleFileWriter.CreateDir.If(false, os.FileMode(0755), "/whatever")
 
@@ -587,7 +587,7 @@ func Test_FileWriter_String_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "string write error:", actual)
 }
 
-func Test_FileWriter_Remove(t *testing.T) {
+func Test_FileWriter_Remove_FromPathExistStatNilSafe(t *testing.T) {
 	// Arrange
 	dir := os.TempDir() + "/chmodtest_remove"
 	filePath := dir + "/test.txt"
@@ -619,7 +619,7 @@ func Test_FileWriter_RemoveIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RemoveIf with false should return nil", actual)
 }
 
-func Test_FileWriter_ParentDir(t *testing.T) {
+func Test_FileWriter_ParentDir_FromPathExistStatNilSafe(t *testing.T) {
 	// Act
 	parent := chmodhelper.SimpleFileWriter.FileWriter.ParentDir("/tmp/test/file.txt")
 

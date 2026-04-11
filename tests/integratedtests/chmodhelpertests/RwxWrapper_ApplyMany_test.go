@@ -77,7 +77,7 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T) {
 
 // ── recursive valid ──
 
-func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive_FromRwxWrapperApplyMany(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("unix only")
 	}

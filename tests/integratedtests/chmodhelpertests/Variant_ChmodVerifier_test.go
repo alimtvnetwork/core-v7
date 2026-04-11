@@ -21,7 +21,7 @@ func skipIfWindows(t *testing.T) {
 
 // --- Variant ---
 
-func Test_Variant_String(t *testing.T) {
+func Test_Variant_String_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	v := chmodhelper.Variant("755")
 
@@ -33,7 +33,7 @@ func Test_Variant_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 755", actual)
 }
 
-func Test_Variant_ExpandOctalByte(t *testing.T) {
+func Test_Variant_ExpandOctalByte_FromVariantChmodVerifier(t *testing.T) {
 	v := chmodhelper.Variant("755")
 	r, w, x := v.ExpandOctalByte()
 	if r == 0 && w == 0 && x == 0 {
@@ -44,7 +44,7 @@ func Test_Variant_ExpandOctalByte(t *testing.T) {
 	_ = x
 }
 
-func Test_Variant_ToWrapper(t *testing.T) {
+func Test_Variant_ToWrapper_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	v := chmodhelper.Variant("755")
 	wrapper, err := v.ToWrapper()
@@ -60,7 +60,7 @@ func Test_Variant_ToWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper", actual)
 }
 
-func Test_Variant_ToWrapperPtr(t *testing.T) {
+func Test_Variant_ToWrapperPtr_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	v := chmodhelper.Variant("755")
 	wrapper, err := v.ToWrapperPtr()
@@ -232,7 +232,7 @@ func Test_SingleRwx_ToRwxOwnerGroupOther_OwnerOther(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected owner+other rw-", actual)
 }
 
-func Test_SingleRwx_ToRwxInstruction(t *testing.T) {
+func Test_SingleRwx_ToRwxInstruction_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	cond := &chmodins.Condition{}
@@ -246,7 +246,7 @@ func Test_SingleRwx_ToRwxInstruction(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil instruction", actual)
 }
 
-func Test_SingleRwx_ToVarRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToVarRwxWrapper_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	vw, err := s.ToVarRwxWrapper()
@@ -259,7 +259,7 @@ func Test_SingleRwx_ToVarRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid var wrapper", actual)
 }
 
-func Test_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToDisabledRwxWrapper_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	dw, err := s.ToDisabledRwxWrapper()
@@ -272,7 +272,7 @@ func Test_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid disabled wrapper", actual)
 }
 
-func Test_SingleRwx_ToRwxWrapper_All(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_All_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	w, err := s.ToRwxWrapper()
@@ -285,7 +285,7 @@ func Test_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid rwx wrapper", actual)
 }
 
-func Test_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_NotAll_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	_, err := s.ToRwxWrapper()
@@ -298,7 +298,7 @@ func Test_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for non-all class type", actual)
 }
 
-func Test_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Empty_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	cond := &chmodins.Condition{}
@@ -312,7 +312,7 @@ func Test_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for empty locations", actual)
 }
 
-func Test_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Valid_FromVariantChmodVerifier(t *testing.T) {
 	skipIfWindows(t)
 
 	tmpDir := t.TempDir()
@@ -327,7 +327,7 @@ func Test_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
 
 // --- NewCreator.RwxWrapper ---
 
-func Test_NewRwxWrapper_UsingVariant(t *testing.T) {
+func Test_NewRwxWrapper_UsingVariant_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	w, err := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.Variant("644"))
 
@@ -371,7 +371,7 @@ func Test_NewRwxWrapper_RwxFullString(t *testing.T) {
 
 // --- ChmodApply and Verify ---
 
-func Test_ChmodApply_RecursivePath(t *testing.T) {
+func Test_ChmodApply_RecursivePath_FromVariantChmodVerifier(t *testing.T) {
 	skipIfWindows(t)
 
 	tmpDir := t.TempDir()
@@ -455,7 +455,7 @@ func Test_SimpleFileReaderWriter(t *testing.T) {
 
 // --- FileModeFriendlyString ---
 
-func Test_FileModeFriendlyString(t *testing.T) {
+func Test_FileModeFriendlyString_FromVariantChmodVerifier(t *testing.T) {
 	s := chmodhelper.FileModeFriendlyString(0755)
 	_ = s
 }
@@ -495,7 +495,7 @@ func Test_GetPathExistStat_Existing(t *testing.T) {
 
 // --- IsPathExists ---
 
-func Test_IsPathExists(t *testing.T) {
+func Test_IsPathExists_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 
@@ -511,7 +511,7 @@ func Test_IsPathExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not exists", actual)
 }
 
-func Test_IsPathInvalid(t *testing.T) {
+func Test_IsPathInvalid_FromVariantChmodVerifier(t *testing.T) {
 	// Act
 	actual := args.Map{"result": chmodhelper.IsPathInvalid("/nonexistent/xyz")}
 
@@ -520,7 +520,7 @@ func Test_IsPathInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected invalid for nonexistent path", actual)
 }
 
-func Test_IsDirectory(t *testing.T) {
+func Test_IsDirectory_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 
@@ -540,7 +540,7 @@ func Test_IsDirectory(t *testing.T) {
 
 // --- GetExistingChmod ---
 
-func Test_GetExistingChmod(t *testing.T) {
+func Test_GetExistingChmod_FromVariantChmodVerifier(t *testing.T) {
 	// Arrange
 	skipIfWindows(t)
 

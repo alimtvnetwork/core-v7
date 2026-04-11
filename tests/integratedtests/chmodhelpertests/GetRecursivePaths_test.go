@@ -78,7 +78,7 @@ func Test_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 
 // ── PathExistStat — MeaningFullError with error ──
 
-func Test_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError_FromGetRecursivePaths(t *testing.T) {
 	// Arrange
 	stat := &chmodhelper.PathExistStat{
 		Location: "/some/path",
@@ -330,7 +330,7 @@ func Test_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 
 // ── chmodVerifier — GetRwx9 ──
 
-func Test_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9_FromGetRecursivePaths(t *testing.T) {
 	// Arrange
 	fileMode := os.FileMode(0755)
 

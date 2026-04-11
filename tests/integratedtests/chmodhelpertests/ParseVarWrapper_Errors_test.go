@@ -223,7 +223,7 @@ func Test_NewRwxVariableWrapper_InvalidChar(t *testing.T) {
 // ── RwxVariableWrapper: IsEqualUsingLocation non-existent ──
 // Covers RwxVariableWrapper.go L295-296
 
-func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent_FromParseVarWrapperError(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 
@@ -239,7 +239,7 @@ func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 // ── RwxVariableWrapper: IsEqualUsingFileInfo nil ──
 // Covers RwxVariableWrapper.go L309-310
 
-func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil_FromParseVarWrapperError(t *testing.T) {
 	// Arrange
 	wrapper, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 

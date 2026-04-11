@@ -85,7 +85,7 @@ func Test_TitleSquareMetaUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TitleSquareMetaUsingFmt returns correct value -- with args", actual)
 }
 
-func Test_WithBracketsQuotation(t *testing.T) {
+func Test_WithBracketsQuotation_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithBracketsQuotation("hello") != ""}
 
@@ -94,7 +94,7 @@ func Test_WithBracketsQuotation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithBracketsQuotation returns non-empty -- with args", actual)
 }
 
-func Test_WithCurlyQuotation(t *testing.T) {
+func Test_WithCurlyQuotation_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithCurlyQuotation("hello") != ""}
 
@@ -103,7 +103,7 @@ func Test_WithCurlyQuotation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WithCurlyQuotation returns non-empty -- with args", actual)
 }
 
-func Test_WithParenthesisQuotation(t *testing.T) {
+func Test_WithParenthesisQuotation_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.WithParenthesisQuotation("hello") != ""}
 
@@ -129,7 +129,7 @@ func Test_CurlyWrapOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption returns correct value -- with args", actual)
 }
 
-func Test_DoubleQuoteWrapElements_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Nil_FromTitleCurlyMeta(t *testing.T) {
 	// Arrange
 	r := simplewrap.DoubleQuoteWrapElements(false, nil...)
 
@@ -150,7 +150,7 @@ func Test_DoubleQuoteWrapElements_EmptySlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements_EmptySlice returns empty -- with args", actual)
 }
 
-func Test_DoubleQuoteWrapElements_SkipExistence(t *testing.T) {
+func Test_DoubleQuoteWrapElements_SkipExistence_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"len": len(simplewrap.DoubleQuoteWrapElements(true, `"already"`, "naked"))}
 
@@ -159,7 +159,7 @@ func Test_DoubleQuoteWrapElements_SkipExistence(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements_SkipExistence returns correct value -- with args", actual)
 }
 
-func Test_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"nilNotNil":     simplewrap.DoubleQuoteWrapElementsWithIndexes(nil...) != nil,
@@ -250,7 +250,7 @@ func Test_MsgWrapNumber_Int64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MsgWrapNumber_Int64 returns correct value -- with args", actual)
 }
 
-func Test_MsgCsvItems_Empty(t *testing.T) {
+func Test_MsgCsvItems_Empty_FromTitleCurlyMeta(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": simplewrap.MsgCsvItems("msg") != ""}
 

@@ -13,7 +13,7 @@ import (
 
 // ── RwxWrapper.ToUint32Octal ──
 
-func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
+func Test_RwxWrapper_ToUint32Octal_FromRwxWrapperOctalApply(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	oct := rwx.ToUint32Octal()
@@ -28,7 +28,7 @@ func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
 
 // ── RwxWrapper.ApplyChmod branches ──
 
-func Test_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_SkipInvalid_FromRwxWrapperOctalApply(t *testing.T) {
 	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(true, "/nonexistent/cov9/skip")

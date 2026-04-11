@@ -40,7 +40,7 @@ func Test_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
 
 // ── SingleRwx.ToDisabledRwxWrapper ──
 
-func Test_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
+func Test_SingleRwx_ToDisabledRwxWrapper_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	w, err := s.ToDisabledRwxWrapper()
@@ -85,7 +85,7 @@ func Test_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for non-All class type", actual)
 }
 
-func Test_SingleRwx_ToRwxWrapper_All(t *testing.T) {
+func Test_SingleRwx_ToRwxWrapper_All_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	w, err := s.ToRwxWrapper()
@@ -331,7 +331,7 @@ func Test_UsingRwxString_Panic(t *testing.T) {
 
 // ── chmodVerifier branches ──
 
-func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(
 		"/nonexistent/cov13/skip", "-rwxr-xr-x")
@@ -344,7 +344,7 @@ func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true for invalid path with skip", actual)
 }
 
-func Test_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(
 		"/nonexistent/cov13/skip2", 0755)
@@ -428,7 +428,7 @@ func Test_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
+func Test_ChmodVerifier_RwxFull_InvalidLength_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	err := chmodhelper.ChmodVerify.RwxFull("/tmp", "rwx")
 
@@ -479,7 +479,7 @@ func Test_ChmodVerifier_PathsUsingRwxFull_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for empty locations", actual)
 }
 
-func Test_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_ContinueOnError_FromSingleRwxPanic(t *testing.T) {
 	tmpFile := filepath.Join(os.TempDir(), "cov13_rwxfull_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -721,7 +721,7 @@ func Test_RwxOwnerGroupOtherApplyChmod_InvalidRwx(t *testing.T) {
 
 // ── RwxMatchingStatus.CreateErrFinalError ──
 
-func Test_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) {
+func Test_RwxMatchingStatus_CreateErrFinalError_AllMatching_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	status := &chmodhelper.RwxMatchingStatus{
 		IsAllMatching: true,
@@ -1065,7 +1065,7 @@ func Test_CreateDirWithFiles_FileCreateErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_CreateDirWithFiles_NoFiles(t *testing.T) {
+func Test_CreateDirWithFiles_NoFiles_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_nofiles")
 	os.RemoveAll(tmpDir)
@@ -1104,7 +1104,7 @@ func Test_CreateDirsWithFiles_Error(t *testing.T) {
 
 // ── CreateDirFilesWithRwxPermissions error ──
 
-func Test_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Error_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	skipOnWindows(t)
 	perms := []chmodhelper.DirFilesWithRwxPermission{
@@ -1255,7 +1255,7 @@ func Test_FileWriter_All_DirErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_FileWriter_Remove(t *testing.T) {
+func Test_FileWriter_Remove_FromSingleRwxPanic(t *testing.T) {
 	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov13_fwremove")
 	os.MkdirAll(tmpDir, 0755)

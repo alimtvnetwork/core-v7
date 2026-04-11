@@ -448,7 +448,7 @@ func Test_DirCreator_IfMissing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "dirCreator.IfMissing creates dir -- missing path", actual)
 }
 
-func Test_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
+func Test_DirCreator_IfMissing_AlreadyExists_FromFileWriterAll(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)
 

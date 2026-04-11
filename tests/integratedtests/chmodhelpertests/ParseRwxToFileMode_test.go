@@ -114,7 +114,7 @@ func Test_GetFilesChmodRwxFullMap_Invalid(t *testing.T) {
 
 // ── SimpleFileReaderWriter additional methods ──
 
-func Test_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefault_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "init.txt")
@@ -133,7 +133,7 @@ func Test_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected parent dir", actual)
 }
 
-func Test_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
+func Test_SimpleFileReaderWriter_InitializeDefaultApplyChmod_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "init2.txt")
@@ -187,7 +187,7 @@ func Test_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
 }
 
-func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAndRead_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "wr.txt")
@@ -211,7 +211,7 @@ func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_SimpleFileReaderWriter_WriteString(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteString_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "ws.txt")
@@ -299,7 +299,7 @@ func Test_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_JoinRelPath_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ParentDir: "/tmp/base",
@@ -444,7 +444,7 @@ func Test_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_SimpleFileReaderWriter_String(t *testing.T) {
+func Test_SimpleFileReaderWriter_String_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -508,7 +508,7 @@ func Test_SimpleFileReaderWriter_ChmodVerifier(t *testing.T) {
 	_ = verifier
 }
 
-func Test_SimpleFileReaderWriter_NewPath(t *testing.T) {
+func Test_SimpleFileReaderWriter_NewPath_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	rw := chmodhelper.SimpleFileReaderWriter{
@@ -653,7 +653,7 @@ func Test_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_SimpleFileReaderWriter_Expire(t *testing.T) {
+func Test_SimpleFileReaderWriter_Expire_FromParseRwxToFileMode(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	f := filepath.Join(dir, "expire.txt")

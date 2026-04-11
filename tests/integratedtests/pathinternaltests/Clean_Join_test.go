@@ -27,7 +27,7 @@ func Test_Clean(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clean returns correct value -- with args", actual)
 }
 
-func Test_Join(t *testing.T) {
+func Test_Join_FromCleanJoin(t *testing.T) {
 	// Arrange & Act
 	result := pathinternal.Join("a", "b", "c")
 
@@ -58,7 +58,7 @@ func Test_ParentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParentDir returns correct value -- with args", actual)
 }
 
-func Test_Relative(t *testing.T) {
+func Test_Relative_FromCleanJoin(t *testing.T) {
 	// Arrange & Act
 	result := pathinternal.Relative("/a/b", "/a/b/c/d")
 
@@ -85,7 +85,7 @@ func Test_IsPathExists(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPathExists returns correct value -- with args", actual)
 }
 
-func Test_GetTemp(t *testing.T) {
+func Test_GetTemp_FromCleanJoin(t *testing.T) {
 	// Arrange & Act
 	result := pathinternal.GetTemp()
 
@@ -99,7 +99,7 @@ func Test_GetTemp(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetTemp returns correct value -- with args", actual)
 }
 
-func Test_JoinTemp(t *testing.T) {
+func Test_JoinTemp_FromCleanJoin(t *testing.T) {
 	// Arrange & Act
 	result := pathinternal.JoinTemp("subdir", "file.txt")
 

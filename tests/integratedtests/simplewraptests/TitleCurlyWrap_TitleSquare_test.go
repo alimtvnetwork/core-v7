@@ -38,7 +38,7 @@ func Test_TitleSquare(t *testing.T) {
 
 // ── TitleSquareMeta ──
 
-func Test_TitleSquareMeta(t *testing.T) {
+func Test_TitleSquareMeta_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMeta("title", "value", "meta")
 
@@ -56,7 +56,7 @@ type cov6Stringer struct{ val string }
 
 func (s cov6Stringer) String() string { return s.val }
 
-func Test_TitleSquareMetaUsingFmt(t *testing.T) {
+func Test_TitleSquareMetaUsingFmt_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareMetaUsingFmt(
 		cov6Stringer{"t"}, cov6Stringer{"v"}, cov6Stringer{"m"})
@@ -71,7 +71,7 @@ func Test_TitleSquareMetaUsingFmt(t *testing.T) {
 
 // ── TitleSquareCsvMeta ──
 
-func Test_TitleSquareCsvMeta(t *testing.T) {
+func Test_TitleSquareCsvMeta_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleSquareCsvMeta("title", "value", "a", "b")
 
@@ -382,7 +382,7 @@ func Test_SquareWrapIf(t *testing.T) {
 
 // ── TitleCurlyMeta ──
 
-func Test_TitleCurlyMeta(t *testing.T) {
+func Test_TitleCurlyMeta_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleCurlyMeta("title", "value", "meta")
 
@@ -396,7 +396,7 @@ func Test_TitleCurlyMeta(t *testing.T) {
 
 // ── TitleQuotationMeta ──
 
-func Test_TitleQuotationMeta(t *testing.T) {
+func Test_TitleQuotationMeta_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.TitleQuotationMeta("title", "value", "meta")
 
@@ -410,7 +410,7 @@ func Test_TitleQuotationMeta(t *testing.T) {
 
 // ── DoubleQuoteWrapElements — skip on existence ──
 
-func Test_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
+func Test_DoubleQuoteWrapElements_SkipOnExistence_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(true, `"hello"`, "world")
 
@@ -422,7 +422,7 @@ func Test_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns correct value -- skip on existence", actual)
 }
 
-func Test_DoubleQuoteWrapElements_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElements_Nil_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false, nil...)
 
@@ -448,7 +448,7 @@ func Test_DoubleQuoteWrapElements_Empty(t *testing.T) {
 
 // ── DoubleQuoteWrapElementsWithIndexes ──
 
-func Test_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Nil_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes(nil...)
 
@@ -460,7 +460,7 @@ func Test_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns nil -- nil", actual)
 }
 
-func Test_DoubleQuoteWrapElementsWithIndexes_Empty(t *testing.T) {
+func Test_DoubleQuoteWrapElementsWithIndexes_Empty_FromTitleCurlyWrapTitleS(t *testing.T) {
 	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes()
 

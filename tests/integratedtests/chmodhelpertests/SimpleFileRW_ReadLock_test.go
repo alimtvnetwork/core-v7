@@ -1172,7 +1172,7 @@ func Test_Executors_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Executors_ApplyOnPaths(t *testing.T) {
+func Test_Executors_ApplyOnPaths_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1222,7 +1222,7 @@ func Test_Executors_VerifyRwxModifiers_NoContinue(t *testing.T) {
 // AttrVariant — uncovered methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_AttrVariant_IsGreaterThan(t *testing.T) {
+func Test_AttrVariant_IsGreaterThan_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	v := chmodhelper.ReadWriteExecute
 	if !v.IsGreaterThan(8) {
@@ -1699,7 +1699,7 @@ func Test_NewSFRW_PathDirDefaultChmod(t *testing.T) {
 // GetRecursivePaths — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_GetRecursivePaths_NonExistent(t *testing.T) {
+func Test_GetRecursivePaths_NonExistent_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	_, err := chmodhelper.GetRecursivePaths(false, "/nonexistent/i10/recurse")
 
@@ -1711,7 +1711,7 @@ func Test_GetRecursivePaths_NonExistent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_GetRecursivePaths_File(t *testing.T) {
+func Test_GetRecursivePaths_File_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "file.txt")
@@ -1726,7 +1726,7 @@ func Test_GetRecursivePaths_File(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
-func Test_GetRecursivePaths_Dir(t *testing.T) {
+func Test_GetRecursivePaths_Dir_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "a.txt"), []byte("x"), 0644)
@@ -1740,7 +1740,7 @@ func Test_GetRecursivePaths_Dir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected >= 2 paths", actual)
 }
 
-func Test_GetRecursivePaths_ContinueOnError(t *testing.T) {
+func Test_GetRecursivePaths_ContinueOnError_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "b.txt"), []byte("x"), 0644)
@@ -1758,7 +1758,7 @@ func Test_GetRecursivePaths_ContinueOnError(t *testing.T) {
 // fileBytesWriter — uncovered methods (via SimpleFileWriter)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_FileBytesWriter_WithDirChmod(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmod_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1773,7 +1773,7 @@ func Test_FileBytesWriter_WithDirChmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_FileBytesWriter_WithDirChmodLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirChmodLock_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1788,7 +1788,7 @@ func Test_FileBytesWriter_WithDirChmodLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_FileBytesWriter_Chmod(t *testing.T) {
+func Test_FileBytesWriter_Chmod_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1803,7 +1803,7 @@ func Test_FileBytesWriter_Chmod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_FileBytesWriter_WithDir(t *testing.T) {
+func Test_FileBytesWriter_WithDir_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1818,7 +1818,7 @@ func Test_FileBytesWriter_WithDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_FileBytesWriter_WithDirLock(t *testing.T) {
+func Test_FileBytesWriter_WithDirLock_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1833,7 +1833,7 @@ func Test_FileBytesWriter_WithDirLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_FileBytesWriter_Default(t *testing.T) {
+func Test_FileBytesWriter_Default_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	skipWin(t)
 	dir := t.TempDir()
@@ -1916,7 +1916,7 @@ func Test_AnyItemWriter_DefaultLock(t *testing.T) {
 // fileReader — Read, ReadBytes
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_FileReader_Read(t *testing.T) {
+func Test_FileReader_Read_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "fr.txt")
@@ -1931,7 +1931,7 @@ func Test_FileReader_Read(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_FileReader_ReadBytes(t *testing.T) {
+func Test_FileReader_ReadBytes_FromSimpleFileRWReadLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "frb.txt")

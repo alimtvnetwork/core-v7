@@ -33,7 +33,7 @@ func Test_Attribute_ToByte_ToRwxString(t *testing.T) {
 	}
 }
 
-func Test_Attribute_IsEqual(t *testing.T) {
+func Test_Attribute_IsEqual_FromAttribute(t *testing.T) {
 	for caseIndex, testCase := range attributeEqualTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -121,7 +121,7 @@ func Test_Attribute_UsingRwxString(t *testing.T) {
 	}
 }
 
-func Test_Attribute_ToAttributeValue(t *testing.T) {
+func Test_Attribute_ToAttributeValue_FromAttribute(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Create(true, true, false)
 
@@ -143,7 +143,7 @@ func Test_Attribute_ToAttributeValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Sum=6", actual)
 }
 
-func Test_Attribute_ToVariant(t *testing.T) {
+func Test_Attribute_ToVariant_FromAttribute(t *testing.T) {
 	// Arrange
 	attr := chmodhelper.New.Attribute.Create(true, false, true)
 
@@ -156,7 +156,7 @@ func Test_Attribute_ToVariant(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected variant value 5", actual)
 }
 
-func Test_ExpandCharRwx(t *testing.T) {
+func Test_ExpandCharRwx_FromAttribute(t *testing.T) {
 	for caseIndex, testCase := range expandCharRwxTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
