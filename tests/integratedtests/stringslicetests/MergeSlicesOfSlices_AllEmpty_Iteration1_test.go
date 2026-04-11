@@ -14,7 +14,7 @@ func Test_MergeSlicesOfSlices_AllEmpty_FromMergeSlicesOfSlicesA(t *testing.T) {
 	actual := stringslice.MergeSlicesOfSlices([]string{}, []string{})
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MergeSlicesOfSlices with all empty: got len, want 0", actual)
 }
@@ -28,7 +28,7 @@ func Test_RegexTrimmedSplitNonEmptyAll_EmptyResult(t *testing.T) {
 	actual := stringslice.RegexTrimmedSplitNonEmptyAll(re, "   ")
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RegexTrimmedSplitNonEmptyAll with whitespace-only: got len, want 0", actual)
 }
@@ -39,7 +39,7 @@ func Test_SplitTrimmedNonEmpty_ZeroCount(t *testing.T) {
 	actual := stringslice.SplitTrimmedNonEmpty("a,b,c", ",", 0)
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmpty with n=0: got len, want 0", actual)
 }
@@ -50,7 +50,7 @@ func Test_SplitTrimmedNonEmptyAll_EmptyContent(t *testing.T) {
 	actual := stringslice.SplitTrimmedNonEmptyAll("", "")
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmptyAll empty/empty: got len, want 0", actual)
 }

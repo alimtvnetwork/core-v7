@@ -20,7 +20,7 @@ func Test_RwxWrapper_Create(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Create() returned error:", actual)
 
-		actual := args.Map{
+		actual = args.Map{
 			"ownerRwx":    wrapper.Owner.ToRwxString(),
 			"groupRwx":    wrapper.Group.ToRwxString(),
 			"otherRwx":    wrapper.Other.ToRwxString(),
@@ -56,7 +56,7 @@ func Test_RwxWrapper_RwxFullString(t *testing.T) {
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
 			// Assert
-			actual := args.Map{
+			actual = args.Map{
 				"ownerRwx":  wrapper.Owner.ToRwxString(),
 				"groupRwx":  wrapper.Group.ToRwxString(),
 				"otherRwx":  wrapper.Other.ToRwxString(),
@@ -87,7 +87,7 @@ func Test_RwxWrapper_Rwx9(t *testing.T) {
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
 			// Assert
-			actual := args.Map{
+			actual = args.Map{
 				"ownerRwx":  wrapper.Owner.ToRwxString(),
 				"groupRwx":  wrapper.Group.ToRwxString(),
 				"otherRwx":  wrapper.Other.ToRwxString(),
@@ -184,11 +184,11 @@ func Test_RwxWrapper_NilIsEmpty(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsEmpty()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsEmpty to be true", actual)
-	actual := args.Map{"result": wrapper.IsNull()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": wrapper.IsNull()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsNull to be true", actual)
-	actual := args.Map{"result": wrapper.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": wrapper.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsInvalid to be true", actual)
 }
 
@@ -344,11 +344,11 @@ func Test_RwxWrapper_ToCompiledSplitValues(t *testing.T) {
 	actual := args.Map{"result": owner != expectedOwner}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected owner '', got ''", actual)
-	actual := args.Map{"result": group != expectedGroup}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": group != expectedGroup}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected group '', got ''", actual)
-	actual := args.Map{"result": other != expectedOther}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": other != expectedOther}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected other '', got ''", actual)
 }
 
@@ -376,14 +376,14 @@ func Test_RwxWrapper_ToRwxOwnerGroupOther_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": ogo == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToRwxOwnerGroupOther to not be nil", actual)
-	actual := args.Map{"result": ogo.Owner != "rwx"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ogo.Owner != "rwx"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Owner 'rwx', got ''", actual)
-	actual := args.Map{"result": ogo.Group != "r-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ogo.Group != "r-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Group 'r-x', got ''", actual)
-	actual := args.Map{"result": ogo.Other != "r-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ogo.Other != "r-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Other 'r-x', got ''", actual)
 }
 
@@ -395,11 +395,11 @@ func Test_RwxWrapper_IsRwxFullEqual_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rwxr-xr-x")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('-rwxr-xr-x') true", actual)
-	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rw-r--r--")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsRwxFullEqual("-rw-r--r--")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('-rw-r--r--') false", actual)
-	actual := args.Map{"result": wrapper.IsRwxFullEqual("short")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsRwxFullEqual("short")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('short') false for short string", actual)
 }
 
@@ -411,11 +411,11 @@ func Test_RwxWrapper_IsEqualFileMode_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0755))}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsEqualFileMode(0755) true", actual)
-	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0644))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0644))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsEqualFileMode(0644) false", actual)
-	actual := args.Map{"result": wrapper.IsNotEqualFileMode(os.FileMode(0644))}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": wrapper.IsNotEqualFileMode(os.FileMode(0644))}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsNotEqualFileMode(0644) true", actual)
 }
 
@@ -428,8 +428,8 @@ func Test_RwxWrapper_HasAnyItem(t *testing.T) {
 	actual := args.Map{"result": wrapper.HasAnyItem()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true for 755", actual)
-	actual := args.Map{"result": emptyWrapper.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyWrapper.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty wrapper", actual)
 }
 
@@ -445,8 +445,8 @@ func Test_RwxWrapper_ToPtr_ToNonPtr_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": ptr == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToPtr to not be nil", actual)
-	actual := args.Map{"result": nonPtr.ToFullRwxValueString() != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nonPtr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToNonPtr to preserve value, got ''", actual)
 }
 
@@ -520,11 +520,11 @@ func Test_RwxWrapper_CreatePtr(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CreatePtr returned error:", actual)
-	actual := args.Map{"result": ptr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected CreatePtr to not be nil", actual)
-	actual := args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
@@ -539,8 +539,8 @@ func Test_RwxWrapper_UsingFileModePtr(t *testing.T) {
 	actual := args.Map{"result": wrapper == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected UsingFileModePtr to not be nil", actual)
-	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
@@ -555,8 +555,8 @@ func Test_RwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
 	actual := args.Map{"result": wrapper == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected UsingFileModePtr to not be nil even for zero", actual)
-	actual := args.Map{"result": wrapper.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": wrapper.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected zero FileMode to create empty wrapper", actual)
 }
 
@@ -581,11 +581,11 @@ func Test_RwxWrapper_UsingVariantPtr(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UsingVariantPtr returned error:", actual)
-	actual := args.Map{"result": ptr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected UsingVariantPtr to not be nil", actual)
-	actual := args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
@@ -600,8 +600,8 @@ func Test_RwxWrapper_ToFullRwxValuesChars(t *testing.T) {
 	actual := args.Map{"result": len(chars) != 10}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 10 chars", actual)
-	actual := args.Map{"result": string(chars) != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(chars) != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
@@ -668,8 +668,8 @@ func Test_AttrVariant_IsGreaterThan(t *testing.T) {
 	actual := args.Map{"result": v.IsGreaterThan(8)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsGreaterThan(8) true (8 > 7)", actual)
-	actual := args.Map{"result": v.IsGreaterThan(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsGreaterThan(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsGreaterThan(5) false (5 < 7)", actual)
 }
 
@@ -697,11 +697,11 @@ func Test_Variant_ExpandOctalByte_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": r != '7'}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected r='7' ()", actual)
-	actual := args.Map{"result": w != '5'}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": w != '5'}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected w='5' ()", actual)
-	actual := args.Map{"result": x != '5'}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": x != '5'}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected x='5' ()", actual)
 }
 
@@ -716,8 +716,8 @@ func Test_Variant_ToWrapper_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToWrapper returned error:", actual)
-	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
@@ -732,11 +732,11 @@ func Test_Variant_ToWrapperPtr_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToWrapperPtr returned error:", actual)
-	actual := args.Map{"result": wrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToWrapperPtr to not be nil", actual)
-	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rw-r--r--"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToFullRwxValueString() != "-rw-r--r--"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected '-rw-r--r--', got ''", actual)
 }
 
@@ -749,8 +749,8 @@ func Test_Attribute_HasAnyItem(t *testing.T) {
 	actual := args.Map{"result": attr.HasAnyItem()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true for read-only attribute", actual)
-	actual := args.Map{"result": emptyAttr.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyAttr.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty attribute", actual)
 }
 
@@ -804,14 +804,14 @@ func Test_Attribute_ToSpecificBytes_FromRwxWrapper(t *testing.T) {
 	actual := args.Map{"result": read != 4}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected read=4", actual)
-	actual := args.Map{"result": write != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": write != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected write=2", actual)
-	actual := args.Map{"result": exe != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": exe != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected exe=0", actual)
-	actual := args.Map{"result": sum != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sum != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sum=6", actual)
 }
 
@@ -823,11 +823,11 @@ func Test_Attribute_UsingByteMust(t *testing.T) {
 	actual := args.Map{"result": attr.IsRead}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsRead true for byte 5", actual)
-	actual := args.Map{"result": attr.IsWrite}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.IsWrite}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsWrite false for byte 5", actual)
-	actual := args.Map{"result": attr.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsExecute true for byte 5", actual)
 }
 
@@ -849,8 +849,8 @@ func Test_Attribute_UsingVariant(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UsingVariant returned error:", actual)
-	actual := args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected read+execute only for ReadExecute variant", actual)
 }
 

@@ -625,8 +625,8 @@ func Test_CovP2_30_FilterPtrLock(t *testing.T) {
 		r2 := col.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
 			return s, true, true
 		})
-		actual := args.Map{"result": len(*r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		empty := corestr.Empty.Collection()
@@ -655,8 +655,8 @@ func Test_CovP2_31_FilterPtr(t *testing.T) {
 		r2 := col.FilterPtr(func(s *string, i int) (*string, bool, bool) {
 			return s, true, true
 		})
-		actual := args.Map{"result": len(*r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		empty := corestr.Empty.Collection()

@@ -141,8 +141,8 @@ func Test_C02_Serializer_UsingAnyPtr(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 	ch := make(chan int)
 	r2 := corejson.Serialize.UsingAnyPtr(ch)
-	actual := args.Map{"result": r2.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": r2.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 

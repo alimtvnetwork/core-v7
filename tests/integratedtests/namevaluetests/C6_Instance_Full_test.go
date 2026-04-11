@@ -510,8 +510,8 @@ func Test_C6_Collection_CsvStrings(t *testing.T) {
 	// with items
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	csv = c.CsvStrings()
-	actual := args.Map{"result": len(csv) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(csv) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -564,8 +564,8 @@ func Test_C6_Collection_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty for empty collection", actual)
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	js := c.JsonString()
-	actual := args.Map{"result": js == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": js == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
@@ -582,8 +582,8 @@ func Test_C6_Collection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty for empty collection", actual)
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	s := c.String()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
@@ -600,25 +600,25 @@ func Test_C6_Collection_HasCompiledString_CompiledLazyString(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-	actual := args.Map{"result": c.HasCompiledString()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": c.HasCompiledString()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected compiled", actual)
 	// Second call returns cached
 	s2 := c.CompiledLazyString()
-	actual := args.Map{"result": s1 != s2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s1 != s2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same", actual)
 	// Invalidate
 	c.InvalidateLazyString()
-	actual := args.Map{"result": c.HasCompiledString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.HasCompiledString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not compiled", actual)
 
 	// nil receiver
 	var nilC *namevalue.Collection[string, any]
 	nilS := nilC.CompiledLazyString()
-	actual := args.Map{"result": nilS != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilS != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	nilC.InvalidateLazyString() // should not panic
 }
@@ -636,8 +636,8 @@ func Test_C6_Collection_Error(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	c.Add(namevalue.StringAny{Name: "err", Value: "msg"})
-	actual := args.Map{"result": c.Error() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Error() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -653,8 +653,8 @@ func Test_C6_Collection_ErrorUsingMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	c.Add(namevalue.StringAny{Name: "err", Value: "msg"})
 	err := c.ErrorUsingMessage("prefix")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -672,8 +672,8 @@ func Test_C6_Collection_ConcatNew(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "original should be unchanged", actual)
 }
 
@@ -723,8 +723,8 @@ func Test_C6_Collection_ClonePtr(t *testing.T) {
 
 	var nilC *namevalue.Collection[string, any]
 	nilClone := nilC.ClonePtr()
-	actual := args.Map{"result": nilClone != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilClone != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for nil ptr", actual)
 }
 
@@ -743,8 +743,8 @@ func Test_C6_Collection_Clear(t *testing.T) {
 
 	var nilC *namevalue.Collection[string, any]
 	result := nilC.Clear()
-	actual := args.Map{"result": result != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -779,12 +779,12 @@ func Test_C6_AppendsIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	result2 := namevalue.AppendsIf(false, items, namevalue.StringAny{Name: "c", Value: 3})
-	actual := args.Map{"result": len(result2)}
-	expected := args.Map{"result": 1}
+	actual = args.Map{"result": len(result2)}
+	expected = args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	result3 := namevalue.AppendsIf[string, any](true, items)
-	actual := args.Map{"result": len(result3)}
-	expected := args.Map{"result": 1}
+	actual = args.Map{"result": len(result3)}
+	expected = args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -800,11 +800,11 @@ func Test_C6_PrependsIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	result2 := namevalue.PrependsIf(false, items, namevalue.StringAny{Name: "c", Value: 3})
-	actual := args.Map{"result": len(result2)}
-	expected := args.Map{"result": 1}
+	actual = args.Map{"result": len(result2)}
+	expected = args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	result3 := namevalue.PrependsIf[string, any](true, items)
-	actual := args.Map{"result": len(result3)}
-	expected := args.Map{"result": 1}
+	actual = args.Map{"result": len(result3)}
+	expected = args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }

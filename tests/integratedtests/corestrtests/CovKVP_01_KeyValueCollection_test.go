@@ -580,22 +580,22 @@ func Test_CovKVC_12_Find(t *testing.T) {
 		r2 := kvc.Find(func(i int, kv corestr.KeyValuePair) (corestr.KeyValuePair, bool, bool) {
 			return kv, true, false
 		})
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// break
 		r3 := kvc.Find(func(i int, kv corestr.KeyValuePair) (corestr.KeyValuePair, bool, bool) {
 			return kv, true, true
 		})
-		actual := args.Map{"result": len(r3) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// skip
 		r4 := kvc.Find(func(i int, kv corestr.KeyValuePair) (corestr.KeyValuePair, bool, bool) {
 			return kv, false, false
 		})
-		actual := args.Map{"result": len(r4) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

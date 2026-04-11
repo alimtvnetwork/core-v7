@@ -440,8 +440,8 @@ func Test_C40_ValidValues_Find(t *testing.T) {
 		found2 := corestr.EmptyValidValues().Find(func(i int, v *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return v, true, false
 		})
-		actual := args.Map{"result": len(found2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(found2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }

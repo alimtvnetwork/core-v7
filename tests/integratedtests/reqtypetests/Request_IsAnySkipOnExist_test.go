@@ -23,11 +23,11 @@ func Test_Request_IsOverrideOrOverwriteOrEnforce(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": reqtype.Override.IsOverrideOrOverwriteOrEnforce()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": reqtype.Override.IsOverrideOrOverwriteOrEnforce()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": reqtype.Enforce.IsOverrideOrOverwriteOrEnforce()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": reqtype.Enforce.IsOverrideOrOverwriteOrEnforce()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -38,7 +38,7 @@ func Test_Request_IsRestartOrReload(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": reqtype.Reload.IsRestartOrReload()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": reqtype.Reload.IsRestartOrReload()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }

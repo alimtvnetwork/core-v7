@@ -718,8 +718,8 @@ func Test_C35_57_KeyValCollection_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": kvc.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": kvc.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -991,8 +991,8 @@ func Test_C35_77_KeyValCollection_Paging(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4 pages", actual)
-	actual := args.Map{"result": kvc.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvc.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -1100,8 +1100,8 @@ func Test_C35_84_MapAnyItems_Add(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 	isNew2 := m.Add("key", 99)
-	actual := args.Map{"result": isNew2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isNew2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not new", actual)
 }
 
@@ -1129,8 +1129,8 @@ func Test_C35_86_MapAnyItems_HasKey(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.HasKey("nope")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasKey("nope")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1159,8 +1159,8 @@ func Test_C35_88_MapAnyItems_Get(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	_, has2 := m.Get("nope")
-	actual := args.Map{"result": has2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": has2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
@@ -1175,8 +1175,8 @@ func Test_C35_89_MapAnyItems_GetValue(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
-	actual := args.Map{"result": m.GetValue("nope") != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetValue("nope") != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1222,8 +1222,8 @@ func Test_C35_92_MapAnyItems_Deserialize(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": target != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1346,8 +1346,8 @@ func Test_C35_101_MapAnyItems_GetPagesSize(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 pages", actual)
-	actual := args.Map{"result": m.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -1443,8 +1443,8 @@ func Test_C35_108_NewMapAnyItemsUsingAnyTypeMap_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": m.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1586,8 +1586,8 @@ func Test_C35_119_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no changes", actual)
-	actual := args.Map{"result": d.HasAnyChanges(false, map[string]any{"k": 2})}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasAnyChanges(false, map[string]any{"k": 2})}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected changes", actual)
 }
 
@@ -2048,8 +2048,8 @@ func Test_C35_156_DynamicStatus_Invalid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": ds.Message != "msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ds.Message != "msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected msg", actual)
 }
 
@@ -2206,8 +2206,8 @@ func Test_C35_168_BytesConverter_Deserialize(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": target != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 

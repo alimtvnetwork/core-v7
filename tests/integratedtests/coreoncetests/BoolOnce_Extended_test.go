@@ -321,7 +321,7 @@ func Test_BoolOnce_MarshalJSON_RoundTrip(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON failed:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returned empty bytes", actual)
 }

@@ -423,20 +423,20 @@ func Test_New_Pair_Creator(t *testing.T) {
 
 	// StringInt
 	pi := coregeneric.New.Pair.StringInt("age", 30)
-	actual := args.Map{"result": pi.Left != "age" || pi.Right != 30 || !pi.IsValid}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.Left != "age" || pi.Right != 30 || !pi.IsValid}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Pair.StringInt failed:", actual)
 
 	// Any
 	pa := coregeneric.New.Pair.Any("x", 42)
-	actual := args.Map{"result": pa.Left != "x" || pa.Right != 42 || !pa.IsValid}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pa.Left != "x" || pa.Right != 42 || !pa.IsValid}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Pair.Any failed:", actual)
 
 	// InvalidStringString
 	inv := coregeneric.New.Pair.InvalidStringString("err")
-	actual := args.Map{"result": inv.IsValid || inv.Message != "err"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": inv.IsValid || inv.Message != "err"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Pair.InvalidStringString failed:", actual)
 }
 
@@ -458,13 +458,13 @@ func Test_New_Triple_Creator(t *testing.T) {
 
 	// Any
 	ta := coregeneric.New.Triple.Any("x", 1, true)
-	actual := args.Map{"result": ta.Left != "x" || ta.Middle != 1 || ta.Right != true || !ta.IsValid}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ta.Left != "x" || ta.Middle != 1 || ta.Right != true || !ta.IsValid}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Triple.Any failed:", actual)
 
 	// InvalidStringStringString
 	inv := coregeneric.New.Triple.InvalidStringStringString("bad")
-	actual := args.Map{"result": inv.IsValid || inv.Message != "bad"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": inv.IsValid || inv.Message != "bad"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Triple.InvalidStringStringString failed:", actual)
 }

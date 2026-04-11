@@ -34,8 +34,8 @@ func Test_Dynamic_InvalidDynamicPtr(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": d.IsValid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsValid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
 }
 
@@ -49,8 +49,8 @@ func Test_Dynamic_NewDynamicValid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be valid", actual)
-	actual := args.Map{"result": d.Data() != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.Data() != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "data mismatch", actual)
 }
 
@@ -145,8 +145,8 @@ func Test_Dynamic_Ptr(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Ptr should return non-nil pointer", actual)
-	actual := args.Map{"result": p.Data() != d.Data()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": p.Data() != d.Data()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Ptr should return pointer with same data", actual)
 }
 
@@ -164,8 +164,8 @@ func Test_SimpleRequest_InvalidNoMessage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
-	actual := args.Map{"result": sr.Message() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr.Message() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have empty message", actual)
 }
 
@@ -179,8 +179,8 @@ func Test_SimpleRequest_Invalid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
-	actual := args.Map{"result": sr.Message() != "err msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr.Message() != "err msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "message mismatch", actual)
 }
 
@@ -194,11 +194,11 @@ func Test_SimpleRequest_New(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be valid", actual)
-	actual := args.Map{"result": sr.Request() != "data"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr.Request() != "data"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "request data mismatch", actual)
-	actual := args.Map{"result": sr.Value() != "data"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr.Value() != "data"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "value data mismatch", actual)
 }
 
@@ -262,13 +262,13 @@ func Test_SimpleRequest_InvalidError_WithMessage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return error", actual)
-	actual := args.Map{"result": err.Error() != "error message"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err.Error() != "error message"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'error message', got ''", actual)
 	// Second call should return cached error
 	err2 := sr.InvalidError()
-	actual := args.Map{"result": err != err2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != err2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return cached error", actual)
 }
 
@@ -338,8 +338,8 @@ func Test_SimpleResult(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "value mismatch", actual)
-	actual := args.Map{"result": sr.InvalidError() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr.InvalidError() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have error", actual)
 }
 
@@ -357,8 +357,8 @@ func Test_KeyVal(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "key mismatch", actual)
-	actual := args.Map{"result": kv.Value != "val"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kv.Value != "val"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "val mismatch", actual)
 }
 
@@ -420,8 +420,8 @@ func Test_CastTo_Match(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not error:", actual)
-	actual := args.Map{"result": result.IsMatchingAcceptedType}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": result.IsMatchingAcceptedType}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match accepted type", actual)
 }
 

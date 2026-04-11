@@ -178,13 +178,13 @@ func Test_TypedSimpleGenericRequest_InvalidUnderlying(t *testing.T) {
 		case "message":
 			tc.ShouldBeEqual(t, caseIndex, req.Message())
 		case "invalidError":
-			actual := args.Map{
+			actual = args.Map{
 				"isNilError":   fmt.Sprintf("%v", req.InvalidError() == nil),
 				"errorMessage": req.InvalidError().Error(),
 			}
 			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		case "invalidErrorNil":
-			actual := args.Map{
+			actual = args.Map{
 				"isNilError":   fmt.Sprintf("%v", req.InvalidError() == nil),
 				"errorMessage": req.Message(),
 			}

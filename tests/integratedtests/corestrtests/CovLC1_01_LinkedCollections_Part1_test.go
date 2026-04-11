@@ -587,8 +587,8 @@ func Test_CovLC1_26_Loop(t *testing.T) {
 			breakCount++
 			return true // break on first
 		})
-		actual := args.Map{"result": breakCount != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": breakCount != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -618,15 +618,15 @@ func Test_CovLC1_27_Filter(t *testing.T) {
 		r := empty.Filter(func(arg *corestr.LinkedCollectionFilterParameter) *corestr.LinkedCollectionFilterResult {
 			return &corestr.LinkedCollectionFilterResult{Value: arg.Node, IsKeep: true}
 		})
-		actual := args.Map{"result": len(r) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// break
 		r2 := lc.Filter(func(arg *corestr.LinkedCollectionFilterParameter) *corestr.LinkedCollectionFilterResult {
 			return &corestr.LinkedCollectionFilterResult{Value: arg.Node, IsKeep: true, IsBreak: true}
 		})
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

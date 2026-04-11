@@ -72,8 +72,8 @@ func Test_Collection_AddIfMany(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	c.AddIfMany(true, 1, 2)
-	actual := args.Map{"result": c.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -221,8 +221,8 @@ func Test_LinkedList_AddsIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	ll.AddsIf(true, 1, 2)
-	actual := args.Map{"result": ll.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ll.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -300,11 +300,11 @@ func Test_LinkedList_IndexAt(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 30", actual)
-	actual := args.Map{"result": ll.IndexAt(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ll.IndexAt(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for negative", actual)
-	actual := args.Map{"result": ll.IndexAt(10) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ll.IndexAt(10) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for out of range", actual)
 }
 
@@ -342,11 +342,11 @@ func Test_CompareNumeric(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
-	actual := args.Map{"result": coregeneric.CompareNumeric(2, 1) != corecomparator.LeftGreater}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.CompareNumeric(2, 1) != corecomparator.LeftGreater}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
-	actual := args.Map{"result": coregeneric.CompareNumeric(1, 1) != corecomparator.Equal}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.CompareNumeric(1, 1) != corecomparator.Equal}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
@@ -357,11 +357,11 @@ func Test_Clamp(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "in range", actual)
-	actual := args.Map{"result": coregeneric.Clamp(-1, 0, 10) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Clamp(-1, 0, 10) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "below min", actual)
-	actual := args.Map{"result": coregeneric.Clamp(20, 0, 10) != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Clamp(20, 0, 10) != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "above max", actual)
 }
 
@@ -390,11 +390,11 @@ func Test_Sign(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
-	actual := args.Map{"result": coregeneric.Sign(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Sign(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": coregeneric.Sign(5) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Sign(5) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -405,8 +405,8 @@ func Test_SafeDiv(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 for div by zero", actual)
-	actual := args.Map{"result": coregeneric.SafeDiv(10, 2) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.SafeDiv(10, 2) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
@@ -444,8 +444,8 @@ func Test_InRangeExclusive(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": coregeneric.InRangeExclusive(0, 0, 10)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.InRangeExclusive(0, 0, 10)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for boundary", actual)
 }
 

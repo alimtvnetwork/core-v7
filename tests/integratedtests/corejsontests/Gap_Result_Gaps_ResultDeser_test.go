@@ -137,8 +137,8 @@ func Test_Gap_BytesTo_ResultCollection(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": rc.Length() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
@@ -220,8 +220,8 @@ func Test_Gap_ResultTo_ResultCollection(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": rc.Length() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
@@ -331,8 +331,8 @@ func Test_Gap_NewResult_UsingBytesError_NonNil(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil BytesError", actual)
 	r2 := corejson.NewResult.UsingBytesError(be)
-	actual := args.Map{"result": r2.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
@@ -391,8 +391,8 @@ func Test_Gap_CastAny_FromToOption_Error(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for error-to-string deserialization", actual)
-	actual := args.Map{"result": out}
-	expected := args.Map{"result": "hello"}
+	actual = args.Map{"result": out}
+	expected = args.Map{"result": "hello"}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
@@ -448,8 +448,8 @@ func Test_Gap_NewResultsCollection_DeserializeUsingResult(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": rc.Length() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
@@ -479,8 +479,8 @@ func Test_Gap_NewResultsCollection_UnmarshalUsingBytes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": rc.Length() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 

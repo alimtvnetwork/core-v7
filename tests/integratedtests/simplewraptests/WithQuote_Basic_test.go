@@ -71,8 +71,8 @@ func Test_CurlyWrapIf_Coverage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected {hello}", actual)
 
 	notWrapped := simplewrap.CurlyWrapIf(false, "hello")
-	actual := args.Map{"result": notWrapped != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": notWrapped != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
@@ -102,8 +102,8 @@ func Test_SquareWrapIf_Coverage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected [hello]", actual)
 
 	notWrapped := simplewrap.SquareWrapIf(false, "hello")
-	actual := args.Map{"result": notWrapped != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": notWrapped != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
@@ -133,8 +133,8 @@ func Test_ParenthesisWrapIf_Coverage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected (hello)", actual)
 
 	notWrapped := simplewrap.ParenthesisWrapIf(false, "hello")
-	actual := args.Map{"result": notWrapped != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": notWrapped != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
@@ -166,13 +166,13 @@ func Test_WithPtr_Coverage(t *testing.T) {
 
 	// Nil cases
 	resultNil := simplewrap.WithPtr(nil, &source, nil)
-	actual := args.Map{"result": *resultNil != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": *resultNil != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	resultNilSrc := simplewrap.WithPtr(&start, nil, &end)
-	actual := args.Map{"result": *resultNilSrc != "[]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": *resultNilSrc != "[]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected []", actual)
 }
 
@@ -274,15 +274,15 @@ func Test_MsgWrapMsg_Coverage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both empty should be empty", actual)
-	actual := args.Map{"result": simplewrap.MsgWrapMsg("", "wrapped") != "wrapped"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": simplewrap.MsgWrapMsg("", "wrapped") != "wrapped"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty msg should return wrapped", actual)
-	actual := args.Map{"result": simplewrap.MsgWrapMsg("msg", "") != "msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": simplewrap.MsgWrapMsg("msg", "") != "msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty wrapped should return msg", actual)
 	result := simplewrap.MsgWrapMsg("msg", "wrapped")
-	actual := args.Map{"result": result == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both non-empty should not be empty", actual)
 }
 
@@ -340,32 +340,32 @@ func Test_ConditionalWrapWith_Coverage(t *testing.T) {
 
 	// Empty input — wrap
 	result = simplewrap.ConditionalWrapWith('[', "", ']')
-	actual := args.Map{"result": result != "[]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "[]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty: expected []", actual)
 
 	// Both missing — add both
 	result = simplewrap.ConditionalWrapWith('[', "hello", ']')
-	actual := args.Map{"result": result != "[hello]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "[hello]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both missing: expected [hello]", actual)
 
 	// Right missing
 	result = simplewrap.ConditionalWrapWith('[', "[hello", ']')
-	actual := args.Map{"result": result != "[hello]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "[hello]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "right missing: expected [hello]", actual)
 
 	// Left missing
 	result = simplewrap.ConditionalWrapWith('[', "hello]", ']')
-	actual := args.Map{"result": result != "[hello]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "[hello]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "left missing: expected [hello]", actual)
 
 	// Single char that matches start
 	result = simplewrap.ConditionalWrapWith('[', "[", ']')
-	actual := args.Map{"result": result != "[]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "[]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "single char: expected []", actual)
 }
 
@@ -382,20 +382,20 @@ func Test_DoubleQuoteWrapElements_Coverage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have 2 items", actual)
-	actual := args.Map{"result": result[0] != `"a"`}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != `"a"`}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected \"a\", actual)
 
 	// Nil input
 	result = simplewrap.DoubleQuoteWrapElements(false, )
-	actual := args.Map{"result": len(result) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty input should return empty", actual)
 
 	// With skip
 	result = simplewrap.DoubleQuoteWrapElements(true, "a", "b")
-	actual := args.Map{"result": len(result) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have 2 items", actual)
 }
 

@@ -50,56 +50,56 @@ func Test_PathExistStat_TempDir(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp dir should exist", actual)
 
-	actual := args.Map{"result": stat.IsDir()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stat.IsDir()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp dir should be a directory", actual)
 
-	actual := args.Map{"result": stat.IsFile()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.IsFile()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should not be a file", actual)
 
-	actual := args.Map{"result": stat.IsInvalid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.IsInvalid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should not be invalid", actual)
 
-	actual := args.Map{"result": stat.HasAnyIssues()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.HasAnyIssues()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should not have issues", actual)
 
-	actual := args.Map{"result": stat.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should not have error", actual)
 
-	actual := args.Map{"result": stat.IsEmptyError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stat.IsEmptyError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp dir should have empty error", actual)
 
-	actual := args.Map{"result": stat.HasFileInfo()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stat.HasFileInfo()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp dir should have file info", actual)
 
-	actual := args.Map{"result": stat.IsInvalidFileInfo()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.IsInvalidFileInfo()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should have valid file info", actual)
 
-	actual := args.Map{"result": stat.FileMode() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.FileMode() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileMode should not be nil", actual)
 
-	actual := args.Map{"result": stat.LastModifiedDate() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.LastModifiedDate() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LastModifiedDate should not be nil", actual)
 
-	actual := args.Map{"result": stat.NotExistError() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.NotExistError() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir NotExistError should be nil", actual)
 
-	actual := args.Map{"result": stat.NotADirError() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.NotADirError() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir NotADirError should be nil", actual)
 
-	actual := args.Map{"result": stat.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
@@ -115,8 +115,8 @@ func Test_PathExistStat_TempDir_Navigation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CombineWithNewPath should not be empty", actual)
 
 	combinedStat := stat.CombineWith("subdir")
-	actual := args.Map{"result": combinedStat == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": combinedStat == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CombineWith should not return nil", actual)
 }
 
@@ -133,51 +133,51 @@ func Test_PathExistStat_File(t *testing.T) {
 	stat := chmodhelper.GetPathExistStat(tmpFile.Name())
 
 	// Assert
-	actual := args.Map{"result": stat.IsExist}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stat.IsExist}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp file should exist", actual)
 
-	actual := args.Map{"result": stat.IsFile()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stat.IsFile()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be a file", actual)
 
-	actual := args.Map{"result": stat.IsDir()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.IsDir()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be a dir", actual)
 
-	actual := args.Map{"result": stat.FileName() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.FileName() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileName should not be empty", actual)
 
-	actual := args.Map{"result": stat.ParentDir() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.ParentDir() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParentDir should not be empty", actual)
 
-	actual := args.Map{"result": stat.DotExt() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.DotExt() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DotExt should not be empty for .txt file", actual)
 
-	actual := args.Map{"result": stat.Size() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.Size() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Size should not be nil", actual)
 
 	parent := stat.Parent()
-	actual := args.Map{"result": parent == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": parent == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Parent should not be nil", actual)
 
-	actual := args.Map{"result": stat.NotAFileError() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.NotAFileError() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NotAFileError should be nil for a file", actual)
 
 	parentPath := stat.ParentWithNewPath("test.txt")
-	actual := args.Map{"result": parentPath == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": parentPath == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParentWithNewPath should not be empty", actual)
 
 	parentStat := stat.ParentWith("test.txt")
-	actual := args.Map{"result": parentStat == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": parentStat == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParentWith should not return nil", actual)
 }
 
@@ -235,8 +235,8 @@ func Test_PathExistStat_Dispose_FromPathExistStatNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsExist should be false after Dispose", actual)
 
-	actual := args.Map{"result": stat.Location != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.Location != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Location should be empty after Dispose", actual)
 }
 
@@ -368,8 +368,8 @@ func Test_ChmodVerifier_GetExisting_FromPathExistStatNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetExisting error:", actual)
 
-	actual := args.Map{"result": mode == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mode == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "mode should not be 0", actual)
 }
 
@@ -404,8 +404,8 @@ func Test_GetExistingChmod(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
 
-	actual := args.Map{"result": mode == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mode == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "mode should not be 0", actual)
 }
 
@@ -427,8 +427,8 @@ func Test_IsPathExists_Ext(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "temp dir should exist", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathExists("/nonexistent/path/xyz")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsPathExists("/nonexistent/path/xyz")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nonexistent path should not exist", actual)
 }
 
@@ -445,8 +445,8 @@ func Test_IsPathInvalid(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nonexistent path should be invalid", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathInvalid(os.TempDir())}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsPathInvalid(os.TempDir())}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "temp dir should not be invalid", actual)
 }
 
@@ -475,8 +475,8 @@ func Test_GetExistingChmodRwxWrapperPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
 
-	actual := args.Map{"result": wrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "wrapper should not be nil", actual)
 }
 
@@ -505,8 +505,8 @@ func Test_DirCreator_Direct_FromPathExistStatNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Direct error:", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathExists(dir)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": chmodhelper.IsPathExists(dir)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "dir should exist after Direct", actual)
 }
 
@@ -527,8 +527,8 @@ func Test_DirCreator_IfMissing_FromPathExistStatNilSafe(t *testing.T) {
 	err2 := chmodhelper.SimpleFileWriter.CreateDir.IfMissing(os.FileMode(0755), dir)
 
 	// Assert
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IfMissing second call error:", actual)
 }
 
@@ -563,8 +563,8 @@ func Test_FileWriter_WriteAndRead(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "write error:", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathExists(filePath)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": chmodhelper.IsPathExists(filePath)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "file should exist after write", actual)
 }
 
@@ -602,8 +602,8 @@ func Test_FileWriter_Remove_FromPathExistStatNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "remove error:", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathExists(filePath)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsPathExists(filePath)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "file should not exist after remove", actual)
 
 	os.RemoveAll(dir)

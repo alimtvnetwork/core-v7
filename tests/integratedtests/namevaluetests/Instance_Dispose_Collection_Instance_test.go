@@ -61,8 +61,8 @@ func Test_Collection_PrependUsingFuncIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b first", actual)
 	c.PrependUsingFuncIf(false, nil)
-	actual := args.Map{"result": c.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -80,8 +80,8 @@ func Test_Collection_AppendUsingFuncIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c.AppendUsingFuncIf(false, nil)
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -100,8 +100,8 @@ func Test_Collection_AppendPrependIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	c.AppendPrependIf(false, pre, post)
-	actual := args.Map{"result": c.Length() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected still 3", actual)
 }
 
@@ -132,8 +132,8 @@ func Test_Collection_AddsIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	c.AddsIf(true, namevalue.Instance[string, string]{Name: "a"})
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -148,8 +148,8 @@ func Test_Collection_ErrorUsingMessage_FromInstanceDisposeColle(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-	actual := args.Map{"result": c.ErrorUsingMessage("msg") == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.ErrorUsingMessage("msg") == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -219,24 +219,24 @@ func Test_Collection_IsEqualByString(t *testing.T) {
 	// diff
 	c := namevalue.NewGenericCollectionDefault[string, string]()
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "2"})
-	actual := args.Map{"result": a.IsEqualByString(c)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a.IsEqualByString(c)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	// nil
 	var d *namevalue.Collection[string, string]
-	actual := args.Map{"result": d.IsEqualByString(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsEqualByString(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil equal", actual)
-	actual := args.Map{"result": d.IsEqualByString(a)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsEqualByString(a)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil", actual)
-	actual := args.Map{"result": a.IsEqualByString(d)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a.IsEqualByString(d)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-nil vs nil", actual)
 	// diff length
 	e := namevalue.NewGenericCollectionDefault[string, string]()
-	actual := args.Map{"result": a.IsEqualByString(e)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a.IsEqualByString(e)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "diff length", actual)
 }
 
@@ -282,8 +282,8 @@ func Test_Collection_JsonString_FromInstanceDisposeColle(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	e := namevalue.EmptyGenericCollection[string, string]()
-	actual := args.Map{"result": e.JsonString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.JsonString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for empty coll", actual)
 }
 

@@ -83,7 +83,7 @@ func Test_Variation_IsPossibleUnixGroup(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected possible unix", actual)
-	actual := args.Map{"result": ostype.Windows.IsPossibleUnixGroup()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ostype.Windows.IsPossibleUnixGroup()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "windows should not be unix", actual)
 }

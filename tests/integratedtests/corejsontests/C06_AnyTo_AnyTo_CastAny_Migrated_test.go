@@ -37,8 +37,8 @@ func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
 	_ = jr4
 
 	jr5 := corejson.AnyTo.SerializedJsonResult(nil)
-	actual := args.Map{"result": jr5.Error == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jr5.Error == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 
 	jr6 := corejson.AnyTo.SerializedJsonResult(42)
@@ -47,8 +47,8 @@ func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
 		expected6.ShouldBeEqual(t, 0, "result6 has no error", actual6)
 
 	jr7 := corejson.AnyTo.SerializedJsonResult(errors.New("oops"))
-	actual := args.Map{"result": jr7 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jr7 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -75,8 +75,8 @@ func Test_C06_AnyTo_SerializedString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	_, err2 := corejson.AnyTo.SerializedString(nil)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -91,8 +91,8 @@ func Test_C06_AnyTo_SerializedSafeString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	s2 := corejson.AnyTo.SerializedSafeString(nil)
-	actual := args.Map{"result": s2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -131,34 +131,34 @@ func Test_C06_AnyTo_PrettyStringWithError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	s2, err2 := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":1}`))
-	actual := args.Map{"result": err2 != nil || s2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil || s2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	r := corejson.NewResult.Any(42)
 	s3, err3 := corejson.AnyTo.PrettyStringWithError(r)
-	actual := args.Map{"result": err3 != nil || s3 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 != nil || s3 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	rp := corejson.NewResult.AnyPtr(42)
 	s4, err4 := corejson.AnyTo.PrettyStringWithError(rp)
-	actual := args.Map{"result": err4 != nil || s4 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err4 != nil || s4 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 
 	re := corejson.Result{Error: errors.New("e")}
 	_, err5 := corejson.AnyTo.PrettyStringWithError(re)
-	actual := args.Map{"result": err5 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err5 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	rep := &corejson.Result{Error: errors.New("e")}
 	_, err6 := corejson.AnyTo.PrettyStringWithError(rep)
-	actual := args.Map{"result": err6 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err6 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	s5, err5b := corejson.AnyTo.PrettyStringWithError(map[string]int{"a": 1})
-	actual := args.Map{"result": err5b != nil || s5 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err5b != nil || s5 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -194,12 +194,12 @@ func Test_C06_AnyTo_JsonStringWithErr(t *testing.T) {
 	_, _ = corejson.AnyTo.JsonStringWithErr(42)
 
 	_, err2 := corejson.AnyTo.JsonStringWithErr(corejson.Result{Error: errors.New("e")})
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	_, err3 := corejson.AnyTo.JsonStringWithErr(&corejson.Result{Error: errors.New("e")})
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 

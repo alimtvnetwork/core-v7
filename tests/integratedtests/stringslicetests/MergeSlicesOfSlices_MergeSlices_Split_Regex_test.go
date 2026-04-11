@@ -20,13 +20,13 @@ func Test_MergeSlicesOfSlices_FromMergeSlicesOfSlicesM(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	// with nil slice
 	result2 := stringslice.MergeSlicesOfSlices([]string{"a"}, []string{})
-	actual := args.Map{"result": len(result2) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result2) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// empty
 	result3 := stringslice.MergeSlicesOfSlices()
-	actual := args.Map{"result": len(result3) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result3) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 

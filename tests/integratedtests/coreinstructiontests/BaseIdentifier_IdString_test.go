@@ -35,8 +35,8 @@ func Test_BaseIdentifier_IsIdEmpty(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty id should be empty", actual)
 	id2 := coreinstruction.NewIdentifier("x")
-	actual := args.Map{"result": id2.IsIdEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": id2.IsIdEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-empty should not be empty", actual)
 }
 
@@ -62,8 +62,8 @@ func Test_BaseIdentifier_IsId(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match", actual)
-	actual := args.Map{"result": id.IsId("other")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": id.IsId("other")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match", actual)
 }
 
@@ -212,8 +212,8 @@ func Test_BaseEnabler_SetEnableVal(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be enabled", actual)
 	e.SetEnableVal(false)
-	actual := args.Map{"result": e.IsEnabled}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsEnabled}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be disabled", actual)
 }
 
@@ -247,11 +247,11 @@ func Test_Specification_Simple(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'id1', got ''", actual)
-	actual := args.Map{"result": spec.Display != "Display1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": spec.Display != "Display1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'Display1'", actual)
-	actual := args.Map{"result": spec.Type != "Type1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": spec.Type != "Type1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'Type1'", actual)
 }
 
@@ -277,8 +277,8 @@ func Test_Specification_Full(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 tags", actual)
-	actual := args.Map{"result": spec.IsGlobal}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": spec.IsGlobal}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be global", actual)
 }
 
@@ -294,8 +294,8 @@ func Test_Specification_Clone(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "clone id mismatch", actual)
 	cloned.Tags[0] = "modified"
-	actual := args.Map{"result": spec.Tags[0] == "modified"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": spec.Tags[0] == "modified"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "clone should be independent", actual)
 }
 
@@ -325,8 +325,8 @@ func Test_Specification_FlatSpecification(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return non-nil flat spec", actual)
 	// Second call should return cached
 	flat2 := spec.FlatSpecification()
-	actual := args.Map{"result": flat != flat2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": flat != flat2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return same cached instance", actual)
 }
 
@@ -357,8 +357,8 @@ func Test_Rename_Properties(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "properties mismatch", actual)
-	actual := args.Map{"result": r.ExistingName() != "old" || r.NewName() != "new"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.ExistingName() != "old" || r.NewName() != "new"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "alias properties mismatch", actual)
 }
 

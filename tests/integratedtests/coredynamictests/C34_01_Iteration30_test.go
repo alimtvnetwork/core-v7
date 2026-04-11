@@ -75,8 +75,8 @@ func Test_C34_05_Dynamic_StructStringPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty string ptr", actual)
 	// second call should return cached
 	ptr2 := d.StructStringPtr()
-	actual := args.Map{"result": ptr != ptr2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr != ptr2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached pointer", actual)
 }
 
@@ -867,8 +867,8 @@ func Test_C34_69_Dynamic_JsonBytesPtr_Null(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error for null", actual)
-	actual := args.Map{"result": len(b) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty bytes", actual)
 }
 
@@ -1242,8 +1242,8 @@ func Test_C34_97_Collection_HasAnyItem(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	c.Add(1)
-	actual := args.Map{"result": c.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": c.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1258,11 +1258,11 @@ func Test_C34_98_Collection_HasIndex(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": c.HasIndex(2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.HasIndex(2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": c.HasIndex(-1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.HasIndex(-1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 }
 
@@ -1881,8 +1881,8 @@ func Test_C34_141_Collection_RemoveAtLock_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -2048,8 +2048,8 @@ func Test_C34_152_Contains(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": coredynamic.Contains(c, 99)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coredynamic.Contains(c, 99)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -2064,8 +2064,8 @@ func Test_C34_153_IndexOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": coredynamic.IndexOf(c, "z") != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coredynamic.IndexOf(c, "z") != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
@@ -2093,8 +2093,8 @@ func Test_C34_155_HasAll(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": coredynamic.HasAll(c, 1, 99)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coredynamic.HasAll(c, 1, 99)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -2121,8 +2121,8 @@ func Test_C34_157_LastIndexOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": coredynamic.LastIndexOf(c, 99) != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coredynamic.LastIndexOf(c, 99) != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
@@ -2296,8 +2296,8 @@ func Test_C34_169_GroupBy(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 groups", actual)
-	actual := args.Map{"result": groups["even"].Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": groups["even"].Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 evens", actual)
 }
 
@@ -2880,8 +2880,8 @@ func Test_C34_212_AnyCollection_Paging(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4 pages", actual)
-	actual := args.Map{"result": ac.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ac.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 for zero page size", actual)
 }
 

@@ -61,11 +61,11 @@ func Test_BaseIsSecure_NewSecure(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected secure", actual)
-	actual := args.Map{"result": s.IsPlainText()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.IsPlainText()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not plain text", actual)
-	actual := args.Map{"result": s.IsIncludePayload()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.IsIncludePayload()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not include payload", actual)
 }
 
@@ -79,11 +79,11 @@ func Test_BaseIsSecure_NewPlain(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not secure", actual)
-	actual := args.Map{"result": s.IsPlainText()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.IsPlainText()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected plain text", actual)
-	actual := args.Map{"result": s.IsIncludePayload()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.IsIncludePayload()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected include payload", actual)
 }
 
@@ -97,8 +97,8 @@ func Test_BaseIsSecure_NilReceiver(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected plain text for nil", actual)
-	actual := args.Map{"result": s.IsIncludePayload()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.IsIncludePayload()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected include payload for nil", actual)
 }
 
@@ -116,8 +116,8 @@ func Test_BaseTags_NewTagsPtr_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bt.TagsLength() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bt.TagsLength() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 tags", actual)
 }
 
@@ -169,12 +169,12 @@ func Test_BaseTags_HasAllTags(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": bt.HasAllTags("a", "z")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bt.HasAllTags("a", "z")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	// Empty tags => true
-	actual := args.Map{"result": bt.HasAllTags()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": bt.HasAllTags()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 }
 
@@ -188,8 +188,8 @@ func Test_BaseTags_HasAnyTags(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": bt.HasAnyTags("x", "z")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bt.HasAnyTags("x", "z")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 

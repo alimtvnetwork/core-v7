@@ -522,8 +522,8 @@ func Test_C5_AIC_ToAnyItems(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	r2 := converters.AnyTo.ToAnyItems(false, []int{1, 2})
-	actual := args.Map{"result": len(r2) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(r2) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -891,8 +891,8 @@ func Test_C5_StringTo_IntegersWithDefaults_WithError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": r.Values[1] != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Values[1] != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1060,8 +1060,8 @@ func Test_C5_StringTo_Byte_Edge(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	_, err = converters.StringTo.Byte("256")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 

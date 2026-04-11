@@ -927,8 +927,8 @@ func Test_C37_Collection_Filter(t *testing.T) {
 		result2 := corestr.Empty.Collection().Filter(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": len(result2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(result2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -968,8 +968,8 @@ func Test_C37_Collection_FilterLock(t *testing.T) {
 		result2 := corestr.Empty.Collection().FilterLock(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": len(result2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(result2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -1026,8 +1026,8 @@ func Test_C37_Collection_FilterPtr(t *testing.T) {
 		result2 := corestr.Empty.Collection().FilterPtr(func(sp *string, i int) (*string, bool, bool) {
 			return sp, true, false
 		})
-		actual := args.Map{"result": len(*result2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*result2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -1050,8 +1050,8 @@ func Test_C37_Collection_FilterPtrLock(t *testing.T) {
 		result2 := corestr.Empty.Collection().FilterPtrLock(func(sp *string, i int) (*string, bool, bool) {
 			return sp, true, false
 		})
-		actual := args.Map{"result": len(*result2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*result2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

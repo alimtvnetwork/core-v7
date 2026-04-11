@@ -386,8 +386,8 @@ func Test_SFRW_Get_Exists(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": out["key"] != "val"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": out["key"] != "val"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected value", actual)
 }
 
@@ -655,11 +655,11 @@ func Test_SFRW_MarshalUnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	var rw2 chmodhelper.SimpleFileReaderWriter
 	err2 := rw2.UnmarshalJSON(b)
-	actual := args.Map{"result": err2}
-	expected := args.Map{"result": nil}
+	actual = args.Map{"result": err2}
+	expected = args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err2", actual)
-	actual := args.Map{"result": rw2.FilePath != rw.FilePath}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw2.FilePath != rw.FilePath}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same path after unmarshal", actual)
 }
 
@@ -1287,8 +1287,8 @@ func Test_FPFIM_LazyValidLocations(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected locations", actual)
 	// second call hits cache
 	locs2 := m.LazyValidLocations()
-	actual := args.Map{"result": len(locs2) != len(locs)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(locs2) != len(locs)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache mismatch", actual)
 }
 
@@ -1678,8 +1678,8 @@ func Test_NewSFRW_PathCondition(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	rw2 := chmodhelper.New.SimpleFileReaderWriter.PathCondition(false, false, 0755, 0644, "/tmp/i10/pc2.txt")
-	actual := args.Map{"result": rw2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 

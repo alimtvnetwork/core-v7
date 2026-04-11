@@ -243,8 +243,8 @@ func Test_Src_SlicePtr_Verification(t *testing.T) {
 	result2 := stringslice.SlicePtr(nilInput)
 
 	// Assert
-	actual := args.Map{"result": len(result2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -266,8 +266,8 @@ func Test_Src_CloneSimpleSliceToPointers_Verification(t *testing.T) {
 	result2 := stringslice.CloneSimpleSliceToPointers(input)
 
 	// Assert
-	actual := args.Map{"result": len(*result2) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(*result2) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 

@@ -65,8 +65,8 @@ func Test_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": executors == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -170,20 +170,20 @@ func Test_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected exist", actual)
-	actual := args.Map{"result": rw.IsParentExist()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rw.IsParentExist()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected parent exist", actual)
-	actual := args.Map{"result": rw.HasPathIssues()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw.HasPathIssues()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
-	actual := args.Map{"result": rw.IsPathInvalid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw.IsPathInvalid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
-	actual := args.Map{"result": rw.IsParentDirInvalid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw.IsParentDirInvalid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid parent", actual)
-	actual := args.Map{"result": rw.HasAnyIssues()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw.HasAnyIssues()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
 }
 
@@ -206,8 +206,8 @@ func Test_SimpleFileReaderWriter_WriteAndRead_FromParseRwxToFileMode(t *testing.
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	content, err := rw.Read()
-	actual := args.Map{"result": err != nil || string(content) != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || string(content) != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -230,8 +230,8 @@ func Test_SimpleFileReaderWriter_WriteString_FromParseRwxToFileMode(t *testing.T
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	content, err := rw.ReadString()
-	actual := args.Map{"result": err != nil || content != "world"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || content != "world"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -255,8 +255,8 @@ func Test_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil nil", actual)
 	content, err := rw.ReadStringOnExist()
-	actual := args.Map{"result": err != nil || content != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || content != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -313,8 +313,8 @@ func Test_SimpleFileReaderWriter_JoinRelPath_FromParseRwxToFileMode(t *testing.T
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected path", actual)
 	p2 := rw.JoinRelPath("")
-	actual := args.Map{"result": p2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": p2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected path", actual)
 }
 

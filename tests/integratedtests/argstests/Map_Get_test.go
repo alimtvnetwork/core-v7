@@ -89,32 +89,32 @@ func Test_Map_Utility_Methods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Length 3", actual)
 
-	actual := args.Map{"result": m.Has("a")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.Has("a")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected Has('a') true", actual)
 
-	actual := args.Map{"result": m.Has("z")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Has("z")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Has('z') false", actual)
 
-	actual := args.Map{"result": m.HasDefined("a")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasDefined("a")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasDefined('a') true", actual)
 
-	actual := args.Map{"result": m.IsKeyMissing("a")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyMissing("a")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsKeyMissing('a') false", actual)
 
-	actual := args.Map{"result": m.IsKeyMissing("z")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.IsKeyMissing("z")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsKeyMissing('z') true", actual)
 
-	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasDefinedAll("a", "b")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasDefinedAll('a','b') true", actual)
 
-	actual := args.Map{"result": m.HasDefinedAll("a", "z")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefinedAll("a", "z")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasDefinedAll('a','z') false", actual)
 }
 
@@ -128,24 +128,24 @@ func Test_Map_NilSafety(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map Get should return false", actual)
 
-	actual := args.Map{"result": m.Has("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Has("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map Has should return false", actual)
 
-	actual := args.Map{"result": m.HasDefined("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefined("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map HasDefined should return false", actual)
 
-	actual := args.Map{"result": m.HasDefinedAll("a")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefinedAll("a")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map HasDefinedAll should return false", actual)
 
-	actual := args.Map{"result": m.IsKeyInvalid("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyInvalid("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map IsKeyInvalid should return false", actual)
 
-	actual := args.Map{"result": m.IsKeyMissing("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyMissing("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil map IsKeyMissing should return false", actual)
 }
 
@@ -162,24 +162,24 @@ func Test_Map_GetDefaults(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsIntDefault to return 5", actual)
 
-	actual := args.Map{"result": m.GetAsIntDefault("missing", 99) != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetAsIntDefault("missing", 99) != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsIntDefault to return default 99", actual)
 
-	actual := args.Map{"result": m.GetAsBoolDefault("flag", false) != true}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetAsBoolDefault("flag", false) != true}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsBoolDefault to return true", actual)
 
-	actual := args.Map{"result": m.GetAsBoolDefault("missing", true) != true}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetAsBoolDefault("missing", true) != true}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsBoolDefault to return default true", actual)
 
-	actual := args.Map{"result": m.GetAsStringDefault("text") != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetAsStringDefault("text") != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsStringDefault to return hello", actual)
 
-	actual := args.Map{"result": m.GetAsStringDefault("missing") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetAsStringDefault("missing") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetAsStringDefault to return empty", actual)
 }
 
@@ -199,24 +199,24 @@ func Test_Map_SpecialKeys(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected When() to return scenario", actual)
 
-	actual := args.Map{"result": m.Title() != "test title"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Title() != "test title"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Title() to return title", actual)
 
-	actual := args.Map{"result": m.Expected() != "some result"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Expected() != "some result"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Expected() to return expected", actual)
 
-	actual := args.Map{"result": m.FirstItem() != "f1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.FirstItem() != "f1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected FirstItem() to return f1", actual)
 
-	actual := args.Map{"result": m.SecondItem() != "f2"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.SecondItem() != "f2"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected SecondItem() to return f2", actual)
 
-	actual := args.Map{"result": m.ThirdItem() != "f3"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.ThirdItem() != "f3"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ThirdItem() to return f3", actual)
 }
 
@@ -235,8 +235,8 @@ func Test_Map_GetByIndex(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 items in slice", actual)
 
-	actual := args.Map{"result": m.GetByIndex(999) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetByIndex(999) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for out of range index", actual)
 }
 
@@ -256,8 +256,8 @@ func Test_Map_GoLiteral(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 lines", actual)
 
-	actual := args.Map{"result": str == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": str == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GoLiteralString should not be empty", actual)
 }
 
@@ -288,8 +288,8 @@ func Test_Map_GetAsStrings(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": len(items) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(items) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 items", actual)
 }
 
@@ -307,8 +307,8 @@ func Test_Map_GetAsAnyItems_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": len(items) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(items) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 items", actual)
 }
 
@@ -356,12 +356,12 @@ func Test_Map_SortedKeys_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SortedKeys error:", actual)
 
-	actual := args.Map{"result": len(keys) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(keys) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 keys", actual)
 
-	actual := args.Map{"result": keys[0] != "a" || keys[1] != "b" || keys[2] != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": keys[0] != "a" || keys[1] != "b" || keys[2] != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "keys should be sorted", actual)
 }
 
@@ -452,8 +452,8 @@ func Test_One_Args(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 arg", actual)
 
-	actual := args.Map{"result": len(one.Args(0)) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(one.Args(0)) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 args", actual)
 }
 
@@ -480,8 +480,8 @@ func Test_One_GetByIndex(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetByIndex(0) to return hello", actual)
 
-	actual := args.Map{"result": one.GetByIndex(99) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": one.GetByIndex(99) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected GetByIndex(99) to return nil", actual)
 }
 
@@ -563,55 +563,55 @@ func Test_Three_Methods_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasFirst should be true", actual)
 
-	actual := args.Map{"result": three.HasSecond()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": three.HasSecond()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasSecond should be true", actual)
 
-	actual := args.Map{"result": three.HasThird()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": three.HasThird()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasThird should be true", actual)
 
-	actual := args.Map{"result": three.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": three.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasExpect should be true", actual)
 
-	actual := args.Map{"result": three.ArgsCount() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": three.ArgsCount() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ArgsCount 3", actual)
 
-	actual := args.Map{"result": len(three.ValidArgs()) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(three.ValidArgs()) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 valid args", actual)
 
-	actual := args.Map{"result": three.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": three.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String() should not be empty", actual)
 
-	actual := args.Map{"result": three.FirstItem() != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": three.FirstItem() != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FirstItem should be a", actual)
 
-	actual := args.Map{"result": three.SecondItem() != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": three.SecondItem() != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SecondItem should be b", actual)
 
-	actual := args.Map{"result": three.ThirdItem() != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": three.ThirdItem() != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ThirdItem should be c", actual)
 
 	argTwo := three.ArgTwo()
-	actual := args.Map{"result": argTwo.First != "a" || argTwo.Second != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": argTwo.First != "a" || argTwo.Second != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgTwo should have first two", actual)
 
 	argThree := three.ArgThree()
-	actual := args.Map{"result": argThree.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": argThree.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgThree should copy", actual)
 
 	lr := three.LeftRight()
-	actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LeftRight should map first/second", actual)
 }
 
@@ -701,46 +701,46 @@ func Test_String_Operations(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String() should return hello", actual)
 
-	actual := args.Map{"result": len(s.Bytes()) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(s.Bytes()) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Bytes() should have 5 bytes", actual)
 
-	actual := args.Map{"result": len(s.Runes()) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(s.Runes()) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Runes() should have 5 runes", actual)
 
-	actual := args.Map{"result": s.Count() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.Count() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Count should be 5", actual)
 
 	trimmed := args.String("  hello  ").TrimSpace()
-	actual := args.Map{"result": trimmed != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trimmed != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TrimSpace expected hello", actual)
 
 	replaced := s.ReplaceAll("hello", "world")
-	actual := args.Map{"result": replaced != "world"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": replaced != "world"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReplaceAll expected world", actual)
 
 	sub := s.Substring(0, 3)
-	actual := args.Map{"result": sub != "hel"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sub != "hel"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Substring expected hel", actual)
 
 	concat := args.String("a").Concat("b", "c")
-	actual := args.Map{"result": concat != "abc"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": concat != "abc"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Concat expected abc", actual)
 
 	joined := args.String("a").Join("-", "b", "c")
-	actual := args.Map{"result": joined != "a-b-c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": joined != "a-b-c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Join expected a-b-c", actual)
 
 	split := args.String("a,b,c").Split(",")
-	actual := args.Map{"result": len(split) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(split) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Split expected 3", actual)
 }
 
@@ -755,18 +755,18 @@ func Test_String_Quoting(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DoubleQuote should not be empty", actual)
 
 	dqq := s.DoubleQuoteQ()
-	actual := args.Map{"result": dqq == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dqq == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteQ should not be empty", actual)
 
 	sq := s.SingleQuote()
-	actual := args.Map{"result": sq == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sq == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SingleQuote should not be empty", actual)
 
 	vdq := s.ValueDoubleQuote()
-	actual := args.Map{"result": vdq == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vdq == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueDoubleQuote should not be empty", actual)
 }
 
@@ -782,16 +782,16 @@ func Test_Empty_Creator(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Empty.Map should not be nil", actual)
 
-	actual := args.Map{"result": fw == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fw == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Empty.FuncWrap should not be nil", actual)
 
-	actual := args.Map{"result": fm == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Empty.FuncMap should not be nil", actual)
 
-	actual := args.Map{"result": h.ArgsCount() != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.ArgsCount() != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Empty.Holder ArgsCount should be 7", actual)
 }
 
@@ -812,68 +812,68 @@ func Test_Holder_Methods_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasFirst should be true", actual)
 
-	actual := args.Map{"result": h.HasSecond()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasSecond()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasSecond should be true", actual)
 
-	actual := args.Map{"result": h.HasThird()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasThird()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasThird should be true", actual)
 
-	actual := args.Map{"result": h.HasFourth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFourth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasFourth should be true", actual)
 
-	actual := args.Map{"result": h.HasFifth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFifth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasFifth should be true", actual)
 
-	actual := args.Map{"result": h.HasSixth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasSixth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasSixth should be true", actual)
 
-	actual := args.Map{"result": h.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasExpect should be true", actual)
 
-	actual := args.Map{"result": h.ArgsCount() != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.ArgsCount() != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgsCount should be 7", actual)
 
-	actual := args.Map{"result": len(h.ValidArgs()) != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(h.ValidArgs()) != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 6 valid args", actual)
 
-	actual := args.Map{"result": h.FirstItem() != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.FirstItem() != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FirstItem should be a", actual)
 
-	actual := args.Map{"result": h.SecondItem() != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.SecondItem() != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SecondItem should be b", actual)
 
-	actual := args.Map{"result": h.ThirdItem() != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.ThirdItem() != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ThirdItem should be c", actual)
 
-	actual := args.Map{"result": h.FourthItem() != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.FourthItem() != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FourthItem should be d", actual)
 
-	actual := args.Map{"result": h.FifthItem() != "e"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.FifthItem() != "e"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FifthItem should be e", actual)
 
-	actual := args.Map{"result": h.SixthItem() != "f"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.SixthItem() != "f"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SixthItem should be f", actual)
 
-	actual := args.Map{"result": h.Expected() != "g"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.Expected() != "g"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Expected should be g", actual)
 
-	actual := args.Map{"result": h.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Holder String() should not be empty", actual)
 }
 
@@ -890,12 +890,12 @@ func Test_Holder_Args(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Args(1) should return 1", actual)
 
-	actual := args.Map{"result": len(h.Args(3)) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(h.Args(3)) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Args(3) should return 3", actual)
 
-	actual := args.Map{"result": len(h.Args(6)) != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(h.Args(6)) != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Args(6) should return 6", actual)
 }
 
@@ -916,18 +916,18 @@ func Test_Holder_ArgTwo_ArgThree_ArgFour_ArgFive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ArgTwo should have first two", actual)
 
 	a3 := h.ArgThree()
-	actual := args.Map{"result": a3.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a3.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgThree should have first", actual)
 
 	a4 := h.ArgFour()
-	actual := args.Map{"result": a4.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a4.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgFour should have first", actual)
 
 	a5 := h.ArgFive()
-	actual := args.Map{"result": a5.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a5.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgFive should have first", actual)
 }
 
@@ -949,55 +949,55 @@ func Test_Dynamic_Methods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ArgsCount 1", actual)
 
-	actual := args.Map{"result": d.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasExpect should be true", actual)
 
-	actual := args.Map{"result": d.Expected() != "expected"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.Expected() != "expected"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Expected should be expected", actual)
 
-	actual := args.Map{"result": d.HasDefined("key1")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasDefined("key1")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasDefined key1 should be true", actual)
 
-	actual := args.Map{"result": d.Has("key1")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.Has("key1")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Has key1 should be true", actual)
 
-	actual := args.Map{"result": d.IsKeyMissing("key1")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsKeyMissing("key1")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsKeyMissing key1 should be false", actual)
 
-	actual := args.Map{"result": d.IsKeyMissing("missing")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsKeyMissing("missing")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsKeyMissing missing should be true", actual)
 
-	actual := args.Map{"result": d.IsKeyInvalid("key1")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsKeyInvalid("key1")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsKeyInvalid key1 should be false", actual)
 
 	val, isValid := d.Get("key1")
-	actual := args.Map{"result": isValid || val != "val1"}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": isValid || val != "val1"}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Get key1 should return val1", actual)
 
 	intVal, intValid := d.GetAsInt("key2")
-	actual := args.Map{"result": intValid || intVal != 42}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": intValid || intVal != 42}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetAsInt key2 should return 42", actual)
 
-	actual := args.Map{"result": d.GetAsIntDefault("missing", 99) != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.GetAsIntDefault("missing", 99) != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetAsIntDefault should return 99", actual)
 
 	strVal, strValid := d.GetAsString("key1")
-	actual := args.Map{"result": strValid || strVal != "val1"}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": strValid || strVal != "val1"}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetAsString key1 should return val1", actual)
 
-	actual := args.Map{"result": d.GetAsStringDefault("missing") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.GetAsStringDefault("missing") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetAsStringDefault should return empty", actual)
 
 	// Note: Dynamic.String() calls Slice() which uses converters.Map.SortedKeys.
@@ -1014,37 +1014,37 @@ func Test_Dynamic_NilSafety(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ArgsCount should return 0", actual)
 
-	actual := args.Map{"result": d.GetWorkFunc() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.GetWorkFunc() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil GetWorkFunc should return nil", actual)
 
-	actual := args.Map{"result": d.HasDefined("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.HasDefined("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil HasDefined should return false", actual)
 
-	actual := args.Map{"result": d.Has("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.Has("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil Has should return false", actual)
 
-	actual := args.Map{"result": d.HasDefinedAll("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.HasDefinedAll("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil HasDefinedAll should return false", actual)
 
-	actual := args.Map{"result": d.IsKeyInvalid("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsKeyInvalid("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil IsKeyInvalid should return false", actual)
 
-	actual := args.Map{"result": d.IsKeyMissing("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsKeyMissing("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil IsKeyMissing should return false", actual)
 
 	_, isValid := d.Get("key")
-	actual := args.Map{"result": isValid}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isValid}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil Get should return false", actual)
 
-	actual := args.Map{"result": d.HasExpect()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.HasExpect()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil HasExpect should return false", actual)
 }
 
@@ -1057,76 +1057,76 @@ func Test_FuncMap_Basic_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "new FuncMap should be empty", actual)
 
-	actual := args.Map{"result": fm.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Length should be 0", actual)
 
-	actual := args.Map{"result": fm.Count() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.Count() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Count should be 0", actual)
 
-	actual := args.Map{"result": fm.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "HasAnyItem should be false", actual)
 
-	actual := args.Map{"result": fm.Has("nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.Has("nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Has should be false", actual)
 
-	actual := args.Map{"result": fm.IsContains("nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.IsContains("nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsContains should be false", actual)
 
-	actual := args.Map{"result": fm.Get("nonexistent") != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.Get("nonexistent") != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Get should return nil", actual)
 
-	actual := args.Map{"result": fm.IsValidFuncOf("nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.IsValidFuncOf("nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsValidFuncOf should be false", actual)
 
-	actual := args.Map{"result": fm.IsInvalidFunc("nonexistent")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fm.IsInvalidFunc("nonexistent")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsInvalidFunc should be true", actual)
 
-	actual := args.Map{"result": fm.PkgPath("nonexistent") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.PkgPath("nonexistent") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PkgPath should return empty", actual)
 
-	actual := args.Map{"result": fm.PkgNameOnly("nonexistent") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.PkgNameOnly("nonexistent") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PkgNameOnly should return empty", actual)
 
-	actual := args.Map{"result": fm.FuncDirectInvokeName("nonexistent") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.FuncDirectInvokeName("nonexistent") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FuncDirectInvokeName should return empty", actual)
 
-	actual := args.Map{"result": fm.ArgsCount("nonexistent") != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.ArgsCount("nonexistent") != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ArgsCount should return 0", actual)
 
-	actual := args.Map{"result": fm.ReturnLength("nonexistent") != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.ReturnLength("nonexistent") != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReturnLength should return 0", actual)
 
-	actual := args.Map{"result": fm.IsPublicMethod("nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.IsPublicMethod("nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsPublicMethod should return false", actual)
 
-	actual := args.Map{"result": fm.IsPrivateMethod("nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.IsPrivateMethod("nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsPrivateMethod should return false", actual)
 
-	actual := args.Map{"result": fm.GetType("nonexistent") != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.GetType("nonexistent") != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetType should return nil", actual)
 
-	actual := args.Map{"result": fm.GetPascalCaseFuncName("nonexistent") != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.GetPascalCaseFuncName("nonexistent") != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetPascalCaseFuncName should return empty", actual)
 
-	actual := args.Map{"result": fm.InvalidError() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fm.InvalidError() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty FuncMap InvalidError should return error", actual)
 }
 
@@ -1142,12 +1142,12 @@ func Test_FuncMap_Add_FromMapGet(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FuncMap should not be empty after Add", actual)
 
-	actual := args.Map{"result": fm.Has("someFunctionV1")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fm.Has("someFunctionV1")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected someFunctionV1 in map", actual)
 
-	actual := args.Map{"result": fm.IsValidFuncOf("someFunctionV1")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fm.IsValidFuncOf("someFunctionV1")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "someFunctionV1 should be valid", actual)
 }
 
@@ -1173,7 +1173,7 @@ func Test_FuncDetector(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetFuncWrap should not return nil", actual)
 
-	actual := args.Map{"result": fw.HasValidFunc()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fw.HasValidFunc()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "wrapped func should be valid", actual)
 }

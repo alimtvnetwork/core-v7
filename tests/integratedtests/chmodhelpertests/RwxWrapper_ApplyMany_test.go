@@ -43,8 +43,8 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	err := wrapper.ApplyLinuxChmodOnMany(cond, f1, f2)
 
 	// Assert
-	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": false}
+	actual = args.Map{"hasError": err != nil}
+	expected = args.Map{"hasError": false}
 	actual.ShouldBeEqual(t, 1, "ApplyLinuxChmodOnMany non-recursive", expected)
 }
 
@@ -70,8 +70,8 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T) {
 	err := wrapper.ApplyLinuxChmodOnMany(cond, "/no/exist/1", "/no/exist/2")
 
 	// Assert
-	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": true}
+	actual = args.Map{"hasError": err != nil}
+	expected = args.Map{"hasError": true}
 	actual.ShouldBeEqual(t, 1, "ApplyLinuxChmodOnMany non-recursive error", expected)
 }
 
@@ -100,8 +100,8 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive_FromRwxWrapperApplyMany(t *
 	err := wrapper.ApplyLinuxChmodOnMany(cond, tmpDir)
 
 	// Assert
-	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": false}
+	actual = args.Map{"hasError": err != nil}
+	expected = args.Map{"hasError": false}
 	actual.ShouldBeEqual(t, 1, "ApplyLinuxChmodOnMany recursive", expected)
 }
 
@@ -127,8 +127,8 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
 	err := wrapper.ApplyLinuxChmodOnMany(cond, "/no/exist/path")
 
 	// Assert
-	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": true}
+	actual = args.Map{"hasError": err != nil}
+	expected = args.Map{"hasError": true}
 	actual.ShouldBeEqual(t, 1, "ApplyLinuxChmodOnMany recursive error", expected)
 }
 

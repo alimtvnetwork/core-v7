@@ -25,8 +25,8 @@ func Test_C36_01_MapAnyItems_AddMapResult(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected override to 99", actual)
-	actual := args.Map{"result": m.GetValue("b") != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.GetValue("b") != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -294,8 +294,8 @@ func Test_C36_21_MapAnyItems_HasAnyChanges(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no changes", actual)
-	actual := args.Map{"result": m.HasAnyChanges(false, map[string]any{"k": 2})}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasAnyChanges(false, map[string]any{"k": 2})}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected changes", actual)
 }
 
@@ -1135,8 +1135,8 @@ func Test_C36_89_CastTo_MatchingType(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected matching", actual)
-	actual := args.Map{"result": result.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
@@ -1288,8 +1288,8 @@ func Test_C36_101_ReflectSetFromTo_SameNonPointerToPointer(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": target != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1306,8 +1306,8 @@ func Test_C36_102_ReflectSetFromTo_SamePointerTypes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": target != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1322,8 +1322,8 @@ func Test_C36_103_ReflectSetFromTo_BytesToType(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": target != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1338,8 +1338,8 @@ func Test_C36_104_ReflectSetFromTo_TypeToBytes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
-	actual := args.Map{"result": len(target) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(target) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
@@ -2118,8 +2118,8 @@ func Test_C36_165_TypedSimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// call again for caching
 	err2 := r.InvalidError()
-	actual := args.Map{"result": err2 != err}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != err}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same error", actual)
 }
 
@@ -2172,8 +2172,8 @@ func Test_C36_169_TypedSimpleRequest_GetAs(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected hi", actual)
 	_, ok2 := r.GetAsInt()
-	actual := args.Map{"result": ok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -2402,8 +2402,8 @@ func Test_C36_187_TypedSimpleResult_InvalidError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": r.InvalidError() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.InvalidError() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached error", actual)
 }
 

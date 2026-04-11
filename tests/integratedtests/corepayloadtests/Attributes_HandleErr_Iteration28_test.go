@@ -138,8 +138,8 @@ func Test_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
 	// Act & Assert
 	tw.HandleError()
 
-	actual := args.Map{"completed": true}
-	expected := args.Map{"completed": true}
+	actual = args.Map{"completed": true}
+	expected = args.Map{"completed": true}
 	expected.ShouldBeEqual(t, 0, "HandleError completes -- no error", actual)
 }
 
@@ -181,13 +181,13 @@ func Test_TypedPayloadCollection_ErrorMethods_NoErrors(t *testing.T) {
 	mergedErr := collection.MergedError()
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"hasErrors":    hasErrors,
 		"errCount":     len(errs),
 		"firstErrNil":  firstErr == nil,
 		"mergedErrNil": mergedErr == nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"hasErrors":    false,
 		"errCount":     0,
 		"firstErrNil":  true,
@@ -213,11 +213,11 @@ func Test_TypedPayloadCollection_Clone(t *testing.T) {
 	cloned, err := collection.Clone()
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"errNil": err == nil,
 		"length": cloned.Length(),
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"errNil": true,
 		"length": 1,
 	}
@@ -241,11 +241,11 @@ func Test_TypedPayloadWrapper_ClonePtr(t *testing.T) {
 	cloned, err := tw.ClonePtr(true)
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"errNil": err == nil,
 		"notNil": cloned != nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"errNil": true,
 		"notNil": true,
 	}
@@ -269,10 +269,10 @@ func Test_TypedPayloadWrapper_Clone(t *testing.T) {
 	cloned, err := tw.Clone(true)
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"errNil": err == nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"errNil": true,
 	}
 	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- deep clone", actual)
@@ -297,11 +297,11 @@ func Test_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 	err = tw.SetTypedData(newData)
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"errNil":  err == nil,
 		"updated": tw.TypedData().Val,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"errNil":  true,
 		"updated": "updated",
 	}

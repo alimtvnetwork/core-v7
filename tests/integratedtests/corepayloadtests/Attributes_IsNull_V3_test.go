@@ -27,8 +27,8 @@ func Test_Attributes_IsNull_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil Attributes should be null", actual)
 
-	actual := args.Map{"result": attr.IsNull()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.IsNull()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-nil Attributes should not be null", actual)
 }
 
@@ -56,8 +56,8 @@ func Test_Attributes_HasStringKey_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasStringKey to be true", actual)
 
-	actual := args.Map{"result": attr.HasStringKey("missing")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasStringKey("missing")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasStringKey to be false for missing", actual)
 }
 
@@ -74,8 +74,8 @@ func Test_Attributes_HasAnyKey_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyKey to be true", actual)
 
-	actual := args.Map{"result": attr.HasAnyKey("missing")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasAnyKey("missing")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyKey to be false for missing", actual)
 }
 
@@ -93,8 +93,8 @@ func Test_Attributes_Payloads(t *testing.T) {
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	actual := args.Map{"result": string(attr.Payloads()) != "data"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(attr.Payloads()) != "data"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Payloads to return data", actual)
 }
 
@@ -111,14 +111,14 @@ func Test_Attributes_PayloadsString_FromAttributesIsNullV3(t *testing.T) {
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	actual := args.Map{"result": attr.PayloadsString() != "data"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.PayloadsString() != "data"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected PayloadsString to return data", actual)
 
 	emptyAttr := corepayload.New.Attributes.Empty()
 
-	actual := args.Map{"result": emptyAttr.PayloadsString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyAttr.PayloadsString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty PayloadsString should return empty", actual)
 }
 
@@ -139,8 +139,8 @@ func Test_Attributes_AnyKeyValMap_FromAttributesIsNullV3(t *testing.T) {
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 	m = attr.AnyKeyValMap()
 
-	actual := args.Map{"result": m["k"] != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m["k"] != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42 for key k", actual)
 }
 
@@ -160,8 +160,8 @@ func Test_Attributes_Hashmap_FromAttributesIsNullV3(t *testing.T) {
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 	m = attr.Hashmap()
 
-	actual := args.Map{"result": m["k"] != "v"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m["k"] != "v"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected v for key k", actual)
 }
 
@@ -178,8 +178,8 @@ func Test_Attributes_HasIssuesOrEmpty(t *testing.T) {
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 
-	actual := args.Map{"result": attr.HasIssuesOrEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasIssuesOrEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-empty valid attr should not have issues", actual)
 }
 
@@ -218,8 +218,8 @@ func Test_Attributes_Count_Capacity(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Count should equal Length", actual)
 
-	actual := args.Map{"result": attr.Capacity() != attr.Length()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.Capacity() != attr.Length()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Capacity should equal Length", actual)
 }
 
@@ -248,8 +248,8 @@ func Test_Attributes_HasPagingInfo_FromAttributesIsNullV3(t *testing.T) {
 
 	attr.PagingInfo = &corepayload.PagingInfo{TotalPages: 5}
 
-	actual := args.Map{"result": attr.HasPagingInfo()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.HasPagingInfo()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected paging info", actual)
 }
 
@@ -267,8 +267,8 @@ func Test_Attributes_HasKeyValuePairs(t *testing.T) {
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr2 := corepayload.New.Attributes.UsingKeyValues(hm)
 
-	actual := args.Map{"result": attr2.HasKeyValuePairs()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr2.HasKeyValuePairs()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected key value pairs", actual)
 }
 
@@ -285,8 +285,8 @@ func Test_Attributes_HasFromTo_FromAttributesIsNullV3(t *testing.T) {
 
 	attr.FromTo = &coreinstruction.FromTo{}
 
-	actual := args.Map{"result": attr.HasFromTo()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.HasFromTo()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected FromTo present", actual)
 }
 
@@ -301,14 +301,14 @@ func Test_Attributes_IsValid_IsInvalid(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": attr.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilAttr.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
@@ -323,12 +323,12 @@ func Test_Attributes_HasError_Error(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": attr.Error() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.Error() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil error", actual)
 
-	actual := args.Map{"result": attr.CompiledError() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.CompiledError() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil CompiledError", actual)
 }
 
@@ -345,8 +345,8 @@ func Test_Attributes_IsEmptyError(t *testing.T) {
 
 	attr := corepayload.New.Attributes.Empty()
 
-	actual := args.Map{"result": attr.IsEmptyError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsEmptyError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 }
 
@@ -363,8 +363,8 @@ func Test_Attributes_DynamicBytesLength(t *testing.T) {
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("abc"))
 
-	actual := args.Map{"result": attr.DynamicBytesLength() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.DynamicBytesLength() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -382,8 +382,8 @@ func Test_Attributes_StringKeyValuePairsLength_FromAttributesIsNullV3(t *testing
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 
-	actual := args.Map{"result": attr.StringKeyValuePairsLength() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.StringKeyValuePairsLength() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -402,8 +402,8 @@ func Test_Attributes_AnyKeyValuePairsLength_FromAttributesIsNullV3(t *testing.T)
 	anyMap.Add("k", 42)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 
-	actual := args.Map{"result": attr.AnyKeyValuePairsLength() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.AnyKeyValuePairsLength() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -418,18 +418,18 @@ func Test_Attributes_IsEmpty_HasItems(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty attr should be empty", actual)
 
-	actual := args.Map{"result": attr.HasItems()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasItems()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty attr should not have items", actual)
 
 	attr2 := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	actual := args.Map{"result": attr2.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-empty attr should not be empty", actual)
 
-	actual := args.Map{"result": attr2.HasItems()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr2.HasItems()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "non-empty attr should have items", actual)
 }
 
@@ -480,12 +480,12 @@ func Test_Attributes_IsUserInfoEmpty_VirtualUser_SystemUser(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected user info empty", actual)
 
-	actual := args.Map{"result": attr.VirtualUser() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.VirtualUser() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil VirtualUser", actual)
 
-	actual := args.Map{"result": attr.SystemUser() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.SystemUser() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil SystemUser", actual)
 
 	// With user info
@@ -494,16 +494,16 @@ func Test_Attributes_IsUserInfoEmpty_VirtualUser_SystemUser(t *testing.T) {
 	userInfo := &corepayload.UserInfo{User: user, SystemUser: sysUser}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{UserInfo: userInfo})
 
-	actual := args.Map{"result": attr2.IsUserInfoEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.IsUserInfoEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected user info not empty", actual)
 
-	actual := args.Map{"result": attr2.VirtualUser().Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.VirtualUser().Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
-	actual := args.Map{"result": attr2.SystemUser().Name != "sys"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.SystemUser().Name != "sys"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sys", actual)
 }
 
@@ -522,8 +522,8 @@ func Test_Attributes_SessionUser(t *testing.T) {
 	si := &corepayload.SessionInfo{Id: "s1", User: user}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{SessionInfo: si})
 
-	actual := args.Map{"result": attr2.SessionUser().Name != "SessionUser"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.SessionUser().Name != "SessionUser"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected SessionUser", actual)
 }
 
@@ -538,8 +538,8 @@ func Test_Attributes_IsAuthInfoEmpty_IsSessionInfoEmpty(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected auth info empty", actual)
 
-	actual := args.Map{"result": attr.IsSessionInfoEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsSessionInfoEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected session info empty", actual)
 }
 
@@ -554,12 +554,12 @@ func Test_Attributes_HasUserInfo_HasAuthInfo_HasSessionInfo(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no user info", actual)
 
-	actual := args.Map{"result": attr.HasAuthInfo()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasAuthInfo()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no auth info", actual)
 
-	actual := args.Map{"result": attr.HasSessionInfo()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasSessionInfo()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no session info", actual)
 }
 
@@ -577,8 +577,8 @@ func Test_Attributes_SessionInfo(t *testing.T) {
 	si := &corepayload.SessionInfo{Id: "s1"}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{SessionInfo: si})
 
-	actual := args.Map{"result": attr2.SessionInfo().Id != "s1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.SessionInfo().Id != "s1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 }
 
@@ -595,8 +595,8 @@ func Test_Attributes_AuthType(t *testing.T) {
 
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{ActionType: "login"})
 
-	actual := args.Map{"result": attr2.AuthType() != "login"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.AuthType() != "login"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected login", actual)
 }
 
@@ -613,8 +613,8 @@ func Test_Attributes_ResourceName(t *testing.T) {
 
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{ResourceName: "/api/test"})
 
-	actual := args.Map{"result": attr2.ResourceName() != "/api/test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr2.ResourceName() != "/api/test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected /api/test", actual)
 }
 
@@ -655,8 +655,8 @@ func Test_Attributes_HasDynamicPayloads_FromAttributesIsNullV3(t *testing.T) {
 
 	attr2 := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	actual := args.Map{"result": attr2.HasDynamicPayloads()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr2.HasDynamicPayloads()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -676,8 +676,8 @@ func Test_Attributes_GetStringKeyValue_FromAttributesIsNullV3(t *testing.T) {
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 	val, found := attr.GetStringKeyValue("k")
 
-	actual := args.Map{"result": found || val != "v"}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": found || val != "v"}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected v for key k", actual)
 }
 
@@ -705,8 +705,8 @@ func Test_Attributes_IsErrorDifferent_IsErrorEqual(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not different when both empty", actual)
 
-	actual := args.Map{"result": attr.IsErrorEqual(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsErrorEqual(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal when both empty", actual)
 }
 
@@ -741,8 +741,8 @@ func Test_Attributes_SetAuthInfo(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetAuthInfo(&corepayload.AuthInfo{ActionType: "new"})
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil result from nil receiver", actual)
 }
 
@@ -765,8 +765,8 @@ func Test_Attributes_SetUserInfo(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetUserInfo(userInfo)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil result from nil receiver", actual)
 }
 
@@ -784,8 +784,8 @@ func Test_Attributes_AddNewStringKeyValueOnly_FromAttributesIsNullV3(t *testing.
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not add", actual)
 }
 
@@ -804,8 +804,8 @@ func Test_Attributes_AddNewAnyKeyValueOnly_FromAttributesIsNullV3(t *testing.T) 
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", 42)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", 42)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not add", actual)
 }
 
@@ -824,8 +824,8 @@ func Test_Attributes_AddOrUpdateString_FromAttributesIsNullV3(t *testing.T) {
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.AddOrUpdateString("k", "v")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddOrUpdateString("k", "v")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -844,8 +844,8 @@ func Test_Attributes_AddOrUpdateAnyItem_FromAttributesIsNullV3(t *testing.T) {
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.AddOrUpdateAnyItem("k", 42)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddOrUpdateAnyItem("k", 42)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -865,8 +865,8 @@ func Test_Attributes_SetBasicErr(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetBasicErr(nil)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil from nil receiver", actual)
 }
 
@@ -910,8 +910,8 @@ func Test_Attributes_PayloadsPrettyString_FromAttributesIsNullV3(t *testing.T) {
 
 	var nilAttr *corepayload.Attributes
 
-	actual := args.Map{"result": nilAttr.PayloadsPrettyString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.PayloadsPrettyString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
@@ -930,8 +930,8 @@ func Test_Attributes_PayloadsJsonResult_FromAttributesIsNullV3(t *testing.T) {
 	emptyAttr := corepayload.New.Attributes.Empty()
 	result = emptyAttr.PayloadsJsonResult()
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil empty result", actual)
 }
 
@@ -949,8 +949,8 @@ func Test_Attributes_JsonString_JsonStringMust(t *testing.T) {
 
 	s = attr.JsonStringMust()
 
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty json string must", actual)
 }
 
@@ -1039,8 +1039,8 @@ func Test_Attributes_ParseInjectUsingJson_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
@@ -1117,8 +1117,8 @@ func Test_Attributes_DynamicPayloadsDeserialize(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	err = nilAttr.DynamicPayloadsDeserialize(&s)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return error", actual)
 }
 
@@ -1172,17 +1172,17 @@ func Test_Attributes_IsEqual_AllBranches(t *testing.T) {
 
 	attr := corepayload.New.Attributes.Empty()
 
-	actual := args.Map{"result": nilA.IsEqual(attr)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilA.IsEqual(attr)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
-	actual := args.Map{"result": attr.IsEqual(nilA)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.IsEqual(nilA)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 
 	// Same pointer
-	actual := args.Map{"result": attr.IsEqual(attr)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsEqual(attr)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 
 	// Different paging
@@ -1190,8 +1190,8 @@ func Test_Attributes_IsEqual_AllBranches(t *testing.T) {
 	a2 := corepayload.New.Attributes.Empty()
 	a1.PagingInfo = &corepayload.PagingInfo{TotalPages: 1}
 
-	actual := args.Map{"result": a1.IsEqual(a2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a1.IsEqual(a2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different paging should not be equal", actual)
 }
 
@@ -1207,8 +1207,8 @@ func Test_Attributes_Clone_Shallow_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cloned data", actual)
 }
 
@@ -1224,8 +1224,8 @@ func Test_Attributes_Clone_Deep_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cloned data", actual)
 }
 
@@ -1304,8 +1304,8 @@ func Test_PayloadWrapper_SetDynamicPayloads_FromAttributesIsNullV3(t *testing.T)
 	var nilPW *corepayload.PayloadWrapper
 	err = nilPW.SetDynamicPayloads([]byte("data"))
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return error", actual)
 }
 
@@ -1424,8 +1424,8 @@ func Test_PayloadWrapper_IdString_IdInteger(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
-	actual := args.Map{"result": pw.IdInteger() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IdInteger() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1443,8 +1443,8 @@ func Test_PayloadWrapper_Serialize(t *testing.T) {
 
 	bytes := pw.SerializeMust()
 
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected serialized bytes", actual)
 }
 
@@ -1464,8 +1464,8 @@ func Test_PayloadWrapper_Username_FromAttributesIsNullV3(t *testing.T) {
 		UserInfo: &corepayload.UserInfo{User: user},
 	}
 
-	actual := args.Map{"result": pw.Username() != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.Username() != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
@@ -1494,70 +1494,70 @@ func Test_PayloadWrapper_IsEqual_AllBranches(t *testing.T) {
 
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	actual := args.Map{"result": nilA.IsEqual(pw)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilA.IsEqual(pw)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
-	actual := args.Map{"result": pw.IsEqual(nilA)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(nilA)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 
-	actual := args.Map{"result": pw.IsEqual(pw)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsEqual(pw)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 
 	pw2 := corepayload.New.PayloadWrapper.Empty()
 
-	actual := args.Map{"result": pw.IsEqual(pw2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsEqual(pw2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "two empty should be equal", actual)
 
 	// Different Name
 	pw3 := corepayload.New.PayloadWrapper.Empty()
 	pw3.Name = "different"
 
-	actual := args.Map{"result": pw.IsEqual(pw3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different name should not be equal", actual)
 
 	// Different Identifier
 	pw4 := corepayload.New.PayloadWrapper.Empty()
 	pw4.Identifier = "diff"
 
-	actual := args.Map{"result": pw.IsEqual(pw4)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw4)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different identifier should not be equal", actual)
 
 	// Different TaskTypeName
 	pw5 := corepayload.New.PayloadWrapper.Empty()
 	pw5.TaskTypeName = "diff"
 
-	actual := args.Map{"result": pw.IsEqual(pw5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different task type should not be equal", actual)
 
 	// Different EntityType
 	pw6 := corepayload.New.PayloadWrapper.Empty()
 	pw6.EntityType = "diff"
 
-	actual := args.Map{"result": pw.IsEqual(pw6)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw6)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different entity type should not be equal", actual)
 
 	// Different CategoryName
 	pw7 := corepayload.New.PayloadWrapper.Empty()
 	pw7.CategoryName = "diff"
 
-	actual := args.Map{"result": pw.IsEqual(pw7)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw7)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different category should not be equal", actual)
 
 	// Different HasManyRecords
 	pw8 := corepayload.New.PayloadWrapper.Empty()
 	pw8.HasManyRecords = true
 
-	actual := args.Map{"result": pw.IsEqual(pw8)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEqual(pw8)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different HasManyRecords should not be equal", actual)
 }
 
@@ -1572,14 +1572,14 @@ func Test_PayloadWrapper_IsPayloadsEqual_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-	actual := args.Map{"result": pw.IsPayloadsEqual([]byte("other"))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsPayloadsEqual([]byte("other"))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	actual := args.Map{"result": nilPW.IsPayloadsEqual([]byte("data"))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPW.IsPayloadsEqual([]byte("data"))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 }
 
@@ -1600,20 +1600,20 @@ func Test_PayloadWrapper_IsName_IsIdentifier_IsTaskTypeName_IsEntityType_IsCateg
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": pw.IsIdentifier("id")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsIdentifier("id")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": pw.IsTaskTypeName("task")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsTaskTypeName("task")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": pw.IsEntityType("entity")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsEntityType("entity")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": pw.IsCategory("cat")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsCategory("cat")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1628,8 +1628,8 @@ func Test_PayloadWrapper_HasAnyItem_HasIssuesOrEmpty(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should not have any item", actual)
 
-	actual := args.Map{"result": pw.HasIssuesOrEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.HasIssuesOrEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should have issues or be empty", actual)
 }
 
@@ -1644,8 +1644,8 @@ func Test_PayloadWrapper_HasError_IsEmptyError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": pw.IsEmptyError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsEmptyError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 }
 
@@ -1662,8 +1662,8 @@ func Test_PayloadWrapper_HasAttributes_IsEmptyAttributes(t *testing.T) {
 
 	pw2 := &corepayload.PayloadWrapper{}
 
-	actual := args.Map{"result": pw2.IsEmptyAttributes()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw2.IsEmptyAttributes()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty attributes", actual)
 }
 
@@ -1690,8 +1690,8 @@ func Test_PayloadWrapper_IsNull_HasAnyNil(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected null", actual)
 
-	actual := args.Map{"result": nilPW.HasAnyNil()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilPW.HasAnyNil()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has any nil", actual)
 }
 
@@ -1706,22 +1706,22 @@ func Test_PayloadWrapper_Count_Length_IsEmpty_HasItems(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 
-	actual := args.Map{"result": pw.Length() != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.Length() != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 
-	actual := args.Map{"result": pw.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": pw.HasItems()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.HasItems()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has items", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	actual := args.Map{"result": nilPW.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPW.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil Length should be 0", actual)
 }
 
@@ -1736,15 +1736,15 @@ func Test_PayloadWrapper_IdentifierInteger_UnsignedInteger(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
-	actual := args.Map{"result": pw.IdentifierUnsignedInteger() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IdentifierUnsignedInteger() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	// Empty identifier
 	pw2 := &corepayload.PayloadWrapper{}
 
-	actual := args.Map{"result": pw2.IdentifierInteger() >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw2.IdentifierInteger() >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
@@ -1776,8 +1776,8 @@ func Test_PayloadWrapper_Deserialize(t *testing.T) {
 
 	err = pw.PayloadDeserialize(&s)
 
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
@@ -1799,12 +1799,12 @@ func Test_PayloadWrapper_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	pw2 := &corepayload.PayloadWrapper{}
 	err = pw2.UnmarshalJSON(jsonBytes)
 
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no unmarshal error", actual)
 
-	actual := args.Map{"result": pw2.Name != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw2.Name != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
@@ -1845,8 +1845,8 @@ func Test_PayloadWrapper_ParseInjectUsingJson(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -1877,8 +1877,8 @@ func Test_PayloadWrapper_PayloadsString(t *testing.T) {
 
 	emptyPW := &corepayload.PayloadWrapper{}
 
-	actual := args.Map{"result": emptyPW.PayloadsString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyPW.PayloadsString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1897,8 +1897,8 @@ func Test_PayloadWrapper_PayloadsJsonResult(t *testing.T) {
 	emptyPW := corepayload.PayloadWrapper{}
 	result = emptyPW.PayloadsJsonResult()
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil empty", actual)
 }
 
@@ -1916,8 +1916,8 @@ func Test_PayloadWrapper_PayloadsPrettyString(t *testing.T) {
 
 	emptyPW := corepayload.PayloadWrapper{}
 
-	actual := args.Map{"result": emptyPW.PayloadsPrettyString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyPW.PayloadsPrettyString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1937,8 +1937,8 @@ func Test_PayloadWrapper_Clear_Dispose(t *testing.T) {
 	pw2 := corepayload.New.PayloadWrapper.Empty()
 	pw2.Dispose()
 
-	actual := args.Map{"result": pw2.Attributes != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw2.Attributes != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil attributes after dispose", actual)
 
 	var nilPW *corepayload.PayloadWrapper
@@ -2156,8 +2156,8 @@ func Test_PayloadWrapper_SetUser_SetSysUser(t *testing.T) {
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = pw.SetSysUser(sysUser)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -2192,8 +2192,8 @@ func Test_PayloadWrapper_DeserializePayloadsToPayloadWrapper(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	actual := args.Map{"result": result.Name != "inner"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.Name != "inner"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected inner", actual)
 }
 
@@ -2246,8 +2246,8 @@ func Test_PayloadsCollection_Length_Count_IsEmpty(t *testing.T) {
 
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	actual := args.Map{"result": col.Count() != 0 || !col.IsEmpty() || col.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Count() != 0 || !col.IsEmpty() || col.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty collection state mismatch", actual)
 }
 
@@ -2265,12 +2265,12 @@ func Test_PayloadsCollection_LastIndex_HasIndex(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 
-	actual := args.Map{"result": col.HasIndex(0)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": col.HasIndex(0)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for index 0", actual)
 
-	actual := args.Map{"result": col.HasIndex(1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.HasIndex(1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for index 1", actual)
 }
 
@@ -2287,8 +2287,8 @@ func Test_PayloadsCollection_First_Last(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 
-	actual := args.Map{"result": col.Last().Name != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Last().Name != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
 
 	_ = col.FirstDynamic()
@@ -2306,8 +2306,8 @@ func Test_PayloadsCollection_FirstOrDefault_LastOrDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
-	actual := args.Map{"result": col.LastOrDefault() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.LastOrDefault() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	_ = col.FirstOrDefaultDynamic()
@@ -2315,12 +2315,12 @@ func Test_PayloadsCollection_FirstOrDefault_LastOrDefault(t *testing.T) {
 
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 
-	actual := args.Map{"result": col.FirstOrDefault().Name != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.FirstOrDefault().Name != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 
-	actual := args.Map{"result": col.LastOrDefault().Name != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.LastOrDefault().Name != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
@@ -2344,34 +2344,34 @@ func Test_PayloadsCollection_Skip_Take_Limit(t *testing.T) {
 
 	skipCol := col.SkipCollection(1)
 
-	actual := args.Map{"result": skipCol.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": skipCol.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	taken := col.Take(2)
 
-	actual := args.Map{"result": len(taken) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(taken) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	_ = col.TakeDynamic(2)
 
 	takeCol := col.TakeCollection(2)
 
-	actual := args.Map{"result": takeCol.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": takeCol.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	limitCol := col.LimitCollection(2)
 
-	actual := args.Map{"result": limitCol.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": limitCol.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	safeLimitCol := col.SafeLimitCollection(100)
 
-	actual := args.Map{"result": safeLimitCol.Length() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": safeLimitCol.Length() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
 	_ = col.LimitDynamic(2)
@@ -2406,14 +2406,14 @@ func Test_PayloadsCollection_IsEqual_FromAttributesIsNullV3(t *testing.T) {
 
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	actual := args.Map{"result": nilA.IsEqual(col)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilA.IsEqual(col)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
 	col2 := corepayload.New.PayloadsCollection.Empty()
 
-	actual := args.Map{"result": col.IsEqual(col2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": col.IsEqual(col2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "two empty should be equal", actual)
 }
 
@@ -2493,8 +2493,8 @@ func Test_PayloadsCollection_FirstByFilter(t *testing.T) {
 		return pw.Name == "z"
 	})
 
-	actual := args.Map{"result": notFound != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": notFound != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -2694,12 +2694,12 @@ func Test_PayloadsCollection_GetPagesSize(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 
-	actual := args.Map{"result": col.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "zero page size should return 0", actual)
 
-	actual := args.Map{"result": col.GetPagesSize(-1) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.GetPagesSize(-1) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "negative page size should return 0", actual)
 }
 
@@ -2725,8 +2725,8 @@ func Test_PayloadsCollection_GetPagedCollection_FromAttributesIsNullV3(t *testin
 	small.Add(corepayload.PayloadWrapper{Name: "a"})
 	pages = small.GetPagedCollection(10)
 
-	actual := args.Map{"result": len(pages) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(pages) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 page", actual)
 }
 
@@ -2749,8 +2749,8 @@ func Test_PayloadsCollection_GetSinglePageCollection_FromAttributesIsNullV3(t *t
 
 	page3 := col.GetSinglePageCollection(10, 3)
 
-	actual := args.Map{"result": page3.Length() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page3.Length() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	// Smaller than page size
@@ -2758,8 +2758,8 @@ func Test_PayloadsCollection_GetSinglePageCollection_FromAttributesIsNullV3(t *t
 	small.Add(corepayload.PayloadWrapper{Name: "a"})
 	page = small.GetSinglePageCollection(10, 1)
 
-	actual := args.Map{"result": page.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -2783,8 +2783,8 @@ func Test_PayloadsCollection_Add_Adds(t *testing.T) {
 	// Adds empty
 	col.Adds()
 
-	actual := args.Map{"result": col.Length() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Length() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected still 3", actual)
 }
 
@@ -2804,8 +2804,8 @@ func Test_PayloadsCollection_AddsPtr(t *testing.T) {
 	// Empty
 	col.AddsPtr()
 
-	actual := args.Map{"result": col.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 }
 
@@ -2828,8 +2828,8 @@ func Test_PayloadsCollection_AddsPtrOptions(t *testing.T) {
 	col2 := corepayload.New.PayloadsCollection.Empty()
 	col2.AddsPtrOptions(true, emptyPW)
 
-	actual := args.Map{"result": col2.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col2.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 (skipped)", actual)
 }
 
@@ -2849,8 +2849,8 @@ func Test_PayloadsCollection_AddsOptions(t *testing.T) {
 	col2 := corepayload.New.PayloadsCollection.Empty()
 	col2.AddsOptions(true, corepayload.PayloadWrapper{})
 
-	actual := args.Map{"result": col2.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col2.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 (skipped)", actual)
 }
 
@@ -2868,8 +2868,8 @@ func Test_PayloadsCollection_AddsIf(t *testing.T) {
 
 	col.AddsIf(false, corepayload.PayloadWrapper{Name: "b"})
 
-	actual := args.Map{"result": col.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 }
 
@@ -2901,8 +2901,8 @@ func Test_PayloadsCollection_ConcatNew_FromAttributesIsNullV3(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
-	actual := args.Map{"result": col.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "original should still be 1", actual)
 }
 
@@ -2943,8 +2943,8 @@ func Test_PayloadsCollection_Reverse_FromAttributesIsNullV3(t *testing.T) {
 	col2.Add(corepayload.PayloadWrapper{Name: "b"})
 	col2.Reverse()
 
-	actual := args.Map{"result": col2.First().Name != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col2.First().Name != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b first", actual)
 
 	// Reverse 1 item
@@ -2952,8 +2952,8 @@ func Test_PayloadsCollection_Reverse_FromAttributesIsNullV3(t *testing.T) {
 	col3.Add(corepayload.PayloadWrapper{Name: "a"})
 	col3.Reverse()
 
-	actual := args.Map{"result": col3.First().Name != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col3.First().Name != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
@@ -2973,15 +2973,15 @@ func Test_PayloadsCollection_Clone_ClonePtr(t *testing.T) {
 
 	clonedPtr := col.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// nil ClonePtr
 	var nilCol *corepayload.PayloadsCollection
 
-	actual := args.Map{"result": nilCol.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilCol.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
@@ -3081,18 +3081,18 @@ func Test_PayloadsCollection_JsonString_String(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
 
-	actual := args.Map{"result": col.String() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.String() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
 
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
-	actual := args.Map{"result": col.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
-	actual := args.Map{"result": col.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -3109,8 +3109,8 @@ func Test_PayloadsCollection_PrettyJsonString(t *testing.T) {
 
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
-	actual := args.Map{"result": col.PrettyJsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.PrettyJsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -3129,8 +3129,8 @@ func Test_PayloadsCollection_CsvStrings_JoinCsv_JoinCsvLine(t *testing.T) {
 
 	csvStrings := col.CsvStrings()
 
-	actual := args.Map{"result": len(csvStrings) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(csvStrings) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_ = col.JoinCsv()
@@ -3227,8 +3227,8 @@ func Test_User_IdentifierInteger(t *testing.T) {
 
 	u2 := corepayload.User{}
 
-	actual := args.Map{"result": u2.IdentifierInteger() >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u2.IdentifierInteger() >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
@@ -3245,8 +3245,8 @@ func Test_User_IdentifierUnsignedInteger_FromAttributesIsNullV3(t *testing.T) {
 
 	u2 := corepayload.User{Identifier: "-1"}
 
-	actual := args.Map{"result": u2.IdentifierUnsignedInteger() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u2.IdentifierUnsignedInteger() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -3261,75 +3261,75 @@ func Test_User_AllBoolMethods(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAuthToken", actual)
 
-	actual := args.Map{"result": u.HasPasswordHash()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": u.HasPasswordHash()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasPasswordHash", actual)
 
-	actual := args.Map{"result": u.IsPasswordHashEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsPasswordHashEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": u.IsAuthTokenEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsAuthTokenEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": u.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": u.IsValidUser()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": u.IsValidUser()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": u.IsNameEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsNameEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": u.IsNameEqual("Alice")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": u.IsNameEqual("Alice")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-	actual := args.Map{"result": u.IsNotSystemUser()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsNotSystemUser()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected system user", actual)
 
-	actual := args.Map{"result": u.IsVirtualUser()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsVirtualUser()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not virtual user (is system)", actual)
 
-	actual := args.Map{"result": u.HasType()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": u.HasType()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has type", actual)
 
-	actual := args.Map{"result": u.IsTypeEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.IsTypeEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
 	// nil receiver
 	var nilUser *corepayload.User
 
-	actual := args.Map{"result": nilUser.HasAuthToken() || nilUser.HasPasswordHash()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUser.HasAuthToken() || nilUser.HasPasswordHash()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	actual := args.Map{"result": nilUser.IsPasswordHashEmpty() || !nilUser.IsAuthTokenEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilUser.IsPasswordHashEmpty() || !nilUser.IsAuthTokenEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
-	actual := args.Map{"result": nilUser.IsEmpty() || nilUser.IsValidUser() || !nilUser.IsNameEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilUser.IsEmpty() || nilUser.IsValidUser() || !nilUser.IsNameEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil checks failed", actual)
 
-	actual := args.Map{"result": nilUser.IsNameEqual("anything")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUser.IsNameEqual("anything")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 
-	actual := args.Map{"result": nilUser.IsNotSystemUser() || nilUser.IsVirtualUser() || nilUser.HasType()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUser.IsNotSystemUser() || nilUser.IsVirtualUser() || nilUser.HasType()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	actual := args.Map{"result": nilUser.IsTypeEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilUser.IsTypeEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be type empty", actual)
 }
 
@@ -3353,8 +3353,8 @@ func Test_User_String_Json_Serialize_Deserialize(t *testing.T) {
 	u2 := &corepayload.User{}
 	err = u2.Deserialize(serialized)
 
-	actual := args.Map{"result": err != nil || u2.Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || u2.Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
@@ -3372,14 +3372,14 @@ func Test_User_Clone_ClonePtr(t *testing.T) {
 
 	clonedPtr := u.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	var nilUser *corepayload.User
 
-	actual := args.Map{"result": nilUser.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUser.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
@@ -3414,31 +3414,31 @@ func Test_UserInfo_All(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasUser", actual)
 
-	actual := args.Map{"result": ui.HasSystemUser()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ui.HasSystemUser()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasSystemUser", actual)
 
-	actual := args.Map{"result": ui.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ui.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": ui.IsUserEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ui.IsUserEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": ui.IsSystemUserEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ui.IsSystemUserEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
 	// nil receiver
 	var nilUI *corepayload.UserInfo
 
-	actual := args.Map{"result": nilUI.HasUser() || nilUI.HasSystemUser()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUI.HasUser() || nilUI.HasSystemUser()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	actual := args.Map{"result": nilUI.IsEmpty() || !nilUI.IsUserEmpty() || !nilUI.IsSystemUserEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilUI.IsEmpty() || !nilUI.IsUserEmpty() || !nilUI.IsSystemUserEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
@@ -3460,8 +3460,8 @@ func Test_UserInfo_SetUserSystemUser(t *testing.T) {
 	var nilUI *corepayload.UserInfo
 	result = nilUI.SetUserSystemUser(user, sysUser)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -3481,22 +3481,22 @@ func Test_UserInfo_SetUser_SetSystemUser(t *testing.T) {
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = ui.SetSystemUser(sysUser)
 
-	actual := args.Map{"result": result.SystemUser.Name != "sys"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.SystemUser.Name != "sys"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sys", actual)
 
 	// nil receiver
 	var nilUI *corepayload.UserInfo
 	result = nilUI.SetUser(user)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	result = nilUI.SetSystemUser(sysUser)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -3514,21 +3514,21 @@ func Test_UserInfo_Clone_ClonePtr_Ptr(t *testing.T) {
 
 	clonedPtr := ui.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.User.Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.User.Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	var nilUI *corepayload.UserInfo
 
-	actual := args.Map{"result": nilUI.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilUI.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 
 	uiVal := corepayload.UserInfo{User: corepayload.New.User.UsingName("Bob")}
 	ptr := uiVal.Ptr()
 
-	actual := args.Map{"result": ptr.User.Name != "Bob"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.User.Name != "Bob"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Bob", actual)
 }
 
@@ -3566,8 +3566,8 @@ func Test_AuthInfo_IdentifierInteger_FromAttributesIsNullV3(t *testing.T) {
 
 	ai2 := corepayload.AuthInfo{}
 
-	actual := args.Map{"result": ai2.IdentifierInteger() >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai2.IdentifierInteger() >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
@@ -3584,8 +3584,8 @@ func Test_AuthInfo_IdentifierUnsignedInteger(t *testing.T) {
 
 	ai2 := corepayload.AuthInfo{Identifier: "-1"}
 
-	actual := args.Map{"result": ai2.IdentifierUnsignedInteger() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai2.IdentifierUnsignedInteger() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -3602,16 +3602,16 @@ func Test_AuthInfo_IsEmpty_HasAnyItem_IsValid(t *testing.T) {
 
 	ai := &corepayload.AuthInfo{ActionType: "login"}
 
-	actual := args.Map{"result": ai.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": ai.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ai.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has any item", actual)
 
-	actual := args.Map{"result": ai.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ai.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 }
 
@@ -3626,18 +3626,18 @@ func Test_AuthInfo_IsActionTypeEmpty_IsResourceNameEmpty(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
-	actual := args.Map{"result": nilAI.IsResourceNameEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilAI.IsResourceNameEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	ai := &corepayload.AuthInfo{ActionType: "login", ResourceName: "/api"}
 
-	actual := args.Map{"result": ai.IsActionTypeEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.IsActionTypeEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": ai.IsResourceNameEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.IsResourceNameEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
@@ -3652,14 +3652,14 @@ func Test_AuthInfo_HasActionType_HasResourceName(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": ai.HasResourceName()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ai.HasResourceName()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
 	var nilAI *corepayload.AuthInfo
 
-	actual := args.Map{"result": nilAI.HasActionType() || nilAI.HasResourceName()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAI.HasActionType() || nilAI.HasResourceName()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -3676,8 +3676,8 @@ func Test_AuthInfo_IsUserInfoEmpty_IsSessionInfoEmpty(t *testing.T) {
 
 	ai := &corepayload.AuthInfo{}
 
-	actual := args.Map{"result": ai.IsUserInfoEmpty() || !ai.IsSessionInfoEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ai.IsUserInfoEmpty() || !ai.IsSessionInfoEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
 }
 
@@ -3695,8 +3695,8 @@ func Test_AuthInfo_HasUserInfo_HasSessionInfo(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": ai.HasSessionInfo()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ai.HasSessionInfo()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -3715,8 +3715,8 @@ func Test_AuthInfo_SetUserInfo_Nil(t *testing.T) {
 	ai := &corepayload.AuthInfo{}
 	result = ai.SetUserInfo(&corepayload.UserInfo{})
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -3735,46 +3735,46 @@ func Test_AuthInfo_SetActionType_SetResourceName_SetIdentifier_SetSessionInfo(t 
 
 	result = nilAI.SetResourceName("/api")
 
-	actual := args.Map{"result": result == nil || result.ResourceName != "/api"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil || result.ResourceName != "/api"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected /api", actual)
 
 	result = nilAI.SetIdentifier("42")
 
-	actual := args.Map{"result": result == nil || result.Identifier != "42"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil || result.Identifier != "42"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	result = nilAI.SetSessionInfo(&corepayload.SessionInfo{Id: "s1"})
 
-	actual := args.Map{"result": result == nil || result.SessionInfo.Id != "s1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil || result.SessionInfo.Id != "s1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	// non-nil receiver
 	ai := &corepayload.AuthInfo{}
 	ai.SetActionType("test")
 
-	actual := args.Map{"result": ai.ActionType != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.ActionType != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
 	ai.SetResourceName("/resource")
 
-	actual := args.Map{"result": ai.ResourceName != "/resource"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.ResourceName != "/resource"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected /resource", actual)
 
 	ai.SetIdentifier("id")
 
-	actual := args.Map{"result": ai.Identifier != "id"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.Identifier != "id"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected id", actual)
 
 	ai.SetSessionInfo(&corepayload.SessionInfo{Id: "s2"})
 
-	actual := args.Map{"result": ai.SessionInfo.Id != "s2"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ai.SessionInfo.Id != "s2"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected s2", actual)
 }
 
@@ -3796,8 +3796,8 @@ func Test_AuthInfo_SetUserSystemUser(t *testing.T) {
 	ai := &corepayload.AuthInfo{UserInfo: &corepayload.UserInfo{}}
 	result = ai.SetUserSystemUser(user, sysUser)
 
-	actual := args.Map{"result": result.UserInfo.User.Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.UserInfo.User.Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
@@ -3818,8 +3818,8 @@ func Test_AuthInfo_SetUser_SetSystemUser(t *testing.T) {
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = nilAI.SetSystemUser(sysUser)
 
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	ai := &corepayload.AuthInfo{UserInfo: &corepayload.UserInfo{}}
@@ -3849,20 +3849,20 @@ func Test_AuthInfo_Clone_ClonePtr_Ptr(t *testing.T) {
 
 	ptr := ai.Ptr()
 
-	actual := args.Map{"result": ptr.ActionType != "login"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.ActionType != "login"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	clonedPtr := ptr.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.ActionType != "login"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.ActionType != "login"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	var nilAI *corepayload.AuthInfo
 
-	actual := args.Map{"result": nilAI.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAI.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
@@ -3883,8 +3883,8 @@ func Test_SessionInfo_IdentifierInteger_FromAttributesIsNullV3(t *testing.T) {
 
 	si2 := corepayload.SessionInfo{}
 
-	actual := args.Map{"result": si2.IdentifierInteger() >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": si2.IdentifierInteger() >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
@@ -3901,8 +3901,8 @@ func Test_SessionInfo_IdentifierUnsignedInteger_FromAttributesIsNullV3(t *testin
 
 	si2 := corepayload.SessionInfo{Id: "-1"}
 
-	actual := args.Map{"result": si2.IdentifierUnsignedInteger() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": si2.IdentifierUnsignedInteger() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -3919,18 +3919,18 @@ func Test_SessionInfo_IsEmpty_IsValid(t *testing.T) {
 
 	si := &corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice")}
 
-	actual := args.Map{"result": si.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": si.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	actual := args.Map{"result": si.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": si.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
 	emptySI := &corepayload.SessionInfo{}
 
-	actual := args.Map{"result": emptySI.IsValid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptySI.IsValid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -3947,8 +3947,8 @@ func Test_SessionInfo_IsUserNameEmpty_IsUserEmpty_HasUser(t *testing.T) {
 
 	si := &corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice")}
 
-	actual := args.Map{"result": si.IsUserNameEmpty() || si.IsUserEmpty() || !si.HasUser()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": si.IsUserNameEmpty() || si.IsUserEmpty() || !si.HasUser()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "user checks failed", actual)
 }
 
@@ -3963,14 +3963,14 @@ func Test_SessionInfo_IsUsernameEqual(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-	actual := args.Map{"result": si.IsUsernameEqual("Bob")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": si.IsUsernameEqual("Bob")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	var nilSI *corepayload.SessionInfo
 
-	actual := args.Map{"result": nilSI.IsUsernameEqual("Alice")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilSI.IsUsernameEqual("Alice")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -3988,20 +3988,20 @@ func Test_SessionInfo_Clone_ClonePtr_Ptr(t *testing.T) {
 
 	ptr := si.Ptr()
 
-	actual := args.Map{"result": ptr.Id != "s1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.Id != "s1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	clonedPtr := ptr.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.Id != "s1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.Id != "s1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	var nilSI *corepayload.SessionInfo
 
-	actual := args.Map{"result": nilSI.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilSI.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
@@ -4022,8 +4022,8 @@ func Test_PagingInfo_IsEmpty(t *testing.T) {
 
 	pi := &corepayload.PagingInfo{TotalPages: 5, TotalItems: 50}
 
-	actual := args.Map{"result": pi.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
@@ -4040,32 +4040,32 @@ func Test_PagingInfo_IsEqual_AllBranches(t *testing.T) {
 
 	pi := &corepayload.PagingInfo{TotalPages: 5}
 
-	actual := args.Map{"result": nilA.IsEqual(pi) || pi.IsEqual(nilA)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilA.IsEqual(pi) || pi.IsEqual(nilA)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
 	pi2 := &corepayload.PagingInfo{TotalPages: 3}
 
-	actual := args.Map{"result": pi.IsEqual(pi2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.IsEqual(pi2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different TotalPages should not be equal", actual)
 
 	pi3 := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 1}
 
-	actual := args.Map{"result": pi.IsEqual(pi3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.IsEqual(pi3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different CurrentPageIndex should not be equal", actual)
 
 	pi4 := &corepayload.PagingInfo{TotalPages: 5, PerPageItems: 10}
 
-	actual := args.Map{"result": pi.IsEqual(pi4)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.IsEqual(pi4)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different PerPageItems should not be equal", actual)
 
 	pi5 := &corepayload.PagingInfo{TotalPages: 5, TotalItems: 50}
 
-	actual := args.Map{"result": pi.IsEqual(pi5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pi.IsEqual(pi5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different TotalItems should not be equal", actual)
 }
 
@@ -4087,8 +4087,8 @@ func Test_PagingInfo_HasMethods(t *testing.T) {
 
 	var nilPI *corepayload.PagingInfo
 
-	actual := args.Map{"result": nilPI.HasTotalPages() || nilPI.HasCurrentPageIndex() || nilPI.HasPerPageItems() || nilPI.HasTotalItems()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPI.HasTotalPages() || nilPI.HasCurrentPageIndex() || nilPI.HasPerPageItems() || nilPI.HasTotalItems()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -4105,8 +4105,8 @@ func Test_PagingInfo_IsInvalidMethods(t *testing.T) {
 
 	var nilPI *corepayload.PagingInfo
 
-	actual := args.Map{"result": nilPI.IsInvalidTotalPages() || !nilPI.IsInvalidCurrentPageIndex() || !nilPI.IsInvalidPerPageItems() || !nilPI.IsInvalidTotalItems()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilPI.IsInvalidTotalPages() || !nilPI.IsInvalidCurrentPageIndex() || !nilPI.IsInvalidPerPageItems() || !nilPI.IsInvalidTotalItems()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
@@ -4125,14 +4125,14 @@ func Test_PagingInfo_Clone_ClonePtr(t *testing.T) {
 	ptr := &pi
 	clonedPtr := ptr.ClonePtr()
 
-	actual := args.Map{"result": clonedPtr.TotalPages != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr.TotalPages != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	var nilPI *corepayload.PagingInfo
 
-	actual := args.Map{"result": nilPI.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPI.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
@@ -4159,24 +4159,24 @@ func Test_PayloadProperties_AllMethods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
-	actual := args.Map{"result": props.IdString() != "42"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": props.IdString() != "42"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
-	actual := args.Map{"result": props.Category() != "cat"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": props.Category() != "cat"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cat", actual)
 
-	actual := args.Map{"result": props.EntityType() != "entity"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": props.EntityType() != "entity"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected entity", actual)
 
-	actual := args.Map{"result": props.HasManyRecord()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": props.HasManyRecord()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": props.HasSingleRecordOnly()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": props.HasSingleRecordOnly()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
 	_ = props.DynamicPayloads()
@@ -4256,20 +4256,20 @@ func Test_EmptyCreator_All(t *testing.T) {
 
 	attrDefaults := corepayload.Empty.AttributesDefaults()
 
-	actual := args.Map{"result": attrDefaults == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attrDefaults == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	pw := corepayload.Empty.PayloadWrapper()
 
-	actual := args.Map{"result": pw == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	col := corepayload.Empty.PayloadsCollection()
 
-	actual := args.Map{"result": col == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -4288,94 +4288,94 @@ func Test_NewAttributesCreator_AllFactories(t *testing.T) {
 	// ErrFromTo
 	attr = corepayload.New.Attributes.ErrFromTo(nil, nil, []byte("data"))
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoDynamicBytes
 	attr = corepayload.New.Attributes.UsingAuthInfoDynamicBytes(nil, []byte("data"))
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingDynamicPayloadBytes
 	attr = corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfo
 	attr = corepayload.New.Attributes.UsingAuthInfo(nil)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingKeyValues
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr = corepayload.New.Attributes.UsingKeyValues(hm)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoKeyValues
 	attr = corepayload.New.Attributes.UsingAuthInfoKeyValues(nil, hm)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingKeyValuesPlusDynamic
 	attr = corepayload.New.Attributes.UsingKeyValuesPlusDynamic(hm, []byte("data"))
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAnyKeyValues
 	anyMap := coredynamic.NewMapAnyItems(0)
 	attr = corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoAnyKeyValues
 	attr = corepayload.New.Attributes.UsingAuthInfoAnyKeyValues(nil, anyMap)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAnyKeyValuesPlusDynamic
 	attr = corepayload.New.Attributes.UsingAnyKeyValuesPlusDynamic(anyMap, []byte("data"))
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingBasicError
 	attr = corepayload.New.Attributes.UsingBasicError(nil)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// Empty
 	attr = corepayload.New.Attributes.Empty()
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// All
 	attr = corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
-	actual := args.Map{"result": attr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -4483,8 +4483,8 @@ func Test_NewAttributesCreator_CastOrDeserializeFrom(t *testing.T) {
 	// nil
 	_, err = corepayload.New.Attributes.CastOrDeserializeFrom(nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4642,8 +4642,8 @@ func Test_NewPayloadWrapper_CastOrDeserializeFrom(t *testing.T) {
 
 	_, err = corepayload.New.PayloadWrapper.CastOrDeserializeFrom(nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4759,8 +4759,8 @@ func Test_NewPayloadsCollection_All(t *testing.T) {
 
 	col = corepayload.New.PayloadsCollection.UsingCap(10)
 
-	actual := args.Map{"result": col == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -4778,8 +4778,8 @@ func Test_NewPayloadsCollection_UsingWrappers(t *testing.T) {
 
 	emptyCol := corepayload.New.PayloadsCollection.UsingWrappers()
 
-	actual := args.Map{"result": emptyCol.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": emptyCol.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -4839,44 +4839,44 @@ func Test_NewUser_All(t *testing.T) {
 
 	u = corepayload.New.User.Create(false, "Alice", "admin")
 
-	actual := args.Map{"result": u.Name != "Alice"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Name != "Alice"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	u = corepayload.New.User.NonSysCreate("Bob", "user")
 
-	actual := args.Map{"result": u.Name != "Bob"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Name != "Bob"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Bob", actual)
 
 	u = corepayload.New.User.NonSysCreateId("1", "Charlie", "user")
 
-	actual := args.Map{"result": u.Identifier != "1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Identifier != "1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	u = corepayload.New.User.System("sys", "system")
 
-	actual := args.Map{"result": u.IsSystemUser}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": u.IsSystemUser}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected system user", actual)
 
 	u = corepayload.New.User.SystemId("1", "sys", "system")
 
-	actual := args.Map{"result": u.Identifier != "1"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Identifier != "1"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	u = corepayload.New.User.UsingName("Dave")
 
-	actual := args.Map{"result": u.Name != "Dave"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Name != "Dave"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Dave", actual)
 
 	u = corepayload.New.User.All(true, "1", "Eve", "admin", "token", "hash")
 
-	actual := args.Map{"result": u.Name != "Eve"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": u.Name != "Eve"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Eve", actual)
 }
 
@@ -4908,8 +4908,8 @@ func Test_NewUser_CastOrDeserializeFrom(t *testing.T) {
 
 	_, err = corepayload.New.User.CastOrDeserializeFrom(nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4932,8 +4932,8 @@ func Test_DeserializePayloadTo(t *testing.T) {
 	// nil wrapper
 	_, err = corepayload.DeserializePayloadTo[string](nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4952,8 +4952,8 @@ func Test_DeserializePayloadToSlice(t *testing.T) {
 	// nil
 	_, err = corepayload.DeserializePayloadToSlice[string](nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4972,8 +4972,8 @@ func Test_DeserializeAttributesPayloadTo(t *testing.T) {
 	// nil
 	_, err = corepayload.DeserializeAttributesPayloadTo[string](nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -4992,8 +4992,8 @@ func Test_DeserializeAttributesPayloadToSlice(t *testing.T) {
 	// nil
 	_, err = corepayload.DeserializeAttributesPayloadToSlice[string](nil)
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -5283,8 +5283,8 @@ func Test_PayloadWrapper_PayloadDeserializeToPayloadBinder(t *testing.T) {
 	var nilPW *corepayload.PayloadWrapper
 	_, err = nilPW.PayloadDeserializeToPayloadBinder()
 
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
@@ -5299,14 +5299,14 @@ func Test_PayloadWrapper_IsEntityTypeNamer(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": pw.IsEntityTypeNamer(nil)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IsEntityTypeNamer(nil)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for nil namer", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	actual := args.Map{"result": nilPW.IsEntityTypeNamer(mockStringer{"test"})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPW.IsEntityTypeNamer(mockStringer{"test"})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
@@ -5323,8 +5323,8 @@ func Test_PayloadWrapper_IsCategoryNamer(t *testing.T) {
 
 	var nilPW *corepayload.PayloadWrapper
 
-	actual := args.Map{"result": nilPW.IsCategoryNamer(mockStringer{"test"})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPW.IsCategoryNamer(mockStringer{"test"})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 

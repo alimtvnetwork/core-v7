@@ -18,8 +18,8 @@ func Test_Request_IsNone_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Invalid should be None", actual)
-	actual := args.Map{"result": reqtype.Create.IsNone()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": reqtype.Create.IsNone()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Create should not be None", actual)
 }
 
@@ -93,8 +93,8 @@ func Test_Request_MinMaxValueString_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
-	actual := args.Map{"result": reqtype.Create.MaxValueString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": reqtype.Create.MaxValueString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
@@ -122,8 +122,8 @@ func Test_Request_IsNotOverrideOrOverwriteOrEnforce_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Create should not match override group", actual)
-	actual := args.Map{"result": reqtype.Override.IsNotOverrideOrOverwriteOrEnforce()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": reqtype.Override.IsNotOverrideOrOverwriteOrEnforce()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Override should match override group", actual)
 }
 
@@ -188,8 +188,8 @@ func Test_Request_IsRestartOrReload_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Restart should match", actual)
-	actual := args.Map{"result": reqtype.Reload.IsRestartOrReload()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": reqtype.Reload.IsRestartOrReload()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Reload should match", actual)
 }
 
@@ -456,8 +456,8 @@ func Test_ResultStatus_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "default should not have error", actual)
-	actual := args.Map{"result": rs.IsSuccess}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rs.IsSuccess}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "default should not be success", actual)
 }
 
@@ -535,8 +535,8 @@ func Test_Request_IsAnyHttpMethod_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetHttp should match its own name", actual)
-	actual := args.Map{"result": reqtype.Create.IsAnyHttpMethod("Create")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": reqtype.Create.IsAnyHttpMethod("Create")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Create should not be HTTP method", actual)
 }
 
@@ -619,8 +619,8 @@ func Test_Request_CurrentNotImpl_Ext(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CurrentNotImpl should return error", actual)
 	err = reqtype.Create.CurrentNotImpl("ref", "test")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CurrentNotImpl with ref should return error", actual)
 }
 
@@ -667,8 +667,8 @@ func Test_Request_IsNotCrudOnlyLogically_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Read is CRUD, should not return true", actual)
-	actual := args.Map{"result": reqtype.Touch.IsNotCrudOnlyLogically()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": reqtype.Touch.IsNotCrudOnlyLogically()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Touch is not CRUD, should return true", actual)
 }
 

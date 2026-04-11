@@ -95,12 +95,12 @@ func Test_BasicByte_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty variadic should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 1, 2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 1, 2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -115,8 +115,8 @@ func Test_BasicByte_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf(0, "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf(0, "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -141,14 +141,14 @@ func Test_BasicByte_GetValueByName_AllBranches(t *testing.T) {
 
 	// Wrapped key
 	v, err = e.GetValueByName(`"Active"`)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error for wrapped", actual)
 
 	// Not found
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -181,14 +181,14 @@ func Test_BasicByte_ExpectingEnumValueError_FromMisc12(t *testing.T) {
 
 	// Not matching
 	err = e.ExpectingEnumValueError("Active", byte(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	// Invalid raw string
 	err = e.ExpectingEnumValueError("NotExist", byte(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for invalid raw", actual)
 }
 
@@ -221,8 +221,8 @@ func Test_BasicByte_IsValidRange(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange(100)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange(100)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -241,8 +241,8 @@ func Test_BasicByte_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 
 	// Not found
 	_, err = e.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -318,26 +318,26 @@ func Test_BasicByte_UnmarshallToValue_AllBranches(t *testing.T) {
 
 	// nil + mapped
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	// empty + mapped
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	// double quote empty + mapped
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	// Valid value
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -381,12 +381,12 @@ func Test_BasicInt8_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -401,8 +401,8 @@ func Test_BasicInt8_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf(0, "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf(0, "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -420,8 +420,8 @@ func Test_BasicInt8_GetValueByName_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -449,13 +449,13 @@ func Test_BasicInt8_ExpectingEnumValueError_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	err = e.ExpectingEnumValueError("Active", int8(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	err = e.ExpectingEnumValueError("NotExist", int8(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -477,8 +477,8 @@ func Test_BasicInt8_IsValidRange_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange(100)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange(100)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -496,8 +496,8 @@ func Test_BasicInt8_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_, err = e.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -535,23 +535,23 @@ func Test_BasicInt8_UnmarshallToValue_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -582,12 +582,12 @@ func Test_BasicInt16_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -602,8 +602,8 @@ func Test_BasicInt16_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf(0, "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf(0, "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -621,8 +621,8 @@ func Test_BasicInt16_GetValueByName_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -650,13 +650,13 @@ func Test_BasicInt16_ExpectingEnumValueError_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	err = e.ExpectingEnumValueError("Active", int16(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	err = e.ExpectingEnumValueError("NotExist", int16(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -678,8 +678,8 @@ func Test_BasicInt16_IsValidRange_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange(100)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange(100)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -697,8 +697,8 @@ func Test_BasicInt16_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_, err = e.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -736,23 +736,23 @@ func Test_BasicInt16_UnmarshallToValue_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -783,12 +783,12 @@ func Test_BasicInt32_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -803,8 +803,8 @@ func Test_BasicInt32_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf(0, "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf(0, "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -822,8 +822,8 @@ func Test_BasicInt32_GetValueByName_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -851,13 +851,13 @@ func Test_BasicInt32_ExpectingEnumValueError_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	err = e.ExpectingEnumValueError("Active", int32(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	err = e.ExpectingEnumValueError("NotExist", int32(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -879,8 +879,8 @@ func Test_BasicInt32_IsValidRange_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange(100)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange(100)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -898,8 +898,8 @@ func Test_BasicInt32_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_, err = e.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -937,23 +937,23 @@ func Test_BasicInt32_UnmarshallToValue_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -984,12 +984,12 @@ func Test_BasicUInt16_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf(1, 0, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf(1, 0, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1004,8 +1004,8 @@ func Test_BasicUInt16_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf(0, "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf(0, "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1023,8 +1023,8 @@ func Test_BasicUInt16_GetValueByName_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1052,13 +1052,13 @@ func Test_BasicUInt16_ExpectingEnumValueError_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	err = e.ExpectingEnumValueError("Active", uint16(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	err = e.ExpectingEnumValueError("NotExist", uint16(0))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1080,8 +1080,8 @@ func Test_BasicUInt16_IsValidRange_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange(100)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange(100)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -1099,8 +1099,8 @@ func Test_BasicUInt16_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_, err = e.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1138,23 +1138,23 @@ func Test_BasicUInt16_UnmarshallToValue_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil || v != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1185,8 +1185,8 @@ func Test_BasicString_IsAnyNamesOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyNamesOf("Invalid", "Active")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyNamesOf("Invalid", "Active")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1201,12 +1201,12 @@ func Test_BasicString_IsAnyOf_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf("Active", "Invalid", "Active")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": e.IsAnyOf("Active", "Invalid", "Active")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": e.IsAnyOf("Active", "Invalid")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsAnyOf("Active", "Invalid")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1263,12 +1263,12 @@ func Test_BasicString_GetNameByIndex_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Active", actual)
 
-	actual := args.Map{"result": e.GetNameByIndex(100) != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.GetNameByIndex(100) != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 
-	actual := args.Map{"result": e.GetNameByIndex(0) != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.GetNameByIndex(0) != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for index 0 (condition > 0)", actual)
 }
 
@@ -1286,13 +1286,13 @@ func Test_BasicString_GetIndexByName_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected valid index", actual)
 
 	idx = e.GetIndexByName("")
-	actual := args.Map{"result": idx >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": idx >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid for empty", actual)
 
 	idx = e.GetIndexByName("NotExist")
-	actual := args.Map{"result": idx >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": idx >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid for not exist", actual)
 }
 
@@ -1342,8 +1342,8 @@ func Test_BasicString_GetValueByName_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Active", actual)
 
 	_, err = e.GetValueByName("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1358,8 +1358,8 @@ func Test_BasicString_IsValidRange_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": e.IsValidRange("NotExist")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.IsValidRange("NotExist")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -1376,8 +1376,8 @@ func Test_BasicString_OnlySupportedErr_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error (unsupported exist)", actual)
 
 	err = e.OnlySupportedErr("Invalid", "Active", "Inactive")
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil (all supported)", actual)
 }
 
@@ -1418,8 +1418,8 @@ func Test_BasicString_ToEnumJsonBytes_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_, err = e.ToEnumJsonBytes("NotExist")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1437,24 +1437,24 @@ func Test_BasicString_UnmarshallToValue_AllBranches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	v, err := e.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = v
 
 	v, err = e.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(true, []byte(`""`))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	v, err = e.UnmarshallToValue(false, []byte("Active"))
-	actual := args.Map{"result": err != nil || v != "Active"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || v != "Active"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Active", actual)
 }
 
@@ -1494,8 +1494,8 @@ func Test_NumberEnumBase_MinValueString_MaxValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	s = e.MaxValueString()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	// Call again to test cached path
@@ -1578,8 +1578,8 @@ func Test_NumberEnumBase_Length_Count(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
-	actual := args.Map{"result": e.Count() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": e.Count() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -1643,8 +1643,8 @@ func Test_NumberEnumBase_Loop_FromMisc12(t *testing.T) {
 		return true
 	})
 
-	actual := args.Map{"result": count != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1673,8 +1673,8 @@ func Test_NumberEnumBase_LoopInteger_FromMisc12(t *testing.T) {
 		return true
 	})
 
-	actual := args.Map{"result": count != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1806,8 +1806,8 @@ func Test_DynamicMap_AddOrUpdate_FromMisc12(t *testing.T) {
 
 	isNew = dm.AddOrUpdate("a", 3)
 
-	actual := args.Map{"result": isNew}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isNew}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not new", actual)
 }
 
@@ -1838,8 +1838,8 @@ func Test_DynamicMap_AddNewOnly_FromMisc12(t *testing.T) {
 
 	isAdded = dm.AddNewOnly("a", 3)
 
-	actual := args.Map{"result": isAdded}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isAdded}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not added", actual)
 }
 
@@ -1857,8 +1857,8 @@ func Test_DynamicMap_AllKeys_AllKeysSorted(t *testing.T) {
 
 	sorted := dm.AllKeysSorted()
 
-	actual := args.Map{"result": sorted[0] != "a" || sorted[1] != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sorted[0] != "a" || sorted[1] != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 
 	empty := enumimpl.DynamicMap{}
@@ -1970,8 +1970,8 @@ func Test_DynamicMap_IsValueString_FromMisc12(t *testing.T) {
 
 	strDm := enumimpl.DynamicMap{"a": "x"}
 
-	actual := args.Map{"result": strDm.IsValueString()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": strDm.IsValueString()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1986,14 +1986,14 @@ func Test_DynamicMap_Length_Count_IsEmpty_HasAnyItem(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
-	actual := args.Map{"result": dm.IsEmpty() || !dm.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsEmpty() || !dm.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
 	var nilDm *enumimpl.DynamicMap
 
-	actual := args.Map{"result": nilDm.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil Length should be 0", actual)
 }
 
@@ -2008,8 +2008,8 @@ func Test_DynamicMap_LastIndex_HasIndex(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
-	actual := args.Map{"result": dm.HasIndex(1) || dm.HasIndex(2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasIndex(1) || dm.HasIndex(2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "index check failed", actual)
 }
 
@@ -2024,16 +2024,16 @@ func Test_DynamicMap_HasKey_IsMissingKey_HasAllKeys_HasAnyKeys(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasKey failed", actual)
 
-	actual := args.Map{"result": dm.IsMissingKey("a") || !dm.IsMissingKey("c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsMissingKey("a") || !dm.IsMissingKey("c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsMissingKey failed", actual)
 
-	actual := args.Map{"result": dm.HasAllKeys("a", "b") || dm.HasAllKeys("a", "c")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasAllKeys("a", "b") || dm.HasAllKeys("a", "c")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasAllKeys failed", actual)
 
-	actual := args.Map{"result": dm.HasAnyKeys("a", "c") || dm.HasAnyKeys("c", "d")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasAnyKeys("a", "c") || dm.HasAnyKeys("c", "d")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasAnyKeys failed", actual)
 }
 
@@ -2050,22 +2050,22 @@ func Test_DynamicMap_IsEqual_AllBranches(t *testing.T) {
 
 	dm := enumimpl.DynamicMap{"a": 1}
 
-	actual := args.Map{"result": nilA.IsEqual(false, &dm)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilA.IsEqual(false, &dm)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
-	actual := args.Map{"result": dm.IsEqual(false, nilA)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsEqual(false, nilA)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 
 	dm2 := enumimpl.DynamicMap{"a": 1}
 
-	actual := args.Map{"result": dm.IsEqual(false, &dm2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.IsEqual(false, &dm2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same maps should be equal", actual)
 
-	actual := args.Map{"result": dm.IsEqual(false, &dm)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.IsEqual(false, &dm)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 }
 
@@ -2082,24 +2082,24 @@ func Test_DynamicMap_IsRawEqual_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 	// Different length
-	actual := args.Map{"result": dm.IsRawEqual(false, map[string]any{"a": 1, "b": 2})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawEqual(false, map[string]any{"a": 1, "b": 2})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	// Missing key
-	actual := args.Map{"result": dm.IsRawEqual(false, map[string]any{"b": 1})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawEqual(false, map[string]any{"b": 1})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	// nil checks
 	var nilDm *enumimpl.DynamicMap
 
-	actual := args.Map{"result": nilDm.IsRawEqual(false, nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilDm.IsRawEqual(false, nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
-	actual := args.Map{"result": nilDm.IsRawEqual(false, raw)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.IsRawEqual(false, raw)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 }
 
@@ -2115,8 +2115,8 @@ func Test_DynamicMap_IsMismatch_IsRawMismatch(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 
-	actual := args.Map{"result": dm.IsRawMismatch(false, map[string]any{"a": 2})}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.IsRawMismatch(false, map[string]any{"a": 2})}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
@@ -2157,23 +2157,23 @@ func Test_DynamicMap_DiffRawUsingDifferChecker_AllBranches(t *testing.T) {
 	right := map[string]any{"a": 1}
 	diff = nilDm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, right)
 
-	actual := args.Map{"result": diff.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": diff.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	// non-nil left, nil right
 	dm := enumimpl.DynamicMap{"a": 1}
 	diff = dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, nil)
 
-	actual := args.Map{"result": diff.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": diff.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	// Equal maps
 	diff = dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, map[string]any{"a": 1})
 
-	actual := args.Map{"result": diff.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": diff.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -2212,8 +2212,8 @@ func Test_DynamicMap_DiffJsonMessage_FromMisc12(t *testing.T) {
 
 	msg = dm.DiffJsonMessage(false, map[string]any{"a": 2})
 
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty for different", actual)
 }
 
@@ -2236,8 +2236,8 @@ func Test_DynamicMap_DiffJsonMessageLeftRight_FromMisc12(t *testing.T) {
 
 	msg = dm.DiffJsonMessageLeftRight(false, map[string]any{"a": 2, "b": 3})
 
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -2255,8 +2255,8 @@ func Test_DynamicMap_ShouldDiffMessage_FromMisc12(t *testing.T) {
 
 	msg = dm.ShouldDiffMessage(false, "test", map[string]any{"a": 2})
 
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -2286,8 +2286,8 @@ func Test_DynamicMap_ExpectingMessage_FromMisc12(t *testing.T) {
 
 	msg = dm.ExpectingMessage("test", map[string]any{"a": 2})
 
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty for different", actual)
 }
 
@@ -2302,22 +2302,22 @@ func Test_DynamicMap_IsKeysEqualOnly_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 1})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 1})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
-	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 1, "c": 3})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 1, "c": 3})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
 	var nilDm *enumimpl.DynamicMap
 
-	actual := args.Map{"result": nilDm.IsKeysEqualOnly(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilDm.IsKeysEqualOnly(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
-	actual := args.Map{"result": nilDm.IsKeysEqualOnly(map[string]any{"a": 1})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.IsKeysEqualOnly(map[string]any{"a": 1})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 }
 
@@ -2335,20 +2335,20 @@ func Test_DynamicMap_KeyValue_KeyValueString(t *testing.T) {
 
 	_, found = dm.KeyValue("z")
 
-	actual := args.Map{"result": found}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 
 	s, found := dm.KeyValueString("a")
 
-	actual := args.Map{"result": found || s != "1"}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": found || s != "1"}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_, found = dm.KeyValueString("z")
 
-	actual := args.Map{"result": found}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
@@ -2366,8 +2366,8 @@ func Test_DynamicMap_KeyValueIntDefault_FromMisc12(t *testing.T) {
 
 	v = dm.KeyValueIntDefault("z")
 
-	actual := args.Map{"result": v >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -2385,8 +2385,8 @@ func Test_DynamicMap_KeyValueByte_FromMisc12(t *testing.T) {
 
 	_, found, _ = dm.KeyValueByte("z")
 
-	actual := args.Map{"result": found}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
@@ -2409,8 +2409,8 @@ func Test_DynamicMap_KeyValueInt_FromMisc12(t *testing.T) {
 
 	_, found, _ = dm.KeyValueInt("z")
 
-	actual := args.Map{"result": found}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
@@ -2484,15 +2484,15 @@ func Test_DynamicMap_ConcatNew_FromMisc12(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	result = dm.ConcatNew(false, another)
-	actual := args.Map{"result": result.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	empty := enumimpl.DynamicMap{}
 	result = empty.ConcatNew(true, enumimpl.DynamicMap{})
 
-	actual := args.Map{"result": result.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -2569,36 +2569,36 @@ func Test_DiffLeftRight_AllMethods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same type", actual)
 
-	actual := args.Map{"result": d.IsSame()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsSame()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not same", actual)
 
-	actual := args.Map{"result": d.IsSameRegardlessOfType()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsSameRegardlessOfType()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not same", actual)
 
-	actual := args.Map{"result": d.IsEqual(false)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsEqual(false)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
-	actual := args.Map{"result": d.IsEqual(true)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsEqual(true)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
-	actual := args.Map{"result": d.HasMismatch(false)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasMismatch(false)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 
-	actual := args.Map{"result": d.HasMismatch(true)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasMismatch(true)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 
-	actual := args.Map{"result": d.IsNotEqual()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsNotEqual()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
-	actual := args.Map{"result": d.HasMismatchRegardlessOfType()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.HasMismatchRegardlessOfType()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 
 	_ = d.String()
@@ -2609,23 +2609,23 @@ func Test_DiffLeftRight_AllMethods(t *testing.T) {
 	_ = rs
 
 	ds := d.DiffString()
-	actual := args.Map{"result": ds == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ds == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	// Same values
 	same := &enumimpl.DiffLeftRight{Left: 1, Right: 1}
 	ds = same.DiffString()
 
-	actual := args.Map{"result": ds != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ds != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for same", actual)
 
 	// nil
 	var nilD *enumimpl.DiffLeftRight
 
-	actual := args.Map{"result": nilD.JsonString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.JsonString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
@@ -2647,25 +2647,25 @@ func Test_DifferCheckerImpl(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected left", actual)
 
 	r := d.GetSingleDiffResult(false, 1, 2)
-	actual := args.Map{"result": r != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected right", actual)
 
 	val := d.GetResultOnKeyMissingInRightExistInLeft("k", 42)
-	actual := args.Map{"result": val != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": val != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
-	actual := args.Map{"result": d.IsEqual(false, 1, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsEqual(false, 1, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-	actual := args.Map{"result": d.IsEqual(false, 1, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsEqual(false, 1, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
-	actual := args.Map{"result": d.IsEqual(true, 1, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsEqual(true, 1, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless", actual)
 }
 
@@ -2775,14 +2775,14 @@ func Test_OnlySupportedErr(t *testing.T) {
 
 	err = enumimpl.OnlySupportedErr(4, []string{"a", "b"}, "a", "b")
 
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	err = enumimpl.OnlySupportedErr(4, []string{}, "a")
 
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty allNames", actual)
 }
 
@@ -2836,8 +2836,8 @@ func Test_ConvEnumAnyValToInteger_AllBranches(t *testing.T) {
 	_ = r
 
 	// byte
-	actual := args.Map{"result": enumimpl.ConvEnumAnyValToInteger(byte(5)) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": enumimpl.ConvEnumAnyValToInteger(byte(5)) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	// non-convertible
@@ -2860,26 +2860,26 @@ func Test_KeyAnyVal_AllMethods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
-	actual := args.Map{"result": kav.AnyVal() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.AnyVal() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	_ = kav.AnyValString()
 	_ = kav.WrapKey()
 	_ = kav.WrapValue()
 
-	actual := args.Map{"result": kav.IsString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.IsString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
-	actual := args.Map{"result": kav.ValInt() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.ValInt() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	kvi := kav.KeyValInteger()
 
-	actual := args.Map{"result": kvi.Key != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvi.Key != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
 	_ = kav.String()
@@ -2887,8 +2887,8 @@ func Test_KeyAnyVal_AllMethods(t *testing.T) {
 	// String type
 	kavStr := enumimpl.KeyAnyVal{Key: "test", AnyValue: "hello"}
 
-	actual := args.Map{"result": kavStr.IsString()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": kavStr.IsString()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
 	_ = kavStr.String()
@@ -2907,8 +2907,8 @@ func Test_KeyAnyValues_FromMisc12(t *testing.T) {
 
 	result = enumimpl.KeyAnyValues([]string{}, []int{})
 
-	actual := args.Map{"result": len(result) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -2933,8 +2933,8 @@ func Test_KeyValInteger_AllMethods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
-	actual := args.Map{"result": kvi.IsString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvi.IsString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -3206,20 +3206,20 @@ func Test_EnumType_Variant_AllMethods(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	actual := args.Map{"result": v.IsNameEqual("Invalid")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsNameEqual("Invalid")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
-	actual := args.Map{"result": v.IsNameEqual("Byte")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsNameEqual("Byte")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": v.IsAnyNamesOf("Invalid", "Byte")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsAnyNamesOf("Invalid", "Byte")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": v.IsAnyNamesOf("Invalid")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsAnyNamesOf("Invalid")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -3231,64 +3231,64 @@ func Test_EnumType_Variant_TypeChecks(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Byte.IsByte()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Byte.IsByte()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.UnsignedInteger16.IsUnsignedInteger16()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.UnsignedInteger16.IsUnsignedInteger16()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.UnsignedInteger32.IsUnsignedInteger32()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.UnsignedInteger32.IsUnsignedInteger32()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.UnsignedInteger64.IsUnsignedInteger64()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.UnsignedInteger64.IsUnsignedInteger64()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer8.IsInteger8()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer8.IsInteger8()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer16.IsInteger16()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer16.IsInteger16()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer32.IsInteger32()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer32.IsInteger32()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer64.IsInteger64()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer64.IsInteger64()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer.IsInteger()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer.IsInteger()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.String.IsString()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.String.IsString()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Byte.IsNumber()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Byte.IsNumber()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Integer8.IsAnyInteger()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Integer8.IsAnyInteger()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Byte.IsAnyUnsignedNumber()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Byte.IsAnyUnsignedNumber()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	actual := args.Map{"result": enumtype.Invalid.IsValid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": enumtype.Invalid.IsValid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 
-	actual := args.Map{"result": enumtype.Invalid.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": enumtype.Invalid.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -3321,20 +3321,20 @@ func Test_EnumType_Variant_UnmarshalJSON(t *testing.T) {
 
 	// Empty
 	err = v.UnmarshalJSON([]byte(""))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	// Too short
 	err = v.UnmarshalJSON([]byte(`""`))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	// Not found
 	err = v.UnmarshalJSON([]byte(`"NotExist"`))
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -3370,8 +3370,8 @@ func Test_EnumType_Variant_RoundTrip(t *testing.T) {
 	var result enumtype.Variant
 	err = json.Unmarshal(b, &result)
 
-	actual := args.Map{"result": err != nil || result != enumtype.Integer32}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || result != enumtype.Integer32}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Integer32", actual)
 }
 
@@ -3392,8 +3392,8 @@ func Test_DynamicMap_IsRawEqual_RegardlessType_FromMisc12(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless", actual)
 
-	actual := args.Map{"result": dm.IsRawEqual(true, map[string]any{"a": 2})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawEqual(true, map[string]any{"a": 2})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 

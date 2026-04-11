@@ -21,8 +21,8 @@ func Test_VersionDisplayMajorMinorPatch_InvalidPatch(t *testing.T) {
 
 	// Assert
 	expected := "v1.2"
-	actual := args.Map{"result": actual != expected}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": actual != expected}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "VersionDisplayMajorMinorPatch with invalid patch: got, want", actual)
 }
 

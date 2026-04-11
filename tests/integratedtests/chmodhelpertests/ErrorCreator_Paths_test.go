@@ -148,8 +148,8 @@ func Test_PathErrorMessage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": len(err.Error()) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(err.Error()) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty error message", actual)
 }
 
@@ -401,12 +401,12 @@ func Test_FilteredPathFileInfoMap_WithEntries(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected locations", actual)
 	infos := m.ValidFileInfos()
-	actual := args.Map{"result": len(infos) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(infos) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected file infos", actual)
 	wrappers := m.ValidLocationFileInfoRwxWrappers()
-	actual := args.Map{"result": len(wrappers) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(wrappers) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrappers", actual)
 }
 
@@ -486,8 +486,8 @@ func Test_GetExistingChmodRwxWrappers_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(results) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(results) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -546,8 +546,8 @@ func Test_GetRecursivePaths_File(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(paths) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(paths) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
@@ -566,8 +566,8 @@ func Test_GetRecursivePaths_Dir(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(paths) < 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(paths) < 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected multiple paths", actual)
 }
 
@@ -617,8 +617,8 @@ func Test_GetRecursivePathsContinueOnError_File_FromErrorCreatorPaths(t *testing
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(paths) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(paths) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 

@@ -72,11 +72,11 @@ func Test_RwxWrapper_Bytes_Ext2(t *testing.T) {
 	actual := args.Map{"result": rwxBytes[0] != 7}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "owner should be 7", actual)
-	actual := args.Map{"result": rwxBytes[1] != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rwxBytes[1] != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "group should be 5", actual)
-	actual := args.Map{"result": rwxBytes[2] != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rwxBytes[2] != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "other should be 5", actual)
 }
 
@@ -93,11 +93,11 @@ func Test_RwxWrapper_ToCompiledOctalBytes_Ext2(t *testing.T) {
 	actual := args.Map{"result": b4[0] != '0'}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "first byte of 4-digit should be '0'", actual)
-	actual := args.Map{"result": len(b3) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b3) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "3-digit should have 3 bytes", actual)
-	actual := args.Map{"result": o != '7' || g != '5' || oth != '5'}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o != '7' || g != '5' || oth != '5'}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "split values wrong:", actual)
 }
 
@@ -177,8 +177,8 @@ func Test_RwxWrapper_Clone_Ext2(t *testing.T) {
 	actual := args.Map{"result": cloned == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should not return nil", actual)
-	actual := args.Map{"result": cloned.IsEqualPtr(&wrapper)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": cloned.IsEqualPtr(&wrapper)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "cloned should equal original", actual)
 }
 
@@ -206,8 +206,8 @@ func Test_RwxWrapper_IsEmpty_Ext2(t *testing.T) {
 	if !empty.IsNull() {
 		// non-pointer IsNull returns false
 	}
-	actual := args.Map{"result": empty.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": empty.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty wrapper should be invalid", actual)
 }
 
@@ -221,8 +221,8 @@ func Test_RwxWrapper_IsEqualPtr_Ext2(t *testing.T) {
 	actual := args.Map{"result": w1.IsEqualPtr(&w2)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same mode wrappers should be equal", actual)
-	actual := args.Map{"result": w1.IsEqualPtr(&w3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": w1.IsEqualPtr(&w3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different mode wrappers should not be equal", actual)
 	if !w1.IsEqualPtr(nil) == true {
 		// nil comparison
@@ -237,11 +237,11 @@ func Test_RwxWrapper_IsEqualFileMode_Ext2(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0755))}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be equal to 0755", actual)
-	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0644))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0644))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be equal to 0644", actual)
-	actual := args.Map{"result": wrapper.IsNotEqualFileMode(os.FileMode(0644))}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": wrapper.IsNotEqualFileMode(os.FileMode(0644))}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be not equal to 0644", actual)
 }
 
@@ -253,11 +253,11 @@ func Test_RwxWrapper_IsRwxFullEqual_Ext2(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rwxr-xr-x")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match full rwx string", actual)
-	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rw-r--r--")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsRwxFullEqual("-rw-r--r--")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match different rwx", actual)
-	actual := args.Map{"result": wrapper.IsRwxFullEqual("short")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsRwxFullEqual("short")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match short string", actual)
 }
 
@@ -302,8 +302,8 @@ func Test_RwxWrapper_ToPtr_ToNonPtr_Ext2(t *testing.T) {
 	actual := args.Map{"result": ptr == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToPtr should not return nil", actual)
-	actual := args.Map{"result": nonPtr.ToFullRwxValueString() != wrapper.ToFullRwxValueString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nonPtr.ToFullRwxValueString() != wrapper.ToFullRwxValueString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToNonPtr should equal original", actual)
 }
 
@@ -318,8 +318,8 @@ func Test_RwxWrapper_ToRwxOwnerGroupOther_Ext2(t *testing.T) {
 	actual := args.Map{"result": ogo == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": ogo.Owner != "rwx"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ogo.Owner != "rwx"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "owner should be rwx", actual)
 }
 
@@ -348,8 +348,8 @@ func Test_RwxWrapper_JSON_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON error:", actual)
-	actual := args.Map{"result": len(jsonBytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(jsonBytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JSON bytes should not be empty", actual)
 
 	// Act - unmarshal
@@ -357,11 +357,11 @@ func Test_RwxWrapper_JSON_Ext2(t *testing.T) {
 	err2 := parsed.UnmarshalJSON(jsonBytes)
 
 	// Assert
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
-	actual := args.Map{"result": parsed.ToFullRwxValueString() != wrapper.ToFullRwxValueString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": parsed.ToFullRwxValueString() != wrapper.ToFullRwxValueString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "parsed should equal original", actual)
 }
 
@@ -377,21 +377,21 @@ func Test_RwxWrapper_Json_Methods_Ext2(t *testing.T) {
 	actual := args.Map{"result": jsonResult.HasError()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Json() should not error", actual)
-	actual := args.Map{"result": jsonPtrResult == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonPtrResult == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	// JsonParseSelfInject
 	var target chmodhelper.RwxWrapper
 	err := target.JsonParseSelfInject(&jsonResult)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 
 	// AsJsonContractsBinder
 	binder := wrapper.AsJsonContractsBinder()
-	actual := args.Map{"result": binder == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": binder == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "binder should not be nil", actual)
 }
 
@@ -428,27 +428,27 @@ func Test_Attribute_NilSafe_Ext2(t *testing.T) {
 	actual := args.Map{"result": attr.IsNull()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil attr should be null", actual)
-	actual := args.Map{"result": attr.IsAnyNull()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsAnyNull()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil attr IsAnyNull should be true", actual)
-	actual := args.Map{"result": attr.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil attr should be empty", actual)
-	actual := args.Map{"result": attr.IsZero()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsZero()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil attr should be zero", actual)
-	actual := args.Map{"result": attr.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil attr should be invalid", actual)
-	actual := args.Map{"result": attr.IsDefined()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.IsDefined()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil attr should not be defined", actual)
-	actual := args.Map{"result": attr.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil attr HasAnyItem should be false", actual)
 	cloned := attr.Clone()
-	actual := args.Map{"result": cloned != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloned != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil attr Clone should be nil", actual)
 }
 
@@ -463,8 +463,8 @@ func Test_Attribute_ToAttributeValue_Ext2(t *testing.T) {
 	actual := args.Map{"result": attrVal.Sum != 7}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sum 7", actual)
-	actual := args.Map{"result": attrVal.Read != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attrVal.Read != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected read 4", actual)
 }
 
@@ -531,8 +531,8 @@ func Test_Attribute_Clone_Ext2(t *testing.T) {
 	actual := args.Map{"result": cloned == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should not be nil", actual)
-	actual := args.Map{"result": attr.IsEqualPtr(cloned)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsEqualPtr(cloned)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "cloned should equal original", actual)
 }
 
@@ -546,8 +546,8 @@ func Test_Attribute_IsEqual_Ext2(t *testing.T) {
 	actual := args.Map{"result": a1.IsEqual(a2)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same attrs should be equal", actual)
-	actual := args.Map{"result": a1.IsEqual(a3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a1.IsEqual(a3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different attrs should not be equal", actual)
 }
 
@@ -561,8 +561,8 @@ func Test_Attribute_IsEqualPtr_BothNil_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
 	a3 := chmodhelper.New.Attribute.UsingRwxString("rwx")
-	actual := args.Map{"result": a1.IsEqualPtr(&a3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a1.IsEqualPtr(&a3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 }
 
@@ -574,8 +574,8 @@ func Test_Attribute_UsingByte_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "byte 5 = r-x", actual)
 }
 
@@ -597,8 +597,8 @@ func Test_Attribute_UsingVariant_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": attr.IsRead || !attr.IsWrite || attr.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsRead || !attr.IsWrite || attr.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ReadWrite should be rw-", actual)
 }
 
@@ -666,8 +666,8 @@ func Test_Variant_ToWrapperPtr_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": ptr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -715,26 +715,26 @@ func Test_VarAttribute_Methods_Ext2(t *testing.T) {
 	actual := args.Map{"result": varAttr.IsFixedType()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have wildcard", actual)
-	actual := args.Map{"result": varAttr.HasWildcard()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varAttr.HasWildcard()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have wildcard", actual)
-	actual := args.Map{"result": varAttr.String() != "r*x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varAttr.String() != "r*x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected r*x", actual)
 
 	// Clone
 	cloned := varAttr.Clone()
-	actual := args.Map{"result": cloned == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloned == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should not be nil", actual)
-	actual := args.Map{"result": varAttr.IsEqualPtr(cloned)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varAttr.IsEqualPtr(cloned)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "cloned should equal", actual)
 
 	// ToCompileFixAttr -- not fixed type, returns nil
 	fixAttr := varAttr.ToCompileFixAttr()
-	actual := args.Map{"result": fixAttr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fixAttr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-fixed should return nil from ToCompileFixAttr", actual)
 }
 
@@ -748,11 +748,11 @@ func Test_VarAttribute_Fixed_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be fixed type", actual)
 
 	fixAttr := varAttr.ToCompileFixAttr()
-	actual := args.Map{"result": fixAttr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fixAttr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "fixed type should return non-nil", actual)
-	actual := args.Map{"result": fixAttr.IsRead || !fixAttr.IsWrite || !fixAttr.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fixAttr.IsRead || !fixAttr.IsWrite || !fixAttr.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have all true", actual)
 }
 
@@ -768,11 +768,11 @@ func Test_VarAttribute_ToCompileAttr_WithWildcard_Ext2(t *testing.T) {
 	actual := args.Map{"result": compiled.IsRead}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "read should be true", actual)
-	actual := args.Map{"result": compiled.IsWrite}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": compiled.IsWrite}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "wildcard should inherit write=true from fixed", actual)
-	actual := args.Map{"result": compiled.IsExecute}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": compiled.IsExecute}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "execute should be true", actual)
 }
 
@@ -852,39 +852,39 @@ func Test_RwxVariableWrapper_Methods_Ext2(t *testing.T) {
 	actual := args.Map{"result": varWrapper.IsFixedType()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be fixed", actual)
-	actual := args.Map{"result": varWrapper.HasWildcard()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.HasWildcard()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have wildcard", actual)
 
 	fixedPtr := varWrapper.ToCompileFixedPtr()
-	actual := args.Map{"result": fixedPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fixedPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "fixed type should return ptr", actual)
 
 	compiled := varWrapper.ToCompileWrapper(nil)
-	actual := args.Map{"result": compiled.ToFullRwxValueString() != "-rwxr-xr--"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": compiled.ToFullRwxValueString() != "-rwxr-xr--"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 
 	cloned := varWrapper.Clone()
-	actual := args.Map{"result": cloned == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloned == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should not be nil", actual)
-	actual := args.Map{"result": varWrapper.IsEqualPtr(cloned)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsEqualPtr(cloned)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "cloned should equal", actual)
 
 	toStr := varWrapper.ToString(true)
-	actual := args.Map{"result": toStr != "-rwxr-xr--"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": toStr != "-rwxr-xr--"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToString with hyphen:", actual)
 	toStr2 := varWrapper.ToString(false)
-	actual := args.Map{"result": toStr2 != "rwxr-xr--"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": toStr2 != "rwxr-xr--"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ToString without hyphen:", actual)
 
-	actual := args.Map{"result": varWrapper.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
@@ -896,11 +896,11 @@ func Test_RwxVariableWrapper_PartialMatch_Ext2(t *testing.T) {
 	actual := args.Map{"result": varWrapper.IsOwnerPartialMatch("rwx")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "owner should match", actual)
-	actual := args.Map{"result": varWrapper.IsGroupPartialMatch("r-x")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsGroupPartialMatch("r-x")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "group should match", actual)
-	actual := args.Map{"result": varWrapper.IsOtherPartialMatch("r--")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsOtherPartialMatch("r--")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "other should match", actual)
 }
 
@@ -912,29 +912,29 @@ func Test_RwxVariableWrapper_IsEqual_Ext2(t *testing.T) {
 	actual := args.Map{"result": varWrapper.IsEqualPartialFullRwx("-rwxr-xr--")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match full rwx", actual)
-	actual := args.Map{"result": varWrapper.IsEqualPartialFullRwx("-rwxrwxrwx")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.IsEqualPartialFullRwx("-rwxrwxrwx")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match different", actual)
-	actual := args.Map{"result": varWrapper.IsMismatchPartialFullRwx("-rwxrwxrwx")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsMismatchPartialFullRwx("-rwxrwxrwx")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be mismatch", actual)
-	actual := args.Map{"result": varWrapper.IsEqualPartialRwxPartial("-rwxr-xr--")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsEqualPartialRwxPartial("-rwxr-xr--")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match partial", actual)
-	actual := args.Map{"result": varWrapper.IsEqualPartialUsingFileMode(os.FileMode(0754))}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsEqualPartialUsingFileMode(os.FileMode(0754))}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match 0754", actual)
-	actual := args.Map{"result": varWrapper.IsEqualUsingFileMode(os.FileMode(0754))}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": varWrapper.IsEqualUsingFileMode(os.FileMode(0754))}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match 0754", actual)
-	actual := args.Map{"result": varWrapper.IsEqualUsingLocation("/nonexistent/path/xyz")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.IsEqualUsingLocation("/nonexistent/path/xyz")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match nonexistent", actual)
-	actual := args.Map{"result": varWrapper.IsEqualUsingFileInfo(nil)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.IsEqualUsingFileInfo(nil)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match nil fileInfo", actual)
-	actual := args.Map{"result": varWrapper.IsEqualRwxWrapperPtr(nil)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper.IsEqualRwxWrapperPtr(nil)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match nil wrapper", actual)
 }
 
@@ -946,8 +946,8 @@ func Test_RwxVariableWrapper_NilSafe_Ext2(t *testing.T) {
 	actual := args.Map{"result": v1.Clone() != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil Clone should be nil", actual)
-	actual := args.Map{"result": v1.IsEqualPtr(v2)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v1.IsEqualPtr(v2)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
@@ -1021,14 +1021,14 @@ func Test_IsChmod_Ext2(t *testing.T) {
 	actual := args.Map{"result": chmodhelper.IsChmod(tmpFile.Name(), rwxFull)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match existing chmod", actual)
-	actual := args.Map{"result": chmodhelper.IsChmod(tmpFile.Name(), "short")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsChmod(tmpFile.Name(), "short")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "short string should return false", actual)
-	actual := args.Map{"result": chmodhelper.IsChmod("", "-rwxrwxrwx")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsChmod("", "-rwxrwxrwx")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty path should return false", actual)
-	actual := args.Map{"result": chmodhelper.IsChmod("/nonexistent/xyz", "-rwxrwxrwx")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsChmod("/nonexistent/xyz", "-rwxrwxrwx")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nonexistent should return false", actual)
 }
 
@@ -1068,8 +1068,8 @@ func Test_GetExistingChmodOfValidFile_Ext2(t *testing.T) {
 	actual := args.Map{"result": isInvalid}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be invalid", actual)
-	actual := args.Map{"result": chmod == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmod == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "chmod should not be 0", actual)
 }
 
@@ -1081,8 +1081,8 @@ func Test_GetExistingChmodOfValidFile_Invalid_Ext2(t *testing.T) {
 	actual := args.Map{"result": isInvalid}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
-	actual := args.Map{"result": chmod != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmod != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "chmod should be 0", actual)
 }
 
@@ -1103,8 +1103,8 @@ func Test_ParseRwxOwnerGroupOtherToFileMode_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": mode != os.FileMode(0754)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mode != os.FileMode(0754)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0754, got %o", actual)
 }
 
@@ -1128,14 +1128,14 @@ func Test_ParseRwxInstructionToExecutor_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": executor == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executor == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "executor should not be nil", actual)
-	actual := args.Map{"result": executor.IsFixedWrapper()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": executor.IsFixedWrapper()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be fixed wrapper", actual)
-	actual := args.Map{"result": executor.IsVarWrapper()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executor.IsVarWrapper()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be var wrapper", actual)
 }
 
@@ -1165,8 +1165,8 @@ func Test_RwxInstructionExecutor_IsEqualFileMode_Ext2(t *testing.T) {
 	actual := args.Map{"result": executor.IsEqualFileMode(os.FileMode(0754))}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be equal to 0754", actual)
-	actual := args.Map{"result": executor.IsEqualFileMode(os.FileMode(0777))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executor.IsEqualFileMode(os.FileMode(0777))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be equal to 0777", actual)
 }
 
@@ -1189,8 +1189,8 @@ func Test_RwxInstructionExecutor_CompiledWrapper_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": compiled == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": compiled == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -1228,8 +1228,8 @@ func Test_RwxInstructionExecutor_IsEqualFileInfo_Nil_Ext2(t *testing.T) {
 	actual := args.Map{"result": executor.IsEqualFileInfo(nil)}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil fileInfo should return false", actual)
-	actual := args.Map{"result": executor.IsEqualRwxWrapper(nil)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executor.IsEqualRwxWrapper(nil)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil wrapper should return false", actual)
 }
 
@@ -1243,26 +1243,26 @@ func Test_RwxInstructionExecutors_Ext2(t *testing.T) {
 	actual := args.Map{"result": executors.IsEmpty()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be empty initially", actual)
-	actual := args.Map{"result": executors.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have items", actual)
-	actual := args.Map{"result": executors.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "length should be 0", actual)
-	actual := args.Map{"result": executors.Count() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.Count() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "count should be 0", actual)
-	actual := args.Map{"result": executors.LastIndex() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.LastIndex() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "lastIndex should be -1", actual)
-	actual := args.Map{"result": executors.HasIndex(0)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.HasIndex(0)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have index 0", actual)
 
 	// Add nil -- should skip
 	executors.Add(nil)
-	actual := args.Map{"result": executors.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "adding nil should not increase length", actual)
 }
 
@@ -1286,8 +1286,8 @@ func Test_ParseRwxInstructionsToExecutors_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": executors.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1309,8 +1309,8 @@ func Test_ParseRwxInstructionsToExecutors_Empty_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": executors.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executors.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
@@ -1336,26 +1336,26 @@ func Test_FilteredPathFileInfoMap_Empty_Ext2(t *testing.T) {
 	actual := args.Map{"result": fmap.HasAnyValidFileInfo()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have valid info", actual)
-	actual := args.Map{"result": fmap.IsEmptyValidFileInfos()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fmap.IsEmptyValidFileInfos()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
-	actual := args.Map{"result": fmap.HasAnyMissingPaths()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmap.HasAnyMissingPaths()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have missing", actual)
-	actual := args.Map{"result": fmap.IsEmptyIssues()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fmap.IsEmptyIssues()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be empty issues", actual)
-	actual := args.Map{"result": fmap.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmap.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have error", actual)
-	actual := args.Map{"result": fmap.HasAnyIssues()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmap.HasAnyIssues()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have issues", actual)
-	actual := args.Map{"result": fmap.LengthOfIssues() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmap.LengthOfIssues() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "issues length should be 0", actual)
-	actual := args.Map{"result": fmap.MissingPathsToString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmap.MissingPathsToString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "missing paths string should be empty", actual)
 }
 
@@ -1374,8 +1374,8 @@ func Test_GetExistsFilteredPathFileInfoMap_Ext2(t *testing.T) {
 	actual := args.Map{"result": fmap.HasAnyValidFileInfo()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have valid tempDir", actual)
-	actual := args.Map{"result": fmap.HasAnyMissingPaths()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fmap.HasAnyMissingPaths()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have missing /nonexistent/xyz", actual)
 	if fmap.HasError() == false {
 		// should have error because isSkipOnInvalid=false
@@ -1410,11 +1410,11 @@ func Test_FilteredPathFileInfoMap_LazyMethods_Ext2(t *testing.T) {
 	actual := args.Map{"result": len(locs) == 0 || len(locs2) == 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have locations", actual)
-	actual := args.Map{"result": len(infos) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(infos) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have infos", actual)
-	actual := args.Map{"result": len(wrappers) == 0 || len(wrappers2) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(wrappers) == 0 || len(wrappers2) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have wrappers", actual)
 }
 
@@ -1431,8 +1431,8 @@ func Test_GetFilteredExistsPaths_Ext2(t *testing.T) {
 	actual := args.Map{"result": len(found) != 1}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 found", actual)
-	actual := args.Map{"result": len(missing) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(missing) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 missing", actual)
 }
 
@@ -1456,8 +1456,8 @@ func Test_RwxMatchingStatus_Empty_Ext2(t *testing.T) {
 	actual := args.Map{"result": status.IsAllMatching}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be all matching", actual)
-	actual := args.Map{"result": status.MissingFilesToString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": status.MissingFilesToString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "missing files should be empty", actual)
 }
 
@@ -1470,8 +1470,8 @@ func Test_RwxMatchingStatus_Invalid_Ext2(t *testing.T) {
 	actual := args.Map{"result": status.IsAllMatching}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be matching", actual)
-	actual := args.Map{"result": status.Error == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": status.Error == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have error", actual)
 }
 
@@ -1501,8 +1501,8 @@ func Test_GetExistingChmodRwxWrappers_Empty_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": len(wrappers) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(wrappers) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
@@ -1523,8 +1523,8 @@ func Test_GetExistingChmodRwxWrappers_ContinueOnError_Ext2(t *testing.T) {
 	actual := args.Map{"result": len(wrappers) != 1}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 valid", actual)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have error for nonexistent path", actual)
 }
 
@@ -1556,8 +1556,8 @@ func Test_GetRecursivePaths_File_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": len(paths) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(paths) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1575,8 +1575,8 @@ func Test_GetRecursivePaths_Dir_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": len(paths) < 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(paths) < 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 2 paths", actual)
 }
 
@@ -1605,8 +1605,8 @@ func Test_GetExistingChmodRwxWrapper_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
@@ -1639,11 +1639,11 @@ func Test_SimpleFileReaderWriter_WriteReadString_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "write error:", actual)
 
 	content, readErr := rw.ReadString()
-	actual := args.Map{"result": readErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": readErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "read error:", actual)
-	actual := args.Map{"result": content != "hello world"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": content != "hello world"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'hello world'", actual)
 }
 
@@ -1659,19 +1659,19 @@ func Test_SimpleFileReaderWriter_Properties_Ext2(t *testing.T) {
 	actual := args.Map{"result": rw.IsExist()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "file should not exist yet", actual)
-	actual := args.Map{"result": rw.HasPathIssues()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rw.HasPathIssues()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have path issues", actual)
-	actual := args.Map{"result": rw.IsPathInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rw.IsPathInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be path invalid", actual)
 	if rw.HasAnyIssues() == false {
 		// parent dir doesn't exist either
 	}
 
 	str := rw.String()
-	actual := args.Map{"result": str == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": str == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
@@ -1691,32 +1691,32 @@ func Test_SimpleFileReaderWriter_WriteAndRead_Ext2(t *testing.T) {
 
 	// Read
 	bytes, readErr := rw.Read()
-	actual := args.Map{"result": readErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": readErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "read error:", actual)
-	actual := args.Map{"result": string(bytes) != "bytes content"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(bytes) != "bytes content"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected content:", actual)
 
 	// ReadOnExist
 	bytes2, err2 := rw.ReadOnExist()
-	actual := args.Map{"result": err2 != nil || len(bytes2) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil || len(bytes2) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReadOnExist should work", actual)
 
 	// ReadStringOnExist
 	s, err3 := rw.ReadStringOnExist()
-	actual := args.Map{"result": err3 != nil || s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 != nil || s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExist should work", actual)
 
 	// Expire
 	expErr := rw.Expire()
-	actual := args.Map{"result": expErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": expErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Expire error:", actual)
-	actual := args.Map{"result": rw.IsExist()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rw.IsExist()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "file should not exist after Expire", actual)
 }
 
@@ -1733,8 +1733,8 @@ func Test_SimpleFileReaderWriter_ReadOnExist_NotExist_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReadOnExist on nonexistent should return nil, nil", actual)
 
 	s, err2 := rw.ReadStringOnExist()
-	actual := args.Map{"result": err2 != nil || s != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil || s != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExist on nonexistent should return empty", actual)
 }
 
@@ -1769,8 +1769,8 @@ func Test_SimpleFileReaderWriter_JoinRelPath_Ext2(t *testing.T) {
 	actual := args.Map{"result": joined == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
-	actual := args.Map{"result": joinedEmpty == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": joinedEmpty == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
@@ -1845,8 +1845,8 @@ func Test_SimpleFileReaderWriter_JSON_Ext2(t *testing.T) {
 
 	var parsed chmodhelper.SimpleFileReaderWriter
 	err2 := parsed.UnmarshalJSON(jsonBytes)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
 }
 
@@ -1862,19 +1862,19 @@ func Test_SimpleFileReaderWriter_Json_Methods_Ext2(t *testing.T) {
 	actual := args.Map{"result": jsonResult.HasError()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Json() should not error", actual)
-	actual := args.Map{"result": jsonPtrResult == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonPtrResult == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonPtr should not nil", actual)
 
 	var target chmodhelper.SimpleFileReaderWriter
 	err := target.JsonParseSelfInject(&jsonResult)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 
 	binder := rw.AsJsonContractsBinder()
-	actual := args.Map{"result": binder == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": binder == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "binder should not be nil", actual)
 }
 
@@ -1893,8 +1893,8 @@ func Test_SimpleFileReaderWriter_InitializeDefault_Ext2(t *testing.T) {
 	actual := args.Map{"result": initialized == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": initialized.ParentDir == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": initialized.ParentDir == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParentDir should be populated", actual)
 }
 
@@ -2137,11 +2137,11 @@ func Test_NewRwxWrapperCreator_Invalid_Ext2(t *testing.T) {
 	actual := args.Map{"result": w.IsEmpty()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Invalid should be empty", actual)
-	actual := args.Map{"result": wPtr == nil || !wPtr.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wPtr == nil || !wPtr.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "InvalidPtr should be empty", actual)
-	actual := args.Map{"result": empty == nil || !empty.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": empty == nil || !empty.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Empty should be empty", actual)
 }
 
@@ -2153,8 +2153,8 @@ func Test_NewRwxWrapperCreator_CreatePtr_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": ptr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2215,8 +2215,8 @@ func Test_NewRwxWrapperCreator_Rwx10_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -2228,8 +2228,8 @@ func Test_NewRwxWrapperCreator_Rwx9_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -2252,8 +2252,8 @@ func Test_NewRwxWrapperCreator_UsingFileMode_Zero_Ext2(t *testing.T) {
 	actual := args.Map{"result": wrapper.IsEmpty()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "zero mode should be empty", actual)
-	actual := args.Map{"result": wrapperPtr == nil || !wrapperPtr.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapperPtr == nil || !wrapperPtr.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "zero mode ptr should be empty", actual)
 }
 
@@ -2272,8 +2272,8 @@ func Test_NewRwxWrapperCreator_UsingRwxOwnerGroupOther_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.ToRwxCompiledStr() != "755"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -2288,8 +2288,8 @@ func Test_NewRwxWrapperCreator_Instruction_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": ins == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ins == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2306,8 +2306,8 @@ func Test_NewRwxWrapperCreator_UsingExistingFile_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2324,8 +2324,8 @@ func Test_NewRwxWrapperCreator_UsingExistingFileSkipInvalidFile_Ext2(t *testing.
 
 	// Act - invalid
 	wrapper2, isInvalid2 := chmodhelper.New.RwxWrapper.UsingExistingFileSkipInvalidFile("/nonexistent/xyz")
-	actual := args.Map{"result": isInvalid2 || wrapper2 == nil}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": isInvalid2 || wrapper2 == nil}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "invalid file should return empty", actual)
 }
 
@@ -2343,14 +2343,14 @@ func Test_NewRwxWrapperCreator_UsingExistingFileOption_Ext2(t *testing.T) {
 
 	// Act - skip invalid = false, valid file
 	wrapper2, err2, isInvalid2 := chmodhelper.New.RwxWrapper.UsingExistingFileOption(false, tmpFile.Name())
-	actual := args.Map{"result": err2 != nil || isInvalid2 || wrapper2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil || isInvalid2 || wrapper2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should work for valid file with skip=false", actual)
 
 	// Act - skip invalid = false, invalid file
 	_, err3, _ := chmodhelper.New.RwxWrapper.UsingExistingFileOption(false, "/nonexistent/xyz")
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should error for invalid file with skip=false", actual)
 }
 
@@ -2366,8 +2366,8 @@ func Test_SingleRwx_All_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "error:", actual)
 
 	ogo := singleRwx.ToRwxOwnerGroupOther()
-	actual := args.Map{"result": ogo.Owner != "rwx" || ogo.Group != "rwx" || ogo.Other != "rwx"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ogo.Owner != "rwx" || ogo.Group != "rwx" || ogo.Other != "rwx"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -2484,8 +2484,8 @@ func Test_SingleRwx_ToVarRwxWrapper_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": varWrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": varWrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2500,8 +2500,8 @@ func Test_SingleRwx_ToRwxWrapper_All_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2529,8 +2529,8 @@ func Test_SingleRwx_ToDisabledRwxWrapper_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -2547,14 +2547,14 @@ func Test_TempDirGetter_Ext2(t *testing.T) {
 	actual := args.Map{"result": tempDefault == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TempDefault should not be empty", actual)
-	actual := args.Map{"result": tempPermanent == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tempPermanent == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TempPermanent should not be empty", actual)
-	actual := args.Map{"result": tempOptionTrue != tempPermanent}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tempOptionTrue != tempPermanent}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TempOption(true) should equal TempPermanent", actual)
-	actual := args.Map{"result": tempOptionFalse != tempDefault}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tempOptionFalse != tempDefault}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TempOption(false) should equal TempDefault", actual)
 }
 
@@ -2759,8 +2759,8 @@ func Test_ChmodVerifier_GetExistingRwxWrapper_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": wrapper.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
@@ -2850,8 +2850,8 @@ func Test_RwxPartialToInstructionExecutor_Valid_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": executor == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": executor == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
@@ -3175,8 +3175,8 @@ func Test_FileReader_Read_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": content != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": content != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -3194,8 +3194,8 @@ func Test_FileReader_ReadBytes_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": string(bytes) != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(bytes) != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 

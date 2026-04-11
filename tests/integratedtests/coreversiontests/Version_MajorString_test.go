@@ -457,8 +457,8 @@ func Test_Version_IsVersionCompareEqual_Nil(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil with empty should be equal", actual)
-	actual := args.Map{"result": v.IsVersionCompareEqual("1.0.0")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsVersionCompareEqual("1.0.0")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil with value should not be equal", actual)
 }
 
@@ -506,8 +506,8 @@ func Test_Version_IsMajorAtLeast(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "3 should be at least 2", actual)
-	actual := args.Map{"result": v.IsMajorAtLeast(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsMajorAtLeast(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "3 should not be at least 5", actual)
 }
 
@@ -570,8 +570,8 @@ func Test_IsAtLeast(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "2.0.0 should be at least 1.0.0", actual)
-	actual := args.Map{"result": coreversion.IsAtLeast("1.0.0", "2.0.0")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coreversion.IsAtLeast("1.0.0", "2.0.0")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "1.0.0 should not be at least 2.0.0", actual)
 }
 
@@ -591,8 +591,8 @@ func Test_IsLowerOrEqual(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "equal should be lower or equal", actual)
-	actual := args.Map{"result": coreversion.IsLowerOrEqual("1.0.0", "2.0.0")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": coreversion.IsLowerOrEqual("1.0.0", "2.0.0")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "1.0.0 should be lower or equal to 2.0.0", actual)
 }
 
@@ -621,23 +621,23 @@ func Test_VersionsCollection_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": vc.Count() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vc.Count() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Count should equal Length", actual)
-	actual := args.Map{"result": vc.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vc.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
-	actual := args.Map{"result": vc.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": vc.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have items", actual)
-	actual := args.Map{"result": vc.LastIndex() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vc.LastIndex() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected last index 1", actual)
-	actual := args.Map{"result": vc.HasIndex(1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": vc.HasIndex(1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have index 1", actual)
-	actual := args.Map{"result": vc.HasIndex(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vc.HasIndex(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have index 5", actual)
 }
 
@@ -681,8 +681,8 @@ func Test_VersionsCollection_Strings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	verStrs := vc.VersionsStrings()
-	actual := args.Map{"result": len(verStrs) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(verStrs) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -696,8 +696,8 @@ func Test_VersionsCollection_Strings_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
-	actual := args.Map{"result": len(vc.VersionsStrings()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(vc.VersionsStrings()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
 }
 
@@ -713,8 +713,8 @@ func Test_VersionsCollection_IndexOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should find version", actual)
-	actual := args.Map{"result": vc.IndexOf("3.0.0") >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vc.IndexOf("3.0.0") >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not find version", actual)
 }
 

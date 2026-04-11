@@ -151,8 +151,8 @@ func Test_CovJsonS3_AT11_SerializedSafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 	// nil gives empty
 	s2 := corejson.AnyTo.SerializedSafeString(nil)
-	actual := args.Map{"result": s2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -252,8 +252,8 @@ func Test_CovJsonS3_AT19_SafeJsonPrettyString_Branches(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	// bytes
 	s := corejson.AnyTo.SafeJsonPrettyString([]byte(`"hello"`))
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 	// Result
 	r := corejson.New(1)

@@ -526,8 +526,8 @@ func Test_C22_BC_AddAnyItems_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": bc.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 

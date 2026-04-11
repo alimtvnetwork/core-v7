@@ -221,8 +221,8 @@ func Test_DynamicMap_AddOrUpdate_FromDiffLeftRightTypes(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be newly added", actual)
 	isNew2 := dm.AddOrUpdate("key1", "updated")
-	actual := args.Map{"result": isNew2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isNew2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be updated, not new", actual)
 }
 
@@ -361,8 +361,8 @@ func Test_DynamicMap_HasKey(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have key 'a'", actual)
-	actual := args.Map{"result": dm.HasKey("b")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasKey("b")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have key 'b'", actual)
 }
 
@@ -376,8 +376,8 @@ func Test_DynamicMap_HasAllKeys_FromDiffLeftRightTypes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have all keys", actual)
-	actual := args.Map{"result": dm.HasAllKeys("a", "c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasAllKeys("a", "c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have all keys", actual)
 }
 
@@ -391,8 +391,8 @@ func Test_DynamicMap_HasAnyKeys_FromDiffLeftRightTypes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have any key", actual)
-	actual := args.Map{"result": dm.HasAnyKeys("b", "c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasAnyKeys("b", "c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have any key", actual)
 }
 

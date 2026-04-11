@@ -459,11 +459,11 @@ func Test_FirstLastStatus_Multiple(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 2 items", actual)
-	actual := args.Map{
+	actual = args.Map{
 		"first": s[0],
 		"last": s[len(s)-1],
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"first": "a",
 		"last": "b",
 	}

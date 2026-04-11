@@ -32,8 +32,8 @@ func Test_CovEnum_DM01_AddOrUpdate(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 	isNew2 := dm.AddOrUpdate("a", 99)
-	actual := args.Map{"result": isNew2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isNew2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected update", actual)
 }
 
@@ -62,8 +62,8 @@ func Test_CovEnum_DM03_AddNewOnly(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected added", actual)
 	ok2 := dm.AddNewOnly("a", 99)
-	actual := args.Map{"result": ok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not added", actual)
 }
 
@@ -79,16 +79,16 @@ func Test_CovEnum_DM04_AllKeys_AllKeysSorted(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	sorted := dm.AllKeysSorted()
-	actual := args.Map{"result": sorted[0] != "Execute"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sorted[0] != "Execute"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Execute first", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.AllKeys()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.AllKeys()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.AllKeysSorted()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.AllKeysSorted()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -104,16 +104,16 @@ func Test_CovEnum_DM05_AllValuesStrings_Sorted(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	vss := dm.AllValuesStringsSorted()
-	actual := args.Map{"result": len(vss) != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(vss) != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.AllValuesStrings()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.AllValuesStrings()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.AllValuesStringsSorted()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.AllValuesStringsSorted()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -130,8 +130,8 @@ func Test_CovEnum_DM06_AllValuesIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.AllValuesIntegers()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.AllValuesIntegers()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -149,8 +149,8 @@ func Test_CovEnum_DM07_MapIntegerString(t *testing.T) {
 	// empty
 	empty := enumimpl.DynamicMap{}
 	m2, k2 := empty.MapIntegerString()
-	actual := args.Map{"result": len(m2) != 0 || len(k2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(m2) != 0 || len(k2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -167,8 +167,8 @@ func Test_CovEnum_DM08_SortedKeyValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.SortedKeyValues()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.SortedKeyValues()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -185,14 +185,14 @@ func Test_CovEnum_DM09_SortedKeyAnyValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.SortedKeyAnyValues()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.SortedKeyAnyValues()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	// string values
 	dmStr := enumimpl.DynamicMap{"x": "hello", "y": "world"}
 	kavStr := dmStr.SortedKeyAnyValues()
-	actual := args.Map{"result": len(kavStr) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(kavStr) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -210,8 +210,8 @@ func Test_CovEnum_DM10_First(t *testing.T) {
 	// empty
 	empty := enumimpl.DynamicMap{}
 	k2, v2 := empty.First()
-	actual := args.Map{"result": k2 != "" || v2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k2 != "" || v2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -226,8 +226,8 @@ func Test_CovEnum_DM11_IsValueString_IsValueTypeOf(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	dm2 := enumimpl.DynamicMap{"a": 1}
-	actual := args.Map{"result": dm2.IsValueString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm2.IsValueString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -241,28 +241,28 @@ func Test_CovEnum_DM12_Length_Count_IsEmpty_HasAnyItem_LastIndex_HasIndex(t *tes
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": dm.Count() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.Count() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": dm.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": dm.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.LastIndex() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.LastIndex() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": dm.HasIndex(1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasIndex(1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.HasIndex(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasIndex(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	// nil ptr
 	var nilDm *enumimpl.DynamicMap
-	actual := args.Map{"result": nilDm.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -276,23 +276,23 @@ func Test_CovEnum_DM13_HasKey_HasAllKeys_HasAnyKeys_IsMissingKey(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.HasKey("c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasKey("c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": dm.HasAllKeys("a", "b")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasAllKeys("a", "b")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.HasAllKeys("a", "c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasAllKeys("a", "c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": dm.HasAnyKeys("a", "c")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.HasAnyKeys("a", "c")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.HasAnyKeys("c", "d")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.HasAnyKeys("c", "d")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": dm.IsMissingKey("c")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm.IsMissingKey("c")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -307,21 +307,21 @@ func Test_CovEnum_DM14_IsEqual_IsMismatch(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
-	actual := args.Map{"result": dm1.IsMismatch(false, &dm2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm1.IsMismatch(false, &dm2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no mismatch", actual)
 	// nil comparisons
 	var nilDm *enumimpl.DynamicMap
-	actual := args.Map{"result": nilDm.IsEqual(false, nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilDm.IsEqual(false, nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil==nil", actual)
-	actual := args.Map{"result": nilDm.IsEqual(false, &dm1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.IsEqual(false, &dm1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	// regardless of type
 	dm3 := enumimpl.DynamicMap{"a": byte(1)}
-	actual := args.Map{"result": dm1.IsEqual(true, &dm3)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dm1.IsEqual(true, &dm3)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless of type", actual)
 }
 
@@ -336,26 +336,26 @@ func Test_CovEnum_DM15_IsRawEqual_IsRawMismatch(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
-	actual := args.Map{"result": dm.IsRawMismatch(false, raw)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawMismatch(false, raw)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no mismatch", actual)
 	// different lengths
 	raw2 := map[string]any{"a": 1, "b": 2}
-	actual := args.Map{"result": dm.IsRawEqual(false, raw2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawEqual(false, raw2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	// missing key
 	raw3 := map[string]any{"b": 1}
-	actual := args.Map{"result": dm.IsRawEqual(false, raw3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsRawEqual(false, raw3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	// nil dm
 	var nilDm *enumimpl.DynamicMap
-	actual := args.Map{"result": nilDm.IsRawEqual(false, nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilDm.IsRawEqual(false, nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil==nil", actual)
-	actual := args.Map{"result": nilDm.IsRawEqual(false, raw)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.IsRawEqual(false, raw)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -374,8 +374,8 @@ func Test_CovEnum_DM16_DiffRaw(t *testing.T) {
 	// same maps
 	same := map[string]any{"a": 1, "b": 2}
 	diff2 := dm.DiffRaw(false, same)
-	actual := args.Map{"result": diff2.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": diff2.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no diff", actual)
 }
 
@@ -395,13 +395,13 @@ func Test_CovEnum_DM17_DiffRawUsingDifferChecker_NilBranches(t *testing.T) {
 	// left nil, right not nil
 	right := map[string]any{"a": 1}
 	r2 := nilDm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, right)
-	actual := args.Map{"result": r2.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// left not nil, right nil
 	r3 := dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, nil)
-	actual := args.Map{"result": r3.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -438,8 +438,8 @@ func Test_CovEnum_DM19_DiffJsonMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	diff := map[string]any{"a": 2}
 	msg2 := dm.DiffJsonMessage(false, diff)
-	actual := args.Map{"result": msg2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -469,8 +469,8 @@ func Test_CovEnum_DM21_ShouldDiffMessage(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	msg2 := dm.ShouldDiffMessage(false, "test", map[string]any{"a": 2})
-	actual := args.Map{"result": msg2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -488,8 +488,8 @@ func Test_CovEnum_DM22_ShouldDiffLeftRightMessageUsingDifferChecker(t *testing.T
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	msg2 := dm.ShouldDiffLeftRightMessageUsingDifferChecker(
 		enumimpl.DefaultDiffCheckerImpl, false, "test", map[string]any{"a": 2})
-	actual := args.Map{"result": msg2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -545,8 +545,8 @@ func Test_CovEnum_DM26_ExpectingMessage(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for same", actual)
 	msg2 := dm.ExpectingMessage("test", map[string]any{"a": 2})
-	actual := args.Map{"result": msg2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -565,18 +565,18 @@ func Test_CovEnum_DM28_IsKeysEqualOnly(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 99, "c": 88})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 99, "c": 88})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 99})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 99})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for different length", actual)
 	var nilDm *enumimpl.DynamicMap
-	actual := args.Map{"result": nilDm.IsKeysEqualOnly(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilDm.IsKeysEqualOnly(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil==nil", actual)
-	actual := args.Map{"result": nilDm.IsKeysEqualOnly(map[string]any{"a": 1})}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDm.IsKeysEqualOnly(map[string]any{"a": 1})}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -592,16 +592,16 @@ func Test_CovEnum_DM29_KeyValue_KeyValueString(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_, ok2 := dm.KeyValue("missing")
-	actual := args.Map{"result": ok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	vs, ok3 := dm.KeyValueString("a")
-	actual := args.Map{"result": ok3 || vs == ""}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ok3 || vs == ""}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	_, ok4 := dm.KeyValueString("missing")
-	actual := args.Map{"result": ok4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -617,8 +617,8 @@ func Test_CovEnum_DM30_KeyValueIntDefault_KeyValueInt(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	vi2 := dm.KeyValueIntDefault("missing")
-	actual := args.Map{"result": vi2 >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vi2 >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -634,14 +634,14 @@ func Test_CovEnum_DM31_KeyValueByte(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	_, found2, _ := dm.KeyValueByte("missing")
-	actual := args.Map{"result": found2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 	// int value
 	dm2 := enumimpl.DynamicMap{"a": 42}
 	b2, found3, failed3 := dm2.KeyValueByte("a")
-	actual := args.Map{"result": found3 || failed3 || b2 != 42}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": found3 || failed3 || b2 != 42}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -670,8 +670,8 @@ func Test_CovEnum_DM33_ConvMaps(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	is := dm.ConvMapIntegerString()
-	actual := args.Map{"result": len(is) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(is) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	bs := dm.ConvMapByteString()
 	_ = bs
@@ -689,32 +689,32 @@ func Test_CovEnum_DM33_ConvMaps(t *testing.T) {
 	_ = ss
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.ConvMapStringInteger()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapStringInteger()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapIntegerString()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapIntegerString()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapByteString()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapByteString()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapInt8String()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapInt8String()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapInt16String()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapInt16String()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapInt32String()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapInt32String()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapUInt16String()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapUInt16String()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapInt64String()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapInt64String()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.ConvMapStringString()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.ConvMapStringString()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -733,20 +733,20 @@ func Test_CovEnum_DM34_ConcatNew(t *testing.T) {
 	// no override
 	dm3 := enumimpl.DynamicMap{"a": 99}
 	r2 := dm1.ConcatNew(false, dm3)
-	actual := args.Map{"result": r2["a"] != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2["a"] != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 not overridden", actual)
 	// override
 	r3 := dm1.ConcatNew(true, dm3)
-	actual := args.Map{"result": r3["a"] != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3["a"] != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 99 overridden", actual)
 	// both empty
 	empty1 := enumimpl.DynamicMap{}
 	empty2 := enumimpl.DynamicMap{}
 	r4 := empty1.ConcatNew(true, empty2)
-	actual := args.Map{"result": r4.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r4.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -762,22 +762,22 @@ func Test_CovEnum_DM35_Strings_String_StringsUsingFmt(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	s := dm.String()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	sf := dm.StringsUsingFmt(func(index int, key string, val any) string {
 		return key
 	})
-	actual := args.Map{"result": len(sf) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sf) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// empty
 	empty := enumimpl.DynamicMap{}
-	actual := args.Map{"result": len(empty.Strings()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.Strings()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": len(empty.StringsUsingFmt(func(i int, k string, v any) string { return k })) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(empty.StringsUsingFmt(func(i int, k string, v any) string { return k })) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -830,8 +830,8 @@ func Test_CovEnum_DM39_BasicByte(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bb.Length() != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bb.Length() != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
@@ -947,11 +947,11 @@ func Test_CovEnum_BB01_IsAnyOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": bb.IsAnyOf(5, 1, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bb.IsAnyOf(5, 1, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": bb.IsAnyOf(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": bb.IsAnyOf(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for empty variadic", actual)
 }
 
@@ -966,8 +966,8 @@ func Test_CovEnum_BB02_IsAnyNamesOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": bb.IsAnyNamesOf(1, "nonexistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bb.IsAnyNamesOf(1, "nonexistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -989,8 +989,8 @@ func Test_CovEnum_BB04_GetValueByName_Valid_Invalid(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_, err2 := bb.GetValueByName("nonexistent_xyz")
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1017,12 +1017,12 @@ func Test_CovEnum_BB06_ToEnumJsonBytes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
-	actual := args.Map{"result": len(b) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	_, err2 := bb.ToEnumJsonBytes(99)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1040,20 +1040,20 @@ func Test_CovEnum_BB07_UnmarshallToValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// nil mapped to first
 	v, err2 := bb.UnmarshallToValue(true, nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = v
 	// empty string mapped to first
 	v2, err3 := bb.UnmarshallToValue(true, []byte(""))
-	actual := args.Map{"result": err3 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = v2
 	// valid name
 	_, err4 := bb.UnmarshallToValue(false, []byte("Invalid"))
-	actual := args.Map{"result": err4 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err4 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
@@ -1119,22 +1119,22 @@ func Test_CovEnum_NEB01_MinMaxAny_MinValueString_MaxValueString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	ms := bb.MinValueString()
-	actual := args.Map{"result": ms == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ms == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// cached call
 	ms2 := bb.MinValueString()
-	actual := args.Map{"result": ms2 != ms}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ms2 != ms}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same cached", actual)
 	mx := bb.MaxValueString()
-	actual := args.Map{"result": mx == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mx == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// cached call
 	mx2 := bb.MaxValueString()
-	actual := args.Map{"result": mx2 != mx}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mx2 != mx}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same cached", actual)
 }
 
@@ -1169,17 +1169,17 @@ func Test_CovEnum_NEB04_RangesMap_DynamicMap_RangesDynamicMap(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 4", actual)
 	dm := bb.DynamicMap()
-	actual := args.Map{"result": dm.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dm.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	rdm := bb.RangesDynamicMap()
-	actual := args.Map{"result": len(rdm) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(rdm) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// cached
 	rdm2 := bb.RangesDynamicMap()
-	actual := args.Map{"result": len(rdm2) != len(rdm)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(rdm2) != len(rdm)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same", actual)
 }
 
@@ -1209,12 +1209,12 @@ func Test_CovEnum_NEB06_KeyAnyValues_KeyValIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	// cached
 	kav2 := bb.KeyAnyValues()
-	actual := args.Map{"result": len(kav2) != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(kav2) != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	kvi := bb.KeyValIntegers()
-	actual := args.Map{"result": len(kvi) != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(kvi) != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
@@ -1239,16 +1239,16 @@ func Test_CovEnum_NEB07_Loop_LoopInteger(t *testing.T) {
 		count2++
 		return true
 	})
-	actual := args.Map{"result": count2 != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count2 != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	count3 := 0
 	bb.LoopInteger(func(index int, name string, anyVal int) bool {
 		count3++
 		return false
 	})
-	actual := args.Map{"result": count3 != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count3 != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
@@ -1264,12 +1264,12 @@ func Test_CovEnum_NEB08_RangesCsv_RangesInvalidMessage_RangesInvalidErr(t *testi
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	msg := bb.RangesInvalidMessage()
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	err := bb.RangesInvalidErr()
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1285,12 +1285,12 @@ func Test_CovEnum_NEB09_StringRanges_NamesHashset(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	srp := bb.StringRangesPtr()
-	actual := args.Map{"result": len(srp) != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(srp) != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	hs := bb.NamesHashset()
-	actual := args.Map{"result": len(hs) != 4}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(hs) != 4}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
@@ -1306,12 +1306,12 @@ func Test_CovEnum_NEB10_NameWithValue_NameWithValueOption(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	nvo := bb.NameWithValueOption(1, true)
-	actual := args.Map{"result": nvo == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nvo == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	nvo2 := bb.NameWithValueOption(1, false)
-	actual := args.Map{"result": nvo2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nvo2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1327,8 +1327,8 @@ func Test_CovEnum_NEB11_ValueString_JsonString_ToEnumString_ToName(t *testing.T)
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	js := bb.JsonString(1)
-	actual := args.Map{"result": js == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": js == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1408,8 +1408,8 @@ func Test_CovEnum_Misc02_ConvEnumAnyValToInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected MinInt", actual)
 	// int
 	r2 := enumimpl.ConvEnumAnyValToInteger(42)
-	actual := args.Map{"result": r2 != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1449,8 +1449,8 @@ func Test_CovEnum_Misc05_PrependJoin_JoinPrependUsingDot(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := enumimpl.JoinPrependUsingDot("pre", "a", "b")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1478,13 +1478,13 @@ func Test_CovEnum_Misc07_OnlySupportedErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// empty all names
 	err2 := enumimpl.OnlySupportedErr(0, []string{}, "a")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	// all supported
 	err3 := enumimpl.OnlySupportedErr(0, []string{"a", "b"}, "a", "b")
-	actual := args.Map{"result": err3 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1514,8 +1514,8 @@ func Test_CovEnum_Misc09_KeyAnyValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// empty
 	kav2 := enumimpl.KeyAnyValues(nil, nil)
-	actual := args.Map{"result": len(kav2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(kav2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -1534,8 +1534,8 @@ func Test_CovEnum_DLR01_Types_IsSameTypeSame(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same type", actual)
-	actual := args.Map{"result": d.IsSameTypeSame()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsSameTypeSame()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1549,12 +1549,12 @@ func Test_CovEnum_DLR02_IsSame_IsNotEqual(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected same", actual)
-	actual := args.Map{"result": d.IsNotEqual()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsNotEqual()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not notequal", actual)
 	d2 := &enumimpl.DiffLeftRight{Left: 1, Right: 2}
-	actual := args.Map{"result": d2.IsSame()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d2.IsSame()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not same", actual)
 }
 
@@ -1580,18 +1580,18 @@ func Test_CovEnum_DLR04_IsEqual_HasMismatch(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
-	actual := args.Map{"result": d.HasMismatch(false)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.HasMismatch(false)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no mismatch", actual)
-	actual := args.Map{"result": d.IsEqual(true)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsEqual(true)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless", actual)
-	actual := args.Map{"result": d.HasMismatch(true)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.HasMismatch(true)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no mismatch regardless", actual)
 	d2 := &enumimpl.DiffLeftRight{Left: 1, Right: 2}
-	actual := args.Map{"result": d2.HasMismatch(false)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d2.HasMismatch(false)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 	if d2.HasMismatchRegardlessOfType() {
 		// might be same string fmt
@@ -1610,23 +1610,23 @@ func Test_CovEnum_DLR05_String_JsonString_DiffString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	js := d.JsonString()
-	actual := args.Map{"result": js == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": js == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	ds := d.DiffString()
-	actual := args.Map{"result": ds == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ds == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty for different", actual)
 	// same
 	d2 := &enumimpl.DiffLeftRight{Left: 1, Right: 1}
 	ds2 := d2.DiffString()
-	actual := args.Map{"result": ds2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ds2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for same", actual)
 	// nil
 	var nilD *enumimpl.DiffLeftRight
-	actual := args.Map{"result": nilD.JsonString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.JsonString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
@@ -1657,25 +1657,25 @@ func Test_CovEnum_KAV01_KeyAnyVal_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
-	actual := args.Map{"result": kav.AnyVal() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.AnyVal() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	_ = kav.AnyValString()
 	_ = kav.WrapKey()
 	_ = kav.WrapValue()
-	actual := args.Map{"result": kav.IsString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.IsString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": kav.ValInt() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kav.ValInt() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	kvi := kav.KeyValInteger()
-	actual := args.Map{"result": kvi.Key != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvi.Key != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
 	s := kav.String()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1690,8 +1690,8 @@ func Test_CovEnum_KAV02_KeyAnyVal_StringType(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	s := kav.String()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1708,12 +1708,12 @@ func Test_CovEnum_KVI01_KeyValInteger_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected test", actual)
-	actual := args.Map{"result": kvi.IsString()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvi.IsString()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	s := kvi.String()
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1733,18 +1733,18 @@ func Test_CovEnum_DC01_DefaultDiffCheckerImpl(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected left", actual)
 	r2 := dc.GetSingleDiffResult(false, 1, 2)
-	actual := args.Map{"result": r2 != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected right", actual)
 	r3 := dc.GetResultOnKeyMissingInRightExistInLeft("k", 1)
-	actual := args.Map{"result": r3 != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3 != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": dc.IsEqual(false, 1, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dc.IsEqual(false, 1, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": dc.IsEqual(true, 1, byte(1))}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dc.IsEqual(true, 1, byte(1))}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true regardless", actual)
 }
 
@@ -1760,11 +1760,11 @@ func Test_CovEnum_DC02_LeftRightDiffCheckerImpl(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	r2 := dc.GetResultOnKeyMissingInRightExistInLeft("k", 1)
-	actual := args.Map{"result": r2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": dc.IsEqual(false, 1, 1)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": dc.IsEqual(false, 1, 1)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 

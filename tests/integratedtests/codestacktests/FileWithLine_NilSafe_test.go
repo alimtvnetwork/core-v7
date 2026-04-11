@@ -39,68 +39,68 @@ func Test_FileWithLine_Value(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FullFilePath mismatch", actual)
 
-	actual := args.Map{"result": fwl.LineNumber() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.LineNumber() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LineNumber mismatch", actual)
 
-	actual := args.Map{"result": fwl.IsNil()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.IsNil()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 
-	actual := args.Map{"result": fwl.IsNotNil()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fwl.IsNotNil()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be not nil", actual)
 
-	actual := args.Map{"result": fwl.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 
-	actual := args.Map{"result": fwl.FileWithLine() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.FileWithLine() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileWithLine should not be empty", actual)
 
 	// JsonModel
 	model := fwl.JsonModel()
-	actual := args.Map{"result": model.FilePath != "/tmp/test.go"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": model.FilePath != "/tmp/test.go"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonModel FilePath mismatch", actual)
 
 	// JsonModelAny
 	modelAny := fwl.JsonModelAny()
-	actual := args.Map{"result": modelAny == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": modelAny == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	// Json
 	jsonResult := fwl.Json()
-	actual := args.Map{"result": jsonResult.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonResult.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Json string should not be empty", actual)
 
 	// JsonPtr
 	jsonPtr := fwl.JsonPtr()
-	actual := args.Map{"result": jsonPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	// JsonString
 	js := fwl.JsonString()
-	actual := args.Map{"result": js == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": js == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonString should not be empty", actual)
 
 	// StringUsingFmt
 	fmtStr := fwl.StringUsingFmt(func(f codestack.FileWithLine) string {
 		return f.FilePath
 	})
-	actual := args.Map{"result": fmtStr != "/tmp/test.go"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fmtStr != "/tmp/test.go"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "StringUsingFmt mismatch", actual)
 
 	// AsFileLiner
 	liner := fwl.AsFileLiner()
-	actual := args.Map{"result": liner == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": liner == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
@@ -122,8 +122,8 @@ func Test_FileWithLine_ParseJson(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson error:", actual)
 
-	actual := args.Map{"result": result.FilePath != "/tmp/test.go"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.FilePath != "/tmp/test.go"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "parsed FilePath mismatch", actual)
 }
 
@@ -176,45 +176,45 @@ func Test_Trace_Value(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil pointer — it's a value", actual)
 
-	actual := args.Map{"result": trace.IsOkay}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": trace.IsOkay}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Default trace should be okay", actual)
 
-	actual := args.Map{"result": trace.PackageMethodName == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.PackageMethodName == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PackageMethodName should not be empty", actual)
 
-	actual := args.Map{"result": trace.Message() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.Message() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Message should not be empty", actual)
 
-	actual := args.Map{"result": trace.ShortString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.ShortString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ShortString should not be empty", actual)
 
-	actual := args.Map{"result": trace.FullFilePath() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.FullFilePath() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FullFilePath should not be empty", actual)
 
-	actual := args.Map{"result": trace.FileName() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.FileName() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileName should not be empty", actual)
 
-	actual := args.Map{"result": trace.LineNumber() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.LineNumber() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LineNumber should not be 0", actual)
 
-	actual := args.Map{"result": trace.FileWithLineString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.FileWithLineString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileWithLineString should not be empty", actual)
 
 	fwl := trace.FileWithLine()
-	actual := args.Map{"result": fwl.FilePath == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.FilePath == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileWithLine FilePath should not be empty", actual)
 
-	actual := args.Map{"result": trace.String() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.String() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
@@ -246,8 +246,8 @@ func Test_Trace_Clone_FromFileWithLineNilSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone PackageMethodName mismatch", actual)
 
 	clonedPtr := trace.ClonePtr()
-	actual := args.Map{"result": clonedPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
@@ -262,28 +262,28 @@ func Test_Trace_Json_FromFileWithLineNilSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonModel PackageName should not be empty", actual)
 
 	modelAny := trace.JsonModelAny()
-	actual := args.Map{"result": modelAny == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": modelAny == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	js := trace.JsonString()
-	actual := args.Map{"result": js == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": js == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonString should not be empty", actual)
 
 	jsonResult := trace.Json()
-	actual := args.Map{"result": jsonResult.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonResult.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Json string should not be empty", actual)
 
 	jsonPtr := trace.JsonPtr()
-	actual := args.Map{"result": jsonPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	liner := trace.AsFileLiner()
-	actual := args.Map{"result": liner == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": liner == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
@@ -302,8 +302,8 @@ func Test_Trace_ParseJson(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson error:", actual)
 
-	actual := args.Map{"result": result.PackageName == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.PackageName == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "parsed PackageName should not be empty", actual)
 }
 
@@ -351,8 +351,8 @@ func Test_Trace_Dispose_FromFileWithLineNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PackageName should be empty after Dispose", actual)
 
-	actual := args.Map{"result": trace.IsOkay}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": trace.IsOkay}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsOkay should be false after Dispose", actual)
 }
 
@@ -382,28 +382,28 @@ func Test_TraceCollection_NewAndBasic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "First should have PackageName", actual)
 
 	last := tc.Last()
-	actual := args.Map{"result": last.PackageName == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": last.PackageName == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Last should have PackageName", actual)
 
 	firstDyn := tc.FirstDynamic()
-	actual := args.Map{"result": firstDyn == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": firstDyn == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FirstDynamic should not be nil", actual)
 
 	lastDyn := tc.LastDynamic()
-	actual := args.Map{"result": lastDyn == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lastDyn == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LastDynamic should not be nil", actual)
 
 	firstOrDefault := tc.FirstOrDefault()
-	actual := args.Map{"result": firstOrDefault.PackageName == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": firstOrDefault.PackageName == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefault should have PackageName", actual)
 
 	lastOrDefault := tc.LastOrDefault()
-	actual := args.Map{"result": lastOrDefault.PackageName == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lastOrDefault.PackageName == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LastOrDefault should have PackageName", actual)
 }
 
@@ -483,18 +483,18 @@ func Test_TraceCollection_SkipTake(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SkipCollection should reduce length", actual)
 
 	takeCol := tc.TakeCollection(1)
-	actual := args.Map{"result": takeCol.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": takeCol.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TakeCollection should return 1", actual)
 
 	limitCol := tc.LimitCollection(1)
-	actual := args.Map{"result": limitCol.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": limitCol.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "LimitCollection should return 1", actual)
 
 	safeLimit := tc.SafeLimitCollection(1)
-	actual := args.Map{"result": safeLimit.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": safeLimit.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeLimitCollection should return 1", actual)
 }
 
@@ -514,18 +514,18 @@ func Test_TraceCollection_FileWithLines_FromFileWithLineNilSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLines should not be empty", actual)
 
 	fwlStrs := tc.FileWithLinesStrings()
-	actual := args.Map{"result": len(fwlStrs) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(fwlStrs) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileWithLinesStrings should not be empty", actual)
 
 	fwlStr := tc.FileWithLinesString()
-	actual := args.Map{"result": fwlStr == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwlStr == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FileWithLinesString should not be empty", actual)
 
 	joinFwlStr := tc.JoinFileWithLinesStrings(", ")
-	actual := args.Map{"result": joinFwlStr == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": joinFwlStr == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JoinFileWithLinesStrings should not be empty", actual)
 }
 
@@ -544,33 +544,33 @@ func Test_TraceCollection_Json_FromFileWithLineNilSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonStrings should not be empty", actual)
 
 	joinJsonStr := tc.JoinJsonStrings(", ")
-	actual := args.Map{"result": joinJsonStr == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": joinJsonStr == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JoinJsonStrings should not be empty", actual)
 
 	jsonModel := tc.JsonModel()
-	actual := args.Map{"result": jsonModel == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonModel == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonModel should not be nil", actual)
 
 	jsonModelAny := tc.JsonModelAny()
-	actual := args.Map{"result": jsonModelAny == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonModelAny == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	jsonResult := tc.Json()
-	actual := args.Map{"result": jsonResult.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonResult.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Json should not be empty", actual)
 
 	jsonPtr := tc.JsonPtr()
-	actual := args.Map{"result": jsonPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsonPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	csvStrs := tc.CsvStrings()
-	actual := args.Map{"result": len(csvStrs) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(csvStrs) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CsvStrings should not be empty", actual)
 }
 
@@ -614,8 +614,8 @@ func Test_TraceCollection_Clone_FromFileWithLineNilSafe(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should preserve length", actual)
 	clonedPtr := tc.ClonePtr()
-	actual := args.Map{"result": clonedPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": clonedPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
@@ -676,8 +676,8 @@ func Test_TraceCollection_CodeStacksString_FromFileWithLineNilSafe(t *testing.T)
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CodeStacksString should not be empty", actual)
 	csStrLimit := tc.CodeStacksStringLimit(1)
-	actual := args.Map{"result": csStrLimit == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": csStrLimit == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CodeStacksStringLimit should not be empty", actual)
 }
 
@@ -698,8 +698,8 @@ func Test_TraceCollection_StringsUsingFmt_FromFileWithLineNilSafe(t *testing.T) 
 	joinStr := tc.JoinUsingFmt(func(tr *codestack.Trace) string {
 		return tr.PackageName
 	}, ", ")
-	actual := args.Map{"result": joinStr == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": joinStr == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JoinUsingFmt should not be empty", actual)
 }
 
@@ -742,8 +742,8 @@ func Test_TraceCollection_HasIndex_FromFileWithLineNilSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "HasIndex 0 should be true", actual)
-	actual := args.Map{"result": tc.HasIndex(9999)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tc.HasIndex(9999)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "HasIndex 9999 should be false", actual)
 }
 
@@ -759,8 +759,8 @@ func Test_TraceCollection_Serializer_FromFileWithLineNilSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Serializer should not return error:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Serializer should not be empty", actual)
 }
 
@@ -840,12 +840,12 @@ func Test_NameOf_All(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "full should not be empty", actual)
 
-	actual := args.Map{"result": pkg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pkg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "pkg should not be empty", actual)
 
-	actual := args.Map{"result": method == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": method == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "method should not be empty", actual)
 }
 
@@ -988,8 +988,8 @@ func Test_TraceCollection_Concat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConcatNew should not reduce length", actual)
 	trace := codestack.New.Default()
 	concatPtr := tc.ConcatNewPtr(&trace)
-	actual := args.Map{"result": concatPtr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": concatPtr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ConcatNewPtr should not be nil", actual)
 }
 
@@ -1010,8 +1010,8 @@ func Test_TraceCollection_Filters(t *testing.T) {
 	filteredLimit := tc.FilterWithLimit(1, func(trace *codestack.Trace) (bool, bool) {
 		return true, false
 	})
-	actual := args.Map{"result": len(filteredLimit) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(filteredLimit) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "FilterWithLimit should return 1 item", actual)
 }
 
@@ -1028,11 +1028,11 @@ func Test_TraceCollection_AsBindings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder should not be nil", actual)
 	jsoner := tc.AsJsoner()
-	actual := args.Map{"result": jsoner == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jsoner == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsJsoner should not be nil", actual)
 	injector := tc.AsJsonParseSelfInjector()
-	actual := args.Map{"result": injector == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": injector == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsJsonParseSelfInjector should not be nil", actual)
 }

@@ -91,8 +91,8 @@ func Test_LineValidator_AllVerifyError_MultipleContents_PrintsDiff(t *testing.T)
 
 	errMsg := err.Error()
 	for _, expected := range []string{"wrong-1", "wrong-2", "wrong-3"} {
-		actual := args.Map{"result": strings.Contains(errMsg, expected)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": strings.Contains(errMsg, expected)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "error should contain '', got:\n", actual)
 	}
 }
@@ -140,8 +140,8 @@ func Test_LineValidator_VerifyMany_CollectAll_PrintsDiff(t *testing.T) {
 	}, "Contains 'ok'")
 
 	errMsg := err.Error()
-	actual := args.Map{"result": strings.Contains(errMsg, "no match")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": strings.Contains(errMsg, "no match")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should mention 'no match':", actual)
 }
 
@@ -290,7 +290,7 @@ func Test_ErrorToLinesLineDiff_NilError(t *testing.T) {
 
 	// Act
 	actual := args.Map{"result": strings.Contains(result, "MISSING EXPECTED")}
-	expected := args.Map{"result": true}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil error vs expected lines should show missing, got:\n", actual)
 
 	fmt.Print(result)
@@ -307,10 +307,10 @@ func Test_ErrorToLinesLineDiff_WithError(t *testing.T) {
 
 	// Act
 	actual := args.Map{"result": strings.Contains(result, "MISMATCH")}
-	expected := args.Map{"result": true}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "line 2 should be mismatch, got:\n", actual)
-	actual := args.Map{"result": strings.Contains(result, "Line")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": strings.Contains(result, "Line")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should contain line number labels", actual)
 
 	fmt.Print(result)

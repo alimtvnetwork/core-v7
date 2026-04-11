@@ -32,7 +32,7 @@ func Test_FromTo_ClonePtr(t *testing.T) {
 		tc := fromToClonePtrNilTestCase
 		var nilFT *coreinstruction.FromTo
 
-		actual := args.Map{"isNil": nilFT.ClonePtr() == nil}
+		actual = args.Map{"isNil": nilFT.ClonePtr() == nil}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -71,7 +71,7 @@ func Test_FromTo_IsNull(t *testing.T) {
 		tc := fromToIsNullNonNilTestCase
 		ft := &coreinstruction.FromTo{From: "x", To: "y"}
 
-		actual := args.Map{"result": ft.IsNull()}
+		actual = args.Map{"result": ft.IsNull()}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -94,7 +94,7 @@ func Test_FromTo_IsFromEmpty(t *testing.T) {
 		tc := fromToIsFromEmptyNilTestCase
 		var nilFT *coreinstruction.FromTo
 
-		actual := args.Map{"result": nilFT.IsFromEmpty()}
+		actual = args.Map{"result": nilFT.IsFromEmpty()}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -117,7 +117,7 @@ func Test_FromTo_IsToEmpty(t *testing.T) {
 		tc := fromToIsToEmptyNonEmptyTestCase
 		ft := &coreinstruction.FromTo{From: "src", To: "dest"}
 
-		actual := args.Map{"result": ft.IsToEmpty()}
+		actual = args.Map{"result": ft.IsToEmpty()}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -182,7 +182,7 @@ func Test_FromTo_SetFromName(t *testing.T) {
 			nilFT.SetFromName("x")
 		}()
 
-		actual := args.Map{"noPanic": !didPanic}
+		actual = args.Map{"noPanic": !didPanic}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -223,7 +223,7 @@ func Test_FromTo_SourceDestination(t *testing.T) {
 		tc := fromToSourceDestNilTestCase
 		var nilFT *coreinstruction.FromTo
 
-		actual := args.Map{"isNil": nilFT.SourceDestination() == nil}
+		actual = args.Map{"isNil": nilFT.SourceDestination() == nil}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}
@@ -251,7 +251,7 @@ func Test_FromTo_Rename(t *testing.T) {
 		tc := fromToRenameNilTestCase
 		var nilFT *coreinstruction.FromTo
 
-		actual := args.Map{"isNil": nilFT.Rename() == nil}
+		actual = args.Map{"isNil": nilFT.Rename() == nil}
 
 		tc.ShouldBeEqualMapFirst(t, actual)
 	}

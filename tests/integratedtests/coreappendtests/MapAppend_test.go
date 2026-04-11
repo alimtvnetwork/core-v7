@@ -24,8 +24,8 @@ func Test_PrependAppendToStrings_AllNonNil(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
-	actual := args.Map{"result": result[0] != "PRE" || result[len(result)-1] != "POST"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "PRE" || result[len(result)-1] != "POST"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected PRE...POST", actual)
 }
 
@@ -41,8 +41,8 @@ func Test_PrependAppendToStrings_NilPrepend(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 (skip nil prepend)", actual)
-	actual := args.Map{"result": result[0] != "a" || result[1] != "POST"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "a" || result[1] != "POST"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected result:", actual)
 }
 
@@ -58,8 +58,8 @@ func Test_PrependAppendToStrings_NilAppend(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 (skip nil append)", actual)
-	actual := args.Map{"result": result[0] != "PRE" || result[1] != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "PRE" || result[1] != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected result:", actual)
 }
 
@@ -220,8 +220,8 @@ func Test_PrependAppendUsingFunc_Basic_FromMapAppend(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
-	actual := args.Map{"result": result[0] != "[pre]" || result[3] != "[post]"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "[pre]" || result[3] != "[post]"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
@@ -314,8 +314,8 @@ func Test_MapAppend_SkipEmpty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SkipEmpty should skip empty string values", actual)
-	actual := args.Map{"result": result["b"] != "val"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result["b"] != "val"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'val', got ''", actual)
 }
 

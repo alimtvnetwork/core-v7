@@ -507,8 +507,8 @@ func Test_CovSS1_25_IndexOf_IndexOfFunc(t *testing.T) {
 		idx := ss.IndexOfFunc("b", func(item, searching string) bool {
 			return item == searching
 		})
-		actual := args.Map{"result": idx != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": idx != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		e := corestr.New.SimpleSlice.Strings([]string{})
