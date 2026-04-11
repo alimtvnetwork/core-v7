@@ -115,7 +115,7 @@ func Test_TypedPayloadWrapper_DeepClone(t *testing.T) {
 	}
 }
 
-func Test_TypedPayloadWrapper_SetTypedData(t *testing.T) {
+func Test_TypedPayloadWrapper_SetTypedData_FromTypedWrapper(t *testing.T) {
 	for caseIndex, testCase := range typedWrapperSetDataTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)

@@ -12,7 +12,7 @@ import (
 // LazyRegex.FullString
 // =============================================================================
 
-func Test_LazyRegex_FullString(t *testing.T) {
+func Test_LazyRegex_FullString_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexFullStringTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -35,7 +35,7 @@ func Test_LazyRegex_FullString(t *testing.T) {
 // LazyRegex.CompileMust
 // =============================================================================
 
-func Test_LazyRegex_CompileMust(t *testing.T) {
+func Test_LazyRegex_CompileMust_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexCompileMustTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -70,7 +70,7 @@ func Test_LazyRegex_CompileMust(t *testing.T) {
 // LazyRegex.FirstMatchLine
 // =============================================================================
 
-func Test_LazyRegex_FirstMatchLine(t *testing.T) {
+func Test_LazyRegex_FirstMatchLine_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexFirstMatchLineTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -95,7 +95,7 @@ func Test_LazyRegex_FirstMatchLine(t *testing.T) {
 // LazyRegex.IsFailedMatchBytes
 // =============================================================================
 
-func Test_LazyRegex_IsFailedMatchBytes(t *testing.T) {
+func Test_LazyRegex_IsFailedMatchBytes_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexIsFailedMatchBytesTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -147,7 +147,7 @@ func Test_LazyRegex_MatchUsingFuncError(t *testing.T) {
 // LazyRegex.OnRequiredCompiledMust
 // =============================================================================
 
-func Test_LazyRegex_OnRequiredCompiledMust(t *testing.T) {
+func Test_LazyRegex_OnRequiredCompiledMust_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexOnRequiredCompiledMustTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -180,7 +180,7 @@ func Test_LazyRegex_OnRequiredCompiledMust(t *testing.T) {
 // LazyRegex.MustBeSafe
 // =============================================================================
 
-func Test_LazyRegex_MustBeSafe(t *testing.T) {
+func Test_LazyRegex_MustBeSafe_FromLazyRegexExtendedMet(t *testing.T) {
 	for caseIndex, tc := range lazyRegexMustBeSafeTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)

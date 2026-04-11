@@ -28,7 +28,7 @@ func sampleSixArgs(a, b, c, d, e, f int) int { return a + b + c + d + e + f }
 // Covers OneFunc.go L84-86, L89-91, L103-105
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_OneFunc_Invoke(t *testing.T) {
+func Test_OneFunc_Invoke(t *testing.T) {
 	of := &OneFunc[string]{
 		First:    "World",
 		WorkFunc: sampleGreet,
@@ -43,7 +43,7 @@ func Test_Cov9_OneFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_OneFunc_InvokeMust(t *testing.T) {
+func Test_OneFunc_InvokeMust(t *testing.T) {
 	of := &OneFunc[string]{
 		First:    "Test",
 		WorkFunc: sampleGreet,
@@ -54,7 +54,7 @@ func Test_Cov9_OneFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_OneFunc_InvokeArgs(t *testing.T) {
+func Test_OneFunc_InvokeArgs(t *testing.T) {
 	of := &OneFunc[string]{
 		First:    "Args",
 		WorkFunc: sampleGreet,
@@ -73,7 +73,7 @@ func Test_Cov9_OneFunc_InvokeArgs(t *testing.T) {
 // Covers TwoFunc.go L98-100, L103-105, L117-119, L170-172
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_TwoFunc_Invoke(t *testing.T) {
+func Test_TwoFunc_Invoke(t *testing.T) {
 	tf := &TwoFunc[int, int]{
 		First:    1,
 		Second:   2,
@@ -88,7 +88,7 @@ func Test_Cov9_TwoFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_TwoFunc_InvokeMust(t *testing.T) {
+func Test_TwoFunc_InvokeMust(t *testing.T) {
 	tf := &TwoFunc[int, int]{First: 1, Second: 2, WorkFunc: sampleAdd}
 	results := tf.InvokeMust(1, 2)
 	if results[0] != int64(3) {
@@ -96,7 +96,7 @@ func Test_Cov9_TwoFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_TwoFunc_InvokeArgs(t *testing.T) {
+func Test_TwoFunc_InvokeArgs(t *testing.T) {
 	tf := &TwoFunc[int, int]{First: 1, Second: 2, WorkFunc: sampleAdd}
 	results, err := tf.InvokeArgs(2)
 	if err != nil {
@@ -107,7 +107,7 @@ func Test_Cov9_TwoFunc_InvokeArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_TwoFunc_String(t *testing.T) {
+func Test_TwoFunc_String(t *testing.T) {
 	tf := &TwoFunc[int, int]{First: 10, Second: 20, WorkFunc: sampleAdd}
 	s := tf.String()
 	if s == "" {
@@ -120,7 +120,7 @@ func Test_Cov9_TwoFunc_String(t *testing.T) {
 // Covers ThreeFunc.go L119-121, L124-126, L138-140, L174-176, L197-199
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_ThreeFunc_Invoke(t *testing.T) {
+func Test_ThreeFunc_Invoke(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{
 		First: 1, Second: 2, Third: 3,
 		WorkFunc: sampleThreeArgs,
@@ -134,7 +134,7 @@ func Test_Cov9_ThreeFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_ThreeFunc_InvokeMust(t *testing.T) {
+func Test_ThreeFunc_InvokeMust(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{First: 1, Second: 2, Third: 3, WorkFunc: sampleThreeArgs}
 	results := tf.InvokeMust(1, 2, 3)
 	if results[0] != int64(6) {
@@ -142,7 +142,7 @@ func Test_Cov9_ThreeFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_ThreeFunc_InvokeArgs(t *testing.T) {
+func Test_ThreeFunc_InvokeArgs(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{First: 1, Second: 2, Third: 3, WorkFunc: sampleThreeArgs}
 	results, err := tf.InvokeArgs(3)
 	if err != nil {
@@ -153,7 +153,7 @@ func Test_Cov9_ThreeFunc_InvokeArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_ThreeFunc_Slice(t *testing.T) {
+func Test_ThreeFunc_Slice(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{First: 1, Second: 2, Third: 3, WorkFunc: sampleThreeArgs}
 	s := tf.Slice()
 	if len(s) == 0 {
@@ -161,7 +161,7 @@ func Test_Cov9_ThreeFunc_Slice(t *testing.T) {
 	}
 }
 
-func Test_Cov9_ThreeFunc_GetByIndex(t *testing.T) {
+func Test_ThreeFunc_GetByIndex(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{First: 10, Second: 20, Third: 30}
 	slice := tf.Slice()
 	item := tf.GetByIndex(0)
@@ -175,7 +175,7 @@ func Test_Cov9_ThreeFunc_GetByIndex(t *testing.T) {
 // Covers FourFunc.go L123-125, L130-132, L135-137, L142-144, L149-151, L190-192, L214-216
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_FourFunc_Invoke(t *testing.T) {
+func Test_FourFunc_Invoke(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{
 		First: 1, Second: 2, Third: 3, Fourth: 4,
 		WorkFunc: sampleFourArgs,
@@ -189,7 +189,7 @@ func Test_Cov9_FourFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FourFunc_InvokeMust(t *testing.T) {
+func Test_FourFunc_InvokeMust(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, WorkFunc: sampleFourArgs}
 	results := ff.InvokeMust(1, 2, 3, 4)
 	if results[0] != int64(10) {
@@ -197,7 +197,7 @@ func Test_Cov9_FourFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FourFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, WorkFunc: sampleFourArgs}
 	results, err := ff.InvokeWithValidArgs()
 	if err != nil {
@@ -208,7 +208,7 @@ func Test_Cov9_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FourFunc_InvokeArgs(t *testing.T) {
+func Test_FourFunc_InvokeArgs(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, WorkFunc: sampleFourArgs}
 	results, err := ff.InvokeArgs(4)
 	if err != nil {
@@ -219,7 +219,7 @@ func Test_Cov9_FourFunc_InvokeArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FourFunc_Slice(t *testing.T) {
+func Test_FourFunc_Slice(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, WorkFunc: sampleFourArgs}
 	s := ff.Slice()
 	if len(s) == 0 {
@@ -227,7 +227,7 @@ func Test_Cov9_FourFunc_Slice(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FourFunc_String(t *testing.T) {
+func Test_FourFunc_String(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4}
 	s := ff.String()
 	if s == "" {
@@ -240,7 +240,7 @@ func Test_Cov9_FourFunc_String(t *testing.T) {
 // Covers FiveFunc.go L134-136, L141-143, L146-148, L153-155, L160-162, L206-208, L231-233
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_FiveFunc_Invoke(t *testing.T) {
+func Test_FiveFunc_Invoke(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{
 		First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5,
 		WorkFunc: sampleFiveArgs,
@@ -254,7 +254,7 @@ func Test_Cov9_FiveFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FiveFunc_InvokeMust(t *testing.T) {
+func Test_FiveFunc_InvokeMust(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, WorkFunc: sampleFiveArgs}
 	results := ff.InvokeMust(1, 2, 3, 4, 5)
 	if results[0] != int64(15) {
@@ -262,7 +262,7 @@ func Test_Cov9_FiveFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FiveFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, WorkFunc: sampleFiveArgs}
 	results, err := ff.InvokeWithValidArgs()
 	if err != nil {
@@ -273,7 +273,7 @@ func Test_Cov9_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FiveFunc_InvokeArgs(t *testing.T) {
+func Test_FiveFunc_InvokeArgs(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, WorkFunc: sampleFiveArgs}
 	results, err := ff.InvokeArgs(5)
 	if err != nil {
@@ -284,7 +284,7 @@ func Test_Cov9_FiveFunc_InvokeArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FiveFunc_Slice(t *testing.T) {
+func Test_FiveFunc_Slice(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, WorkFunc: sampleFiveArgs}
 	s := ff.Slice()
 	if len(s) == 0 {
@@ -292,7 +292,7 @@ func Test_Cov9_FiveFunc_Slice(t *testing.T) {
 	}
 }
 
-func Test_Cov9_FiveFunc_String(t *testing.T) {
+func Test_FiveFunc_String(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5}
 	s := ff.String()
 	if s == "" {
@@ -305,7 +305,7 @@ func Test_Cov9_FiveFunc_String(t *testing.T) {
 // Covers SixFunc.go L156-158, L163-165, L168-170, L175-177, L182-184, L233-235, L259-261
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov9_SixFunc_Invoke(t *testing.T) {
+func Test_SixFunc_Invoke(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{
 		First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6,
 		WorkFunc: sampleSixArgs,
@@ -319,7 +319,7 @@ func Test_Cov9_SixFunc_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Cov9_SixFunc_InvokeMust(t *testing.T) {
+func Test_SixFunc_InvokeMust(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, WorkFunc: sampleSixArgs}
 	results := sf.InvokeMust(1, 2, 3, 4, 5, 6)
 	if results[0] != int64(21) {
@@ -327,7 +327,7 @@ func Test_Cov9_SixFunc_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_Cov9_SixFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, WorkFunc: sampleSixArgs}
 	results, err := sf.InvokeWithValidArgs()
 	if err != nil {
@@ -338,7 +338,7 @@ func Test_Cov9_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_SixFunc_InvokeArgs(t *testing.T) {
+func Test_SixFunc_InvokeArgs(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, WorkFunc: sampleSixArgs}
 	results, err := sf.InvokeArgs(6)
 	if err != nil {
@@ -349,7 +349,7 @@ func Test_Cov9_SixFunc_InvokeArgs(t *testing.T) {
 	}
 }
 
-func Test_Cov9_SixFunc_Slice(t *testing.T) {
+func Test_SixFunc_Slice(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, WorkFunc: sampleSixArgs}
 	s := sf.Slice()
 	if len(s) == 0 {
@@ -357,7 +357,7 @@ func Test_Cov9_SixFunc_Slice(t *testing.T) {
 	}
 }
 
-func Test_Cov9_SixFunc_String(t *testing.T) {
+func Test_SixFunc_String(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6}
 	s := sf.String()
 	if s == "" {
