@@ -81,7 +81,7 @@ func Test_Attributes_DeepClone(t *testing.T) {
 // ── AttributesSetters: HandleErr, HandleError, MustBeEmptyError ──
 // Covers AttributesSetters.go L13-15, L19-21, L29
 
-func Test_I12_Attributes_HandleErr_NoError(t *testing.T) {
+func Test_Attributes_HandleErr_NoError(t *testing.T) {
 	// Arrange
 	a := &corepayload.Attributes{}
 	a.HandleErr() // should not panic
@@ -94,7 +94,7 @@ func Test_I12_Attributes_HandleErr_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HandleErr does nothing -- no error", actual)
 }
 
-func Test_I12_Attributes_HandleError_NoError(t *testing.T) {
+func Test_Attributes_HandleError_NoError(t *testing.T) {
 	// Arrange
 	a := &corepayload.Attributes{}
 	a.HandleError() // should not panic
@@ -161,7 +161,7 @@ func Test_PayloadWrapper_UnmarshalJSON_Nil(t *testing.T) {
 // ── PayloadWrapper: BasicError (has error vs no error) ──
 // Covers PayloadWrapper.go L134-136
 
-func Test_I12_PayloadWrapper_BasicError_NoError(t *testing.T) {
+func Test_PayloadWrapper_BasicError_NoError(t *testing.T) {
 	// Arrange
 	pw := &corepayload.PayloadWrapper{}
 	result := pw.BasicError()
@@ -284,7 +284,7 @@ func Test_PayloadWrapper_SetUserInfo(t *testing.T) {
 // ── PayloadWrapper: HandleError ──
 // Covers PayloadWrapper.go L294-296
 
-func Test_I12_PayloadWrapper_HandleError_NoError(t *testing.T) {
+func Test_PayloadWrapper_HandleError_NoError(t *testing.T) {
 	// Arrange
 	pw := &corepayload.PayloadWrapper{}
 	pw.HandleError() // should not panic
