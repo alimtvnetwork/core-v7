@@ -8,7 +8,7 @@ import (
 
 // ── String type ──
 
-func Test_String_Concat(t *testing.T) {
+func Test_String_Concat_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	result := s.Concat(" ", "world")
@@ -25,7 +25,7 @@ func Test_String_Concat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_Concat returns correct value -- with args", actual)
 }
 
-func Test_String_Join(t *testing.T) {
+func Test_String_Join_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	result := s.Join("-", "world", "go")
@@ -42,7 +42,7 @@ func Test_String_Join(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_Join returns correct value -- with args", actual)
 }
 
-func Test_String_Split(t *testing.T) {
+func Test_String_Split_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("a,b,c")
 	result := s.Split(",")
@@ -59,7 +59,7 @@ func Test_String_Split(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_Split returns correct value -- with args", actual)
 }
 
-func Test_String_Quoting(t *testing.T) {
+func Test_String_Quoting_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -129,7 +129,7 @@ func Test_String_IsEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_IsEmptyOrWhitespace returns empty -- with args", actual)
 }
 
-func Test_String_TrimSpace(t *testing.T) {
+func Test_String_TrimSpace_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("  hello  ")
 	result := s.TrimSpace()
@@ -146,7 +146,7 @@ func Test_String_TrimSpace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_TrimSpace returns correct value -- with args", actual)
 }
 
-func Test_String_ReplaceAll(t *testing.T) {
+func Test_String_ReplaceAll_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 	result := s.ReplaceAll("world", "go")
@@ -163,7 +163,7 @@ func Test_String_ReplaceAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String_ReplaceAll returns correct value -- with args", actual)
 }
 
-func Test_String_Substring(t *testing.T) {
+func Test_String_Substring_FromStringConcat(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 	result := s.Substring(0, 5)
@@ -200,7 +200,7 @@ func Test_String_Bytes(t *testing.T) {
 
 // ── Dynamic ──
 
-func Test_Dynamic_Getters(t *testing.T) {
+func Test_Dynamic_Getters_FromStringConcat(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
 		Params: args.Map{
@@ -240,7 +240,7 @@ func Test_Dynamic_Getters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic_Getters returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_NilSafety(t *testing.T) {
+func Test_Dynamic_NilSafety_FromStringConcat(t *testing.T) {
 	// Arrange
 	var d *args.DynamicAny
 
@@ -320,7 +320,7 @@ func Test_Dynamic_TypedGetters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic_TypedGetters returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_GetLowerCase(t *testing.T) {
+func Test_Dynamic_GetLowerCase_FromStringConcat(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
 		Params: args.Map{"name": "val"},
@@ -345,7 +345,7 @@ func Test_Dynamic_GetLowerCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic_GetLowerCase returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_HasDefined(t *testing.T) {
+func Test_Dynamic_HasDefined_FromStringConcat(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
 		Params: args.Map{
@@ -382,7 +382,7 @@ func Test_Dynamic_HasDefined(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic_HasDefined returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValidArgs(t *testing.T) {
+func Test_Dynamic_ValidArgs_FromStringConcat(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
 		Params: args.Map{
@@ -575,7 +575,7 @@ func Test_Holder_HasMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder_HasMethods returns correct value -- with args", actual)
 }
 
-func Test_Holder_ArgTwo(t *testing.T) {
+func Test_Holder_ArgTwo_FromStringConcat(t *testing.T) {
 	// Arrange
 	h := &args.HolderAny{First: "a", Second: "b"}
 	two := h.ArgTwo()
@@ -613,7 +613,7 @@ func Test_Holder_ArgThree(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder_ArgThree returns correct value -- with args", actual)
 }
 
-func Test_Holder_Args(t *testing.T) {
+func Test_Holder_Args_FromStringConcat(t *testing.T) {
 	// Arrange
 	h := &args.HolderAny{First: "a", Second: "b", Third: "c"}
 
@@ -655,7 +655,7 @@ func Test_Holder_ValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder_ValidArgs returns non-empty -- with args", actual)
 }
 
-func Test_Holder_Slice(t *testing.T) {
+func Test_Holder_Slice_FromStringConcat(t *testing.T) {
 	// Arrange
 	h := &args.HolderAny{First: "a", Expect: "exp"}
 
@@ -694,7 +694,7 @@ func Test_Holder_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder_GetByIndex returns correct value -- with args", actual)
 }
 
-func Test_Holder_String(t *testing.T) {
+func Test_Holder_String_FromStringConcat(t *testing.T) {
 	// Arrange
 	h := &args.HolderAny{First: "a"}
 
@@ -712,7 +712,7 @@ func Test_Holder_String(t *testing.T) {
 
 // ── LeftRight ──
 
-func Test_LeftRight_Methods(t *testing.T) {
+func Test_LeftRight_Methods_FromStringConcat(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRightAny{
 		Left:   "L",
@@ -748,7 +748,7 @@ func Test_LeftRight_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight_Methods returns correct value -- with args", actual)
 }
 
-func Test_LeftRight_ArgTwo(t *testing.T) {
+func Test_LeftRight_ArgTwo_FromStringConcat(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRightAny{Left: "L", Right: "R"}
 	two := lr.ArgTwo()
@@ -787,7 +787,7 @@ func Test_LeftRight_ValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight_ValidArgs returns non-empty -- with args", actual)
 }
 
-func Test_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone_FromStringConcat(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRightAny{Left: "L", Right: "R", Expect: "e"}
 	clone := lr.Clone()
@@ -808,7 +808,7 @@ func Test_LeftRight_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight_Clone returns correct value -- with args", actual)
 }
 
-func Test_LeftRight_String(t *testing.T) {
+func Test_LeftRight_String_FromStringConcat(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRightAny{Left: "L"}
 
@@ -826,7 +826,7 @@ func Test_LeftRight_String(t *testing.T) {
 
 // ── Two ──
 
-func Test_Two_Methods(t *testing.T) {
+func Test_Two_Methods_FromStringConcat(t *testing.T) {
 	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b", Expect: "exp"}
 
@@ -854,7 +854,7 @@ func Test_Two_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two_Methods returns correct value -- with args", actual)
 }
 
-func Test_Two_ArgTwo(t *testing.T) {
+func Test_Two_ArgTwo_FromStringConcat(t *testing.T) {
 	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b"}
 	at := tw.ArgTwo()
@@ -873,7 +873,7 @@ func Test_Two_ArgTwo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two_ArgTwo returns correct value -- with args", actual)
 }
 
-func Test_Two_LeftRight(t *testing.T) {
+func Test_Two_LeftRight_FromStringConcat(t *testing.T) {
 	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b", Expect: "e"}
 	lr := tw.LeftRight()
@@ -894,7 +894,7 @@ func Test_Two_LeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two_LeftRight returns correct value -- with args", actual)
 }
 
-func Test_Two_String(t *testing.T) {
+func Test_Two_String_FromStringConcat(t *testing.T) {
 	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b"}
 
@@ -912,7 +912,7 @@ func Test_Two_String(t *testing.T) {
 
 // ── Three ──
 
-func Test_Three_Methods(t *testing.T) {
+func Test_Three_Methods_FromStringConcat(t *testing.T) {
 	// Arrange
 	th := &args.ThreeAny{First: "a", Second: "b", Third: "c", Expect: "exp"}
 
@@ -964,7 +964,7 @@ func Test_Three_ArgTwo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Three_ArgTwo returns correct value -- with args", actual)
 }
 
-func Test_Three_LeftRight(t *testing.T) {
+func Test_Three_LeftRight_FromStringConcat(t *testing.T) {
 	// Arrange
 	th := &args.ThreeAny{First: "a", Second: "b", Expect: "e"}
 	lr := th.LeftRight()
@@ -983,7 +983,7 @@ func Test_Three_LeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Three_LeftRight returns correct value -- with args", actual)
 }
 
-func Test_Three_String(t *testing.T) {
+func Test_Three_String_FromStringConcat(t *testing.T) {
 	// Arrange
 	th := &args.ThreeAny{First: "a"}
 
@@ -1079,7 +1079,7 @@ func Test_FuncWrap_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap_Invoke returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_InvokeMust(t *testing.T) {
+func Test_FuncWrap_InvokeMust_FromStringConcat(t *testing.T) {
 	// Arrange
 	fn := func() string { return "ok" }
 	fw := args.NewTypedFuncWrap(fn)
@@ -1098,7 +1098,7 @@ func Test_FuncWrap_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap_InvokeMust returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_VoidCall(t *testing.T) {
+func Test_FuncWrap_VoidCall_FromStringConcat(t *testing.T) {
 	// Arrange
 	called := false
 	fn := func() { called = true }
@@ -1160,7 +1160,7 @@ func Test_FuncWrap_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap_InvalidError returns error -- with args", actual)
 }
 
-func Test_FuncWrap_IsEqual(t *testing.T) {
+func Test_FuncWrap_IsEqual_FromStringConcat(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fw1 := args.NewTypedFuncWrap(fn)
@@ -1188,7 +1188,7 @@ func Test_FuncWrap_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap_IsEqual returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_PkgPath(t *testing.T) {
+func Test_FuncWrap_PkgPath_FromStringConcat(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fw := args.NewTypedFuncWrap(fn)
@@ -1234,7 +1234,7 @@ func Test_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap_GetFirstResponseOfInvoke returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex_FromStringConcat(t *testing.T) {
 	// Arrange
 	fn := func() (string, int) { return "a", 42 }
 	fw := args.NewTypedFuncWrap(fn)
@@ -1262,7 +1262,7 @@ func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 
 // ── Map CompileToString ──
 
-func Test_Map_CompileToString(t *testing.T) {
+func Test_Map_CompileToString_FromStringConcat(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,

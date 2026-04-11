@@ -29,7 +29,7 @@ func Test_TraceCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection zero-value returns empty -- default", actual)
 }
 
-func Test_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add_FromTraceCollectionDefau(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()

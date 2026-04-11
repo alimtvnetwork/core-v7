@@ -121,7 +121,7 @@ func Test_CaseV1_SetExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.SetExpected -- called", actual)
 }
 
-func Test_CaseV1_ShouldBeEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualFirst_FromCaseV1InputV2(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "equal first test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -131,7 +131,7 @@ func Test_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 	c.ShouldBeEqualFirst(t, "hello returns correct value -- with args")
 }
 
-func Test_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeTrimEqualFirst_FromCaseV1InputV2(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "trim equal first test",
 		ExpectedInput: "hello",
@@ -140,7 +140,7 @@ func Test_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
 	_ = err // exercise the trim-equal path
 }
 
-func Test_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeSortedEqualFirst_FromCaseV1InputV2(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "sorted equal first test",
 		ExpectedInput: []string{"b", "a"},
@@ -148,7 +148,7 @@ func Test_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
 	c.ShouldBeSortedEqualFirst(t, "b", "a")
 }
 
-func Test_CaseV1_ShouldContainsFirst(t *testing.T) {
+func Test_CaseV1_ShouldContainsFirst_FromCaseV1InputV2(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "contains first test",
 		ExpectedInput: "hel",
@@ -172,7 +172,7 @@ func Test_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 	tc.ShouldBeSafe(t, 0)
 }
 
-func Test_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafeFirst_FromCaseV1InputV2(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "ClonePtr nil safe first",
 		Func:  (*coretests.DraftType).ClonePtr,

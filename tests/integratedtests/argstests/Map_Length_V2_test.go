@@ -10,7 +10,7 @@ import (
 // Map basic operations
 // ==========================================
 
-func Test_Map_Length(t *testing.T) {
+func Test_Map_Length_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -25,7 +25,7 @@ func Test_Map_Length(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
-func Test_Map_Has(t *testing.T) {
+func Test_Map_Has_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 
@@ -52,7 +52,7 @@ func Test_Map_Has_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil map should return false", actual)
 }
 
-func Test_Map_HasDefined(t *testing.T) {
+func Test_Map_HasDefined_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": "val",
@@ -79,7 +79,7 @@ func Test_Map_HasDefined_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil map should return false", actual)
 }
 
-func Test_Map_IsKeyMissing(t *testing.T) {
+func Test_Map_IsKeyMissing_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 
@@ -106,7 +106,7 @@ func Test_Map_IsKeyMissing_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil map should return false (per implementation)", actual)
 }
 
-func Test_Map_IsKeyInvalid(t *testing.T) {
+func Test_Map_IsKeyInvalid_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": "val"}
 
@@ -130,7 +130,7 @@ func Test_Map_IsKeyInvalid_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil map should return false (per implementation)", actual)
 }
 
-func Test_Map_HasDefinedAll(t *testing.T) {
+func Test_Map_HasDefinedAll_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": "v1",
@@ -212,7 +212,7 @@ func Test_Map_Get_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil map should not be valid", actual)
 }
 
-func Test_Map_GetLowerCase(t *testing.T) {
+func Test_Map_GetLowerCase_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"name": "val"}
 	item, isValid := m.GetLowerCase("Name")
@@ -225,7 +225,7 @@ func Test_Map_GetLowerCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should find lowercase", actual)
 }
 
-func Test_Map_GetDirectLower(t *testing.T) {
+func Test_Map_GetDirectLower_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"name": "val"}
 	item := m.GetDirectLower("Name")
@@ -255,7 +255,7 @@ func Test_Map_GetDirectLower_Missing(t *testing.T) {
 // Map semantic accessors
 // ==========================================
 
-func Test_Map_When(t *testing.T) {
+func Test_Map_When_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"when": "condition"}
 
@@ -267,7 +267,7 @@ func Test_Map_When(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return when value", actual)
 }
 
-func Test_Map_Title(t *testing.T) {
+func Test_Map_Title_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"title": "test title"}
 
@@ -279,7 +279,7 @@ func Test_Map_Title(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return title value", actual)
 }
 
-func Test_Map_Expect(t *testing.T) {
+func Test_Map_Expect_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"expect": "value"}
 
@@ -291,7 +291,7 @@ func Test_Map_Expect(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return expect value", actual)
 }
 
-func Test_Map_Actual(t *testing.T) {
+func Test_Map_Actual_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"actual": "value"}
 
@@ -303,7 +303,7 @@ func Test_Map_Actual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return actual value", actual)
 }
 
-func Test_Map_Arrange(t *testing.T) {
+func Test_Map_Arrange_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"arrange": "value"}
 
@@ -404,7 +404,7 @@ func Test_Map_SixthItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return sixth item", actual)
 }
 
-func Test_Map_Seventh(t *testing.T) {
+func Test_Map_Seventh_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"seventh": "val"}
 
@@ -420,7 +420,7 @@ func Test_Map_Seventh(t *testing.T) {
 // Map Expected
 // ==========================================
 
-func Test_Map_Expected(t *testing.T) {
+func Test_Map_Expected_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"expected": "val"}
 
@@ -444,7 +444,7 @@ func Test_Map_Expected_Alias(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return expected from alias", actual)
 }
 
-func Test_Map_HasExpect(t *testing.T) {
+func Test_Map_HasExpect_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"expected": "val"}
 
@@ -456,7 +456,7 @@ func Test_Map_HasExpect(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should have expect", actual)
 }
 
-func Test_Map_HasFirst(t *testing.T) {
+func Test_Map_HasFirst_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"first": "val"}
 
@@ -472,7 +472,7 @@ func Test_Map_HasFirst(t *testing.T) {
 // Map Raw / Args / ValidArgs
 // ==========================================
 
-func Test_Map_Raw(t *testing.T) {
+func Test_Map_Raw_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	raw := m.Raw()
@@ -550,7 +550,7 @@ func Test_Map_SortedKeys_Cov(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected sorted [a b]", actual)
 }
 
-func Test_Map_SortedKeys_Empty(t *testing.T) {
+func Test_Map_SortedKeys_Empty_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 	keys, err := m.SortedKeys()
@@ -586,7 +586,7 @@ func Test_Map_SortedKeysMust(t *testing.T) {
 // Map ArgsCount
 // ==========================================
 
-func Test_Map_ArgsCount(t *testing.T) {
+func Test_Map_ArgsCount_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	// HasFunc() always returns true (FuncWrap returns non-nil),
 	// so ArgsCount = len - 1 (func) = 1
@@ -624,7 +624,7 @@ func Test_Map_ArgsCount_WithExpected(t *testing.T) {
 // Map GetFirstOfNames
 // ==========================================
 
-func Test_Map_GetFirstOfNames(t *testing.T) {
+func Test_Map_GetFirstOfNames_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"name": "val"}
 	r := m.GetFirstOfNames("missing", "name")
@@ -637,7 +637,7 @@ func Test_Map_GetFirstOfNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return first found", actual)
 }
 
-func Test_Map_GetFirstOfNames_Empty(t *testing.T) {
+func Test_Map_GetFirstOfNames_Empty_FromMapLengthV2(t *testing.T) {
 	// Arrange
 	m := args.Map{"name": "val"}
 	r := m.GetFirstOfNames()

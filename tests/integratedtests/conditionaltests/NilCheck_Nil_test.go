@@ -9,7 +9,7 @@ import (
 
 // ── NilCheck ──
 
-func Test_NilCheck_Nil(t *testing.T) {
+func Test_NilCheck_Nil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.NilCheck(nil, "default", "nonnil")
 
@@ -21,7 +21,7 @@ func Test_NilCheck_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilCheck nil -- default", actual)
 }
 
-func Test_NilCheck_NonNil(t *testing.T) {
+func Test_NilCheck_NonNil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.NilCheck("val", "default", "nonnil")
 
@@ -35,7 +35,7 @@ func Test_NilCheck_NonNil(t *testing.T) {
 
 // ── DefOnNil ──
 
-func Test_DefOnNil_Nil(t *testing.T) {
+func Test_DefOnNil_Nil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.DefOnNil(nil, "fallback")
 
@@ -47,7 +47,7 @@ func Test_DefOnNil_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DefOnNil nil -- fallback", actual)
 }
 
-func Test_DefOnNil_NonNil(t *testing.T) {
+func Test_DefOnNil_NonNil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.DefOnNil("actual", "fallback")
 
@@ -61,7 +61,7 @@ func Test_DefOnNil_NonNil(t *testing.T) {
 
 // ── NilOrEmptyStr ──
 
-func Test_NilOrEmptyStr_Nil(t *testing.T) {
+func Test_NilOrEmptyStr_Nil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.NilOrEmptyStr(nil, "empty", "notempty")
 
@@ -73,7 +73,7 @@ func Test_NilOrEmptyStr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStr returns nil -- nil", actual)
 }
 
-func Test_NilOrEmptyStr_Empty(t *testing.T) {
+func Test_NilOrEmptyStr_Empty_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	s := ""
 	result := conditional.NilOrEmptyStr(&s, "empty", "notempty")
@@ -86,7 +86,7 @@ func Test_NilOrEmptyStr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStr returns nil -- empty string", actual)
 }
 
-func Test_NilOrEmptyStr_NonEmpty(t *testing.T) {
+func Test_NilOrEmptyStr_NonEmpty_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := conditional.NilOrEmptyStr(&s, "empty", "notempty")
@@ -101,7 +101,7 @@ func Test_NilOrEmptyStr_NonEmpty(t *testing.T) {
 
 // ── NilOrEmptyStrPtr ──
 
-func Test_NilOrEmptyStrPtr_Nil(t *testing.T) {
+func Test_NilOrEmptyStrPtr_Nil_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.NilOrEmptyStrPtr(nil, "empty", "notempty")
 
@@ -113,7 +113,7 @@ func Test_NilOrEmptyStrPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStrPtr returns nil -- nil", actual)
 }
 
-func Test_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
+func Test_NilOrEmptyStrPtr_NonEmpty_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := conditional.NilOrEmptyStrPtr(&s, "empty", "notempty")
@@ -128,7 +128,7 @@ func Test_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
 
 // ── StringDefault ──
 
-func Test_StringDefault_True(t *testing.T) {
+func Test_StringDefault_True_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.StringDefault(true, "hello")
 
@@ -140,7 +140,7 @@ func Test_StringDefault_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringDefault returns non-empty -- true", actual)
 }
 
-func Test_StringDefault_False(t *testing.T) {
+func Test_StringDefault_False_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.StringDefault(false, "hello")
 
@@ -154,7 +154,7 @@ func Test_StringDefault_False(t *testing.T) {
 
 // ── BoolByOrder ──
 
-func Test_BoolByOrder_AllFalse(t *testing.T) {
+func Test_BoolByOrder_AllFalse_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	result := conditional.BoolByOrder(false, false, false)
 
@@ -180,7 +180,7 @@ func Test_BoolByOrder_SecondTrue(t *testing.T) {
 
 // ── Func ──
 
-func Test_Func_True(t *testing.T) {
+func Test_Func_True_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	f := conditional.Func(true, func() any { return "t" }, func() any { return "f" })
 
@@ -192,7 +192,7 @@ func Test_Func_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Func returns non-empty -- true", actual)
 }
 
-func Test_Func_False(t *testing.T) {
+func Test_Func_False_FromNilCheckNil(t *testing.T) {
 	// Arrange
 	f := conditional.Func(false, func() any { return "t" }, func() any { return "f" })
 

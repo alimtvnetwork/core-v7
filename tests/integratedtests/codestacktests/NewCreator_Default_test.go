@@ -28,7 +28,7 @@ func Test_NewCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Default returns valid Trace -- from test func", actual)
 }
 
-func Test_NewCreator_SkipOne(t *testing.T) {
+func Test_NewCreator_SkipOne_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -40,7 +40,7 @@ func Test_NewCreator_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.SkipOne returns valid Trace -- skip one frame", actual)
 }
 
-func Test_NewCreator_Ptr(t *testing.T) {
+func Test_NewCreator_Ptr_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 
@@ -66,7 +66,7 @@ func Test_NewCreator_Create(t *testing.T) {
 
 // ── Trace methods ──
 
-func Test_Trace_Message(t *testing.T) {
+func Test_Trace_Message_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	msg := trace.Message()
@@ -79,7 +79,7 @@ func Test_Trace_Message(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Message returns non-empty -- default", actual)
 }
 
-func Test_Trace_ShortString(t *testing.T) {
+func Test_Trace_ShortString_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.ShortString()
@@ -92,7 +92,7 @@ func Test_Trace_ShortString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ShortString returns non-empty -- default", actual)
 }
 
-func Test_Trace_String(t *testing.T) {
+func Test_Trace_String_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.String()
@@ -105,7 +105,7 @@ func Test_Trace_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.String returns non-empty -- default", actual)
 }
 
-func Test_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fwl := trace.FileWithLine()
@@ -124,7 +124,7 @@ func Test_Trace_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileWithLine returns populated value -- default", actual)
 }
 
-func Test_Trace_FullFilePath(t *testing.T) {
+func Test_Trace_FullFilePath_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fp := trace.FullFilePath()
@@ -137,7 +137,7 @@ func Test_Trace_FullFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FullFilePath returns non-empty -- default", actual)
 }
 
-func Test_Trace_FileName(t *testing.T) {
+func Test_Trace_FileName_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fn := trace.FileName()
@@ -150,7 +150,7 @@ func Test_Trace_FileName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileName returns non-empty -- default", actual)
 }
 
-func Test_Trace_LineNumber(t *testing.T) {
+func Test_Trace_LineNumber_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	ln := trace.LineNumber()
@@ -163,7 +163,7 @@ func Test_Trace_LineNumber(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.LineNumber returns positive -- default", actual)
 }
 
-func Test_Trace_FileWithLineString(t *testing.T) {
+func Test_Trace_FileWithLineString_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.FileWithLineString()
@@ -176,7 +176,7 @@ func Test_Trace_FileWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileWithLineString returns non-empty -- default", actual)
 }
 
-func Test_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	cloned := trace.Clone()
@@ -195,7 +195,7 @@ func Test_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Clone returns same data -- default", actual)
 }
 
-func Test_Trace_ClonePtr(t *testing.T) {
+func Test_Trace_ClonePtr_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 	cloned := trace.ClonePtr()
@@ -216,7 +216,7 @@ func Test_Trace_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns different ptr same data -- default", actual)
 }
 
-func Test_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	cloned := trace.ClonePtr()
@@ -229,7 +229,7 @@ func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns nil -- nil receiver", actual)
 }
 
-func Test_Trace_JsonModel(t *testing.T) {
+func Test_Trace_JsonModel_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	model := trace.JsonModel()
@@ -242,7 +242,7 @@ func Test_Trace_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonModel returns Trace struct -- default", actual)
 }
 
-func Test_Trace_JsonModelAny(t *testing.T) {
+func Test_Trace_JsonModelAny_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	model := trace.JsonModelAny()
@@ -255,7 +255,7 @@ func Test_Trace_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonModelAny returns non-nil -- default", actual)
 }
 
-func Test_Trace_JsonString(t *testing.T) {
+func Test_Trace_JsonString_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	js := trace.JsonString()
@@ -268,7 +268,7 @@ func Test_Trace_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonString returns non-empty -- default", actual)
 }
 
-func Test_Trace_Json(t *testing.T) {
+func Test_Trace_Json_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	result := trace.Json()
@@ -281,7 +281,7 @@ func Test_Trace_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Json returns result with bytes -- default", actual)
 }
 
-func Test_Trace_JsonPtr(t *testing.T) {
+func Test_Trace_JsonPtr_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	result := trace.JsonPtr()
@@ -294,7 +294,7 @@ func Test_Trace_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonPtr returns non-nil result -- default", actual)
 }
 
-func Test_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	trace.Dispose()
@@ -409,7 +409,7 @@ func Test_CurrentNameOf_CurrentFuncFullPath(t *testing.T) {
 
 // ── dirGetter ──
 
-func Test_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.CurDir()
 
@@ -421,7 +421,7 @@ func Test_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns non-empty -- from test", actual)
 }
 
-func Test_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.CurDirJoin("sub")
 
@@ -449,7 +449,7 @@ func Test_File_CurFile(t *testing.T) {
 
 // ── stacksTo ──
 
-func Test_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String_FromNewCreatorDefault(t *testing.T) {
 	// Arrange
 	s := codestack.StacksTo.String(0, 5)
 

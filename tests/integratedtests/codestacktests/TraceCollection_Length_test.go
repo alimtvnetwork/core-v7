@@ -27,7 +27,7 @@ func Test_TraceCollection_Length(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Length -- default traces", actual)
 }
 
-func Test_TraceCollection_IsEmpty(t *testing.T) {
+func Test_TraceCollection_IsEmpty_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 
@@ -45,7 +45,7 @@ func Test_TraceCollection_IsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection IsEmpty -- empty", actual)
 }
 
-func Test_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()
@@ -59,7 +59,7 @@ func Test_TraceCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Add -- single trace", actual)
 }
 
-func Test_TraceCollection_Adds(t *testing.T) {
+func Test_TraceCollection_Adds_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	t1 := codestack.New.Default()
@@ -87,7 +87,7 @@ func Test_TraceCollection_AddsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Adds empty -- no traces", actual)
 }
 
-func Test_TraceCollection_AddsPtr(t *testing.T) {
+func Test_TraceCollection_AddsPtr_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	t1 := codestack.New.Ptr(0)
@@ -102,7 +102,7 @@ func Test_TraceCollection_AddsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection AddsPtr -- skip nil", actual)
 }
 
-func Test_TraceCollection_ConcatNew(t *testing.T) {
+func Test_TraceCollection_ConcatNew_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(1, 2)
 	t1 := codestack.New.Default()
@@ -116,7 +116,7 @@ func Test_TraceCollection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection ConcatNew -- adds trace", actual)
 }
 
-func Test_TraceCollection_ConcatNewPtr(t *testing.T) {
+func Test_TraceCollection_ConcatNewPtr_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(1, 2)
 	t1 := codestack.New.Ptr(0)
@@ -130,7 +130,7 @@ func Test_TraceCollection_ConcatNewPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection ConcatNewPtr -- adds trace ptr", actual)
 }
 
-func Test_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(1, 3)
 	cloned := tc.Clone()
@@ -143,7 +143,7 @@ func Test_TraceCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Clone -- same length", actual)
 }
 
-func Test_TraceCollection_ClonePtr(t *testing.T) {
+func Test_TraceCollection_ClonePtr_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(1, 3)
 	cloned := tc.ClonePtr()
@@ -162,7 +162,7 @@ func Test_TraceCollection_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection ClonePtr -- same length", actual)
 }
 
-func Test_TraceCollection_ClonePtr_Nil(t *testing.T) {
+func Test_TraceCollection_ClonePtr_Nil_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	cloned := tc.ClonePtr()
@@ -188,7 +188,7 @@ func Test_TraceCollection_FirstOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection FirstOrDefault -- has items", actual)
 }
 
-func Test_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_Empty_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	first := tc.FirstOrDefault()
@@ -214,7 +214,7 @@ func Test_TraceCollection_LastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection LastOrDefault -- has items", actual)
 }
 
-func Test_TraceCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_LastOrDefault_Empty_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	last := tc.LastOrDefault()
@@ -227,7 +227,7 @@ func Test_TraceCollection_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection LastOrDefault empty -- nil", actual)
 }
 
-func Test_TraceCollection_CodeStacksString(t *testing.T) {
+func Test_TraceCollection_CodeStacksString_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	s := tc.CodeStacksString()
@@ -240,7 +240,7 @@ func Test_TraceCollection_CodeStacksString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection CodeStacksString -- has content", actual)
 }
 
-func Test_TraceCollection_StackTraces(t *testing.T) {
+func Test_TraceCollection_StackTraces_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	s := tc.StackTraces()
@@ -253,7 +253,7 @@ func Test_TraceCollection_StackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection StackTraces -- has content", actual)
 }
 
-func Test_TraceCollection_StackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_StackTracesJsonResult_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	r := tc.StackTracesJsonResult()
@@ -272,7 +272,7 @@ func Test_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection StackTracesJsonResult -- valid", actual)
 }
 
-func Test_TraceCollection_NewStackTraces(t *testing.T) {
+func Test_TraceCollection_NewStackTraces_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	s := tc.NewStackTraces(1)
@@ -285,7 +285,7 @@ func Test_TraceCollection_NewStackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection NewStackTraces -- has content", actual)
 }
 
-func Test_TraceCollection_NewDefaultStackTraces(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTraces_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	s := tc.NewDefaultStackTraces()
@@ -298,7 +298,7 @@ func Test_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection NewDefaultStackTraces -- has content", actual)
 }
 
-func Test_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewStackTracesJsonResult_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	r := tc.NewStackTracesJsonResult(1)
@@ -311,7 +311,7 @@ func Test_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection NewStackTracesJsonResult -- valid", actual)
 }
 
-func Test_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTracesJsonResult_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	r := tc.NewDefaultStackTracesJsonResult()
@@ -324,7 +324,7 @@ func Test_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection NewDefaultStackTracesJsonResult -- valid", actual)
 }
 
-func Test_TraceCollection_GetPagesSize(t *testing.T) {
+func Test_TraceCollection_GetPagesSize_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	pages := tc.GetPagesSize(2)
@@ -350,7 +350,7 @@ func Test_TraceCollection_GetPagesSize_Zero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection GetPagesSize zero -- empty", actual)
 }
 
-func Test_TraceCollection_Dispose(t *testing.T) {
+func Test_TraceCollection_Dispose_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	tc.Dispose()
@@ -363,7 +363,7 @@ func Test_TraceCollection_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Dispose -- empty after", actual)
 }
 
-func Test_TraceCollection_Dispose_Nil(t *testing.T) {
+func Test_TraceCollection_Dispose_Nil_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	tc.Dispose() // should not panic
@@ -376,7 +376,7 @@ func Test_TraceCollection_Dispose_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Dispose nil -- no panic", actual)
 }
 
-func Test_TraceCollection_Json(t *testing.T) {
+func Test_TraceCollection_Json_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	r := tc.Json()
@@ -389,7 +389,7 @@ func Test_TraceCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Json -- valid", actual)
 }
 
-func Test_TraceCollection_JsonPtr(t *testing.T) {
+func Test_TraceCollection_JsonPtr_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	r := tc.JsonPtr()
@@ -402,7 +402,7 @@ func Test_TraceCollection_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection JsonPtr -- valid", actual)
 }
 
-func Test_TraceCollection_JsonString(t *testing.T) {
+func Test_TraceCollection_JsonString_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	s := tc.JsonString()
@@ -415,7 +415,7 @@ func Test_TraceCollection_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection JsonString -- valid", actual)
 }
 
-func Test_TraceCollection_JsonStrings(t *testing.T) {
+func Test_TraceCollection_JsonStrings_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	s := tc.JsonStrings()
@@ -428,7 +428,7 @@ func Test_TraceCollection_JsonStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection JsonStrings -- valid", actual)
 }
 
-func Test_TraceCollection_String(t *testing.T) {
+func Test_TraceCollection_String_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	s := tc.String()
@@ -441,7 +441,7 @@ func Test_TraceCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection String -- valid", actual)
 }
 
-func Test_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
+func Test_TraceCollection_ConcatNewUsingSkipPlusCount_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	newTc := tc.ConcatNewUsingSkipPlusCount(0, 3)
@@ -454,7 +454,7 @@ func Test_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection ConcatNewUsingSkipPlusCount -- appended", actual)
 }
 
-func Test_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
+func Test_TraceCollection_AddsUsingSkipDefault_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.AddsUsingSkipDefault(0)
@@ -469,7 +469,7 @@ func Test_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
 
 // ── FileWithLine extended ──
 
-func Test_FileWithLine_ParseInjectUsingJson(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJson_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	jsonResult := fwl.JsonPtr()
@@ -490,7 +490,7 @@ func Test_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine ParseInjectUsingJson -- roundtrip", actual)
 }
 
-func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
+func Test_FileWithLine_JsonParseSelfInject_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	jsonResult := fwl.JsonPtr()
@@ -511,7 +511,7 @@ func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine JsonParseSelfInject -- roundtrip", actual)
 }
 
-func Test_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	liner := fwl.AsFileLiner()
@@ -526,7 +526,7 @@ func Test_FileWithLine_AsFileLiner(t *testing.T) {
 
 // ── Trace extended ──
 
-func Test_Trace_ParseInjectUsingJson(t *testing.T) {
+func Test_Trace_ParseInjectUsingJson_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.JsonPtr()
@@ -547,7 +547,7 @@ func Test_Trace_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace ParseInjectUsingJson -- roundtrip", actual)
 }
 
-func Test_Trace_JsonParseSelfInject(t *testing.T) {
+func Test_Trace_JsonParseSelfInject_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.JsonPtr()
@@ -562,7 +562,7 @@ func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace JsonParseSelfInject -- roundtrip", actual)
 }
 
-func Test_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	liner := trace.AsFileLiner()
@@ -575,7 +575,7 @@ func Test_Trace_AsFileLiner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace AsFileLiner -- not nil", actual)
 }
 
-func Test_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.StringUsingFmt(func(tr codestack.Trace) string { return tr.PackageName })
@@ -627,7 +627,7 @@ func Test_Trace_Nil_Dispose(t *testing.T) {
 
 // ── dirGetter extended ──
 
-func Test_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.RepoDir()
 
@@ -639,7 +639,7 @@ func Test_Dir_RepoDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.RepoDir -- not empty", actual)
 }
 
-func Test_Dir_RepoDirJoin(t *testing.T) {
+func Test_Dir_RepoDirJoin_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.RepoDirJoin("sub")
 
@@ -653,7 +653,7 @@ func Test_Dir_RepoDirJoin(t *testing.T) {
 
 // ── fileGetter extended ──
 
-func Test_File_CurrentFilePath(t *testing.T) {
+func Test_File_CurrentFilePath_FromTraceCollectionLengt(t *testing.T) {
 	// Arrange
 	file := codestack.File.CurrentFilePath()
 

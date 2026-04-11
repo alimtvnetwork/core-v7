@@ -11,7 +11,7 @@ import (
 // ── CaseV1.ShouldBeEqualMap — mismatch branch ──
 // Covers CaseV1MapAssertions.go L55-69 and CaseNilSafeAssertHelper.go L17-27
 
-func Test_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualMap_Mismatch_FromCaseV1ShouldBeEqualM(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "deliberate mismatch for coverage",

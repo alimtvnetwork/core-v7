@@ -37,7 +37,7 @@ func Test_MethodName_NonFunc(t *testing.T) {
 // ── MethodName: nil input ──
 // Covers MethodName.go L16-18
 
-func Test_MethodName_Nil(t *testing.T) {
+func Test_MethodName_Nil_FromShouldMatchResultMis(t *testing.T) {
 	// Arrange & Act
 	name := results.MethodName(nil)
 

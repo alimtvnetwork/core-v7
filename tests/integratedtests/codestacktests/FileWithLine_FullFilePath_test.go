@@ -88,7 +88,7 @@ func Test_FileWithLine_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- String nil", actual)
 }
 
-func Test_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.StringUsingFmt(func(f codestack.FileWithLine) string { return "custom" })
@@ -114,7 +114,7 @@ func Test_FileWithLine_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- FileWithLine method", actual)
 }
 
-func Test_FileWithLine_JsonModel(t *testing.T) {
+func Test_FileWithLine_JsonModel_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	model := fwl.JsonModel()
@@ -153,7 +153,7 @@ func Test_FileWithLine_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonString", actual)
 }
 
-func Test_FileWithLine_Json(t *testing.T) {
+func Test_FileWithLine_Json_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.Json()
@@ -476,7 +476,7 @@ func Test_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- StringUsingFmt", actual)
 }
 
-func Test_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	fwl := trace.FileWithLine()
@@ -544,7 +544,7 @@ func Test_Trace_FileWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLineString", actual)
 }
 
-func Test_Trace_JsonModel(t *testing.T) {
+func Test_Trace_JsonModel_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	model := trace.JsonModel()
@@ -583,7 +583,7 @@ func Test_Trace_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonString", actual)
 }
 
-func Test_Trace_Json(t *testing.T) {
+func Test_Trace_Json_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.Json()
@@ -609,7 +609,7 @@ func Test_Trace_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonPtr", actual)
 }
 
-func Test_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	cloned := trace.Clone()
@@ -641,7 +641,7 @@ func Test_Trace_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ClonePtr", actual)
 }
 
-func Test_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	cloned := trace.ClonePtr()
@@ -706,7 +706,7 @@ func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	trace.Dispose()
@@ -2387,7 +2387,7 @@ func Test_StacksTo_BytesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.BytesDefault returns correct value -- with args", actual)
 }
 
-func Test_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.String(0, 5)
 
@@ -2584,7 +2584,7 @@ func Test_Dir_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.Get returns correct value -- with args", actual)
 }
 
-func Test_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir_FromFileWithLineFullFile(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.RepoDir()
 
@@ -2702,7 +2702,7 @@ func Test_StackTrace_SkipOne(t *testing.T) {
 	_ = tc.HasAnyItem()
 }
 
-func Test_StackTrace_Default(t *testing.T) {
+func Test_StackTrace_Default_FromFileWithLineFullFile(t *testing.T) {
 	tc := codestack.New.StackTrace.Default(0, 5)
 	_ = tc.HasAnyItem()
 }

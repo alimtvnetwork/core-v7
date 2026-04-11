@@ -172,7 +172,7 @@ func Test_Format_Panics(t *testing.T) {
 
 // ── BaseIsCaseSensitive / BaseIsIgnoreCase ──
 
-func Test_BaseIsCaseSensitive(t *testing.T) {
+func Test_BaseIsCaseSensitive_FromUnmarshalJSONValid(t *testing.T) {
 	// Arrange
 	b := corecomparator.BaseIsCaseSensitive{IsCaseSensitive: true}
 	clone := b.Clone()
@@ -209,7 +209,7 @@ func Test_BaseIsCaseSensitive_NilClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive ClonePtr nil -- nil", actual)
 }
 
-func Test_BaseIsIgnoreCase(t *testing.T) {
+func Test_BaseIsIgnoreCase_FromUnmarshalJSONValid(t *testing.T) {
 	// Arrange
 	b := corecomparator.BaseIsIgnoreCase{IsIgnoreCase: true}
 	clone := b.Clone()
@@ -248,7 +248,7 @@ func Test_BaseIsIgnoreCase_NilClonePtr(t *testing.T) {
 
 // ── RangeNamesCsv ──
 
-func Test_RangeNamesCsv(t *testing.T) {
+func Test_RangeNamesCsv_FromUnmarshalJSONValid(t *testing.T) {
 	// Arrange
 	csv := corecomparator.RangeNamesCsv()
 

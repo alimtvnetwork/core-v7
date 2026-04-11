@@ -146,7 +146,7 @@ func Test_FileWithLine_ParseJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust FilePath mismatch", actual)
 }
 
-func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
+func Test_FileWithLine_JsonParseSelfInject_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/tmp/test.go",
@@ -218,7 +218,7 @@ func Test_Trace_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
-func Test_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -233,7 +233,7 @@ func Test_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringUsingFmt should not be empty", actual)
 }
 
-func Test_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -251,7 +251,7 @@ func Test_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
-func Test_Trace_Json(t *testing.T) {
+func Test_Trace_Json_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -323,7 +323,7 @@ func Test_Trace_ParseJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust PackageName mismatch", actual)
 }
 
-func Test_Trace_JsonParseSelfInject(t *testing.T) {
+func Test_Trace_JsonParseSelfInject_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.Json()
@@ -339,7 +339,7 @@ func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
-func Test_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -407,7 +407,7 @@ func Test_TraceCollection_NewAndBasic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LastOrDefault should have PackageName", actual)
 }
 
-func Test_TraceCollection_Strings(t *testing.T) {
+func Test_TraceCollection_Strings_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -498,7 +498,7 @@ func Test_TraceCollection_SkipTake(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeLimitCollection should return 1", actual)
 }
 
-func Test_TraceCollection_FileWithLines(t *testing.T) {
+func Test_TraceCollection_FileWithLines_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	// Use manually-constructed trace to avoid skip-count issues
 	tc := codestack.TraceCollection{}
@@ -529,7 +529,7 @@ func Test_TraceCollection_FileWithLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinFileWithLinesStrings should not be empty", actual)
 }
 
-func Test_TraceCollection_Json(t *testing.T) {
+func Test_TraceCollection_Json_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.Func", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -588,7 +588,7 @@ func Test_TraceCollection_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reverse should preserve length", actual)
 }
 
-func Test_TraceCollection_IsEqual(t *testing.T) {
+func Test_TraceCollection_IsEqual_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -601,7 +601,7 @@ func Test_TraceCollection_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "collection should be equal to itself", actual)
 }
 
-func Test_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -633,7 +633,7 @@ func Test_TraceCollection_ClearDispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be empty after Clear", actual)
 }
 
-func Test_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()
@@ -663,7 +663,7 @@ func Test_TraceCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagesSize should return at least 1", actual)
 }
 
-func Test_TraceCollection_CodeStacksString(t *testing.T) {
+func Test_TraceCollection_CodeStacksString_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -681,7 +681,7 @@ func Test_TraceCollection_CodeStacksString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CodeStacksStringLimit should not be empty", actual)
 }
 
-func Test_TraceCollection_StringsUsingFmt(t *testing.T) {
+func Test_TraceCollection_StringsUsingFmt_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -703,7 +703,7 @@ func Test_TraceCollection_StringsUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinUsingFmt should not be empty", actual)
 }
 
-func Test_TraceCollection_JoinShortStrings(t *testing.T) {
+func Test_TraceCollection_JoinShortStrings_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -717,7 +717,7 @@ func Test_TraceCollection_JoinShortStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinShortStrings should not be empty", actual)
 }
 
-func Test_TraceCollection_JoinCsvLine(t *testing.T) {
+func Test_TraceCollection_JoinCsvLine_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -731,7 +731,7 @@ func Test_TraceCollection_JoinCsvLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinCsvLine should not be empty", actual)
 }
 
-func Test_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -747,7 +747,7 @@ func Test_TraceCollection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndex 9999 should be false", actual)
 }
 
-func Test_TraceCollection_Serializer(t *testing.T) {
+func Test_TraceCollection_Serializer_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -764,7 +764,7 @@ func Test_TraceCollection_Serializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serializer should not be empty", actual)
 }
 
-func Test_TraceCollection_StackTracesBytes(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -795,7 +795,7 @@ func Test_TraceCollection_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
-func Test_TraceCollection_Dispose(t *testing.T) {
+func Test_TraceCollection_Dispose_FromFileWithLineNilSafe(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -811,7 +811,7 @@ func Test_TraceCollection_Dispose(t *testing.T) {
 
 // ── NameOf tests ──
 
-func Test_NameOf_Method(t *testing.T) {
+func Test_NameOf_Method_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	name := codestack.NameOf.MethodByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Method_Cov")
 
@@ -821,7 +821,7 @@ func Test_NameOf_Method(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Method should not be empty", actual)
 }
 
-func Test_NameOf_Package(t *testing.T) {
+func Test_NameOf_Package_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	name := codestack.NameOf.PackageByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Package_Cov")
 
@@ -873,13 +873,13 @@ func Test_NewCreator_Ptr(t *testing.T) {
 
 // ── StackTrace tests ──
 
-func Test_StackTrace_DefaultCount(t *testing.T) {
+func Test_StackTrace_DefaultCount_FromFileWithLineNilSafe(t *testing.T) {
 	// Exercise the code path — result may be empty due to integrated test call depth
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	_ = tc.Length()
 }
 
-func Test_StackTrace_SkipOne(t *testing.T) {
+func Test_StackTrace_SkipOne_FromFileWithLineNilSafe(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipOne()
 	_ = tc.Length()
 }
@@ -891,48 +891,48 @@ func Test_StackTrace_SkipNone(t *testing.T) {
 
 // ── StacksTo tests ──
 
-func Test_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String_FromFileWithLineNilSafe(t *testing.T) {
 	// Exercise code path; result may be empty from integrated test
 	result := codestack.StacksTo.String(0, 5)
 	_ = result
 }
 
-func Test_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault_FromFileWithLineNilSafe(t *testing.T) {
 	result := codestack.StacksTo.StringDefault()
 	_ = result
 }
 
-func Test_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes_FromFileWithLineNilSafe(t *testing.T) {
 	result := codestack.StacksTo.Bytes(0)
 	_ = result
 }
 
-func Test_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault_FromFileWithLineNilSafe(t *testing.T) {
 	result := codestack.StacksTo.BytesDefault()
 	_ = result
 }
 
-func Test_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString_FromFileWithLineNilSafe(t *testing.T) {
 	// JsonString can panic if stack is empty due to HandleError; recover defensively
 	defer func() { recover() }()
 	result := codestack.StacksTo.JsonString(0)
 	_ = result
 }
 
-func Test_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault_FromFileWithLineNilSafe(t *testing.T) {
 	defer func() { recover() }()
 	result := codestack.StacksTo.JsonStringDefault()
 	_ = result
 }
 
-func Test_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount_FromFileWithLineNilSafe(t *testing.T) {
 	result := codestack.StacksTo.StringNoCount(0)
 	_ = result
 }
 
 // ── File getter tests ──
 
-func Test_File_Name(t *testing.T) {
+func Test_File_Name_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	name := codestack.File.Name(0)
 
@@ -942,7 +942,7 @@ func Test_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name should not be empty", actual)
 }
 
-func Test_File_Path(t *testing.T) {
+func Test_File_Path_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	path := codestack.File.Path(0)
 
@@ -954,7 +954,7 @@ func Test_File_Path(t *testing.T) {
 
 // ── Dir getter tests ──
 
-func Test_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	dir := codestack.Dir.CurDir()
 
@@ -964,7 +964,7 @@ func Test_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir should not be empty", actual)
 }
 
-func Test_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin_FromFileWithLineNilSafe(t *testing.T) {
 	// Act
 	dir := codestack.Dir.CurDirJoin("subdir")
 

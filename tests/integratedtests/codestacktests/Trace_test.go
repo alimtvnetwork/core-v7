@@ -60,7 +60,7 @@ func Test_Trace_Nil(t *testing.T) {
 	}
 }
 
-func Test_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose_FromTrace(t *testing.T) {
 	for caseIndex, testCase := range traceDisposeTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -96,7 +96,7 @@ func Test_Trace_Dispose(t *testing.T) {
 	}
 }
 
-func Test_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone_FromTrace(t *testing.T) {
 	for caseIndex, testCase := range traceCloneTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -130,7 +130,7 @@ func Test_Trace_Clone(t *testing.T) {
 	}
 }
 
-func Test_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil_FromTrace(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -171,7 +171,7 @@ func Test_Trace_Message_And_ShortString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected String to not be empty", actual)
 }
 
-func Test_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine_FromTrace(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{
 		FilePath: "/src/file.go",
@@ -191,7 +191,7 @@ func Test_Trace_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Line 10", actual)
 }
 
-func Test_Trace_FileName(t *testing.T) {
+func Test_Trace_FileName_FromTrace(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{
 		FilePath: "/src/mypkg/handler.go",
@@ -207,7 +207,7 @@ func Test_Trace_FileName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected FileName 'handler.go', got ''", actual)
 }
 
-func Test_Trace_HasIssues(t *testing.T) {
+func Test_Trace_HasIssues_FromTrace(t *testing.T) {
 	// Arrange - empty method name
 	trace := &codestack.Trace{
 		PackageName:       "pkg",
@@ -221,7 +221,7 @@ func Test_Trace_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected HasIssues=true when PackageMethodName is empty", actual)
 }
 
-func Test_Trace_FileWithLineString(t *testing.T) {
+func Test_Trace_FileWithLineString_FromTrace(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{
 		FilePath: "/src/file.go",
@@ -274,7 +274,7 @@ func Test_FileWithLine_NilString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil FileWithLine String to be empty, got ''", actual)
 }
 
-func Test_FileWithLine_JsonString(t *testing.T) {
+func Test_FileWithLine_JsonString_FromTrace(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/src/file.go",
@@ -290,7 +290,7 @@ func Test_FileWithLine_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected JsonString to not be empty", actual)
 }
 
-func Test_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner_FromTrace(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/src/test.go",
@@ -309,7 +309,7 @@ func Test_FileWithLine_AsFileLiner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected path '/src/test.go', got ''", actual)
 }
 
-func Test_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner_FromTrace(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{
 		FilePath: "/src/trace.go",
@@ -326,7 +326,7 @@ func Test_Trace_AsFileLiner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected AsFileLiner to not be nil", actual)
 }
 
-func Test_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt_FromTrace(t *testing.T) {
 	// Arrange
 	trace := codestack.Trace{
 		PackageMethodName: "pkg.Method",
@@ -344,7 +344,7 @@ func Test_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'pkg.Method', got ''", actual)
 }
 
-func Test_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt_FromTrace(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/file.go",

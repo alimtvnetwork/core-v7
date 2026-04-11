@@ -362,7 +362,7 @@ func Test_Compare_IsCompareEqualLogically(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Compare returns correct value -- IsCompareEqualLogically", actual)
 }
 
-func Test_Compare_OnlySupportedErr(t *testing.T) {
+func Test_Compare_OnlySupportedErr_FromCompareIs(t *testing.T) {
 	// Arrange
 	err := corecomparator.Inconclusive.OnlySupportedErr("msg", corecomparator.Equal)
 

@@ -28,7 +28,7 @@ func Test_Map_Get(t *testing.T) {
 	}
 }
 
-func Test_Map_TypedGetters(t *testing.T) {
+func Test_Map_TypedGetters_FromMapGet(t *testing.T) {
 	for caseIndex, testCase := range extMapTypedGetTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -293,7 +293,7 @@ func Test_Map_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3 items", actual)
 }
 
-func Test_Map_GetAsAnyItems(t *testing.T) {
+func Test_Map_GetAsAnyItems_FromMapGet(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"items": []any{1, "two", true},
@@ -312,7 +312,7 @@ func Test_Map_GetAsAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3 items", actual)
 }
 
-func Test_Map_String(t *testing.T) {
+func Test_Map_String_FromMapGet(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key": "value",
@@ -327,7 +327,7 @@ func Test_Map_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map String() should not be empty", actual)
 }
 
-func Test_Map_SetActual(t *testing.T) {
+func Test_Map_SetActual_FromMapGet(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -340,7 +340,7 @@ func Test_Map_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Actual to return result", actual)
 }
 
-func Test_Map_SortedKeys(t *testing.T) {
+func Test_Map_SortedKeys_FromMapGet(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"c": 3,
@@ -485,7 +485,7 @@ func Test_One_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected GetByIndex(99) to return nil", actual)
 }
 
-func Test_One_LeftRight(t *testing.T) {
+func Test_One_LeftRight_FromMapGet(t *testing.T) {
 	// Arrange
 	one := args.OneAny{First: "hello", Expect: 42}
 
@@ -536,7 +536,7 @@ func Test_Two_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two.String() should not be empty", actual)
 }
 
-func Test_Two_LeftRight(t *testing.T) {
+func Test_Two_LeftRight_FromMapGet(t *testing.T) {
 	// Arrange
 	two := args.TwoAny{First: "a", Second: "b", Expect: "c"}
 
@@ -549,7 +549,7 @@ func Test_Two_LeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight conversion failed", actual)
 }
 
-func Test_Three_Methods(t *testing.T) {
+func Test_Three_Methods_FromMapGet(t *testing.T) {
 	// Arrange
 	three := args.ThreeAny{
 		First:  "a",
@@ -644,7 +644,7 @@ func Test_LeftRight(t *testing.T) {
 	}
 }
 
-func Test_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone_FromMapGet(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{Left: "a", Right: "b", Expect: "c"}
 
@@ -670,7 +670,7 @@ func Test_LeftRight_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight.String() should not be empty", actual)
 }
 
-func Test_String_Methods(t *testing.T) {
+func Test_String_Methods_FromMapGet(t *testing.T) {
 	for caseIndex, testCase := range extStringTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -795,7 +795,7 @@ func Test_Empty_Creator(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Holder ArgsCount should be 7", actual)
 }
 
-func Test_Holder_Methods(t *testing.T) {
+func Test_Holder_Methods_FromMapGet(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{
 		First:  "a",
@@ -1048,7 +1048,7 @@ func Test_Dynamic_NilSafety(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil HasExpect should return false", actual)
 }
 
-func Test_FuncMap_Basic(t *testing.T) {
+func Test_FuncMap_Basic_FromMapGet(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1130,7 +1130,7 @@ func Test_FuncMap_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty FuncMap InvalidError should return error", actual)
 }
 
-func Test_FuncMap_Add(t *testing.T) {
+func Test_FuncMap_Add_FromMapGet(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1151,7 +1151,7 @@ func Test_FuncMap_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "someFunctionV1 should be valid", actual)
 }
 
-func Test_FuncMap_Adds(t *testing.T) {
+func Test_FuncMap_Adds_FromMapGet(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 

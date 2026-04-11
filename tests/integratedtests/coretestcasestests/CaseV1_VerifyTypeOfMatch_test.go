@@ -27,7 +27,7 @@ func Test_CaseV1_VerifyTypeOfMatch_WithVerifyTypeOf(t *testing.T) {
 	c.VerifyTypeOfMatch(t, 0, "actual-string")
 }
 
-func Test_CaseV1_VerifyTypeOfMust(t *testing.T) {
+func Test_CaseV1_VerifyTypeOfMust_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "verify type must",
 		ExpectedInput: "world",
@@ -36,7 +36,7 @@ func Test_CaseV1_VerifyTypeOfMust(t *testing.T) {
 	c.VerifyTypeOfMust(t, 0, "actual-string")
 }
 
-func Test_CaseV1_VerifyType(t *testing.T) {
+func Test_CaseV1_VerifyType_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "verify type",
 		ExpectedInput: "world",
@@ -45,7 +45,7 @@ func Test_CaseV1_VerifyType(t *testing.T) {
 	c.VerifyType(t, 0, "actual-string")
 }
 
-func Test_CaseV1_VerifyTypeMust(t *testing.T) {
+func Test_CaseV1_VerifyTypeMust_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "verify type must",
 		ExpectedInput: "world",
@@ -133,7 +133,7 @@ func Test_CaseV1_SliceValidatorCondition(t *testing.T) {
 
 // ── CaseV1.ShouldBeRegex ──
 
-func Test_CaseV1_ShouldBeRegex(t *testing.T) {
+func Test_CaseV1_ShouldBeRegex_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "regex test",
 		ExpectedInput: "^hel.*ld$",
@@ -143,7 +143,7 @@ func Test_CaseV1_ShouldBeRegex(t *testing.T) {
 
 // ── CaseV1.ShouldBeTrimRegex ──
 
-func Test_CaseV1_ShouldBeTrimRegex(t *testing.T) {
+func Test_CaseV1_ShouldBeTrimRegex_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "trim regex",
 		ExpectedInput: "^hello$",
@@ -166,7 +166,7 @@ func Test_CaseV1_VerifyError_WithTypeVerify(t *testing.T) {
 
 // ── CaseV1.TypeShouldMatch ──
 
-func Test_CaseV1_TypeShouldMatch(t *testing.T) {
+func Test_CaseV1_TypeShouldMatch_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "type should match",
@@ -209,7 +209,7 @@ func Test_CaseV1_ShouldBeUsingCondition_WithVerify(t *testing.T) {
 
 // ── CaseV1.AssertDirectly ──
 
-func Test_CaseV1_AssertDirectly(t *testing.T) {
+func Test_CaseV1_AssertDirectly_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title: "assert directly",
 	}
@@ -238,7 +238,7 @@ func Test_CaseV1_ShouldBeEqual_SliceExpected(t *testing.T) {
 
 // ── CaseV1.SetExpected ──
 
-func Test_CaseV1_SetExpected(t *testing.T) {
+func Test_CaseV1_SetExpected_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{}
 	c.SetExpected("new-expected")
@@ -254,7 +254,7 @@ func Test_CaseV1_SetExpected(t *testing.T) {
 
 // ── CaseV1.SetActual ──
 
-func Test_CaseV1_SetActual(t *testing.T) {
+func Test_CaseV1_SetActual_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{}
 	c.SetActual("new-actual")
@@ -302,7 +302,7 @@ func Test_CaseNilSafe_InvokeNil_ReturnValue(t *testing.T) {
 
 // ── CaseNilSafe.ShouldBeSafeFirst ──
 
-func Test_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafeFirst_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "safe first",
 		Func:  (*coretests.DraftType).ClonePtr,
@@ -318,7 +318,7 @@ func Test_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
 
 // ── GenericGherkins.ShouldBeEqual with When fallback ──
 
-func Test_GenericGherkins_ShouldBeEqual_WhenFallback(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqual_WhenFallback_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		When:          "when-based-title",
 		ExpectedLines: []string{"hello"},
@@ -426,7 +426,7 @@ func Test_CaseV1_ShouldBe(t *testing.T) {
 
 // ── CaseV1.VerifyAll ──
 
-func Test_CaseV1_VerifyAll(t *testing.T) {
+func Test_CaseV1_VerifyAll_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "verify all",
@@ -489,7 +489,7 @@ func Test_CaseV1_IsEnable(t *testing.T) {
 
 // ── CaseV1 ExpectedLines with int ──
 
-func Test_CaseV1_ExpectedLines_Int(t *testing.T) {
+func Test_CaseV1_ExpectedLines_Int_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		ExpectedInput: 42,
@@ -510,7 +510,7 @@ func Test_CaseV1_ExpectedLines_Int(t *testing.T) {
 
 // ── CaseV1 ExpectedLines with bool ──
 
-func Test_CaseV1_ExpectedLines_Bool(t *testing.T) {
+func Test_CaseV1_ExpectedLines_Bool_FromCaseV1VerifyTypeOfMa(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		ExpectedInput: true,

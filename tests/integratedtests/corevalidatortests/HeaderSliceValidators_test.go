@@ -80,7 +80,7 @@ func Test_HeaderSliceValidators_IsMatch(t *testing.T) {
 // IsValid (delegates to IsMatch)
 // ==========================================
 
-func Test_HeaderSliceValidators_IsValid(t *testing.T) {
+func Test_HeaderSliceValidators_IsValid_FromHeaderSliceValidator(t *testing.T) {
 	for caseIndex, tc := range headerSliceValidatorsIsMatchTestCases {
 		// Arrange
 		input := tc.ArrangeInput
@@ -103,7 +103,7 @@ func Test_HeaderSliceValidators_IsValid(t *testing.T) {
 // SetActualOnAll
 // ==========================================
 
-func Test_HeaderSliceValidators_SetActualOnAll_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_SetActualOnAll_Empty_FromHeaderSliceValidator(t *testing.T) {
 	// should not panic
 	var v corevalidator.HeaderSliceValidators
 	v.SetActualOnAll("a", "b")

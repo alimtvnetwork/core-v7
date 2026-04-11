@@ -41,7 +41,7 @@ func Test_LinesValidators_LastIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_LinesValidators_Adds(t *testing.T) {
+func Test_LinesValidators_Adds_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(3)
 	lv.Adds(
@@ -58,7 +58,7 @@ func Test_LinesValidators_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
-func Test_LinesValidators_String(t *testing.T) {
+func Test_LinesValidators_String_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{
@@ -82,7 +82,7 @@ func Test_LinesValidators_String(t *testing.T) {
 // LinesValidators.IsMatch (with contents)
 // ==========================================
 
-func Test_LinesValidators_IsMatch_Empty(t *testing.T) {
+func Test_LinesValidators_IsMatch_Empty_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 	items := []corestr.TextWithLineNumber{
@@ -97,7 +97,7 @@ func Test_LinesValidators_IsMatch_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty validators should match", actual)
 }
 
-func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
+func Test_LinesValidators_IsMatch_NoContentsSkip_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{
@@ -116,7 +116,7 @@ func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "no contents with skip should match", actual)
 }
 
-func Test_LinesValidators_IsMatch_NoContentsNoSkip(t *testing.T) {
+func Test_LinesValidators_IsMatch_NoContentsNoSkip_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{
@@ -187,7 +187,7 @@ func Test_LinesValidators_IsMatch_OneFails(t *testing.T) {
 // LinesValidators.VerifyFirstDefaultLineNumberError
 // ==========================================
 
-func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty(t *testing.T) {
+func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
@@ -307,7 +307,7 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Fail(t *testing.T) {
 // LinesValidators.AllVerifyError
 // ==========================================
 
-func Test_LinesValidators_AllVerifyError_Empty(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_Empty_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
@@ -497,7 +497,7 @@ func Test_LineValidator_AllVerifyError_FirstFailOthersPass(t *testing.T) {
 // LinesValidators.AsBasicSliceContractsBinder
 // ==========================================
 
-func Test_LinesValidators_AsBasicSliceContractsBinder(t *testing.T) {
+func Test_LinesValidators_AsBasicSliceContractsBinder_FromLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	binder := lv.AsBasicSliceContractsBinder()

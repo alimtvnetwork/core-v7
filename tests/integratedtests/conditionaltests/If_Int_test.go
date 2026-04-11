@@ -486,7 +486,7 @@ func Test_StringDefault_False(t *testing.T) {
 // BoolByOrder
 // ==========================================
 
-func Test_BoolByOrder_FirstTrue(t *testing.T) {
+func Test_BoolByOrder_FirstTrue_FromIfInt(t *testing.T) {
 	// Arrange
 	r := conditional.BoolByOrder(true, false)
 
@@ -498,7 +498,7 @@ func Test_BoolByOrder_FirstTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return true", actual)
 }
 
-func Test_BoolByOrder_AllFalse(t *testing.T) {
+func Test_BoolByOrder_AllFalse_FromIfInt(t *testing.T) {
 	// Arrange
 	r := conditional.BoolByOrder(false, false, false)
 
@@ -510,7 +510,7 @@ func Test_BoolByOrder_AllFalse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return false", actual)
 }
 
-func Test_BoolByOrder_LastTrue(t *testing.T) {
+func Test_BoolByOrder_LastTrue_FromIfInt(t *testing.T) {
 	// Arrange
 	r := conditional.BoolByOrder(false, false, true)
 
@@ -570,7 +570,7 @@ func Test_Func_False(t *testing.T) {
 // StringsIndexVal
 // ==========================================
 
-func Test_StringsIndexVal_True(t *testing.T) {
+func Test_StringsIndexVal_True_FromIfInt(t *testing.T) {
 	// Arrange
 	r := conditional.StringsIndexVal(true, []string{"a", "b", "c"}, 0, 2)
 
@@ -582,7 +582,7 @@ func Test_StringsIndexVal_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'a', got ''", actual)
 }
 
-func Test_StringsIndexVal_False(t *testing.T) {
+func Test_StringsIndexVal_False_FromIfInt(t *testing.T) {
 	// Arrange
 	r := conditional.StringsIndexVal(false, []string{"a", "b", "c"}, 0, 2)
 

@@ -166,7 +166,7 @@ func Test_TextValidator_IsMatch_EndsWith(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- ends with", actual)
 }
 
-func Test_TextValidator_IsMatch_Contains(t *testing.T) {
+func Test_TextValidator_IsMatch_Contains_FromHeaderSliceValidator(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "ell", SearchAs: stringcompareas.Contains}
 
@@ -178,7 +178,7 @@ func Test_TextValidator_IsMatch_Contains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- contains", actual)
 }
 
-func Test_TextValidator_ToString_SingleLine(t *testing.T) {
+func Test_TextValidator_ToString_SingleLine_FromHeaderSliceValidator(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{Search: "test", SearchAs: stringcompareas.Equal}
 

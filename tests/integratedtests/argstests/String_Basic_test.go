@@ -10,7 +10,7 @@ import (
 // String type
 // ═══════════════════════════════════════════
 
-func Test_String_Basic(t *testing.T) {
+func Test_String_Basic_FromStringBasic(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -34,7 +34,7 @@ func Test_String_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- basic", actual)
 }
 
-func Test_String_Empty(t *testing.T) {
+func Test_String_Empty_FromStringBasic(t *testing.T) {
 	// Arrange
 	s := args.String("")
 
@@ -78,7 +78,7 @@ func Test_String_Ops(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- ops", actual)
 }
 
-func Test_String_Split(t *testing.T) {
+func Test_String_Split_FromStringBasic(t *testing.T) {
 	// Arrange
 	s := args.String("a,b,c")
 	parts := s.Split(",")
@@ -91,7 +91,7 @@ func Test_String_Split(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- Split", actual)
 }
 
-func Test_String_Join(t *testing.T) {
+func Test_String_Join_FromStringBasic(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	joined := s.Join("-", "world", "go")
@@ -104,7 +104,7 @@ func Test_String_Join(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- Join", actual)
 }
 
-func Test_String_Substring(t *testing.T) {
+func Test_String_Substring_FromStringBasic(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	sub := s.Substring(1, 4)
@@ -121,7 +121,7 @@ func Test_String_Substring(t *testing.T) {
 // LeftRight
 // ═══════════════════════════════════════════
 
-func Test_LeftRight_Basic(t *testing.T) {
+func Test_LeftRight_Basic_FromStringBasic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "hello", Right: 42, Expect: true}
 
@@ -167,7 +167,7 @@ func Test_LeftRight_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Slice", actual)
 }
 
-func Test_LeftRight_GetByIndex(t *testing.T) {
+func Test_LeftRight_GetByIndex_FromStringBasic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 
@@ -185,7 +185,7 @@ func Test_LeftRight_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- GetByIndex", actual)
 }
 
-func Test_LeftRight_String(t *testing.T) {
+func Test_LeftRight_String_FromStringBasic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 
@@ -197,7 +197,7 @@ func Test_LeftRight_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- String", actual)
 }
 
-func Test_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone_FromStringBasic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1, Expect: "exp"}
 	cloned := lr.Clone()
@@ -239,7 +239,7 @@ func Test_LeftRight_Args(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Args", actual)
 }
 
-func Test_LeftRight_ArgTwo(t *testing.T) {
+func Test_LeftRight_ArgTwo_FromStringBasic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 	two := lr.ArgTwo()
@@ -292,7 +292,7 @@ func Test_Holder_AllPositional(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- all positional", actual)
 }
 
-func Test_Holder_Args(t *testing.T) {
+func Test_Holder_Args_FromStringBasic(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", Sixth: "f"}
 	a1 := h.Args(1)
@@ -702,7 +702,7 @@ func Test_FuncWrap_MustBeValid_Panic(t *testing.T) {
 // FuncWrap — invoke methods
 // ═══════════════════════════════════════════
 
-func Test_FuncWrap_VoidCall(t *testing.T) {
+func Test_FuncWrap_VoidCall_FromStringBasic(t *testing.T) {
 	// Arrange
 	called := false
 	fn := func() { called = true }
@@ -743,7 +743,7 @@ func Test_FuncWrap_GetFirstResponse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- GetFirstResponseOfInvoke", actual)
 }
 
-func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex_FromStringBasic(t *testing.T) {
 	// Arrange
 	fn := func() (string, int) { return "a", 1 }
 	fw := args.NewFuncWrap.Default(fn)
@@ -913,7 +913,7 @@ func Test_DynamicFunc(t *testing.T) {
 // Map — additional methods
 // ═══════════════════════════════════════════
 
-func Test_Map_WorkFunc(t *testing.T) {
+func Test_Map_WorkFunc_FromStringBasic(t *testing.T) {
 	// Arrange
 	fn := func() string { return "hello" }
 	m := args.Map{
@@ -967,7 +967,7 @@ func Test_Map_GetTyped(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetTyped", actual)
 }
 
-func Test_Map_SortedKeysMust(t *testing.T) {
+func Test_Map_SortedKeysMust_FromStringBasic(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,

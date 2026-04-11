@@ -480,7 +480,7 @@ func Test_TypedErrorFunctionsExecuteResults_WithErrors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns error -- with errors", actual)
 }
 
-func Test_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_Empty_FromAnyFunctionsTrue(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, nil, nil)
 

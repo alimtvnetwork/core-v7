@@ -10,7 +10,7 @@ import (
 
 // ── TextValidators: AllVerifyErrorMany ──
 
-func Test_TextValidators_AllVerifyErrorMany_Match(t *testing.T) {
+func Test_TextValidators_AllVerifyErrorMany_Match_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(2)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -48,7 +48,7 @@ func Test_TextValidators_AllVerifyErrorMany_NoMatch(t *testing.T) {
 
 // ── TextValidators: VerifyErrorMany ──
 
-func Test_TextValidators_VerifyErrorMany_ContinueOnError(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_ContinueOnError_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -66,7 +66,7 @@ func Test_TextValidators_VerifyErrorMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- continue mode match", actual)
 }
 
-func Test_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_FirstOnly_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -84,7 +84,7 @@ func Test_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- first only match", actual)
 }
 
-func Test_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_Nil_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidators
 
@@ -99,7 +99,7 @@ func Test_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
 
 // ── TextValidators: AddSimpleAllTrue ──
 
-func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
+func Test_TextValidators_AddSimpleAllTrue_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 
@@ -142,7 +142,7 @@ func Test_TextValidators_Accessors(t *testing.T) {
 
 // ── TextValidators: Dispose ──
 
-func Test_TextValidators_Dispose(t *testing.T) {
+func Test_TextValidators_Dispose_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("a", stringcompareas.Contains)
@@ -158,7 +158,7 @@ func Test_TextValidators_Dispose(t *testing.T) {
 
 // ── TextValidators: String ──
 
-func Test_TextValidators_String(t *testing.T) {
+func Test_TextValidators_String_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("test", stringcompareas.Contains)
@@ -204,7 +204,7 @@ func Test_TextValidators_IsMatchMany_NoMatch(t *testing.T) {
 
 // ── TextValidator: VerifyMany ──
 
-func Test_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_TextValidator_VerifyMany_ContinueOnError_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -224,7 +224,7 @@ func Test_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns nil -- continue+match", actual)
 }
 
-func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
+func Test_TextValidator_VerifyMany_FirstOnly_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -264,7 +264,7 @@ func Test_TextValidator_IsMatchMany_SkipOnEmpty(t *testing.T) {
 
 // ── TextValidator: ToString multiline ──
 
-func Test_TextValidator_ToString_MultiLine(t *testing.T) {
+func Test_TextValidator_ToString_MultiLine_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "test",
@@ -282,7 +282,7 @@ func Test_TextValidator_ToString_MultiLine(t *testing.T) {
 
 // ── TextValidator: MethodName ──
 
-func Test_TextValidator_MethodName(t *testing.T) {
+func Test_TextValidator_MethodName_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "test",
@@ -365,7 +365,7 @@ func Test_SliceValidator_AllVerifyErrorExceptLast(t *testing.T) {
 
 // ── SliceValidator: AllVerifyErrorTestCase ──
 
-func Test_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Match_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"hello"},
@@ -406,7 +406,7 @@ func Test_LinesValidators_Accessors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators empty accessors -- correct defaults", actual)
 }
 
-func Test_LinesValidators_String(t *testing.T) {
+func Test_LinesValidators_String_FromTextValidatorsAllVer(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 

@@ -13,7 +13,7 @@ import (
 // ── CaseV1: ArrangeTypeName ──
 // Covers CaseV1.go L55-57
 
-func Test_CaseV1_ArrangeTypeName(t *testing.T) {
+func Test_CaseV1_ArrangeTypeName_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "test type name",
@@ -119,7 +119,7 @@ func Test_CaseV1_ShouldBeTrimRegex(t *testing.T) {
 // ── CaseV1: ShouldHaveNoError ──
 // Covers CaseV1.go L586-601
 
-func Test_CaseV1_ShouldHaveNoError(t *testing.T) {
+func Test_CaseV1_ShouldHaveNoError_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := coretestcases.CaseV1{
 		Title:         "no error test",
 		ExpectedInput: "test",
@@ -143,7 +143,7 @@ func Test_CaseV1_AssertDirectly(t *testing.T) {
 // ── CaseV1: PrepareTitle ──
 // Covers CaseV1.go L636-643
 
-func Test_CaseV1_PrepareTitle(t *testing.T) {
+func Test_CaseV1_PrepareTitle_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "my test",
@@ -169,7 +169,7 @@ func Test_CaseV1_PrepareTitle(t *testing.T) {
 // ── CaseV1: AsSimpleTestCaseWrapperContractsBinder ──
 // Covers CaseV1.go L649-651
 
-func Test_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
+func Test_CaseV1_AsSimpleTestCaseWrapperContractsBinder_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "binder test",
@@ -211,17 +211,17 @@ func Test_CaseV1_ShouldContainsFirst(t *testing.T) {
 	tc.ShouldContainsFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldStartsWithFirst(t *testing.T) {
+func Test_CaseV1_ShouldStartsWithFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := coretestcases.CaseV1{Title: "first starts", ExpectedInput: "he"}
 	tc.ShouldStartsWithFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldEndsWithFirst(t *testing.T) {
+func Test_CaseV1_ShouldEndsWithFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := coretestcases.CaseV1{Title: "first ends", ExpectedInput: "lo"}
 	tc.ShouldEndsWithFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldBeNotEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeNotEqualFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := coretestcases.CaseV1{Title: "first not equal", ExpectedInput: "abc"}
 	tc.ShouldBeNotEqualFirst(t, "xyz")
 }
@@ -374,7 +374,7 @@ func Test_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqual success ──
 // Covers GenericGherkinsAssertions.go L19-33
 
-func Test_GenericGherkins_ShouldBeEqual(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqual_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title:         "gherkins equal test",
 		ExpectedLines: []string{"hello"},
@@ -387,7 +387,7 @@ func Test_GenericGherkins_ShouldBeEqual(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqualFirst ──
 // Covers GenericGherkinsAssertions.go L42-51
 
-func Test_GenericGherkins_ShouldBeEqualFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title: "gherkins first test",
 	}
@@ -399,7 +399,7 @@ func Test_GenericGherkins_ShouldBeEqualFirst(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqualArgs ──
 // Covers GenericGherkinsAssertions.go L69-78
 
-func Test_GenericGherkins_ShouldBeEqualArgs(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualArgs_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title:         "gherkins args test",
 		ExpectedLines: []string{"val"},
@@ -412,7 +412,7 @@ func Test_GenericGherkins_ShouldBeEqualArgs(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqualArgsFirst ──
 // Covers GenericGherkinsAssertions.go L94-102
 
-func Test_GenericGherkins_ShouldBeEqualArgsFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualArgsFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title:         "gherkins args first test",
 		ExpectedLines: []string{"val"},
@@ -425,7 +425,7 @@ func Test_GenericGherkins_ShouldBeEqualArgsFirst(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqualUsingExpected ──
 // Covers GenericGherkinsAssertions.go L111-120
 
-func Test_GenericGherkins_ShouldBeEqualUsingExpected(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualUsingExpected_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title:         "gherkins expected test",
 		ExpectedLines: []string{"val"},
@@ -438,7 +438,7 @@ func Test_GenericGherkins_ShouldBeEqualUsingExpected(t *testing.T) {
 // ── GenericGherkinsAssertions: ShouldBeEqualUsingExpectedFirst ──
 // Covers GenericGherkinsAssertions.go L128-136
 
-func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title:         "gherkins expected first test",
 		ExpectedLines: []string{"val"},
@@ -451,7 +451,7 @@ func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
 // ── GenericGherkinsCompare: CompareWith nil cases ──
 // Covers GenericGherkinsCompare.go L14-17
 
-func Test_GenericGherkins_CompareWith_OneNil(t *testing.T) {
+func Test_GenericGherkins_CompareWith_OneNil_FromCaseV1ArrangeTypeNam(t *testing.T) {
 	// Arrange
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title: "compare test",

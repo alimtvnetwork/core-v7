@@ -174,7 +174,7 @@ func Test_Dynamic_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- basic", actual)
 }
 
-func Test_Dynamic_GetByIndex(t *testing.T) {
+func Test_Dynamic_GetByIndex_FromFourBasic(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{Params: args.Map{"first": "hello"}}
 	result := d.GetByIndex(0)

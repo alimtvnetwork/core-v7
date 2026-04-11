@@ -1019,7 +1019,7 @@ func Test_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
 	})
 }
 
-func Test_FuncMap_InvalidError(t *testing.T) {
+func Test_FuncMap_InvalidError_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1371,7 +1371,7 @@ func Test_String_Substring(t *testing.T) {
 	})
 }
 
-func Test_String_Empty(t *testing.T) {
+func Test_String_Empty_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	s := args.String("")
 
@@ -1441,7 +1441,7 @@ func Test_Dynamic_HasDefined(t *testing.T) {
 	})
 }
 
-func Test_Dynamic_HasDefinedAll(t *testing.T) {
+func Test_Dynamic_HasDefinedAll_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1510,7 +1510,7 @@ func Test_Dynamic_GetTyped(t *testing.T) {
 	})
 }
 
-func Test_Dynamic_GetLowerCase(t *testing.T) {
+func Test_Dynamic_GetLowerCase_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1571,7 +1571,7 @@ func Test_Dynamic_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Dynamic_GetByIndex(t *testing.T) {
+func Test_Dynamic_GetByIndex_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1603,7 +1603,7 @@ func Test_Dynamic_HasFunc(t *testing.T) {
 	})
 }
 
-func Test_Dynamic_AsInterfaces(t *testing.T) {
+func Test_Dynamic_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	d := args.Dynamic[string]{
 		Params: args.Map{},
@@ -1656,7 +1656,7 @@ func Test_DynamicFunc_Getters(t *testing.T) {
 	})
 }
 
-func Test_DynamicFunc_HasFirst(t *testing.T) {
+func Test_DynamicFunc_HasFirst_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1670,7 +1670,7 @@ func Test_DynamicFunc_HasFirst(t *testing.T) {
 	})
 }
 
-func Test_DynamicFunc_GetByIndex(t *testing.T) {
+func Test_DynamicFunc_GetByIndex_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1739,7 +1739,7 @@ func Test_DynamicFunc_HasDefined(t *testing.T) {
 	})
 }
 
-func Test_DynamicFunc_GetLowerCase(t *testing.T) {
+func Test_DynamicFunc_GetLowerCase_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	df := args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1797,7 +1797,7 @@ func Test_DynamicFunc_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_DynamicFunc_AsInterfaces(t *testing.T) {
+func Test_DynamicFunc_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	df := args.DynamicFunc[func()]{
 		Params: args.Map{},
@@ -1906,7 +1906,7 @@ func Test_LeftRight_Slice_GetByIndex_String(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_AsInterfaces(t *testing.T) {
+func Test_LeftRight_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	lr := args.LeftRight[string, int]{
 		Left:  "a",
@@ -2005,7 +2005,7 @@ func Test_One_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_One_AsInterfaces(t *testing.T) {
+func Test_One_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	one := args.One[string]{
 		First: "hello",
@@ -2118,7 +2118,7 @@ func Test_Two_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Two_AsInterfaces(t *testing.T) {
+func Test_Two_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	two := args.Two[string, int]{
 		First:  "a",
@@ -2240,7 +2240,7 @@ func Test_Three_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Three_AsInterfaces(t *testing.T) {
+func Test_Three_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	three := args.Three[string, int, bool]{
 		First: "a",
@@ -2337,7 +2337,7 @@ func Test_Four_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Four_AsInterfaces(t *testing.T) {
+func Test_Four_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	four := args.Four[string, int, bool, float64]{
 		First: "a",
@@ -2438,7 +2438,7 @@ func Test_Five_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Five_AsInterfaces(t *testing.T) {
+func Test_Five_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	five := args.Five[string, int, bool, float64, byte]{
 		First: "a",
@@ -2546,7 +2546,7 @@ func Test_Six_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Six_AsInterfaces(t *testing.T) {
+func Test_Six_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	six := args.Six[string, int, bool, float64, byte, rune]{
 		First: "a",
@@ -2650,7 +2650,7 @@ func Test_Holder_Slice_GetByIndex_String(t *testing.T) {
 	})
 }
 
-func Test_Holder_AsInterfaces(t *testing.T) {
+func Test_Holder_AsInterfaces_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	h := args.Holder[func()]{
 		First: "a",
@@ -2686,7 +2686,7 @@ func Test_Map_Getters(t *testing.T) {
 	})
 }
 
-func Test_Map_SetActual(t *testing.T) {
+func Test_Map_SetActual_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2765,7 +2765,7 @@ func Test_Map_TypedGetters(t *testing.T) {
 	})
 }
 
-func Test_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"items": []string{"a", "b"},
@@ -2806,7 +2806,7 @@ func Test_Map_GetAsStringSliceFirstOfNames_Empty(t *testing.T) {
 	})
 }
 
-func Test_Map_WorkFuncName(t *testing.T) {
+func Test_Map_WorkFuncName_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"func": func() {},
@@ -2821,7 +2821,7 @@ func Test_Map_WorkFuncName(t *testing.T) {
 	})
 }
 
-func Test_Map_GetFirstFuncNameOf(t *testing.T) {
+func Test_Map_GetFirstFuncNameOf_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"func": func() {},
@@ -2854,7 +2854,7 @@ func Test_Map_Slice_String(t *testing.T) {
 	})
 }
 
-func Test_Map_CompileToStrings(t *testing.T) {
+func Test_Map_CompileToStrings_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -2883,7 +2883,7 @@ func Test_Map_CompileToStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_Map_CompileToString(t *testing.T) {
+func Test_Map_CompileToString_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -2899,7 +2899,7 @@ func Test_Map_CompileToString(t *testing.T) {
 	})
 }
 
-func Test_Map_GoLiteralLines(t *testing.T) {
+func Test_Map_GoLiteralLines_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"name":  "hello",
@@ -2928,7 +2928,7 @@ func Test_Map_GoLiteralLines_Empty(t *testing.T) {
 	})
 }
 
-func Test_Map_GoLiteralString(t *testing.T) {
+func Test_Map_GoLiteralString_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key": "val",
@@ -2962,7 +2962,7 @@ func Test_Map_NilReceiver(t *testing.T) {
 
 // --- emptyCreator ---
 
-func Test_EmptyCreator(t *testing.T) {
+func Test_EmptyCreator_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Act & Assert
 	convey.Convey("Empty creator methods", t, func() {
 		convey.So(args.Empty.Map(), convey.ShouldNotBeNil)
@@ -3052,7 +3052,7 @@ func Test_FuncMap_Add(t *testing.T) {
 	})
 }
 
-func Test_FuncMap_Adds(t *testing.T) {
+func Test_FuncMap_Adds_FromFuncWrapVoidCallNoRe(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 

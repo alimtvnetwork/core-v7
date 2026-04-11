@@ -277,7 +277,7 @@ func Test_VerifyError_WithTypeVerify(t *testing.T) {
 // CaseNilSafe — covers CaseNilSafe.go + CaseNilSafeAssertHelper.go
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_CaseNilSafe_ShouldBeSafe(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafe_FromShouldBeSortedEqualI(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "ClonePtr nil safe direct",
 		Func:  (*coretests.DraftType).ClonePtr,

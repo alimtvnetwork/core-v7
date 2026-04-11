@@ -11,7 +11,7 @@ import (
 
 // ── SliceValidator ──
 
-func Test_SliceValidator_IsUsedAlready_Nil(t *testing.T) {
+func Test_SliceValidator_IsUsedAlready_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -23,7 +23,7 @@ func Test_SliceValidator_IsUsedAlready_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsUsedAlready returns nil -- nil", actual)
 }
 
-func Test_SliceValidator_ActualLinesLength_Nil(t *testing.T) {
+func Test_SliceValidator_ActualLinesLength_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -35,7 +35,7 @@ func Test_SliceValidator_ActualLinesLength_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ActualLinesLength returns nil -- nil", actual)
 }
 
-func Test_SliceValidator_MethodName(t *testing.T) {
+func Test_SliceValidator_MethodName_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 
@@ -47,7 +47,7 @@ func Test_SliceValidator_MethodName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MethodName returns correct value -- with args", actual)
 }
 
-func Test_SliceValidator_SetActual(t *testing.T) {
+func Test_SliceValidator_SetActual_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{}
 	sv.SetActual([]string{"a", "b"})
@@ -66,7 +66,7 @@ func Test_SliceValidator_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetActual returns correct value -- with args", actual)
 }
 
-func Test_SliceValidator_SetActualVsExpected(t *testing.T) {
+func Test_SliceValidator_SetActualVsExpected_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{}
 	sv.SetActualVsExpected([]string{"a"}, []string{"a"})
@@ -100,7 +100,7 @@ func Test_SliceValidator_ActualLinesString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ActualLinesString returns correct value -- with args", actual)
 }
 
-func Test_SliceValidator_ActualLinesString_Nil(t *testing.T) {
+func Test_SliceValidator_ActualLinesString_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	result := sv.ActualLinesString()
@@ -126,7 +126,7 @@ func Test_SliceValidator_ExpectingLinesString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpectingLinesString returns correct value -- with args", actual)
 }
 
-func Test_SliceValidator_ExpectingLinesString_Nil(t *testing.T) {
+func Test_SliceValidator_ExpectingLinesString_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	result := sv.ExpectingLinesString()
@@ -139,7 +139,7 @@ func Test_SliceValidator_ExpectingLinesString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ExpectingLinesString returns nil -- nil", actual)
 }
 
-func Test_SliceValidator_ExpectingLinesLength_Nil(t *testing.T) {
+func Test_SliceValidator_ExpectingLinesLength_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -167,7 +167,7 @@ func Test_SliceValidator_ComparingValidators(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns non-empty -- with args", actual)
 }
 
-func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
+func Test_SliceValidator_ComparingValidators_Cached_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a"},
@@ -184,7 +184,7 @@ func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns non-empty -- cached", actual)
 }
 
-func Test_SliceValidator_IsValid_Nil(t *testing.T) {
+func Test_SliceValidator_IsValid_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -212,7 +212,7 @@ func Test_SliceValidator_IsValid_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- match", actual)
 }
 
-func Test_SliceValidator_IsValid_Mismatch(t *testing.T) {
+func Test_SliceValidator_IsValid_Mismatch_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"hello"},
@@ -244,7 +244,7 @@ func Test_SliceValidator_IsValid_DifferentLengths(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- different lengths", actual)
 }
 
-func Test_SliceValidator_IsValidOtherLines(t *testing.T) {
+func Test_SliceValidator_IsValidOtherLines_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a", "b"},
@@ -307,7 +307,7 @@ func Test_SliceValidator_IsValidLines_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "isValidLines returns nil -- one nil", actual)
 }
 
-func Test_SliceValidator_Dispose(t *testing.T) {
+func Test_SliceValidator_Dispose_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"a"},
@@ -331,7 +331,7 @@ func Test_SliceValidator_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dispose returns correct value -- with args", actual)
 }
 
-func Test_SliceValidator_Dispose_Nil(t *testing.T) {
+func Test_SliceValidator_Dispose_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	sv.Dispose() // should not panic
@@ -367,7 +367,7 @@ func Test_TextValidator_IsMatch_EqualMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- equal", actual)
 }
 
-func Test_TextValidator_IsMatch_Contains(t *testing.T) {
+func Test_TextValidator_IsMatch_Contains_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "ell",
@@ -382,7 +382,7 @@ func Test_TextValidator_IsMatch_Contains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- contains", actual)
 }
 
-func Test_TextValidator_IsMatch_StartsWith(t *testing.T) {
+func Test_TextValidator_IsMatch_StartsWith_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hel",
@@ -397,7 +397,7 @@ func Test_TextValidator_IsMatch_StartsWith(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- startsWith", actual)
 }
 
-func Test_TextValidator_IsMatch_EndsWith(t *testing.T) {
+func Test_TextValidator_IsMatch_EndsWith_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "llo",
@@ -428,7 +428,7 @@ func Test_TextValidators_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.Add returns non-empty -- with args", actual)
 }
 
-func Test_TextValidators_Dispose(t *testing.T) {
+func Test_TextValidators_Dispose_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	validators := corevalidator.NewTextValidators(5)
 	validators.Add(corevalidator.TextValidator{Search: "a"})
@@ -442,7 +442,7 @@ func Test_TextValidators_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.Dispose returns non-empty -- with args", actual)
 }
 
-func Test_TextValidators_Dispose_Nil(t *testing.T) {
+func Test_TextValidators_Dispose_Nil_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	var validators *corevalidator.TextValidators
 	validators.Dispose() // should not panic
@@ -487,7 +487,7 @@ func Test_Parameter_Fields(t *testing.T) {
 
 // ── SimpleSliceValidator ──
 
-func Test_SimpleSliceValidator_SetActual(t *testing.T) {
+func Test_SimpleSliceValidator_SetActual_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 
 	// Assert
@@ -504,7 +504,7 @@ func Test_SimpleSliceValidator_SetActual(t *testing.T) {
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.SetActual returns non-empty -- with args", actual)
 }
 
-func Test_SimpleSliceValidator_VerifyAll(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyAll_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 
 	// Assert
@@ -530,7 +530,7 @@ func Test_SimpleSliceValidator_VerifyAll(t *testing.T) {
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.VerifyAll returns non-empty -- with args", actual)
 }
 
-func Test_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyAll_Mismatch_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 
 	// Assert
@@ -593,7 +593,7 @@ func Test_HeaderSliceValidator_IsValid(t *testing.T) {
 
 // ── HeaderSliceValidators ──
 
-func Test_HeaderSliceValidators_IsEmpty(t *testing.T) {
+func Test_HeaderSliceValidators_IsEmpty_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	hsvs := &corevalidator.HeaderSliceValidators{}
 
@@ -605,7 +605,7 @@ func Test_HeaderSliceValidators_IsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HeaderSliceValidators.IsEmpty returns empty -- with args", actual)
 }
 
-func Test_HeaderSliceValidators_Length(t *testing.T) {
+func Test_HeaderSliceValidators_Length_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	hsvs := corevalidator.HeaderSliceValidators{
 		{Header: "h1"},
@@ -655,7 +655,7 @@ func Test_SliceValidators_Length(t *testing.T) {
 
 // ── RangesSegment ──
 
-func Test_RangesSegment(t *testing.T) {
+func Test_RangesSegment_FromSliceValidatorIsUsed(t *testing.T) {
 	// Arrange
 	rs := corevalidator.RangesSegment{
 		ExpectedLines: []string{"a", "b"},

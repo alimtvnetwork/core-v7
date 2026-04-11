@@ -65,7 +65,7 @@ func Test_TextValidator_IsMatch_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- IsMatch nil", actual)
 }
 
-func Test_TextValidator_VerifyDetailError_Nil(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Nil_FromTextValidatorToStrin(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	_ = &corevalidator.Parameter{CaseIndex: 0, Header: "test"}

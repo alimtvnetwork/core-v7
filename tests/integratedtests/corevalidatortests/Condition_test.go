@@ -11,7 +11,7 @@ import (
 // Condition.IsSplitByWhitespace
 // ==========================================
 
-func Test_Condition_IsSplitByWhitespace_AllFalse(t *testing.T) {
+func Test_Condition_IsSplitByWhitespace_AllFalse_FromCondition(t *testing.T) {
 	// Arrange
 	tc := conditionAllFalseTestCase
 	c := corevalidator.Condition{}

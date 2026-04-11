@@ -27,7 +27,7 @@ func Test_TextValidators_NewEmpty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_Add(t *testing.T) {
+func Test_TextValidators_Add_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsAddTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -41,7 +41,7 @@ func Test_TextValidators_Add(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_Adds(t *testing.T) {
+func Test_TextValidators_Adds_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsAddsTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -57,7 +57,7 @@ func Test_TextValidators_Adds(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_Adds_Empty(t *testing.T) {
+func Test_TextValidators_Adds_Empty_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsAddsEmptyTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -70,7 +70,7 @@ func Test_TextValidators_Adds_Empty(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_AddSimple(t *testing.T) {
+func Test_TextValidators_AddSimple_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsAddSimpleTestCase
 	v := corevalidator.NewTextValidators(1)
@@ -83,7 +83,7 @@ func Test_TextValidators_AddSimple(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_HasIndex(t *testing.T) {
+func Test_TextValidators_HasIndex_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsHasIndexTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -129,7 +129,7 @@ func Test_TextValidators_IsMatch_EmptyValidators(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_IsMatch_AllPass(t *testing.T) {
+func Test_TextValidators_IsMatch_AllPass_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsIsMatchAllPassTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -143,7 +143,7 @@ func Test_TextValidators_IsMatch_AllPass(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_IsMatch_OneFails(t *testing.T) {
+func Test_TextValidators_IsMatch_OneFails_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsIsMatchOneFailsTestCase
 	v := corevalidator.NewTextValidators(2)
@@ -211,7 +211,7 @@ func Test_TextValidators_VerifyFirstError_Fails(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidators_VerifyFirstError_Empty(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Empty_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsVerifyFirstEmptyTestCase
 	v := corevalidator.NewTextValidators(0)
@@ -270,7 +270,7 @@ func Test_TextValidators_AllVerifyError_MultipleFail(t *testing.T) {
 // TextValidators.Dispose
 // ==========================================
 
-func Test_TextValidators_Dispose(t *testing.T) {
+func Test_TextValidators_Dispose_FromTextValidators(t *testing.T) {
 	// Arrange
 	tc := textValidatorsDisposeTestCase
 	v := corevalidator.NewTextValidators(2)

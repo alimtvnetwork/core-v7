@@ -42,7 +42,7 @@ func Test_TextValidator_IsMatch_ExactNotEqual(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_CaseInsensitive_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvIsMatchCaseInsensitiveTestCase
 	v := corevalidator.TextValidator{
@@ -110,7 +110,7 @@ func Test_TextValidator_IsMatch_TrimBothSides(t *testing.T) {
 // TextValidator.IsMatch — Contains
 // ==========================================
 
-func Test_TextValidator_IsMatch_Contains(t *testing.T) {
+func Test_TextValidator_IsMatch_Contains_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvIsMatchContainsTestCase
 	v := corevalidator.TextValidator{
@@ -231,7 +231,7 @@ func Test_TextValidator_IsMatch_EmptySearchNonEmptyContent(t *testing.T) {
 // TextValidator.IsMatchMany
 // ==========================================
 
-func Test_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
+func Test_TextValidator_IsMatchMany_AllMatch_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvIsMatchManyAllTestCase
 	v := corevalidator.TextValidator{
@@ -246,7 +246,7 @@ func Test_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidator_IsMatchMany_OneFails(t *testing.T) {
+func Test_TextValidator_IsMatchMany_OneFails_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvIsMatchManyOneFailsTestCase
 	v := corevalidator.TextValidator{
@@ -261,7 +261,7 @@ func Test_TextValidator_IsMatchMany_OneFails(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidator_IsMatchMany_EmptySkip(t *testing.T) {
+func Test_TextValidator_IsMatchMany_EmptySkip_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvIsMatchManyEmptySkipTestCase
 	v := corevalidator.TextValidator{
@@ -282,7 +282,7 @@ func Test_TextValidator_IsMatchMany_EmptySkip(t *testing.T) {
 // TextValidator.VerifyDetailError
 // ==========================================
 
-func Test_TextValidator_VerifyDetailError_Match(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Match_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvVerifyDetailMatchTestCase
 	v := corevalidator.TextValidator{
@@ -300,7 +300,7 @@ func Test_TextValidator_VerifyDetailError_Match(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Mismatch_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvVerifyDetailMismatchTestCase
 	v := corevalidator.TextValidator{
@@ -324,7 +324,7 @@ func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 // TextValidator.VerifyMany
 // ==========================================
 
-func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
+func Test_TextValidator_VerifyMany_FirstOnly_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvVerifyManyFirstOnlyTestCase
 	v := corevalidator.TextValidator{
@@ -360,7 +360,7 @@ func Test_TextValidator_VerifyMany_AllErrors(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
+func Test_TextValidator_VerifyFirstError_EmptySkip_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvVerifyFirstEmptySkipTestCase
 	v := corevalidator.TextValidator{
@@ -383,7 +383,7 @@ func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 // TextValidator.SearchTextFinalized — caching
 // ==========================================
 
-func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
+func Test_TextValidator_SearchTextFinalized_Cached_FromTextValidator(t *testing.T) {
 	// Arrange
 	tc := tvSearchTextFinalizedTestCase
 	v := corevalidator.TextValidator{

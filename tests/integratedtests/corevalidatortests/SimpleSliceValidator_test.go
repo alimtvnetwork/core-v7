@@ -9,7 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
 )
 
-func Test_SimpleSliceValidator_SetActual(t *testing.T) {
+func Test_SimpleSliceValidator_SetActual_FromSimpleSliceValidator(t *testing.T) {
 	tc := simpleSliceValidatorSetActualTestCase
 
 	// Arrange
@@ -31,7 +31,7 @@ func Test_SimpleSliceValidator_SetActual(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_SimpleSliceValidator_SliceValidator(t *testing.T) {
+func Test_SimpleSliceValidator_SliceValidator_FromSimpleSliceValidator(t *testing.T) {
 	tc := simpleSliceValidatorSliceValidatorTestCase
 
 	// Arrange
@@ -54,7 +54,7 @@ func Test_SimpleSliceValidator_SliceValidator(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_SimpleSliceValidator_VerifyAll(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyAll_FromSimpleSliceValidator(t *testing.T) {
 	for caseIndex, tc := range simpleSliceValidatorVerifyAllTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -86,7 +86,7 @@ func Test_SimpleSliceValidator_VerifyAll(t *testing.T) {
 	}
 }
 
-func Test_SimpleSliceValidator_VerifyFirst(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyFirst_FromSimpleSliceValidator(t *testing.T) {
 	tc := simpleSliceValidatorVerifyFirstTestCase
 
 	// Arrange
@@ -117,7 +117,7 @@ func Test_SimpleSliceValidator_VerifyFirst(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_SimpleSliceValidator_VerifyUpto(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyUpto_FromSimpleSliceValidator(t *testing.T) {
 	tc := simpleSliceValidatorVerifyUptoTestCase
 
 	// Arrange

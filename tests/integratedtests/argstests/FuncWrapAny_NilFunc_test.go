@@ -319,7 +319,7 @@ func Test_Three_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Three returns correct value -- basic", actual)
 }
 
-func Test_Four_Basic(t *testing.T) {
+func Test_Four_Basic_FromFuncWrapAnyNilFunc(t *testing.T) {
 	// Arrange
 	f := args.FourAny{First: 1, Second: 2, Third: 3, Fourth: 4}
 
@@ -343,7 +343,7 @@ func Test_Four_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- basic", actual)
 }
 
-func Test_Five_Basic(t *testing.T) {
+func Test_Five_Basic_FromFuncWrapAnyNilFunc(t *testing.T) {
 	// Arrange
 	f := args.FiveAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5}
 
@@ -364,7 +364,7 @@ func Test_Five_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Five returns correct value -- basic", actual)
 }
 
-func Test_Six_Basic(t *testing.T) {
+func Test_Six_Basic_FromFuncWrapAnyNilFunc(t *testing.T) {
 	// Arrange
 	s := args.SixAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6}
 
@@ -435,7 +435,7 @@ func Test_LeftRight_Basic(t *testing.T) {
 // Dynamic
 // ═══════════════════════════════════════════
 
-func Test_Dynamic_Basic(t *testing.T) {
+func Test_Dynamic_Basic_FromFuncWrapAnyNilFunc(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{Params: args.Map{"val": "hello"}, Expect: "expected"}
 

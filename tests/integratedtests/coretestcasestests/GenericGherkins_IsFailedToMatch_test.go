@@ -9,7 +9,7 @@ import (
 
 // ── GenericGherkins Getters ──
 
-func Test_GenericGherkins_IsFailedToMatch(t *testing.T) {
+func Test_GenericGherkins_IsFailedToMatch_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{IsMatching: true}
 	g2 := &coretestcases.StringBoolGherkins{IsMatching: false}
@@ -144,7 +144,7 @@ func Test_GenericGherkins_GetExtraAsBoolDefault(t *testing.T) {
 
 // ── GenericGherkins Formatting ──
 
-func Test_GenericGherkins_ToString(t *testing.T) {
+func Test_GenericGherkins_ToString_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{
 		Feature: "f", Given: "g", When: "w", Then: "t",
@@ -159,7 +159,7 @@ func Test_GenericGherkins_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToString returns correct value -- with args", actual)
 }
 
-func Test_GenericGherkins_String(t *testing.T) {
+func Test_GenericGherkins_String_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 
@@ -171,7 +171,7 @@ func Test_GenericGherkins_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_GenericGherkins_GetWithExpectation(t *testing.T) {
+func Test_GenericGherkins_GetWithExpectation_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 	result := g.GetWithExpectation(0)
@@ -184,7 +184,7 @@ func Test_GenericGherkins_GetWithExpectation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetWithExpectation returns non-empty -- with args", actual)
 }
 
-func Test_GenericGherkins_GetMessageConditional(t *testing.T) {
+func Test_GenericGherkins_GetMessageConditional_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 	withExp := g.GetMessageConditional(true, 0)
@@ -220,7 +220,7 @@ func Test_GenericGherkins_FullString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FullString returns correct value -- with args", actual)
 }
 
-func Test_GenericGherkins_FullString_Nil(t *testing.T) {
+func Test_GenericGherkins_FullString_Nil_FromGenericGherkinsIsFai(t *testing.T) {
 	// Arrange
 	var g *coretestcases.StringBoolGherkins
 	result := g.FullString()

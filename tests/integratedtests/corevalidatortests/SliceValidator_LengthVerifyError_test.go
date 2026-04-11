@@ -282,7 +282,7 @@ func Test_HeaderSliceValidators_IsValid_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns true -- non-empty match", actual)
 }
 
-func Test_HeaderSliceValidators_SetActualOnAll_NonEmpty(t *testing.T) {
+func Test_HeaderSliceValidators_SetActualOnAll_NonEmpty_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -303,7 +303,7 @@ func Test_HeaderSliceValidators_SetActualOnAll_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetActualOnAll completes -- non-empty validators", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAll_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAll_WithError_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -326,7 +326,7 @@ func Test_HeaderSliceValidators_VerifyAll_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns error -- non-empty mismatch", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAll_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAll_Match_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -372,7 +372,7 @@ func Test_HeaderSliceValidators_VerifyAll_PrintError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns error -- isPrintError true", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAllError_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllError_WithError_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -419,7 +419,7 @@ func Test_HeaderSliceValidators_VerifyAllError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllError returns expected -- match", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyFirst_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyFirst_WithError_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -442,7 +442,7 @@ func Test_HeaderSliceValidators_VerifyFirst_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns error -- mismatch", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyFirst_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyFirst_Match_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -488,7 +488,7 @@ func Test_HeaderSliceValidators_VerifyFirst_PrintError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns error -- isPrintError true", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyUpto_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_WithError_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -511,7 +511,7 @@ func Test_HeaderSliceValidators_VerifyUpto_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns error -- mismatch", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyUpto_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_Match_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -534,7 +534,7 @@ func Test_HeaderSliceValidators_VerifyUpto_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- match", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyUpto_PrintError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_PrintError_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -557,7 +557,7 @@ func Test_HeaderSliceValidators_VerifyUpto_PrintError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns error -- isPrintError true", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Match_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -585,7 +585,7 @@ func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllErrorUsingActual completes -- non-empty", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Mismatch(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Mismatch_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -634,7 +634,7 @@ func Test_RangeSegmentsValidator_Validators_WithSegments(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Validators returns expected -- one segment", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyAll_Match(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyAll_Match_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -657,7 +657,7 @@ func Test_RangeSegmentsValidator_VerifyAll_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifySimple(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifySimple_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -680,7 +680,7 @@ func Test_RangeSegmentsValidator_VerifySimple(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifySimple returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyFirst(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyFirst_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -703,7 +703,7 @@ func Test_RangeSegmentsValidator_VerifyFirst(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyFirstDefault_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -726,7 +726,7 @@ func Test_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstDefault returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyUpto(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyUpto_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -749,7 +749,7 @@ func Test_RangeSegmentsValidator_VerifyUpto(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyUptoDefault_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -772,7 +772,7 @@ func Test_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUptoDefault returns nil -- match", actual)
 }
 
-func Test_RangeSegmentsValidator_VerifyAll_Mismatch(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyAll_Mismatch_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -799,7 +799,7 @@ func Test_RangeSegmentsValidator_VerifyAll_Mismatch(t *testing.T) {
 // NewSliceValidatorUsingAny — with conditions
 // =============================================================================
 
-func Test_NewSliceValidatorUsingAny_WithConditions(t *testing.T) {
+func Test_NewSliceValidatorUsingAny_WithConditions_FromSliceValidatorLength(t *testing.T) {
 	// Arrange & Act
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"  hello  world  ",
@@ -814,7 +814,7 @@ func Test_NewSliceValidatorUsingAny_WithConditions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingAny returns valid -- with conditions", actual)
 }
 
-func Test_NewSliceValidatorUsingAny_Mismatch(t *testing.T) {
+func Test_NewSliceValidatorUsingAny_Mismatch_FromSliceValidatorLength(t *testing.T) {
 	// Arrange & Act
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"actual",
@@ -856,7 +856,7 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_ValidatorError(t *te
 // LinesValidators — empty paths
 // =============================================================================
 
-func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty(t *testing.T) {
+func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -870,7 +870,7 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "VerifyFirstDefaultLineNumberError returns nil -- empty validators", actual)
 }
 
-func Test_LinesValidators_AllVerifyError_Empty(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_Empty_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -916,7 +916,7 @@ func Test_SliceValidator_UserInputsMergeWithError_NilErr_EmptyActual(t *testing.
 // SliceValidator — case insensitive path
 // =============================================================================
 
-func Test_SliceValidator_IsValid_CaseInsensitive(t *testing.T) {
+func Test_SliceValidator_IsValid_CaseInsensitive_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -934,7 +934,7 @@ func Test_SliceValidator_IsValid_CaseInsensitive(t *testing.T) {
 // TextValidator — case insensitive IsMatch
 // =============================================================================
 
-func Test_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_CaseInsensitive_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "Hello", SearchAs: stringcompareas.Equal}
 
@@ -991,7 +991,7 @@ func Test_Vars_DefaultConditions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Default conditions return expected -- all vars", actual)
 }
 
-func Test_Vars_EmptyValidator(t *testing.T) {
+func Test_Vars_EmptyValidator_FromSliceValidatorLength(t *testing.T) {
 	// Act & Assert
 	actual := args.Map{
 		"search":   corevalidator.EmptyValidator.Search,
@@ -1010,7 +1010,7 @@ func Test_Vars_EmptyValidator(t *testing.T) {
 // SimpleSliceValidator — VerifyFirst and VerifyUpto error paths
 // =============================================================================
 
-func Test_SimpleSliceValidator_VerifyFirst_Mismatch(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyFirst_Mismatch_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"expected"}),
@@ -1028,7 +1028,7 @@ func Test_SimpleSliceValidator_VerifyFirst_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleSliceValidator VerifyFirst returns error -- mismatch", actual)
 }
 
-func Test_SimpleSliceValidator_VerifyUpto_Mismatch(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyUpto_Mismatch_FromSliceValidatorLength(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"expected"}),

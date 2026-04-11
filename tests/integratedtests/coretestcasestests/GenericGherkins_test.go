@@ -29,7 +29,7 @@ func Test_GenericGherkins_IsFailedToMatch_WhenNotMatching(t *testing.T) {
 	tc.ShouldMatchExpectedFirst(t, result)
 }
 
-func Test_GenericGherkins_CompareWith_Equal(t *testing.T) {
+func Test_GenericGherkins_CompareWith_Equal_FromGenericGherkins(t *testing.T) {
 	tc := compareWithEqualTestCase
 
 	// Arrange
@@ -86,7 +86,7 @@ func Test_GenericGherkins_CompareWith_DiffInput(t *testing.T) {
 	verifyCaseV1.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_GenericGherkins_CompareWith_BothNil(t *testing.T) {
+func Test_GenericGherkins_CompareWith_BothNil_FromGenericGherkins(t *testing.T) {
 	tc := compareWithBothNilTestCase
 
 	// Arrange
@@ -105,7 +105,7 @@ func Test_GenericGherkins_CompareWith_BothNil(t *testing.T) {
 	verifyCaseV1.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_GenericGherkins_CompareWith_OneNil(t *testing.T) {
+func Test_GenericGherkins_CompareWith_OneNil_FromGenericGherkins(t *testing.T) {
 	tc := compareWithOneNilTestCase
 
 	// Arrange
@@ -152,7 +152,7 @@ func Test_GenericGherkins_FullString_Basic(t *testing.T) {
 	verifyCaseV1.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_GenericGherkins_FullString_Nil(t *testing.T) {
+func Test_GenericGherkins_FullString_Nil_FromGenericGherkins(t *testing.T) {
 	tc := fullStringNilTestCase
 
 	// Arrange

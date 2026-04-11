@@ -14,7 +14,7 @@ import (
 
 // --- CaseV1FirstAssertions ---
 
-func Test_CaseV1_ShouldBeEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "first assertion test",
@@ -25,7 +25,7 @@ func Test_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 	tc.ShouldBeEqualFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeTrimEqualFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "trim equal first test",
@@ -36,7 +36,7 @@ func Test_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
 	tc.ShouldBeTrimEqualFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeSortedEqualFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "sorted equal first test",
@@ -47,7 +47,7 @@ func Test_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
 	tc.ShouldBeSortedEqualFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldContainsFirst(t *testing.T) {
+func Test_CaseV1_ShouldContainsFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "contains first test",
@@ -58,7 +58,7 @@ func Test_CaseV1_ShouldContainsFirst(t *testing.T) {
 	tc.ShouldContainsFirst(t, "hello world")
 }
 
-func Test_CaseV1_ShouldStartsWithFirst(t *testing.T) {
+func Test_CaseV1_ShouldStartsWithFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "starts with first test",
@@ -69,7 +69,7 @@ func Test_CaseV1_ShouldStartsWithFirst(t *testing.T) {
 	tc.ShouldStartsWithFirst(t, "hello world")
 }
 
-func Test_CaseV1_ShouldEndsWithFirst(t *testing.T) {
+func Test_CaseV1_ShouldEndsWithFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "ends with first test",
@@ -80,7 +80,7 @@ func Test_CaseV1_ShouldEndsWithFirst(t *testing.T) {
 	tc.ShouldEndsWithFirst(t, "hello world")
 }
 
-func Test_CaseV1_ShouldBeNotEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeNotEqualFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "not equal first test",
@@ -91,7 +91,7 @@ func Test_CaseV1_ShouldBeNotEqualFirst(t *testing.T) {
 	tc.ShouldBeNotEqualFirst(t, "hello")
 }
 
-func Test_CaseV1_ShouldBeRegexFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeRegexFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "regex first test",
@@ -104,7 +104,7 @@ func Test_CaseV1_ShouldBeRegexFirst(t *testing.T) {
 
 // --- CaseV1 other methods ---
 
-func Test_CaseV1_Input(t *testing.T) {
+func Test_CaseV1_Input_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		ArrangeInput: "test-input",
@@ -116,7 +116,7 @@ func Test_CaseV1_Input(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_Actual(t *testing.T) {
+func Test_CaseV1_Actual_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		ActualInput: "actual-val",
@@ -128,7 +128,7 @@ func Test_CaseV1_Actual(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_ArrangeTypeName(t *testing.T) {
+func Test_CaseV1_ArrangeTypeName_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		ArrangeInput: "hello",
@@ -143,7 +143,7 @@ func Test_CaseV1_ArrangeTypeName(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_CaseTitle(t *testing.T) {
+func Test_CaseV1_CaseTitle_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "my-title",
@@ -155,7 +155,7 @@ func Test_CaseV1_CaseTitle(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_PrepareTitle(t *testing.T) {
+func Test_CaseV1_PrepareTitle_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "base",
@@ -171,7 +171,7 @@ func Test_CaseV1_PrepareTitle(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_AsBaseTestCase(t *testing.T) {
+func Test_CaseV1_AsBaseTestCase_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "test",
@@ -186,7 +186,7 @@ func Test_CaseV1_AsBaseTestCase(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_AsSimpleTestCaseWrapper(t *testing.T) {
+func Test_CaseV1_AsSimpleTestCaseWrapper_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "test",
@@ -198,7 +198,7 @@ func Test_CaseV1_AsSimpleTestCaseWrapper(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
+func Test_CaseV1_AsSimpleTestCaseWrapperContractsBinder_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "test",
@@ -212,7 +212,7 @@ func Test_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
 
 // --- CaseV1MapAssertions ---
 
-func Test_CaseV1_ExpectedAsMap(t *testing.T) {
+func Test_CaseV1_ExpectedAsMap_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "map test",
@@ -243,7 +243,7 @@ func Test_CaseV1_ExpectedAsMap_Panics(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_ShouldBeEqualMap(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualMap_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "map equal test",
@@ -258,7 +258,7 @@ func Test_CaseV1_ShouldBeEqualMap(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_ShouldBeEqualMapFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualMapFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "map equal first test",
@@ -275,7 +275,7 @@ func Test_CaseV1_ShouldBeEqualMapFirst(t *testing.T) {
 
 // --- CaseV1 assertion methods ---
 
-func Test_CaseV1_ShouldContains(t *testing.T) {
+func Test_CaseV1_ShouldContains_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "contains test",
@@ -286,7 +286,7 @@ func Test_CaseV1_ShouldContains(t *testing.T) {
 	tc.ShouldContains(t, 0, "hello")
 }
 
-func Test_CaseV1_ShouldStartsWith(t *testing.T) {
+func Test_CaseV1_ShouldStartsWith_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "starts with test",
@@ -297,7 +297,7 @@ func Test_CaseV1_ShouldStartsWith(t *testing.T) {
 	tc.ShouldStartsWith(t, 0, "hello world")
 }
 
-func Test_CaseV1_ShouldEndsWith(t *testing.T) {
+func Test_CaseV1_ShouldEndsWith_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "ends with test",
@@ -308,7 +308,7 @@ func Test_CaseV1_ShouldEndsWith(t *testing.T) {
 	tc.ShouldEndsWith(t, 0, "hello world")
 }
 
-func Test_CaseV1_ShouldBeNotEqual(t *testing.T) {
+func Test_CaseV1_ShouldBeNotEqual_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "not equal test",
@@ -330,7 +330,7 @@ func Test_CaseV1_ShouldBeRegex(t *testing.T) {
 	tc.ShouldBeRegex(t, 0, "hello")
 }
 
-func Test_CaseV1_ShouldBeTrimRegex(t *testing.T) {
+func Test_CaseV1_ShouldBeTrimRegex_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "trim regex test",
@@ -341,7 +341,7 @@ func Test_CaseV1_ShouldBeTrimRegex(t *testing.T) {
 	tc.ShouldBeTrimRegex(t, 0, "hello")
 }
 
-func Test_CaseV1_ShouldHaveNoError(t *testing.T) {
+func Test_CaseV1_ShouldHaveNoError_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "no error test",
@@ -351,7 +351,7 @@ func Test_CaseV1_ShouldHaveNoError(t *testing.T) {
 	tc.ShouldHaveNoError(t, "additional", 0, nil)
 }
 
-func Test_CaseV1_AssertDirectly(t *testing.T) {
+func Test_CaseV1_AssertDirectly_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title: "direct assert test",
@@ -434,7 +434,7 @@ func Test_CaseV1_TypeShouldMatch(t *testing.T) {
 
 // --- CaseV1 VerifyAll and related ---
 
-func Test_CaseV1_VerifyAllEqual(t *testing.T) {
+func Test_CaseV1_VerifyAllEqual_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify all equal",
@@ -450,7 +450,7 @@ func Test_CaseV1_VerifyAllEqual(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_VerifyError(t *testing.T) {
+func Test_CaseV1_VerifyError_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify error test",
@@ -466,7 +466,7 @@ func Test_CaseV1_VerifyError(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_VerifyFirst(t *testing.T) {
+func Test_CaseV1_VerifyFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify first test",
@@ -482,7 +482,7 @@ func Test_CaseV1_VerifyFirst(t *testing.T) {
 	})
 }
 
-func Test_CaseV1_SliceValidator(t *testing.T) {
+func Test_CaseV1_SliceValidator_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "slice validator test",
@@ -515,7 +515,7 @@ func Test_CaseNilSafe_CaseTitle_Fallback(t *testing.T) {
 	})
 }
 
-func Test_CaseNilSafe_MethodName(t *testing.T) {
+func Test_CaseNilSafe_MethodName_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseNilSafe{
 		Func: func() {},
@@ -532,7 +532,7 @@ func Test_CaseNilSafe_MethodName(t *testing.T) {
 
 // --- GenericGherkins ---
 
-func Test_GenericGherkins_CompareWith_BothNil(t *testing.T) {
+func Test_GenericGherkins_CompareWith_BothNil_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	var g1 *coretestcases.AnyGherkins
 	var g2 *coretestcases.AnyGherkins
@@ -547,7 +547,7 @@ func Test_GenericGherkins_CompareWith_BothNil(t *testing.T) {
 	})
 }
 
-func Test_GenericGherkins_CompareWith_OneNil(t *testing.T) {
+func Test_GenericGherkins_CompareWith_OneNil_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g1 := &coretestcases.AnyGherkins{Title: "test"}
 	var g2 *coretestcases.AnyGherkins
@@ -605,7 +605,7 @@ func Test_GenericGherkins_CompareWith_AllDiffs(t *testing.T) {
 	})
 }
 
-func Test_GenericGherkins_CompareWith_Equal(t *testing.T) {
+func Test_GenericGherkins_CompareWith_Equal_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g1 := &coretestcases.AnyGherkins{
 		Title: "same",
@@ -846,7 +846,7 @@ func Test_GenericGherkins_SetTypedActual(t *testing.T) {
 	})
 }
 
-func Test_GenericGherkins_AsTypedTestCaseWrapper(t *testing.T) {
+func Test_GenericGherkins_AsTypedTestCaseWrapper_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.GenericGherkins[string, int]{
 		Title: "wrapper test",
@@ -874,7 +874,7 @@ func Test_GenericGherkins_ShouldBeEqual_WithWhenFallback(t *testing.T) {
 	g.ShouldBeEqual(t, 0, []string{"hello"}, []string{"hello"})
 }
 
-func Test_GenericGherkins_ShouldBeEqualFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.AnyGherkins{
 		Title:         "first test",
@@ -885,7 +885,7 @@ func Test_GenericGherkins_ShouldBeEqualFirst(t *testing.T) {
 	g.ShouldBeEqualFirst(t, []string{"hello"}, []string{"hello"})
 }
 
-func Test_GenericGherkins_ShouldBeEqualArgs(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualArgs_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.AnyGherkins{
 		Title:         "args test",
@@ -896,7 +896,7 @@ func Test_GenericGherkins_ShouldBeEqualArgs(t *testing.T) {
 	g.ShouldBeEqualArgs(t, 0, "hello")
 }
 
-func Test_GenericGherkins_ShouldBeEqualArgsFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualArgsFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.AnyGherkins{
 		Title:         "args first test",
@@ -907,7 +907,7 @@ func Test_GenericGherkins_ShouldBeEqualArgsFirst(t *testing.T) {
 	g.ShouldBeEqualArgsFirst(t, "hello")
 }
 
-func Test_GenericGherkins_ShouldBeEqualUsingExpected(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualUsingExpected_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.AnyGherkins{
 		Title:         "using expected test",
@@ -918,7 +918,7 @@ func Test_GenericGherkins_ShouldBeEqualUsingExpected(t *testing.T) {
 	g.ShouldBeEqualUsingExpected(t, 0, []string{"hello"})
 }
 
-func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.AnyGherkins{
 		Title:         "using expected first test",
@@ -931,7 +931,7 @@ func Test_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
 
 // --- GenericGherkinsMapAssertions ---
 
-func Test_GenericGherkins_ShouldBeEqualMap(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualMap_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.MapGherkins{
 		Title: "map assertion test",
@@ -946,7 +946,7 @@ func Test_GenericGherkins_ShouldBeEqualMap(t *testing.T) {
 	})
 }
 
-func Test_GenericGherkins_ShouldBeEqualMapFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualMapFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.MapGherkins{
 		Title: "map first test",
@@ -974,7 +974,7 @@ func Test_GenericGherkins_ShouldMatchExpected_Match(t *testing.T) {
 	g.ShouldMatchExpected(t, 0, true)
 }
 
-func Test_GenericGherkins_ShouldMatchExpectedFirst(t *testing.T) {
+func Test_GenericGherkins_ShouldMatchExpectedFirst_FromCaseV1ShouldBeEqualF(t *testing.T) {
 	// Arrange
 	g := &coretestcases.GenericGherkins[string, string]{
 		Title:    "match first test",

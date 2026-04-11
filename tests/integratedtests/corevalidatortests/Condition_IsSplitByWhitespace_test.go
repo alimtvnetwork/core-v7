@@ -26,7 +26,7 @@ func Test_Condition_IsSplitByWhitespace_AllFalse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition.IsSplitByWhitespace returns non-empty -- all false", actual)
 }
 
-func Test_Condition_IsSplitByWhitespace_UniqueWord(t *testing.T) {
+func Test_Condition_IsSplitByWhitespace_UniqueWord_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	c := &corevalidator.Condition{IsUniqueWordOnly: true}
 
@@ -38,7 +38,7 @@ func Test_Condition_IsSplitByWhitespace_UniqueWord(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition.IsSplitByWhitespace returns correct value -- unique word", actual)
 }
 
-func Test_Condition_IsSplitByWhitespace_NonEmpty(t *testing.T) {
+func Test_Condition_IsSplitByWhitespace_NonEmpty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	c := &corevalidator.Condition{IsNonEmptyWhitespace: true}
 
@@ -50,7 +50,7 @@ func Test_Condition_IsSplitByWhitespace_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition.IsSplitByWhitespace returns empty -- non-empty", actual)
 }
 
-func Test_Condition_IsSplitByWhitespace_Sort(t *testing.T) {
+func Test_Condition_IsSplitByWhitespace_Sort_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	c := &corevalidator.Condition{IsSortStringsBySpace: true}
 
@@ -106,7 +106,7 @@ func Test_LineNumber_HasLineNumber_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber.HasLineNumber returns non-empty -- valid", actual)
 }
 
-func Test_LineNumber_HasLineNumber_Invalid(t *testing.T) {
+func Test_LineNumber_HasLineNumber_Invalid_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	ln := &corevalidator.LineNumber{LineNumber: -1}
 
@@ -118,7 +118,7 @@ func Test_LineNumber_HasLineNumber_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber.HasLineNumber returns error -- invalid", actual)
 }
 
-func Test_LineNumber_IsMatch_BothInvalid(t *testing.T) {
+func Test_LineNumber_IsMatch_BothInvalid_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	ln := &corevalidator.LineNumber{LineNumber: -1}
 
@@ -154,7 +154,7 @@ func Test_LineNumber_IsMatch_Different(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber.IsMatch returns correct value -- different", actual)
 }
 
-func Test_LineNumber_IsMatch_InputInvalid(t *testing.T) {
+func Test_LineNumber_IsMatch_InputInvalid_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	ln := &corevalidator.LineNumber{LineNumber: 5}
 
@@ -166,7 +166,7 @@ func Test_LineNumber_IsMatch_InputInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber.IsMatch returns error -- input invalid", actual)
 }
 
-func Test_LineNumber_VerifyError_Match(t *testing.T) {
+func Test_LineNumber_VerifyError_Match_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	ln := &corevalidator.LineNumber{LineNumber: 5}
 	err := ln.VerifyError(5)
@@ -179,7 +179,7 @@ func Test_LineNumber_VerifyError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber.VerifyError returns error -- match", actual)
 }
 
-func Test_LineNumber_VerifyError_Mismatch(t *testing.T) {
+func Test_LineNumber_VerifyError_Mismatch_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	ln := &corevalidator.LineNumber{LineNumber: 5}
 	err := ln.VerifyError(3)
@@ -403,7 +403,7 @@ func Test_TextValidator_MethodName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.MethodName returns non-empty -- with args", actual)
 }
 
-func Test_TextValidator_VerifyDetailError_Nil(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	err := tv.VerifyDetailError(&corevalidator.Parameter{}, "hello")
@@ -442,7 +442,7 @@ func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.VerifyDetailError returns error -- mismatch", actual)
 }
 
-func Test_TextValidator_VerifySimpleError_Nil(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	err := tv.VerifySimpleError(0, &corevalidator.Parameter{}, "hello")
@@ -481,7 +481,7 @@ func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.VerifySimpleError returns error -- mismatch", actual)
 }
 
-func Test_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_TextValidator_VerifyMany_ContinueOnError_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -509,7 +509,7 @@ func Test_TextValidator_VerifyMany_StopOnFirst(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.VerifyMany returns non-empty -- stop first", actual)
 }
 
-func Test_TextValidator_VerifyFirstError_Nil(t *testing.T) {
+func Test_TextValidator_VerifyFirstError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	err := tv.VerifyFirstError(&corevalidator.Parameter{}, "a")
@@ -535,7 +535,7 @@ func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.VerifyFirstError returns empty -- empty skip", actual)
 }
 
-func Test_TextValidator_AllVerifyError_Nil(t *testing.T) {
+func Test_TextValidator_AllVerifyError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	err := tv.AllVerifyError(&corevalidator.Parameter{}, "a")
@@ -548,7 +548,7 @@ func Test_TextValidator_AllVerifyError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator.AllVerifyError returns nil -- nil", actual)
 }
 
-func Test_TextValidator_AllVerifyError_EmptySkip(t *testing.T) {
+func Test_TextValidator_AllVerifyError_EmptySkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal}
 	err := tv.AllVerifyError(&corevalidator.Parameter{IsSkipCompareOnActualEmpty: true})
@@ -697,7 +697,7 @@ func Test_TextValidators_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.String returns non-empty -- with args", actual)
 }
 
-func Test_TextValidators_IsMatch_Empty(t *testing.T) {
+func Test_TextValidators_IsMatch_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 
@@ -737,7 +737,7 @@ func Test_TextValidators_IsMatch_OneFails(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.IsMatch returns non-empty -- one fails", actual)
 }
 
-func Test_TextValidators_IsMatchMany_Empty(t *testing.T) {
+func Test_TextValidators_IsMatchMany_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 
@@ -762,7 +762,7 @@ func Test_TextValidators_VerifyFirstError_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.VerifyFirstError returns empty -- empty", actual)
 }
 
-func Test_TextValidators_VerifyFirstError_Match(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Match_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.Add(corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal})
@@ -776,7 +776,7 @@ func Test_TextValidators_VerifyFirstError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.VerifyFirstError returns error -- match", actual)
 }
 
-func Test_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Mismatch_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.Add(corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal})
@@ -790,7 +790,7 @@ func Test_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.VerifyFirstError returns error -- mismatch", actual)
 }
 
-func Test_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tvs *corevalidator.TextValidators
 	err := tvs.VerifyErrorMany(true, &corevalidator.Parameter{}, "a")
@@ -857,7 +857,7 @@ func Test_TextValidators_AllVerifyErrorMany_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.AllVerifyErrorMany returns empty -- empty", actual)
 }
 
-func Test_TextValidators_AllVerifyError_Empty(t *testing.T) {
+func Test_TextValidators_AllVerifyError_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	err := tvs.AllVerifyError(0, "hello", true)
@@ -898,7 +898,7 @@ func Test_TextValidators_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators.Dispose returns non-empty -- with args", actual)
 }
 
-func Test_TextValidators_Dispose_Nil(t *testing.T) {
+func Test_TextValidators_Dispose_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var tvs *corevalidator.TextValidators
 	tvs.Dispose() // should not panic
@@ -950,7 +950,7 @@ func Test_LineValidator_IsMatch_LineAndText(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.IsMatch returns non-empty -- with args", actual)
 }
 
-func Test_LineValidator_IsMatchMany_Nil(t *testing.T) {
+func Test_LineValidator_IsMatchMany_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var lv *corevalidator.LineValidator
 
@@ -962,7 +962,7 @@ func Test_LineValidator_IsMatchMany_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.IsMatchMany returns nil -- nil", actual)
 }
 
-func Test_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
+func Test_LineValidator_IsMatchMany_EmptySkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		TextValidator: corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal},
@@ -1031,7 +1031,7 @@ func Test_LineValidator_VerifyError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.VerifyError returns error -- match", actual)
 }
 
-func Test_LineValidator_VerifyError_LineMismatch(t *testing.T) {
+func Test_LineValidator_VerifyError_LineMismatch_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -1048,7 +1048,7 @@ func Test_LineValidator_VerifyError_LineMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.VerifyError returns error -- line mismatch", actual)
 }
 
-func Test_LineValidator_VerifyError_TextMismatch(t *testing.T) {
+func Test_LineValidator_VerifyError_TextMismatch_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1101,7 +1101,7 @@ func Test_LineValidator_VerifyMany_StopFirst(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.VerifyMany returns non-empty -- stop first", actual)
 }
 
-func Test_LineValidator_VerifyFirstError_Nil(t *testing.T) {
+func Test_LineValidator_VerifyFirstError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var lv *corevalidator.LineValidator
 	err := lv.VerifyFirstError(&corevalidator.Parameter{})
@@ -1114,7 +1114,7 @@ func Test_LineValidator_VerifyFirstError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.VerifyFirstError returns nil -- nil", actual)
 }
 
-func Test_LineValidator_VerifyFirstError_EmptySkip(t *testing.T) {
+func Test_LineValidator_VerifyFirstError_EmptySkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		TextValidator: corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal},
@@ -1129,7 +1129,7 @@ func Test_LineValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.VerifyFirstError returns empty -- empty skip", actual)
 }
 
-func Test_LineValidator_AllVerifyError_Nil(t *testing.T) {
+func Test_LineValidator_AllVerifyError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var lv *corevalidator.LineValidator
 	err := lv.AllVerifyError(&corevalidator.Parameter{})
@@ -1142,7 +1142,7 @@ func Test_LineValidator_AllVerifyError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineValidator.AllVerifyError returns nil -- nil", actual)
 }
 
-func Test_LineValidator_AllVerifyError_EmptySkip(t *testing.T) {
+func Test_LineValidator_AllVerifyError_EmptySkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		TextValidator: corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal},
@@ -1201,7 +1201,7 @@ func Test_LinesValidators_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators returns non-empty -- basic", actual)
 }
 
-func Test_LinesValidators_Add(t *testing.T) {
+func Test_LinesValidators_Add_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{
@@ -1224,7 +1224,7 @@ func Test_LinesValidators_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.Add returns non-empty -- with args", actual)
 }
 
-func Test_LinesValidators_AddPtr_Nil(t *testing.T) {
+func Test_LinesValidators_AddPtr_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.AddPtr(nil)
@@ -1237,7 +1237,7 @@ func Test_LinesValidators_AddPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.AddPtr returns nil -- nil", actual)
 }
 
-func Test_LinesValidators_AddPtr_Valid(t *testing.T) {
+func Test_LinesValidators_AddPtr_Valid_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	v := &corevalidator.LineValidator{
@@ -1253,7 +1253,7 @@ func Test_LinesValidators_AddPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.AddPtr returns non-empty -- valid", actual)
 }
 
-func Test_LinesValidators_Adds(t *testing.T) {
+func Test_LinesValidators_Adds_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Adds(
@@ -1269,7 +1269,7 @@ func Test_LinesValidators_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.Adds returns non-empty -- with args", actual)
 }
 
-func Test_LinesValidators_HasIndex(t *testing.T) {
+func Test_LinesValidators_HasIndex_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "a"}})
@@ -1288,7 +1288,7 @@ func Test_LinesValidators_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.HasIndex returns non-empty -- with args", actual)
 }
 
-func Test_LinesValidators_String(t *testing.T) {
+func Test_LinesValidators_String_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "a"}})
@@ -1301,7 +1301,7 @@ func Test_LinesValidators_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.String returns non-empty -- with args", actual)
 }
 
-func Test_LinesValidators_AsBasicSliceContractsBinder(t *testing.T) {
+func Test_LinesValidators_AsBasicSliceContractsBinder_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	binder := lv.AsBasicSliceContractsBinder()
@@ -1314,7 +1314,7 @@ func Test_LinesValidators_AsBasicSliceContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.AsBasicSliceContractsBinder returns non-empty -- with args", actual)
 }
 
-func Test_LinesValidators_IsMatchText_Empty(t *testing.T) {
+func Test_LinesValidators_IsMatchText_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 
@@ -1326,7 +1326,7 @@ func Test_LinesValidators_IsMatchText_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.IsMatchText returns empty -- empty", actual)
 }
 
-func Test_LinesValidators_IsMatchText_Match(t *testing.T) {
+func Test_LinesValidators_IsMatchText_Match_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{
@@ -1342,7 +1342,7 @@ func Test_LinesValidators_IsMatchText_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.IsMatchText returns non-empty -- match", actual)
 }
 
-func Test_LinesValidators_IsMatchText_NoMatch(t *testing.T) {
+func Test_LinesValidators_IsMatchText_NoMatch_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{
@@ -1358,7 +1358,7 @@ func Test_LinesValidators_IsMatchText_NoMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.IsMatchText returns empty -- no match", actual)
 }
 
-func Test_LinesValidators_IsMatch_Empty(t *testing.T) {
+func Test_LinesValidators_IsMatch_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 
@@ -1370,7 +1370,7 @@ func Test_LinesValidators_IsMatch_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.IsMatch returns empty -- empty", actual)
 }
 
-func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
+func Test_LinesValidators_IsMatch_NoContentsSkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "a"}})
@@ -1383,7 +1383,7 @@ func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators.IsMatch returns empty -- no contents skip", actual)
 }
 
-func Test_LinesValidators_IsMatch_NoContentsNoSkip(t *testing.T) {
+func Test_LinesValidators_IsMatch_NoContentsNoSkip_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "a"}})
@@ -1400,7 +1400,7 @@ func Test_LinesValidators_IsMatch_NoContentsNoSkip(t *testing.T) {
 // BaseLinesValidators
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_BaseLinesValidators_Nil(t *testing.T) {
+func Test_BaseLinesValidators_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var blv *corevalidator.BaseLinesValidators
 
@@ -1420,7 +1420,7 @@ func Test_BaseLinesValidators_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators returns nil -- nil", actual)
 }
 
-func Test_BaseLinesValidators_Empty(t *testing.T) {
+func Test_BaseLinesValidators_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	blv := &corevalidator.BaseLinesValidators{}
 
@@ -1438,7 +1438,7 @@ func Test_BaseLinesValidators_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators returns empty -- empty", actual)
 }
 
-func Test_BaseLinesValidators_WithItems(t *testing.T) {
+func Test_BaseLinesValidators_WithItems_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	blv := &corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{
@@ -1460,7 +1460,7 @@ func Test_BaseLinesValidators_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators returns non-empty -- with items", actual)
 }
 
-func Test_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
+func Test_BaseLinesValidators_ToLinesValidators_Empty_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	blv := &corevalidator.BaseLinesValidators{}
 	lv := blv.ToLinesValidators()
@@ -1479,7 +1479,7 @@ func Test_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators.ToLinesValidators returns empty -- empty", actual)
 }
 
-func Test_BaseLinesValidators_ToLinesValidators_WithItems(t *testing.T) {
+func Test_BaseLinesValidators_ToLinesValidators_WithItems_FromConditionIsSplitByWh_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	blv := &corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{
@@ -1655,7 +1655,7 @@ func Test_NewSliceValidatorUsingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr returns error -- with args", actual)
 }
 
-func Test_NewSliceValidatorUsingAny(t *testing.T) {
+func Test_NewSliceValidatorUsingAny_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny("hello\nworld", "hello\nworld", false, false, false, stringcompareas.Equal)
 
@@ -1677,7 +1677,7 @@ func Test_NewSliceValidatorUsingAny(t *testing.T) {
 // SliceValidator — Verify
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_SliceValidator_VerifyFirstError_Nil(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.VerifyFirstError(&corevalidator.Parameter{})
@@ -1690,7 +1690,7 @@ func Test_SliceValidator_VerifyFirstError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator.VerifyFirstError returns nil -- nil", actual)
 }
 
-func Test_SliceValidator_AllVerifyError_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyError_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyError(&corevalidator.Parameter{})
@@ -1737,7 +1737,7 @@ func Test_SliceValidator_AllVerifyError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator.AllVerifyError returns error -- mismatch", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorExceptLast_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorExceptLast_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorExceptLast(&corevalidator.Parameter{})
@@ -1813,7 +1813,7 @@ func Test_SliceValidator_AllVerifyErrorUptoLength_LengthMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorUptoLength returns error -- length mismatch", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorTestCase_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorTestCase(0, "test", true)
@@ -1826,7 +1826,7 @@ func Test_SliceValidator_AllVerifyErrorTestCase_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorTestCase returns nil -- nil", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorQuick_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorQuick_Nil_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorQuick(0, "test", "a")
@@ -2344,7 +2344,7 @@ func Test_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeSegmentsValidator.LengthOfVerifierSegments returns non-empty -- with args", actual)
 }
 
-func Test_RangeSegmentsValidator_SetActual(t *testing.T) {
+func Test_RangeSegmentsValidator_SetActual_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{Title: "test"}
 	result := rsv.SetActual([]string{"a", "b", "c"})

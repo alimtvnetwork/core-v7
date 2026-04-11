@@ -30,7 +30,7 @@ func Test_DraftType_IsEqual_InnerFieldsMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- IsEqual inner field mismatch", actual)
 }
 
-func Test_DraftType_JsonString(t *testing.T) {
+func Test_DraftType_JsonString_FromDraftTypeIsEqualIter(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "s1", SampleInteger: 42}
 
@@ -43,7 +43,7 @@ func Test_DraftType_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- JsonString", actual)
 }
 
-func Test_DraftType_JsonBytes(t *testing.T) {
+func Test_DraftType_JsonBytes_FromDraftTypeIsEqualIter(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "s1", SampleInteger: 42}
 

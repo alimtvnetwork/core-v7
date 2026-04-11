@@ -1034,7 +1034,7 @@ func Test_BaseLinesValidators_ToLinesValidators_Empty_Cov(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return empty", actual)
 }
 
-func Test_BaseLinesValidators_ToLinesValidators_WithItems(t *testing.T) {
+func Test_BaseLinesValidators_ToLinesValidators_WithItems_FromConditionIsSplitByWh(t *testing.T) {
 	// Arrange
 	blv := &corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{

@@ -30,7 +30,7 @@ func Test_BaseLinesValidators_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_BaseLinesValidators_WithItems(t *testing.T) {
+func Test_BaseLinesValidators_WithItems_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	b := corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{
@@ -59,7 +59,7 @@ func Test_BaseLinesValidators_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
+func Test_BaseLinesValidators_ToLinesValidators_Empty_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	b := corevalidator.BaseLinesValidators{}
 	lv := b.ToLinesValidators()
@@ -128,7 +128,7 @@ func Test_LinesValidators_New(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "new should be empty", actual)
 }
 
-func Test_LinesValidators_Add(t *testing.T) {
+func Test_LinesValidators_Add_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -150,7 +150,7 @@ func Test_LinesValidators_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
-func Test_LinesValidators_AddPtr_Nil(t *testing.T) {
+func Test_LinesValidators_AddPtr_Nil_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.AddPtr(nil)
@@ -185,7 +185,7 @@ func Test_LinesValidators_HasIndex(t *testing.T) {
 // LinesValidators.IsMatchText
 // ==========================================
 
-func Test_LinesValidators_IsMatchText_Empty(t *testing.T) {
+func Test_LinesValidators_IsMatchText_Empty_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 
@@ -197,7 +197,7 @@ func Test_LinesValidators_IsMatchText_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty validators should match any text", actual)
 }
 
-func Test_LinesValidators_IsMatchText_Match(t *testing.T) {
+func Test_LinesValidators_IsMatchText_Match_FromBaseLinesValidators(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{

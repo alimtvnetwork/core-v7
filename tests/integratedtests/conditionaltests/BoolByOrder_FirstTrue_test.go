@@ -43,7 +43,7 @@ func Test_BoolByOrder_LastTrue(t *testing.T) {
 // BoolFunctionsByOrder
 // ═══════════════════════════════════════════
 
-func Test_BoolFunctionsByOrder_FirstTrue(t *testing.T) {
+func Test_BoolFunctionsByOrder_FirstTrue_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	f1 := func() bool { return true }
 	f2 := func() bool { return false }
@@ -56,7 +56,7 @@ func Test_BoolFunctionsByOrder_FirstTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolFunctionsByOrder returns true -- first func true", actual)
 }
 
-func Test_BoolFunctionsByOrder_AllFalse(t *testing.T) {
+func Test_BoolFunctionsByOrder_AllFalse_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	f1 := func() bool { return false }
 	f2 := func() bool { return false }
@@ -73,7 +73,7 @@ func Test_BoolFunctionsByOrder_AllFalse(t *testing.T) {
 // ErrorFunc
 // ═══════════════════════════════════════════
 
-func Test_ErrorFunc_True(t *testing.T) {
+func Test_ErrorFunc_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return errors.New("false-err") }
@@ -87,7 +87,7 @@ func Test_ErrorFunc_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunc returns trueFunc -- condition true", actual)
 }
 
-func Test_ErrorFunc_False(t *testing.T) {
+func Test_ErrorFunc_False_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return errors.New("false-err") }
@@ -105,7 +105,7 @@ func Test_ErrorFunc_False(t *testing.T) {
 // ErrorFunctionResult
 // ═══════════════════════════════════════════
 
-func Test_ErrorFunctionResult_True(t *testing.T) {
+func Test_ErrorFunctionResult_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return nil }
@@ -125,7 +125,7 @@ func Test_ErrorFunctionResult_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionResult returns error -- condition true", actual)
 }
 
-func Test_ErrorFunctionResult_False(t *testing.T) {
+func Test_ErrorFunctionResult_False_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return nil }
@@ -203,7 +203,7 @@ func Test_ErrorFunctionsExecuteResults_NilFuncInSlice(t *testing.T) {
 // StringsIndexVal
 // ═══════════════════════════════════════════
 
-func Test_StringsIndexVal_True(t *testing.T) {
+func Test_StringsIndexVal_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.StringsIndexVal(true, []string{"a", "b", "c"}, 0, 2)}
 
@@ -212,7 +212,7 @@ func Test_StringsIndexVal_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsIndexVal returns trueValue index -- condition true", actual)
 }
 
-func Test_StringsIndexVal_False(t *testing.T) {
+func Test_StringsIndexVal_False_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.StringsIndexVal(false, []string{"a", "b", "c"}, 0, 2)}
 
@@ -225,7 +225,7 @@ func Test_StringsIndexVal_False(t *testing.T) {
 // Functions (generic)
 // ═══════════════════════════════════════════
 
-func Test_Functions_True(t *testing.T) {
+func Test_Functions_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "t1", true, false },
@@ -266,7 +266,7 @@ func Test_Functions_False(t *testing.T) {
 // FunctionsExecuteResults (generic)
 // ═══════════════════════════════════════════
 
-func Test_FunctionsExecuteResults_True(t *testing.T) {
+func Test_FunctionsExecuteResults_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "t1", true, false },
@@ -288,7 +288,7 @@ func Test_FunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults returns results -- true path", actual)
 }
 
-func Test_FunctionsExecuteResults_Break(t *testing.T) {
+func Test_FunctionsExecuteResults_Break_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	funcs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "a", true, false },
@@ -327,7 +327,7 @@ func Test_FunctionsExecuteResults_SkipNotTake(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults skips isTake=false -- selective take", actual)
 }
 
-func Test_FunctionsExecuteResults_NilFunc(t *testing.T) {
+func Test_FunctionsExecuteResults_NilFunc_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	funcs := []func() (string, bool, bool){
 		nil,
@@ -343,7 +343,7 @@ func Test_FunctionsExecuteResults_NilFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults skips nil func -- nil in slice", actual)
 }
 
-func Test_FunctionsExecuteResults_Empty(t *testing.T) {
+func Test_FunctionsExecuteResults_Empty_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	result := conditional.FunctionsExecuteResults[string](true, nil, nil)
 
@@ -359,7 +359,7 @@ func Test_FunctionsExecuteResults_Empty(t *testing.T) {
 // AnyFunctions
 // ═══════════════════════════════════════════
 
-func Test_AnyFunctions_True(t *testing.T) {
+func Test_AnyFunctions_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "t1", true, false },
@@ -374,7 +374,7 @@ func Test_AnyFunctions_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyFunctions returns trueFuncs -- condition true", actual)
 }
 
-func Test_AnyFunctions_False(t *testing.T) {
+func Test_AnyFunctions_False_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	falseFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "f1", true, false },
@@ -393,7 +393,7 @@ func Test_AnyFunctions_False(t *testing.T) {
 // AnyFunctionsExecuteResults
 // ═══════════════════════════════════════════
 
-func Test_AnyFunctionsExecuteResults_True(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "r1", true, false },
@@ -425,7 +425,7 @@ func Test_AnyFunctionsExecuteResults_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyFunctionsExecuteResults stops at break -- isBreak", actual)
 }
 
-func Test_AnyFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_Empty_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	result := conditional.AnyFunctionsExecuteResults(true, nil, nil)
 
@@ -441,7 +441,7 @@ func Test_AnyFunctionsExecuteResults_Empty(t *testing.T) {
 // VoidFunctions
 // ═══════════════════════════════════════════
 
-func Test_VoidFunctions_True(t *testing.T) {
+func Test_VoidFunctions_True_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	called := false
 	trueFuncs := []func(){func() { called = true }}
@@ -456,7 +456,7 @@ func Test_VoidFunctions_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidFunctions executes true funcs -- condition true", actual)
 }
 
-func Test_VoidFunctions_False(t *testing.T) {
+func Test_VoidFunctions_False_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	called := false
 	trueFuncs := []func(){}
@@ -512,7 +512,7 @@ func Test_TypedErrorFunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns results+error -- mixed", actual)
 }
 
-func Test_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_Empty_FromBoolByOrderFirstTrue(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, nil, nil)
 

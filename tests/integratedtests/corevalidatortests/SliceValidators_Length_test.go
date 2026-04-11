@@ -9,7 +9,7 @@ import (
 
 // ── SliceValidators — uncovered branches ──
 
-func Test_SliceValidators_Length_Nil(t *testing.T) {
+func Test_SliceValidators_Length_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidators
 
@@ -21,7 +21,7 @@ func Test_SliceValidators_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns 0 -- nil receiver", actual)
 }
 
-func Test_SliceValidators_IsEmpty_Nil(t *testing.T) {
+func Test_SliceValidators_IsEmpty_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidators
 
@@ -45,7 +45,7 @@ func Test_SliceValidators_IsEmpty_EmptyValidators(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns true -- empty validators slice", actual)
 }
 
-func Test_SliceValidators_IsMatch_Empty(t *testing.T) {
+func Test_SliceValidators_IsMatch_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 
@@ -69,7 +69,7 @@ func Test_SliceValidators_IsValid_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns true -- empty validators", actual)
 }
 
-func Test_SliceValidators_VerifyAll_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAll_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	err := sv.VerifyAll("header", &corevalidator.Parameter{}, false)
@@ -82,7 +82,7 @@ func Test_SliceValidators_VerifyAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns nil -- empty validators", actual)
 }
 
-func Test_SliceValidators_VerifyAllError_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAllError_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	err := sv.VerifyAllError(&corevalidator.Parameter{})
@@ -95,7 +95,7 @@ func Test_SliceValidators_VerifyAllError_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllError returns nil -- empty validators", actual)
 }
 
-func Test_SliceValidators_VerifyFirst_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyFirst_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	err := sv.VerifyFirst(&corevalidator.Parameter{}, false)
@@ -108,7 +108,7 @@ func Test_SliceValidators_VerifyFirst_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- empty validators", actual)
 }
 
-func Test_SliceValidators_VerifyUpto_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyUpto_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	err := sv.VerifyUpto(false, false, 10, &corevalidator.Parameter{})
@@ -121,7 +121,7 @@ func Test_SliceValidators_VerifyUpto_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- empty validators", actual)
 }
 
-func Test_SliceValidators_SetActualOnAll_Empty(t *testing.T) {
+func Test_SliceValidators_SetActualOnAll_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	sv.SetActualOnAll("line1") // should not panic
@@ -134,7 +134,7 @@ func Test_SliceValidators_SetActualOnAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetActualOnAll does not panic -- empty validators", actual)
 }
 
-func Test_SliceValidators_VerifyAllErrorUsingActual_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAllErrorUsingActual_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{}
 	err := sv.VerifyAllErrorUsingActual(&corevalidator.Parameter{}, "a", "b")
@@ -149,7 +149,7 @@ func Test_SliceValidators_VerifyAllErrorUsingActual_Empty(t *testing.T) {
 
 // ── HeaderSliceValidators — uncovered branches ──
 
-func Test_HeaderSliceValidators_Length_Nil(t *testing.T) {
+func Test_HeaderSliceValidators_Length_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var hsv corevalidator.HeaderSliceValidators
 
@@ -161,7 +161,7 @@ func Test_HeaderSliceValidators_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns 0 -- nil slice", actual)
 }
 
-func Test_HeaderSliceValidators_IsEmpty_Nil(t *testing.T) {
+func Test_HeaderSliceValidators_IsEmpty_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var hsv corevalidator.HeaderSliceValidators
 
@@ -173,7 +173,7 @@ func Test_HeaderSliceValidators_IsEmpty_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns true -- nil slice", actual)
 }
 
-func Test_HeaderSliceValidators_IsMatch_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_IsMatch_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 
@@ -185,7 +185,7 @@ func Test_HeaderSliceValidators_IsMatch_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAll_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAll_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	err := hsv.VerifyAll("header", &corevalidator.Parameter{}, false)
@@ -198,7 +198,7 @@ func Test_HeaderSliceValidators_VerifyAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns nil -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAllError_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllError_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	err := hsv.VerifyAllError(&corevalidator.Parameter{})
@@ -211,7 +211,7 @@ func Test_HeaderSliceValidators_VerifyAllError_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllError returns nil -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyFirst_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyFirst_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	err := hsv.VerifyFirst(&corevalidator.Parameter{}, false)
@@ -224,7 +224,7 @@ func Test_HeaderSliceValidators_VerifyFirst_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyUpto_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	err := hsv.VerifyUpto(false, false, 10, &corevalidator.Parameter{})
@@ -237,7 +237,7 @@ func Test_HeaderSliceValidators_VerifyUpto_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_SetActualOnAll_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_SetActualOnAll_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	hsv.SetActualOnAll("a") // should not panic
@@ -250,7 +250,7 @@ func Test_HeaderSliceValidators_SetActualOnAll_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetActualOnAll does not panic -- empty slice", actual)
 }
 
-func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Empty(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_Empty_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{}
 	err := hsv.VerifyAllErrorUsingActual(&corevalidator.Parameter{}, "a")
@@ -303,7 +303,7 @@ func Test_SliceValidator_AssertAllQuick_Nil(t *testing.T) {
 
 // ── SliceValidatorVerify — nil receiver paths ──
 
-func Test_SliceValidator_VerifyFirstError_Nil(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.VerifyFirstError(&corevalidator.Parameter{})
@@ -316,7 +316,7 @@ func Test_SliceValidator_VerifyFirstError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns nil -- nil receiver", actual)
 }
 
-func Test_SliceValidator_AllVerifyError_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyError_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyError(&corevalidator.Parameter{})
@@ -329,7 +329,7 @@ func Test_SliceValidator_AllVerifyError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- nil receiver", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorExceptLast_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorExceptLast_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorExceptLast(&corevalidator.Parameter{})
@@ -342,7 +342,7 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorExceptLast returns nil -- nil receiver", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorQuick_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorQuick_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorQuick(0, "header", "a")
@@ -355,7 +355,7 @@ func Test_SliceValidator_AllVerifyErrorQuick_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorQuick returns nil -- nil receiver", actual)
 }
 
-func Test_SliceValidator_AllVerifyErrorTestCase_Nil(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Nil_FromSliceValidatorsLengt(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorTestCase(0, "header", true)

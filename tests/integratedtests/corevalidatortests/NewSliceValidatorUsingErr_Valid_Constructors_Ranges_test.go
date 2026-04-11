@@ -76,7 +76,7 @@ func Test_NewSliceValidatorUsingAny_Valid(t *testing.T) {
 
 // ── RangeSegmentsValidator ──
 
-func Test_RangeSegmentsValidator_VerifySimple(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifySimple_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test Range",
@@ -103,7 +103,7 @@ func Test_RangeSegmentsValidator_VerifySimple(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifySimple returns nil -- matching range", result)
 }
 
-func Test_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyFirstDefault_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test",
@@ -129,7 +129,7 @@ func Test_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyFirstDefault returns nil -- matching", result)
 }
 
-func Test_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyUptoDefault_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test",
@@ -155,7 +155,7 @@ func Test_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyUptoDefault returns nil -- matching upto 1", result)
 }
 
-func Test_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
+func Test_RangeSegmentsValidator_LengthOfVerifierSegments_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title:            "Test",
@@ -173,7 +173,7 @@ func Test_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
 
 // ── SimpleSliceValidator ──
 
-func Test_SimpleSliceValidator_VerifyUpto(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyUpto_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	sv := createSimpleSliceValidator(
 		[]string{"a", "b", "c"},
@@ -193,7 +193,7 @@ func Test_SimpleSliceValidator_VerifyUpto(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- matching first 2", actual)
 }
 
-func Test_SimpleSliceValidator_VerifyFirst(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyFirst_FromNewSliceValidatorUsi(t *testing.T) {
 	// Arrange
 	sv := createSimpleSliceValidator(
 		[]string{"hello", "world"},

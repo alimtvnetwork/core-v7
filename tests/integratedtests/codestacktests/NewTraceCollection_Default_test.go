@@ -226,7 +226,7 @@ func Test_FileWithLine_NilPtr_IsNotNil(t *testing.T) {
 
 // ── stacksTo ──
 
-func Test_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.String(0, 5)
 
@@ -238,7 +238,7 @@ func Test_StacksTo_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.String returns non-empty -- with count", actual)
 }
 
-func Test_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringDefault()
 
@@ -250,7 +250,7 @@ func Test_StacksTo_StringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringDefault returns non-empty -- default args", actual)
 }
 
-func Test_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringNoCount(0)
 
@@ -262,7 +262,7 @@ func Test_StacksTo_StringNoCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringNoCount returns non-empty -- skip 0", actual)
 }
 
-func Test_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.Bytes(0)
 
@@ -274,7 +274,7 @@ func Test_StacksTo_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.Bytes returns non-empty -- skip 0", actual)
 }
 
-func Test_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.BytesDefault()
 
@@ -286,7 +286,7 @@ func Test_StacksTo_BytesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.BytesDefault returns non-empty -- default", actual)
 }
 
-func Test_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonString(0)
 
@@ -298,7 +298,7 @@ func Test_StacksTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonString returns non-empty -- skip 0", actual)
 }
 
-func Test_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonStringDefault()
 
@@ -310,7 +310,7 @@ func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonStringDefault returns non-empty -- default", actual)
 }
 
-func Test_StacksTo_StringUsingFmt(t *testing.T) {
+func Test_StacksTo_StringUsingFmt_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringUsingFmt(
 		func(tr *codestack.Trace) string { return tr.PackageName },
@@ -328,7 +328,7 @@ func Test_StacksTo_StringUsingFmt(t *testing.T) {
 
 // ── newCreator ──
 
-func Test_NewCreator_Create(t *testing.T) {
+func Test_NewCreator_Create_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -346,7 +346,7 @@ func Test_NewCreator_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.Create returns valid trace -- skip 0", actual)
 }
 
-func Test_NewCreator_Default(t *testing.T) {
+func Test_NewCreator_Default_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -358,7 +358,7 @@ func Test_NewCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.Default returns valid trace -- default", actual)
 }
 
-func Test_NewCreator_SkipOne(t *testing.T) {
+func Test_NewCreator_SkipOne_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -370,7 +370,7 @@ func Test_NewCreator_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.SkipOne returns valid trace -- skip one", actual)
 }
 
-func Test_NewCreator_Ptr(t *testing.T) {
+func Test_NewCreator_Ptr_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	ptr := codestack.New.Ptr(0)
 
@@ -430,7 +430,7 @@ func Test_NameOf_Package_EmptyInput(t *testing.T) {
 
 // ── Trace.AsFileLiner ──
 
-func Test_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	liner := trace.AsFileLiner()
@@ -451,7 +451,7 @@ func Test_Trace_AsFileLiner(t *testing.T) {
 
 // ── FileWithLine.AsFileLiner ──
 
-func Test_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner_FromNewTraceCollectionDe(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	liner := fwl.AsFileLiner()
@@ -493,7 +493,7 @@ func Test_Trace_Clone_PreservesIsSkippable(t *testing.T) {
 
 // ── File / Dir getters ──
 
-func Test_File_Name(t *testing.T) {
+func Test_File_Name_FromNewTraceCollectionDe(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.Name(0) != ""}
 
@@ -502,7 +502,7 @@ func Test_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name returns non-empty -- skip 0", actual)
 }
 
-func Test_File_Path(t *testing.T) {
+func Test_File_Path_FromNewTraceCollectionDe(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.Path(0) != ""}
 
@@ -511,7 +511,7 @@ func Test_File_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Path returns non-empty -- skip 0", actual)
 }
 
-func Test_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir_FromNewTraceCollectionDe(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.CurDir() != ""}
 
@@ -520,7 +520,7 @@ func Test_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns non-empty -- current dir", actual)
 }
 
-func Test_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin_FromNewTraceCollectionDe(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.CurDirJoin("sub") != ""}
 
