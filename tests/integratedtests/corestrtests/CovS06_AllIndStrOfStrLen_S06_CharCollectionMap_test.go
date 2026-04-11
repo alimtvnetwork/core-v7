@@ -1000,11 +1000,7 @@ func Test_CovS06_CharCollMap_LockVariants(t *testing.T) {
 			"isEqLock":     true,
 			"isEqCSLock":   true,
 		}
-		for k, v := range expected {
-			actual = args.Map{"result": actual[k] != v}
-			expected = args.Map{"result": false}
-			expected.ShouldBeEqual(t, 0, "LockVariants: got, want", actual)
-		}
+		expected.ShouldBeEqual(t, 0, "LockVariants: got, want", actual)
 	})
 }
 
