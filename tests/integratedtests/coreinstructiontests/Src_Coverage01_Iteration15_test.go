@@ -11,7 +11,7 @@ import (
 // BaseIsContinueOnError — IsExitOnError nil receiver branch (line 7)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I15_BaseIsContinueOnError_IsExitOnError_Nil(t *testing.T) {
+func Test_BaseIsContinueOnError_IsExitOnError_Nil(t *testing.T) {
 	// Arrange
 	var b *coreinstruction.BaseIsContinueOnError
 
@@ -23,7 +23,7 @@ func Test_I15_BaseIsContinueOnError_IsExitOnError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for nil receiver", actual)
 }
 
-func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueTrue(t *testing.T) {
+func Test_BaseIsContinueOnError_IsExitOnError_ContinueTrue(t *testing.T) {
 	// Arrange
 	b := &coreinstruction.BaseIsContinueOnError{IsContinueOnError: true}
 
@@ -35,7 +35,7 @@ func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false when IsContinueOnError is true", actual)
 }
 
-func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueFalse(t *testing.T) {
+func Test_BaseIsContinueOnError_IsExitOnError_ContinueFalse(t *testing.T) {
 	// Arrange
 	b := &coreinstruction.BaseIsContinueOnError{IsContinueOnError: false}
 
@@ -51,7 +51,7 @@ func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueFalse(t *testing.T) {
 // BaseIsSecure — NewSecure, NewPlain, IsPlainText, IsIncludePayload (lines 7-25)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I15_BaseIsSecure_NewSecure(t *testing.T) {
+func Test_BaseIsSecure_NewSecure(t *testing.T) {
 	// Arrange
 	s := coreinstruction.NewSecure()
 
@@ -69,7 +69,7 @@ func Test_I15_BaseIsSecure_NewSecure(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not include payload", actual)
 }
 
-func Test_I15_BaseIsSecure_NewPlain(t *testing.T) {
+func Test_BaseIsSecure_NewPlain(t *testing.T) {
 	// Arrange
 	s := coreinstruction.NewPlain()
 
@@ -87,7 +87,7 @@ func Test_I15_BaseIsSecure_NewPlain(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected include payload", actual)
 }
 
-func Test_I15_BaseIsSecure_NilReceiver(t *testing.T) {
+func Test_BaseIsSecure_NilReceiver(t *testing.T) {
 	// Arrange
 	var s *coreinstruction.BaseIsSecure
 
@@ -106,7 +106,7 @@ func Test_I15_BaseIsSecure_NilReceiver(t *testing.T) {
 // BaseTags — NewTagsPtr, TagsLength nil, TagsHashset, IsAnyTagMatchesRegex
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I15_BaseTags_NewTagsPtr_Empty(t *testing.T) {
+func Test_BaseTags_NewTagsPtr_Empty(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTagsPtr([]string{})
 
@@ -121,7 +121,7 @@ func Test_I15_BaseTags_NewTagsPtr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0 tags", actual)
 }
 
-func Test_I15_BaseTags_NewTagsPtr_NonEmpty(t *testing.T) {
+func Test_BaseTags_NewTagsPtr_NonEmpty(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTagsPtr([]string{"a", "b"})
 
@@ -133,7 +133,7 @@ func Test_I15_BaseTags_NewTagsPtr_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2 tags", actual)
 }
 
-func Test_I15_BaseTags_TagsLength_NilTags(t *testing.T) {
+func Test_BaseTags_TagsLength_NilTags(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.BaseTags{Tags: nil}
 
@@ -145,7 +145,7 @@ func Test_I15_BaseTags_TagsLength_NilTags(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
-func Test_I15_BaseTags_TagsHashset_Cached(t *testing.T) {
+func Test_BaseTags_TagsHashset_Cached(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{"x", "y"})
 	h1 := bt.TagsHashset()
@@ -159,7 +159,7 @@ func Test_I15_BaseTags_TagsHashset_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected same pointer (cached)", actual)
 }
 
-func Test_I15_BaseTags_HasAllTags(t *testing.T) {
+func Test_BaseTags_HasAllTags(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{"a", "b", "c"})
 
@@ -178,7 +178,7 @@ func Test_I15_BaseTags_HasAllTags(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 }
 
-func Test_I15_BaseTags_HasAnyTags(t *testing.T) {
+func Test_BaseTags_HasAnyTags(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{"a", "b"})
 
@@ -193,7 +193,7 @@ func Test_I15_BaseTags_HasAnyTags(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
-func Test_I15_BaseTags_IsAnyTagMatchesRegex_Empty(t *testing.T) {
+func Test_BaseTags_IsAnyTagMatchesRegex_Empty(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{})
 	r := regexp.MustCompile(`.*`)
@@ -206,7 +206,7 @@ func Test_I15_BaseTags_IsAnyTagMatchesRegex_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected false for empty tags", actual)
 }
 
-func Test_I15_BaseTags_IsAnyTagMatchesRegex_Match(t *testing.T) {
+func Test_BaseTags_IsAnyTagMatchesRegex_Match(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{"hello-world", "foo"})
 	r := regexp.MustCompile(`^hello`)
@@ -219,7 +219,7 @@ func Test_I15_BaseTags_IsAnyTagMatchesRegex_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected match", actual)
 }
 
-func Test_I15_BaseTags_IsAnyTagMatchesRegex_NoMatch(t *testing.T) {
+func Test_BaseTags_IsAnyTagMatchesRegex_NoMatch(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.NewTags([]string{"foo", "bar"})
 	r := regexp.MustCompile(`^hello`)

@@ -197,7 +197,7 @@ func Test_TypedSimpleGenericRequest_InvalidUnderlying(t *testing.T) {
 // Test: TypedSimpleGenericRequest Clone
 // ==========================================
 
-func Test_TypedSimpleGenericRequest_Clone(t *testing.T) {
+func Test_TypedSimpleGenericRequest_Clone_FromTypedConversions(t *testing.T) {
 	for caseIndex, testCase := range typedSimpleGenericRequestCloneTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -220,7 +220,7 @@ func Test_TypedSimpleGenericRequest_Clone(t *testing.T) {
 	}
 }
 
-func Test_TypedSimpleGenericRequest_Clone_Nil(t *testing.T) {
+func Test_TypedSimpleGenericRequest_Clone_Nil_FromTypedConversions(t *testing.T) {
 	for caseIndex, tc := range typedSimpleGenericRequestCloneNilTestCases {
 		// Arrange
 		var req *coreapi.TypedSimpleGenericRequest[string]
@@ -238,7 +238,7 @@ func Test_TypedSimpleGenericRequest_Clone_Nil(t *testing.T) {
 // Test: TypedRequestIn.TypedSimpleGenericRequest conversion
 // ==========================================
 
-func Test_TypedRequestIn_TypedSimpleGenericRequest(t *testing.T) {
+func Test_TypedRequestIn_TypedSimpleGenericRequest_FromTypedConversions(t *testing.T) {
 	for caseIndex, testCase := range typedRequestInToTypedSimpleGenericTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -283,7 +283,7 @@ func Test_TypedRequestIn_TypedSimpleGenericRequest(t *testing.T) {
 	}
 }
 
-func Test_TypedRequestIn_TypedSimpleGenericRequest_Nil(t *testing.T) {
+func Test_TypedRequestIn_TypedSimpleGenericRequest_Nil_FromTypedConversions(t *testing.T) {
 	for caseIndex, tc := range typedRequestInToTypedSimpleGenericNilTestCases {
 		// Arrange
 		var reqIn *coreapi.TypedRequestIn[string]
@@ -301,7 +301,7 @@ func Test_TypedRequestIn_TypedSimpleGenericRequest_Nil(t *testing.T) {
 // Test: TypedResponse.TypedResponseResult conversion
 // ==========================================
 
-func Test_TypedResponse_TypedResponseResult(t *testing.T) {
+func Test_TypedResponse_TypedResponseResult_FromTypedConversions(t *testing.T) {
 	for caseIndex, testCase := range typedResponseToTypedResponseResultTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -331,7 +331,7 @@ func Test_TypedResponse_TypedResponseResult(t *testing.T) {
 	}
 }
 
-func Test_TypedResponse_TypedResponseResult_Nil(t *testing.T) {
+func Test_TypedResponse_TypedResponseResult_Nil_FromTypedConversions(t *testing.T) {
 	for caseIndex, tc := range typedResponseToTypedResponseResultNilTestCases {
 		// Arrange
 		var resp *coreapi.TypedResponse[string]

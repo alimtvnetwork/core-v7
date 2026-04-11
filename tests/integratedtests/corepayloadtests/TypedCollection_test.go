@@ -120,7 +120,7 @@ func Test_TypedPayloadCollection_Add(t *testing.T) {
 	}
 }
 
-func Test_TypedPayloadCollection_FilterByData(t *testing.T) {
+func Test_TypedPayloadCollection_FilterByData_FromTypedCollection(t *testing.T) {
 	for caseIndex, testCase := range typedCollectionFilterTestCases {
 		// Arrange
 		collection := createTestCollection()
@@ -229,7 +229,7 @@ func Test_TypedPayloadCollection_Partition(t *testing.T) {
 	}
 }
 
-func Test_TypedPayloadCollection_AllData(t *testing.T) {
+func Test_TypedPayloadCollection_AllData_FromTypedCollection(t *testing.T) {
 	for caseIndex, testCase := range typedCollectionAllDataTestCases {
 		// Arrange
 		collection := createTestCollection()
@@ -329,7 +329,7 @@ func Test_TypedPayloadCollection_EmptyBehavior(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TypedPayloadCollection_FirstByName(t *testing.T) {
+func Test_TypedPayloadCollection_FirstByName_FromTypedCollection(t *testing.T) {
 	// Arrange
 	tc := typedCollectionFirstByNameTestCase
 	collection := createTestCollection()
@@ -347,7 +347,7 @@ func Test_TypedPayloadCollection_FirstByName(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TypedPayloadCollection_RemoveAt(t *testing.T) {
+func Test_TypedPayloadCollection_RemoveAt_FromTypedCollection(t *testing.T) {
 	// Arrange
 	tc := typedCollectionRemoveAtTestCase
 	collection := createTestCollection()
@@ -368,7 +368,7 @@ func Test_TypedPayloadCollection_RemoveAt(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_TypedPayloadCollection_ToPayloadsCollection(t *testing.T) {
+func Test_TypedPayloadCollection_ToPayloadsCollection_FromTypedCollection(t *testing.T) {
 	// Arrange
 	tc := typedCollectionToPayloadsTestCase
 	collection := createTestCollection()

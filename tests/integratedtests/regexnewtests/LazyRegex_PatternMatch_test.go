@@ -49,7 +49,7 @@ func Test_LazyRegex_IsMatch_PartialMismatch(t *testing.T) {
 // Test: IsFailedMatch
 // ==========================================================================
 
-func Test_LazyRegex_IsFailedMatch(t *testing.T) {
+func Test_LazyRegex_IsFailedMatch_FromLazyRegexPatternMatc(t *testing.T) {
 	tc := lazyRegexIsFailedMatchTestCase
 
 	// Arrange

@@ -14,7 +14,7 @@ import (
 // Tests: GetPagesSize
 // =============================================================================
 
-func Test_TypedPayloadCollection_GetPagesSize(t *testing.T) {
+func Test_TypedPayloadCollection_GetPagesSize_FromTypedCollectionPagin(t *testing.T) {
 	for caseIndex, testCase := range typedCollectionPagesSizeTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -71,7 +71,7 @@ func Test_TypedPayloadCollection_GetSinglePageCollection(t *testing.T) {
 // Tests: GetPagedCollection
 // =============================================================================
 
-func Test_TypedPayloadCollection_GetPagedCollection(t *testing.T) {
+func Test_TypedPayloadCollection_GetPagedCollection_FromTypedCollectionPagin(t *testing.T) {
 	for caseIndex, testCase := range typedCollectionPagedCollectionTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -99,7 +99,7 @@ func Test_TypedPayloadCollection_GetPagedCollection(t *testing.T) {
 // Tests: GetPagedCollectionWithInfo
 // =============================================================================
 
-func Test_TypedPayloadCollection_GetPagedCollectionWithInfo(t *testing.T) {
+func Test_TypedPayloadCollection_GetPagedCollectionWithInfo_FromTypedCollectionPagin(t *testing.T) {
 	for caseIndex, testCase := range typedCollectionPagedWithInfoTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)

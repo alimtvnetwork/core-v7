@@ -64,7 +64,7 @@ func Test_Create_IsMatchFailed_Verification(t *testing.T) {
 // Test: MatchError
 // ==========================================================================
 
-func Test_MatchError_Match(t *testing.T) {
+func Test_MatchError_Match_FromCreate(t *testing.T) {
 	tc := matchErrorMatchTestCase
 
 	// Arrange
@@ -104,7 +104,7 @@ func Test_MatchError_Mismatch(t *testing.T) {
 // Test: MatchErrorLock
 // ==========================================================================
 
-func Test_MatchErrorLock_Match(t *testing.T) {
+func Test_MatchErrorLock_Match_FromCreate(t *testing.T) {
 	tc := matchErrorLockMatchTestCase
 
 	// Arrange
