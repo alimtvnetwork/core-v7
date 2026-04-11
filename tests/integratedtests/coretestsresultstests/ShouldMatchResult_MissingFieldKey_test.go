@@ -11,7 +11,7 @@ import (
 // ── filterByFields: missing key triggers "<missing key: ...>" path ──
 // Covers ResultAssert.go L92-94
 
-func Test_Cov4_ShouldMatchResult_MissingFieldKey(t *testing.T) {
+func Test_ShouldMatchResult_MissingFieldKey(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42, Panicked: false}
 	exp := results.ResultAny{Panicked: false}
@@ -24,7 +24,7 @@ func Test_Cov4_ShouldMatchResult_MissingFieldKey(t *testing.T) {
 // ── MethodName: non-func input ──
 // Covers MethodName.go L22-24
 
-func Test_Cov4_MethodName_NonFunc(t *testing.T) {
+func Test_MethodName_NonFunc(t *testing.T) {
 	// Arrange & Act
 	name := results.MethodName("not-a-func")
 
@@ -37,7 +37,7 @@ func Test_Cov4_MethodName_NonFunc(t *testing.T) {
 // ── MethodName: nil input ──
 // Covers MethodName.go L16-18
 
-func Test_Cov4_MethodName_Nil(t *testing.T) {
+func Test_MethodName_Nil(t *testing.T) {
 	// Arrange & Act
 	name := results.MethodName(nil)
 
@@ -53,7 +53,7 @@ type cov4Struct struct{}
 
 func (s *cov4Struct) Hello() string { return "hi" }
 
-func Test_Cov4_MethodName_ValidFunc(t *testing.T) {
+func Test_MethodName_ValidFunc(t *testing.T) {
 	// Arrange & Act
 	name := results.MethodName((*cov4Struct).Hello)
 
@@ -66,7 +66,7 @@ func Test_Cov4_MethodName_ValidFunc(t *testing.T) {
 // ── InvokeWithPanicRecovery: non-func input ──
 // Covers Invoke.go L48-53
 
-func Test_Cov4_Invoke_NonFunc(t *testing.T) {
+func Test_Invoke_NonFunc(t *testing.T) {
 	// Arrange & Act
 	r := results.InvokeWithPanicRecovery("not-a-func", nil)
 

@@ -20,7 +20,7 @@ func createSimpleSliceValidator(expectedLines []string) *corevalidator.SimpleSli
 
 // ── NewSliceValidatorUsingErr ──
 
-func Test_Cov12_NewSliceValidatorUsingErr_Valid(t *testing.T) {
+func Test_NewSliceValidatorUsingErr_Valid(t *testing.T) {
 	// Arrange
 	err := errors.New("line1\nline2")
 	expected := "line1\nline2"
@@ -42,7 +42,7 @@ func Test_Cov12_NewSliceValidatorUsingErr_Valid(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr creates validator -- 2 lines", actual)
 }
 
-func Test_Cov12_NewSliceValidatorUsingErr_NilErr(t *testing.T) {
+func Test_NewSliceValidatorUsingErr_NilErr(t *testing.T) {
 	// Arrange & Act
 	sv := corevalidator.NewSliceValidatorUsingErr(
 		nil, "", false, false, false, stringcompareas.Equal,
@@ -56,7 +56,7 @@ func Test_Cov12_NewSliceValidatorUsingErr_NilErr(t *testing.T) {
 
 // ── NewSliceValidatorUsingAny ──
 
-func Test_Cov12_NewSliceValidatorUsingAny_Valid(t *testing.T) {
+func Test_NewSliceValidatorUsingAny_Valid(t *testing.T) {
 	// Arrange & Act
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"hello\nworld", "hello\nworld", false, false, false, stringcompareas.Equal,
@@ -76,7 +76,7 @@ func Test_Cov12_NewSliceValidatorUsingAny_Valid(t *testing.T) {
 
 // ── RangeSegmentsValidator ──
 
-func Test_Cov12_RangeSegmentsValidator_VerifySimple(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifySimple(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test Range",
@@ -103,7 +103,7 @@ func Test_Cov12_RangeSegmentsValidator_VerifySimple(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifySimple returns nil -- matching range", result)
 }
 
-func Test_Cov12_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test",
@@ -129,7 +129,7 @@ func Test_Cov12_RangeSegmentsValidator_VerifyFirstDefault(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyFirstDefault returns nil -- matching", result)
 }
 
-func Test_Cov12_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
+func Test_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "Test",
@@ -155,7 +155,7 @@ func Test_Cov12_RangeSegmentsValidator_VerifyUptoDefault(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyUptoDefault returns nil -- matching upto 1", result)
 }
 
-func Test_Cov12_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
+func Test_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title:            "Test",
@@ -173,7 +173,7 @@ func Test_Cov12_RangeSegmentsValidator_LengthOfVerifierSegments(t *testing.T) {
 
 // ── SimpleSliceValidator ──
 
-func Test_Cov12_SimpleSliceValidator_VerifyUpto(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyUpto(t *testing.T) {
 	// Arrange
 	sv := createSimpleSliceValidator(
 		[]string{"a", "b", "c"},
@@ -193,7 +193,7 @@ func Test_Cov12_SimpleSliceValidator_VerifyUpto(t *testing.T) {
 	exp.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- matching first 2", actual)
 }
 
-func Test_Cov12_SimpleSliceValidator_VerifyFirst(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyFirst(t *testing.T) {
 	// Arrange
 	sv := createSimpleSliceValidator(
 		[]string{"hello", "world"},

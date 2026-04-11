@@ -15,7 +15,7 @@ import (
 
 // --- FuncWrap.VoidCallNoReturn valid path ---
 
-func Test_Cov12_FuncWrap_VoidCallNoReturn_Valid(t *testing.T) {
+func Test_FuncWrap_VoidCallNoReturn_Valid(t *testing.T) {
 	// Arrange
 	called := false
 	fw := args.NewFuncWrap.Default(func() { called = true })
@@ -32,7 +32,7 @@ func Test_Cov12_FuncWrap_VoidCallNoReturn_Valid(t *testing.T) {
 
 // --- FuncWrap.InvokeFirstAndError success path ---
 
-func Test_Cov12_FuncWrap_InvokeFirstAndError_Success(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError_Success(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) { return "ok", nil })
 
@@ -47,7 +47,7 @@ func Test_Cov12_FuncWrap_InvokeFirstAndError_Success(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeFirstAndError_WithError(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError_WithError(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) {
 		return "", errors.New("fail")
@@ -66,7 +66,7 @@ func Test_Cov12_FuncWrap_InvokeFirstAndError_WithError(t *testing.T) {
 
 // --- FuncWrap.InvokeAsAnyError branches ---
 
-func Test_Cov12_FuncWrap_InvokeAsAnyError_SingleReturn(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_SingleReturn(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "solo" })
 
@@ -81,7 +81,7 @@ func Test_Cov12_FuncWrap_InvokeAsAnyError_SingleReturn(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsAnyError_WithFuncError(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_WithFuncError(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) {
 		return "val", errors.New("err")
@@ -98,7 +98,7 @@ func Test_Cov12_FuncWrap_InvokeAsAnyError_WithFuncError(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsAnyError_NilSecondReturn(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_NilSecondReturn(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) {
 		return "val", nil
@@ -115,7 +115,7 @@ func Test_Cov12_FuncWrap_InvokeAsAnyError_NilSecondReturn(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsAnyError_VoidFunc(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_VoidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -132,7 +132,7 @@ func Test_Cov12_FuncWrap_InvokeAsAnyError_VoidFunc(t *testing.T) {
 
 // --- FuncWrap.InvokeAsError with actual error return ---
 
-func Test_Cov12_FuncWrap_InvokeAsError_ActualError(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_ActualError(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() error {
 		return errors.New("real error")
@@ -151,7 +151,7 @@ func Test_Cov12_FuncWrap_InvokeAsError_ActualError(t *testing.T) {
 
 // --- FuncWrap.InvokeAsBool/AsString/AsAny void returns ---
 
-func Test_Cov12_FuncWrap_InvokeAsBool_VoidFunc(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_VoidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -165,7 +165,7 @@ func Test_Cov12_FuncWrap_InvokeAsBool_VoidFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsString_VoidFunc(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_VoidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -179,7 +179,7 @@ func Test_Cov12_FuncWrap_InvokeAsString_VoidFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsAny_VoidFunc(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny_VoidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -193,7 +193,7 @@ func Test_Cov12_FuncWrap_InvokeAsAny_VoidFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsBool_Success(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_Success(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() bool { return true })
 
@@ -207,7 +207,7 @@ func Test_Cov12_FuncWrap_InvokeAsBool_Success(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsString_Success(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_Success(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "hello" })
 
@@ -221,7 +221,7 @@ func Test_Cov12_FuncWrap_InvokeAsString_Success(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvokeAsAny_Success(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny_Success(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() int { return 42 })
 
@@ -237,7 +237,7 @@ func Test_Cov12_FuncWrap_InvokeAsAny_Success(t *testing.T) {
 
 // --- FuncWrap.InvokeSkip panic recovery ---
 
-func Test_Cov12_FuncWrap_InvokeSkip_PanicRecovery(t *testing.T) {
+func Test_FuncWrap_InvokeSkip_PanicRecovery(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() { panic("boom") })
 
@@ -254,7 +254,7 @@ func Test_Cov12_FuncWrap_InvokeSkip_PanicRecovery(t *testing.T) {
 
 // --- FuncWrap.IsNotEqual and IsEqualValue ---
 
-func Test_Cov12_FuncWrap_IsNotEqual(t *testing.T) {
+func Test_FuncWrap_IsNotEqual(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() string { return "" })
 	fw2 := args.NewFuncWrap.Default(func() int { return 0 })
@@ -268,7 +268,7 @@ func Test_Cov12_FuncWrap_IsNotEqual(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsEqualValue(t *testing.T) {
+func Test_FuncWrap_IsEqualValue(t *testing.T) {
 	// Arrange
 	sampleFunc := func() string { return "" }
 	fw1 := args.NewFuncWrap.Default(sampleFunc)
@@ -285,7 +285,7 @@ func Test_Cov12_FuncWrap_IsEqualValue(t *testing.T) {
 
 // --- FuncWrap.IsEqual nil branches ---
 
-func Test_Cov12_FuncWrap_IsEqual_BothNil(t *testing.T) {
+func Test_FuncWrap_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var fw1 *args.FuncWrapAny
 	var fw2 *args.FuncWrapAny
@@ -299,7 +299,7 @@ func Test_Cov12_FuncWrap_IsEqual_BothNil(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsEqual_OneNil(t *testing.T) {
+func Test_FuncWrap_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() {})
 	var fw2 *args.FuncWrapAny
@@ -313,7 +313,7 @@ func Test_Cov12_FuncWrap_IsEqual_OneNil(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsEqual_SamePointer(t *testing.T) {
+func Test_FuncWrap_IsEqual_SamePointer(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() {})
 
@@ -326,7 +326,7 @@ func Test_Cov12_FuncWrap_IsEqual_SamePointer(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsEqual_DiffInArgs(t *testing.T) {
+func Test_FuncWrap_IsEqual_DiffInArgs(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func(a string) {})
 	fw2 := args.NewFuncWrap.Default(func(a int) {})
@@ -342,7 +342,7 @@ func Test_Cov12_FuncWrap_IsEqual_DiffInArgs(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsEqual_DiffOutArgs(t *testing.T) {
+func Test_FuncWrap_IsEqual_DiffOutArgs(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() string { return "" })
 	fw2 := args.NewFuncWrap.Default(func() int { return 0 })
@@ -359,7 +359,7 @@ func Test_Cov12_FuncWrap_IsEqual_DiffOutArgs(t *testing.T) {
 
 // --- FuncWrap typed helper signature checkers ---
 
-func Test_Cov12_FuncWrap_IsBoolFunc(t *testing.T) {
+func Test_FuncWrap_IsBoolFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() bool { return true })
 
@@ -369,7 +369,7 @@ func Test_Cov12_FuncWrap_IsBoolFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsErrorFunc(t *testing.T) {
+func Test_FuncWrap_IsErrorFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() error { return nil })
 
@@ -379,7 +379,7 @@ func Test_Cov12_FuncWrap_IsErrorFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsStringFunc(t *testing.T) {
+func Test_FuncWrap_IsStringFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 
@@ -389,7 +389,7 @@ func Test_Cov12_FuncWrap_IsStringFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsAnyFunc(t *testing.T) {
+func Test_FuncWrap_IsAnyFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() int { return 0 })
 
@@ -399,7 +399,7 @@ func Test_Cov12_FuncWrap_IsAnyFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsValueErrorFunc(t *testing.T) {
+func Test_FuncWrap_IsValueErrorFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) { return "", nil })
 
@@ -409,7 +409,7 @@ func Test_Cov12_FuncWrap_IsValueErrorFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsVoidFunc(t *testing.T) {
+func Test_FuncWrap_IsVoidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -419,7 +419,7 @@ func Test_Cov12_FuncWrap_IsVoidFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsAnyErrorFunc(t *testing.T) {
+func Test_FuncWrap_IsAnyErrorFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) { return "", nil })
 
@@ -429,7 +429,7 @@ func Test_Cov12_FuncWrap_IsAnyErrorFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_SignatureCheckers_Invalid(t *testing.T) {
+func Test_FuncWrap_SignatureCheckers_Invalid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -446,7 +446,7 @@ func Test_Cov12_FuncWrap_SignatureCheckers_Invalid(t *testing.T) {
 
 // --- FuncWrap.VoidCall ---
 
-func Test_Cov12_FuncWrap_VoidCall(t *testing.T) {
+func Test_FuncWrap_VoidCall(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "x" })
 
@@ -462,7 +462,7 @@ func Test_Cov12_FuncWrap_VoidCall(t *testing.T) {
 
 // --- FuncWrap.GetPascalCaseFuncName ---
 
-func Test_Cov12_FuncWrap_GetPascalCaseFuncName(t *testing.T) {
+func Test_FuncWrap_GetPascalCaseFuncName(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -475,7 +475,7 @@ func Test_Cov12_FuncWrap_GetPascalCaseFuncName(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_GetPascalCaseFuncName_Nil(t *testing.T) {
+func Test_FuncWrap_GetPascalCaseFuncName_Nil(t *testing.T) {
 	// Arrange
 	var fw *args.FuncWrapAny
 
@@ -490,7 +490,7 @@ func Test_Cov12_FuncWrap_GetPascalCaseFuncName_Nil(t *testing.T) {
 
 // --- FuncWrap.PkgPath, PkgNameOnly, FuncDirectInvokeName ---
 
-func Test_Cov12_FuncWrap_PkgPath(t *testing.T) {
+func Test_FuncWrap_PkgPath(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -503,7 +503,7 @@ func Test_Cov12_FuncWrap_PkgPath(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_PkgPath_Cached(t *testing.T) {
+func Test_FuncWrap_PkgPath_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 	_ = fw.PkgPath() // first call to populate cache
@@ -517,7 +517,7 @@ func Test_Cov12_FuncWrap_PkgPath_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_PkgNameOnly(t *testing.T) {
+func Test_FuncWrap_PkgNameOnly(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -530,7 +530,7 @@ func Test_Cov12_FuncWrap_PkgNameOnly(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_PkgNameOnly_Cached(t *testing.T) {
+func Test_FuncWrap_PkgNameOnly_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 	_ = fw.PkgNameOnly()
@@ -544,7 +544,7 @@ func Test_Cov12_FuncWrap_PkgNameOnly_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_FuncDirectInvokeName(t *testing.T) {
+func Test_FuncWrap_FuncDirectInvokeName(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -557,7 +557,7 @@ func Test_Cov12_FuncWrap_FuncDirectInvokeName(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_FuncDirectInvokeName_Cached(t *testing.T) {
+func Test_FuncWrap_FuncDirectInvokeName_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 	_ = fw.FuncDirectInvokeName()
@@ -573,7 +573,7 @@ func Test_Cov12_FuncWrap_FuncDirectInvokeName_Cached(t *testing.T) {
 
 // --- FuncWrap.GetType, IsPublicMethod, IsPrivateMethod ---
 
-func Test_Cov12_FuncWrap_GetType(t *testing.T) {
+func Test_FuncWrap_GetType(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -586,7 +586,7 @@ func Test_Cov12_FuncWrap_GetType(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_GetType_Invalid(t *testing.T) {
+func Test_FuncWrap_GetType_Invalid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -599,7 +599,7 @@ func Test_Cov12_FuncWrap_GetType_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsPublicMethod(t *testing.T) {
+func Test_FuncWrap_IsPublicMethod(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -609,7 +609,7 @@ func Test_Cov12_FuncWrap_IsPublicMethod(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsPrivateMethod(t *testing.T) {
+func Test_FuncWrap_IsPrivateMethod(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -621,7 +621,7 @@ func Test_Cov12_FuncWrap_IsPrivateMethod(t *testing.T) {
 
 // --- FuncWrap.HasValidFunc ---
 
-func Test_Cov12_FuncWrap_HasValidFunc(t *testing.T) {
+func Test_FuncWrap_HasValidFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -633,7 +633,7 @@ func Test_Cov12_FuncWrap_HasValidFunc(t *testing.T) {
 
 // --- FuncWrap.ValidateMethodArgs mismatch ---
 
-func Test_Cov12_FuncWrap_ValidateMethodArgs_CountMismatch(t *testing.T) {
+func Test_FuncWrap_ValidateMethodArgs_CountMismatch(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a, b string) {})
 
@@ -649,7 +649,7 @@ func Test_Cov12_FuncWrap_ValidateMethodArgs_CountMismatch(t *testing.T) {
 
 // --- FuncWrap.MustBeValid panics ---
 
-func Test_Cov12_FuncWrap_MustBeValid_NilPanics(t *testing.T) {
+func Test_FuncWrap_MustBeValid_NilPanics(t *testing.T) {
 	// Arrange
 	var fw *args.FuncWrapAny
 
@@ -659,7 +659,7 @@ func Test_Cov12_FuncWrap_MustBeValid_NilPanics(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_MustBeValid_InvalidPanics(t *testing.T) {
+func Test_FuncWrap_MustBeValid_InvalidPanics(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default("not-a-func")
 
@@ -671,7 +671,7 @@ func Test_Cov12_FuncWrap_MustBeValid_InvalidPanics(t *testing.T) {
 
 // --- FuncWrap.ValidationError ---
 
-func Test_Cov12_FuncWrap_ValidationError_Nil(t *testing.T) {
+func Test_FuncWrap_ValidationError_Nil(t *testing.T) {
 	// Arrange
 	var fw *args.FuncWrapAny
 
@@ -684,7 +684,7 @@ func Test_Cov12_FuncWrap_ValidationError_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_ValidationError_Invalid(t *testing.T) {
+func Test_FuncWrap_ValidationError_Invalid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default("not-a-func")
 
@@ -697,7 +697,7 @@ func Test_Cov12_FuncWrap_ValidationError_Invalid(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_ValidationError_Valid(t *testing.T) {
+func Test_FuncWrap_ValidationError_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -712,7 +712,7 @@ func Test_Cov12_FuncWrap_ValidationError_Valid(t *testing.T) {
 
 // --- FuncWrap.InvalidError ---
 
-func Test_Cov12_FuncWrap_InvalidError_Nil(t *testing.T) {
+func Test_FuncWrap_InvalidError_Nil(t *testing.T) {
 	// Arrange
 	var fw *args.FuncWrapAny
 
@@ -725,7 +725,7 @@ func Test_Cov12_FuncWrap_InvalidError_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InvalidError_Valid(t *testing.T) {
+func Test_FuncWrap_InvalidError_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -740,7 +740,7 @@ func Test_Cov12_FuncWrap_InvalidError_Valid(t *testing.T) {
 
 // --- FuncWrapArgs: IsInTypeMatches, IsOutTypeMatches ---
 
-func Test_Cov12_FuncWrap_IsInTypeMatches(t *testing.T) {
+func Test_FuncWrap_IsInTypeMatches(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(s string) {})
 
@@ -750,7 +750,7 @@ func Test_Cov12_FuncWrap_IsInTypeMatches(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_IsOutTypeMatches(t *testing.T) {
+func Test_FuncWrap_IsOutTypeMatches(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 
@@ -762,7 +762,7 @@ func Test_Cov12_FuncWrap_IsOutTypeMatches(t *testing.T) {
 
 // --- FuncWrapArgs: InArgNames single arg ---
 
-func Test_Cov12_FuncWrap_InArgNames_SingleArg(t *testing.T) {
+func Test_FuncWrap_InArgNames_SingleArg(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(s string) {})
 
@@ -775,7 +775,7 @@ func Test_Cov12_FuncWrap_InArgNames_SingleArg(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_InArgNames_Cached(t *testing.T) {
+func Test_FuncWrap_InArgNames_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(s string) {})
 	_ = fw.InArgNames()
@@ -791,7 +791,7 @@ func Test_Cov12_FuncWrap_InArgNames_Cached(t *testing.T) {
 
 // --- FuncWrapArgs: OutArgNames single arg ---
 
-func Test_Cov12_FuncWrap_OutArgNames_SingleArg(t *testing.T) {
+func Test_FuncWrap_OutArgNames_SingleArg(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 
@@ -804,7 +804,7 @@ func Test_Cov12_FuncWrap_OutArgNames_SingleArg(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_OutArgNames_Cached(t *testing.T) {
+func Test_FuncWrap_OutArgNames_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 	_ = fw.OutArgNames()
@@ -818,7 +818,7 @@ func Test_Cov12_FuncWrap_OutArgNames_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_OutArgNames_MultiArg(t *testing.T) {
+func Test_FuncWrap_OutArgNames_MultiArg(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) { return "", nil })
 
@@ -833,7 +833,7 @@ func Test_Cov12_FuncWrap_OutArgNames_MultiArg(t *testing.T) {
 
 // --- FuncWrapArgs: InArgNamesEachLine, OutArgNamesEachLine for single arg ---
 
-func Test_Cov12_FuncWrap_InArgNamesEachLine_Single(t *testing.T) {
+func Test_FuncWrap_InArgNamesEachLine_Single(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(s string) {})
 
@@ -846,7 +846,7 @@ func Test_Cov12_FuncWrap_InArgNamesEachLine_Single(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_OutArgNamesEachLine_Single(t *testing.T) {
+func Test_FuncWrap_OutArgNamesEachLine_Single(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 
@@ -861,7 +861,7 @@ func Test_Cov12_FuncWrap_OutArgNamesEachLine_Single(t *testing.T) {
 
 // --- FuncWrapArgs: cached GetInArgsTypes, GetOutArgsTypes ---
 
-func Test_Cov12_FuncWrap_GetInArgsTypes_Cached(t *testing.T) {
+func Test_FuncWrap_GetInArgsTypes_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a string) {})
 	_ = fw.GetInArgsTypes()
@@ -875,7 +875,7 @@ func Test_Cov12_FuncWrap_GetInArgsTypes_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_GetOutArgsTypes_Cached(t *testing.T) {
+func Test_FuncWrap_GetOutArgsTypes_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 	_ = fw.GetOutArgsTypes()
@@ -889,7 +889,7 @@ func Test_Cov12_FuncWrap_GetOutArgsTypes_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_GetInArgsTypesNames_Cached(t *testing.T) {
+func Test_FuncWrap_GetInArgsTypesNames_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a string) {})
 	_ = fw.GetInArgsTypesNames()
@@ -903,7 +903,7 @@ func Test_Cov12_FuncWrap_GetInArgsTypesNames_Cached(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_GetOutArgsTypesNames_Cached(t *testing.T) {
+func Test_FuncWrap_GetOutArgsTypesNames_Cached(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() string { return "" })
 	_ = fw.GetOutArgsTypesNames()
@@ -919,7 +919,7 @@ func Test_Cov12_FuncWrap_GetOutArgsTypesNames_Cached(t *testing.T) {
 
 // --- FuncMap delegate methods ---
 
-func Test_Cov12_FuncMap_PkgPath(t *testing.T) {
+func Test_FuncMap_PkgPath(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() string { return "" })
 	name := ""
@@ -937,7 +937,7 @@ func Test_Cov12_FuncMap_PkgPath(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_PkgNameOnly(t *testing.T) {
+func Test_FuncMap_PkgNameOnly(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() string { return "" })
 	name := ""
@@ -955,7 +955,7 @@ func Test_Cov12_FuncMap_PkgNameOnly(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_FuncDirectInvokeName(t *testing.T) {
+func Test_FuncMap_FuncDirectInvokeName(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() string { return "" })
 	name := ""
@@ -973,7 +973,7 @@ func Test_Cov12_FuncMap_FuncDirectInvokeName(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_NotFound_Methods(t *testing.T) {
+func Test_FuncMap_NotFound_Methods(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -993,7 +993,7 @@ func Test_Cov12_FuncMap_NotFound_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
+func Test_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1006,7 +1006,7 @@ func Test_Cov12_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1019,7 +1019,7 @@ func Test_Cov12_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvalidError(t *testing.T) {
+func Test_FuncMap_InvalidError(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1032,7 +1032,7 @@ func Test_Cov12_FuncMap_InvalidError(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvalidErrorByName_NotFound(t *testing.T) {
+func Test_FuncMap_InvalidErrorByName_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 
@@ -1045,7 +1045,7 @@ func Test_Cov12_FuncMap_InvalidErrorByName_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvalidErrorByName_Valid(t *testing.T) {
+func Test_FuncMap_InvalidErrorByName_Valid(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 	name := ""
@@ -1063,7 +1063,7 @@ func Test_Cov12_FuncMap_InvalidErrorByName_Valid(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
+func Test_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1076,7 +1076,7 @@ func Test_Cov12_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_MustBeValid_Panics(t *testing.T) {
+func Test_FuncMap_MustBeValid_Panics(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1086,7 +1086,7 @@ func Test_Cov12_FuncMap_MustBeValid_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_ValidationError_NotFound(t *testing.T) {
+func Test_FuncMap_ValidationError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1099,7 +1099,7 @@ func Test_Cov12_FuncMap_ValidationError_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvokeMust_Panics(t *testing.T) {
+func Test_FuncMap_InvokeMust_Panics(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1109,7 +1109,7 @@ func Test_Cov12_FuncMap_InvokeMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_VoidCall(t *testing.T) {
+func Test_FuncMap_VoidCall(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() string { return "x" })
 	name := ""
@@ -1128,7 +1128,7 @@ func Test_Cov12_FuncMap_VoidCall(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1141,7 +1141,7 @@ func Test_Cov12_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InvokeError_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1154,7 +1154,7 @@ func Test_Cov12_FuncMap_InvokeError_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_VerifyInArgs_NotFound(t *testing.T) {
+func Test_FuncMap_VerifyInArgs_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1168,7 +1168,7 @@ func Test_Cov12_FuncMap_VerifyInArgs_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_VerifyOutArgs_NotFound(t *testing.T) {
+func Test_FuncMap_VerifyOutArgs_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1182,7 +1182,7 @@ func Test_Cov12_FuncMap_VerifyOutArgs_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
+func Test_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1196,7 +1196,7 @@ func Test_Cov12_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
+func Test_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1210,7 +1210,7 @@ func Test_Cov12_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_GetPascalCaseFuncName(t *testing.T) {
+func Test_FuncMap_GetPascalCaseFuncName(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 
@@ -1228,7 +1228,7 @@ func Test_Cov12_FuncMap_GetPascalCaseFuncName(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_GetPascalCaseFuncName_Empty(t *testing.T) {
+func Test_FuncMap_GetPascalCaseFuncName_Empty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -1241,7 +1241,7 @@ func Test_Cov12_FuncMap_GetPascalCaseFuncName_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_IsValidFuncOf(t *testing.T) {
+func Test_FuncMap_IsValidFuncOf(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 	name := ""
@@ -1261,7 +1261,7 @@ func Test_Cov12_FuncMap_IsValidFuncOf(t *testing.T) {
 
 // --- String type ---
 
-func Test_Cov12_String_Methods(t *testing.T) {
+func Test_String_Methods(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 
@@ -1280,7 +1280,7 @@ func Test_Cov12_String_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Concat(t *testing.T) {
+func Test_String_Concat(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -1293,7 +1293,7 @@ func Test_Cov12_String_Concat(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Join(t *testing.T) {
+func Test_String_Join(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -1306,7 +1306,7 @@ func Test_Cov12_String_Join(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Split(t *testing.T) {
+func Test_String_Split(t *testing.T) {
 	// Arrange
 	s := args.String("a-b-c")
 
@@ -1319,7 +1319,7 @@ func Test_Cov12_String_Split(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Quote_Methods(t *testing.T) {
+func Test_String_Quote_Methods(t *testing.T) {
 	// Arrange
 	s := args.String("test")
 
@@ -1332,7 +1332,7 @@ func Test_Cov12_String_Quote_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_TrimSpace(t *testing.T) {
+func Test_String_TrimSpace(t *testing.T) {
 	// Arrange
 	s := args.String("  hello  ")
 
@@ -1345,7 +1345,7 @@ func Test_Cov12_String_TrimSpace(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_ReplaceAll(t *testing.T) {
+func Test_String_ReplaceAll(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 
@@ -1358,7 +1358,7 @@ func Test_Cov12_String_ReplaceAll(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Substring(t *testing.T) {
+func Test_String_Substring(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 
@@ -1371,7 +1371,7 @@ func Test_Cov12_String_Substring(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Empty(t *testing.T) {
+func Test_String_Empty(t *testing.T) {
 	// Arrange
 	s := args.String("")
 
@@ -1384,7 +1384,7 @@ func Test_Cov12_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_String_Whitespace(t *testing.T) {
+func Test_String_Whitespace(t *testing.T) {
 	// Arrange
 	s := args.String("   ")
 
@@ -1396,7 +1396,7 @@ func Test_Cov12_String_Whitespace(t *testing.T) {
 
 // --- Dynamic methods ---
 
-func Test_Cov12_Dynamic_Getters(t *testing.T) {
+func Test_Dynamic_Getters(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1424,7 +1424,7 @@ func Test_Cov12_Dynamic_Getters(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_HasDefined(t *testing.T) {
+func Test_Dynamic_HasDefined(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1441,7 +1441,7 @@ func Test_Cov12_Dynamic_HasDefined(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_HasDefinedAll(t *testing.T) {
+func Test_Dynamic_HasDefinedAll(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1457,7 +1457,7 @@ func Test_Cov12_Dynamic_HasDefinedAll(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_IsKeyInvalid(t *testing.T) {
+func Test_Dynamic_IsKeyInvalid(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1473,7 +1473,7 @@ func Test_Cov12_Dynamic_IsKeyInvalid(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_GetTyped(t *testing.T) {
+func Test_Dynamic_GetTyped(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1510,7 +1510,7 @@ func Test_Cov12_Dynamic_GetTyped(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_GetLowerCase(t *testing.T) {
+func Test_Dynamic_GetLowerCase(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1531,7 +1531,7 @@ func Test_Cov12_Dynamic_GetLowerCase(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_Slice_And_String(t *testing.T) {
+func Test_Dynamic_Slice_And_String(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1552,7 +1552,7 @@ func Test_Cov12_Dynamic_Slice_And_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_ValidArgs_And_Args(t *testing.T) {
+func Test_Dynamic_ValidArgs_And_Args(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1571,7 +1571,7 @@ func Test_Cov12_Dynamic_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_GetByIndex(t *testing.T) {
+func Test_Dynamic_GetByIndex(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1588,7 +1588,7 @@ func Test_Cov12_Dynamic_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_HasFunc(t *testing.T) {
+func Test_Dynamic_HasFunc(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{
@@ -1603,7 +1603,7 @@ func Test_Cov12_Dynamic_HasFunc(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Dynamic_AsInterfaces(t *testing.T) {
+func Test_Dynamic_AsInterfaces(t *testing.T) {
 	// Arrange
 	d := args.Dynamic[string]{
 		Params: args.Map{},
@@ -1619,7 +1619,7 @@ func Test_Cov12_Dynamic_AsInterfaces(t *testing.T) {
 
 // --- DynamicFunc methods ---
 
-func Test_Cov12_DynamicFunc_Getters(t *testing.T) {
+func Test_DynamicFunc_Getters(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1656,7 +1656,7 @@ func Test_Cov12_DynamicFunc_Getters(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_HasFirst(t *testing.T) {
+func Test_DynamicFunc_HasFirst(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1670,7 +1670,7 @@ func Test_Cov12_DynamicFunc_HasFirst(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_GetByIndex(t *testing.T) {
+func Test_DynamicFunc_GetByIndex(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1690,7 +1690,7 @@ func Test_Cov12_DynamicFunc_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_TypedGetters(t *testing.T) {
+func Test_DynamicFunc_TypedGetters(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1721,7 +1721,7 @@ func Test_Cov12_DynamicFunc_TypedGetters(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_HasDefined(t *testing.T) {
+func Test_DynamicFunc_HasDefined(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1739,7 +1739,7 @@ func Test_Cov12_DynamicFunc_HasDefined(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_GetLowerCase(t *testing.T) {
+func Test_DynamicFunc_GetLowerCase(t *testing.T) {
 	// Arrange
 	df := args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1760,7 +1760,7 @@ func Test_Cov12_DynamicFunc_GetLowerCase(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_Slice_And_String(t *testing.T) {
+func Test_DynamicFunc_Slice_And_String(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1782,7 +1782,7 @@ func Test_Cov12_DynamicFunc_Slice_And_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_ValidArgs_And_Args(t *testing.T) {
+func Test_DynamicFunc_ValidArgs_And_Args(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func()]{
 		Params: args.Map{
@@ -1797,7 +1797,7 @@ func Test_Cov12_DynamicFunc_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_DynamicFunc_AsInterfaces(t *testing.T) {
+func Test_DynamicFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	df := args.DynamicFunc[func()]{
 		Params: args.Map{},
@@ -1813,7 +1813,7 @@ func Test_Cov12_DynamicFunc_AsInterfaces(t *testing.T) {
 
 // --- LeftRight methods ---
 
-func Test_Cov12_LeftRight_Methods(t *testing.T) {
+func Test_LeftRight_Methods(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{
 		Left:   "hello",
@@ -1835,7 +1835,7 @@ func Test_Cov12_LeftRight_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{
 		Left:   "a",
@@ -1853,7 +1853,7 @@ func Test_Cov12_LeftRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov12_LeftRight_ArgTwo(t *testing.T) {
+func Test_LeftRight_ArgTwo(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{
 		Left:  "a",
@@ -1870,7 +1870,7 @@ func Test_Cov12_LeftRight_ArgTwo(t *testing.T) {
 	})
 }
 
-func Test_Cov12_LeftRight_ValidArgs_And_Args(t *testing.T) {
+func Test_LeftRight_ValidArgs_And_Args(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{
 		Left:  "a",
@@ -1885,7 +1885,7 @@ func Test_Cov12_LeftRight_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_LeftRight_Slice_GetByIndex_String(t *testing.T) {
+func Test_LeftRight_Slice_GetByIndex_String(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{
 		Left:  "a",
@@ -1906,7 +1906,7 @@ func Test_Cov12_LeftRight_Slice_GetByIndex_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_LeftRight_AsInterfaces(t *testing.T) {
+func Test_LeftRight_AsInterfaces(t *testing.T) {
 	// Arrange
 	lr := args.LeftRight[string, int]{
 		Left:  "a",
@@ -1922,7 +1922,7 @@ func Test_Cov12_LeftRight_AsInterfaces(t *testing.T) {
 
 // --- One methods ---
 
-func Test_Cov12_One_Methods(t *testing.T) {
+func Test_One_Methods(t *testing.T) {
 	// Arrange
 	one := &args.One[string]{
 		First:  "hello",
@@ -1939,7 +1939,7 @@ func Test_Cov12_One_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_One_ArgTwo(t *testing.T) {
+func Test_One_ArgTwo(t *testing.T) {
 	// Arrange
 	one := &args.One[string]{
 		First:  "hello",
@@ -1955,7 +1955,7 @@ func Test_Cov12_One_ArgTwo(t *testing.T) {
 	})
 }
 
-func Test_Cov12_One_LeftRight(t *testing.T) {
+func Test_One_LeftRight(t *testing.T) {
 	// Arrange
 	one := &args.One[string]{
 		First:  "hello",
@@ -1971,7 +1971,7 @@ func Test_Cov12_One_LeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov12_One_Slice_GetByIndex_String(t *testing.T) {
+func Test_One_Slice_GetByIndex_String(t *testing.T) {
 	// Arrange
 	one := &args.One[string]{
 		First: "hello",
@@ -1991,7 +1991,7 @@ func Test_Cov12_One_Slice_GetByIndex_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_One_ValidArgs_And_Args(t *testing.T) {
+func Test_One_ValidArgs_And_Args(t *testing.T) {
 	// Arrange
 	one := &args.One[string]{
 		First: "hello",
@@ -2005,7 +2005,7 @@ func Test_Cov12_One_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_One_AsInterfaces(t *testing.T) {
+func Test_One_AsInterfaces(t *testing.T) {
 	// Arrange
 	one := args.One[string]{
 		First: "hello",
@@ -2020,7 +2020,7 @@ func Test_Cov12_One_AsInterfaces(t *testing.T) {
 
 // --- Two methods ---
 
-func Test_Cov12_Two_Methods(t *testing.T) {
+func Test_Two_Methods(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2040,7 +2040,7 @@ func Test_Cov12_Two_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_ArgTwo(t *testing.T) {
+func Test_Two_ArgTwo(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2056,7 +2056,7 @@ func Test_Cov12_Two_ArgTwo(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_LeftRight(t *testing.T) {
+func Test_Two_LeftRight(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2072,7 +2072,7 @@ func Test_Cov12_Two_LeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_Slice_String(t *testing.T) {
+func Test_Two_Slice_String(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2089,7 +2089,7 @@ func Test_Cov12_Two_Slice_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_ValidArgs_And_Args(t *testing.T) {
+func Test_Two_ValidArgs_And_Args(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2104,7 +2104,7 @@ func Test_Cov12_Two_ValidArgs_And_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_GetByIndex(t *testing.T) {
+func Test_Two_GetByIndex(t *testing.T) {
 	// Arrange
 	two := &args.Two[string, int]{
 		First:  "a",
@@ -2118,7 +2118,7 @@ func Test_Cov12_Two_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Two_AsInterfaces(t *testing.T) {
+func Test_Two_AsInterfaces(t *testing.T) {
 	// Arrange
 	two := args.Two[string, int]{
 		First:  "a",
@@ -2134,7 +2134,7 @@ func Test_Cov12_Two_AsInterfaces(t *testing.T) {
 
 // --- Three methods ---
 
-func Test_Cov12_Three_Methods(t *testing.T) {
+func Test_Three_Methods(t *testing.T) {
 	// Arrange
 	three := &args.Three[string, int, bool]{
 		First:  "a",
@@ -2157,7 +2157,7 @@ func Test_Cov12_Three_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_ArgTwo_ArgThree(t *testing.T) {
+func Test_Three_ArgTwo_ArgThree(t *testing.T) {
 	// Arrange
 	three := &args.Three[string, int, bool]{
 		First:  "a",
@@ -2175,7 +2175,7 @@ func Test_Cov12_Three_ArgTwo_ArgThree(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_LeftRight(t *testing.T) {
+func Test_Three_LeftRight(t *testing.T) {
 	// Arrange
 	three := &args.Three[string, int, bool]{
 		First:  "a",
@@ -2191,7 +2191,7 @@ func Test_Cov12_Three_LeftRight(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_Slice_String(t *testing.T) {
+func Test_Three_Slice_String(t *testing.T) {
 	// Arrange
 	three := args.Three[string, int, bool]{
 		First:  "a",
@@ -2209,7 +2209,7 @@ func Test_Cov12_Three_Slice_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_ValidArgs_Args(t *testing.T) {
+func Test_Three_ValidArgs_Args(t *testing.T) {
 	// Arrange
 	three := &args.Three[string, int, bool]{
 		First:  "a",
@@ -2225,7 +2225,7 @@ func Test_Cov12_Three_ValidArgs_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_GetByIndex(t *testing.T) {
+func Test_Three_GetByIndex(t *testing.T) {
 	// Arrange
 	three := &args.Three[string, int, bool]{
 		First:  "a",
@@ -2240,7 +2240,7 @@ func Test_Cov12_Three_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Three_AsInterfaces(t *testing.T) {
+func Test_Three_AsInterfaces(t *testing.T) {
 	// Arrange
 	three := args.Three[string, int, bool]{
 		First: "a",
@@ -2255,7 +2255,7 @@ func Test_Cov12_Three_AsInterfaces(t *testing.T) {
 
 // --- Four methods ---
 
-func Test_Cov12_Four_Methods(t *testing.T) {
+func Test_Four_Methods(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{
 		First:  "a",
@@ -2281,7 +2281,7 @@ func Test_Cov12_Four_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Four_ArgTwo_ArgThree(t *testing.T) {
+func Test_Four_ArgTwo_ArgThree(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{
 		First:  "a",
@@ -2300,7 +2300,7 @@ func Test_Cov12_Four_ArgTwo_ArgThree(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Four_ValidArgs_Args(t *testing.T) {
+func Test_Four_ValidArgs_Args(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{
 		First:  "a",
@@ -2317,7 +2317,7 @@ func Test_Cov12_Four_ValidArgs_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Four_Slice_String_GetByIndex(t *testing.T) {
+func Test_Four_Slice_String_GetByIndex(t *testing.T) {
 	// Arrange
 	four := args.Four[string, int, bool, float64]{
 		First:  "a",
@@ -2337,7 +2337,7 @@ func Test_Cov12_Four_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Four_AsInterfaces(t *testing.T) {
+func Test_Four_AsInterfaces(t *testing.T) {
 	// Arrange
 	four := args.Four[string, int, bool, float64]{
 		First: "a",
@@ -2352,7 +2352,7 @@ func Test_Cov12_Four_AsInterfaces(t *testing.T) {
 
 // --- Five methods ---
 
-func Test_Cov12_Five_Methods(t *testing.T) {
+func Test_Five_Methods(t *testing.T) {
 	// Arrange
 	five := &args.Five[string, int, bool, float64, byte]{
 		First:  "a",
@@ -2381,7 +2381,7 @@ func Test_Cov12_Five_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Five_ArgTwo_ArgThree_ArgFour(t *testing.T) {
+func Test_Five_ArgTwo_ArgThree_ArgFour(t *testing.T) {
 	// Arrange
 	five := &args.Five[string, int, bool, float64, byte]{
 		First:  "a",
@@ -2399,7 +2399,7 @@ func Test_Cov12_Five_ArgTwo_ArgThree_ArgFour(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Five_ValidArgs_Args(t *testing.T) {
+func Test_Five_ValidArgs_Args(t *testing.T) {
 	// Arrange
 	five := &args.Five[string, int, bool, float64, byte]{
 		First:  "a",
@@ -2417,7 +2417,7 @@ func Test_Cov12_Five_ValidArgs_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Five_Slice_String_GetByIndex(t *testing.T) {
+func Test_Five_Slice_String_GetByIndex(t *testing.T) {
 	// Arrange
 	five := args.Five[string, int, bool, float64, byte]{
 		First:  "a",
@@ -2438,7 +2438,7 @@ func Test_Cov12_Five_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Five_AsInterfaces(t *testing.T) {
+func Test_Five_AsInterfaces(t *testing.T) {
 	// Arrange
 	five := args.Five[string, int, bool, float64, byte]{
 		First: "a",
@@ -2453,7 +2453,7 @@ func Test_Cov12_Five_AsInterfaces(t *testing.T) {
 
 // --- Six methods ---
 
-func Test_Cov12_Six_Methods(t *testing.T) {
+func Test_Six_Methods(t *testing.T) {
 	// Arrange
 	six := &args.Six[string, int, bool, float64, byte, rune]{
 		First:  "a",
@@ -2485,7 +2485,7 @@ func Test_Cov12_Six_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Six_ArgTwo_Three_Four_Five(t *testing.T) {
+func Test_Six_ArgTwo_Three_Four_Five(t *testing.T) {
 	// Arrange
 	six := &args.Six[string, int, bool, float64, byte, rune]{
 		First:  "a",
@@ -2505,7 +2505,7 @@ func Test_Cov12_Six_ArgTwo_Three_Four_Five(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Six_ValidArgs_Args(t *testing.T) {
+func Test_Six_ValidArgs_Args(t *testing.T) {
 	// Arrange
 	six := &args.Six[string, int, bool, float64, byte, rune]{
 		First:  "a",
@@ -2524,7 +2524,7 @@ func Test_Cov12_Six_ValidArgs_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Six_Slice_String_GetByIndex(t *testing.T) {
+func Test_Six_Slice_String_GetByIndex(t *testing.T) {
 	// Arrange
 	six := args.Six[string, int, bool, float64, byte, rune]{
 		First:  "a",
@@ -2546,7 +2546,7 @@ func Test_Cov12_Six_Slice_String_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Six_AsInterfaces(t *testing.T) {
+func Test_Six_AsInterfaces(t *testing.T) {
 	// Arrange
 	six := args.Six[string, int, bool, float64, byte, rune]{
 		First: "a",
@@ -2561,7 +2561,7 @@ func Test_Cov12_Six_AsInterfaces(t *testing.T) {
 
 // --- Holder methods ---
 
-func Test_Cov12_Holder_Methods(t *testing.T) {
+func Test_Holder_Methods(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func()]{
 		First:    "a",
@@ -2597,7 +2597,7 @@ func Test_Cov12_Holder_Methods(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Holder_ArgTwo_Three_Four_Five(t *testing.T) {
+func Test_Holder_ArgTwo_Three_Four_Five(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func()]{
 		First:  "a",
@@ -2616,7 +2616,7 @@ func Test_Cov12_Holder_ArgTwo_Three_Four_Five(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Holder_ValidArgs_Args(t *testing.T) {
+func Test_Holder_ValidArgs_Args(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func()]{
 		First:  "a",
@@ -2632,7 +2632,7 @@ func Test_Cov12_Holder_ValidArgs_Args(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Holder_Slice_GetByIndex_String(t *testing.T) {
+func Test_Holder_Slice_GetByIndex_String(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func()]{
 		First: "a",
@@ -2650,7 +2650,7 @@ func Test_Cov12_Holder_Slice_GetByIndex_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Holder_AsInterfaces(t *testing.T) {
+func Test_Holder_AsInterfaces(t *testing.T) {
 	// Arrange
 	h := args.Holder[func()]{
 		First: "a",
@@ -2665,7 +2665,7 @@ func Test_Cov12_Holder_AsInterfaces(t *testing.T) {
 
 // --- Map methods ---
 
-func Test_Cov12_Map_Getters(t *testing.T) {
+func Test_Map_Getters(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"when":    "scenario",
@@ -2686,7 +2686,7 @@ func Test_Cov12_Map_Getters(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_SetActual(t *testing.T) {
+func Test_Map_SetActual(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2699,7 +2699,7 @@ func Test_Cov12_Map_SetActual(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetLowerCase(t *testing.T) {
+func Test_Map_GetLowerCase(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key": "val",
@@ -2715,7 +2715,7 @@ func Test_Cov12_Map_GetLowerCase(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetDirectLower(t *testing.T) {
+func Test_Map_GetDirectLower(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2725,7 +2725,7 @@ func Test_Cov12_Map_GetDirectLower(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_TypedGetters(t *testing.T) {
+func Test_Map_TypedGetters(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"num":     42,
@@ -2765,7 +2765,7 @@ func Test_Cov12_Map_TypedGetters(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"items": []string{"a", "b"},
@@ -2780,7 +2780,7 @@ func Test_Cov12_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetAsStringSliceFirstOfNames_Nil(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames_Nil(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2793,7 +2793,7 @@ func Test_Cov12_Map_GetAsStringSliceFirstOfNames_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetAsStringSliceFirstOfNames_Empty(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames_Empty(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2806,7 +2806,7 @@ func Test_Cov12_Map_GetAsStringSliceFirstOfNames_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_WorkFuncName(t *testing.T) {
+func Test_Map_WorkFuncName(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"func": func() {},
@@ -2821,7 +2821,7 @@ func Test_Cov12_Map_WorkFuncName(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GetFirstFuncNameOf(t *testing.T) {
+func Test_Map_GetFirstFuncNameOf(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"func": func() {},
@@ -2836,7 +2836,7 @@ func Test_Cov12_Map_GetFirstFuncNameOf(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_Slice_String(t *testing.T) {
+func Test_Map_Slice_String(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -2854,7 +2854,7 @@ func Test_Cov12_Map_Slice_String(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_CompileToStrings(t *testing.T) {
+func Test_Map_CompileToStrings(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -2870,7 +2870,7 @@ func Test_Cov12_Map_CompileToStrings(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_CompileToStrings_Empty(t *testing.T) {
+func Test_Map_CompileToStrings_Empty(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2883,7 +2883,7 @@ func Test_Cov12_Map_CompileToStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_CompileToString(t *testing.T) {
+func Test_Map_CompileToString(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -2899,7 +2899,7 @@ func Test_Cov12_Map_CompileToString(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GoLiteralLines(t *testing.T) {
+func Test_Map_GoLiteralLines(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"name":  "hello",
@@ -2915,7 +2915,7 @@ func Test_Cov12_Map_GoLiteralLines(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GoLiteralLines_Empty(t *testing.T) {
+func Test_Map_GoLiteralLines_Empty(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 
@@ -2928,7 +2928,7 @@ func Test_Cov12_Map_GoLiteralLines_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_GoLiteralString(t *testing.T) {
+func Test_Map_GoLiteralString(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key": "val",
@@ -2943,7 +2943,7 @@ func Test_Cov12_Map_GoLiteralString(t *testing.T) {
 	})
 }
 
-func Test_Cov12_Map_NilReceiver(t *testing.T) {
+func Test_Map_NilReceiver(t *testing.T) {
 	// Arrange
 	var m args.Map
 
@@ -2962,7 +2962,7 @@ func Test_Cov12_Map_NilReceiver(t *testing.T) {
 
 // --- emptyCreator ---
 
-func Test_Cov12_EmptyCreator(t *testing.T) {
+func Test_EmptyCreator(t *testing.T) {
 	// Act & Assert
 	convey.Convey("Empty creator methods", t, func() {
 		convey.So(args.Empty.Map(), convey.ShouldNotBeNil)
@@ -2974,7 +2974,7 @@ func Test_Cov12_EmptyCreator(t *testing.T) {
 
 // --- NewFuncWrap.Many ---
 
-func Test_Cov12_NewFuncWrap_Many(t *testing.T) {
+func Test_NewFuncWrap_Many(t *testing.T) {
 	// Arrange
 	f1 := func() {}
 	f2 := func() string { return "" }
@@ -2988,7 +2988,7 @@ func Test_Cov12_NewFuncWrap_Many(t *testing.T) {
 	})
 }
 
-func Test_Cov12_NewFuncWrap_Many_Empty(t *testing.T) {
+func Test_NewFuncWrap_Many_Empty(t *testing.T) {
 	// Act
 	result := args.NewFuncWrap.Many()
 
@@ -3000,7 +3000,7 @@ func Test_Cov12_NewFuncWrap_Many_Empty(t *testing.T) {
 
 // --- NewFuncWrap.Map ---
 
-func Test_Cov12_NewFuncWrap_Map_Empty(t *testing.T) {
+func Test_NewFuncWrap_Map_Empty(t *testing.T) {
 	// Act
 	result := args.NewFuncWrap.Map()
 
@@ -3012,7 +3012,7 @@ func Test_Cov12_NewFuncWrap_Map_Empty(t *testing.T) {
 
 // --- NewFuncWrap.Single ---
 
-func Test_Cov12_NewFuncWrap_Single(t *testing.T) {
+func Test_NewFuncWrap_Single(t *testing.T) {
 	// Arrange
 	f := func() {}
 
@@ -3027,7 +3027,7 @@ func Test_Cov12_NewFuncWrap_Single(t *testing.T) {
 
 // --- NewFuncWrap.Invalid ---
 
-func Test_Cov12_NewFuncWrap_Invalid(t *testing.T) {
+func Test_NewFuncWrap_Invalid(t *testing.T) {
 	// Act
 	result := args.NewFuncWrap.Invalid()
 
@@ -3039,7 +3039,7 @@ func Test_Cov12_NewFuncWrap_Invalid(t *testing.T) {
 
 // --- FuncMap.Add, Adds ---
 
-func Test_Cov12_FuncMap_Add(t *testing.T) {
+func Test_FuncMap_Add(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -3052,7 +3052,7 @@ func Test_Cov12_FuncMap_Add(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Adds(t *testing.T) {
+func Test_FuncMap_Adds(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -3065,7 +3065,7 @@ func Test_Cov12_FuncMap_Adds(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Adds_Empty(t *testing.T) {
+func Test_FuncMap_Adds_Empty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -3080,7 +3080,7 @@ func Test_Cov12_FuncMap_Adds_Empty(t *testing.T) {
 
 // --- FuncMap basic accessors ---
 
-func Test_Cov12_FuncMap_BasicAccessors(t *testing.T) {
+func Test_FuncMap_BasicAccessors(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 
@@ -3093,7 +3093,7 @@ func Test_Cov12_FuncMap_BasicAccessors(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Has_IsContains(t *testing.T) {
+func Test_FuncMap_Has_IsContains(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 	name := ""
@@ -3110,7 +3110,7 @@ func Test_Cov12_FuncMap_Has_IsContains(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Get(t *testing.T) {
+func Test_FuncMap_Get(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func() {})
 	name := ""
@@ -3126,7 +3126,7 @@ func Test_Cov12_FuncMap_Get(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Has_Empty(t *testing.T) {
+func Test_FuncMap_Has_Empty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -3136,7 +3136,7 @@ func Test_Cov12_FuncMap_Has_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncMap_Get_Empty(t *testing.T) {
+func Test_FuncMap_Get_Empty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -3148,7 +3148,7 @@ func Test_Cov12_FuncMap_Get_Empty(t *testing.T) {
 
 // --- FuncMap.ArgsLength (alias) ---
 
-func Test_Cov12_FuncMap_ArgsLength(t *testing.T) {
+func Test_FuncMap_ArgsLength(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(func(a string) {})
 	name := ""
@@ -3168,7 +3168,7 @@ func Test_Cov12_FuncMap_ArgsLength(t *testing.T) {
 
 // --- FuncWrapArgs aliases ---
 
-func Test_Cov12_FuncWrap_InArgsCount(t *testing.T) {
+func Test_FuncWrap_InArgsCount(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a string) {})
 
@@ -3178,7 +3178,7 @@ func Test_Cov12_FuncWrap_InArgsCount(t *testing.T) {
 	})
 }
 
-func Test_Cov12_FuncWrap_ArgsLength(t *testing.T) {
+func Test_FuncWrap_ArgsLength(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a string) {})
 
@@ -3190,7 +3190,7 @@ func Test_Cov12_FuncWrap_ArgsLength(t *testing.T) {
 
 // --- Map.Raw ---
 
-func Test_Cov12_Map_Raw(t *testing.T) {
+func Test_Map_Raw(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key": "val",
@@ -3207,7 +3207,7 @@ func Test_Cov12_Map_Raw(t *testing.T) {
 
 // --- NewTypedFuncWrap ---
 
-func Test_Cov12_NewTypedFuncWrap(t *testing.T) {
+func Test_NewTypedFuncWrap(t *testing.T) {
 	// Arrange
 	fn := func(s string) int { return len(s) }
 
@@ -3221,7 +3221,7 @@ func Test_Cov12_NewTypedFuncWrap(t *testing.T) {
 	})
 }
 
-func Test_Cov12_NewTypedFuncWrap_NonFunc(t *testing.T) {
+func Test_NewTypedFuncWrap_NonFunc(t *testing.T) {
 	// Arrange
 	notFunc := "not-a-func"
 
@@ -3236,7 +3236,7 @@ func Test_Cov12_NewTypedFuncWrap_NonFunc(t *testing.T) {
 
 // --- FuncDetector.GetFuncWrap ArgsMapper branch ---
 
-func Test_Cov12_FuncDetector_GetFuncWrap_ArgsMapper(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_ArgsMapper(t *testing.T) {
 	// Arrange
 	d := &args.Dynamic[string]{
 		Params: args.Map{

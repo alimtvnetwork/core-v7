@@ -9,7 +9,7 @@ import (
 
 // ── GenericGherkins Getters ──
 
-func Test_Cov_GenericGherkins_IsFailedToMatch(t *testing.T) {
+func Test_GenericGherkins_IsFailedToMatch(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{IsMatching: true}
 	g2 := &coretestcases.StringBoolGherkins{IsMatching: false}
@@ -28,7 +28,7 @@ func Test_Cov_GenericGherkins_IsFailedToMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsFailedToMatch returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_HasExtraArgs(t *testing.T) {
+func Test_GenericGherkins_HasExtraArgs(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{ExtraArgs: args.Map{"k": "v"}}
 	g2 := &coretestcases.StringBoolGherkins{}
@@ -50,7 +50,7 @@ func Test_Cov_GenericGherkins_HasExtraArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasExtraArgs returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetExtra(t *testing.T) {
+func Test_GenericGherkins_GetExtra(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{ExtraArgs: args.Map{"k": "v"}}
 	var gNil *coretestcases.StringBoolGherkins
@@ -71,7 +71,7 @@ func Test_Cov_GenericGherkins_GetExtra(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetExtra returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetExtraAsString(t *testing.T) {
+func Test_GenericGherkins_GetExtraAsString(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{ExtraArgs: args.Map{"k": "v"}}
 	var gNil *coretestcases.StringBoolGherkins
@@ -96,7 +96,7 @@ func Test_Cov_GenericGherkins_GetExtraAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetExtraAsString returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetExtraAsBool(t *testing.T) {
+func Test_GenericGherkins_GetExtraAsBool(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{ExtraArgs: args.Map{"k": true}}
 	var gNil *coretestcases.StringBoolGherkins
@@ -121,7 +121,7 @@ func Test_Cov_GenericGherkins_GetExtraAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetExtraAsBool returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetExtraAsBoolDefault(t *testing.T) {
+func Test_GenericGherkins_GetExtraAsBoolDefault(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{ExtraArgs: args.Map{"k": true}}
 	var gNil *coretestcases.StringBoolGherkins
@@ -144,7 +144,7 @@ func Test_Cov_GenericGherkins_GetExtraAsBoolDefault(t *testing.T) {
 
 // ── GenericGherkins Formatting ──
 
-func Test_Cov_GenericGherkins_ToString(t *testing.T) {
+func Test_GenericGherkins_ToString(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{
 		Feature: "f", Given: "g", When: "w", Then: "t",
@@ -159,7 +159,7 @@ func Test_Cov_GenericGherkins_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToString returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_String(t *testing.T) {
+func Test_GenericGherkins_String(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 
@@ -171,7 +171,7 @@ func Test_Cov_GenericGherkins_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetWithExpectation(t *testing.T) {
+func Test_GenericGherkins_GetWithExpectation(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 	result := g.GetWithExpectation(0)
@@ -184,7 +184,7 @@ func Test_Cov_GenericGherkins_GetWithExpectation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetWithExpectation returns non-empty -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_GetMessageConditional(t *testing.T) {
+func Test_GenericGherkins_GetMessageConditional(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{Feature: "f"}
 	withExp := g.GetMessageConditional(true, 0)
@@ -204,7 +204,7 @@ func Test_Cov_GenericGherkins_GetMessageConditional(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetMessageConditional returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_FullString(t *testing.T) {
+func Test_GenericGherkins_FullString(t *testing.T) {
 	// Arrange
 	g := &coretestcases.StringBoolGherkins{
 		Title: "t", Feature: "f", Given: "g", When: "w", Then: "th",
@@ -220,7 +220,7 @@ func Test_Cov_GenericGherkins_FullString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FullString returns correct value -- with args", actual)
 }
 
-func Test_Cov_GenericGherkins_FullString_Nil(t *testing.T) {
+func Test_GenericGherkins_FullString_Nil(t *testing.T) {
 	// Arrange
 	var g *coretestcases.StringBoolGherkins
 	result := g.FullString()
@@ -235,7 +235,7 @@ func Test_Cov_GenericGherkins_FullString_Nil(t *testing.T) {
 
 // ── GenericGherkins CaseTitle ──
 
-func Test_Cov_GenericGherkins_CaseTitle(t *testing.T) {
+func Test_GenericGherkins_CaseTitle(t *testing.T) {
 	// Arrange
 	gTitle := &coretestcases.StringBoolGherkins{Title: "myTitle", When: "myWhen"}
 	gWhen := &coretestcases.StringBoolGherkins{When: "myWhen"}

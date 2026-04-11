@@ -9,7 +9,7 @@ import (
 
 // ── NilCheck ──
 
-func Test_Cov7_NilCheck_Nil(t *testing.T) {
+func Test_NilCheck_Nil(t *testing.T) {
 	// Arrange
 	result := conditional.NilCheck(nil, "default", "nonnil")
 
@@ -21,7 +21,7 @@ func Test_Cov7_NilCheck_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilCheck nil -- default", actual)
 }
 
-func Test_Cov7_NilCheck_NonNil(t *testing.T) {
+func Test_NilCheck_NonNil(t *testing.T) {
 	// Arrange
 	result := conditional.NilCheck("val", "default", "nonnil")
 
@@ -35,7 +35,7 @@ func Test_Cov7_NilCheck_NonNil(t *testing.T) {
 
 // ── DefOnNil ──
 
-func Test_Cov7_DefOnNil_Nil(t *testing.T) {
+func Test_DefOnNil_Nil(t *testing.T) {
 	// Arrange
 	result := conditional.DefOnNil(nil, "fallback")
 
@@ -47,7 +47,7 @@ func Test_Cov7_DefOnNil_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DefOnNil nil -- fallback", actual)
 }
 
-func Test_Cov7_DefOnNil_NonNil(t *testing.T) {
+func Test_DefOnNil_NonNil(t *testing.T) {
 	// Arrange
 	result := conditional.DefOnNil("actual", "fallback")
 
@@ -61,7 +61,7 @@ func Test_Cov7_DefOnNil_NonNil(t *testing.T) {
 
 // ── NilOrEmptyStr ──
 
-func Test_Cov7_NilOrEmptyStr_Nil(t *testing.T) {
+func Test_NilOrEmptyStr_Nil(t *testing.T) {
 	// Arrange
 	result := conditional.NilOrEmptyStr(nil, "empty", "notempty")
 
@@ -73,7 +73,7 @@ func Test_Cov7_NilOrEmptyStr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStr returns nil -- nil", actual)
 }
 
-func Test_Cov7_NilOrEmptyStr_Empty(t *testing.T) {
+func Test_NilOrEmptyStr_Empty(t *testing.T) {
 	// Arrange
 	s := ""
 	result := conditional.NilOrEmptyStr(&s, "empty", "notempty")
@@ -86,7 +86,7 @@ func Test_Cov7_NilOrEmptyStr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStr returns nil -- empty string", actual)
 }
 
-func Test_Cov7_NilOrEmptyStr_NonEmpty(t *testing.T) {
+func Test_NilOrEmptyStr_NonEmpty(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := conditional.NilOrEmptyStr(&s, "empty", "notempty")
@@ -101,7 +101,7 @@ func Test_Cov7_NilOrEmptyStr_NonEmpty(t *testing.T) {
 
 // ── NilOrEmptyStrPtr ──
 
-func Test_Cov7_NilOrEmptyStrPtr_Nil(t *testing.T) {
+func Test_NilOrEmptyStrPtr_Nil(t *testing.T) {
 	// Arrange
 	result := conditional.NilOrEmptyStrPtr(nil, "empty", "notempty")
 
@@ -113,7 +113,7 @@ func Test_Cov7_NilOrEmptyStrPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilOrEmptyStrPtr returns nil -- nil", actual)
 }
 
-func Test_Cov7_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
+func Test_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := conditional.NilOrEmptyStrPtr(&s, "empty", "notempty")
@@ -128,7 +128,7 @@ func Test_Cov7_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
 
 // ── StringDefault ──
 
-func Test_Cov7_StringDefault_True(t *testing.T) {
+func Test_StringDefault_True(t *testing.T) {
 	// Arrange
 	result := conditional.StringDefault(true, "hello")
 
@@ -140,7 +140,7 @@ func Test_Cov7_StringDefault_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringDefault returns non-empty -- true", actual)
 }
 
-func Test_Cov7_StringDefault_False(t *testing.T) {
+func Test_StringDefault_False(t *testing.T) {
 	// Arrange
 	result := conditional.StringDefault(false, "hello")
 
@@ -154,7 +154,7 @@ func Test_Cov7_StringDefault_False(t *testing.T) {
 
 // ── BoolByOrder ──
 
-func Test_Cov7_BoolByOrder_AllFalse(t *testing.T) {
+func Test_BoolByOrder_AllFalse(t *testing.T) {
 	// Arrange
 	result := conditional.BoolByOrder(false, false, false)
 
@@ -166,7 +166,7 @@ func Test_Cov7_BoolByOrder_AllFalse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolByOrder returns non-empty -- all false", actual)
 }
 
-func Test_Cov7_BoolByOrder_SecondTrue(t *testing.T) {
+func Test_BoolByOrder_SecondTrue(t *testing.T) {
 	// Arrange
 	result := conditional.BoolByOrder(false, true, false)
 
@@ -180,7 +180,7 @@ func Test_Cov7_BoolByOrder_SecondTrue(t *testing.T) {
 
 // ── Func ──
 
-func Test_Cov7_Func_True(t *testing.T) {
+func Test_Func_True(t *testing.T) {
 	// Arrange
 	f := conditional.Func(true, func() any { return "t" }, func() any { return "f" })
 
@@ -192,7 +192,7 @@ func Test_Cov7_Func_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Func returns non-empty -- true", actual)
 }
 
-func Test_Cov7_Func_False(t *testing.T) {
+func Test_Func_False(t *testing.T) {
 	// Arrange
 	f := conditional.Func(false, func() any { return "t" }, func() any { return "f" })
 
@@ -206,7 +206,7 @@ func Test_Cov7_Func_False(t *testing.T) {
 
 // ── Generic If / IfFunc / IfTrueFunc / IfSlice / NilDef / NilDefPtr / IfPtr ──
 
-func Test_Cov7_Generic_If(t *testing.T) {
+func Test_Generic_If(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"true":  conditional.If[int](true, 1, 2),
@@ -221,7 +221,7 @@ func Test_Cov7_Generic_If(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- If", actual)
 }
 
-func Test_Cov7_Generic_IfFunc(t *testing.T) {
+func Test_Generic_IfFunc(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"true":  conditional.IfFunc[string](true, func() string { return "a" }, func() string { return "b" }),
@@ -236,7 +236,7 @@ func Test_Cov7_Generic_IfFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfFunc", actual)
 }
 
-func Test_Cov7_Generic_IfTrueFunc(t *testing.T) {
+func Test_Generic_IfTrueFunc(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"true":  conditional.IfTrueFunc[int](true, func() int { return 42 }),
@@ -251,7 +251,7 @@ func Test_Cov7_Generic_IfTrueFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns non-empty -- IfTrueFunc", actual)
 }
 
-func Test_Cov7_Generic_IfSlice(t *testing.T) {
+func Test_Generic_IfSlice(t *testing.T) {
 	// Arrange
 	a := []int{1, 2}
 	b := []int{3, 4}
@@ -270,7 +270,7 @@ func Test_Cov7_Generic_IfSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfSlice", actual)
 }
 
-func Test_Cov7_Generic_NilDef(t *testing.T) {
+func Test_Generic_NilDef(t *testing.T) {
 	// Arrange
 	v := 42
 
@@ -288,7 +288,7 @@ func Test_Cov7_Generic_NilDef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilDef", actual)
 }
 
-func Test_Cov7_Generic_NilDefPtr(t *testing.T) {
+func Test_Generic_NilDefPtr(t *testing.T) {
 	// Arrange
 	v := 42
 	result := conditional.NilDefPtr[int](nil, 99)
@@ -308,7 +308,7 @@ func Test_Cov7_Generic_NilDefPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilDefPtr", actual)
 }
 
-func Test_Cov7_Generic_IfPtr(t *testing.T) {
+func Test_Generic_IfPtr(t *testing.T) {
 	// Arrange
 	a := 1
 	b := 2
@@ -327,7 +327,7 @@ func Test_Cov7_Generic_IfPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfPtr", actual)
 }
 
-func Test_Cov7_Generic_NilVal(t *testing.T) {
+func Test_Generic_NilVal(t *testing.T) {
 	// Arrange
 	v := "hello"
 
@@ -345,7 +345,7 @@ func Test_Cov7_Generic_NilVal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilVal", actual)
 }
 
-func Test_Cov7_Generic_NilValPtr(t *testing.T) {
+func Test_Generic_NilValPtr(t *testing.T) {
 	// Arrange
 	v := "hello"
 	r1 := conditional.NilValPtr[string](nil, "d", "h")
@@ -365,7 +365,7 @@ func Test_Cov7_Generic_NilValPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilValPtr", actual)
 }
 
-func Test_Cov7_Generic_ValueOrZero(t *testing.T) {
+func Test_Generic_ValueOrZero(t *testing.T) {
 	// Arrange
 	v := 42
 
@@ -383,7 +383,7 @@ func Test_Cov7_Generic_ValueOrZero(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- ValueOrZero", actual)
 }
 
-func Test_Cov7_Generic_PtrOrZero(t *testing.T) {
+func Test_Generic_PtrOrZero(t *testing.T) {
 	// Arrange
 	v := 42
 	r1 := conditional.PtrOrZero[int](nil)

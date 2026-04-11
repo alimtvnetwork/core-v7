@@ -13,7 +13,7 @@ import (
 // Covers TextValidator.go L23, L53, L61, L116, L177, L213
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_TextValidator_ToString_Nil(t *testing.T) {
+func Test_TextValidator_ToString_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 
@@ -26,7 +26,7 @@ func Test_Cov10_TextValidator_ToString_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- ToString nil", actual)
 }
 
-func Test_Cov10_TextValidator_String_Nil(t *testing.T) {
+func Test_TextValidator_String_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 
@@ -39,7 +39,7 @@ func Test_Cov10_TextValidator_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- String nil", actual)
 }
 
-func Test_Cov10_TextValidator_SearchTextFinalized_Nil(t *testing.T) {
+func Test_TextValidator_SearchTextFinalized_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 
@@ -52,7 +52,7 @@ func Test_Cov10_TextValidator_SearchTextFinalized_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- SearchTextFinalized nil", actual)
 }
 
-func Test_Cov10_TextValidator_IsMatch_Nil(t *testing.T) {
+func Test_TextValidator_IsMatch_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 
@@ -65,7 +65,7 @@ func Test_Cov10_TextValidator_IsMatch_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- IsMatch nil", actual)
 }
 
-func Test_Cov10_TextValidator_VerifyDetailError_Nil(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 	_ = &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
@@ -85,7 +85,7 @@ func Test_Cov10_TextValidator_VerifyDetailError_Nil(t *testing.T) {
 // Covers SliceValidators.go L109-120, L162-175
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_SliceValidators_AssertVerifyAll(t *testing.T) {
+func Test_SliceValidators_AssertVerifyAll(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"hello world",
@@ -103,7 +103,7 @@ func Test_Cov10_SliceValidators_AssertVerifyAll(t *testing.T) {
 	_ = err // exercise the path; AssertVerifyAll uses convey internally
 }
 
-func Test_Cov10_SliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
+func Test_SliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"",
@@ -126,7 +126,7 @@ func Test_Cov10_SliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
 // Covers HeaderSliceValidators.go L107-118, L160-173
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_HeaderSliceValidators_AssertVerifyAll(t *testing.T) {
+func Test_HeaderSliceValidators_AssertVerifyAll(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"test line",
@@ -144,7 +144,7 @@ func Test_Cov10_HeaderSliceValidators_AssertVerifyAll(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov10_HeaderSliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
+func Test_HeaderSliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"",
@@ -167,7 +167,7 @@ func Test_Cov10_HeaderSliceValidators_AssertVerifyAllUsingActual(t *testing.T) {
 // Covers SliceValidatorVerify.go L220-232
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_SliceValidatorVerify_ActualNonEmptyComparingZero(t *testing.T) {
+func Test_SliceValidatorVerify_ActualNonEmptyComparingZero(t *testing.T) {
 	// Arrange — actual has content but no expected
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"some actual text"},
@@ -191,7 +191,7 @@ func Test_Cov10_SliceValidatorVerify_ActualNonEmptyComparingZero(t *testing.T) {
 // Covers SliceValidatorMessages.go L80-82
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_SliceValidatorMessages_NilErrEmptyStr(t *testing.T) {
+func Test_SliceValidatorMessages_NilErrEmptyStr(t *testing.T) {
 	// Arrange — create a validator where all passes (err=nil, message="")
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"matching",

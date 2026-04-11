@@ -9,7 +9,7 @@ import (
 
 // ── TraceCollection via StackTrace ──
 
-func Test_Cov11_TraceCollection_Default(t *testing.T) {
+func Test_TraceCollection_Default(t *testing.T) {
 	// Arrange & Act — use exported StackTrace to get a TraceCollection
 	tc := codestack.New.StackTrace.Default(0, 5)
 
@@ -19,7 +19,7 @@ func Test_Cov11_TraceCollection_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTrace Default returns non-empty collection", actual)
 }
 
-func Test_Cov11_TraceCollection_Empty(t *testing.T) {
+func Test_TraceCollection_Empty(t *testing.T) {
 	// Arrange & Act — use zero-value TraceCollection
 	tc := codestack.TraceCollection{}
 
@@ -29,7 +29,7 @@ func Test_Cov11_TraceCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection zero-value returns empty -- default", actual)
 }
 
-func Test_Cov11_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()
@@ -43,7 +43,7 @@ func Test_Cov11_TraceCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Add increases length -- single trace", actual)
 }
 
-func Test_Cov11_GetSinglePageCollection_ZeroPagePanic(t *testing.T) {
+func Test_GetSinglePageCollection_ZeroPagePanic(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.New.Default())

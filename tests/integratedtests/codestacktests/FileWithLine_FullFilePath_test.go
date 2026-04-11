@@ -10,7 +10,7 @@ import (
 
 // ── FileWithLine ──
 
-func Test_Cov8_FileWithLine_FullFilePath(t *testing.T) {
+func Test_FileWithLine_FullFilePath(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 
@@ -28,7 +28,7 @@ func Test_Cov8_FileWithLine_FullFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- FullFilePath and LineNumber", actual)
 }
 
-func Test_Cov8_FileWithLine_IsNil(t *testing.T) {
+func Test_FileWithLine_IsNil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -46,7 +46,7 @@ func Test_Cov8_FileWithLine_IsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- IsNil", actual)
 }
 
-func Test_Cov8_FileWithLine_IsNotNil(t *testing.T) {
+func Test_FileWithLine_IsNotNil(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 1}
 
@@ -64,7 +64,7 @@ func Test_Cov8_FileWithLine_IsNotNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- IsNotNil", actual)
 }
 
-func Test_Cov8_FileWithLine_String(t *testing.T) {
+func Test_FileWithLine_String(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 
@@ -76,7 +76,7 @@ func Test_Cov8_FileWithLine_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- String", actual)
 }
 
-func Test_Cov8_FileWithLine_String_Nil(t *testing.T) {
+func Test_FileWithLine_String_Nil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -88,7 +88,7 @@ func Test_Cov8_FileWithLine_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- String nil", actual)
 }
 
-func Test_Cov8_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.StringUsingFmt(func(f codestack.FileWithLine) string { return "custom" })
@@ -101,7 +101,7 @@ func Test_Cov8_FileWithLine_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- StringUsingFmt", actual)
 }
 
-func Test_Cov8_FileWithLine_FileWithLine(t *testing.T) {
+func Test_FileWithLine_FileWithLine(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.FileWithLine()
@@ -114,7 +114,7 @@ func Test_Cov8_FileWithLine_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- FileWithLine method", actual)
 }
 
-func Test_Cov8_FileWithLine_JsonModel(t *testing.T) {
+func Test_FileWithLine_JsonModel(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	model := fwl.JsonModel()
@@ -127,7 +127,7 @@ func Test_Cov8_FileWithLine_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonModel", actual)
 }
 
-func Test_Cov8_FileWithLine_JsonModelAny(t *testing.T) {
+func Test_FileWithLine_JsonModelAny(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.JsonModelAny()
@@ -140,7 +140,7 @@ func Test_Cov8_FileWithLine_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonModelAny", actual)
 }
 
-func Test_Cov8_FileWithLine_JsonString(t *testing.T) {
+func Test_FileWithLine_JsonString(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.JsonString()
@@ -153,7 +153,7 @@ func Test_Cov8_FileWithLine_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonString", actual)
 }
 
-func Test_Cov8_FileWithLine_Json(t *testing.T) {
+func Test_FileWithLine_Json(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.Json()
@@ -166,7 +166,7 @@ func Test_Cov8_FileWithLine_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- Json", actual)
 }
 
-func Test_Cov8_FileWithLine_JsonPtr(t *testing.T) {
+func Test_FileWithLine_JsonPtr(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	result := fwl.JsonPtr()
@@ -179,7 +179,7 @@ func Test_Cov8_FileWithLine_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonPtr", actual)
 }
 
-func Test_Cov8_FileWithLine_ParseInjectUsingJson(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	original := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	jsonResult := original.JsonPtr()
@@ -200,7 +200,7 @@ func Test_Cov8_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_FileWithLine_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	badJson := corejson.NewPtr("not a FileWithLine struct")
 	var target codestack.FileWithLine
@@ -214,7 +214,7 @@ func Test_Cov8_FileWithLine_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns error -- ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov8_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	original := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	jsonResult := original.JsonPtr()
@@ -229,7 +229,7 @@ func Test_Cov8_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- ParseInjectUsingJsonMust", actual)
 }
 
-func Test_Cov8_FileWithLine_JsonParseSelfInject(t *testing.T) {
+func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	original := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	jsonResult := original.JsonPtr()
@@ -250,7 +250,7 @@ func Test_Cov8_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonParseSelfInject", actual)
 }
 
-func Test_Cov8_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	liner := fwl.AsFileLiner()
@@ -271,7 +271,7 @@ func Test_Cov8_FileWithLine_AsFileLiner(t *testing.T) {
 
 // ── Trace ──
 
-func Test_Cov8_Trace_New_Create(t *testing.T) {
+func Test_Trace_New_Create(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -289,7 +289,7 @@ func Test_Cov8_Trace_New_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.Create", actual)
 }
 
-func Test_Cov8_Trace_New_Default(t *testing.T) {
+func Test_Trace_New_Default(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -301,7 +301,7 @@ func Test_Cov8_Trace_New_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.Default", actual)
 }
 
-func Test_Cov8_Trace_New_SkipOne(t *testing.T) {
+func Test_Trace_New_SkipOne(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -313,7 +313,7 @@ func Test_Cov8_Trace_New_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.SkipOne", actual)
 }
 
-func Test_Cov8_Trace_New_Ptr(t *testing.T) {
+func Test_Trace_New_Ptr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 
@@ -331,7 +331,7 @@ func Test_Cov8_Trace_New_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.Ptr", actual)
 }
 
-func Test_Cov8_Trace_Message(t *testing.T) {
+func Test_Trace_Message(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	msg := trace.Message()
@@ -344,7 +344,7 @@ func Test_Cov8_Trace_Message(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Message", actual)
 }
 
-func Test_Cov8_Trace_Message_Cached(t *testing.T) {
+func Test_Trace_Message_Cached(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	msg1 := trace.Message()
@@ -358,7 +358,7 @@ func Test_Cov8_Trace_Message_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Message cached", actual)
 }
 
-func Test_Cov8_Trace_ShortString(t *testing.T) {
+func Test_Trace_ShortString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	ss := trace.ShortString()
@@ -371,7 +371,7 @@ func Test_Cov8_Trace_ShortString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ShortString", actual)
 }
 
-func Test_Cov8_Trace_ShortString_Cached(t *testing.T) {
+func Test_Trace_ShortString_Cached(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	ss1 := trace.ShortString()
@@ -385,7 +385,7 @@ func Test_Cov8_Trace_ShortString_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ShortString cached", actual)
 }
 
-func Test_Cov8_Trace_IsNil(t *testing.T) {
+func Test_Trace_IsNil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -403,7 +403,7 @@ func Test_Cov8_Trace_IsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- IsNil", actual)
 }
 
-func Test_Cov8_Trace_HasIssues_Nil(t *testing.T) {
+func Test_Trace_HasIssues_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -415,7 +415,7 @@ func Test_Cov8_Trace_HasIssues_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- HasIssues nil", actual)
 }
 
-func Test_Cov8_Trace_HasIssues_NotOkay(t *testing.T) {
+func Test_Trace_HasIssues_NotOkay(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{IsOkay: false}
 
@@ -427,7 +427,7 @@ func Test_Cov8_Trace_HasIssues_NotOkay(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- HasIssues not okay", actual)
 }
 
-func Test_Cov8_Trace_HasIssues_MissingPackage(t *testing.T) {
+func Test_Trace_HasIssues_MissingPackage(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{IsOkay: true, PackageMethodName: "test", PackageName: ""}
 
@@ -439,7 +439,7 @@ func Test_Cov8_Trace_HasIssues_MissingPackage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- HasIssues missing package", actual)
 }
 
-func Test_Cov8_Trace_String(t *testing.T) {
+func Test_Trace_String(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -451,7 +451,7 @@ func Test_Cov8_Trace_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- String", actual)
 }
 
-func Test_Cov8_Trace_String_Nil(t *testing.T) {
+func Test_Trace_String_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -463,7 +463,7 @@ func Test_Cov8_Trace_String_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- String nil", actual)
 }
 
-func Test_Cov8_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.StringUsingFmt(func(tr codestack.Trace) string { return "custom" })
@@ -476,7 +476,7 @@ func Test_Cov8_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- StringUsingFmt", actual)
 }
 
-func Test_Cov8_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	fwl := trace.FileWithLine()
@@ -495,7 +495,7 @@ func Test_Cov8_Trace_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLine", actual)
 }
 
-func Test_Cov8_Trace_FullFilePath(t *testing.T) {
+func Test_Trace_FullFilePath(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -507,7 +507,7 @@ func Test_Cov8_Trace_FullFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- FullFilePath", actual)
 }
 
-func Test_Cov8_Trace_FileName(t *testing.T) {
+func Test_Trace_FileName(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -519,7 +519,7 @@ func Test_Cov8_Trace_FileName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- FileName", actual)
 }
 
-func Test_Cov8_Trace_LineNumber(t *testing.T) {
+func Test_Trace_LineNumber(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -531,7 +531,7 @@ func Test_Cov8_Trace_LineNumber(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- LineNumber", actual)
 }
 
-func Test_Cov8_Trace_FileWithLineString(t *testing.T) {
+func Test_Trace_FileWithLineString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.FileWithLineString()
@@ -544,7 +544,7 @@ func Test_Cov8_Trace_FileWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLineString", actual)
 }
 
-func Test_Cov8_Trace_JsonModel(t *testing.T) {
+func Test_Trace_JsonModel(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	model := trace.JsonModel()
@@ -557,7 +557,7 @@ func Test_Cov8_Trace_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonModel", actual)
 }
 
-func Test_Cov8_Trace_JsonModelAny(t *testing.T) {
+func Test_Trace_JsonModelAny(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.JsonModelAny()
@@ -570,7 +570,7 @@ func Test_Cov8_Trace_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonModelAny", actual)
 }
 
-func Test_Cov8_Trace_JsonString(t *testing.T) {
+func Test_Trace_JsonString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.JsonString()
@@ -583,7 +583,7 @@ func Test_Cov8_Trace_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonString", actual)
 }
 
-func Test_Cov8_Trace_Json(t *testing.T) {
+func Test_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.Json()
@@ -596,7 +596,7 @@ func Test_Cov8_Trace_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Json", actual)
 }
 
-func Test_Cov8_Trace_JsonPtr(t *testing.T) {
+func Test_Trace_JsonPtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	result := trace.JsonPtr()
@@ -609,7 +609,7 @@ func Test_Cov8_Trace_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonPtr", actual)
 }
 
-func Test_Cov8_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	cloned := trace.Clone()
@@ -622,7 +622,7 @@ func Test_Cov8_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
 }
 
-func Test_Cov8_Trace_ClonePtr(t *testing.T) {
+func Test_Trace_ClonePtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	cloned := trace.ClonePtr()
@@ -641,7 +641,7 @@ func Test_Cov8_Trace_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ClonePtr", actual)
 }
 
-func Test_Cov8_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	cloned := trace.ClonePtr()
@@ -655,7 +655,7 @@ func Test_Cov8_Trace_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
 }
 
-func Test_Cov8_Trace_ParseInjectUsingJson(t *testing.T) {
+func Test_Trace_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	jsonResult := trace.JsonPtr()
@@ -676,7 +676,7 @@ func Test_Cov8_Trace_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_Trace_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_Trace_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	jsonResult := trace.JsonPtr()
@@ -691,7 +691,7 @@ func Test_Cov8_Trace_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ParseInjectUsingJsonMust", actual)
 }
 
-func Test_Cov8_Trace_JsonParseSelfInject(t *testing.T) {
+func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	jsonResult := trace.JsonPtr()
@@ -706,7 +706,7 @@ func Test_Cov8_Trace_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_Cov8_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	trace.Dispose()
@@ -725,7 +725,7 @@ func Test_Cov8_Trace_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Dispose", actual)
 }
 
-func Test_Cov8_Trace_Dispose_Nil(t *testing.T) {
+func Test_Trace_Dispose_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	trace.Dispose() // should not panic
@@ -738,7 +738,7 @@ func Test_Cov8_Trace_Dispose_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- Dispose nil", actual)
 }
 
-func Test_Cov8_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	liner := trace.AsFileLiner()
@@ -753,7 +753,7 @@ func Test_Cov8_Trace_AsFileLiner(t *testing.T) {
 
 // ── TraceCollection ──
 
-func Test_Cov8_TraceCollection_Basic(t *testing.T) {
+func Test_TraceCollection_Basic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -773,7 +773,7 @@ func Test_Cov8_TraceCollection_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- basic", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEmpty(t *testing.T) {
+func Test_TraceCollection_IsEmpty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 
@@ -791,7 +791,7 @@ func Test_Cov8_TraceCollection_IsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- IsEmpty", actual)
 }
 
-func Test_Cov8_TraceCollection_Length_Nil(t *testing.T) {
+func Test_TraceCollection_Length_Nil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 
@@ -803,7 +803,7 @@ func Test_Cov8_TraceCollection_Length_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- Length nil", actual)
 }
 
-func Test_Cov8_TraceCollection_FirstAndLast(t *testing.T) {
+func Test_TraceCollection_FirstAndLast(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -825,7 +825,7 @@ func Test_Cov8_TraceCollection_FirstAndLast(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	result := tc.FirstOrDefault()
@@ -839,7 +839,7 @@ func Test_Cov8_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- FirstOrDefault empty", actual)
 }
 
-func Test_Cov8_TraceCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_LastOrDefault_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	result := tc.LastOrDefault()
@@ -853,7 +853,7 @@ func Test_Cov8_TraceCollection_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- LastOrDefault empty", actual)
 }
 
-func Test_Cov8_TraceCollection_FirstOrDefault_NonEmpty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_NonEmpty(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.FirstOrDefault()
@@ -866,7 +866,7 @@ func Test_Cov8_TraceCollection_FirstOrDefault_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- FirstOrDefault non-empty", actual)
 }
 
-func Test_Cov8_TraceCollection_FirstDynamic(t *testing.T) {
+func Test_TraceCollection_FirstDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.FirstDynamic()
@@ -879,7 +879,7 @@ func Test_Cov8_TraceCollection_FirstDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FirstDynamic", actual)
 }
 
-func Test_Cov8_TraceCollection_LastDynamic(t *testing.T) {
+func Test_TraceCollection_LastDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.LastDynamic()
@@ -892,7 +892,7 @@ func Test_Cov8_TraceCollection_LastDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- LastDynamic", actual)
 }
 
-func Test_Cov8_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
+func Test_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.FirstOrDefaultDynamic()
@@ -905,7 +905,7 @@ func Test_Cov8_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FirstOrDefaultDynamic", actual)
 }
 
-func Test_Cov8_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
+func Test_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.LastOrDefaultDynamic()
@@ -918,7 +918,7 @@ func Test_Cov8_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- LastOrDefaultDynamic", actual)
 }
 
-func Test_Cov8_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -936,7 +936,7 @@ func Test_Cov8_TraceCollection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- HasIndex", actual)
 }
 
-func Test_Cov8_TraceCollection_Strings(t *testing.T) {
+func Test_TraceCollection_Strings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	strs := tc.Strings()
@@ -949,7 +949,7 @@ func Test_Cov8_TraceCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Strings", actual)
 }
 
-func Test_Cov8_TraceCollection_ShortStrings(t *testing.T) {
+func Test_TraceCollection_ShortStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	strs := tc.ShortStrings()
@@ -962,7 +962,7 @@ func Test_Cov8_TraceCollection_ShortStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ShortStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_FileWithLines(t *testing.T) {
+func Test_TraceCollection_FileWithLines(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	fwls := tc.FileWithLines()
@@ -975,7 +975,7 @@ func Test_Cov8_TraceCollection_FileWithLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- FileWithLines", actual)
 }
 
-func Test_Cov8_TraceCollection_FileWithLinesStrings(t *testing.T) {
+func Test_TraceCollection_FileWithLinesStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	strs := tc.FileWithLinesStrings()
@@ -988,7 +988,7 @@ func Test_Cov8_TraceCollection_FileWithLinesStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- FileWithLinesStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_CodeStacksString(t *testing.T) {
+func Test_TraceCollection_CodeStacksString(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.CodeStacksString()
@@ -1001,7 +1001,7 @@ func Test_Cov8_TraceCollection_CodeStacksString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- CodeStacksString", actual)
 }
 
-func Test_Cov8_TraceCollection_CodeStacksString_Empty(t *testing.T) {
+func Test_TraceCollection_CodeStacksString_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.CodeStacksString()
@@ -1014,7 +1014,7 @@ func Test_Cov8_TraceCollection_CodeStacksString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- CodeStacksString empty", actual)
 }
 
-func Test_Cov8_TraceCollection_StackTraces(t *testing.T) {
+func Test_TraceCollection_StackTraces(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.StackTraces()
@@ -1027,7 +1027,7 @@ func Test_Cov8_TraceCollection_StackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- StackTraces", actual)
 }
 
-func Test_Cov8_TraceCollection_StackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.StackTracesJsonResult()
@@ -1040,7 +1040,7 @@ func Test_Cov8_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- StackTracesJsonResult", actual)
 }
 
-func Test_Cov8_TraceCollection_StackTracesBytes(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.StackTracesBytes()
@@ -1053,7 +1053,7 @@ func Test_Cov8_TraceCollection_StackTracesBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- StackTracesBytes", actual)
 }
 
-func Test_Cov8_TraceCollection_StackTracesBytes_Empty(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.StackTracesBytes()
@@ -1066,7 +1066,7 @@ func Test_Cov8_TraceCollection_StackTracesBytes_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- StackTracesBytes empty", actual)
 }
 
-func Test_Cov8_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	cloned := tc.Clone()
@@ -1079,7 +1079,7 @@ func Test_Cov8_TraceCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Clone", actual)
 }
 
-func Test_Cov8_TraceCollection_ClonePtr(t *testing.T) {
+func Test_TraceCollection_ClonePtr(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	cloned := tc.ClonePtr()
@@ -1098,7 +1098,7 @@ func Test_Cov8_TraceCollection_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ClonePtr", actual)
 }
 
-func Test_Cov8_TraceCollection_ClonePtr_Nil(t *testing.T) {
+func Test_TraceCollection_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	cloned := tc.ClonePtr()
@@ -1112,7 +1112,7 @@ func Test_Cov8_TraceCollection_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- ClonePtr nil", actual)
 }
 
-func Test_Cov8_TraceCollection_Reverse_Empty(t *testing.T) {
+func Test_TraceCollection_Reverse_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	result := tc.Reverse()
@@ -1125,7 +1125,7 @@ func Test_Cov8_TraceCollection_Reverse_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- Reverse empty", actual)
 }
 
-func Test_Cov8_TraceCollection_Reverse_Single(t *testing.T) {
+func Test_TraceCollection_Reverse_Single(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{trace}}
@@ -1139,7 +1139,7 @@ func Test_Cov8_TraceCollection_Reverse_Single(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Reverse single", actual)
 }
 
-func Test_Cov8_TraceCollection_Reverse_Two(t *testing.T) {
+func Test_TraceCollection_Reverse_Two(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1160,7 +1160,7 @@ func Test_Cov8_TraceCollection_Reverse_Two(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Reverse two", actual)
 }
 
-func Test_Cov8_TraceCollection_Reverse_Three(t *testing.T) {
+func Test_TraceCollection_Reverse_Three(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1182,7 +1182,7 @@ func Test_Cov8_TraceCollection_Reverse_Three(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Reverse three", actual)
 }
 
-func Test_Cov8_TraceCollection_Skip(t *testing.T) {
+func Test_TraceCollection_Skip(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 1 {
@@ -1197,7 +1197,7 @@ func Test_Cov8_TraceCollection_Skip(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_SkipDynamic_BeyondLength(t *testing.T) {
+func Test_TraceCollection_SkipDynamic_BeyondLength(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.SkipDynamic(99999)
@@ -1210,7 +1210,7 @@ func Test_Cov8_TraceCollection_SkipDynamic_BeyondLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipDynamic beyond", actual)
 }
 
-func Test_Cov8_TraceCollection_SkipCollection(t *testing.T) {
+func Test_TraceCollection_SkipCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 1 {
@@ -1225,7 +1225,7 @@ func Test_Cov8_TraceCollection_SkipCollection(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_Take(t *testing.T) {
+func Test_TraceCollection_Take(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 1 {
@@ -1240,7 +1240,7 @@ func Test_Cov8_TraceCollection_Take(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_TakeDynamic(t *testing.T) {
+func Test_TraceCollection_TakeDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -1255,7 +1255,7 @@ func Test_Cov8_TraceCollection_TakeDynamic(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_TakeCollection(t *testing.T) {
+func Test_TraceCollection_TakeCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -1270,7 +1270,7 @@ func Test_Cov8_TraceCollection_TakeCollection(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_LimitCollection(t *testing.T) {
+func Test_TraceCollection_LimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -1285,7 +1285,7 @@ func Test_Cov8_TraceCollection_LimitCollection(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_SafeLimitCollection(t *testing.T) {
+func Test_TraceCollection_SafeLimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.SafeLimitCollection(999)
@@ -1298,7 +1298,7 @@ func Test_Cov8_TraceCollection_SafeLimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SafeLimitCollection", actual)
 }
 
-func Test_Cov8_TraceCollection_LimitDynamic(t *testing.T) {
+func Test_TraceCollection_LimitDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -1313,7 +1313,7 @@ func Test_Cov8_TraceCollection_LimitDynamic(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_Limit(t *testing.T) {
+func Test_TraceCollection_Limit(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() > 0 {
@@ -1328,7 +1328,7 @@ func Test_Cov8_TraceCollection_Limit(t *testing.T) {
 	}
 }
 
-func Test_Cov8_TraceCollection_GetPagesSize(t *testing.T) {
+func Test_TraceCollection_GetPagesSize(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1349,7 +1349,7 @@ func Test_Cov8_TraceCollection_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- GetPagesSize", actual)
 }
 
-func Test_Cov8_TraceCollection_GetPagedCollection(t *testing.T) {
+func Test_TraceCollection_GetPagedCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1365,7 +1365,7 @@ func Test_Cov8_TraceCollection_GetPagedCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- GetPagedCollection", actual)
 }
 
-func Test_Cov8_TraceCollection_GetPagedCollection_SmallPage(t *testing.T) {
+func Test_TraceCollection_GetPagedCollection_SmallPage(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{t1}}
@@ -1379,7 +1379,7 @@ func Test_Cov8_TraceCollection_GetPagedCollection_SmallPage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- GetPagedCollection small", actual)
 }
 
-func Test_Cov8_TraceCollection_GetSinglePageCollection(t *testing.T) {
+func Test_TraceCollection_GetSinglePageCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1395,7 +1395,7 @@ func Test_Cov8_TraceCollection_GetSinglePageCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- GetSinglePageCollection", actual)
 }
 
-func Test_Cov8_TraceCollection_Filter(t *testing.T) {
+func Test_TraceCollection_Filter(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a", IsOkay: true, PackageMethodName: "a.test"}
 	t2 := codestack.Trace{PackageName: "b", IsOkay: true, PackageMethodName: "b.test"}
@@ -1412,7 +1412,7 @@ func Test_Cov8_TraceCollection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Filter", actual)
 }
 
-func Test_Cov8_TraceCollection_Filter_WithBreak(t *testing.T) {
+func Test_TraceCollection_Filter_WithBreak(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1429,7 +1429,7 @@ func Test_Cov8_TraceCollection_Filter_WithBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- Filter with break", actual)
 }
 
-func Test_Cov8_TraceCollection_FilterTraceCollection(t *testing.T) {
+func Test_TraceCollection_FilterTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1446,7 +1446,7 @@ func Test_Cov8_TraceCollection_FilterTraceCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FilterTraceCollection", actual)
 }
 
-func Test_Cov8_TraceCollection_FilterPackageNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_FilterPackageNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1461,7 +1461,7 @@ func Test_Cov8_TraceCollection_FilterPackageNameTraceCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FilterPackageName", actual)
 }
 
-func Test_Cov8_TraceCollection_SkipFilterPackageNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_SkipFilterPackageNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1476,7 +1476,7 @@ func Test_Cov8_TraceCollection_SkipFilterPackageNameTraceCollection(t *testing.T
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipFilterPackageName", actual)
 }
 
-func Test_Cov8_TraceCollection_FilterMethodNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_FilterMethodNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{MethodName: "test"}
 	t2 := codestack.Trace{MethodName: "other"}
@@ -1491,7 +1491,7 @@ func Test_Cov8_TraceCollection_FilterMethodNameTraceCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FilterMethodName", actual)
 }
 
-func Test_Cov8_TraceCollection_SkipFilterMethodNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_SkipFilterMethodNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{MethodName: "test"}
 	t2 := codestack.Trace{MethodName: "other"}
@@ -1506,7 +1506,7 @@ func Test_Cov8_TraceCollection_SkipFilterMethodNameTraceCollection(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipFilterMethodName", actual)
 }
 
-func Test_Cov8_TraceCollection_FilterFullMethodNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_FilterFullMethodNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageMethodName: "pkg.Method"}
 	t2 := codestack.Trace{PackageMethodName: "pkg.Other"}
@@ -1521,7 +1521,7 @@ func Test_Cov8_TraceCollection_FilterFullMethodNameTraceCollection(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- FilterFullMethodName", actual)
 }
 
-func Test_Cov8_TraceCollection_SkipFilterFullMethodNameTraceCollection(t *testing.T) {
+func Test_TraceCollection_SkipFilterFullMethodNameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageMethodName: "pkg.Method"}
 	t2 := codestack.Trace{PackageMethodName: "pkg.Other"}
@@ -1536,7 +1536,7 @@ func Test_Cov8_TraceCollection_SkipFilterFullMethodNameTraceCollection(t *testin
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipFilterFullMethodName", actual)
 }
 
-func Test_Cov8_TraceCollection_SkipFilterFilenameTraceCollection(t *testing.T) {
+func Test_TraceCollection_SkipFilterFilenameTraceCollection(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{FilePath: "/a.go"}
 	t2 := codestack.Trace{FilePath: "/b.go"}
@@ -1551,7 +1551,7 @@ func Test_Cov8_TraceCollection_SkipFilterFilenameTraceCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipFilterFilename", actual)
 }
 
-func Test_Cov8_TraceCollection_FilterWithLimit(t *testing.T) {
+func Test_TraceCollection_FilterWithLimit(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -1569,7 +1569,7 @@ func Test_Cov8_TraceCollection_FilterWithLimit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- FilterWithLimit", actual)
 }
 
-func Test_Cov8_TraceCollection_Json(t *testing.T) {
+func Test_TraceCollection_Json(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.Json()
@@ -1582,7 +1582,7 @@ func Test_Cov8_TraceCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Json", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonPtr(t *testing.T) {
+func Test_TraceCollection_JsonPtr(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JsonPtr()
@@ -1595,7 +1595,7 @@ func Test_Cov8_TraceCollection_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonPtr", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonString(t *testing.T) {
+func Test_TraceCollection_JsonString(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JsonString()
@@ -1608,7 +1608,7 @@ func Test_Cov8_TraceCollection_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonString", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonString_Empty(t *testing.T) {
+func Test_TraceCollection_JsonString_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.JsonString()
@@ -1621,7 +1621,7 @@ func Test_Cov8_TraceCollection_JsonString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- JsonString empty", actual)
 }
 
-func Test_Cov8_TraceCollection_String(t *testing.T) {
+func Test_TraceCollection_String(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.String()
@@ -1634,7 +1634,7 @@ func Test_Cov8_TraceCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- String", actual)
 }
 
-func Test_Cov8_TraceCollection_String_Empty(t *testing.T) {
+func Test_TraceCollection_String_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.String()
@@ -1647,7 +1647,7 @@ func Test_Cov8_TraceCollection_String_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- String empty", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonModel(t *testing.T) {
+func Test_TraceCollection_JsonModel(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	model := tc.JsonModel()
@@ -1660,7 +1660,7 @@ func Test_Cov8_TraceCollection_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonModel", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonModelAny(t *testing.T) {
+func Test_TraceCollection_JsonModelAny(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JsonModelAny()
@@ -1673,7 +1673,7 @@ func Test_Cov8_TraceCollection_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonModelAny", actual)
 }
 
-func Test_Cov8_TraceCollection_Serializer(t *testing.T) {
+func Test_TraceCollection_Serializer(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	bytes, err := tc.Serializer()
@@ -1692,7 +1692,7 @@ func Test_Cov8_TraceCollection_Serializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Serializer", actual)
 }
 
-func Test_Cov8_TraceCollection_Join(t *testing.T) {
+func Test_TraceCollection_Join(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.Join(", ")
@@ -1705,7 +1705,7 @@ func Test_Cov8_TraceCollection_Join(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Join", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinLines(t *testing.T) {
+func Test_TraceCollection_JoinLines(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinLines()
@@ -1718,7 +1718,7 @@ func Test_Cov8_TraceCollection_JoinLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinLines", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinShortStrings(t *testing.T) {
+func Test_TraceCollection_JoinShortStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinShortStrings(", ")
@@ -1731,7 +1731,7 @@ func Test_Cov8_TraceCollection_JoinShortStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinShortStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinFileWithLinesStrings(t *testing.T) {
+func Test_TraceCollection_JoinFileWithLinesStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinFileWithLinesStrings(", ")
@@ -1744,7 +1744,7 @@ func Test_Cov8_TraceCollection_JoinFileWithLinesStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- JoinFileWithLinesStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinJsonStrings(t *testing.T) {
+func Test_TraceCollection_JoinJsonStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinJsonStrings(", ")
@@ -1757,7 +1757,7 @@ func Test_Cov8_TraceCollection_JoinJsonStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinJsonStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonStrings(t *testing.T) {
+func Test_TraceCollection_JsonStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JsonStrings()
@@ -1770,7 +1770,7 @@ func Test_Cov8_TraceCollection_JsonStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_CsvStrings(t *testing.T) {
+func Test_TraceCollection_CsvStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.CsvStrings()
@@ -1783,7 +1783,7 @@ func Test_Cov8_TraceCollection_CsvStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- CsvStrings", actual)
 }
 
-func Test_Cov8_TraceCollection_CsvStrings_Empty(t *testing.T) {
+func Test_TraceCollection_CsvStrings_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.CsvStrings()
@@ -1796,7 +1796,7 @@ func Test_Cov8_TraceCollection_CsvStrings_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- CsvStrings empty", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinCsv(t *testing.T) {
+func Test_TraceCollection_JoinCsv(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinCsv()
@@ -1809,7 +1809,7 @@ func Test_Cov8_TraceCollection_JoinCsv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinCsv", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinCsvLine(t *testing.T) {
+func Test_TraceCollection_JoinCsvLine(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinCsvLine()
@@ -1822,7 +1822,7 @@ func Test_Cov8_TraceCollection_JoinCsvLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinCsvLine", actual)
 }
 
-func Test_Cov8_TraceCollection_JoinUsingFmt(t *testing.T) {
+func Test_TraceCollection_JoinUsingFmt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.JoinUsingFmt(func(trace *codestack.Trace) string { return "x" }, ", ")
@@ -1835,7 +1835,7 @@ func Test_Cov8_TraceCollection_JoinUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JoinUsingFmt", actual)
 }
 
-func Test_Cov8_TraceCollection_StringsUsingFmt(t *testing.T) {
+func Test_TraceCollection_StringsUsingFmt(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.StringsUsingFmt(func(trace *codestack.Trace) string { return "x" })
@@ -1854,7 +1854,7 @@ func Test_Cov8_TraceCollection_StringsUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- StringsUsingFmt", actual)
 }
 
-func Test_Cov8_TraceCollection_CodeStacksStringLimit(t *testing.T) {
+func Test_TraceCollection_CodeStacksStringLimit(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.CodeStacksStringLimit(1)
@@ -1867,7 +1867,7 @@ func Test_Cov8_TraceCollection_CodeStacksStringLimit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- CodeStacksStringLimit", actual)
 }
 
-func Test_Cov8_TraceCollection_CodeStacksStringLimit_Empty(t *testing.T) {
+func Test_TraceCollection_CodeStacksStringLimit_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.CodeStacksStringLimit(1)
@@ -1880,7 +1880,7 @@ func Test_Cov8_TraceCollection_CodeStacksStringLimit_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- CodeStacksStringLimit empty", actual)
 }
 
-func Test_Cov8_TraceCollection_FileWithLinesString(t *testing.T) {
+func Test_TraceCollection_FileWithLinesString(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.FileWithLinesString()
@@ -1893,7 +1893,7 @@ func Test_Cov8_TraceCollection_FileWithLinesString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- FileWithLinesString", actual)
 }
 
-func Test_Cov8_TraceCollection_FileWithLinesString_Empty(t *testing.T) {
+func Test_TraceCollection_FileWithLinesString_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	result := tc.FileWithLinesString()
@@ -1906,7 +1906,7 @@ func Test_Cov8_TraceCollection_FileWithLinesString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- FileWithLinesString empty", actual)
 }
 
-func Test_Cov8_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	trace := codestack.Trace{PackageName: "test"}
@@ -1920,7 +1920,7 @@ func Test_Cov8_TraceCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Add", actual)
 }
 
-func Test_Cov8_TraceCollection_Adds(t *testing.T) {
+func Test_TraceCollection_Adds(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -1933,7 +1933,7 @@ func Test_Cov8_TraceCollection_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Adds", actual)
 }
 
-func Test_Cov8_TraceCollection_Adds_Empty(t *testing.T) {
+func Test_TraceCollection_Adds_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.Adds()
@@ -1946,7 +1946,7 @@ func Test_Cov8_TraceCollection_Adds_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- Adds empty", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsIf_True(t *testing.T) {
+func Test_TraceCollection_AddsIf_True(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.AddsIf(true, codestack.Trace{PackageName: "a"})
@@ -1959,7 +1959,7 @@ func Test_Cov8_TraceCollection_AddsIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- AddsIf true", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsIf_False(t *testing.T) {
+func Test_TraceCollection_AddsIf_False(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.AddsIf(false, codestack.Trace{PackageName: "a"})
@@ -1972,7 +1972,7 @@ func Test_Cov8_TraceCollection_AddsIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns non-empty -- AddsIf false", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsPtr(t *testing.T) {
+func Test_TraceCollection_AddsPtr(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	trace := &codestack.Trace{PackageName: "a", IsOkay: true, PackageMethodName: "a.test"}
@@ -1986,7 +1986,7 @@ func Test_Cov8_TraceCollection_AddsPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AddsPtr", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
+func Test_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	trace := &codestack.Trace{IsOkay: false}
@@ -2000,7 +2000,7 @@ func Test_Cov8_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AddsPtr skip issues", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsPtr_Nil(t *testing.T) {
+func Test_TraceCollection_AddsPtr_Nil(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.AddsPtr(false, nil)
@@ -2013,7 +2013,7 @@ func Test_Cov8_TraceCollection_AddsPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- AddsPtr nil", actual)
 }
 
-func Test_Cov8_TraceCollection_AddsPtr_Empty(t *testing.T) {
+func Test_TraceCollection_AddsPtr_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.AddsPtr(false)
@@ -2026,7 +2026,7 @@ func Test_Cov8_TraceCollection_AddsPtr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- AddsPtr empty", actual)
 }
 
-func Test_Cov8_TraceCollection_ConcatNew(t *testing.T) {
+func Test_TraceCollection_ConcatNew(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}}}
 	result := tc.ConcatNew(codestack.Trace{PackageName: "b"})
@@ -2045,7 +2045,7 @@ func Test_Cov8_TraceCollection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ConcatNew", actual)
 }
 
-func Test_Cov8_TraceCollection_ConcatNewPtr(t *testing.T) {
+func Test_TraceCollection_ConcatNewPtr(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}}}
 	trace := &codestack.Trace{PackageName: "b", IsOkay: true, PackageMethodName: "b.test"}
@@ -2059,7 +2059,7 @@ func Test_Cov8_TraceCollection_ConcatNewPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ConcatNewPtr", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqual(t *testing.T) {
+func Test_TraceCollection_IsEqual(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	tc1 := &codestack.TraceCollection{Items: []codestack.Trace{t1}}
@@ -2073,7 +2073,7 @@ func Test_Cov8_TraceCollection_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqual_BothNil(t *testing.T) {
+func Test_TraceCollection_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var tc1 *codestack.TraceCollection
 	var tc2 *codestack.TraceCollection
@@ -2086,7 +2086,7 @@ func Test_Cov8_TraceCollection_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- IsEqual both nil", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqual_OneNil(t *testing.T) {
+func Test_TraceCollection_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	tc1 := &codestack.TraceCollection{}
 	var tc2 *codestack.TraceCollection
@@ -2099,7 +2099,7 @@ func Test_Cov8_TraceCollection_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- IsEqual one nil", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqual_DiffLen(t *testing.T) {
+func Test_TraceCollection_IsEqual_DiffLen(t *testing.T) {
 	// Arrange
 	tc1 := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}}}
 	tc2 := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}, {PackageName: "b"}}}
@@ -2112,7 +2112,7 @@ func Test_Cov8_TraceCollection_IsEqual_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- IsEqual diff len", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqualItems(t *testing.T) {
+func Test_TraceCollection_IsEqualItems(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{t1}}
@@ -2125,7 +2125,7 @@ func Test_Cov8_TraceCollection_IsEqualItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- IsEqualItems", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqualItems_DiffLen(t *testing.T) {
+func Test_TraceCollection_IsEqualItems_DiffLen(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}}}
 
@@ -2137,7 +2137,7 @@ func Test_Cov8_TraceCollection_IsEqualItems_DiffLen(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- IsEqualItems diff len", actual)
 }
 
-func Test_Cov8_TraceCollection_IsEqualItems_NotEqual(t *testing.T) {
+func Test_TraceCollection_IsEqualItems_NotEqual(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{{PackageName: "a"}}}
 
@@ -2149,7 +2149,7 @@ func Test_Cov8_TraceCollection_IsEqualItems_NotEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- IsEqualItems not equal", actual)
 }
 
-func Test_Cov8_TraceCollection_ParseInjectUsingJson(t *testing.T) {
+func Test_TraceCollection_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	jsonResult := tc.JsonPtr()
@@ -2170,7 +2170,7 @@ func Test_Cov8_TraceCollection_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_Cov8_TraceCollection_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_TraceCollection_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	jsonResult := tc.JsonPtr()
@@ -2185,7 +2185,7 @@ func Test_Cov8_TraceCollection_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ParseInjectUsingJsonMust", actual)
 }
 
-func Test_Cov8_TraceCollection_JsonParseSelfInject(t *testing.T) {
+func Test_TraceCollection_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	jsonResult := tc.JsonPtr()
@@ -2200,7 +2200,7 @@ func Test_Cov8_TraceCollection_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_Cov8_TraceCollection_AsJsonContractsBinder(t *testing.T) {
+func Test_TraceCollection_AsJsonContractsBinder(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.AsJsonContractsBinder()
@@ -2213,7 +2213,7 @@ func Test_Cov8_TraceCollection_AsJsonContractsBinder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AsJsonContractsBinder", actual)
 }
 
-func Test_Cov8_TraceCollection_AsJsoner(t *testing.T) {
+func Test_TraceCollection_AsJsoner(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.AsJsoner()
@@ -2226,7 +2226,7 @@ func Test_Cov8_TraceCollection_AsJsoner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AsJsoner", actual)
 }
 
-func Test_Cov8_TraceCollection_AsJsonParseSelfInjector(t *testing.T) {
+func Test_TraceCollection_AsJsonParseSelfInjector(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	result := tc.AsJsonParseSelfInjector()
@@ -2239,7 +2239,7 @@ func Test_Cov8_TraceCollection_AsJsonParseSelfInjector(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AsJsonParseSelfInjector", actual)
 }
 
-func Test_Cov8_TraceCollection_Clear(t *testing.T) {
+func Test_TraceCollection_Clear(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	tc.Clear()
@@ -2252,7 +2252,7 @@ func Test_Cov8_TraceCollection_Clear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Clear", actual)
 }
 
-func Test_Cov8_TraceCollection_Clear_Nil(t *testing.T) {
+func Test_TraceCollection_Clear_Nil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	result := tc.Clear()
@@ -2266,7 +2266,7 @@ func Test_Cov8_TraceCollection_Clear_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- Clear nil", actual)
 }
 
-func Test_Cov8_TraceCollection_Dispose(t *testing.T) {
+func Test_TraceCollection_Dispose(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	tc.Dispose()
@@ -2280,7 +2280,7 @@ func Test_Cov8_TraceCollection_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Dispose", actual)
 }
 
-func Test_Cov8_TraceCollection_Dispose_Nil(t *testing.T) {
+func Test_TraceCollection_Dispose_Nil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	tc.Dispose() // should not panic
@@ -2293,7 +2293,7 @@ func Test_Cov8_TraceCollection_Dispose_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- Dispose nil", actual)
 }
 
-func Test_Cov8_TraceCollection_InsertAt(t *testing.T) {
+func Test_TraceCollection_InsertAt(t *testing.T) {
 	// Arrange
 	t1 := codestack.Trace{PackageName: "a"}
 	t2 := codestack.Trace{PackageName: "b"}
@@ -2317,7 +2317,7 @@ func Test_Cov8_TraceCollection_InsertAt(t *testing.T) {
 
 // ── NameOf ──
 
-func Test_Cov8_NameOf_All_Empty(t *testing.T) {
+func Test_NameOf_All_Empty(t *testing.T) {
 	// Arrange
 	full, pkg, method := codestack.NameOf.All("")
 
@@ -2337,7 +2337,7 @@ func Test_Cov8_NameOf_All_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns empty -- empty", actual)
 }
 
-func Test_Cov8_NameOf_Method(t *testing.T) {
+func Test_NameOf_Method(t *testing.T) {
 	// Arrange
 	method := codestack.NameOf.Method()
 
@@ -2349,7 +2349,7 @@ func Test_Cov8_NameOf_Method(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Method returns correct value -- with args", actual)
 }
 
-func Test_Cov8_NameOf_Package(t *testing.T) {
+func Test_NameOf_Package(t *testing.T) {
 	// Arrange
 	pkg := codestack.NameOf.Package()
 
@@ -2363,7 +2363,7 @@ func Test_Cov8_NameOf_Package(t *testing.T) {
 
 // ── StacksTo ──
 
-func Test_Cov8_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.Bytes(0)
 
@@ -2375,7 +2375,7 @@ func Test_Cov8_StacksTo_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.Bytes returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.BytesDefault()
 
@@ -2387,7 +2387,7 @@ func Test_Cov8_StacksTo_BytesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.BytesDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.String(0, 5)
 
@@ -2399,7 +2399,7 @@ func Test_Cov8_StacksTo_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.String returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringDefault()
 
@@ -2411,7 +2411,7 @@ func Test_Cov8_StacksTo_StringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringNoCount(0)
 
@@ -2423,7 +2423,7 @@ func Test_Cov8_StacksTo_StringNoCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringNoCount returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonString(0)
 
@@ -2435,7 +2435,7 @@ func Test_Cov8_StacksTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonString returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonStringDefault()
 
@@ -2447,7 +2447,7 @@ func Test_Cov8_StacksTo_JsonStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonStringDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov8_StacksTo_StringUsingFmt(t *testing.T) {
+func Test_StacksTo_StringUsingFmt(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringUsingFmt(
 		func(trace *codestack.Trace) string { return "x" },
@@ -2464,7 +2464,7 @@ func Test_Cov8_StacksTo_StringUsingFmt(t *testing.T) {
 
 // ── File / Dir ──
 
-func Test_Cov8_File_Name(t *testing.T) {
+func Test_File_Name(t *testing.T) {
 	// Arrange
 	result := codestack.File.Name(0)
 
@@ -2476,7 +2476,7 @@ func Test_Cov8_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name returns correct value -- with args", actual)
 }
 
-func Test_Cov8_File_Path(t *testing.T) {
+func Test_File_Path(t *testing.T) {
 	// Arrange
 	result := codestack.File.Path(0)
 
@@ -2488,7 +2488,7 @@ func Test_Cov8_File_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Path returns correct value -- with args", actual)
 }
 
-func Test_Cov8_File_CurrentFilePath(t *testing.T) {
+func Test_File_CurrentFilePath(t *testing.T) {
 	// Arrange
 	result := codestack.File.CurrentFilePath()
 
@@ -2500,7 +2500,7 @@ func Test_Cov8_File_CurrentFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.CurrentFilePath returns correct value -- with args", actual)
 }
 
-func Test_Cov8_File_PathLineSep(t *testing.T) {
+func Test_File_PathLineSep(t *testing.T) {
 	// Arrange
 	path, line := codestack.File.PathLineSep(0)
 
@@ -2518,7 +2518,7 @@ func Test_Cov8_File_PathLineSep(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSep returns correct value -- with args", actual)
 }
 
-func Test_Cov8_File_PathLineSepDefault(t *testing.T) {
+func Test_File_PathLineSepDefault(t *testing.T) {
 	// Arrange
 	path, line := codestack.File.PathLineSepDefault()
 
@@ -2536,7 +2536,7 @@ func Test_Cov8_File_PathLineSepDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSepDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov8_File_FilePathWithLineString(t *testing.T) {
+func Test_File_FilePathWithLineString(t *testing.T) {
 	// Arrange
 	result := codestack.File.FilePathWithLineString(0)
 
@@ -2548,7 +2548,7 @@ func Test_Cov8_File_FilePathWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.FilePathWithLineString returns non-empty -- with args", actual)
 }
 
-func Test_Cov8_File_PathLineStringDefault(t *testing.T) {
+func Test_File_PathLineStringDefault(t *testing.T) {
 	// Arrange
 	result := codestack.File.PathLineStringDefault()
 
@@ -2560,7 +2560,7 @@ func Test_Cov8_File_PathLineStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineStringDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov8_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.CurDir()
 
@@ -2572,7 +2572,7 @@ func Test_Cov8_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns correct value -- with args", actual)
 }
 
-func Test_Cov8_Dir_Get(t *testing.T) {
+func Test_Dir_Get(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.Get(0)
 
@@ -2584,7 +2584,7 @@ func Test_Cov8_Dir_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.Get returns correct value -- with args", actual)
 }
 
-func Test_Cov8_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.RepoDir()
 
@@ -2596,7 +2596,7 @@ func Test_Cov8_Dir_RepoDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.RepoDir returns correct value -- with args", actual)
 }
 
-func Test_Cov8_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.CurDirJoin("sub", "dir")
 
@@ -2608,7 +2608,7 @@ func Test_Cov8_Dir_CurDirJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDirJoin returns correct value -- with args", actual)
 }
 
-func Test_Cov8_Dir_RepoDirJoin(t *testing.T) {
+func Test_Dir_RepoDirJoin(t *testing.T) {
 	// Arrange
 	result := codestack.Dir.RepoDirJoin("sub")
 
@@ -2622,7 +2622,7 @@ func Test_Cov8_Dir_RepoDirJoin(t *testing.T) {
 
 // ── NameOf extended ──
 
-func Test_Cov8_NameOf_MethodByFullName(t *testing.T) {
+func Test_NameOf_MethodByFullName(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.MethodByFullName("github.com/pkg.Type.Method")
 
@@ -2634,7 +2634,7 @@ func Test_Cov8_NameOf_MethodByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.MethodByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov8_NameOf_PackageByFullName(t *testing.T) {
+func Test_NameOf_PackageByFullName(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.PackageByFullName("github.com/pkg.Type.Method")
 
@@ -2646,7 +2646,7 @@ func Test_Cov8_NameOf_PackageByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.PackageByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov8_NameOf_CurrentFuncFullPath(t *testing.T) {
+func Test_NameOf_CurrentFuncFullPath(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.CurrentFuncFullPath("github.com/pkg.Type.Method")
 
@@ -2658,7 +2658,7 @@ func Test_Cov8_NameOf_CurrentFuncFullPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.CurrentFuncFullPath returns correct value -- with args", actual)
 }
 
-func Test_Cov8_NameOf_JoinPackageNameWithRelative(t *testing.T) {
+func Test_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.JoinPackageNameWithRelative("github.com/pkg.Type.Method", "SubMethod")
 
@@ -2670,7 +2670,7 @@ func Test_Cov8_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.JoinPackageNameWithRelative returns non-empty -- with args", actual)
 }
 
-func Test_Cov8_NameOf_MethodStackSkip(t *testing.T) {
+func Test_NameOf_MethodStackSkip(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.MethodStackSkip(0)
 
@@ -2682,7 +2682,7 @@ func Test_Cov8_NameOf_MethodStackSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.MethodStackSkip returns correct value -- with args", actual)
 }
 
-func Test_Cov8_NameOf_PackageStackSkip(t *testing.T) {
+func Test_NameOf_PackageStackSkip(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.PackageStackSkip(0)
 
@@ -2696,38 +2696,38 @@ func Test_Cov8_NameOf_PackageStackSkip(t *testing.T) {
 
 // ── newStacksCreator ──
 
-func Test_Cov8_StackTrace_SkipOne(t *testing.T) {
+func Test_StackTrace_SkipOne(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipOne()
 	// Result may be empty due to integrated test call depth; just exercise the code path
 	_ = tc.HasAnyItem()
 }
 
-func Test_Cov8_StackTrace_Default(t *testing.T) {
+func Test_StackTrace_Default(t *testing.T) {
 	tc := codestack.New.StackTrace.Default(0, 5)
 	_ = tc.HasAnyItem()
 }
 
-func Test_Cov8_StackTrace_DefaultCount(t *testing.T) {
+func Test_StackTrace_DefaultCount(t *testing.T) {
 	tc := codestack.New.StackTrace.DefaultCount(0)
 	_ = tc.HasAnyItem()
 }
 
 // ── NewStackTraces / NewDefaultStackTraces ──
 
-func Test_Cov8_TraceCollection_NewStackTraces(t *testing.T) {
+func Test_TraceCollection_NewStackTraces(t *testing.T) {
 	tc := codestack.TraceCollection{}
 	// May be empty due to call depth; just exercise code path
 	result := tc.NewStackTraces(0)
 	_ = result
 }
 
-func Test_Cov8_TraceCollection_NewDefaultStackTraces(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	tc := codestack.TraceCollection{}
 	result := tc.NewDefaultStackTraces()
 	_ = result
 }
 
-func Test_Cov8_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.NewStackTracesJsonResult(0)
@@ -2740,7 +2740,7 @@ func Test_Cov8_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- NewStackTracesJsonResult", actual)
 }
 
-func Test_Cov8_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	result := tc.NewDefaultStackTracesJsonResult()
@@ -2755,7 +2755,7 @@ func Test_Cov8_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 
 // ── newTraceCollection ──
 
-func Test_Cov8_NewTraceCollection_Empty(t *testing.T) {
+func Test_NewTraceCollection_Empty(t *testing.T) {
 	// Arrange
 	// Test via TraceCollection Clear which creates empty
 	tc := codestack.New.StackTrace.SkipNone()
@@ -2771,7 +2771,7 @@ func Test_Cov8_NewTraceCollection_Empty(t *testing.T) {
 
 // ── isSkippablePackage ──
 
-func Test_Cov8_Trace_Create_HighSkipIndex(t *testing.T) {
+func Test_Trace_Create_HighSkipIndex(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(9999)
 

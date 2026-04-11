@@ -12,7 +12,7 @@ import (
 // BoolByOrder
 // ═══════════════════════════════════════════
 
-func Test_Cov8_BoolByOrder_FirstTrue(t *testing.T) {
+func Test_BoolByOrder_FirstTrue(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.BoolByOrder(true, false, false)}
 
@@ -21,7 +21,7 @@ func Test_Cov8_BoolByOrder_FirstTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolByOrder returns true -- first true", actual)
 }
 
-func Test_Cov8_BoolByOrder_AllFalse(t *testing.T) {
+func Test_BoolByOrder_AllFalse(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.BoolByOrder(false, false, false)}
 
@@ -30,7 +30,7 @@ func Test_Cov8_BoolByOrder_AllFalse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolByOrder returns false -- all false", actual)
 }
 
-func Test_Cov8_BoolByOrder_LastTrue(t *testing.T) {
+func Test_BoolByOrder_LastTrue(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.BoolByOrder(false, false, true)}
 
@@ -43,7 +43,7 @@ func Test_Cov8_BoolByOrder_LastTrue(t *testing.T) {
 // BoolFunctionsByOrder
 // ═══════════════════════════════════════════
 
-func Test_Cov8_BoolFunctionsByOrder_FirstTrue(t *testing.T) {
+func Test_BoolFunctionsByOrder_FirstTrue(t *testing.T) {
 	// Arrange
 	f1 := func() bool { return true }
 	f2 := func() bool { return false }
@@ -56,7 +56,7 @@ func Test_Cov8_BoolFunctionsByOrder_FirstTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolFunctionsByOrder returns true -- first func true", actual)
 }
 
-func Test_Cov8_BoolFunctionsByOrder_AllFalse(t *testing.T) {
+func Test_BoolFunctionsByOrder_AllFalse(t *testing.T) {
 	// Arrange
 	f1 := func() bool { return false }
 	f2 := func() bool { return false }
@@ -73,7 +73,7 @@ func Test_Cov8_BoolFunctionsByOrder_AllFalse(t *testing.T) {
 // ErrorFunc
 // ═══════════════════════════════════════════
 
-func Test_Cov8_ErrorFunc_True(t *testing.T) {
+func Test_ErrorFunc_True(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return errors.New("false-err") }
@@ -87,7 +87,7 @@ func Test_Cov8_ErrorFunc_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunc returns trueFunc -- condition true", actual)
 }
 
-func Test_Cov8_ErrorFunc_False(t *testing.T) {
+func Test_ErrorFunc_False(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return errors.New("false-err") }
@@ -105,7 +105,7 @@ func Test_Cov8_ErrorFunc_False(t *testing.T) {
 // ErrorFunctionResult
 // ═══════════════════════════════════════════
 
-func Test_Cov8_ErrorFunctionResult_True(t *testing.T) {
+func Test_ErrorFunctionResult_True(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return nil }
@@ -125,7 +125,7 @@ func Test_Cov8_ErrorFunctionResult_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionResult returns error -- condition true", actual)
 }
 
-func Test_Cov8_ErrorFunctionResult_False(t *testing.T) {
+func Test_ErrorFunctionResult_False(t *testing.T) {
 	// Arrange
 	errTrue := func() error { return errors.New("true-err") }
 	errFalse := func() error { return nil }
@@ -143,7 +143,7 @@ func Test_Cov8_ErrorFunctionResult_False(t *testing.T) {
 // ErrorFunctionsExecuteResults
 // ═══════════════════════════════════════════
 
-func Test_Cov8_ErrorFunctionsExecuteResults_True(t *testing.T) {
+func Test_ErrorFunctionsExecuteResults_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() error{
 		func() error { return nil },
@@ -160,7 +160,7 @@ func Test_Cov8_ErrorFunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionsExecuteResults returns error -- one func errors", actual)
 }
 
-func Test_Cov8_ErrorFunctionsExecuteResults_False(t *testing.T) {
+func Test_ErrorFunctionsExecuteResults_False(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() error{func() error { return errors.New("err1") }}
 	falseFuncs := []func() error{func() error { return nil }}
@@ -174,7 +174,7 @@ func Test_Cov8_ErrorFunctionsExecuteResults_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionsExecuteResults returns nil -- false path all ok", actual)
 }
 
-func Test_Cov8_ErrorFunctionsExecuteResults_EmptyFuncs(t *testing.T) {
+func Test_ErrorFunctionsExecuteResults_EmptyFuncs(t *testing.T) {
 	// Arrange
 	result := conditional.ErrorFunctionsExecuteResults(true, []func() error{}, nil)
 
@@ -186,7 +186,7 @@ func Test_Cov8_ErrorFunctionsExecuteResults_EmptyFuncs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionsExecuteResults returns nil -- empty funcs", actual)
 }
 
-func Test_Cov8_ErrorFunctionsExecuteResults_NilFuncInSlice(t *testing.T) {
+func Test_ErrorFunctionsExecuteResults_NilFuncInSlice(t *testing.T) {
 	// Arrange
 	funcs := []func() error{nil, func() error { return nil }}
 	result := conditional.ErrorFunctionsExecuteResults(true, funcs, nil)
@@ -203,7 +203,7 @@ func Test_Cov8_ErrorFunctionsExecuteResults_NilFuncInSlice(t *testing.T) {
 // StringsIndexVal
 // ═══════════════════════════════════════════
 
-func Test_Cov8_StringsIndexVal_True(t *testing.T) {
+func Test_StringsIndexVal_True(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.StringsIndexVal(true, []string{"a", "b", "c"}, 0, 2)}
 
@@ -212,7 +212,7 @@ func Test_Cov8_StringsIndexVal_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringsIndexVal returns trueValue index -- condition true", actual)
 }
 
-func Test_Cov8_StringsIndexVal_False(t *testing.T) {
+func Test_StringsIndexVal_False(t *testing.T) {
 	// Act
 	actual := args.Map{"result": conditional.StringsIndexVal(false, []string{"a", "b", "c"}, 0, 2)}
 
@@ -225,7 +225,7 @@ func Test_Cov8_StringsIndexVal_False(t *testing.T) {
 // Functions (generic)
 // ═══════════════════════════════════════════
 
-func Test_Cov8_Functions_True(t *testing.T) {
+func Test_Functions_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "t1", true, false },
@@ -243,7 +243,7 @@ func Test_Cov8_Functions_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Functions returns trueFuncs -- condition true", actual)
 }
 
-func Test_Cov8_Functions_False(t *testing.T) {
+func Test_Functions_False(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "t1", true, false },
@@ -266,7 +266,7 @@ func Test_Cov8_Functions_False(t *testing.T) {
 // FunctionsExecuteResults (generic)
 // ═══════════════════════════════════════════
 
-func Test_Cov8_FunctionsExecuteResults_True(t *testing.T) {
+func Test_FunctionsExecuteResults_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "t1", true, false },
@@ -288,7 +288,7 @@ func Test_Cov8_FunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults returns results -- true path", actual)
 }
 
-func Test_Cov8_FunctionsExecuteResults_Break(t *testing.T) {
+func Test_FunctionsExecuteResults_Break(t *testing.T) {
 	// Arrange
 	funcs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "a", true, false },
@@ -305,7 +305,7 @@ func Test_Cov8_FunctionsExecuteResults_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults stops at break -- isTake+isBreak", actual)
 }
 
-func Test_Cov8_FunctionsExecuteResults_SkipNotTake(t *testing.T) {
+func Test_FunctionsExecuteResults_SkipNotTake(t *testing.T) {
 	// Arrange
 	funcs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "a", false, false }, // skip
@@ -327,7 +327,7 @@ func Test_Cov8_FunctionsExecuteResults_SkipNotTake(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults skips isTake=false -- selective take", actual)
 }
 
-func Test_Cov8_FunctionsExecuteResults_NilFunc(t *testing.T) {
+func Test_FunctionsExecuteResults_NilFunc(t *testing.T) {
 	// Arrange
 	funcs := []func() (string, bool, bool){
 		nil,
@@ -343,7 +343,7 @@ func Test_Cov8_FunctionsExecuteResults_NilFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults skips nil func -- nil in slice", actual)
 }
 
-func Test_Cov8_FunctionsExecuteResults_Empty(t *testing.T) {
+func Test_FunctionsExecuteResults_Empty(t *testing.T) {
 	// Arrange
 	result := conditional.FunctionsExecuteResults[string](true, nil, nil)
 
@@ -359,7 +359,7 @@ func Test_Cov8_FunctionsExecuteResults_Empty(t *testing.T) {
 // AnyFunctions
 // ═══════════════════════════════════════════
 
-func Test_Cov8_AnyFunctions_True(t *testing.T) {
+func Test_AnyFunctions_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "t1", true, false },
@@ -374,7 +374,7 @@ func Test_Cov8_AnyFunctions_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyFunctions returns trueFuncs -- condition true", actual)
 }
 
-func Test_Cov8_AnyFunctions_False(t *testing.T) {
+func Test_AnyFunctions_False(t *testing.T) {
 	// Arrange
 	falseFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "f1", true, false },
@@ -393,7 +393,7 @@ func Test_Cov8_AnyFunctions_False(t *testing.T) {
 // AnyFunctionsExecuteResults
 // ═══════════════════════════════════════════
 
-func Test_Cov8_AnyFunctionsExecuteResults_True(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "r1", true, false },
@@ -409,7 +409,7 @@ func Test_Cov8_AnyFunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyFunctionsExecuteResults returns results -- true path", actual)
 }
 
-func Test_Cov8_AnyFunctionsExecuteResults_Break(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_Break(t *testing.T) {
 	// Arrange
 	funcs := []func() (any, bool, bool){
 		func() (any, bool, bool) { return "a", true, true },
@@ -425,7 +425,7 @@ func Test_Cov8_AnyFunctionsExecuteResults_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyFunctionsExecuteResults stops at break -- isBreak", actual)
 }
 
-func Test_Cov8_AnyFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_Empty(t *testing.T) {
 	// Arrange
 	result := conditional.AnyFunctionsExecuteResults(true, nil, nil)
 
@@ -441,7 +441,7 @@ func Test_Cov8_AnyFunctionsExecuteResults_Empty(t *testing.T) {
 // VoidFunctions
 // ═══════════════════════════════════════════
 
-func Test_Cov8_VoidFunctions_True(t *testing.T) {
+func Test_VoidFunctions_True(t *testing.T) {
 	// Arrange
 	called := false
 	trueFuncs := []func(){func() { called = true }}
@@ -456,7 +456,7 @@ func Test_Cov8_VoidFunctions_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidFunctions executes true funcs -- condition true", actual)
 }
 
-func Test_Cov8_VoidFunctions_False(t *testing.T) {
+func Test_VoidFunctions_False(t *testing.T) {
 	// Arrange
 	called := false
 	trueFuncs := []func(){}
@@ -471,7 +471,7 @@ func Test_Cov8_VoidFunctions_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidFunctions executes false funcs -- condition false", actual)
 }
 
-func Test_Cov8_VoidFunctions_NilFunc(t *testing.T) {
+func Test_VoidFunctions_NilFunc(t *testing.T) {
 	// Arrange
 	called := false
 	funcs := []func(){nil, func() { called = true }}
@@ -489,7 +489,7 @@ func Test_Cov8_VoidFunctions_NilFunc(t *testing.T) {
 // TypedErrorFunctionsExecuteResults
 // ═══════════════════════════════════════════
 
-func Test_Cov8_TypedErrorFunctionsExecuteResults_True(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_True(t *testing.T) {
 	// Arrange
 	trueFuncs := []func() (string, error){
 		func() (string, error) { return "r1", nil },
@@ -512,7 +512,7 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns results+error -- mixed", actual)
 }
 
-func Test_Cov8_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, nil, nil)
 
@@ -530,7 +530,7 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns nil -- empty", actual)
 }
 
-func Test_Cov8_TypedErrorFunctionsExecuteResults_NilFunc(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_NilFunc(t *testing.T) {
 	// Arrange
 	funcs := []func() (int, error){
 		nil,
@@ -556,7 +556,7 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_NilFunc(t *testing.T) {
 // Typed wrappers — bool
 // ═══════════════════════════════════════════
 
-func Test_Cov8_IfFuncBool(t *testing.T) {
+func Test_IfFuncBool(t *testing.T) {
 	// Arrange
 	trueF := func() bool { return true }
 	falseF := func() bool { return false }
@@ -575,7 +575,7 @@ func Test_Cov8_IfFuncBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfFuncBool returns bool -- both conditions", actual)
 }
 
-func Test_Cov8_IfTrueFuncBool(t *testing.T) {
+func Test_IfTrueFuncBool(t *testing.T) {
 	// Arrange
 	trueF := func() bool { return true }
 
@@ -593,7 +593,7 @@ func Test_Cov8_IfTrueFuncBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncBool returns bool -- both conditions", actual)
 }
 
-func Test_Cov8_NilDefBool(t *testing.T) {
+func Test_NilDefBool(t *testing.T) {
 	// Arrange
 	v := true
 
@@ -611,7 +611,7 @@ func Test_Cov8_NilDefBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilDefBool returns bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_NilDefPtrBool(t *testing.T) {
+func Test_NilDefPtrBool(t *testing.T) {
 	// Arrange
 	v := true
 	nonNilResult := conditional.NilDefPtrBool(&v, false)
@@ -631,7 +631,7 @@ func Test_Cov8_NilDefPtrBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilDefPtrBool returns *bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_ValueOrZeroBool(t *testing.T) {
+func Test_ValueOrZeroBool(t *testing.T) {
 	// Arrange
 	v := true
 
@@ -649,7 +649,7 @@ func Test_Cov8_ValueOrZeroBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueOrZeroBool returns bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_PtrOrZeroBool(t *testing.T) {
+func Test_PtrOrZeroBool(t *testing.T) {
 	// Arrange
 	v := true
 	nonNilResult := conditional.PtrOrZeroBool(&v)
@@ -669,7 +669,7 @@ func Test_Cov8_PtrOrZeroBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroBool returns *bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_NilValBool(t *testing.T) {
+func Test_NilValBool(t *testing.T) {
 	// Arrange
 	v := true
 
@@ -687,7 +687,7 @@ func Test_Cov8_NilValBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilValBool returns bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_NilValPtrBool(t *testing.T) {
+func Test_NilValPtrBool(t *testing.T) {
 	// Arrange
 	v := true
 	nonNilResult := conditional.NilValPtrBool(&v, false, true)
@@ -707,7 +707,7 @@ func Test_Cov8_NilValPtrBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilValPtrBool returns *bool -- nil and non-nil", actual)
 }
 
-func Test_Cov8_IfSliceBool(t *testing.T) {
+func Test_IfSliceBool(t *testing.T) {
 	// Arrange
 	trueSlice := []bool{true}
 	falseSlice := []bool{false}
@@ -726,7 +726,7 @@ func Test_Cov8_IfSliceBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfSliceBool returns slice -- both conditions", actual)
 }
 
-func Test_Cov8_IfPtrBool(t *testing.T) {
+func Test_IfPtrBool(t *testing.T) {
 	// Arrange
 	v1 := true
 	v2 := false
@@ -744,7 +744,7 @@ func Test_Cov8_IfPtrBool(t *testing.T) {
 // Typed wrappers — byte
 // ═══════════════════════════════════════════
 
-func Test_Cov8_IfByte(t *testing.T) {
+func Test_IfByte(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"true":  conditional.IfByte(true, byte(1), byte(2)),
@@ -759,7 +759,7 @@ func Test_Cov8_IfByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfByte returns byte -- both conditions", actual)
 }
 
-func Test_Cov8_IfFuncByte(t *testing.T) {
+func Test_IfFuncByte(t *testing.T) {
 	// Arrange
 	trueF := func() byte { return 1 }
 	falseF := func() byte { return 2 }
@@ -772,7 +772,7 @@ func Test_Cov8_IfFuncByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfFuncByte returns byte -- condition true", actual)
 }
 
-func Test_Cov8_IfTrueFuncByte(t *testing.T) {
+func Test_IfTrueFuncByte(t *testing.T) {
 	// Arrange
 	trueF := func() byte { return 42 }
 
@@ -790,7 +790,7 @@ func Test_Cov8_IfTrueFuncByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncByte returns byte -- both conditions", actual)
 }
 
-func Test_Cov8_NilDefByte(t *testing.T) {
+func Test_NilDefByte(t *testing.T) {
 	// Arrange
 	v := byte(42)
 
@@ -808,7 +808,7 @@ func Test_Cov8_NilDefByte(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilDefByte returns byte -- nil and non-nil", actual)
 }
 
-func Test_Cov8_ValueOrZeroByte(t *testing.T) {
+func Test_ValueOrZeroByte(t *testing.T) {
 	// Arrange
 	v := byte(42)
 

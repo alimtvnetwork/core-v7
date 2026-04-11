@@ -11,7 +11,7 @@ import (
 // ── TraceCollection.IsEqualItems — nil paths ──
 // Covers TraceCollection.go L810-812, L814-816
 
-func Test_Cov9_IsEqualItems_BothNil(t *testing.T) {
+func Test_IsEqualItems_BothNil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 
@@ -24,7 +24,7 @@ func Test_Cov9_IsEqualItems_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualItems returns nil -- both nil", actual)
 }
 
-func Test_Cov9_IsEqualItems_ReceiverNilItemsNot(t *testing.T) {
+func Test_IsEqualItems_ReceiverNilItemsNot(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	trace := codestack.New.Create(codestack.Skip1)
@@ -41,7 +41,7 @@ func Test_Cov9_IsEqualItems_ReceiverNilItemsNot(t *testing.T) {
 // ── TraceCollection.FilterWithLimit — isBreak branch ──
 // Covers TraceCollection.go L520-522
 
-func Test_Cov9_FilterWithLimit_Break(t *testing.T) {
+func Test_FilterWithLimit_Break(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	breakFilter := func(tr *codestack.Trace) (bool, bool) {
@@ -60,7 +60,7 @@ func Test_Cov9_FilterWithLimit_Break(t *testing.T) {
 // ── TraceCollection.AddsUsingSkipUsingFilter — isBreak branch ──
 // Covers TraceCollection.go L136-138, L141
 
-func Test_Cov9_AddsUsingSkipUsingFilter_Break(t *testing.T) {
+func Test_AddsUsingSkipUsingFilter_Break(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	tcPtr := &stacks
@@ -82,7 +82,7 @@ func Test_Cov9_AddsUsingSkipUsingFilter_Break(t *testing.T) {
 // TraceCollection.go L899-901, L913-914
 // Also covers newTraceCollection.go L38 (Empty)
 
-func Test_Cov9_FileWithLine_ParseInjectUsingJsonMust_Panic(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{}
 	badResult := corejson.NewPtr("not-a-FileWithLine")
@@ -105,7 +105,7 @@ func Test_Cov9_FileWithLine_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine panics -- ParseInjectUsingJsonMust panic", actual)
 }
 
-func Test_Cov9_Trace_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_Trace_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	tr := &codestack.Trace{}
 	badResult := corejson.NewPtr("bad")
@@ -120,7 +120,7 @@ func Test_Cov9_Trace_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns error -- ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov9_Trace_ParseInjectUsingJsonMust_Panic(t *testing.T) {
+func Test_Trace_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	// Arrange
 	tr := &codestack.Trace{}
 	badResult := corejson.NewPtr("bad")
@@ -143,7 +143,7 @@ func Test_Cov9_Trace_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace panics -- ParseInjectUsingJsonMust panic", actual)
 }
 
-func Test_Cov9_TraceCollection_ParseInjectUsingJson_Error(t *testing.T) {
+func Test_TraceCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	badResult := corejson.NewPtr("bad")
@@ -164,7 +164,7 @@ func Test_Cov9_TraceCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns error -- ParseInjectUsingJson error", actual)
 }
 
-func Test_Cov9_TraceCollection_ParseInjectUsingJsonMust_Panic(t *testing.T) {
+func Test_TraceCollection_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	badResult := corejson.NewPtr("bad")
@@ -190,7 +190,7 @@ func Test_Cov9_TraceCollection_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 // ── TraceCollection.PaginateAt — negative page panic ──
 // Covers TraceCollection.go L419-426
 
-func Test_Cov9_TraceCollection_GetSinglePageCollection_NegativePanic(t *testing.T) {
+func Test_TraceCollection_GetSinglePageCollection_NegativePanic(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 

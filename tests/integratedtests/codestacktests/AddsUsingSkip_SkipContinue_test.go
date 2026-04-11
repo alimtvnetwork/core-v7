@@ -10,7 +10,7 @@ import (
 // ── newStacksCreator.All with isBreakOnceInvalid=false ──
 // Covers TraceCollection.go L75 (continue path on invalid trace)
 
-func Test_Cov10_AddsUsingSkip_SkipContinue(t *testing.T) {
+func Test_AddsUsingSkip_SkipContinue(t *testing.T) {
 	// Arrange & Act — large skip index means invalid traces
 	// isSkipInvalid=true, isBreakOnceInvalid=false → continue past invalid
 	tc := codestack.New.StackTrace.All(true, false, 900, 5)
@@ -24,7 +24,7 @@ func Test_Cov10_AddsUsingSkip_SkipContinue(t *testing.T) {
 // ── newStacksCreator.DefaultCount — captures current call stack ──
 // Covers newTraceCollection.go indirectly
 
-func Test_Cov10_StackTrace_Default(t *testing.T) {
+func Test_StackTrace_Default(t *testing.T) {
 	// Arrange & Act — use DefaultCount to avoid double-skip
 	tc := codestack.New.StackTrace.DefaultCount(0)
 
@@ -37,7 +37,7 @@ func Test_Cov10_StackTrace_Default(t *testing.T) {
 // ── FilterWithLimit: natural loop exhaustion ──
 // Covers TraceCollection.go L529 (end-of-loop return)
 
-func Test_Cov10_FilterWithLimit_NaturalExhaustion(t *testing.T) {
+func Test_FilterWithLimit_NaturalExhaustion(t *testing.T) {
 	// Arrange — use DefaultCount which reliably captures frames
 	tcVal := codestack.New.StackTrace.DefaultCount(0)
 	tc := &tcVal
@@ -57,7 +57,7 @@ func Test_Cov10_FilterWithLimit_NaturalExhaustion(t *testing.T) {
 // ── GetSinglePageCollection: page=0 causes panic ──
 // Covers TraceCollection.go L419-426
 
-func Test_Cov10_GetSinglePageCollection_NegativePagePanic(t *testing.T) {
+func Test_GetSinglePageCollection_NegativePagePanic(t *testing.T) {
 	// Arrange — need enough items so length >= eachPageSize, otherwise early return
 	tcVal := codestack.New.StackTrace.DefaultCount(0)
 	tc := &tcVal
@@ -89,7 +89,7 @@ func Test_Cov10_GetSinglePageCollection_NegativePagePanic(t *testing.T) {
 // ── AddsUsingSkipUsingFilter: skip-continue and end-of-loop return ──
 // Covers TraceCollection.go L119-120 (continue) and L141 (return)
 
-func Test_Cov10_AddsUsingSkipUsingFilter_SkipContinue(t *testing.T) {
+func Test_AddsUsingSkipUsingFilter_SkipContinue(t *testing.T) {
 	// Arrange — start with items using DefaultCount
 	tcVal := codestack.New.StackTrace.DefaultCount(0)
 	tc := &tcVal
@@ -110,7 +110,7 @@ func Test_Cov10_AddsUsingSkipUsingFilter_SkipContinue(t *testing.T) {
 // ── AddsUsingSkipUsingFilter: valid traces with filter that takes all, no break ──
 // Covers TraceCollection.go L141 (end-of-loop return after processing all)
 
-func Test_Cov10_AddsUsingSkipUsingFilter_AllValid_NoBreak(t *testing.T) {
+func Test_AddsUsingSkipUsingFilter_AllValid_NoBreak(t *testing.T) {
 	// Arrange
 	tcVal := codestack.TraceCollection{}
 	tc := &tcVal

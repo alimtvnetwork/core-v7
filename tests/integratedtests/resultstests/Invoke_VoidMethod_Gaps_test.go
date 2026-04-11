@@ -14,7 +14,7 @@ type voidMethod struct{}
 
 func (v voidMethod) VoidReturn() {}
 
-func Test_Cov4_Invoke_VoidMethod_ReturnsNilValue(t *testing.T) {
+func Test_Invoke_VoidMethod_ReturnsNilValue(t *testing.T) {
 	// Arrange
 	funcRef := (voidMethod).VoidReturn
 	receiver := voidMethod{}
@@ -48,7 +48,7 @@ func (m multiNonErrorReturn) TwoStrings() (string, string) {
 	return "a", "b"
 }
 
-func Test_Cov4_Invoke_NonErrorSecondReturn(t *testing.T) {
+func Test_Invoke_NonErrorSecondReturn(t *testing.T) {
 	// Arrange
 	funcRef := (multiNonErrorReturn).TwoStrings
 	receiver := multiNonErrorReturn{}
@@ -86,7 +86,7 @@ type customErr struct{ msg string }
 
 func (e *customErr) Error() string { return e.msg }
 
-func Test_Cov4_Invoke_NilPtrErrorReturn(t *testing.T) {
+func Test_Invoke_NilPtrErrorReturn(t *testing.T) {
 	// Arrange
 	funcRef := (nilPtrErrorReturn).NilPtrErr
 	receiver := nilPtrErrorReturn{}
@@ -114,7 +114,7 @@ func Test_Cov4_Invoke_NilPtrErrorReturn(t *testing.T) {
 
 // ── MethodName: function without dots in runtime name ──
 
-func Test_Cov4_MethodName_NilFuncRef(t *testing.T) {
+func Test_MethodName_NilFuncRef(t *testing.T) {
 	// Arrange / Act
 	name := results.MethodName(nil)
 
@@ -132,7 +132,7 @@ func Test_Cov4_MethodName_NilFuncRef(t *testing.T) {
 	)
 }
 
-func Test_Cov4_MethodName_NonFuncRef(t *testing.T) {
+func Test_MethodName_NonFuncRef(t *testing.T) {
 	// Arrange / Act
 	name := results.MethodName(42)
 
@@ -150,7 +150,7 @@ func Test_Cov4_MethodName_NonFuncRef(t *testing.T) {
 	)
 }
 
-func Test_Cov4_MethodName_ValidMethod(t *testing.T) {
+func Test_MethodName_ValidMethod(t *testing.T) {
 	// Arrange / Act
 	name := results.MethodName((voidMethod).VoidReturn)
 
@@ -176,7 +176,7 @@ func (n nilPtrReturn) ReturnNilPtr() *int {
 	return nil
 }
 
-func Test_Cov4_Invoke_NilPtrReturnValue(t *testing.T) {
+func Test_Invoke_NilPtrReturnValue(t *testing.T) {
 	// Arrange
 	funcRef := (nilPtrReturn).ReturnNilPtr
 	receiver := nilPtrReturn{}
@@ -209,7 +209,7 @@ type ptrReceiver struct{ val int }
 
 func (p *ptrReceiver) GetVal() int { return p.val }
 
-func Test_Cov4_Invoke_NilReceiver_PanicsRecovery(t *testing.T) {
+func Test_Invoke_NilReceiver_PanicsRecovery(t *testing.T) {
 	// Arrange
 	funcRef := (*ptrReceiver).GetVal
 

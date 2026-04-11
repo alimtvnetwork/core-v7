@@ -17,7 +17,7 @@ import (
 
 // ── FiveFunc.String (line 231) ──
 
-func Test_Cov13_FiveFunc_String_I29(t *testing.T) {
+func Test_FiveFunc_String_I29(t *testing.T) {
 	// Arrange
 	ff := &args.FiveFunc[int, string, float64, bool, string]{
 		First: 1, Second: "two", Third: 3.0, Fourth: true, Fifth: "five",
@@ -34,7 +34,7 @@ func Test_Cov13_FiveFunc_String_I29(t *testing.T) {
 
 // ── FourFunc.String (line 214) ──
 
-func Test_Cov13_FourFunc_String_I29(t *testing.T) {
+func Test_FourFunc_String_I29(t *testing.T) {
 	// Arrange
 	ff := &args.FourFunc[int, string, float64, bool]{
 		First: 1, Second: "two", Third: 3.0, Fourth: true,
@@ -51,7 +51,7 @@ func Test_Cov13_FourFunc_String_I29(t *testing.T) {
 
 // ── SixFunc.String (line 259) ──
 
-func Test_Cov13_SixFunc_String_I29(t *testing.T) {
+func Test_SixFunc_String_I29(t *testing.T) {
 	// Arrange
 	sf := &args.SixFunc[int, string, float64, bool, string, int]{
 		First: 1, Second: "two", Third: 3.0, Fourth: true, Fifth: "five", Sixth: 6,
@@ -68,7 +68,7 @@ func Test_Cov13_SixFunc_String_I29(t *testing.T) {
 
 // ── FuncMap.AddStructFunctions error path (line 112-114) ──
 
-func Test_Cov13_FuncMap_AddStructFunctions_EmptySlice_I29(t *testing.T) {
+func Test_FuncMap_AddStructFunctions_EmptySlice_I29(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -83,7 +83,7 @@ func Test_Cov13_FuncMap_AddStructFunctions_EmptySlice_I29(t *testing.T) {
 
 // ── FuncWrap.IsEqual name mismatch (line 223-225) ──
 
-func Test_Cov13_FuncWrap_IsEqual_Mismatch_I29(t *testing.T) {
+func Test_FuncWrap_IsEqual_Mismatch_I29(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() {})
 	fw2 := args.NewFuncWrap.Default(func(x int) int { return x })
@@ -99,7 +99,7 @@ func Test_Cov13_FuncWrap_IsEqual_Mismatch_I29(t *testing.T) {
 
 // ── FuncWrapArgs.GetOutArgsTypesNames empty (line 253-255) ──
 
-func Test_Cov13_FuncWrapArgs_GetOutArgsTypesNames_NoReturn_I29(t *testing.T) {
+func Test_FuncWrapArgs_GetOutArgsTypesNames_NoReturn_I29(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() {})
 
@@ -114,7 +114,7 @@ func Test_Cov13_FuncWrapArgs_GetOutArgsTypesNames_NoReturn_I29(t *testing.T) {
 
 // ── FuncWrapInvoke.InvokeError (line 110-112) ──
 
-func Test_Cov13_FuncWrapInvoke_InvokeError_Valid_I29(t *testing.T) {
+func Test_FuncWrapInvoke_InvokeError_Valid_I29(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() error { return errors.New("test") })
 
@@ -135,7 +135,7 @@ func Test_Cov13_FuncWrapInvoke_InvokeError_Valid_I29(t *testing.T) {
 
 // ── FuncWrapTypedHelpers: InvokeAsError nil result (line 127-129) ──
 
-func Test_Cov13_FuncWrapTypedHelpers_InvokeAsError_Nil_I29(t *testing.T) {
+func Test_FuncWrapTypedHelpers_InvokeAsError_Nil_I29(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() error { return nil })
 
@@ -159,7 +159,7 @@ func Test_Cov13_FuncWrapTypedHelpers_InvokeAsError_Nil_I29(t *testing.T) {
 
 // ── Map.GetFuncName with nil FuncWrap (line 107) ──
 
-func Test_Cov13_Map_GetFuncName_NoFunc_I29(t *testing.T) {
+func Test_Map_GetFuncName_NoFunc_I29(t *testing.T) {
 	// Arrange
 	m := args.Map{"key": "val"}
 
@@ -174,7 +174,7 @@ func Test_Cov13_Map_GetFuncName_NoFunc_I29(t *testing.T) {
 
 // ── Map.SortedKeysMust panic path (line 207-208) ──
 
-func Test_Cov13_Map_SortedKeysMust_Valid_I29(t *testing.T) {
+func Test_Map_SortedKeysMust_Valid_I29(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,
@@ -198,7 +198,7 @@ func Test_Cov13_Map_SortedKeysMust_Valid_I29(t *testing.T) {
 
 // ── MapShouldBeEqual: hasMismatch path (line 39-51) ──
 
-func Test_Cov13_MapShouldBeEqual_Mismatch_I29(t *testing.T) {
+func Test_MapShouldBeEqual_Mismatch_I29(t *testing.T) {
 	// Arrange
 	expected := args.Map{"key": "expected"}
 	actual := args.Map{"key": "actual"}
@@ -223,7 +223,7 @@ func Test_Cov13_MapShouldBeEqual_Mismatch_I29(t *testing.T) {
 
 // ── funcDetector: default case (line 18-19) ──
 
-func Test_Cov13_FuncDetector_Default_I29(t *testing.T) {
+func Test_FuncDetector_Default_I29(t *testing.T) {
 	// Arrange — passing a raw func
 	rawFunc := func(x int) int { return x }
 	m := args.Map{
@@ -241,7 +241,7 @@ func Test_Cov13_FuncDetector_Default_I29(t *testing.T) {
 
 // ── newFuncWrapCreator.Default non-func kind (line 27-28) ──
 
-func Test_Cov13_NewFuncWrap_Default_NonFunc_I29(t *testing.T) {
+func Test_NewFuncWrap_Default_NonFunc_I29(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(42)
 

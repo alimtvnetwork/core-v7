@@ -12,7 +12,7 @@ import (
 // HeaderSliceValidator — uncovered branches
 // =============================================================================
 
-func Test_Cov2_HeaderSliceValidator_Create(t *testing.T) {
+func Test_HeaderSliceValidator_Create(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidator{
 		Header: "test-header",
@@ -40,7 +40,7 @@ func Test_Cov2_HeaderSliceValidator_Create(t *testing.T) {
 // SliceValidator — additional branch coverage
 // =============================================================================
 
-func Test_Cov2_SliceValidator_SetActualVsExpected_Mismatch(t *testing.T) {
+func Test_SliceValidator_SetActualVsExpected_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 	sv.SetActualVsExpected([]string{"a"}, []string{"b"})
@@ -53,7 +53,7 @@ func Test_Cov2_SliceValidator_SetActualVsExpected_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator SetActualVsExpected returns invalid -- mismatch", actual)
 }
 
-func Test_Cov2_SliceValidator_VerifyFirstError_Valid(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Valid(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -71,7 +71,7 @@ func Test_Cov2_SliceValidator_VerifyFirstError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator VerifyFirstError returns nil -- matching", actual)
 }
 
-func Test_Cov2_SliceValidator_AllVerifyError_Valid(t *testing.T) {
+func Test_SliceValidator_AllVerifyError_Valid(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -89,7 +89,7 @@ func Test_Cov2_SliceValidator_AllVerifyError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator AllVerifyError returns nil -- matching", actual)
 }
 
-func Test_Cov2_SliceValidator_ActualLines_Valid(t *testing.T) {
+func Test_SliceValidator_ActualLines_Valid(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -118,7 +118,7 @@ func Test_Cov2_SliceValidator_ActualLines_Valid(t *testing.T) {
 // TextValidator — additional branch coverage
 // =============================================================================
 
-func Test_Cov2_TextValidator_IsMatch_Equal_True(t *testing.T) {
+func Test_TextValidator_IsMatch_Equal_True(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 
@@ -130,7 +130,7 @@ func Test_Cov2_TextValidator_IsMatch_Equal_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- equal", actual)
 }
 
-func Test_Cov2_TextValidator_IsMatch_Equal_False(t *testing.T) {
+func Test_TextValidator_IsMatch_Equal_False(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 
@@ -142,7 +142,7 @@ func Test_Cov2_TextValidator_IsMatch_Equal_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns false -- not equal", actual)
 }
 
-func Test_Cov2_TextValidator_IsMatch_StartsWith(t *testing.T) {
+func Test_TextValidator_IsMatch_StartsWith(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hel", SearchAs: stringcompareas.StartsWith}
 
@@ -154,7 +154,7 @@ func Test_Cov2_TextValidator_IsMatch_StartsWith(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- starts with", actual)
 }
 
-func Test_Cov2_TextValidator_IsMatch_EndsWith(t *testing.T) {
+func Test_TextValidator_IsMatch_EndsWith(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "llo", SearchAs: stringcompareas.EndsWith}
 
@@ -166,7 +166,7 @@ func Test_Cov2_TextValidator_IsMatch_EndsWith(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- ends with", actual)
 }
 
-func Test_Cov2_TextValidator_IsMatch_Contains(t *testing.T) {
+func Test_TextValidator_IsMatch_Contains(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "ell", SearchAs: stringcompareas.Contains}
 
@@ -178,7 +178,7 @@ func Test_Cov2_TextValidator_IsMatch_Contains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator IsMatch returns true -- contains", actual)
 }
 
-func Test_Cov2_TextValidator_ToString_SingleLine(t *testing.T) {
+func Test_TextValidator_ToString_SingleLine(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{Search: "test", SearchAs: stringcompareas.Equal}
 
@@ -194,7 +194,7 @@ func Test_Cov2_TextValidator_ToString_SingleLine(t *testing.T) {
 // TextValidators — additional branch coverage
 // =============================================================================
 
-func Test_Cov2_TextValidators_IsMatch_WithItems(t *testing.T) {
+func Test_TextValidators_IsMatch_WithItems(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -213,7 +213,7 @@ func Test_Cov2_TextValidators_IsMatch_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators IsMatch returns expected -- with validator", actual)
 }
 
-func Test_Cov2_TextValidators_VerifyFirstError_WithMatch(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_WithMatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -227,7 +227,7 @@ func Test_Cov2_TextValidators_VerifyFirstError_WithMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators VerifyFirstError returns nil -- matching", actual)
 }
 
-func Test_Cov2_TextValidators_AllVerifyError_WithMatch(t *testing.T) {
+func Test_TextValidators_AllVerifyError_WithMatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -245,7 +245,7 @@ func Test_Cov2_TextValidators_AllVerifyError_WithMatch(t *testing.T) {
 // RangeSegmentsValidator — uncovered branches
 // =============================================================================
 
-func Test_Cov2_RangeSegmentsValidator_Create(t *testing.T) {
+func Test_RangeSegmentsValidator_Create(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{
 		Title: "test-range",
@@ -269,7 +269,7 @@ func Test_Cov2_RangeSegmentsValidator_Create(t *testing.T) {
 // Condition — additional branches
 // =============================================================================
 
-func Test_Cov2_Condition_AllTrue(t *testing.T) {
+func Test_Condition_AllTrue(t *testing.T) {
 	// Arrange
 	c := corevalidator.Condition{
 		IsUniqueWordOnly:     true,
@@ -289,7 +289,7 @@ func Test_Cov2_Condition_AllTrue(t *testing.T) {
 // Parameter — additional branches
 // =============================================================================
 
-func Test_Cov2_Parameter_SkipOnEmpty(t *testing.T) {
+func Test_Parameter_SkipOnEmpty(t *testing.T) {
 	// Arrange
 	p := corevalidator.Parameter{IsSkipCompareOnActualEmpty: true}
 

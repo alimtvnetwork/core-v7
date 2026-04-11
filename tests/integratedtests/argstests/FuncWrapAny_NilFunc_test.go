@@ -10,7 +10,7 @@ import (
 // FuncWrapAny — basic
 // ═══════════════════════════════════════════
 
-func Test_Cov6_FuncWrapAny_NilFunc(t *testing.T) {
+func Test_FuncWrapAny_NilFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -28,7 +28,7 @@ func Test_Cov6_FuncWrapAny_NilFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrapAny returns nil -- nil func", actual)
 }
 
-func Test_Cov6_FuncWrapAny_ValidFunc(t *testing.T) {
+func Test_FuncWrapAny_ValidFunc(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fw := args.NewFuncWrap.Default(fn)
@@ -49,7 +49,7 @@ func Test_Cov6_FuncWrapAny_ValidFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrapAny returns non-empty -- valid func", actual)
 }
 
-func Test_Cov6_FuncWrapAny_Invoke(t *testing.T) {
+func Test_FuncWrapAny_Invoke(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fw := args.NewFuncWrap.Default(fn)
@@ -69,7 +69,7 @@ func Test_Cov6_FuncWrapAny_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrapAny returns correct value -- invoke", actual)
 }
 
-func Test_Cov6_FuncWrapAny_InvokeNilFunc(t *testing.T) {
+func Test_FuncWrapAny_InvokeNilFunc(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 	_, err := fw.Invoke(1)
@@ -86,7 +86,7 @@ func Test_Cov6_FuncWrapAny_InvokeNilFunc(t *testing.T) {
 // Map — accessors
 // ═══════════════════════════════════════════
 
-func Test_Cov6_Map_GetAs(t *testing.T) {
+func Test_Map_GetAs(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"str": "hello", "int": 42, "bool": true,
@@ -122,7 +122,7 @@ func Test_Cov6_Map_GetAs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAs", actual)
 }
 
-func Test_Cov6_Map_GetAsBoolDefault(t *testing.T) {
+func Test_Map_GetAsBoolDefault(t *testing.T) {
 	// Arrange
 	m := args.Map{"bool": true}
 	val := m.GetAsBoolDefault("bool", false)
@@ -142,7 +142,7 @@ func Test_Cov6_Map_GetAsBoolDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsBoolDefault", actual)
 }
 
-func Test_Cov6_Map_ArgsCount(t *testing.T) {
+func Test_Map_ArgsCount(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -159,7 +159,7 @@ func Test_Cov6_Map_ArgsCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- ArgsCount", actual)
 }
 
-func Test_Cov6_Map_WorkFunc(t *testing.T) {
+func Test_Map_WorkFunc(t *testing.T) {
 	// Arrange
 	fn := func() string { return "hello" }
 	m := args.Map{"func": fn}
@@ -173,7 +173,7 @@ func Test_Cov6_Map_WorkFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- WorkFunc", actual)
 }
 
-func Test_Cov6_Map_GetFirstOfNames(t *testing.T) {
+func Test_Map_GetFirstOfNames(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"input": "hello",
@@ -196,7 +196,7 @@ func Test_Cov6_Map_GetFirstOfNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetFirstOfNames", actual)
 }
 
-func Test_Cov6_Map_HasFunc(t *testing.T) {
+func Test_Map_HasFunc(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	m1 := args.Map{"func": fn}
@@ -217,7 +217,7 @@ func Test_Cov6_Map_HasFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- HasFunc", actual)
 }
 
-func Test_Cov6_Map_CompileToStrings(t *testing.T) {
+func Test_Map_CompileToStrings(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,
@@ -239,7 +239,7 @@ func Test_Cov6_Map_CompileToStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- CompileToStrings", actual)
 }
 
-func Test_Cov6_Map_GoLiteralLines(t *testing.T) {
+func Test_Map_GoLiteralLines(t *testing.T) {
 	// Arrange
 	m := args.Map{"key": "val"}
 	lines := m.GoLiteralLines()
@@ -256,7 +256,7 @@ func Test_Cov6_Map_GoLiteralLines(t *testing.T) {
 // One through Six — basic (using *Any aliases for untyped usage)
 // ═══════════════════════════════════════════
 
-func Test_Cov6_One_Basic(t *testing.T) {
+func Test_One_Basic(t *testing.T) {
 	// Arrange
 	o := args.OneAny{First: 1}
 
@@ -275,7 +275,7 @@ func Test_Cov6_One_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "One returns correct value -- basic", actual)
 }
 
-func Test_Cov6_Two_Basic(t *testing.T) {
+func Test_Two_Basic(t *testing.T) {
 	// Arrange
 	tw := args.TwoAny{First: 1, Second: 2}
 
@@ -297,7 +297,7 @@ func Test_Cov6_Two_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two returns correct value -- basic", actual)
 }
 
-func Test_Cov6_Three_Basic(t *testing.T) {
+func Test_Three_Basic(t *testing.T) {
 	// Arrange
 	th := args.ThreeAny{First: 1, Second: 2, Third: 3}
 
@@ -319,7 +319,7 @@ func Test_Cov6_Three_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Three returns correct value -- basic", actual)
 }
 
-func Test_Cov6_Four_Basic(t *testing.T) {
+func Test_Four_Basic(t *testing.T) {
 	// Arrange
 	f := args.FourAny{First: 1, Second: 2, Third: 3, Fourth: 4}
 
@@ -343,7 +343,7 @@ func Test_Cov6_Four_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- basic", actual)
 }
 
-func Test_Cov6_Five_Basic(t *testing.T) {
+func Test_Five_Basic(t *testing.T) {
 	// Arrange
 	f := args.FiveAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5}
 
@@ -364,7 +364,7 @@ func Test_Cov6_Five_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Five returns correct value -- basic", actual)
 }
 
-func Test_Cov6_Six_Basic(t *testing.T) {
+func Test_Six_Basic(t *testing.T) {
 	// Arrange
 	s := args.SixAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6}
 
@@ -391,7 +391,7 @@ func Test_Cov6_Six_Basic(t *testing.T) {
 // Holder
 // ═══════════════════════════════════════════
 
-func Test_Cov6_Holder_Basic(t *testing.T) {
+func Test_Holder_Basic(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{First: "hello"}
 
@@ -413,7 +413,7 @@ func Test_Cov6_Holder_Basic(t *testing.T) {
 // LeftRight — args
 // ═══════════════════════════════════════════
 
-func Test_Cov6_LeftRight_Basic(t *testing.T) {
+func Test_LeftRight_Basic(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{Left: "hello", Right: 42}
 
@@ -435,7 +435,7 @@ func Test_Cov6_LeftRight_Basic(t *testing.T) {
 // Dynamic
 // ═══════════════════════════════════════════
 
-func Test_Cov6_Dynamic_Basic(t *testing.T) {
+func Test_Dynamic_Basic(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{Params: args.Map{"val": "hello"}, Expect: "expected"}
 

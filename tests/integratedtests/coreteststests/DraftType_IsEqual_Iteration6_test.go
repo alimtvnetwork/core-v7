@@ -14,7 +14,7 @@ import (
 // Covers DraftType.go L148, L174, L184
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_DraftType_IsEqual_InnerFieldsMismatch(t *testing.T) {
+func Test_DraftType_IsEqual_InnerFieldsMismatch(t *testing.T) {
 	// Arrange
 	dt1 := &coretests.DraftType{SampleString1: "a", SampleString2: "b", SampleInteger: 1}
 	dt1.SetF2Integer(10)
@@ -30,7 +30,7 @@ func Test_Cov2_DraftType_IsEqual_InnerFieldsMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- IsEqual inner field mismatch", actual)
 }
 
-func Test_Cov2_DraftType_JsonString(t *testing.T) {
+func Test_DraftType_JsonString(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "s1", SampleInteger: 42}
 
@@ -43,7 +43,7 @@ func Test_Cov2_DraftType_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- JsonString", actual)
 }
 
-func Test_Cov2_DraftType_JsonBytes(t *testing.T) {
+func Test_DraftType_JsonBytes(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "s1", SampleInteger: 42}
 
@@ -61,7 +61,7 @@ func Test_Cov2_DraftType_JsonBytes(t *testing.T) {
 // Covers SimpleTestCase.go L126-137, L143-154, L160-171
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_SimpleTestCase_ShouldBeEqual(t *testing.T) {
+func Test_SimpleTestCase_ShouldBeEqual(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "simple equal test",
@@ -72,7 +72,7 @@ func Test_Cov2_SimpleTestCase_ShouldBeEqual(t *testing.T) {
 	tc.ShouldBeEqual(0, t, "hello")
 }
 
-func Test_Cov2_SimpleTestCase_ShouldHaveNoError(t *testing.T) {
+func Test_SimpleTestCase_ShouldHaveNoError(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "no error test",
@@ -88,7 +88,7 @@ func Test_Cov2_SimpleTestCase_ShouldHaveNoError(t *testing.T) {
 	}()
 }
 
-func Test_Cov2_SimpleTestCase_ShouldContains(t *testing.T) {
+func Test_SimpleTestCase_ShouldContains(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "contains test",
@@ -108,7 +108,7 @@ func Test_Cov2_SimpleTestCase_ShouldContains(t *testing.T) {
 // Covers BaseTestCaseAssertions.go L73-77
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_BaseTestCase_ShouldBeExplicit_Disabled(t *testing.T) {
+func Test_BaseTestCase_ShouldBeExplicit_Disabled(t *testing.T) {
 	// Arrange
 	tc := &coretests.BaseTestCase{
 		Title:         "disabled test",
@@ -133,7 +133,7 @@ func Test_Cov2_BaseTestCase_ShouldBeExplicit_Disabled(t *testing.T) {
 // Covers BaseTestCaseValidation.go L18-23 (no-error path)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_BaseTestCase_TypesValidationMustPasses_NoError(t *testing.T) {
+func Test_BaseTestCase_TypesValidationMustPasses_NoError(t *testing.T) {
 	// Arrange
 	tc := &coretests.BaseTestCase{
 		Title:         "type validation",

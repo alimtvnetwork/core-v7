@@ -8,7 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
+func Test_AnyFunctionsExecuteResults_False(t *testing.T) {
 	// Arrange
 	result := conditional.AnyFunctionsExecuteResults(
 		false,
@@ -26,7 +26,7 @@ func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		false,
@@ -44,7 +44,7 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
-func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		true,
@@ -67,7 +67,7 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
-func Test_Cov_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
+func Test_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		true,

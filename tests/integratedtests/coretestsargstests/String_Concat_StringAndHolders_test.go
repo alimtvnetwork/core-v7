@@ -8,7 +8,7 @@ import (
 
 // ── args.String methods ──
 
-func Test_Cov2_String_Concat(t *testing.T) {
+func Test_String_Concat(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -21,7 +21,7 @@ func Test_Cov2_String_Concat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Concat returns joined -- two parts", actual)
 }
 
-func Test_Cov2_String_Join(t *testing.T) {
+func Test_String_Join(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -34,7 +34,7 @@ func Test_Cov2_String_Join(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Join returns joined -- with separator", actual)
 }
 
-func Test_Cov2_String_Split(t *testing.T) {
+func Test_String_Split(t *testing.T) {
 	// Arrange
 	s := args.String("a-b-c")
 
@@ -47,7 +47,7 @@ func Test_Cov2_String_Split(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Split returns parts -- 3 segments", actual)
 }
 
-func Test_Cov2_String_Quotes(t *testing.T) {
+func Test_String_Quotes(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -73,7 +73,7 @@ func Test_Cov2_String_Quotes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Quote methods return non-empty -- all variants", actual)
 }
 
-func Test_Cov2_String_Properties(t *testing.T) {
+func Test_String_Properties(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	empty := args.String("")
@@ -106,7 +106,7 @@ func Test_Cov2_String_Properties(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String properties return correct -- various methods", actual)
 }
 
-func Test_Cov2_String_TrimAndReplace(t *testing.T) {
+func Test_String_TrimAndReplace(t *testing.T) {
 	// Arrange
 	s := args.String("  hello  ")
 
@@ -129,7 +129,7 @@ func Test_Cov2_String_TrimAndReplace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TrimSpace/ReplaceAll/Substring return correct -- basic ops", actual)
 }
 
-func Test_Cov2_String_TrimReplaceMap(t *testing.T) {
+func Test_String_TrimReplaceMap(t *testing.T) {
 	// Arrange
 	s := args.String("{name}-{age}")
 
@@ -147,7 +147,7 @@ func Test_Cov2_String_TrimReplaceMap(t *testing.T) {
 
 // ── One methods ──
 
-func Test_Cov2_One_Methods(t *testing.T) {
+func Test_One_Methods(t *testing.T) {
 	// Arrange
 	one := args.OneAny{
 		First:  "hello",
@@ -176,7 +176,7 @@ func Test_Cov2_One_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "One methods return correct -- all accessors", actual)
 }
 
-func Test_Cov2_One_LeftRight(t *testing.T) {
+func Test_One_LeftRight(t *testing.T) {
 	// Arrange
 	one := args.OneAny{First: "hello"}
 
@@ -189,7 +189,7 @@ func Test_Cov2_One_LeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "One.LeftRight returns correct -- first as left", actual)
 }
 
-func Test_Cov2_One_Args(t *testing.T) {
+func Test_One_Args(t *testing.T) {
 	// Arrange
 	one := args.OneAny{First: "hello"}
 
@@ -211,7 +211,7 @@ func Test_Cov2_One_Args(t *testing.T) {
 
 // ── Two methods ──
 
-func Test_Cov2_Two_Methods(t *testing.T) {
+func Test_Two_Methods(t *testing.T) {
 	// Arrange
 	two := args.TwoAny{
 		First:  "hello",
@@ -239,7 +239,7 @@ func Test_Cov2_Two_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two methods return correct -- all accessors", actual)
 }
 
-func Test_Cov2_Two_LeftRight(t *testing.T) {
+func Test_Two_LeftRight(t *testing.T) {
 	// Arrange
 	two := args.TwoAny{First: "a", Second: "b"}
 
@@ -260,7 +260,7 @@ func Test_Cov2_Two_LeftRight(t *testing.T) {
 
 // ── Three methods ──
 
-func Test_Cov2_Three_Methods(t *testing.T) {
+func Test_Three_Methods(t *testing.T) {
 	// Arrange
 	three := args.ThreeAny{
 		First:  "a",
@@ -288,7 +288,7 @@ func Test_Cov2_Three_Methods(t *testing.T) {
 
 // ── Four methods ──
 
-func Test_Cov2_Four_Methods(t *testing.T) {
+func Test_Four_Methods(t *testing.T) {
 	// Arrange
 	four := args.FourAny{
 		First:  1,
@@ -315,7 +315,7 @@ func Test_Cov2_Four_Methods(t *testing.T) {
 
 // ── Five methods ──
 
-func Test_Cov2_Five_Methods(t *testing.T) {
+func Test_Five_Methods(t *testing.T) {
 	// Arrange
 	five := args.FiveAny{
 		First:  1,
@@ -343,7 +343,7 @@ func Test_Cov2_Five_Methods(t *testing.T) {
 
 // ── Six methods ──
 
-func Test_Cov2_Six_Methods(t *testing.T) {
+func Test_Six_Methods(t *testing.T) {
 	// Arrange
 	six := args.SixAny{
 		First:  1,
@@ -372,7 +372,7 @@ func Test_Cov2_Six_Methods(t *testing.T) {
 
 // ── LeftRight methods ──
 
-func Test_Cov2_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{
 		Left:   "a",
@@ -397,7 +397,7 @@ func Test_Cov2_LeftRight_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight.Clone returns copy -- all fields", actual)
 }
 
-func Test_Cov2_LeftRight_HasLeftRight(t *testing.T) {
+func Test_LeftRight_HasLeftRight(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{Left: "a", Right: "b"}
 
@@ -415,7 +415,7 @@ func Test_Cov2_LeftRight_HasLeftRight(t *testing.T) {
 
 // ── Holder methods ──
 
-func Test_Cov2_Holder_Methods(t *testing.T) {
+func Test_Holder_Methods(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{
 		First:  "a",
@@ -455,7 +455,7 @@ func Test_Cov2_Holder_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder methods return correct -- all accessors", actual)
 }
 
-func Test_Cov2_Holder_ArgHelpers(t *testing.T) {
+func Test_Holder_ArgHelpers(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{
 		First:  "a",
@@ -487,7 +487,7 @@ func Test_Cov2_Holder_ArgHelpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder Arg helpers return correct -- decomposed", actual)
 }
 
-func Test_Cov2_Holder_Args(t *testing.T) {
+func Test_Holder_Args(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{
 		First:  "a",
@@ -516,7 +516,7 @@ func Test_Cov2_Holder_Args(t *testing.T) {
 
 // ── Dynamic methods ──
 
-func Test_Cov2_Dynamic_Methods(t *testing.T) {
+func Test_Dynamic_Methods(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -552,7 +552,7 @@ func Test_Cov2_Dynamic_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic methods return correct -- various accessors", actual)
 }
 
-func Test_Cov2_Dynamic_TypedAccessors(t *testing.T) {
+func Test_Dynamic_TypedAccessors(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -595,7 +595,7 @@ func Test_Cov2_Dynamic_TypedAccessors(t *testing.T) {
 
 // ── FuncDetector ──
 
-func Test_Cov2_FuncDetector_GetFuncWrap_FromFunc(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_FromFunc(t *testing.T) {
 	// Arrange
 	fn := func(s string) int { return len(s) }
 
@@ -612,7 +612,7 @@ func Test_Cov2_FuncDetector_GetFuncWrap_FromFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncDetector.GetFuncWrap returns valid -- from func", actual)
 }
 
-func Test_Cov2_FuncDetector_GetFuncWrap_FromMap(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_FromMap(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"func": func() {},
@@ -633,7 +633,7 @@ func Test_Cov2_FuncDetector_GetFuncWrap_FromMap(t *testing.T) {
 
 // ── emptyCreator ──
 
-func Test_Cov2_Empty_Creators(t *testing.T) {
+func Test_Empty_Creators(t *testing.T) {
 	// Arrange & Act
 	m := args.Empty.Map()
 	fw := args.Empty.FuncWrap()

@@ -11,7 +11,7 @@ import (
 
 // ── Result methods ──
 
-func Test_Cov_Result_IsSafe(t *testing.T) {
+func Test_Result_IsSafe(t *testing.T) {
 	// Arrange
 	safe := results.ResultAny{Value: "ok"}
 	unsafe := results.ResultAny{Panicked: true}
@@ -33,7 +33,7 @@ func Test_Cov_Result_IsSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSafe returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_HasError(t *testing.T) {
+func Test_Result_HasError(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Error: errors.New("e")}
 
@@ -45,7 +45,7 @@ func Test_Cov_Result_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasError returns error -- with args", actual)
 }
 
-func Test_Cov_Result_HasPanicked(t *testing.T) {
+func Test_Result_HasPanicked(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Panicked: true}
 
@@ -57,7 +57,7 @@ func Test_Cov_Result_HasPanicked(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasPanicked panics -- with args", actual)
 }
 
-func Test_Cov_Result_IsResult(t *testing.T) {
+func Test_Result_IsResult(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42}
 
@@ -75,7 +75,7 @@ func Test_Cov_Result_IsResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsResult returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_IsResultTypeOf(t *testing.T) {
+func Test_Result_IsResultTypeOf(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42}
 
@@ -93,7 +93,7 @@ func Test_Cov_Result_IsResultTypeOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsResultTypeOf returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_IsError(t *testing.T) {
+func Test_Result_IsError(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Error: errors.New("test")}
 	noErr := results.ResultAny{}
@@ -114,7 +114,7 @@ func Test_Cov_Result_IsError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsError returns error -- with args", actual)
 }
 
-func Test_Cov_Result_ValueString(t *testing.T) {
+func Test_Result_ValueString(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42}
 
@@ -126,7 +126,7 @@ func Test_Cov_Result_ValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns non-empty -- with args", actual)
 }
 
-func Test_Cov_Result_ResultAt(t *testing.T) {
+func Test_Result_ResultAt(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{AllResults: []any{"a", "b"}}
 
@@ -148,7 +148,7 @@ func Test_Cov_Result_ResultAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultAt returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_ToMap(t *testing.T) {
+func Test_Result_ToMap(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42, ReturnCount: 1}
 	m := r.ToMap()
@@ -169,7 +169,7 @@ func Test_Cov_Result_ToMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToMap returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_ToMapCompact(t *testing.T) {
+func Test_Result_ToMapCompact(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 42}
 	m := r.ToMapCompact()
@@ -188,7 +188,7 @@ func Test_Cov_Result_ToMapCompact(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToMapCompact returns correct value -- with args", actual)
 }
 
-func Test_Cov_Result_String(t *testing.T) {
+func Test_Result_String(t *testing.T) {
 	// Arrange
 	rNormal := results.Result[int]{Value: 42, ReturnCount: 1}
 	rPanic := results.Result[int]{Panicked: true, PanicValue: "boom"}
@@ -212,7 +212,7 @@ func Test_Cov_Result_String(t *testing.T) {
 
 // ── Results (two-value) ──
 
-func Test_Cov_Results_String(t *testing.T) {
+func Test_Results_String(t *testing.T) {
 	// Arrange
 	rNormal := results.Results[int, bool]{Result: results.Result[int]{Value: 42}, Result2: true}
 	rPanic := results.Results[int, bool]{Result: results.Result[int]{Panicked: true, PanicValue: "boom"}}
@@ -234,7 +234,7 @@ func Test_Cov_Results_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Results_String returns correct value -- with args", actual)
 }
 
-func Test_Cov_Results_IsResult2(t *testing.T) {
+func Test_Results_IsResult2(t *testing.T) {
 	// Arrange
 	r := results.Results[int, string]{Result2: "hello"}
 
@@ -252,7 +252,7 @@ func Test_Cov_Results_IsResult2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsResult2 returns correct value -- with args", actual)
 }
 
-func Test_Cov_Results_Result2String(t *testing.T) {
+func Test_Results_Result2String(t *testing.T) {
 	// Arrange
 	r := results.Results[int, string]{Result2: "hello"}
 
@@ -264,7 +264,7 @@ func Test_Cov_Results_Result2String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result2String returns correct value -- with args", actual)
 }
 
-func Test_Cov_FromResultAny(t *testing.T) {
+func Test_FromResultAny(t *testing.T) {
 	// Arrange
 	raw := results.ResultAny{
 		Value:       42,
@@ -289,7 +289,7 @@ func Test_Cov_FromResultAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns correct value -- with args", actual)
 }
 
-func Test_Cov_FromResultAny_TypeMismatch(t *testing.T) {
+func Test_FromResultAny_TypeMismatch(t *testing.T) {
 	// Arrange
 	raw := results.ResultAny{AllResults: []any{"not-int", 42}}
 	r := results.FromResultAny[int, string](raw)
@@ -310,7 +310,7 @@ func Test_Cov_FromResultAny_TypeMismatch(t *testing.T) {
 
 // ── InvokeWithPanicRecovery ──
 
-func Test_Cov_InvokeWithPanicRecovery_NilFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_NilFunc(t *testing.T) {
 	// Arrange
 	result := results.InvokeWithPanicRecovery(nil, nil)
 
@@ -322,7 +322,7 @@ func Test_Cov_InvokeWithPanicRecovery_NilFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NilFunc returns nil -- with args", actual)
 }
 
-func Test_Cov_InvokeWithPanicRecovery_NotFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_NotFunc(t *testing.T) {
 	// Arrange
 	result := results.InvokeWithPanicRecovery(42, nil)
 
@@ -334,7 +334,7 @@ func Test_Cov_InvokeWithPanicRecovery_NotFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NotFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov_InvokeWithPanicRecovery_SimpleFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_SimpleFunc(t *testing.T) {
 	// Arrange
 	fn := func(x int) int { return x * 2 }
 	result := results.InvokeWithPanicRecovery(fn, nil, 5)
@@ -348,7 +348,7 @@ func Test_Cov_InvokeWithPanicRecovery_SimpleFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 	// Arrange
 	called := false
 	fn := func() { called = true }
@@ -370,7 +370,7 @@ func Test_Cov_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov_InvokeWithPanicRecovery_PanicFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_PanicFunc(t *testing.T) {
 	// Arrange
 	fn := func() { panic("boom") }
 	result := results.InvokeWithPanicRecovery(fn, nil)
@@ -391,7 +391,7 @@ func Test_Cov_InvokeWithPanicRecovery_PanicFunc(t *testing.T) {
 
 // ── MethodName ──
 
-func Test_Cov_MethodName_Nil(t *testing.T) {
+func Test_MethodName_Nil(t *testing.T) {
 	// Arrange
 	result := results.MethodName(nil)
 
@@ -403,7 +403,7 @@ func Test_Cov_MethodName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MethodName_Nil returns nil -- with args", actual)
 }
 
-func Test_Cov_MethodName_NotFunc(t *testing.T) {
+func Test_MethodName_NotFunc(t *testing.T) {
 	// Arrange
 	result := results.MethodName(42)
 
@@ -415,7 +415,7 @@ func Test_Cov_MethodName_NotFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MethodName_NotFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov_MethodName_Func(t *testing.T) {
+func Test_MethodName_Func(t *testing.T) {
 	// Arrange
 	result := results.MethodName(fmt.Sprintf)
 
@@ -429,14 +429,14 @@ func Test_Cov_MethodName_Func(t *testing.T) {
 
 // ── ResultAssert (ShouldMatchResult) ──
 
-func Test_Cov_ShouldMatchResult_Basic(t *testing.T) {
+func Test_ShouldMatchResult_Basic(t *testing.T) {
 	r := results.Result[int]{Value: 42, Panicked: false, ReturnCount: 1}
 	exp := results.ResultAny{Value: "42", Panicked: false, ReturnCount: 1}
 	// Should not fail
 	r.ShouldMatchResult(t, 0, "basic", exp)
 }
 
-func Test_Cov_ShouldMatchResult_ExplicitFields(t *testing.T) {
+func Test_ShouldMatchResult_ExplicitFields(t *testing.T) {
 	r := results.Result[int]{Value: 42, Panicked: false}
 	exp := results.ResultAny{Panicked: false}
 	r.ShouldMatchResult(t, 0, "explicit", exp, "panicked")

@@ -9,7 +9,7 @@ import (
 
 // ── Four ──
 
-func Test_Cov4_Four_Basic(t *testing.T) {
+func Test_Four_Basic(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{First: "a", Second: 1, Third: true, Fourth: 3.14, Expect: "yes"}
 
@@ -35,7 +35,7 @@ func Test_Cov4_Four_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four basic -- all types", actual)
 }
 
-func Test_Cov4_Four_GetByIndex(t *testing.T) {
+func Test_Four_GetByIndex(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{First: "a", Second: 1, Third: true, Fourth: 3.14}
 
@@ -55,7 +55,7 @@ func Test_Cov4_Four_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- GetByIndex", actual)
 }
 
-func Test_Cov4_Four_Slice(t *testing.T) {
+func Test_Four_Slice(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{First: "a", Second: 1, Third: true, Fourth: 3.14}
 
@@ -67,7 +67,7 @@ func Test_Cov4_Four_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- Slice", actual)
 }
 
-func Test_Cov4_Four_String(t *testing.T) {
+func Test_Four_String(t *testing.T) {
 	// Arrange
 	four := &args.Four[string, int, bool, float64]{First: "a", Second: 1, Third: true, Fourth: 3.14}
 
@@ -81,7 +81,7 @@ func Test_Cov4_Four_String(t *testing.T) {
 
 // ── Five ──
 
-func Test_Cov4_Five_Basic(t *testing.T) {
+func Test_Five_Basic(t *testing.T) {
 	// Arrange
 	five := &args.Five[string, int, bool, float64, byte]{First: "a", Second: 1, Third: true, Fourth: 3.14, Fifth: byte(5), Expect: "yes"}
 
@@ -99,7 +99,7 @@ func Test_Cov4_Five_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Five returns correct value -- basic", actual)
 }
 
-func Test_Cov4_Five_GetByIndex(t *testing.T) {
+func Test_Five_GetByIndex(t *testing.T) {
 	// Arrange
 	five := &args.Five[string, int, bool, float64, byte]{First: "a", Second: 1, Third: true, Fourth: 3.14, Fifth: byte(5)}
 
@@ -113,7 +113,7 @@ func Test_Cov4_Five_GetByIndex(t *testing.T) {
 
 // ── Six ──
 
-func Test_Cov4_Six_Basic(t *testing.T) {
+func Test_Six_Basic(t *testing.T) {
 	// Arrange
 	six := &args.Six[string, int, bool, float64, byte, uint]{
 		First: "a", Second: 1, Third: true, Fourth: 3.14, Fifth: byte(5), Sixth: uint(6), Expect: "yes",
@@ -134,7 +134,7 @@ func Test_Cov4_Six_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Six returns correct value -- basic", actual)
 }
 
-func Test_Cov4_Six_GetByIndex(t *testing.T) {
+func Test_Six_GetByIndex(t *testing.T) {
 	// Arrange
 	six := &args.Six[string, int, bool, float64, byte, uint]{
 		First: "a", Second: 1, Third: true, Fourth: 3.14, Fifth: byte(5), Sixth: uint(6),
@@ -150,7 +150,7 @@ func Test_Cov4_Six_GetByIndex(t *testing.T) {
 
 // ── Dynamic ──
 
-func Test_Cov4_Dynamic_Basic(t *testing.T) {
+func Test_Dynamic_Basic(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{Params: args.Map{"first": "hello"}, Expect: 42}
 
@@ -174,7 +174,7 @@ func Test_Cov4_Dynamic_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- basic", actual)
 }
 
-func Test_Cov4_Dynamic_GetByIndex(t *testing.T) {
+func Test_Dynamic_GetByIndex(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{Params: args.Map{"first": "hello"}}
 	result := d.GetByIndex(0)
@@ -190,7 +190,7 @@ func Test_Cov4_Dynamic_GetByIndex(t *testing.T) {
 
 // ── FuncMap ──
 
-func Test_Cov4_FuncMap_Basic(t *testing.T) {
+func Test_FuncMap_Basic(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 	fm.Add(func() {})
@@ -211,7 +211,7 @@ func Test_Cov4_FuncMap_Basic(t *testing.T) {
 
 // ── Map.Get missing key ──
 
-func Test_Cov4_Map_Get_MissingKey(t *testing.T) {
+func Test_Map_Get_MissingKey(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	val, ok := m.Get("missing")
@@ -230,7 +230,7 @@ func Test_Cov4_Map_Get_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Get missing key", actual)
 }
 
-func Test_Cov4_Map_GetFirstOfNames_None(t *testing.T) {
+func Test_Map_GetFirstOfNames_None(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	val := m.GetFirstOfNames("x", "y", "z")
@@ -245,7 +245,7 @@ func Test_Cov4_Map_GetFirstOfNames_None(t *testing.T) {
 
 // ── Map compile ──
 
-func Test_Cov4_MapCompile_ToGoLiteral(t *testing.T) {
+func Test_MapCompile_ToGoLiteral(t *testing.T) {
 	// Arrange
 	m := args.Map{"key": "value"}
 	literal := m.GoLiteralString()
@@ -260,7 +260,7 @@ func Test_Cov4_MapCompile_ToGoLiteral(t *testing.T) {
 
 // ── Holder nil func ──
 
-func Test_Cov4_Holder_NilFunc(t *testing.T) {
+func Test_Holder_NilFunc(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func() string]{First: "hello"}
 
@@ -280,7 +280,7 @@ func Test_Cov4_Holder_NilFunc(t *testing.T) {
 
 // ── Empty creator ──
 
-func Test_Cov4_Empty_One(t *testing.T) {
+func Test_Empty_One(t *testing.T) {
 	// Arrange
 	h := args.Empty.Holder()
 
@@ -292,7 +292,7 @@ func Test_Cov4_Empty_One(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty returns empty -- Holder", actual)
 }
 
-func Test_Cov4_Empty_Two(t *testing.T) {
+func Test_Empty_Two(t *testing.T) {
 	// Arrange
 	fw := args.Empty.FuncWrap()
 
@@ -304,7 +304,7 @@ func Test_Cov4_Empty_Two(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty returns empty -- FuncWrap", actual)
 }
 
-func Test_Cov4_Empty_Map(t *testing.T) {
+func Test_Empty_Map(t *testing.T) {
 	// Arrange
 	m := args.Empty.Map()
 
@@ -318,7 +318,7 @@ func Test_Cov4_Empty_Map(t *testing.T) {
 
 // ── OneFunc / TwoFunc / ThreeFunc ──
 
-func Test_Cov4_OneFunc(t *testing.T) {
+func Test_OneFunc(t *testing.T) {
 	// Arrange
 	of := &args.OneFunc[string]{First: "a", WorkFunc: func() string { return "hello" }}
 
@@ -336,7 +336,7 @@ func Test_Cov4_OneFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OneFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov4_TwoFunc(t *testing.T) {
+func Test_TwoFunc(t *testing.T) {
 	// Arrange
 	tf := &args.TwoFunc[string, int]{First: "a", Second: 1, WorkFunc: func() string { return "hello" }}
 
@@ -356,7 +356,7 @@ func Test_Cov4_TwoFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TwoFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov4_ThreeFunc(t *testing.T) {
+func Test_ThreeFunc(t *testing.T) {
 	// Arrange
 	tf := &args.ThreeFunc[string, int, bool]{
 		First: "a", Second: 1, Third: true, WorkFunc: func() string { return "hello" },
@@ -378,7 +378,7 @@ func Test_Cov4_ThreeFunc(t *testing.T) {
 
 // ── FuncWrap with args ──
 
-func Test_Cov4_FuncWrap_WithArgs(t *testing.T) {
+func Test_FuncWrap_WithArgs(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fw := args.NewFuncWrap.Default(fn)
@@ -399,7 +399,7 @@ func Test_Cov4_FuncWrap_WithArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns non-empty -- with args", actual)
 }
 
-func Test_Cov4_FuncWrap_Nil(t *testing.T) {
+func Test_FuncWrap_Nil(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 

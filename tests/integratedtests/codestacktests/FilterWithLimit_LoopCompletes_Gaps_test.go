@@ -20,7 +20,7 @@ import (
 // succeeds from test context). Documented as accepted dead-code gaps.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov12_FilterWithLimit_LoopCompletes(t *testing.T) {
+func Test_FilterWithLimit_LoopCompletes(t *testing.T) {
 	// Arrange — create a small collection, filter takes all, limit > count
 	stacks := codestack.New.StackTrace.SkipNone()
 	collection := &stacks

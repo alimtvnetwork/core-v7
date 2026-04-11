@@ -11,7 +11,7 @@ import (
 // Dynamic — nil receiver, getters, caching
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Dynamic_NilReceiver(t *testing.T) {
+func Test_Dynamic_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *args.DynamicAny
 
@@ -41,7 +41,7 @@ func Test_Cov7_Dynamic_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns nil -- nil receiver", actual)
 }
 
-func Test_Cov7_Dynamic_GetMethods(t *testing.T) {
+func Test_Dynamic_GetMethods(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -88,7 +88,7 @@ func Test_Cov7_Dynamic_GetMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- get methods", actual)
 }
 
-func Test_Cov7_Dynamic_GetLowerCase(t *testing.T) {
+func Test_Dynamic_GetLowerCase(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -123,7 +123,7 @@ func Test_Cov7_Dynamic_GetLowerCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- getLowerCase", actual)
 }
 
-func Test_Cov7_Dynamic_HasDefinedAll(t *testing.T) {
+func Test_Dynamic_HasDefinedAll(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -148,7 +148,7 @@ func Test_Cov7_Dynamic_HasDefinedAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- hasDefinedAll", actual)
 }
 
-func Test_Cov7_Dynamic_SliceCaching(t *testing.T) {
+func Test_Dynamic_SliceCaching(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{"a": 1},
@@ -173,7 +173,7 @@ func Test_Cov7_Dynamic_SliceCaching(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- slice caching", actual)
 }
 
-func Test_Cov7_Dynamic_ItemAccessors(t *testing.T) {
+func Test_Dynamic_ItemAccessors(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -203,7 +203,7 @@ func Test_Cov7_Dynamic_ItemAccessors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- item accessors", actual)
 }
 
-func Test_Cov7_Dynamic_ValidArgs(t *testing.T) {
+func Test_Dynamic_ValidArgs(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -229,7 +229,7 @@ func Test_Cov7_Dynamic_ValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns non-empty -- validArgs", actual)
 }
 
-func Test_Cov7_Dynamic_GetByIndex(t *testing.T) {
+func Test_Dynamic_GetByIndex(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{Params: args.Map{"a": 1}}
 
@@ -247,7 +247,7 @@ func Test_Cov7_Dynamic_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- getByIndex", actual)
 }
 
-func Test_Cov7_Dynamic_AsInterfaces(t *testing.T) {
+func Test_Dynamic_AsInterfaces(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{Params: args.Map{"a": 1}}
 
@@ -267,7 +267,7 @@ func Test_Cov7_Dynamic_AsInterfaces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- asInterfaces", actual)
 }
 
-func Test_Cov7_Dynamic_Get_NilReceiver(t *testing.T) {
+func Test_Dynamic_Get_NilReceiver(t *testing.T) {
 	// Arrange
 	var d *args.DynamicAny
 	item, valid := d.Get("x")
@@ -290,7 +290,7 @@ func Test_Cov7_Dynamic_Get_NilReceiver(t *testing.T) {
 // DynamicFunc — nil receiver, func methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_DynamicFunc_NilReceiver(t *testing.T) {
+func Test_DynamicFunc_NilReceiver(t *testing.T) {
 	// Arrange
 	var df *args.DynamicFuncAny
 
@@ -316,7 +316,7 @@ func Test_Cov7_DynamicFunc_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns nil -- nil receiver", actual)
 }
 
-func Test_Cov7_DynamicFunc_FuncMethods(t *testing.T) {
+func Test_DynamicFunc_FuncMethods(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	df := args.DynamicFuncAny{
@@ -343,7 +343,7 @@ func Test_Cov7_DynamicFunc_FuncMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- func methods", actual)
 }
 
-func Test_Cov7_DynamicFunc_GetMethods(t *testing.T) {
+func Test_DynamicFunc_GetMethods(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -376,7 +376,7 @@ func Test_Cov7_DynamicFunc_GetMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- get methods", actual)
 }
 
-func Test_Cov7_DynamicFunc_WhenTitle(t *testing.T) {
+func Test_DynamicFunc_WhenTitle(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -399,7 +399,7 @@ func Test_Cov7_DynamicFunc_WhenTitle(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- when title", actual)
 }
 
-func Test_Cov7_DynamicFunc_GetLowerCase(t *testing.T) {
+func Test_DynamicFunc_GetLowerCase(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -431,7 +431,7 @@ func Test_Cov7_DynamicFunc_GetLowerCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- getLowerCase", actual)
 }
 
-func Test_Cov7_DynamicFunc_HasDefinedAll(t *testing.T) {
+func Test_DynamicFunc_HasDefinedAll(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -454,7 +454,7 @@ func Test_Cov7_DynamicFunc_HasDefinedAll(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- hasDefinedAll", actual)
 }
 
-func Test_Cov7_DynamicFunc_SliceCaching(t *testing.T) {
+func Test_DynamicFunc_SliceCaching(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	df := args.DynamicFuncAny{
@@ -481,7 +481,7 @@ func Test_Cov7_DynamicFunc_SliceCaching(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- slice caching", actual)
 }
 
-func Test_Cov7_DynamicFunc_ItemAccessors(t *testing.T) {
+func Test_DynamicFunc_ItemAccessors(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -505,7 +505,7 @@ func Test_Cov7_DynamicFunc_ItemAccessors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- item accessors", actual)
 }
 
-func Test_Cov7_DynamicFunc_GetByIndex(t *testing.T) {
+func Test_DynamicFunc_GetByIndex(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{Params: args.Map{"a": 1}}
 
@@ -523,7 +523,7 @@ func Test_Cov7_DynamicFunc_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- getByIndex", actual)
 }
 
-func Test_Cov7_DynamicFunc_ValidArgs(t *testing.T) {
+func Test_DynamicFunc_ValidArgs(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{
@@ -549,7 +549,7 @@ func Test_Cov7_DynamicFunc_ValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns non-empty -- validArgs", actual)
 }
 
-func Test_Cov7_DynamicFunc_AsInterfaces(t *testing.T) {
+func Test_DynamicFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{Params: args.Map{"a": 1}}
 
@@ -569,7 +569,7 @@ func Test_Cov7_DynamicFunc_AsInterfaces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns correct value -- asInterfaces", actual)
 }
 
-func Test_Cov7_DynamicFunc_Get_NilReceiver(t *testing.T) {
+func Test_DynamicFunc_Get_NilReceiver(t *testing.T) {
 	// Arrange
 	var df *args.DynamicFuncAny
 	item, valid := df.Get("x")
@@ -588,7 +588,7 @@ func Test_Cov7_DynamicFunc_Get_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicFunc returns nil -- Get nil", actual)
 }
 
-func Test_Cov7_DynamicFunc_HasFirst(t *testing.T) {
+func Test_DynamicFunc_HasFirst(t *testing.T) {
 	// Arrange
 	df1 := args.DynamicFuncAny{Params: args.Map{"first": "hello"}}
 	df2 := args.DynamicFuncAny{Params: args.Map{}}
@@ -611,7 +611,7 @@ func Test_Cov7_DynamicFunc_HasFirst(t *testing.T) {
 // One — downcasts, args, interfaces
 // ═══════════════════════════════════════════
 
-func Test_Cov7_One_AllMethods(t *testing.T) {
+func Test_One_AllMethods(t *testing.T) {
 	// Arrange
 	o := args.OneAny{First: "hello", Expect: 42}
 
@@ -641,7 +641,7 @@ func Test_Cov7_One_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "One returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_One_ArgTwoAndLeftRight(t *testing.T) {
+func Test_One_ArgTwoAndLeftRight(t *testing.T) {
 	// Arrange
 	o := args.OneAny{First: "hello", Expect: 42}
 	a2 := o.ArgTwo()
@@ -661,7 +661,7 @@ func Test_Cov7_One_ArgTwoAndLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "One returns correct value -- argTwo leftRight", actual)
 }
 
-func Test_Cov7_One_AsInterfaces(t *testing.T) {
+func Test_One_AsInterfaces(t *testing.T) {
 	// Arrange
 	o := args.OneAny{First: "hello"}
 
@@ -683,7 +683,7 @@ func Test_Cov7_One_AsInterfaces(t *testing.T) {
 // OneFunc — func methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_OneFunc_AllMethods(t *testing.T) {
+func Test_OneFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s + "!" }
 	of := args.OneFuncAny{First: "hello", WorkFunc: fn, Expect: "hello!"}
@@ -717,7 +717,7 @@ func Test_Cov7_OneFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OneFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_OneFunc_ArgTwoAndLeftRight(t *testing.T) {
+func Test_OneFunc_ArgTwoAndLeftRight(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	of := args.OneFuncAny{First: "a", WorkFunc: fn, Expect: "b"}
@@ -740,7 +740,7 @@ func Test_Cov7_OneFunc_ArgTwoAndLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OneFunc returns correct value -- argTwo leftRight", actual)
 }
 
-func Test_Cov7_OneFunc_AsInterfaces(t *testing.T) {
+func Test_OneFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	of := args.OneFuncAny{First: "a"}
 
@@ -764,7 +764,7 @@ func Test_Cov7_OneFunc_AsInterfaces(t *testing.T) {
 // Two — downcasts, args, interfaces
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Two_AllMethods(t *testing.T) {
+func Test_Two_AllMethods(t *testing.T) {
 	// Arrange
 	tw := args.TwoAny{First: "a", Second: "b", Expect: "c"}
 
@@ -794,7 +794,7 @@ func Test_Cov7_Two_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Two_DowncastAndConvert(t *testing.T) {
+func Test_Two_DowncastAndConvert(t *testing.T) {
 	// Arrange
 	tw := args.TwoAny{First: "a", Second: "b", Expect: "c"}
 	a2 := tw.ArgTwo()
@@ -816,7 +816,7 @@ func Test_Cov7_Two_DowncastAndConvert(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Two returns correct value -- downcast", actual)
 }
 
-func Test_Cov7_Two_AsInterfaces(t *testing.T) {
+func Test_Two_AsInterfaces(t *testing.T) {
 	// Arrange
 	tw := args.TwoAny{First: "a", Second: "b"}
 
@@ -838,7 +838,7 @@ func Test_Cov7_Two_AsInterfaces(t *testing.T) {
 // TwoFunc — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_TwoFunc_AllMethods(t *testing.T) {
+func Test_TwoFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func(a, b string) string { return a + b }
 	tf := args.TwoFuncAny{First: "a", Second: "b", WorkFunc: fn, Expect: "ab"}
@@ -873,7 +873,7 @@ func Test_Cov7_TwoFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TwoFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_TwoFunc_DowncastAndConvert(t *testing.T) {
+func Test_TwoFunc_DowncastAndConvert(t *testing.T) {
 	// Arrange
 	tf := args.TwoFuncAny{First: "a", Second: "b", Expect: "c"}
 	a2 := tf.ArgTwo()
@@ -893,7 +893,7 @@ func Test_Cov7_TwoFunc_DowncastAndConvert(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TwoFunc returns correct value -- downcast", actual)
 }
 
-func Test_Cov7_TwoFunc_AsInterfaces(t *testing.T) {
+func Test_TwoFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	tf := args.TwoFuncAny{First: "a", Second: "b"}
 
@@ -917,7 +917,7 @@ func Test_Cov7_TwoFunc_AsInterfaces(t *testing.T) {
 // Three — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Three_AllMethods(t *testing.T) {
+func Test_Three_AllMethods(t *testing.T) {
 	// Arrange
 	th := args.ThreeAny{First: "a", Second: "b", Third: "c", Expect: "d"}
 	a2 := th.ArgTwo()
@@ -950,7 +950,7 @@ func Test_Cov7_Three_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Three returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Three_AsInterfaces(t *testing.T) {
+func Test_Three_AsInterfaces(t *testing.T) {
 	// Arrange
 	th := args.ThreeAny{First: "a", Second: "b", Third: "c"}
 
@@ -972,7 +972,7 @@ func Test_Cov7_Three_AsInterfaces(t *testing.T) {
 // ThreeFunc — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_ThreeFunc_AllMethods(t *testing.T) {
+func Test_ThreeFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func(a, b, c string) string { return a + b + c }
 	tf := args.ThreeFuncAny{First: "a", Second: "b", Third: "c", WorkFunc: fn, Expect: "abc"}
@@ -1006,7 +1006,7 @@ func Test_Cov7_ThreeFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ThreeFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_ThreeFunc_AsInterfaces(t *testing.T) {
+func Test_ThreeFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	tf := args.ThreeFuncAny{First: "a"}
 
@@ -1030,7 +1030,7 @@ func Test_Cov7_ThreeFunc_AsInterfaces(t *testing.T) {
 // Four — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Four_AllMethods(t *testing.T) {
+func Test_Four_AllMethods(t *testing.T) {
 	// Arrange
 	f := args.FourAny{First: "a", Second: "b", Third: "c", Fourth: "d", Expect: "e"}
 	a2 := f.ArgTwo()
@@ -1061,7 +1061,7 @@ func Test_Cov7_Four_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Four_AsInterfaces(t *testing.T) {
+func Test_Four_AsInterfaces(t *testing.T) {
 	// Arrange
 	f := args.FourAny{First: "a"}
 
@@ -1083,7 +1083,7 @@ func Test_Cov7_Four_AsInterfaces(t *testing.T) {
 // FourFunc — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_FourFunc_AllMethods(t *testing.T) {
+func Test_FourFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	ff := args.FourFuncAny{First: "a", Second: "b", Third: "c", Fourth: "d", WorkFunc: fn, Expect: "e"}
@@ -1117,7 +1117,7 @@ func Test_Cov7_FourFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FourFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_FourFunc_AsInterfaces(t *testing.T) {
+func Test_FourFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	ff := args.FourFuncAny{First: "a"}
 
@@ -1141,7 +1141,7 @@ func Test_Cov7_FourFunc_AsInterfaces(t *testing.T) {
 // Five — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Five_AllMethods(t *testing.T) {
+func Test_Five_AllMethods(t *testing.T) {
 	// Arrange
 	f := args.FiveAny{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", Expect: "f"}
 	a2 := f.ArgTwo()
@@ -1173,7 +1173,7 @@ func Test_Cov7_Five_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Five returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Five_AsInterfaces(t *testing.T) {
+func Test_Five_AsInterfaces(t *testing.T) {
 	// Arrange
 	f := args.FiveAny{First: "a"}
 
@@ -1195,7 +1195,7 @@ func Test_Cov7_Five_AsInterfaces(t *testing.T) {
 // FiveFunc — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_FiveFunc_AllMethods(t *testing.T) {
+func Test_FiveFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	ff := args.FiveFuncAny{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", WorkFunc: fn, Expect: "f"}
@@ -1231,7 +1231,7 @@ func Test_Cov7_FiveFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FiveFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_FiveFunc_AsInterfaces(t *testing.T) {
+func Test_FiveFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	ff := args.FiveFuncAny{First: "a"}
 
@@ -1255,7 +1255,7 @@ func Test_Cov7_FiveFunc_AsInterfaces(t *testing.T) {
 // Six — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Six_AllMethods(t *testing.T) {
+func Test_Six_AllMethods(t *testing.T) {
 	// Arrange
 	s := args.SixAny{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", Sixth: "f", Expect: "g"}
 	a2 := s.ArgTwo()
@@ -1292,7 +1292,7 @@ func Test_Cov7_Six_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Six returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Six_AsInterfaces(t *testing.T) {
+func Test_Six_AsInterfaces(t *testing.T) {
 	// Arrange
 	s := args.SixAny{First: "a"}
 
@@ -1314,7 +1314,7 @@ func Test_Cov7_Six_AsInterfaces(t *testing.T) {
 // SixFunc — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_SixFunc_AllMethods(t *testing.T) {
+func Test_SixFunc_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	sf := args.SixFuncAny{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", Sixth: "f", WorkFunc: fn, Expect: "g"}
@@ -1353,7 +1353,7 @@ func Test_Cov7_SixFunc_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SixFunc returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_SixFunc_AsInterfaces(t *testing.T) {
+func Test_SixFunc_AsInterfaces(t *testing.T) {
 	// Arrange
 	sf := args.SixFuncAny{First: "a"}
 
@@ -1377,7 +1377,7 @@ func Test_Cov7_SixFunc_AsInterfaces(t *testing.T) {
 // Holder — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Holder_AllMethods(t *testing.T) {
+func Test_Holder_AllMethods(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	h := args.HolderAny{
@@ -1425,7 +1425,7 @@ func Test_Cov7_Holder_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_Holder_AsInterfaces(t *testing.T) {
+func Test_Holder_AsInterfaces(t *testing.T) {
 	// Arrange
 	h := args.HolderAny{First: "a"}
 
@@ -1447,7 +1447,7 @@ func Test_Cov7_Holder_AsInterfaces(t *testing.T) {
 // LeftRight — clone, has methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_LeftRight_AllMethods(t *testing.T) {
+func Test_LeftRight_AllMethods(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{Left: "a", Right: "b", Expect: "c"}
 	clone := lr.Clone()
@@ -1478,7 +1478,7 @@ func Test_Cov7_LeftRight_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_LeftRight_AsInterfaces(t *testing.T) {
+func Test_LeftRight_AsInterfaces(t *testing.T) {
 	// Arrange
 	lr := args.LeftRightAny{Left: "a", Right: "b"}
 
@@ -1500,7 +1500,7 @@ func Test_Cov7_LeftRight_AsInterfaces(t *testing.T) {
 // Map — remaining methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_Map_NilMap(t *testing.T) {
+func Test_Map_NilMap(t *testing.T) {
 	// Arrange
 	var m args.Map
 
@@ -1521,7 +1521,7 @@ func Test_Cov7_Map_NilMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns nil -- nil", actual)
 }
 
-func Test_Cov7_Map_GetNilMap(t *testing.T) {
+func Test_Map_GetNilMap(t *testing.T) {
 	// Arrange
 	var m args.Map
 	item, valid := m.Get("x")
@@ -1540,7 +1540,7 @@ func Test_Cov7_Map_GetNilMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns nil -- Get nil", actual)
 }
 
-func Test_Cov7_Map_GetAsStringDefault(t *testing.T) {
+func Test_Map_GetAsStringDefault(t *testing.T) {
 	// Arrange
 	m := args.Map{"name": "hello"}
 
@@ -1558,7 +1558,7 @@ func Test_Cov7_Map_GetAsStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsStringDefault", actual)
 }
 
-func Test_Cov7_Map_GetAsIntDefault(t *testing.T) {
+func Test_Map_GetAsIntDefault(t *testing.T) {
 	// Arrange
 	m := args.Map{"val": 42}
 
@@ -1576,7 +1576,7 @@ func Test_Cov7_Map_GetAsIntDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsIntDefault", actual)
 }
 
-func Test_Cov7_Map_GetAsAnyItems(t *testing.T) {
+func Test_Map_GetAsAnyItems(t *testing.T) {
 	// Arrange
 	m := args.Map{"items": []any{1, 2, 3}}
 	items, ok := m.GetAsAnyItems("items")
@@ -1598,7 +1598,7 @@ func Test_Cov7_Map_GetAsAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsAnyItems", actual)
 }
 
-func Test_Cov7_Map_Accessors(t *testing.T) {
+func Test_Map_Accessors(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"when": "w", "title": "t",
@@ -1626,7 +1626,7 @@ func Test_Cov7_Map_Accessors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- accessors", actual)
 }
 
-func Test_Cov7_Map_SetActual(t *testing.T) {
+func Test_Map_SetActual(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 	m.SetActual(42)
@@ -1639,7 +1639,7 @@ func Test_Cov7_Map_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- SetActual", actual)
 }
 
-func Test_Cov7_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	// Arrange
 	m := args.Map{"strs": []string{"a", "b"}}
 	result := m.GetAsStringSliceFirstOfNames("strs")
@@ -1662,7 +1662,7 @@ func Test_Cov7_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsStringSliceFirstOfNames", actual)
 }
 
-func Test_Cov7_Map_SortedKeys(t *testing.T) {
+func Test_Map_SortedKeys(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,
@@ -1687,7 +1687,7 @@ func Test_Cov7_Map_SortedKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- SortedKeys", actual)
 }
 
-func Test_Cov7_Map_CompileToString(t *testing.T) {
+func Test_Map_CompileToString(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	s := m.CompileToString()
@@ -1700,7 +1700,7 @@ func Test_Cov7_Map_CompileToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- CompileToString", actual)
 }
 
-func Test_Cov7_Map_GoLiteralString(t *testing.T) {
+func Test_Map_GoLiteralString(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	s := m.GoLiteralString()
@@ -1713,7 +1713,7 @@ func Test_Cov7_Map_GoLiteralString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GoLiteralString", actual)
 }
 
-func Test_Cov7_Map_EmptyGoLiteralLines(t *testing.T) {
+func Test_Map_EmptyGoLiteralLines(t *testing.T) {
 	// Arrange
 	m := args.Map{}
 	lines := m.GoLiteralLines()
@@ -1726,7 +1726,7 @@ func Test_Cov7_Map_EmptyGoLiteralLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns empty -- empty GoLiteralLines", actual)
 }
 
-func Test_Cov7_Map_WorkFuncName(t *testing.T) {
+func Test_Map_WorkFuncName(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	m := args.Map{"func": fn}
@@ -1740,7 +1740,7 @@ func Test_Cov7_Map_WorkFuncName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- WorkFuncName", actual)
 }
 
-func Test_Cov7_Map_GetFirstFuncNameOf(t *testing.T) {
+func Test_Map_GetFirstFuncNameOf(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	m := args.Map{"func": fn}
@@ -1754,7 +1754,7 @@ func Test_Cov7_Map_GetFirstFuncNameOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetFirstFuncNameOf", actual)
 }
 
-func Test_Cov7_Map_GetFuncName(t *testing.T) {
+func Test_Map_GetFuncName(t *testing.T) {
 	// Arrange
 	m1 := args.Map{}
 	m2 := args.Map{"func": func() {}}
@@ -1773,7 +1773,7 @@ func Test_Cov7_Map_GetFuncName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetFuncName", actual)
 }
 
-func Test_Cov7_Map_Slice(t *testing.T) {
+func Test_Map_Slice(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"a": 1,
@@ -1789,7 +1789,7 @@ func Test_Cov7_Map_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Slice", actual)
 }
 
-func Test_Cov7_Map_String(t *testing.T) {
+func Test_Map_String(t *testing.T) {
 	// Arrange
 	m := args.Map{"a": 1}
 	s := m.String()
@@ -1806,7 +1806,7 @@ func Test_Cov7_Map_String(t *testing.T) {
 // String type — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_String_AllMethods(t *testing.T) {
+func Test_String_AllMethods(t *testing.T) {
 	// Arrange
 	s := args.String("hello world")
 
@@ -1839,7 +1839,7 @@ func Test_Cov7_String_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- all methods", actual)
 }
 
-func Test_Cov7_String_ConcatJoinSplit(t *testing.T) {
+func Test_String_ConcatJoinSplit(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	concat := s.Concat(" world")
@@ -1862,7 +1862,7 @@ func Test_Cov7_String_ConcatJoinSplit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- concat join split", actual)
 }
 
-func Test_Cov7_String_Quotes(t *testing.T) {
+func Test_String_Quotes(t *testing.T) {
 	// Arrange
 	s := args.String("test")
 	dq := s.DoubleQuote()
@@ -1885,7 +1885,7 @@ func Test_Cov7_String_Quotes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- quotes", actual)
 }
 
-func Test_Cov7_String_Empty(t *testing.T) {
+func Test_String_Empty(t *testing.T) {
 	// Arrange
 	s := args.String("")
 	ws := args.String("  ")
@@ -1909,7 +1909,7 @@ func Test_Cov7_String_Empty(t *testing.T) {
 // emptyCreator — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_EmptyCreator(t *testing.T) {
+func Test_EmptyCreator(t *testing.T) {
 	// Arrange
 	m := args.Empty.Map()
 	fw := args.Empty.FuncWrap()
@@ -1935,7 +1935,7 @@ func Test_Cov7_EmptyCreator(t *testing.T) {
 // funcDetector — GetFuncWrap
 // ═══════════════════════════════════════════
 
-func Test_Cov7_FuncDetector_GetFuncWrap(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fw := args.NewFuncWrap.Default(fn)
@@ -1970,7 +1970,7 @@ func Test_Cov7_FuncDetector_GetFuncWrap(t *testing.T) {
 // FuncMap — all methods
 // ═══════════════════════════════════════════
 
-func Test_Cov7_FuncMap_BasicMethods(t *testing.T) {
+func Test_FuncMap_BasicMethods(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 	fn := func(a, b int) int { return a + b }
@@ -1991,7 +1991,7 @@ func Test_Cov7_FuncMap_BasicMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- basic", actual)
 }
 
-func Test_Cov7_FuncMap_HasAndGet(t *testing.T) {
+func Test_FuncMap_HasAndGet(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fm := args.FuncMap{}
@@ -2024,7 +2024,7 @@ func Test_Cov7_FuncMap_HasAndGet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- has and get", actual)
 }
 
-func Test_Cov7_FuncMap_Adds(t *testing.T) {
+func Test_FuncMap_Adds(t *testing.T) {
 	// Arrange
 	fn1 := func() {}
 	fn2 := func(x int) int { return x }
@@ -2039,7 +2039,7 @@ func Test_Cov7_FuncMap_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- adds", actual)
 }
 
-func Test_Cov7_FuncMap_AddsEmpty(t *testing.T) {
+func Test_FuncMap_AddsEmpty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 	fm.Adds()
@@ -2052,7 +2052,7 @@ func Test_Cov7_FuncMap_AddsEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns empty -- adds empty", actual)
 }
 
-func Test_Cov7_FuncMap_IsValidInvalid(t *testing.T) {
+func Test_FuncMap_IsValidInvalid(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fm := args.FuncMap{}
@@ -2079,7 +2079,7 @@ func Test_Cov7_FuncMap_IsValidInvalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns error -- isValid/isInvalid", actual)
 }
 
-func Test_Cov7_FuncMap_FuncInfo(t *testing.T) {
+func Test_FuncMap_FuncInfo(t *testing.T) {
 	// Arrange
 	fn := func(a int) string { return "" }
 	fm := args.FuncMap{}
@@ -2115,7 +2115,7 @@ func Test_Cov7_FuncMap_FuncInfo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- func info", actual)
 }
 
-func Test_Cov7_FuncMap_IsPublicPrivate(t *testing.T) {
+func Test_FuncMap_IsPublicPrivate(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fm := args.FuncMap{}
@@ -2141,7 +2141,7 @@ func Test_Cov7_FuncMap_IsPublicPrivate(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- public/private", actual)
 }
 
-func Test_Cov7_FuncMap_GetType(t *testing.T) {
+func Test_FuncMap_GetType(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fm := args.FuncMap{}
@@ -2173,7 +2173,7 @@ func Test_Cov7_FuncMap_GetType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- getType", actual)
 }
 
-func Test_Cov7_FuncMap_Invoke(t *testing.T) {
+func Test_FuncMap_Invoke(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fm := args.FuncMap{}
@@ -2206,7 +2206,7 @@ func Test_Cov7_FuncMap_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- invoke", actual)
 }
 
-func Test_Cov7_FuncMap_VoidCallNoReturn(t *testing.T) {
+func Test_FuncMap_VoidCallNoReturn(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fm := args.FuncMap{}
@@ -2235,7 +2235,7 @@ func Test_Cov7_FuncMap_VoidCallNoReturn(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- VoidCallNoReturn", actual)
 }
 
-func Test_Cov7_FuncMap_ValidationError(t *testing.T) {
+func Test_FuncMap_ValidationError(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fm := args.FuncMap{}
@@ -2263,7 +2263,7 @@ func Test_Cov7_FuncMap_ValidationError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns error -- validationError", actual)
 }
 
-func Test_Cov7_FuncMap_InvalidError(t *testing.T) {
+func Test_FuncMap_InvalidError(t *testing.T) {
 	// Arrange
 	emptyFm := args.FuncMap{}
 	fn := func() {}
@@ -2284,7 +2284,7 @@ func Test_Cov7_FuncMap_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns error -- invalidError", actual)
 }
 
-func Test_Cov7_FuncMap_InvalidErrorByName(t *testing.T) {
+func Test_FuncMap_InvalidErrorByName(t *testing.T) {
 	// Arrange
 	emptyFm := args.FuncMap{}
 	fn := func() {}
@@ -2310,7 +2310,7 @@ func Test_Cov7_FuncMap_InvalidErrorByName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns error -- invalidErrorByName", actual)
 }
 
-func Test_Cov7_FuncMap_GetEmptyPascalCase(t *testing.T) {
+func Test_FuncMap_GetEmptyPascalCase(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 	name := fm.GetPascalCaseFuncName("test")
@@ -2323,7 +2323,7 @@ func Test_Cov7_FuncMap_GetEmptyPascalCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns empty -- empty getPascalCase", actual)
 }
 
-func Test_Cov7_FuncMap_VerifyArgs(t *testing.T) {
+func Test_FuncMap_VerifyArgs(t *testing.T) {
 	// Arrange
 	fn := func(a int) int { return a }
 	fm := args.FuncMap{}
@@ -2351,7 +2351,7 @@ func Test_Cov7_FuncMap_VerifyArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- verifyArgs missing", actual)
 }
 
-func Test_Cov7_FuncMap_ValidateMethodArgs(t *testing.T) {
+func Test_FuncMap_ValidateMethodArgs(t *testing.T) {
 	// Arrange
 	fn := func(a int) int { return a }
 	fm := args.FuncMap{}
@@ -2367,7 +2367,7 @@ func Test_Cov7_FuncMap_ValidateMethodArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns non-empty -- validateMethodArgs missing", actual)
 }
 
-func Test_Cov7_FuncMap_GetFirstResponseOfInvoke(t *testing.T) {
+func Test_FuncMap_GetFirstResponseOfInvoke(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fm := args.FuncMap{}
@@ -2397,7 +2397,7 @@ func Test_Cov7_FuncMap_GetFirstResponseOfInvoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- getFirstResponse", actual)
 }
 
-func Test_Cov7_FuncMap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncMap_InvokeResultOfIndex(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fm := args.FuncMap{}
@@ -2427,7 +2427,7 @@ func Test_Cov7_FuncMap_InvokeResultOfIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- invokeResultOfIndex", actual)
 }
 
-func Test_Cov7_FuncMap_InvokeFirstAndError(t *testing.T) {
+func Test_FuncMap_InvokeFirstAndError(t *testing.T) {
 	// Arrange
 	fn := func(a, b int) int { return a + b }
 	fm := args.FuncMap{}
@@ -2443,7 +2443,7 @@ func Test_Cov7_FuncMap_InvokeFirstAndError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns error -- invokeFirstAndError missing", actual)
 }
 
-func Test_Cov7_FuncMap_EmptyHas(t *testing.T) {
+func Test_FuncMap_EmptyHas(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -2461,7 +2461,7 @@ func Test_Cov7_FuncMap_EmptyHas(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns empty -- empty has/get", actual)
 }
 
-func Test_Cov7_FuncMap_InArgsVerifyRv_Missing(t *testing.T) {
+func Test_FuncMap_InArgsVerifyRv_Missing(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 	fm.Add(func() {})

@@ -13,7 +13,7 @@ import (
 
 // ── DraftType.IsEqual: inner fields mismatch (line 148-150) ──
 
-func Test_Cov4_DraftType_IsEqual_InnerFieldF2Mismatch(t *testing.T) {
+func Test_DraftType_IsEqual_InnerFieldF2Mismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{
 		SampleString1: "s1",
@@ -47,7 +47,7 @@ func Test_Cov4_DraftType_IsEqual_InnerFieldF2Mismatch(t *testing.T) {
 
 // ── BaseTestCase.ShouldBe: disabled case triggers noPrintAssert (BaseTestCase) ──
 
-func Test_Cov4_BaseTestCase_ShouldBe_DisabledCase(t *testing.T) {
+func Test_BaseTestCase_ShouldBe_DisabledCase(t *testing.T) {
 	// Arrange
 	tc := coretests.BaseTestCase{
 		IsEnable: issetter.False,

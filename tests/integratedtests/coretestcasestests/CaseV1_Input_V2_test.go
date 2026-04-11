@@ -14,7 +14,7 @@ import (
 
 // ── CaseV1 additional methods ──
 
-func Test_Cov4_CaseV1_Input(t *testing.T) {
+func Test_CaseV1_Input(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{ArrangeInput: "hello returns correct value -- with args"}
 
@@ -26,7 +26,7 @@ func Test_Cov4_CaseV1_Input(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.Input -- hello", actual)
 }
 
-func Test_Cov4_CaseV1_Expected(t *testing.T) {
+func Test_CaseV1_Expected(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{ExpectedInput: "world"}
 
@@ -38,7 +38,7 @@ func Test_Cov4_CaseV1_Expected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.Expected -- world", actual)
 }
 
-func Test_Cov4_CaseV1_ExpectedLines_String(t *testing.T) {
+func Test_CaseV1_ExpectedLines_String(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{ExpectedInput: "single"}
 	lines := c.ExpectedLines()
@@ -57,7 +57,7 @@ func Test_Cov4_CaseV1_ExpectedLines_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.ExpectedLines string -- single", actual)
 }
 
-func Test_Cov4_CaseV1_ExpectedLines_Slice(t *testing.T) {
+func Test_CaseV1_ExpectedLines_Slice(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{ExpectedInput: []string{"a", "b"}}
 	lines := c.ExpectedLines()
@@ -70,7 +70,7 @@ func Test_Cov4_CaseV1_ExpectedLines_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.ExpectedLines slice -- 2 items", actual)
 }
 
-func Test_Cov4_CaseV1_Actual(t *testing.T) {
+func Test_CaseV1_Actual(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{ActualInput: "test"}
 
@@ -82,7 +82,7 @@ func Test_Cov4_CaseV1_Actual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.Actual -- test", actual)
 }
 
-func Test_Cov4_CaseV1_SetActual(t *testing.T) {
+func Test_CaseV1_SetActual(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{}
 	c.SetActual("set")
@@ -96,7 +96,7 @@ func Test_Cov4_CaseV1_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.SetActual -- called", actual)
 }
 
-func Test_Cov4_CaseV1_CaseTitle(t *testing.T) {
+func Test_CaseV1_CaseTitle(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{Title: "my title"}
 
@@ -108,7 +108,7 @@ func Test_Cov4_CaseV1_CaseTitle(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.CaseTitle -- my title", actual)
 }
 
-func Test_Cov4_CaseV1_SetExpected(t *testing.T) {
+func Test_CaseV1_SetExpected(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{}
 	c.SetExpected("val")
@@ -121,7 +121,7 @@ func Test_Cov4_CaseV1_SetExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CaseV1.SetExpected -- called", actual)
 }
 
-func Test_Cov4_CaseV1_ShouldBeEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "equal first test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -131,7 +131,7 @@ func Test_Cov4_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 	c.ShouldBeEqualFirst(t, "hello returns correct value -- with args")
 }
 
-func Test_Cov4_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "trim equal first test",
 		ExpectedInput: "hello",
@@ -140,7 +140,7 @@ func Test_Cov4_CaseV1_ShouldBeTrimEqualFirst(t *testing.T) {
 	_ = err // exercise the trim-equal path
 }
 
-func Test_Cov4_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
+func Test_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "sorted equal first test",
 		ExpectedInput: []string{"b", "a"},
@@ -148,7 +148,7 @@ func Test_Cov4_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
 	c.ShouldBeSortedEqualFirst(t, "b", "a")
 }
 
-func Test_Cov4_CaseV1_ShouldContainsFirst(t *testing.T) {
+func Test_CaseV1_ShouldContainsFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "contains first test",
 		ExpectedInput: "hel",
@@ -158,7 +158,7 @@ func Test_Cov4_CaseV1_ShouldContainsFirst(t *testing.T) {
 
 // ── CaseNilSafe: ShouldBeSafe ──
 
-func Test_Cov4_CaseNilSafe_ShouldBeSafe(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "ClonePtr nil safe",
 		Func:  (*coretests.DraftType).ClonePtr,
@@ -172,7 +172,7 @@ func Test_Cov4_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 	tc.ShouldBeSafe(t, 0)
 }
 
-func Test_Cov4_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "ClonePtr nil safe first",
 		Func:  (*coretests.DraftType).ClonePtr,
@@ -188,7 +188,7 @@ func Test_Cov4_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
 
 // ── CaseV1 VerifyTypeOfMatch with disabled verify ──
 
-func Test_Cov4_CaseV1_VerifyTypeOfMatch_SkipVerify(t *testing.T) {
+func Test_CaseV1_VerifyTypeOfMatch_SkipVerify(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "skip verify",
@@ -209,7 +209,7 @@ func Test_Cov4_CaseV1_VerifyTypeOfMatch_SkipVerify(t *testing.T) {
 
 // ── CaseV1 ShouldBeEqual wraps string ──
 
-func Test_Cov4_CaseV1_ShouldBeEqual_StringWrap(t *testing.T) {
+func Test_CaseV1_ShouldBeEqual_StringWrap(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "string wrap test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -221,7 +221,7 @@ func Test_Cov4_CaseV1_ShouldBeEqual_StringWrap(t *testing.T) {
 
 // ── CaseV1 ShouldBeEqual empty string ──
 
-func Test_Cov4_CaseV1_ShouldBeEqual_EmptyString(t *testing.T) {
+func Test_CaseV1_ShouldBeEqual_EmptyString(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "empty string wrap test",
 		ExpectedInput: "",

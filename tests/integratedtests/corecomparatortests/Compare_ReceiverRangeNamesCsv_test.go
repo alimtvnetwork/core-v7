@@ -9,7 +9,7 @@ import (
 
 // ── Cover receiver method RangeNamesCsv (vs package-level func) ──
 
-func Test_Cov7_Compare_ReceiverRangeNamesCsv(t *testing.T) {
+func Test_Compare_ReceiverRangeNamesCsv(t *testing.T) {
 	// Arrange
 	csv := corecomparator.Equal.RangeNamesCsv()
 
@@ -23,7 +23,7 @@ func Test_Cov7_Compare_ReceiverRangeNamesCsv(t *testing.T) {
 
 // ── IsCompareEqualLogically: branch where expectedCompare is Equal but it is not ──
 
-func Test_Cov7_IsCompareEqualLogically_ExpectedEqual_ItNotEqual(t *testing.T) {
+func Test_IsCompareEqualLogically_ExpectedEqual_ItNotEqual(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"result": corecomparator.LeftGreater.IsCompareEqualLogically(corecomparator.Equal),
@@ -36,7 +36,7 @@ func Test_Cov7_IsCompareEqualLogically_ExpectedEqual_ItNotEqual(t *testing.T) {
 
 // ── OnlySupportedDirectErr error path ──
 
-func Test_Cov7_OnlySupportedDirectErr_NotMatching(t *testing.T) {
+func Test_OnlySupportedDirectErr_NotMatching(t *testing.T) {
 	// Arrange
 	err := corecomparator.Inconclusive.OnlySupportedDirectErr(corecomparator.Equal, corecomparator.LeftGreater)
 
@@ -50,7 +50,7 @@ func Test_Cov7_OnlySupportedDirectErr_NotMatching(t *testing.T) {
 
 // ── IsLeftLessEqualLogically on non-less values ──
 
-func Test_Cov7_IsLeftLessEqualLogically_Greater(t *testing.T) {
+func Test_IsLeftLessEqualLogically_Greater(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"greater": corecomparator.LeftGreater.IsLeftLessEqualLogically(),
@@ -67,7 +67,7 @@ func Test_Cov7_IsLeftLessEqualLogically_Greater(t *testing.T) {
 
 // ── IsLeftGreaterEqualLogically on non-greater values ──
 
-func Test_Cov7_IsLeftGreaterEqualLogically_Less(t *testing.T) {
+func Test_IsLeftGreaterEqualLogically_Less(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"less":  corecomparator.LeftLess.IsLeftGreaterEqualLogically(),
@@ -84,7 +84,7 @@ func Test_Cov7_IsLeftGreaterEqualLogically_Less(t *testing.T) {
 
 // ── MinLength equal values ──
 
-func Test_Cov7_MinLength_Equal(t *testing.T) {
+func Test_MinLength_Equal(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecomparator.MinLength(3, 3)}
 

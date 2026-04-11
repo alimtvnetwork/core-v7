@@ -9,7 +9,7 @@ import (
 )
 
 // Test_Cov3_MethodName_NilInput tests MethodName with nil funcRef.
-func Test_Cov3_MethodName_NilInput(t *testing.T) {
+func Test_MethodName_NilInput(t *testing.T) {
 	// Arrange / Act
 	actual := results.MethodName(nil)
 
@@ -20,7 +20,7 @@ func Test_Cov3_MethodName_NilInput(t *testing.T) {
 }
 
 // Test_Cov3_MethodName_NonFuncInput tests MethodName with a non-function value.
-func Test_Cov3_MethodName_NonFuncInput(t *testing.T) {
+func Test_MethodName_NonFuncInput(t *testing.T) {
 	// Arrange / Act
 	actual := results.MethodName("not-a-func")
 
@@ -31,7 +31,7 @@ func Test_Cov3_MethodName_NonFuncInput(t *testing.T) {
 }
 
 // Test_Cov3_MethodName_SimpleFuncNoDot tests MethodName with a simple function.
-func Test_Cov3_MethodName_SimpleFuncNoDot(t *testing.T) {
+func Test_MethodName_SimpleFuncNoDot(t *testing.T) {
 	// Arrange
 	myFunc := func() {}
 
@@ -45,7 +45,7 @@ func Test_Cov3_MethodName_SimpleFuncNoDot(t *testing.T) {
 }
 
 // Test_Cov3_InvokeWithPanicRecovery_VoidFunc tests InvokeWithPanicRecovery on a void func.
-func Test_Cov3_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
+func Test_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 	// Arrange
 	voidFunc := func() {}
 
@@ -62,7 +62,7 @@ func Test_Cov3_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 }
 
 // Test_Cov3_InvokeWithPanicRecovery_NilPtrError tests extractErrorFromValue with nil ptr implementing error.
-func Test_Cov3_InvokeWithPanicRecovery_NilPtrError(t *testing.T) {
+func Test_InvokeWithPanicRecovery_NilPtrError(t *testing.T) {
 	// Arrange
 	funcReturningNilPtrError := func() error {
 		var e *customError
@@ -78,7 +78,7 @@ func Test_Cov3_InvokeWithPanicRecovery_NilPtrError(t *testing.T) {
 }
 
 // Test_Cov3_InvokeWithPanicRecovery_FuncReturning42 tests with a func returning int.
-func Test_Cov3_InvokeWithPanicRecovery_FuncReturning42(t *testing.T) {
+func Test_InvokeWithPanicRecovery_FuncReturning42(t *testing.T) {
 	// Arrange
 	funcReturning42 := func() int { return 42 }
 
@@ -95,7 +95,7 @@ func Test_Cov3_InvokeWithPanicRecovery_FuncReturning42(t *testing.T) {
 }
 
 // Test_Cov3_FilterByFields_MissingKey tests filterByFields with a key not present in the map.
-func Test_Cov3_FilterByFields_MissingKey(t *testing.T) {
+func Test_FilterByFields_MissingKey(t *testing.T) {
 	// Arrange
 	funcReturning42 := func() int { return 42 }
 	expected := results.ResultAny{

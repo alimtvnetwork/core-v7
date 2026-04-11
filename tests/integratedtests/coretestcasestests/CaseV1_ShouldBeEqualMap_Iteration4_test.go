@@ -11,7 +11,7 @@ import (
 // ── CaseV1.ShouldBeEqualMap — mismatch branch ──
 // Covers CaseV1MapAssertions.go L55-69 and CaseNilSafeAssertHelper.go L17-27
 
-func Test_Cov8_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
+func Test_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
 	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "deliberate mismatch for coverage",
@@ -36,7 +36,7 @@ func Test_Cov8_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
 // ── GenericGherkins.ShouldBeEqualMap — not-ok type assertion ──
 // Covers GenericGherkinsMapAssertions.go L33-36
 
-func Test_Cov8_GenericGherkins_ShouldBeEqualMap_NotMap(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualMap_NotMap(t *testing.T) {
 	// Arrange — Expected is string, not args.Map
 	tc := coretestcases.GenericGherkins[string, string]{
 		Title:    "type assertion fail",
@@ -65,7 +65,7 @@ func Test_Cov8_GenericGherkins_ShouldBeEqualMap_NotMap(t *testing.T) {
 // ── GenericGherkins.ShouldBeEqualMap — mismatch branch ──
 // Covers GenericGherkinsMapAssertions.go L50-64
 
-func Test_Cov8_GenericGherkins_ShouldBeEqualMap_Mismatch(t *testing.T) {
+func Test_GenericGherkins_ShouldBeEqualMap_Mismatch(t *testing.T) {
 	// Arrange
 	tc := coretestcases.GenericGherkins[string, args.Map]{
 		Title:    "deliberate mismatch",
@@ -87,7 +87,7 @@ func Test_Cov8_GenericGherkins_ShouldBeEqualMap_Mismatch(t *testing.T) {
 // ── GenericGherkins.ShouldMatchExpected — mismatch branch ──
 // Covers GenericGherkinsTypedAssertions.go L28-34
 
-func Test_Cov8_GenericGherkins_ShouldMatchExpected_Mismatch(t *testing.T) {
+func Test_GenericGherkins_ShouldMatchExpected_Mismatch(t *testing.T) {
 	// Arrange
 	tc := coretestcases.GenericGherkins[string, bool]{
 		Title:    "typed mismatch",

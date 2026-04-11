@@ -17,7 +17,7 @@ import (
 // CaseV1 ShouldBeSortedEqual — covers CaseV1.go L484-492
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldBeSortedEqual(t *testing.T) {
+func Test_ShouldBeSortedEqual(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "sorted equal direct",
 		ExpectedInput: []string{"a", "b"},
@@ -29,7 +29,7 @@ func Test_Cov10_ShouldBeSortedEqual(t *testing.T) {
 // CaseV1 ShouldContains — covers CaseV1.go L498-505
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldContains(t *testing.T) {
+func Test_ShouldContains(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "contains direct",
 		ExpectedInput: "hello",
@@ -41,7 +41,7 @@ func Test_Cov10_ShouldContains(t *testing.T) {
 // CaseV1 ShouldStartsWith — covers CaseV1.go L511-518
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldStartsWith(t *testing.T) {
+func Test_ShouldStartsWith(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "starts with direct",
 		ExpectedInput: "hello",
@@ -53,7 +53,7 @@ func Test_Cov10_ShouldStartsWith(t *testing.T) {
 // CaseV1 ShouldEndsWith — covers CaseV1.go L524-531
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldEndsWith(t *testing.T) {
+func Test_ShouldEndsWith(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "ends with direct",
 		ExpectedInput: "world",
@@ -65,7 +65,7 @@ func Test_Cov10_ShouldEndsWith(t *testing.T) {
 // CaseV1 ShouldBeNotEqual — covers CaseV1.go L537-544
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldBeNotEqual(t *testing.T) {
+func Test_ShouldBeNotEqual(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "not equal direct",
 		ExpectedInput: "hello",
@@ -77,7 +77,7 @@ func Test_Cov10_ShouldBeNotEqual(t *testing.T) {
 // CaseV1 ShouldBeRegex — covers CaseV1.go L554-561
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldBeRegex(t *testing.T) {
+func Test_ShouldBeRegex(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "regex direct",
 		ExpectedInput: "hel.*",
@@ -89,7 +89,7 @@ func Test_Cov10_ShouldBeRegex(t *testing.T) {
 // CaseV1 ShouldBeTrimRegex — covers CaseV1.go L571-579
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldBeTrimRegex(t *testing.T) {
+func Test_ShouldBeTrimRegex(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "trim regex direct",
 		ExpectedInput: "hel.*",
@@ -101,7 +101,7 @@ func Test_Cov10_ShouldBeTrimRegex(t *testing.T) {
 // CaseV1 ShouldHaveNoError — covers CaseV1.go L586-601
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldHaveNoError(t *testing.T) {
+func Test_ShouldHaveNoError(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title: "no error direct",
 	}
@@ -112,7 +112,7 @@ func Test_Cov10_ShouldHaveNoError(t *testing.T) {
 // CaseV1 PrepareTitle — covers CaseV1.go L636-643
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_PrepareTitle(t *testing.T) {
+func Test_PrepareTitle(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{Title: "title"}
 	title := c.PrepareTitle(1, "suffix")
@@ -129,7 +129,7 @@ func Test_Cov10_PrepareTitle(t *testing.T) {
 // CaseV1 AsSimpleTestCaseWrapperContractsBinder — covers CaseV1.go L649-651
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
+func Test_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{Title: "binder"}
 	binder := c.AsSimpleTestCaseWrapperContractsBinder()
@@ -146,7 +146,7 @@ func Test_Cov10_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
 // CaseV1 VerifyTypeOfMatch — covers CaseV1.go L89-110
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyTypeOfMatch(t *testing.T) {
+func Test_VerifyTypeOfMatch(t *testing.T) {
 	vt := coretests.NewVerifyTypeOf("actual")
 	c := coretestcases.CaseV1{
 		Title:         "type match",
@@ -161,7 +161,7 @@ func Test_Cov10_VerifyTypeOfMatch(t *testing.T) {
 // CaseV1 VerifyTypeOfMust — covers CaseV1.go L120-141
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyTypeOfMust(t *testing.T) {
+func Test_VerifyTypeOfMust(t *testing.T) {
 	vt := coretests.NewVerifyTypeOf("actual")
 	c := coretestcases.CaseV1{
 		Title:         "type must",
@@ -176,7 +176,7 @@ func Test_Cov10_VerifyTypeOfMust(t *testing.T) {
 // CaseV1 VerifyType — covers CaseV1.go L151-172
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyType(t *testing.T) {
+func Test_VerifyType(t *testing.T) {
 	vt := coretests.NewVerifyTypeOf("actual")
 	c := coretestcases.CaseV1{
 		Title:         "verify type",
@@ -191,7 +191,7 @@ func Test_Cov10_VerifyType(t *testing.T) {
 // CaseV1 VerifyTypeMust — covers CaseV1.go L182-203
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyTypeMust(t *testing.T) {
+func Test_VerifyTypeMust(t *testing.T) {
 	vt := coretests.NewVerifyTypeOf("actual")
 	c := coretestcases.CaseV1{
 		Title:         "verify type must",
@@ -206,7 +206,7 @@ func Test_Cov10_VerifyTypeMust(t *testing.T) {
 // CaseV1 SliceValidatorCondition — covers CaseV1.go L241-256
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_SliceValidatorCondition(t *testing.T) {
+func Test_SliceValidatorCondition(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "slice validator condition",
@@ -230,7 +230,7 @@ func Test_Cov10_SliceValidatorCondition(t *testing.T) {
 // CaseV1 VerifyAllEqualCondition — covers CaseV1.go L217-228
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyAllEqualCondition(t *testing.T) {
+func Test_VerifyAllEqualCondition(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "verify all equal condition",
@@ -250,7 +250,7 @@ func Test_Cov10_VerifyAllEqualCondition(t *testing.T) {
 // CaseV1 VerifyError with type verification — covers CaseV1.go L349-366
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_VerifyError_WithTypeVerify(t *testing.T) {
+func Test_VerifyError_WithTypeVerify(t *testing.T) {
 	// Act
 	actualStr := "hello"
 	vt := &coretests.VerifyTypeOf{
@@ -277,7 +277,7 @@ func Test_Cov10_VerifyError_WithTypeVerify(t *testing.T) {
 // CaseNilSafe — covers CaseNilSafe.go + CaseNilSafeAssertHelper.go
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_CaseNilSafe_ShouldBeSafe(t *testing.T) {
+func Test_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 	tc := coretestcases.CaseNilSafe{
 		Title: "ClonePtr nil safe direct",
 		Func:  (*coretests.DraftType).ClonePtr,
@@ -295,7 +295,7 @@ func Test_Cov10_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 // CaseV1 First variants — covers CaseV1FirstAssertions.go
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov10_ShouldContainsFirst(t *testing.T) {
+func Test_ShouldContainsFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "contains first direct",
 		ExpectedInput: "hel",
@@ -303,7 +303,7 @@ func Test_Cov10_ShouldContainsFirst(t *testing.T) {
 	c.ShouldContainsFirst(t, "hello world")
 }
 
-func Test_Cov10_ShouldStartsWithFirst(t *testing.T) {
+func Test_ShouldStartsWithFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "starts with first direct",
 		ExpectedInput: "hello",
@@ -311,7 +311,7 @@ func Test_Cov10_ShouldStartsWithFirst(t *testing.T) {
 	c.ShouldStartsWithFirst(t, "hello world")
 }
 
-func Test_Cov10_ShouldBeRegexFirst(t *testing.T) {
+func Test_ShouldBeRegexFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "regex first direct",
 		ExpectedInput: "hel.*",

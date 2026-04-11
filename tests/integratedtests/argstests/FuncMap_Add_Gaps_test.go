@@ -15,7 +15,7 @@ import (
 
 // --- FuncMap nil receiver branches ---
 
-func Test_Cov11_FuncMap_Add_Nil(t *testing.T) {
+func Test_FuncMap_Add_Nil(t *testing.T) {
 	// Arrange
 	_ = args.FuncMap(nil)
 
@@ -29,7 +29,7 @@ func Test_Cov11_FuncMap_Add_Nil(t *testing.T) {
 
 // --- FuncMap.AddStructFunctions ---
 
-func Test_Cov11_FuncMap_AddStructFunctions_ValidStruct(t *testing.T) {
+func Test_FuncMap_AddStructFunctions_ValidStruct(t *testing.T) {
 	// Arrange
 	type sampleStruct struct{}
 
@@ -45,7 +45,7 @@ func Test_Cov11_FuncMap_AddStructFunctions_ValidStruct(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncMap_AddStructFunctions_Empty(t *testing.T) {
+func Test_FuncMap_AddStructFunctions_Empty(t *testing.T) {
 	// Arrange
 	fm := args.FuncMap{}
 
@@ -60,7 +60,7 @@ func Test_Cov11_FuncMap_AddStructFunctions_Empty(t *testing.T) {
 
 // --- FuncWrap.IsEqual branches ---
 
-func Test_Cov11_FuncWrap_IsEqual_SameName(t *testing.T) {
+func Test_FuncWrap_IsEqual_SameName(t *testing.T) {
 	// Arrange
 	sampleFunc := func(a string) string { return a }
 	fw1 := args.NewFuncWrap.Default(sampleFunc)
@@ -75,7 +75,7 @@ func Test_Cov11_FuncWrap_IsEqual_SameName(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_IsEqual_DifferentPublic(t *testing.T) {
+func Test_FuncWrap_IsEqual_DifferentPublic(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func(a string) string { return a })
 	fw2 := args.NewFuncWrap.Default(func(a int) int { return a })
@@ -89,7 +89,7 @@ func Test_Cov11_FuncWrap_IsEqual_DifferentPublic(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_IsEqual_DifferentReturnCount(t *testing.T) {
+func Test_FuncWrap_IsEqual_DifferentReturnCount(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(func() string { return "" })
 	fw2 := args.NewFuncWrap.Default(func() (string, error) { return "", nil })
@@ -105,7 +105,7 @@ func Test_Cov11_FuncWrap_IsEqual_DifferentReturnCount(t *testing.T) {
 
 // --- FuncWrapInvoke branches ---
 
-func Test_Cov11_FuncWrap_InvokeMust_Panics(t *testing.T) {
+func Test_FuncWrap_InvokeMust_Panics(t *testing.T) {
 	// Arrange — create invalid FuncWrap
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -117,7 +117,7 @@ func Test_Cov11_FuncWrap_InvokeMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_GetFirstResponseOfInvoke_Error(t *testing.T) {
+func Test_FuncWrap_GetFirstResponseOfInvoke_Error(t *testing.T) {
 	// Arrange — invalid func wrap
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -130,7 +130,7 @@ func Test_Cov11_FuncWrap_GetFirstResponseOfInvoke_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeResultOfIndex_Error(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -143,7 +143,7 @@ func Test_Cov11_FuncWrap_InvokeResultOfIndex_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeError_Error(t *testing.T) {
+func Test_FuncWrap_InvokeError_Error(t *testing.T) {
 	// Arrange
 	sampleFunc := func() error { return errors.New("test error") }
 	fw := args.NewFuncWrap.Default(sampleFunc)
@@ -159,7 +159,7 @@ func Test_Cov11_FuncWrap_InvokeError_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeFirstAndError_Insufficient(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError_Insufficient(t *testing.T) {
 	// Arrange
 	sampleFunc := func() string { return "test" }
 	fw := args.NewFuncWrap.Default(sampleFunc)
@@ -175,7 +175,7 @@ func Test_Cov11_FuncWrap_InvokeFirstAndError_Insufficient(t *testing.T) {
 
 // --- FuncWrapTypedHelpers branches ---
 
-func Test_Cov11_FuncWrap_InvokeAsBool_Error(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -189,7 +189,7 @@ func Test_Cov11_FuncWrap_InvokeAsBool_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsError_Error(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -202,7 +202,7 @@ func Test_Cov11_FuncWrap_InvokeAsError_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsString_Error(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -215,7 +215,7 @@ func Test_Cov11_FuncWrap_InvokeAsString_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsBool_NotBool(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_NotBool(t *testing.T) {
 	// Arrange — func returns string, not bool
 	fw := args.NewFuncWrap.Default(func() string { return "not-bool" })
 
@@ -229,7 +229,7 @@ func Test_Cov11_FuncWrap_InvokeAsBool_NotBool(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
 	// Arrange — func returns nil (not an error type)
 	fw := args.NewFuncWrap.Default(func() *int { return nil })
 
@@ -243,7 +243,7 @@ func Test_Cov11_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsString_NotString(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_NotString(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() int { return 42 })
 
@@ -257,7 +257,7 @@ func Test_Cov11_FuncWrap_InvokeAsString_NotString(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsAny_Error(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -270,7 +270,7 @@ func Test_Cov11_FuncWrap_InvokeAsAny_Error(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_InvokeAsAnyError_Error(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_Error(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 
@@ -285,7 +285,7 @@ func Test_Cov11_FuncWrap_InvokeAsAnyError_Error(t *testing.T) {
 
 // --- FuncWrapValidation ---
 
-func Test_Cov11_FuncWrap_InvalidError_NilReflect(t *testing.T) {
+func Test_FuncWrap_InvalidError_NilReflect(t *testing.T) {
 	// Arrange — create a FuncWrap from a non-func value
 	fw := args.NewFuncWrap.Default("not-a-func")
 
@@ -300,7 +300,7 @@ func Test_Cov11_FuncWrap_InvalidError_NilReflect(t *testing.T) {
 
 // --- ThreeFunc/FourFunc/FiveFunc/SixFunc InvokeMust and String ---
 
-func Test_Cov11_ThreeFunc_InvokeMust(t *testing.T) {
+func Test_ThreeFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	tf := &args.ThreeFunc[string, string, string]{
 		WorkFunc: func(a, b, c string) string { return a + b + c },
@@ -319,7 +319,7 @@ func Test_Cov11_ThreeFunc_InvokeMust(t *testing.T) {
 	})
 }
 
-func Test_Cov11_ThreeFunc_String(t *testing.T) {
+func Test_ThreeFunc_String(t *testing.T) {
 	// Arrange
 	tf := &args.ThreeFunc[string, string, string]{
 		First:  "a",
@@ -336,7 +336,7 @@ func Test_Cov11_ThreeFunc_String(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FourFunc_InvokeMust(t *testing.T) {
+func Test_FourFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	ff := &args.FourFunc[string, string, string, string]{
 		WorkFunc: func(a, b, c, d string) string { return a + b + c + d },
@@ -355,7 +355,7 @@ func Test_Cov11_FourFunc_InvokeMust(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FourFunc_String(t *testing.T) {
+func Test_FourFunc_String(t *testing.T) {
 	// Arrange
 	ff := &args.FourFunc[string, string, string, string]{
 		First:  "a",
@@ -373,7 +373,7 @@ func Test_Cov11_FourFunc_String(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FiveFunc_InvokeMust(t *testing.T) {
+func Test_FiveFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	ff := &args.FiveFunc[string, string, string, string, string]{
 		WorkFunc: func(a, b, c, d, e string) string { return a },
@@ -393,7 +393,7 @@ func Test_Cov11_FiveFunc_InvokeMust(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FiveFunc_String(t *testing.T) {
+func Test_FiveFunc_String(t *testing.T) {
 	// Arrange
 	ff := &args.FiveFunc[string, string, string, string, string]{
 		First:  "a",
@@ -412,7 +412,7 @@ func Test_Cov11_FiveFunc_String(t *testing.T) {
 	})
 }
 
-func Test_Cov11_SixFunc_InvokeMust(t *testing.T) {
+func Test_SixFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	sf := &args.SixFunc[string, string, string, string, string, string]{
 		WorkFunc: func(a, b, c, d, e, f string) string { return a },
@@ -433,7 +433,7 @@ func Test_Cov11_SixFunc_InvokeMust(t *testing.T) {
 	})
 }
 
-func Test_Cov11_SixFunc_String(t *testing.T) {
+func Test_SixFunc_String(t *testing.T) {
 	// Arrange
 	sf := &args.SixFunc[string, string, string, string, string, string]{
 		First:  "a",
@@ -455,7 +455,7 @@ func Test_Cov11_SixFunc_String(t *testing.T) {
 
 // --- Map.GetFuncName nil FuncWrap ---
 
-func Test_Cov11_Map_GetFuncName_NilFuncWrap(t *testing.T) {
+func Test_Map_GetFuncName_NilFuncWrap(t *testing.T) {
 	// Arrange — map without FuncWrap key
 	m := args.Map{}
 
@@ -470,7 +470,7 @@ func Test_Cov11_Map_GetFuncName_NilFuncWrap(t *testing.T) {
 
 // --- Map.SortedKeysMust panic ---
 
-func Test_Cov11_Map_SortedKeysMust_Valid(t *testing.T) {
+func Test_Map_SortedKeysMust_Valid(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"key1": "val1",
@@ -488,7 +488,7 @@ func Test_Cov11_Map_SortedKeysMust_Valid(t *testing.T) {
 
 // --- Dynamic nil receiver ---
 
-func Test_Cov11_Dynamic_GetWorkFunc_Nil(t *testing.T) {
+func Test_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 	// Arrange
 	var d *args.Dynamic[string]
 
@@ -503,7 +503,7 @@ func Test_Cov11_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 
 // --- DynamicFunc.InvokeMust panic ---
 
-func Test_Cov11_DynamicFunc_InvokeMust_Valid(t *testing.T) {
+func Test_DynamicFunc_InvokeMust_Valid(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFunc[func() string]{
 		WorkFunc: func() string { return "hello" },
@@ -521,7 +521,7 @@ func Test_Cov11_DynamicFunc_InvokeMust_Valid(t *testing.T) {
 // funcDetector.GetFuncWrap is accessed via args.FuncDetect.GetFuncWrap
 // The Map, *FuncWrapAny, FuncWrapGetter, ArgsMapper branches:
 
-func Test_Cov11_FuncDetector_GetFuncWrap_Map(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_Map(t *testing.T) {
 	// Arrange
 	sampleFunc := func() string { return "test" }
 	fw := args.NewFuncWrap.Default(sampleFunc)
@@ -538,7 +538,7 @@ func Test_Cov11_FuncDetector_GetFuncWrap_Map(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
 	// Arrange
 	sampleFunc := func() string { return "test" }
 	fw := args.NewFuncWrap.Default(sampleFunc)
@@ -554,7 +554,7 @@ func Test_Cov11_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
 
 // --- newFuncWrapCreator branches ---
 
-func Test_Cov11_NewFuncWrap_Default_FuncWrapGetter(t *testing.T) {
+func Test_NewFuncWrap_Default_FuncWrapGetter(t *testing.T) {
 	// Arrange — pass a *FuncWrapAny directly (implements the switch case)
 	sampleFunc := func() string { return "test" }
 	fw := args.NewFuncWrap.Default(sampleFunc)
@@ -573,7 +573,7 @@ func Test_Cov11_NewFuncWrap_Default_FuncWrapGetter(t *testing.T) {
 
 // --- FuncWrapArgs.InArgNamesEachLine/OutArgNamesEachLine ---
 
-func Test_Cov11_FuncWrap_InArgNamesEachLine_MultipleArgs(t *testing.T) {
+func Test_FuncWrap_InArgNamesEachLine_MultipleArgs(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func(a string, b int) string { return "" })
 
@@ -586,7 +586,7 @@ func Test_Cov11_FuncWrap_InArgNamesEachLine_MultipleArgs(t *testing.T) {
 	})
 }
 
-func Test_Cov11_FuncWrap_OutArgNamesEachLine_MultipleArgs(t *testing.T) {
+func Test_FuncWrap_OutArgNamesEachLine_MultipleArgs(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(func() (string, error) { return "", nil })
 

@@ -9,7 +9,7 @@ import (
 
 // ── currentNameOf ──
 
-func Test_Cov6_CurrentNameOf(t *testing.T) {
+func Test_CurrentNameOf(t *testing.T) {
 	// Arrange
 	name := codestack.NameOf.MethodStackSkip(0)
 
@@ -23,7 +23,7 @@ func Test_Cov6_CurrentNameOf(t *testing.T) {
 
 // ── skippablePrefixes ──
 
-func Test_Cov6_SkippablePrefixes(t *testing.T) {
+func Test_SkippablePrefixes(t *testing.T) {
 	// Arrange
 	// skippablePrefixes is unexported; verify via NameOf instead
 	name := codestack.NameOf.Method()
@@ -38,7 +38,7 @@ func Test_Cov6_SkippablePrefixes(t *testing.T) {
 
 // ── New.Default / New.Ptr / New.Skip ──
 
-func Test_Cov6_New_Default(t *testing.T) {
+func Test_New_Default(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -56,7 +56,7 @@ func Test_Cov6_New_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Default returns correct value -- with args", actual)
 }
 
-func Test_Cov6_New_Ptr(t *testing.T) {
+func Test_New_Ptr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 
@@ -74,7 +74,7 @@ func Test_Cov6_New_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Ptr returns correct value -- with args", actual)
 }
 
-func Test_Cov6_New_Skip(t *testing.T) {
+func Test_New_Skip(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -86,7 +86,7 @@ func Test_Cov6_New_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.SkipOne returns correct value -- with args", actual)
 }
 
-func Test_Cov6_New_SkipPtr(t *testing.T) {
+func Test_New_SkipPtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(1)
 
@@ -100,7 +100,7 @@ func Test_Cov6_New_SkipPtr(t *testing.T) {
 
 // ── Trace — all getters ──
 
-func Test_Cov6_Trace_Getters(t *testing.T) {
+func Test_Trace_Getters(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -132,7 +132,7 @@ func Test_Cov6_Trace_Getters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- getters", actual)
 }
 
-func Test_Cov6_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fwl := trace.FileWithLine()
@@ -145,7 +145,7 @@ func Test_Cov6_Trace_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLine", actual)
 }
 
-func Test_Cov6_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	cloned := trace.Clone()
@@ -165,7 +165,7 @@ func Test_Cov6_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
 }
 
-func Test_Cov6_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -177,7 +177,7 @@ func Test_Cov6_Trace_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
 }
 
-func Test_Cov6_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	trace.Dispose()
@@ -190,7 +190,7 @@ func Test_Cov6_Trace_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Dispose", actual)
 }
 
-func Test_Cov6_Trace_JsonModel(t *testing.T) {
+func Test_Trace_JsonModel(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	model := trace.JsonModel()
@@ -210,7 +210,7 @@ func Test_Cov6_Trace_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonModel", actual)
 }
 
-func Test_Cov6_Trace_Json(t *testing.T) {
+func Test_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	r := trace.Json()
@@ -232,7 +232,7 @@ func Test_Cov6_Trace_Json(t *testing.T) {
 
 // ── FileWithLine — all methods ──
 
-func Test_Cov6_FileWithLine_Basic(t *testing.T) {
+func Test_FileWithLine_Basic(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 
@@ -255,7 +255,7 @@ func Test_Cov6_FileWithLine_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- basic", actual)
 }
 
-func Test_Cov6_FileWithLine_Nil(t *testing.T) {
+func Test_FileWithLine_Nil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -273,7 +273,7 @@ func Test_Cov6_FileWithLine_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- nil", actual)
 }
 
-func Test_Cov6_FileWithLine_Clone(t *testing.T) {
+func Test_FileWithLine_Clone(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 
@@ -291,7 +291,7 @@ func Test_Cov6_FileWithLine_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- fields", actual)
 }
 
-func Test_Cov6_FileWithLine_JsonModel(t *testing.T) {
+func Test_FileWithLine_JsonModel(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	model := fwl.JsonModel()
@@ -311,7 +311,7 @@ func Test_Cov6_FileWithLine_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonModel", actual)
 }
 
-func Test_Cov6_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	result := fwl.StringUsingFmt(func(f codestack.FileWithLine) string { return f.FilePath })
@@ -324,7 +324,7 @@ func Test_Cov6_FileWithLine_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- StringUsingFmt", actual)
 }
 
-func Test_Cov6_FileWithLine_Json(t *testing.T) {
+func Test_FileWithLine_Json(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	r := fwl.Json()
@@ -344,7 +344,7 @@ func Test_Cov6_FileWithLine_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- Json", actual)
 }
 
-func Test_Cov6_FileWithLine_Dispose(t *testing.T) {
+func Test_FileWithLine_Dispose(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 	fwl.FilePath = ""
@@ -358,7 +358,7 @@ func Test_Cov6_FileWithLine_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- Dispose", actual)
 }
 
-func Test_Cov6_FileWithLine_Dispose_Nil(t *testing.T) {
+func Test_FileWithLine_Dispose_Nil(t *testing.T) {
 	// Act
 	actual := args.Map{"ok": true}
 
@@ -369,7 +369,7 @@ func Test_Cov6_FileWithLine_Dispose_Nil(t *testing.T) {
 
 // ── StacksTo ──
 
-func Test_Cov6_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.String(0, 10)
 
@@ -383,7 +383,7 @@ func Test_Cov6_StacksTo_String(t *testing.T) {
 
 // ── Dir ──
 
-func Test_Cov6_Dir_CurrentDir(t *testing.T) {
+func Test_Dir_CurrentDir(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.CurDir()
 
@@ -395,7 +395,7 @@ func Test_Cov6_Dir_CurrentDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir returns correct value -- CurDir", actual)
 }
 
-func Test_Cov6_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.RepoDir()
 
@@ -409,7 +409,7 @@ func Test_Cov6_Dir_RepoDir(t *testing.T) {
 
 // ── File ──
 
-func Test_Cov6_File_CurrentFileName(t *testing.T) {
+func Test_File_CurrentFileName(t *testing.T) {
 	// Arrange
 	file := codestack.File.CurrentFilePath()
 

@@ -25,7 +25,7 @@ func sampleRetAnyErrFail() (any, error) { return nil, errors.New("fail") }
 
 // ── OneFunc: Invoke, InvokeMust, InvokeWithValidArgs, InvokeArgs, Slice, String ──
 
-func Test_Cov3_OneFunc_Invoke(t *testing.T) {
+func Test_OneFunc_Invoke(t *testing.T) {
 	// Arrange
 	of := args.OneFunc[string]{
 		First:    "world",
@@ -47,7 +47,7 @@ func Test_Cov3_OneFunc_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct -- OneFunc with valid func", actual)
 }
 
-func Test_Cov3_OneFunc_InvokeMust(t *testing.T) {
+func Test_OneFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	of := args.OneFunc[string]{
 		First:    "test",
@@ -65,7 +65,7 @@ func Test_Cov3_OneFunc_InvokeMust(t *testing.T) {
 
 // ── TwoFunc: Invoke, InvokeMust, InvokeWithValidArgs, InvokeArgs, Slice, GetByIndex, String ──
 
-func Test_Cov3_TwoFunc_Invoke(t *testing.T) {
+func Test_TwoFunc_Invoke(t *testing.T) {
 	// Arrange
 	tf := args.TwoFunc[int, int]{
 		First:    3,
@@ -88,7 +88,7 @@ func Test_Cov3_TwoFunc_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct -- TwoFunc with add", actual)
 }
 
-func Test_Cov3_TwoFunc_InvokeMust(t *testing.T) {
+func Test_TwoFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	tf := args.TwoFunc[int, int]{
 		First:    1,
@@ -105,7 +105,7 @@ func Test_Cov3_TwoFunc_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeMust returns correct -- TwoFunc", actual)
 }
 
-func Test_Cov3_TwoFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_TwoFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	tf := args.TwoFunc[int, int]{
 		First:    10,
@@ -128,7 +128,7 @@ func Test_Cov3_TwoFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- TwoFunc", actual)
 }
 
-func Test_Cov3_TwoFunc_InvokeArgs(t *testing.T) {
+func Test_TwoFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	tf := args.TwoFunc[int, int]{
 		First:    5,
@@ -151,7 +151,7 @@ func Test_Cov3_TwoFunc_InvokeArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- TwoFunc upTo 2", actual)
 }
 
-func Test_Cov3_TwoFunc_Slice_GetByIndex_String(t *testing.T) {
+func Test_TwoFunc_Slice_GetByIndex_String(t *testing.T) {
 	// Arrange
 	tf := args.TwoFunc[int, int]{
 		First:  1,
@@ -180,7 +180,7 @@ func Test_Cov3_TwoFunc_Slice_GetByIndex_String(t *testing.T) {
 
 // ── ThreeFunc ──
 
-func Test_Cov3_ThreeFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_ThreeFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	tf := args.ThreeFunc[string, string, string]{
 		First:    "a",
@@ -204,7 +204,7 @@ func Test_Cov3_ThreeFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- ThreeFunc", actual)
 }
 
-func Test_Cov3_ThreeFunc_InvokeArgs(t *testing.T) {
+func Test_ThreeFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	tf := args.ThreeFunc[string, string, string]{
 		First:    "x",
@@ -228,7 +228,7 @@ func Test_Cov3_ThreeFunc_InvokeArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- ThreeFunc upTo 3", actual)
 }
 
-func Test_Cov3_ThreeFunc_Slice_String(t *testing.T) {
+func Test_ThreeFunc_Slice_String(t *testing.T) {
 	// Arrange
 	tf := args.ThreeFunc[string, string, string]{
 		First:  "a",
@@ -254,7 +254,7 @@ func Test_Cov3_ThreeFunc_Slice_String(t *testing.T) {
 
 // ── FourFunc ──
 
-func Test_Cov3_FourFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	ff := args.FourFunc[int, int, int, int]{
 		First:    1,
@@ -279,7 +279,7 @@ func Test_Cov3_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- FourFunc", actual)
 }
 
-func Test_Cov3_FourFunc_InvokeArgs(t *testing.T) {
+func Test_FourFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	ff := args.FourFunc[int, int, int, int]{
 		First:    1,
@@ -304,7 +304,7 @@ func Test_Cov3_FourFunc_InvokeArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- FourFunc upTo 4", actual)
 }
 
-func Test_Cov3_FourFunc_Slice_String(t *testing.T) {
+func Test_FourFunc_Slice_String(t *testing.T) {
 	// Arrange
 	ff := args.FourFunc[int, int, int, int]{
 		First:  1,
@@ -331,7 +331,7 @@ func Test_Cov3_FourFunc_Slice_String(t *testing.T) {
 
 // ── FiveFunc ──
 
-func Test_Cov3_FiveFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	ff := args.FiveFunc[int, int, int, int, int]{
 		First:    1,
@@ -357,7 +357,7 @@ func Test_Cov3_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- FiveFunc", actual)
 }
 
-func Test_Cov3_FiveFunc_InvokeArgs(t *testing.T) {
+func Test_FiveFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	ff := args.FiveFunc[int, int, int, int, int]{
 		First:    1,
@@ -383,7 +383,7 @@ func Test_Cov3_FiveFunc_InvokeArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- FiveFunc upTo 5", actual)
 }
 
-func Test_Cov3_FiveFunc_Slice_String(t *testing.T) {
+func Test_FiveFunc_Slice_String(t *testing.T) {
 	// Arrange
 	ff := args.FiveFunc[int, int, int, int, int]{
 		First:  1,
@@ -411,7 +411,7 @@ func Test_Cov3_FiveFunc_Slice_String(t *testing.T) {
 
 // ── SixFunc ──
 
-func Test_Cov3_SixFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	sf := args.SixFunc[int, int, int, int, int, int]{
 		First:    1,
@@ -438,7 +438,7 @@ func Test_Cov3_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- SixFunc", actual)
 }
 
-func Test_Cov3_SixFunc_InvokeArgs(t *testing.T) {
+func Test_SixFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	sf := args.SixFunc[int, int, int, int, int, int]{
 		First:    1,
@@ -465,7 +465,7 @@ func Test_Cov3_SixFunc_InvokeArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- SixFunc upTo 6", actual)
 }
 
-func Test_Cov3_SixFunc_Slice_String(t *testing.T) {
+func Test_SixFunc_Slice_String(t *testing.T) {
 	// Arrange
 	sf := args.SixFunc[int, int, int, int, int, int]{
 		First:  1,

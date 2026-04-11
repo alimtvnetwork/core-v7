@@ -13,7 +13,7 @@ import (
 // SliceValidator — nil receiver paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_NilReceiver_IsUsedAlready(t *testing.T) {
+func Test_SliceValidator_NilReceiver_IsUsedAlready(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -25,7 +25,7 @@ func Test_I16_SliceValidator_NilReceiver_IsUsedAlready(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns false -- nil IsUsedAlready", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_ActualLinesLength(t *testing.T) {
+func Test_SliceValidator_NilReceiver_ActualLinesLength(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -37,7 +37,7 @@ func Test_I16_SliceValidator_NilReceiver_ActualLinesLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns 0 -- nil ActualLinesLength", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_ActualLinesString(t *testing.T) {
+func Test_SliceValidator_NilReceiver_ActualLinesString(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -49,7 +49,7 @@ func Test_I16_SliceValidator_NilReceiver_ActualLinesString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns empty -- nil ActualLinesString", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_ExpectingLinesString(t *testing.T) {
+func Test_SliceValidator_NilReceiver_ExpectingLinesString(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -61,7 +61,7 @@ func Test_I16_SliceValidator_NilReceiver_ExpectingLinesString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns empty -- nil ExpectingLinesString", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_ExpectingLinesLength(t *testing.T) {
+func Test_SliceValidator_NilReceiver_ExpectingLinesLength(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -73,7 +73,7 @@ func Test_I16_SliceValidator_NilReceiver_ExpectingLinesLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns 0 -- nil ExpectingLinesLength", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_IsValid(t *testing.T) {
+func Test_SliceValidator_NilReceiver_IsValid(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 
@@ -85,7 +85,7 @@ func Test_I16_SliceValidator_NilReceiver_IsValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns true -- nil IsValid", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_Dispose(t *testing.T) {
+func Test_SliceValidator_NilReceiver_Dispose(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	sv.Dispose() // should not panic
@@ -98,7 +98,7 @@ func Test_I16_SliceValidator_NilReceiver_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator no panic -- nil Dispose", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_VerifyFirstError(t *testing.T) {
+func Test_SliceValidator_NilReceiver_VerifyFirstError(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.VerifyFirstError(&corevalidator.Parameter{})
@@ -111,7 +111,7 @@ func Test_I16_SliceValidator_NilReceiver_VerifyFirstError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil VerifyFirstError", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_AllVerifyError(t *testing.T) {
+func Test_SliceValidator_NilReceiver_AllVerifyError(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyError(&corevalidator.Parameter{})
@@ -124,7 +124,7 @@ func Test_I16_SliceValidator_NilReceiver_AllVerifyError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil AllVerifyError", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorQuick(t *testing.T) {
+func Test_SliceValidator_NilReceiver_AllVerifyErrorQuick(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorQuick(0, "header", "line1")
@@ -137,7 +137,7 @@ func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorQuick(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil AllVerifyErrorQuick", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorTestCase(t *testing.T) {
+func Test_SliceValidator_NilReceiver_AllVerifyErrorTestCase(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorTestCase(0, "header", true)
@@ -150,7 +150,7 @@ func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorTestCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil AllVerifyErrorTestCase", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorExceptLast(t *testing.T) {
+func Test_SliceValidator_NilReceiver_AllVerifyErrorExceptLast(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorExceptLast(&corevalidator.Parameter{})
@@ -163,7 +163,7 @@ func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorExceptLast(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil AllVerifyErrorExceptLast", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorUptoLength(t *testing.T) {
+func Test_SliceValidator_NilReceiver_AllVerifyErrorUptoLength(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.AllVerifyErrorUptoLength(false, &corevalidator.Parameter{}, 5)
@@ -176,7 +176,7 @@ func Test_I16_SliceValidator_NilReceiver_AllVerifyErrorUptoLength(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- nil AllVerifyErrorUptoLength", actual)
 }
 
-func Test_I16_SliceValidator_NilReceiver_VerifyFirstLengthUptoError(t *testing.T) {
+func Test_SliceValidator_NilReceiver_VerifyFirstLengthUptoError(t *testing.T) {
 	// Arrange
 	var sv *corevalidator.SliceValidator
 	err := sv.VerifyFirstLengthUptoError(&corevalidator.Parameter{}, 5)
@@ -193,7 +193,7 @@ func Test_I16_SliceValidator_NilReceiver_VerifyFirstLengthUptoError(t *testing.T
 // SliceValidator — SetActual, SetActualVsExpected
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_SetActual(t *testing.T) {
+func Test_SliceValidator_SetActual(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -215,7 +215,7 @@ func Test_I16_SliceValidator_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns correct value -- SetActual", actual)
 }
 
-func Test_I16_SliceValidator_SetActualVsExpected(t *testing.T) {
+func Test_SliceValidator_SetActualVsExpected(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 	sv.SetActualVsExpected([]string{"a"}, []string{"a"})
@@ -240,7 +240,7 @@ func Test_I16_SliceValidator_SetActualVsExpected(t *testing.T) {
 // SliceValidator — IsValid and IsValidOtherLines
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_IsValid_Match(t *testing.T) {
+func Test_SliceValidator_IsValid_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -256,7 +256,7 @@ func Test_I16_SliceValidator_IsValid_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns true -- valid match", actual)
 }
 
-func Test_I16_SliceValidator_IsValid_Mismatch(t *testing.T) {
+func Test_SliceValidator_IsValid_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -272,7 +272,7 @@ func Test_I16_SliceValidator_IsValid_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns false -- mismatch", actual)
 }
 
-func Test_I16_SliceValidator_IsValid_LengthDiff(t *testing.T) {
+func Test_SliceValidator_IsValid_LengthDiff(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -288,7 +288,7 @@ func Test_I16_SliceValidator_IsValid_LengthDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns false -- length diff", actual)
 }
 
-func Test_I16_SliceValidator_IsValid_BothNil(t *testing.T) {
+func Test_SliceValidator_IsValid_BothNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -304,7 +304,7 @@ func Test_I16_SliceValidator_IsValid_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns true -- both nil", actual)
 }
 
-func Test_I16_SliceValidator_IsValid_OneNil(t *testing.T) {
+func Test_SliceValidator_IsValid_OneNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -320,7 +320,7 @@ func Test_I16_SliceValidator_IsValid_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns false -- one nil", actual)
 }
 
-func Test_I16_SliceValidator_IsValidOtherLines(t *testing.T) {
+func Test_SliceValidator_IsValidOtherLines(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -339,7 +339,7 @@ func Test_I16_SliceValidator_IsValidOtherLines(t *testing.T) {
 // SliceValidator — ComparingValidators (lazy creation & caching)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_ComparingValidators(t *testing.T) {
+func Test_SliceValidator_ComparingValidators(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -366,7 +366,7 @@ func Test_I16_SliceValidator_ComparingValidators(t *testing.T) {
 // SliceValidator — Dispose with validators
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_Dispose_WithValidators(t *testing.T) {
+func Test_SliceValidator_Dispose_WithValidators(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -394,7 +394,7 @@ func Test_I16_SliceValidator_Dispose_WithValidators(t *testing.T) {
 // SliceValidator — AllVerifyErrorQuick success path
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_AllVerifyErrorQuick_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorQuick_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -410,7 +410,7 @@ func Test_I16_SliceValidator_AllVerifyErrorQuick_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- AllVerifyErrorQuick match", actual)
 }
 
-func Test_I16_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -430,7 +430,7 @@ func Test_I16_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
 // SliceValidator — AllVerifyErrorTestCase success/fail
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -447,7 +447,7 @@ func Test_I16_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- AllVerifyErrorTestCase match", actual)
 }
 
-func Test_I16_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -468,7 +468,7 @@ func Test_I16_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
 // SliceValidator — AllVerifyErrorExceptLast
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -495,7 +495,7 @@ func Test_I16_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
 // SliceValidator — VerifyFirstError (first error only)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_VerifyFirstError_Match(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -513,7 +513,7 @@ func Test_I16_SliceValidator_VerifyFirstError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- VerifyFirstError match", actual)
 }
 
-func Test_I16_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -535,7 +535,7 @@ func Test_I16_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
 // SliceValidator — isEmptyIgnoreCase
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_EmptyIgnoreCase(t *testing.T) {
+func Test_SliceValidator_EmptyIgnoreCase(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -560,7 +560,7 @@ func Test_I16_SliceValidator_EmptyIgnoreCase(t *testing.T) {
 // SliceValidator — initialVerifyError nil paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_InitialVerify_AnyNil(t *testing.T) {
+func Test_SliceValidator_InitialVerify_AnyNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -578,7 +578,7 @@ func Test_I16_SliceValidator_InitialVerify_AnyNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns error -- actual nil expected not", actual)
 }
 
-func Test_I16_SliceValidator_InitialVerify_ExpectedNil(t *testing.T) {
+func Test_SliceValidator_InitialVerify_ExpectedNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -600,7 +600,7 @@ func Test_I16_SliceValidator_InitialVerify_ExpectedNil(t *testing.T) {
 // SliceValidator — compactOrFullMismatchError single vs multi
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_CompactMismatch_SingleValue(t *testing.T) {
+func Test_SliceValidator_CompactMismatch_SingleValue(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -618,7 +618,7 @@ func Test_I16_SliceValidator_CompactMismatch_SingleValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns error -- compact single mismatch", actual)
 }
 
-func Test_I16_SliceValidator_CompactMismatch_MultiValue(t *testing.T) {
+func Test_SliceValidator_CompactMismatch_MultiValue(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -640,7 +640,7 @@ func Test_I16_SliceValidator_CompactMismatch_MultiValue(t *testing.T) {
 // SliceValidator — UserInputsMergeWithError paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_UserInputsMerge_NoAttach(t *testing.T) {
+func Test_SliceValidator_UserInputsMerge_NoAttach(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -658,7 +658,7 @@ func Test_I16_SliceValidator_UserInputsMerge_NoAttach(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UserInputsMergeWithError returns error -- no attach", actual)
 }
 
-func Test_I16_SliceValidator_UserInputsMerge_WithAttach_NilErr(t *testing.T) {
+func Test_SliceValidator_UserInputsMerge_WithAttach_NilErr(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -676,7 +676,7 @@ func Test_I16_SliceValidator_UserInputsMerge_WithAttach_NilErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UserInputsMergeWithError returns error -- nil err with inputs", actual)
 }
 
-func Test_I16_SliceValidator_UserInputsMerge_WithAttach_WithErr(t *testing.T) {
+func Test_SliceValidator_UserInputsMerge_WithAttach_WithErr(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -698,7 +698,7 @@ func Test_I16_SliceValidator_UserInputsMerge_WithAttach_WithErr(t *testing.T) {
 // SliceValidator — MethodName
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_SliceValidator_MethodName(t *testing.T) {
+func Test_SliceValidator_MethodName(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 
@@ -714,7 +714,7 @@ func Test_I16_SliceValidator_MethodName(t *testing.T) {
 // SliceValidatorConstructors — NewSliceValidatorUsingErr, NewSliceValidatorUsingAny
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_NewSliceValidatorUsingErr(t *testing.T) {
+func Test_NewSliceValidatorUsingErr(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingErr(
 		errors.New("line1\nline2"),
@@ -737,7 +737,7 @@ func Test_I16_NewSliceValidatorUsingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr returns correct value -- with args", actual)
 }
 
-func Test_I16_NewSliceValidatorUsingAny(t *testing.T) {
+func Test_NewSliceValidatorUsingAny(t *testing.T) {
 	// Arrange
 	sv := corevalidator.NewSliceValidatorUsingAny(
 		"line1\nline2",
@@ -764,7 +764,7 @@ func Test_I16_NewSliceValidatorUsingAny(t *testing.T) {
 // TextValidator — various method paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_TextValidator_ToString_SingleLine(t *testing.T) {
+func Test_TextValidator_ToString_SingleLine(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "test",
@@ -793,7 +793,7 @@ func Test_I16_TextValidator_ToString_SingleLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- ToString formats", actual)
 }
 
-func Test_I16_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "Hello",
@@ -816,7 +816,7 @@ func Test_I16_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- IsMatch case sensitivity", actual)
 }
 
-func Test_I16_TextValidator_IsMatchMany(t *testing.T) {
+func Test_TextValidator_IsMatchMany(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -839,7 +839,7 @@ func Test_I16_TextValidator_IsMatchMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- IsMatchMany", actual)
 }
 
-func Test_I16_TextValidator_IsMatchMany_Nil(t *testing.T) {
+func Test_TextValidator_IsMatchMany_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidator
 
@@ -851,7 +851,7 @@ func Test_I16_TextValidator_IsMatchMany_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns true -- nil IsMatchMany", actual)
 }
 
-func Test_I16_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -868,7 +868,7 @@ func Test_I16_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- VerifyMany continue success", actual)
 }
 
-func Test_I16_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
+func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -885,7 +885,7 @@ func Test_I16_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- VerifyMany first only success", actual)
 }
 
-func Test_I16_TextValidator_VerifyFirstError_SkipEmpty(t *testing.T) {
+func Test_TextValidator_VerifyFirstError_SkipEmpty(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -902,7 +902,7 @@ func Test_I16_TextValidator_VerifyFirstError_SkipEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- VerifyFirstError skip empty", actual)
 }
 
-func Test_I16_TextValidator_AllVerifyError_SkipEmpty(t *testing.T) {
+func Test_TextValidator_AllVerifyError_SkipEmpty(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -919,7 +919,7 @@ func Test_I16_TextValidator_AllVerifyError_SkipEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- AllVerifyError skip empty", actual)
 }
 
-func Test_I16_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
+func Test_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "expected",
@@ -936,7 +936,7 @@ func Test_I16_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns error -- AllVerifyError with errors", actual)
 }
 
-func Test_I16_TextValidator_VerifyDetailError_Match(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Match(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -953,7 +953,7 @@ func Test_I16_TextValidator_VerifyDetailError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- VerifyDetailError match", actual)
 }
 
-func Test_I16_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -970,7 +970,7 @@ func Test_I16_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns error -- VerifyDetailError mismatch", actual)
 }
 
-func Test_I16_TextValidator_VerifySimpleError_Match(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Match(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "ok",
@@ -987,7 +987,7 @@ func Test_I16_TextValidator_VerifySimpleError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns nil -- VerifySimpleError match", actual)
 }
 
-func Test_I16_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "ok",
@@ -1004,7 +1004,7 @@ func Test_I16_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns error -- VerifySimpleError mismatch", actual)
 }
 
-func Test_I16_TextValidator_MethodName(t *testing.T) {
+func Test_TextValidator_MethodName(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{SearchAs: stringcompareas.Contains}
 	var nilTv *corevalidator.TextValidator
@@ -1027,7 +1027,7 @@ func Test_I16_TextValidator_MethodName(t *testing.T) {
 // TextValidator — SearchTextFinalized with conditions (trim, whitespace split)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_TextValidator_SearchTextFinalized_Trim(t *testing.T) {
+func Test_TextValidator_SearchTextFinalized_Trim(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "  hello  ",
@@ -1046,7 +1046,7 @@ func Test_I16_TextValidator_SearchTextFinalized_Trim(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- SearchTextFinalized trim", actual)
 }
 
-func Test_I16_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
+func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -1067,7 +1067,7 @@ func Test_I16_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 // TextValidators — various paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_TextValidators_NilLength(t *testing.T) {
+func Test_TextValidators_NilLength(t *testing.T) {
 	// Arrange
 	var tvs *corevalidator.TextValidators
 
@@ -1079,7 +1079,7 @@ func Test_I16_TextValidators_NilLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns 0 -- nil Length", actual)
 }
 
-func Test_I16_TextValidators_AddSimple(t *testing.T) {
+func Test_TextValidators_AddSimple(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("test", stringcompareas.Equal)
@@ -1092,7 +1092,7 @@ func Test_I16_TextValidators_AddSimple(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns correct value -- AddSimple", actual)
 }
 
-func Test_I16_TextValidators_AddSimpleAllTrue(t *testing.T) {
+func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimpleAllTrue("test", stringcompareas.Equal)
@@ -1111,7 +1111,7 @@ func Test_I16_TextValidators_AddSimpleAllTrue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns correct value -- AddSimpleAllTrue", actual)
 }
 
-func Test_I16_TextValidators_Adds_Empty(t *testing.T) {
+func Test_TextValidators_Adds_Empty(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.Adds()
@@ -1124,7 +1124,7 @@ func Test_I16_TextValidators_Adds_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns empty -- Adds empty", actual)
 }
 
-func Test_I16_TextValidators_IsMatch_Empty(t *testing.T) {
+func Test_TextValidators_IsMatch_Empty(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(0)
 
@@ -1136,7 +1136,7 @@ func Test_I16_TextValidators_IsMatch_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns true -- empty IsMatch", actual)
 }
 
-func Test_I16_TextValidators_IsMatch_Success(t *testing.T) {
+func Test_TextValidators_IsMatch_Success(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1155,7 +1155,7 @@ func Test_I16_TextValidators_IsMatch_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns correct value -- IsMatch", actual)
 }
 
-func Test_I16_TextValidators_IsMatchMany_Empty(t *testing.T) {
+func Test_TextValidators_IsMatchMany_Empty(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(0)
 
@@ -1167,7 +1167,7 @@ func Test_I16_TextValidators_IsMatchMany_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns true -- empty IsMatchMany", actual)
 }
 
-func Test_I16_TextValidators_IsMatchMany_Fail(t *testing.T) {
+func Test_TextValidators_IsMatchMany_Fail(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1180,7 +1180,7 @@ func Test_I16_TextValidators_IsMatchMany_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns false -- IsMatchMany fail", actual)
 }
 
-func Test_I16_TextValidators_VerifyFirstError_Empty(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Empty(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(0)
 	err := tvs.VerifyFirstError(0, "content", true)
@@ -1193,7 +1193,7 @@ func Test_I16_TextValidators_VerifyFirstError_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- empty VerifyFirstError", actual)
 }
 
-func Test_I16_TextValidators_VerifyFirstError_Match(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Match(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1207,7 +1207,7 @@ func Test_I16_TextValidators_VerifyFirstError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- VerifyFirstError match", actual)
 }
 
-func Test_I16_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1221,7 +1221,7 @@ func Test_I16_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns error -- VerifyFirstError mismatch", actual)
 }
 
-func Test_I16_TextValidators_AllVerifyError_Match(t *testing.T) {
+func Test_TextValidators_AllVerifyError_Match(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1235,7 +1235,7 @@ func Test_I16_TextValidators_AllVerifyError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- AllVerifyError match", actual)
 }
 
-func Test_I16_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
+func Test_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1249,7 +1249,7 @@ func Test_I16_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns error -- AllVerifyError mismatch", actual)
 }
 
-func Test_I16_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
 	// Arrange
 	var tvs *corevalidator.TextValidators
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -1263,7 +1263,7 @@ func Test_I16_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- nil VerifyErrorMany", actual)
 }
 
-func Test_I16_TextValidators_VerifyErrorMany_Continue(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_Continue(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1278,7 +1278,7 @@ func Test_I16_TextValidators_VerifyErrorMany_Continue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- VerifyErrorMany continue match", actual)
 }
 
-func Test_I16_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("hello", stringcompareas.Equal)
@@ -1293,7 +1293,7 @@ func Test_I16_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- VerifyErrorMany first only match", actual)
 }
 
-func Test_I16_TextValidators_Dispose(t *testing.T) {
+func Test_TextValidators_Dispose(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("test", stringcompareas.Equal)
@@ -1307,7 +1307,7 @@ func Test_I16_TextValidators_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TextValidators returns nil -- Dispose", actual)
 }
 
-func Test_I16_TextValidators_Dispose_Nil(t *testing.T) {
+func Test_TextValidators_Dispose_Nil(t *testing.T) {
 	// Arrange
 	var tvs *corevalidator.TextValidators
 	tvs.Dispose() // no panic
@@ -1324,7 +1324,7 @@ func Test_I16_TextValidators_Dispose_Nil(t *testing.T) {
 // Condition — IsSplitByWhitespace
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_Condition_IsSplitByWhitespace(t *testing.T) {
+func Test_Condition_IsSplitByWhitespace(t *testing.T) {
 	// Arrange
 	c1 := corevalidator.Condition{}
 	c2 := corevalidator.Condition{IsUniqueWordOnly: true}
@@ -1353,7 +1353,7 @@ func Test_I16_Condition_IsSplitByWhitespace(t *testing.T) {
 // Parameter — IsIgnoreCase
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_Parameter_IsIgnoreCase(t *testing.T) {
+func Test_Parameter_IsIgnoreCase(t *testing.T) {
 	// Arrange
 	p1 := corevalidator.Parameter{IsCaseSensitive: true}
 	p2 := corevalidator.Parameter{IsCaseSensitive: false}
@@ -1376,7 +1376,7 @@ func Test_I16_Parameter_IsIgnoreCase(t *testing.T) {
 // TextValidators — String, HasIndex, LastIndex, Count
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_TextValidators_QueryMethods(t *testing.T) {
+func Test_TextValidators_QueryMethods(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.AddSimple("a", stringcompareas.Equal)
@@ -1407,7 +1407,7 @@ func Test_I16_TextValidators_QueryMethods(t *testing.T) {
 // TextValidators — AsBasicSliceContractsBinder
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
+func Test_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(5)
 	binder := tvs.AsBasicSliceContractsBinder()
@@ -1424,7 +1424,7 @@ func Test_I16_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
 // Vars — predefined conditions and validator
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I16_Vars_DefaultConditions(t *testing.T) {
+func Test_Vars_DefaultConditions(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"disabled":  corevalidator.DefaultDisabledCoreCondition.IsTrimCompare,

@@ -10,7 +10,7 @@ import (
 // String type
 // ═══════════════════════════════════════════
 
-func Test_Cov5_String_Basic(t *testing.T) {
+func Test_String_Basic(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -34,7 +34,7 @@ func Test_Cov5_String_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- basic", actual)
 }
 
-func Test_Cov5_String_Empty(t *testing.T) {
+func Test_String_Empty(t *testing.T) {
 	// Arrange
 	s := args.String("")
 
@@ -52,7 +52,7 @@ func Test_Cov5_String_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns empty -- empty", actual)
 }
 
-func Test_Cov5_String_Ops(t *testing.T) {
+func Test_String_Ops(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 
@@ -78,7 +78,7 @@ func Test_Cov5_String_Ops(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- ops", actual)
 }
 
-func Test_Cov5_String_Split(t *testing.T) {
+func Test_String_Split(t *testing.T) {
 	// Arrange
 	s := args.String("a,b,c")
 	parts := s.Split(",")
@@ -91,7 +91,7 @@ func Test_Cov5_String_Split(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- Split", actual)
 }
 
-func Test_Cov5_String_Join(t *testing.T) {
+func Test_String_Join(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	joined := s.Join("-", "world", "go")
@@ -104,7 +104,7 @@ func Test_Cov5_String_Join(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- Join", actual)
 }
 
-func Test_Cov5_String_Substring(t *testing.T) {
+func Test_String_Substring(t *testing.T) {
 	// Arrange
 	s := args.String("hello")
 	sub := s.Substring(1, 4)
@@ -121,7 +121,7 @@ func Test_Cov5_String_Substring(t *testing.T) {
 // LeftRight
 // ═══════════════════════════════════════════
 
-func Test_Cov5_LeftRight_Basic(t *testing.T) {
+func Test_LeftRight_Basic(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "hello", Right: 42, Expect: true}
 
@@ -147,7 +147,7 @@ func Test_Cov5_LeftRight_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- basic", actual)
 }
 
-func Test_Cov5_LeftRight_Slice(t *testing.T) {
+func Test_LeftRight_Slice(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 	s := lr.Slice()
@@ -167,7 +167,7 @@ func Test_Cov5_LeftRight_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Slice", actual)
 }
 
-func Test_Cov5_LeftRight_GetByIndex(t *testing.T) {
+func Test_LeftRight_GetByIndex(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 
@@ -185,7 +185,7 @@ func Test_Cov5_LeftRight_GetByIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- GetByIndex", actual)
 }
 
-func Test_Cov5_LeftRight_String(t *testing.T) {
+func Test_LeftRight_String(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 
@@ -197,7 +197,7 @@ func Test_Cov5_LeftRight_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- String", actual)
 }
 
-func Test_Cov5_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1, Expect: "exp"}
 	cloned := lr.Clone()
@@ -216,7 +216,7 @@ func Test_Cov5_LeftRight_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Clone", actual)
 }
 
-func Test_Cov5_LeftRight_Args(t *testing.T) {
+func Test_LeftRight_Args(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 	a1 := lr.Args(1)
@@ -239,7 +239,7 @@ func Test_Cov5_LeftRight_Args(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Args", actual)
 }
 
-func Test_Cov5_LeftRight_ArgTwo(t *testing.T) {
+func Test_LeftRight_ArgTwo(t *testing.T) {
 	// Arrange
 	lr := &args.LeftRight[string, int]{Left: "a", Right: 1}
 	two := lr.ArgTwo()
@@ -262,7 +262,7 @@ func Test_Cov5_LeftRight_ArgTwo(t *testing.T) {
 // Holder — comprehensive
 // ═══════════════════════════════════════════
 
-func Test_Cov5_Holder_AllPositional(t *testing.T) {
+func Test_Holder_AllPositional(t *testing.T) {
 	// Arrange
 	h := &args.Holder[func() string]{
 		First: "a", Second: "b", Third: "c",
@@ -292,7 +292,7 @@ func Test_Cov5_Holder_AllPositional(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- all positional", actual)
 }
 
-func Test_Cov5_Holder_Args(t *testing.T) {
+func Test_Holder_Args(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e", Sixth: "f"}
 	a1 := h.Args(1)
@@ -315,7 +315,7 @@ func Test_Cov5_Holder_Args(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- Args", actual)
 }
 
-func Test_Cov5_Holder_ArgTwo(t *testing.T) {
+func Test_Holder_ArgTwo(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{First: "a", Second: "b", Third: "c", Fourth: "d", Fifth: "e"}
 	two := h.ArgTwo()
@@ -336,7 +336,7 @@ func Test_Cov5_Holder_ArgTwo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- ArgTwo/Three/Four/Five", actual)
 }
 
-func Test_Cov5_Holder_WithFunc(t *testing.T) {
+func Test_Holder_WithFunc(t *testing.T) {
 	// Arrange
 	fn := func(a, b string) string { return a + b }
 	h := &args.Holder[func(string, string) string]{First: "a", Second: "b", WorkFunc: fn}
@@ -357,7 +357,7 @@ func Test_Cov5_Holder_WithFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns non-empty -- with func", actual)
 }
 
-func Test_Cov5_Holder_Invoke(t *testing.T) {
+func Test_Holder_Invoke(t *testing.T) {
 	// Arrange
 	fn := func(a, b string) string { return a + b }
 	h := &args.Holder[func(string, string) string]{First: "hello", Second: " world", WorkFunc: fn}
@@ -377,7 +377,7 @@ func Test_Cov5_Holder_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- Invoke", actual)
 }
 
-func Test_Cov5_Holder_Slice(t *testing.T) {
+func Test_Holder_Slice(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{First: "a", Second: "b"}
 	s := h.Slice()
@@ -390,7 +390,7 @@ func Test_Cov5_Holder_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder returns correct value -- Slice", actual)
 }
 
-func Test_Cov5_Holder_String(t *testing.T) {
+func Test_Holder_String(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{First: "a"}
 
@@ -406,7 +406,7 @@ func Test_Cov5_Holder_String(t *testing.T) {
 // FuncWrap — typed helpers
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FuncWrap_TypedHelpers(t *testing.T) {
+func Test_FuncWrap_TypedHelpers(t *testing.T) {
 	// Arrange
 	boolFn := func() bool { return true }
 	errFn := func() error { return nil }
@@ -439,7 +439,7 @@ func Test_Cov5_FuncWrap_TypedHelpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- typed helpers", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeAsBool(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool(t *testing.T) {
 	// Arrange
 	fn := func() bool { return true }
 	fw := args.NewFuncWrap.Default(fn)
@@ -459,7 +459,7 @@ func Test_Cov5_FuncWrap_InvokeAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsBool", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeAsString(t *testing.T) {
+func Test_FuncWrap_InvokeAsString(t *testing.T) {
 	// Arrange
 	fn := func() string { return "hello" }
 	fw := args.NewFuncWrap.Default(fn)
@@ -479,7 +479,7 @@ func Test_Cov5_FuncWrap_InvokeAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsString", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeAsAny(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny(t *testing.T) {
 	// Arrange
 	fn := func() int { return 42 }
 	fw := args.NewFuncWrap.Default(fn)
@@ -499,7 +499,7 @@ func Test_Cov5_FuncWrap_InvokeAsAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsAny", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeAsError(t *testing.T) {
+func Test_FuncWrap_InvokeAsError(t *testing.T) {
 	// Arrange
 	fn := func() error { return nil }
 	fw := args.NewFuncWrap.Default(fn)
@@ -519,7 +519,7 @@ func Test_Cov5_FuncWrap_InvokeAsError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns error -- InvokeAsError", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeAsAnyError(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError(t *testing.T) {
 	// Arrange
 	fn := func() (int, error) { return 42, nil }
 	fw := args.NewFuncWrap.Default(fn)
@@ -545,7 +545,7 @@ func Test_Cov5_FuncWrap_InvokeAsAnyError(t *testing.T) {
 // FuncWrap — args info
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FuncWrap_ArgsInfo(t *testing.T) {
+func Test_FuncWrap_ArgsInfo(t *testing.T) {
 	// Arrange
 	fn := func(a string, b int) (string, error) { return a, nil }
 	fw := args.NewFuncWrap.Default(fn)
@@ -572,7 +572,7 @@ func Test_Cov5_FuncWrap_ArgsInfo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- args info", actual)
 }
 
-func Test_Cov5_FuncWrap_InArgNames(t *testing.T) {
+func Test_FuncWrap_InArgNames(t *testing.T) {
 	// Arrange
 	fn := func(a string) string { return a }
 	fw := args.NewFuncWrap.Default(fn)
@@ -593,7 +593,7 @@ func Test_Cov5_FuncWrap_InArgNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InArgNames", actual)
 }
 
-func Test_Cov5_FuncWrap_InArgNamesEachLine(t *testing.T) {
+func Test_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	// Arrange
 	fn := func(a, b string) string { return a + b }
 	fw := args.NewFuncWrap.Default(fn)
@@ -614,7 +614,7 @@ func Test_Cov5_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InArgNamesEachLine", actual)
 }
 
-func Test_Cov5_FuncWrap_IsTypeMatches(t *testing.T) {
+func Test_FuncWrap_IsTypeMatches(t *testing.T) {
 	// Arrange
 	fn := func(a string) int { return 0 }
 	fw := args.NewFuncWrap.Default(fn)
@@ -639,7 +639,7 @@ func Test_Cov5_FuncWrap_IsTypeMatches(t *testing.T) {
 // FuncWrap — validation
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FuncWrap_Validation(t *testing.T) {
+func Test_FuncWrap_Validation(t *testing.T) {
 	// Arrange
 	fn := func(a string) string { return a }
 	fw := args.NewFuncWrap.Default(fn)
@@ -661,7 +661,7 @@ func Test_Cov5_FuncWrap_Validation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns non-empty -- validation", actual)
 }
 
-func Test_Cov5_FuncWrap_ValidateMethodArgs(t *testing.T) {
+func Test_FuncWrap_ValidateMethodArgs(t *testing.T) {
 	// Arrange
 	fn := func(a string) string { return a }
 	fw := args.NewFuncWrap.Default(fn)
@@ -682,7 +682,7 @@ func Test_Cov5_FuncWrap_ValidateMethodArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns non-empty -- ValidateMethodArgs", actual)
 }
 
-func Test_Cov5_FuncWrap_MustBeValid_Panic(t *testing.T) {
+func Test_FuncWrap_MustBeValid_Panic(t *testing.T) {
 	// Arrange
 	nilFW := args.NewFuncWrap.Default(nil)
 	defer func() {
@@ -702,7 +702,7 @@ func Test_Cov5_FuncWrap_MustBeValid_Panic(t *testing.T) {
 // FuncWrap — invoke methods
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FuncWrap_VoidCall(t *testing.T) {
+func Test_FuncWrap_VoidCall(t *testing.T) {
 	// Arrange
 	called := false
 	fn := func() { called = true }
@@ -723,7 +723,7 @@ func Test_Cov5_FuncWrap_VoidCall(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- VoidCall", actual)
 }
 
-func Test_Cov5_FuncWrap_GetFirstResponse(t *testing.T) {
+func Test_FuncWrap_GetFirstResponse(t *testing.T) {
 	// Arrange
 	fn := func() string { return "first" }
 	fw := args.NewFuncWrap.Default(fn)
@@ -743,7 +743,7 @@ func Test_Cov5_FuncWrap_GetFirstResponse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- GetFirstResponseOfInvoke", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	// Arrange
 	fn := func() (string, int) { return "a", 1 }
 	fw := args.NewFuncWrap.Default(fn)
@@ -763,7 +763,7 @@ func Test_Cov5_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeResultOfIndex", actual)
 }
 
-func Test_Cov5_FuncWrap_InvokeMust(t *testing.T) {
+func Test_FuncWrap_InvokeMust(t *testing.T) {
 	// Arrange
 	fn := func() string { return "ok" }
 	fw := args.NewFuncWrap.Default(fn)
@@ -781,7 +781,7 @@ func Test_Cov5_FuncWrap_InvokeMust(t *testing.T) {
 // FuncWrap — nil/invalid return 
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FuncWrap_Invalid_Args(t *testing.T) {
+func Test_FuncWrap_Invalid_Args(t *testing.T) {
 	// Arrange
 	nilFW := args.NewFuncWrap.Default(nil)
 
@@ -818,7 +818,7 @@ func Test_Cov5_FuncWrap_Invalid_Args(t *testing.T) {
 // FourFunc / FiveFunc / SixFunc
 // ═══════════════════════════════════════════
 
-func Test_Cov5_FourFunc(t *testing.T) {
+func Test_FourFunc(t *testing.T) {
 	// Arrange
 	ff := &args.FourFunc[string, int, bool, float64]{
 		First: "a", Second: 1, Third: true, Fourth: 3.14,
@@ -839,7 +839,7 @@ func Test_Cov5_FourFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FourFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov5_FiveFunc(t *testing.T) {
+func Test_FiveFunc(t *testing.T) {
 	// Arrange
 	ff := &args.FiveFunc[string, int, bool, float64, byte]{
 		First: "a", Second: 1, Third: true, Fourth: 3.14, Fifth: byte(5),
@@ -860,7 +860,7 @@ func Test_Cov5_FiveFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FiveFunc returns correct value -- with args", actual)
 }
 
-func Test_Cov5_SixFunc(t *testing.T) {
+func Test_SixFunc(t *testing.T) {
 	// Arrange
 	sf := &args.SixFunc[string, int, bool, float64, byte, uint]{
 		First: "a", Sixth: uint(6),
@@ -885,7 +885,7 @@ func Test_Cov5_SixFunc(t *testing.T) {
 // DynamicFunc
 // ═══════════════════════════════════════════
 
-func Test_Cov5_DynamicFunc(t *testing.T) {
+func Test_DynamicFunc(t *testing.T) {
 	// Arrange
 	df := &args.DynamicFuncAny{
 		Params:   args.Map{"first": "hello"},
@@ -913,7 +913,7 @@ func Test_Cov5_DynamicFunc(t *testing.T) {
 // Map — additional methods
 // ═══════════════════════════════════════════
 
-func Test_Cov5_Map_WorkFunc(t *testing.T) {
+func Test_Map_WorkFunc(t *testing.T) {
 	// Arrange
 	fn := func() string { return "hello" }
 	m := args.Map{
@@ -938,7 +938,7 @@ func Test_Cov5_Map_WorkFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- WorkFunc", actual)
 }
 
-func Test_Cov5_Map_GetTyped(t *testing.T) {
+func Test_Map_GetTyped(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"str": "hello",
@@ -967,7 +967,7 @@ func Test_Cov5_Map_GetTyped(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetTyped", actual)
 }
 
-func Test_Cov5_Map_SortedKeysMust(t *testing.T) {
+func Test_Map_SortedKeysMust(t *testing.T) {
 	// Arrange
 	m := args.Map{
 		"b": 2,

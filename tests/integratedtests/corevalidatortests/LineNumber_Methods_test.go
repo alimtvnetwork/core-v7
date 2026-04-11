@@ -9,7 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
 )
 
-func Test_Cov3_LineNumber_Methods(t *testing.T) {
+func Test_LineNumber_Methods(t *testing.T) {
 	// Arrange
 	ln := corevalidator.LineNumber{LineNumber: 5}
 
@@ -29,7 +29,7 @@ func Test_Cov3_LineNumber_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LineNumber returns correct value -- methods", actual)
 }
 
-func Test_Cov3_Condition_Methods(t *testing.T) {
+func Test_Condition_Methods(t *testing.T) {
 	// Arrange
 	c := corevalidator.Condition{IsUniqueWordOnly: true}
 
@@ -41,7 +41,7 @@ func Test_Cov3_Condition_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Condition returns correct value -- methods", actual)
 }
 
-func Test_Cov3_Parameter_Methods(t *testing.T) {
+func Test_Parameter_Methods(t *testing.T) {
 	// Arrange
 	p := corevalidator.Parameter{CaseIndex: 1, Header: "h", IsCaseSensitive: false}
 
@@ -61,7 +61,7 @@ func Test_Cov3_Parameter_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Parameter returns correct value -- methods", actual)
 }
 
-func Test_Cov3_RangesSegment(t *testing.T) {
+func Test_RangesSegment(t *testing.T) {
 	// Arrange
 	rs := corevalidator.RangesSegment{RangeInt: corerange.RangeInt{Start: 0, End: 10}, ExpectedLines: []string{"a"}, CompareAs: stringcompareas.Equal}
 
@@ -83,7 +83,7 @@ func Test_Cov3_RangesSegment(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangesSegment returns correct value -- struct", actual)
 }
 
-func Test_Cov3_BaseValidatorCoreCondition_Default(t *testing.T) {
+func Test_BaseValidatorCoreCondition_Default(t *testing.T) {
 	// Arrange
 	bv := corevalidator.BaseValidatorCoreCondition{}
 	cond := bv.ValidatorCoreConditionDefault()

@@ -10,7 +10,7 @@ import (
 
 // ── newCreator ──
 
-func Test_Cov4_NewCreator_Default(t *testing.T) {
+func Test_NewCreator_Default(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -28,7 +28,7 @@ func Test_Cov4_NewCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Default returns valid Trace -- from test func", actual)
 }
 
-func Test_Cov4_NewCreator_SkipOne(t *testing.T) {
+func Test_NewCreator_SkipOne(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -40,7 +40,7 @@ func Test_Cov4_NewCreator_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.SkipOne returns valid Trace -- skip one frame", actual)
 }
 
-func Test_Cov4_NewCreator_Ptr(t *testing.T) {
+func Test_NewCreator_Ptr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 
@@ -52,7 +52,7 @@ func Test_Cov4_NewCreator_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.Ptr returns valid Trace ptr -- default skip", actual)
 }
 
-func Test_Cov4_NewCreator_Create(t *testing.T) {
+func Test_NewCreator_Create(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(1)
 
@@ -66,7 +66,7 @@ func Test_Cov4_NewCreator_Create(t *testing.T) {
 
 // ── Trace methods ──
 
-func Test_Cov4_Trace_Message(t *testing.T) {
+func Test_Trace_Message(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	msg := trace.Message()
@@ -79,7 +79,7 @@ func Test_Cov4_Trace_Message(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Message returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_ShortString(t *testing.T) {
+func Test_Trace_ShortString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.ShortString()
@@ -92,7 +92,7 @@ func Test_Cov4_Trace_ShortString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ShortString returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_String(t *testing.T) {
+func Test_Trace_String(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.String()
@@ -105,7 +105,7 @@ func Test_Cov4_Trace_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.String returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fwl := trace.FileWithLine()
@@ -124,7 +124,7 @@ func Test_Cov4_Trace_FileWithLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileWithLine returns populated value -- default", actual)
 }
 
-func Test_Cov4_Trace_FullFilePath(t *testing.T) {
+func Test_Trace_FullFilePath(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fp := trace.FullFilePath()
@@ -137,7 +137,7 @@ func Test_Cov4_Trace_FullFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FullFilePath returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_FileName(t *testing.T) {
+func Test_Trace_FileName(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	fn := trace.FileName()
@@ -150,7 +150,7 @@ func Test_Cov4_Trace_FileName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileName returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_LineNumber(t *testing.T) {
+func Test_Trace_LineNumber(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	ln := trace.LineNumber()
@@ -163,7 +163,7 @@ func Test_Cov4_Trace_LineNumber(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.LineNumber returns positive -- default", actual)
 }
 
-func Test_Cov4_Trace_FileWithLineString(t *testing.T) {
+func Test_Trace_FileWithLineString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s := trace.FileWithLineString()
@@ -176,7 +176,7 @@ func Test_Cov4_Trace_FileWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.FileWithLineString returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	cloned := trace.Clone()
@@ -195,7 +195,7 @@ func Test_Cov4_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Clone returns same data -- default", actual)
 }
 
-func Test_Cov4_Trace_ClonePtr(t *testing.T) {
+func Test_Trace_ClonePtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Ptr(0)
 	cloned := trace.ClonePtr()
@@ -216,7 +216,7 @@ func Test_Cov4_Trace_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns different ptr same data -- default", actual)
 }
 
-func Test_Cov4_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	cloned := trace.ClonePtr()
@@ -229,7 +229,7 @@ func Test_Cov4_Trace_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns nil -- nil receiver", actual)
 }
 
-func Test_Cov4_Trace_JsonModel(t *testing.T) {
+func Test_Trace_JsonModel(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	model := trace.JsonModel()
@@ -242,7 +242,7 @@ func Test_Cov4_Trace_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonModel returns Trace struct -- default", actual)
 }
 
-func Test_Cov4_Trace_JsonModelAny(t *testing.T) {
+func Test_Trace_JsonModelAny(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	model := trace.JsonModelAny()
@@ -255,7 +255,7 @@ func Test_Cov4_Trace_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonModelAny returns non-nil -- default", actual)
 }
 
-func Test_Cov4_Trace_JsonString(t *testing.T) {
+func Test_Trace_JsonString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	js := trace.JsonString()
@@ -268,7 +268,7 @@ func Test_Cov4_Trace_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonString returns non-empty -- default", actual)
 }
 
-func Test_Cov4_Trace_Json(t *testing.T) {
+func Test_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	result := trace.Json()
@@ -281,7 +281,7 @@ func Test_Cov4_Trace_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Json returns result with bytes -- default", actual)
 }
 
-func Test_Cov4_Trace_JsonPtr(t *testing.T) {
+func Test_Trace_JsonPtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	result := trace.JsonPtr()
@@ -294,7 +294,7 @@ func Test_Cov4_Trace_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.JsonPtr returns non-nil result -- default", actual)
 }
 
-func Test_Cov4_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	trace.Dispose()
@@ -309,7 +309,7 @@ func Test_Cov4_Trace_Dispose(t *testing.T) {
 
 // ── newStacksCreator (via New.StackTrace) ──
 
-func Test_Cov4_NewStacks_Default(t *testing.T) {
+func Test_NewStacks_Default(t *testing.T) {
 	// Arrange
 	traces := codestack.New.StackTrace.SkipNone()
 
@@ -321,7 +321,7 @@ func Test_Cov4_NewStacks_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTrace.Default returns non-empty -- from test", actual)
 }
 
-func Test_Cov4_NewStacks_DefaultCount(t *testing.T) {
+func Test_NewStacks_DefaultCount(t *testing.T) {
 	// Arrange
 	traces := codestack.New.StackTrace.DefaultCount(0)
 
@@ -333,7 +333,7 @@ func Test_Cov4_NewStacks_DefaultCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTrace.DefaultCount returns traces -- start skip 3", actual)
 }
 
-func Test_Cov4_NewStacks_SkipOne(t *testing.T) {
+func Test_NewStacks_SkipOne(t *testing.T) {
 	// Arrange
 	traces := codestack.New.StackTrace.SkipOne()
 
@@ -345,7 +345,7 @@ func Test_Cov4_NewStacks_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTrace.SkipOne returns traces -- skip 1", actual)
 }
 
-func Test_Cov4_NewStacks_SkipNone(t *testing.T) {
+func Test_NewStacks_SkipNone(t *testing.T) {
 	// Arrange
 	traces := codestack.New.StackTrace.SkipNone()
 
@@ -357,7 +357,7 @@ func Test_Cov4_NewStacks_SkipNone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTrace.SkipNone returns traces -- no skip", actual)
 }
 
-func Test_Cov4_NewStacks_All(t *testing.T) {
+func Test_NewStacks_All(t *testing.T) {
 	// Arrange
 	traces := codestack.New.StackTrace.All(true, true, 0, 5)
 
@@ -371,7 +371,7 @@ func Test_Cov4_NewStacks_All(t *testing.T) {
 
 // ── currentNameOf (via NameOf) ──
 
-func Test_Cov4_CurrentNameOf_Method(t *testing.T) {
+func Test_CurrentNameOf_Method(t *testing.T) {
 	// Arrange
 	name := codestack.NameOf.Method()
 
@@ -383,7 +383,7 @@ func Test_Cov4_CurrentNameOf_Method(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Method returns non-empty -- from test", actual)
 }
 
-func Test_Cov4_CurrentNameOf_Package(t *testing.T) {
+func Test_CurrentNameOf_Package(t *testing.T) {
 	// Arrange
 	name := codestack.NameOf.Package()
 
@@ -395,7 +395,7 @@ func Test_Cov4_CurrentNameOf_Package(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Package returns non-empty -- from test", actual)
 }
 
-func Test_Cov4_CurrentNameOf_CurrentFuncFullPath(t *testing.T) {
+func Test_CurrentNameOf_CurrentFuncFullPath(t *testing.T) {
 	// Arrange
 	name := codestack.NameOf.CurrentFuncFullPath("github.com/alimtvnetwork/core/tests/integratedtests/codestacktests.Test_Cov4_CurrentNameOf_CurrentFuncFullPath")
 
@@ -409,7 +409,7 @@ func Test_Cov4_CurrentNameOf_CurrentFuncFullPath(t *testing.T) {
 
 // ── dirGetter ──
 
-func Test_Cov4_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.CurDir()
 
@@ -421,7 +421,7 @@ func Test_Cov4_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns non-empty -- from test", actual)
 }
 
-func Test_Cov4_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Arrange
 	dir := codestack.Dir.CurDirJoin("sub")
 
@@ -435,7 +435,7 @@ func Test_Cov4_Dir_CurDirJoin(t *testing.T) {
 
 // ── fileGetter ──
 
-func Test_Cov4_File_CurFile(t *testing.T) {
+func Test_File_CurFile(t *testing.T) {
 	// Arrange
 	file := codestack.File.CurrentFilePath()
 
@@ -449,7 +449,7 @@ func Test_Cov4_File_CurFile(t *testing.T) {
 
 // ── stacksTo ──
 
-func Test_Cov4_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Arrange
 	s := codestack.StacksTo.String(0, 5)
 

@@ -15,7 +15,7 @@ import (
 // Covers BaseTestCaseAssertions.go L88-92
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_BaseTestCase_ShouldBeExplicit_Mismatch(t *testing.T) {
+func Test_BaseTestCase_ShouldBeExplicit_Mismatch(t *testing.T) {
 	// Arrange — deliberately mismatched actual vs expected to hit isFailed branch
 	tc := &coretests.BaseTestCase{
 		Title:         "mismatch test for isFailed branch",
@@ -43,7 +43,7 @@ func Test_Cov3_BaseTestCase_ShouldBeExplicit_Mismatch(t *testing.T) {
 // Covers BaseTestCaseAssertions.go L123-141
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_BaseTestCase_TypeShouldMatch_WithMismatch(t *testing.T) {
+func Test_BaseTestCase_TypeShouldMatch_WithMismatch(t *testing.T) {
 	tc := &coretests.BaseTestCase{
 		Title:         "type mismatch for TypeShouldMatch",
 		ArrangeInput:  "string_input",
@@ -70,7 +70,7 @@ func Test_Cov3_BaseTestCase_TypeShouldMatch_WithMismatch(t *testing.T) {
 // Covers BaseTestCaseAssertions.go L25-39
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_BaseTestCase_ShouldBe_Enabled(t *testing.T) {
+func Test_BaseTestCase_ShouldBe_Enabled(t *testing.T) {
 	tc := &coretests.BaseTestCase{
 		Title:         "enabled ShouldBe",
 		ExpectedInput: "hello",
@@ -85,7 +85,7 @@ func Test_Cov3_BaseTestCase_ShouldBe_Enabled(t *testing.T) {
 // Covers BaseTestCaseAssertions.go L25-29, L42-62
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_BaseTestCase_ShouldBe_Disabled(t *testing.T) {
+func Test_BaseTestCase_ShouldBe_Disabled(t *testing.T) {
 	tc := &coretests.BaseTestCase{
 		Title:         "disabled ShouldBe",
 		ExpectedInput: "hello",
@@ -100,7 +100,7 @@ func Test_Cov3_BaseTestCase_ShouldBe_Disabled(t *testing.T) {
 // Covers SimpleTestCase.go L84-104
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_SimpleTestCase_Disabled(t *testing.T) {
+func Test_SimpleTestCase_Disabled(t *testing.T) {
 	tc := coretests.SimpleTestCase{
 		Title:         "disabled simple case",
 		ExpectedInput: "value",
@@ -116,7 +116,7 @@ func Test_Cov3_SimpleTestCase_Disabled(t *testing.T) {
 // Covers BaseTestCaseValidation.go L18-23
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_BaseTestCase_TypesValidationMustPasses_WithError(t *testing.T) {
+func Test_BaseTestCase_TypesValidationMustPasses_WithError(t *testing.T) {
 	tc := &coretests.BaseTestCase{
 		Title:         "type validation with error",
 		ArrangeInput:  "string",
@@ -144,7 +144,7 @@ func Test_Cov3_BaseTestCase_TypesValidationMustPasses_WithError(t *testing.T) {
 // This test covers the surrounding code path through Clone.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_DraftType_IsEqual_InnerF1StringCoverage(t *testing.T) {
+func Test_DraftType_IsEqual_InnerF1StringCoverage(t *testing.T) {
 	// Arrange — use IsEqual with isIncludingInnerFields=false to skip unexported fields
 	a := &coretests.DraftType{SampleString1: "x", SampleString2: "y", SampleInteger: 1}
 	b := &coretests.DraftType{SampleString1: "x", SampleString2: "y", SampleInteger: 1}
@@ -160,7 +160,7 @@ func Test_Cov3_DraftType_IsEqual_InnerF1StringCoverage(t *testing.T) {
 // Covers AnyToBytes.go L26-28
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_AnyToBytes_MarshalPanic(t *testing.T) {
+func Test_AnyToBytes_MarshalPanic(t *testing.T) {
 	// Arrange
 	defer func() {
 		r := recover()

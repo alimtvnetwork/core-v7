@@ -10,7 +10,7 @@ import (
 
 // ── Result.IsResultTypeOf: actualType nil (Value is nil any) ──
 
-func Test_Cov5_IsResultTypeOf_NilValue_NonNilExpected(t *testing.T) {
+func Test_IsResultTypeOf_NilValue_NonNilExpected(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Value: nil}
 
@@ -22,7 +22,7 @@ func Test_Cov5_IsResultTypeOf_NilValue_NonNilExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsResultTypeOf returns false -- nil value non-nil expected", actual)
 }
 
-func Test_Cov5_IsResultTypeOf_NilValue_NilExpected_Zero(t *testing.T) {
+func Test_IsResultTypeOf_NilValue_NilExpected_Zero(t *testing.T) {
 	// Arrange
 	// Value is zero-value int (not nil), expected is nil
 	r := results.Result[int]{Value: 0}
@@ -37,7 +37,7 @@ func Test_Cov5_IsResultTypeOf_NilValue_NilExpected_Zero(t *testing.T) {
 
 // ── deriveCompareFields: only Error set ──
 
-func Test_Cov5_ShouldMatchResult_ErrorDerived(t *testing.T) {
+func Test_ShouldMatchResult_ErrorDerived(t *testing.T) {
 	r := results.Result[string]{Value: "x", Error: errors.New("e")}
 	exp := results.ResultAny{Error: results.ExpectAnyError}
 	// This exercises deriveCompareFields with only Error != nil
@@ -46,7 +46,7 @@ func Test_Cov5_ShouldMatchResult_ErrorDerived(t *testing.T) {
 
 // ── FromResultAny: panicked with no AllResults ──
 
-func Test_Cov5_FromResultAny_Panicked(t *testing.T) {
+func Test_FromResultAny_Panicked(t *testing.T) {
 	// Arrange
 	ra := results.ResultAny{Panicked: true, PanicValue: "boom"}
 	r := results.FromResultAny[string, int](ra)
@@ -69,7 +69,7 @@ func Test_Cov5_FromResultAny_Panicked(t *testing.T) {
 
 // ── FromResultAny: single AllResult ──
 
-func Test_Cov5_FromResultAny_SingleResult(t *testing.T) {
+func Test_FromResultAny_SingleResult(t *testing.T) {
 	// Arrange
 	ra := results.ResultAny{AllResults: []any{"hello"}, ReturnCount: 1}
 	r := results.FromResultAny[string, int](ra)
@@ -90,7 +90,7 @@ func Test_Cov5_FromResultAny_SingleResult(t *testing.T) {
 
 // ── Result.ToMapCompact: panicked ──
 
-func Test_Cov5_ToMapCompact_Panicked(t *testing.T) {
+func Test_ToMapCompact_Panicked(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Panicked: true, PanicValue: "boom"}
 	m := r.ToMapCompact()
@@ -111,7 +111,7 @@ func (s *cov5TypedArgStruct) Process(name string, count int) string {
 	return name
 }
 
-func Test_Cov5_Invoke_TypedArgs(t *testing.T) {
+func Test_Invoke_TypedArgs(t *testing.T) {
 	// Arrange
 	s := &cov5TypedArgStruct{}
 	r := results.InvokeWithPanicRecovery((*cov5TypedArgStruct).Process, s, "hello", 5)
@@ -144,7 +144,7 @@ func (s *cov5PtrErrReturn) ReturnErr() *cov5CustomErr {
 	return &cov5CustomErr{msg: "custom"}
 }
 
-func Test_Cov5_ExtractError_PtrImplError(t *testing.T) {
+func Test_ExtractError_PtrImplError(t *testing.T) {
 	// Arrange
 	s := &cov5PtrErrReturn{}
 	r := results.InvokeWithPanicRecovery((*cov5PtrErrReturn).ReturnErr, s)
@@ -165,7 +165,7 @@ func Test_Cov5_ExtractError_PtrImplError(t *testing.T) {
 
 // ── ShouldMatchResult: with explicit compareFields including returnCount ──
 
-func Test_Cov5_ShouldMatchResult_ReturnCountDerived(t *testing.T) {
+func Test_ShouldMatchResult_ReturnCountDerived(t *testing.T) {
 	r := results.Result[int]{Value: 10, ReturnCount: 2}
 	exp := results.ResultAny{ReturnCount: 2}
 	r.ShouldMatchResult(t, 0, "returnCount derived", exp)
@@ -173,7 +173,7 @@ func Test_Cov5_ShouldMatchResult_ReturnCountDerived(t *testing.T) {
 
 // ── Result.IsResult / IsError combined ──
 
-func Test_Cov5_Result_IsResult_StringComparison(t *testing.T) {
+func Test_Result_IsResult_StringComparison(t *testing.T) {
 	// Arrange
 	r := results.Result[int]{Value: 0}
 

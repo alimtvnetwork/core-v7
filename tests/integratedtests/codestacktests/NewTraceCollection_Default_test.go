@@ -9,7 +9,7 @@ import (
 
 // ── newTraceCollection ──
 
-func Test_Cov2_NewTraceCollection_Default(t *testing.T) {
+func Test_NewTraceCollection_Default(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(0, codestack.DefaultStackCount)
 
@@ -21,7 +21,7 @@ func Test_Cov2_NewTraceCollection_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newTraceCollection.Default returns non-empty -- default args", actual)
 }
 
-func Test_Cov2_NewTraceCollection_SkipOne(t *testing.T) {
+func Test_NewTraceCollection_SkipOne(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -33,7 +33,7 @@ func Test_Cov2_NewTraceCollection_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newTraceCollection.SkipOne returns non-empty -- skip one", actual)
 }
 
-func Test_Cov2_NewTraceCollection_SkipNone(t *testing.T) {
+func Test_NewTraceCollection_SkipNone(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -45,7 +45,7 @@ func Test_Cov2_NewTraceCollection_SkipNone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newTraceCollection.SkipNone returns non-empty -- skip none", actual)
 }
 
-func Test_Cov2_NewTraceCollection_DefaultCount(t *testing.T) {
+func Test_NewTraceCollection_DefaultCount(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(0)
 
@@ -59,7 +59,7 @@ func Test_Cov2_NewTraceCollection_DefaultCount(t *testing.T) {
 
 // ── Trace edge cases ──
 
-func Test_Cov2_Trace_NilPtr_String(t *testing.T) {
+func Test_Trace_NilPtr_String(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -71,7 +71,7 @@ func Test_Cov2_Trace_NilPtr_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.String returns empty -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_NilPtr_HasIssues(t *testing.T) {
+func Test_Trace_NilPtr_HasIssues(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -83,7 +83,7 @@ func Test_Cov2_Trace_NilPtr_HasIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.HasIssues returns true -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_NilPtr_IsNil(t *testing.T) {
+func Test_Trace_NilPtr_IsNil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -95,7 +95,7 @@ func Test_Cov2_Trace_NilPtr_IsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.IsNil returns true -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_NilPtr_IsNotNil(t *testing.T) {
+func Test_Trace_NilPtr_IsNotNil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -107,7 +107,7 @@ func Test_Cov2_Trace_NilPtr_IsNotNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.IsNotNil returns false -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_NilPtr_Dispose(t *testing.T) {
+func Test_Trace_NilPtr_Dispose(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 	trace.Dispose() // should not panic
@@ -120,7 +120,7 @@ func Test_Cov2_Trace_NilPtr_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Dispose returns safely -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_NilPtr_ClonePtr(t *testing.T) {
+func Test_Trace_NilPtr_ClonePtr(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -132,7 +132,7 @@ func Test_Cov2_Trace_NilPtr_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns nil -- nil pointer", actual)
 }
 
-func Test_Cov2_Trace_Empty_HasIssues(t *testing.T) {
+func Test_Trace_Empty_HasIssues(t *testing.T) {
 	// Arrange
 	trace := codestack.Trace{}
 
@@ -146,7 +146,7 @@ func Test_Cov2_Trace_Empty_HasIssues(t *testing.T) {
 
 // ── Trace message caching ──
 
-func Test_Cov2_Trace_Message_CalledTwice(t *testing.T) {
+func Test_Trace_Message_CalledTwice(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	msg1 := trace.Message()
@@ -166,7 +166,7 @@ func Test_Cov2_Trace_Message_CalledTwice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace.Message returns cached -- called twice", actual)
 }
 
-func Test_Cov2_Trace_ShortString_CalledTwice(t *testing.T) {
+func Test_Trace_ShortString_CalledTwice(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	s1 := trace.ShortString()
@@ -188,7 +188,7 @@ func Test_Cov2_Trace_ShortString_CalledTwice(t *testing.T) {
 
 // ── FileWithLine edge cases ──
 
-func Test_Cov2_FileWithLine_NilPtr_String(t *testing.T) {
+func Test_FileWithLine_NilPtr_String(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -200,7 +200,7 @@ func Test_Cov2_FileWithLine_NilPtr_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine.String returns empty -- nil pointer", actual)
 }
 
-func Test_Cov2_FileWithLine_NilPtr_IsNil(t *testing.T) {
+func Test_FileWithLine_NilPtr_IsNil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -212,7 +212,7 @@ func Test_Cov2_FileWithLine_NilPtr_IsNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine.IsNil returns true -- nil pointer", actual)
 }
 
-func Test_Cov2_FileWithLine_NilPtr_IsNotNil(t *testing.T) {
+func Test_FileWithLine_NilPtr_IsNotNil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -226,7 +226,7 @@ func Test_Cov2_FileWithLine_NilPtr_IsNotNil(t *testing.T) {
 
 // ── stacksTo ──
 
-func Test_Cov2_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.String(0, 5)
 
@@ -238,7 +238,7 @@ func Test_Cov2_StacksTo_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.String returns non-empty -- with count", actual)
 }
 
-func Test_Cov2_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringDefault()
 
@@ -250,7 +250,7 @@ func Test_Cov2_StacksTo_StringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringDefault returns non-empty -- default args", actual)
 }
 
-func Test_Cov2_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringNoCount(0)
 
@@ -262,7 +262,7 @@ func Test_Cov2_StacksTo_StringNoCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringNoCount returns non-empty -- skip 0", actual)
 }
 
-func Test_Cov2_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.Bytes(0)
 
@@ -274,7 +274,7 @@ func Test_Cov2_StacksTo_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.Bytes returns non-empty -- skip 0", actual)
 }
 
-func Test_Cov2_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.BytesDefault()
 
@@ -286,7 +286,7 @@ func Test_Cov2_StacksTo_BytesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.BytesDefault returns non-empty -- default", actual)
 }
 
-func Test_Cov2_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonString(0)
 
@@ -298,7 +298,7 @@ func Test_Cov2_StacksTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonString returns non-empty -- skip 0", actual)
 }
 
-func Test_Cov2_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.JsonStringDefault()
 
@@ -310,7 +310,7 @@ func Test_Cov2_StacksTo_JsonStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonStringDefault returns non-empty -- default", actual)
 }
 
-func Test_Cov2_StacksTo_StringUsingFmt(t *testing.T) {
+func Test_StacksTo_StringUsingFmt(t *testing.T) {
 	// Arrange
 	result := codestack.StacksTo.StringUsingFmt(
 		func(tr *codestack.Trace) string { return tr.PackageName },
@@ -328,7 +328,7 @@ func Test_Cov2_StacksTo_StringUsingFmt(t *testing.T) {
 
 // ── newCreator ──
 
-func Test_Cov2_NewCreator_Create(t *testing.T) {
+func Test_NewCreator_Create(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Create(0)
 
@@ -346,7 +346,7 @@ func Test_Cov2_NewCreator_Create(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.Create returns valid trace -- skip 0", actual)
 }
 
-func Test_Cov2_NewCreator_Default(t *testing.T) {
+func Test_NewCreator_Default(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -358,7 +358,7 @@ func Test_Cov2_NewCreator_Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.Default returns valid trace -- default", actual)
 }
 
-func Test_Cov2_NewCreator_SkipOne(t *testing.T) {
+func Test_NewCreator_SkipOne(t *testing.T) {
 	// Arrange
 	trace := codestack.New.SkipOne()
 
@@ -370,7 +370,7 @@ func Test_Cov2_NewCreator_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "newCreator.SkipOne returns valid trace -- skip one", actual)
 }
 
-func Test_Cov2_NewCreator_Ptr(t *testing.T) {
+func Test_NewCreator_Ptr(t *testing.T) {
 	// Arrange
 	ptr := codestack.New.Ptr(0)
 
@@ -390,7 +390,7 @@ func Test_Cov2_NewCreator_Ptr(t *testing.T) {
 
 // ── NameOf edge cases ──
 
-func Test_Cov2_NameOf_All_EmptyInput(t *testing.T) {
+func Test_NameOf_All_EmptyInput(t *testing.T) {
 	// Arrange
 	full, pkg, method := codestack.NameOf.All("")
 
@@ -410,7 +410,7 @@ func Test_Cov2_NameOf_All_EmptyInput(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns empty -- empty input", actual)
 }
 
-func Test_Cov2_NameOf_Method_EmptyInput(t *testing.T) {
+func Test_NameOf_Method_EmptyInput(t *testing.T) {
 	// Act
 	actual := args.Map{"result": codestack.NameOf.MethodByFullName("")}
 
@@ -419,7 +419,7 @@ func Test_Cov2_NameOf_Method_EmptyInput(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Method returns empty -- empty input", actual)
 }
 
-func Test_Cov2_NameOf_Package_EmptyInput(t *testing.T) {
+func Test_NameOf_Package_EmptyInput(t *testing.T) {
 	// Act
 	actual := args.Map{"result": codestack.NameOf.PackageByFullName("")}
 
@@ -430,7 +430,7 @@ func Test_Cov2_NameOf_Package_EmptyInput(t *testing.T) {
 
 // ── Trace.AsFileLiner ──
 
-func Test_Cov2_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	liner := trace.AsFileLiner()
@@ -451,7 +451,7 @@ func Test_Cov2_Trace_AsFileLiner(t *testing.T) {
 
 // ── FileWithLine.AsFileLiner ──
 
-func Test_Cov2_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 	liner := fwl.AsFileLiner()
@@ -472,7 +472,7 @@ func Test_Cov2_FileWithLine_AsFileLiner(t *testing.T) {
 
 // ── Trace.Clone with IsSkippable ──
 
-func Test_Cov2_Trace_Clone_PreservesIsSkippable(t *testing.T) {
+func Test_Trace_Clone_PreservesIsSkippable(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	cloned := trace.Clone()
@@ -493,7 +493,7 @@ func Test_Cov2_Trace_Clone_PreservesIsSkippable(t *testing.T) {
 
 // ── File / Dir getters ──
 
-func Test_Cov2_File_Name(t *testing.T) {
+func Test_File_Name(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.Name(0) != ""}
 
@@ -502,7 +502,7 @@ func Test_Cov2_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name returns non-empty -- skip 0", actual)
 }
 
-func Test_Cov2_File_Path(t *testing.T) {
+func Test_File_Path(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.Path(0) != ""}
 
@@ -511,7 +511,7 @@ func Test_Cov2_File_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Path returns non-empty -- skip 0", actual)
 }
 
-func Test_Cov2_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.CurDir() != ""}
 
@@ -520,7 +520,7 @@ func Test_Cov2_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns non-empty -- current dir", actual)
 }
 
-func Test_Cov2_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.CurDirJoin("sub") != ""}
 

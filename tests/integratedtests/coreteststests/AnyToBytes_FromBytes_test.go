@@ -12,7 +12,7 @@ import (
 
 // ── AnyToBytes ──
 
-func Test_Cov_AnyToBytes_FromBytes(t *testing.T) {
+func Test_AnyToBytes_FromBytes(t *testing.T) {
 	// Arrange
 	input := []byte{1, 2, 3}
 
@@ -35,7 +35,7 @@ func Test_Cov_AnyToBytes_FromBytes(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToBytes_FromString(t *testing.T) {
+func Test_AnyToBytes_FromString(t *testing.T) {
 	// Arrange
 	input := "hello"
 
@@ -56,7 +56,7 @@ func Test_Cov_AnyToBytes_FromString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
+func Test_AnyToBytes_FromStruct(t *testing.T) {
 	// Arrange
 	input := map[string]int{"a": 1}
 
@@ -77,7 +77,7 @@ func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToBytes_NilBytes(t *testing.T) {
+func Test_AnyToBytes_NilBytes(t *testing.T) {
 	// Arrange
 	var input []byte
 
@@ -100,7 +100,7 @@ func Test_Cov_AnyToBytes_NilBytes(t *testing.T) {
 
 // ── AnyToBytesPtr ──
 
-func Test_Cov_AnyToBytesPtr_Delegates(t *testing.T) {
+func Test_AnyToBytesPtr_Delegates(t *testing.T) {
 	// Arrange
 	input := "test"
 
@@ -123,7 +123,7 @@ func Test_Cov_AnyToBytesPtr_Delegates(t *testing.T) {
 
 // ── AnyToDraftType ──
 
-func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
+func Test_AnyToDraftType_FromValue(t *testing.T) {
 	// Arrange
 	input := coretests.DraftType{SampleString1: "s1"}
 
@@ -146,7 +146,7 @@ func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
+func Test_AnyToDraftType_FromPtr(t *testing.T) {
 	// Arrange
 	input := &coretests.DraftType{SampleString1: "s2"}
 
@@ -169,7 +169,7 @@ func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
+func Test_AnyToDraftType_FromOther(t *testing.T) {
 	// Arrange
 	input := "not a DraftType"
 
@@ -192,7 +192,7 @@ func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
 
 // ── DraftType ──
 
-func Test_Cov_DraftType_Clone(t *testing.T) {
+func Test_DraftType_Clone(t *testing.T) {
 	// Arrange
 	original := coretests.DraftType{
 		SampleString1: "a",
@@ -229,7 +229,7 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_ClonePtr_Nil(t *testing.T) {
+func Test_DraftType_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coretests.DraftType
 
@@ -250,7 +250,7 @@ func Test_Cov_DraftType_ClonePtr_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_ClonePtr_Valid(t *testing.T) {
+func Test_DraftType_ClonePtr_Valid(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "test"}
 
@@ -273,7 +273,7 @@ func Test_Cov_DraftType_ClonePtr_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_BothNil(t *testing.T) {
+func Test_DraftType_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var a, b *coretests.DraftType
 
@@ -294,7 +294,7 @@ func Test_Cov_DraftType_IsEqual_BothNil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_OneNil(t *testing.T) {
+func Test_DraftType_IsEqual_OneNil(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	var b *coretests.DraftType
@@ -316,7 +316,7 @@ func Test_Cov_DraftType_IsEqual_OneNil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_SamePointer(t *testing.T) {
+func Test_DraftType_IsEqual_SamePointer(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 
@@ -337,7 +337,7 @@ func Test_Cov_DraftType_IsEqual_SamePointer(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_FieldMismatch(t *testing.T) {
+func Test_DraftType_IsEqual_FieldMismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "y"}
@@ -359,7 +359,7 @@ func Test_Cov_DraftType_IsEqual_FieldMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_String2Mismatch(t *testing.T) {
+func Test_DraftType_IsEqual_String2Mismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x", SampleString2: "a"}
 	b := &coretests.DraftType{SampleString1: "x", SampleString2: "b"}
@@ -381,7 +381,7 @@ func Test_Cov_DraftType_IsEqual_String2Mismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_IntegerMismatch(t *testing.T) {
+func Test_DraftType_IsEqual_IntegerMismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x", SampleString2: "y", SampleInteger: 1}
 	b := &coretests.DraftType{SampleString1: "x", SampleString2: "y", SampleInteger: 2}
@@ -403,7 +403,7 @@ func Test_Cov_DraftType_IsEqual_IntegerMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_BytesMismatch(t *testing.T) {
+func Test_DraftType_IsEqual_BytesMismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x", RawBytes: []byte{1}}
 	b := &coretests.DraftType{SampleString1: "x", RawBytes: []byte{2}}
@@ -425,7 +425,7 @@ func Test_Cov_DraftType_IsEqual_BytesMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqual_LinesMismatch(t *testing.T) {
+func Test_DraftType_IsEqual_LinesMismatch(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x", Lines: []string{"a"}}
 	b := &coretests.DraftType{SampleString1: "x", Lines: []string{"b"}}
@@ -447,7 +447,7 @@ func Test_Cov_DraftType_IsEqual_LinesMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyNotEqualMessage_Equal(t *testing.T) {
+func Test_DraftType_VerifyNotEqualMessage_Equal(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "x"}
@@ -469,7 +469,7 @@ func Test_Cov_DraftType_VerifyNotEqualMessage_Equal(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyNotEqualErr_Equal(t *testing.T) {
+func Test_DraftType_VerifyNotEqualErr_Equal(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "x"}
@@ -491,7 +491,7 @@ func Test_Cov_DraftType_VerifyNotEqualErr_Equal(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyNotEqualErr_NotEqual(t *testing.T) {
+func Test_DraftType_VerifyNotEqualErr_NotEqual(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "y"}
@@ -513,7 +513,7 @@ func Test_Cov_DraftType_VerifyNotEqualErr_NotEqual(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyAllNotEqualErr(t *testing.T) {
+func Test_DraftType_VerifyAllNotEqualErr(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "x"}
@@ -535,7 +535,7 @@ func Test_Cov_DraftType_VerifyAllNotEqualErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyNotEqualExcludingInnerFieldsErr(t *testing.T) {
+func Test_DraftType_VerifyNotEqualExcludingInnerFieldsErr(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "y"}
@@ -557,7 +557,7 @@ func Test_Cov_DraftType_VerifyNotEqualExcludingInnerFieldsErr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_VerifyAllNotEqualMessage(t *testing.T) {
+func Test_DraftType_VerifyAllNotEqualMessage(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "y"}
@@ -579,7 +579,7 @@ func Test_Cov_DraftType_VerifyAllNotEqualMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_JsonString(t *testing.T) {
+func Test_DraftType_JsonString(t *testing.T) {
 	// Arrange
 	d := coretests.DraftType{SampleString1: "test"}
 
@@ -602,7 +602,7 @@ func Test_Cov_DraftType_JsonString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_JsonBytes(t *testing.T) {
+func Test_DraftType_JsonBytes(t *testing.T) {
 	// Arrange
 	d := coretests.DraftType{SampleString1: "test"}
 
@@ -623,7 +623,7 @@ func Test_Cov_DraftType_JsonBytes(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_JsonBytesPtr(t *testing.T) {
+func Test_DraftType_JsonBytesPtr(t *testing.T) {
 	// Arrange
 	d := coretests.DraftType{SampleString1: "test"}
 
@@ -644,7 +644,7 @@ func Test_Cov_DraftType_JsonBytesPtr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_F1String_F2Integer(t *testing.T) {
+func Test_DraftType_F1String_F2Integer(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "x"}
 	d.SetF2Integer(42)
@@ -668,7 +668,7 @@ func Test_Cov_DraftType_F1String_F2Integer(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_NonPtr(t *testing.T) {
+func Test_DraftType_NonPtr(t *testing.T) {
 	// Arrange
 	d := coretests.DraftType{SampleString1: "val"}
 
@@ -689,7 +689,7 @@ func Test_Cov_DraftType_NonPtr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_PtrOrNonPtr_Nil(t *testing.T) {
+func Test_DraftType_PtrOrNonPtr_Nil(t *testing.T) {
 	// Arrange
 	var d *coretests.DraftType
 
@@ -710,7 +710,7 @@ func Test_Cov_DraftType_PtrOrNonPtr_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_PtrOrNonPtr_Ptr(t *testing.T) {
+func Test_DraftType_PtrOrNonPtr_Ptr(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "p"}
 
@@ -731,7 +731,7 @@ func Test_Cov_DraftType_PtrOrNonPtr_Ptr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_PtrOrNonPtr_NonPtr(t *testing.T) {
+func Test_DraftType_PtrOrNonPtr_NonPtr(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "p"}
 
@@ -755,7 +755,7 @@ func Test_Cov_DraftType_PtrOrNonPtr_NonPtr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_DraftType_IsEqualAll(t *testing.T) {
+func Test_DraftType_IsEqualAll(t *testing.T) {
 	// Arrange
 	a := &coretests.DraftType{SampleString1: "x"}
 	b := &coretests.DraftType{SampleString1: "x"}
@@ -779,7 +779,7 @@ func Test_Cov_DraftType_IsEqualAll(t *testing.T) {
 
 // ── VerifyTypeOf ──
 
-func Test_Cov_VerifyTypeOf_NewAndMethods(t *testing.T) {
+func Test_VerifyTypeOf_NewAndMethods(t *testing.T) {
 	// Arrange
 	vt := coretests.NewVerifyTypeOf("hello")
 
@@ -801,7 +801,7 @@ func Test_Cov_VerifyTypeOf_NewAndMethods(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_VerifyTypeOf_NilSkipVerify(t *testing.T) {
+func Test_VerifyTypeOf_NilSkipVerify(t *testing.T) {
 	// Arrange
 	var vt *coretests.VerifyTypeOf
 
@@ -824,7 +824,7 @@ func Test_Cov_VerifyTypeOf_NilSkipVerify(t *testing.T) {
 
 // ── SomeString ──
 
-func Test_Cov_SomeString_String(t *testing.T) {
+func Test_SomeString_String(t *testing.T) {
 	// Arrange
 	s := coretests.SomeString{Value: "hello"}
 
@@ -850,7 +850,7 @@ func Test_Cov_SomeString_String(t *testing.T) {
 
 // ── TestFuncName ──
 
-func Test_Cov_TestFuncName_Value(t *testing.T) {
+func Test_TestFuncName_Value(t *testing.T) {
 	// Arrange
 	fn := coretests.TestFuncName("MyFunc")
 
@@ -873,7 +873,7 @@ func Test_Cov_TestFuncName_Value(t *testing.T) {
 
 // ── CaseIndexPlusIsPrint ──
 
-func Test_Cov_CaseIndexPlusIsPrint_Fields(t *testing.T) {
+func Test_CaseIndexPlusIsPrint_Fields(t *testing.T) {
 	// Arrange
 	c := coretests.CaseIndexPlusIsPrint{IsPrint: true, CaseIndex: 5}
 
@@ -895,7 +895,7 @@ func Test_Cov_CaseIndexPlusIsPrint_Fields(t *testing.T) {
 
 // ── SimpleTestCase ──
 
-func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
+func Test_SimpleTestCase_Getters(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test title",
@@ -926,7 +926,7 @@ func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_FormTitle(t *testing.T) {
+func Test_SimpleTestCase_FormTitle(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{Title: "my test"}
 
@@ -947,7 +947,7 @@ func Test_Cov_SimpleTestCase_FormTitle(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_CustomTitle(t *testing.T) {
+func Test_SimpleTestCase_CustomTitle(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{Title: "my test"}
 
@@ -968,7 +968,7 @@ func Test_Cov_SimpleTestCase_CustomTitle(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_SetActual(t *testing.T) {
+func Test_SimpleTestCase_SetActual(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{Title: "test"}
 
@@ -989,7 +989,7 @@ func Test_Cov_SimpleTestCase_SetActual(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_String(t *testing.T) {
+func Test_SimpleTestCase_String(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test",
@@ -1014,7 +1014,7 @@ func Test_Cov_SimpleTestCase_String(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_LinesString(t *testing.T) {
+func Test_SimpleTestCase_LinesString(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test",
@@ -1038,7 +1038,7 @@ func Test_Cov_SimpleTestCase_LinesString(t *testing.T) {
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleTestCase_AsSimpleTestCaseWrapper(t *testing.T) {
+func Test_SimpleTestCase_AsSimpleTestCaseWrapper(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{Title: "test"}
 
@@ -1061,7 +1061,7 @@ func Test_Cov_SimpleTestCase_AsSimpleTestCaseWrapper(t *testing.T) {
 
 // ── BaseTestCase getters ──
 
-func Test_Cov_BaseTestCase_Getters(t *testing.T) {
+func Test_BaseTestCase_Getters(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{
 		Title:         "base title",
@@ -1092,7 +1092,7 @@ func Test_Cov_BaseTestCase_Getters(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_SetActual(t *testing.T) {
+func Test_BaseTestCase_SetActual(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1115,7 +1115,7 @@ func Test_Cov_BaseTestCase_SetActual(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_ActualLines(t *testing.T) {
+func Test_BaseTestCase_ActualLines(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{
 		Title:     "test",
@@ -1141,7 +1141,7 @@ func Test_Cov_BaseTestCase_ActualLines(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_ExpectedLines(t *testing.T) {
+func Test_BaseTestCase_ExpectedLines(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{
 		Title:         "test",
@@ -1169,7 +1169,7 @@ func Test_Cov_BaseTestCase_ExpectedLines(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_FormTitle(t *testing.T) {
+func Test_BaseTestCase_FormTitle(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "my test"}
 
@@ -1190,7 +1190,7 @@ func Test_Cov_BaseTestCase_FormTitle(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_CustomTitle(t *testing.T) {
+func Test_BaseTestCase_CustomTitle(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "my test"}
 
@@ -1211,7 +1211,7 @@ func Test_Cov_BaseTestCase_CustomTitle(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_IsDisabled(t *testing.T) {
+func Test_BaseTestCase_IsDisabled(t *testing.T) {
 	// Arrange
 	enabled := &coretests.BaseTestCase{Title: "enabled"}
 	disabled := &coretests.BaseTestCase{Title: "disabled", IsEnable: issetter.False}
@@ -1232,7 +1232,7 @@ func Test_Cov_BaseTestCase_IsDisabled(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_IsSkipWithLog_Disabled(t *testing.T) {
+func Test_BaseTestCase_IsSkipWithLog_Disabled(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test", IsEnable: issetter.False}
 
@@ -1253,7 +1253,7 @@ func Test_Cov_BaseTestCase_IsSkipWithLog_Disabled(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_IsSkipWithLog_Enabled(t *testing.T) {
+func Test_BaseTestCase_IsSkipWithLog_Enabled(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1274,7 +1274,7 @@ func Test_Cov_BaseTestCase_IsSkipWithLog_Enabled(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_String(t *testing.T) {
+func Test_BaseTestCase_String(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{
 		Title:         "test",
@@ -1299,7 +1299,7 @@ func Test_Cov_BaseTestCase_String(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_LinesString(t *testing.T) {
+func Test_BaseTestCase_LinesString(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{
 		Title:         "test",
@@ -1323,7 +1323,7 @@ func Test_Cov_BaseTestCase_LinesString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_ArrangeTypeName(t *testing.T) {
+func Test_BaseTestCase_ArrangeTypeName(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{ArrangeInput: "hello"}
 
@@ -1344,7 +1344,7 @@ func Test_Cov_BaseTestCase_ArrangeTypeName(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_AsWrappers(t *testing.T) {
+func Test_BaseTestCase_AsWrappers(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1368,7 +1368,7 @@ func Test_Cov_BaseTestCase_AsWrappers(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_IsTypeInvalidOrSkipVerify(t *testing.T) {
+func Test_BaseTestCase_IsTypeInvalidOrSkipVerify(t *testing.T) {
 	// Arrange
 	noVerify := &coretests.BaseTestCase{Title: "no verify"}
 	withVerify := &coretests.BaseTestCase{
@@ -1396,7 +1396,7 @@ func Test_Cov_BaseTestCase_IsTypeInvalidOrSkipVerify(t *testing.T) {
 
 // ── BaseTestCase Parameters ──
 
-func Test_Cov_BaseTestCase_Parameters_Nil(t *testing.T) {
+func Test_BaseTestCase_Parameters_Nil(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1428,7 +1428,7 @@ func Test_Cov_BaseTestCase_Parameters_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_BaseTestCase_HashmapParam_Nil(t *testing.T) {
+func Test_BaseTestCase_HashmapParam_Nil(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1453,7 +1453,7 @@ func Test_Cov_BaseTestCase_HashmapParam_Nil(t *testing.T) {
 
 // ── BaseTestCase TypeValidation ──
 
-func Test_Cov_BaseTestCase_TypeValidationError_NoVerify(t *testing.T) {
+func Test_BaseTestCase_TypeValidationError_NoVerify(t *testing.T) {
 	// Arrange
 	btc := &coretests.BaseTestCase{Title: "test"}
 
@@ -1476,7 +1476,7 @@ func Test_Cov_BaseTestCase_TypeValidationError_NoVerify(t *testing.T) {
 
 // ── getAssert helpers ──
 
-func Test_Cov_GetAssert_Quick(t *testing.T) {
+func Test_GetAssert_Quick(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.Quick("when", "actual", "expected", 0)
 
@@ -1494,7 +1494,7 @@ func Test_Cov_GetAssert_Quick(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToStrings_String(t *testing.T) {
+func Test_GetAssert_ToStrings_String(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ToStrings("hello")
 
@@ -1514,7 +1514,7 @@ func Test_Cov_GetAssert_ToStrings_String(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToStrings_Slice(t *testing.T) {
+func Test_GetAssert_ToStrings_Slice(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ToStrings([]string{"a", "b"})
 
@@ -1536,7 +1536,7 @@ func Test_Cov_GetAssert_ToStrings_Slice(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToStrings_Int(t *testing.T) {
+func Test_GetAssert_ToStrings_Int(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ToStrings(42)
 
@@ -1556,7 +1556,7 @@ func Test_Cov_GetAssert_ToStrings_Int(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToStrings_Bool(t *testing.T) {
+func Test_GetAssert_ToStrings_Bool(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ToStrings(true)
 
@@ -1576,7 +1576,7 @@ func Test_Cov_GetAssert_ToStrings_Bool(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToString(t *testing.T) {
+func Test_GetAssert_ToString(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ToString("test")
 
@@ -1594,7 +1594,7 @@ func Test_Cov_GetAssert_ToString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_SortedMessage(t *testing.T) {
+func Test_GetAssert_SortedMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.SortedMessage(false, "b a c", " ")
 
@@ -1612,7 +1612,7 @@ func Test_Cov_GetAssert_SortedMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_SortedArrayNoPrint(t *testing.T) {
+func Test_GetAssert_SortedArrayNoPrint(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.SortedArrayNoPrint("b a c")
 
@@ -1630,7 +1630,7 @@ func Test_Cov_GetAssert_SortedArrayNoPrint(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ToQuoteLines(t *testing.T) {
+func Test_GetAssert_ToQuoteLines(t *testing.T) {
 	// Arrange
 	lines := []string{"a", "b"}
 
@@ -1651,7 +1651,7 @@ func Test_Cov_GetAssert_ToQuoteLines(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
+func Test_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.AnyToDoubleQuoteLines(2, "hello")
 
@@ -1669,7 +1669,7 @@ func Test_Cov_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
+func Test_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ConvertLinesToDoubleQuoteThenString(2, []string{"a", "b"})
 
@@ -1687,7 +1687,7 @@ func Test_Cov_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
+func Test_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.AnyToStringDoubleQuoteLine(2, "hello")
 
@@ -1707,7 +1707,7 @@ func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
 
 // ── getAssertMessages ──
 
-func Test_Cov_GetAssert_IsEqualMessage(t *testing.T) {
+func Test_GetAssert_IsEqualMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsEqualMessage("when", "actual", "expected")
 
@@ -1725,7 +1725,7 @@ func Test_Cov_GetAssert_IsEqualMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_IsNotEqualMessage(t *testing.T) {
+func Test_GetAssert_IsNotEqualMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsNotEqualMessage("when", "actual", "expected")
 
@@ -1743,7 +1743,7 @@ func Test_Cov_GetAssert_IsNotEqualMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_IsTrueMessage(t *testing.T) {
+func Test_GetAssert_IsTrueMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsTrueMessage("when", "actual")
 
@@ -1761,7 +1761,7 @@ func Test_Cov_GetAssert_IsTrueMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_IsFalseMessage(t *testing.T) {
+func Test_GetAssert_IsFalseMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsFalseMessage("when", "actual")
 
@@ -1779,7 +1779,7 @@ func Test_Cov_GetAssert_IsFalseMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_IsNilMessage(t *testing.T) {
+func Test_GetAssert_IsNilMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsNilMessage("when", nil)
 
@@ -1797,7 +1797,7 @@ func Test_Cov_GetAssert_IsNilMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_IsNotNilMessage(t *testing.T) {
+func Test_GetAssert_IsNotNilMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.IsNotNilMessage("when", "actual")
 
@@ -1815,7 +1815,7 @@ func Test_Cov_GetAssert_IsNotNilMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ShouldBeMessage(t *testing.T) {
+func Test_GetAssert_ShouldBeMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ShouldBeMessage("title", "actual", "expected")
 
@@ -1833,7 +1833,7 @@ func Test_Cov_GetAssert_ShouldBeMessage(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_GetAssert_ShouldNotBeMessage(t *testing.T) {
+func Test_GetAssert_ShouldNotBeMessage(t *testing.T) {
 	// Arrange / Act
 	result := coretests.GetAssert.ShouldNotBeMessage("title", "actual", "expected")
 
@@ -1853,7 +1853,7 @@ func Test_Cov_GetAssert_ShouldNotBeMessage(t *testing.T) {
 
 // ── ToStringValues / ToStringNameValues ──
 
-func Test_Cov_ToStringValues(t *testing.T) {
+func Test_ToStringValues(t *testing.T) {
 	// Arrange / Act
 	resultNil := coretests.ToStringValues(nil)
 	resultVal := coretests.ToStringValues("hello")
@@ -1874,7 +1874,7 @@ func Test_Cov_ToStringValues(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_ToStringNameValues(t *testing.T) {
+func Test_ToStringNameValues(t *testing.T) {
 	// Arrange / Act
 	resultNil := coretests.ToStringNameValues(nil)
 	resultVal := coretests.ToStringNameValues("hello")
@@ -1897,7 +1897,7 @@ func Test_Cov_ToStringNameValues(t *testing.T) {
 
 // ── LogOnFail ──
 
-func Test_Cov_LogOnFail_Pass(t *testing.T) {
+func Test_LogOnFail_Pass(t *testing.T) {
 	// Arrange / Act - should not panic
 	coretests.LogOnFail(true, "exp", "act")
 
@@ -1915,7 +1915,7 @@ func Test_Cov_LogOnFail_Pass(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_LogOnFail_Fail(t *testing.T) {
+func Test_LogOnFail_Fail(t *testing.T) {
 	// Arrange / Act - should log but not panic
 	coretests.LogOnFail(false, "exp", "act")
 
@@ -1935,7 +1935,7 @@ func Test_Cov_LogOnFail_Fail(t *testing.T) {
 
 // ── SimpleGherkins ──
 
-func Test_Cov_SimpleGherkins_String(t *testing.T) {
+func Test_SimpleGherkins_String(t *testing.T) {
 	// Arrange
 	g := &coretests.SimpleGherkins{
 		Feature: "feature",
@@ -1964,7 +1964,7 @@ func Test_Cov_SimpleGherkins_String(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleGherkins_GetWithExpectation(t *testing.T) {
+func Test_SimpleGherkins_GetWithExpectation(t *testing.T) {
 	// Arrange
 	g := &coretests.SimpleGherkins{
 		Feature: "f",
@@ -1992,7 +1992,7 @@ func Test_Cov_SimpleGherkins_GetWithExpectation(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_SimpleGherkins_GetMessageConditional(t *testing.T) {
+func Test_SimpleGherkins_GetMessageConditional(t *testing.T) {
 	// Arrange
 	g := &coretests.SimpleGherkins{Feature: "f"}
 
@@ -2018,7 +2018,7 @@ func Test_Cov_SimpleGherkins_GetMessageConditional(t *testing.T) {
 
 // ── getAssertSimpleTestCaseWrapper ──
 
-func Test_Cov_GetAssert_SimpleTestCaseWrapper_Lines(t *testing.T) {
+func Test_GetAssert_SimpleTestCaseWrapper_Lines(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test",

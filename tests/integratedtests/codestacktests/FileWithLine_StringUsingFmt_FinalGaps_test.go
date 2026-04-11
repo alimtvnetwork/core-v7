@@ -13,7 +13,7 @@ import (
 
 // --- FileWithLine methods ---
 
-func Test_Cov13_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/some/path.go",
@@ -31,7 +31,7 @@ func Test_Cov13_FileWithLine_StringUsingFmt(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_JsonModelAny(t *testing.T) {
+func Test_FileWithLine_JsonModelAny(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -47,7 +47,7 @@ func Test_Cov13_FileWithLine_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_JsonString(t *testing.T) {
+func Test_FileWithLine_JsonString(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -63,7 +63,7 @@ func Test_Cov13_FileWithLine_JsonString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_Json(t *testing.T) {
+func Test_FileWithLine_Json(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -79,7 +79,7 @@ func Test_Cov13_FileWithLine_Json(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_JsonPtr(t *testing.T) {
+func Test_FileWithLine_JsonPtr(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -95,7 +95,7 @@ func Test_Cov13_FileWithLine_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_ParseInjectUsingJson(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -115,7 +115,7 @@ func Test_Cov13_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -134,7 +134,7 @@ func Test_Cov13_FileWithLine_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_JsonParseSelfInject(t *testing.T) {
+func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -154,7 +154,7 @@ func Test_Cov13_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_AsFileLiner(t *testing.T) {
+func Test_FileWithLine_AsFileLiner(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/path.go",
@@ -171,7 +171,7 @@ func Test_Cov13_FileWithLine_AsFileLiner(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_String_Nil(t *testing.T) {
+func Test_FileWithLine_String_Nil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 
@@ -184,7 +184,7 @@ func Test_Cov13_FileWithLine_String_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov13_FileWithLine_IsNil_IsNotNil(t *testing.T) {
+func Test_FileWithLine_IsNil_IsNotNil(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{}
 
@@ -197,7 +197,7 @@ func Test_Cov13_FileWithLine_IsNil_IsNotNil(t *testing.T) {
 
 // --- Trace methods ---
 
-func Test_Cov13_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -212,7 +212,7 @@ func Test_Cov13_Trace_StringUsingFmt(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_FileName(t *testing.T) {
+func Test_Trace_FileName(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -225,7 +225,7 @@ func Test_Cov13_Trace_FileName(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_FileWithLine(t *testing.T) {
+func Test_Trace_FileWithLine(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -238,7 +238,7 @@ func Test_Cov13_Trace_FileWithLine(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_FileWithLineString(t *testing.T) {
+func Test_Trace_FileWithLineString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -251,7 +251,7 @@ func Test_Cov13_Trace_FileWithLineString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_ShortString(t *testing.T) {
+func Test_Trace_ShortString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -266,7 +266,7 @@ func Test_Cov13_Trace_ShortString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_Message(t *testing.T) {
+func Test_Trace_Message(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -281,7 +281,7 @@ func Test_Cov13_Trace_Message(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_HasIssues(t *testing.T) {
+func Test_Trace_HasIssues(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -291,7 +291,7 @@ func Test_Cov13_Trace_HasIssues(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_HasIssues_Nil(t *testing.T) {
+func Test_Trace_HasIssues_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -301,7 +301,7 @@ func Test_Cov13_Trace_HasIssues_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_JsonModelAny(t *testing.T) {
+func Test_Trace_JsonModelAny(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -314,7 +314,7 @@ func Test_Cov13_Trace_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_JsonString(t *testing.T) {
+func Test_Trace_JsonString(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -327,7 +327,7 @@ func Test_Cov13_Trace_JsonString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_ParseInjectUsingJson(t *testing.T) {
+func Test_Trace_ParseInjectUsingJson(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.JsonPtr()
@@ -343,7 +343,7 @@ func Test_Cov13_Trace_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_Trace_ParseInjectUsingJsonMust(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.JsonPtr()
@@ -358,7 +358,7 @@ func Test_Cov13_Trace_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_JsonParseSelfInject(t *testing.T) {
+func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.JsonPtr()
@@ -373,7 +373,7 @@ func Test_Cov13_Trace_JsonParseSelfInject(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -386,7 +386,7 @@ func Test_Cov13_Trace_Clone(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_ClonePtr(t *testing.T) {
+func Test_Trace_ClonePtr(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -399,7 +399,7 @@ func Test_Cov13_Trace_ClonePtr(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -412,7 +412,7 @@ func Test_Cov13_Trace_ClonePtr_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -426,7 +426,7 @@ func Test_Cov13_Trace_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_Dispose_Nil(t *testing.T) {
+func Test_Trace_Dispose_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -436,7 +436,7 @@ func Test_Cov13_Trace_Dispose_Nil(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -449,7 +449,7 @@ func Test_Cov13_Trace_AsFileLiner(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Trace_String_Nil(t *testing.T) {
+func Test_Trace_String_Nil(t *testing.T) {
 	// Arrange
 	var trace *codestack.Trace
 
@@ -464,7 +464,7 @@ func Test_Cov13_Trace_String_Nil(t *testing.T) {
 
 // --- TraceCollection methods ---
 
-func Test_Cov13_TraceCollection_StackTraces(t *testing.T) {
+func Test_TraceCollection_StackTraces(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -477,7 +477,7 @@ func Test_Cov13_TraceCollection_StackTraces(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_StackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -490,7 +490,7 @@ func Test_Cov13_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_NewStackTraces(t *testing.T) {
+func Test_TraceCollection_NewStackTraces(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -503,7 +503,7 @@ func Test_Cov13_TraceCollection_NewStackTraces(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_NewDefaultStackTraces(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -516,7 +516,7 @@ func Test_Cov13_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -529,7 +529,7 @@ func Test_Cov13_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -542,7 +542,7 @@ func Test_Cov13_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_StackTracesBytes(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -555,7 +555,7 @@ func Test_Cov13_TraceCollection_StackTracesBytes(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_InsertAt(t *testing.T) {
+func Test_TraceCollection_InsertAt(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	trace := codestack.New.Default()
@@ -571,7 +571,7 @@ func Test_Cov13_TraceCollection_InsertAt(t *testing.T) {
 
 // --- currentNameOf methods ---
 
-func Test_Cov13_NameOf_Method(t *testing.T) {
+func Test_NameOf_Method(t *testing.T) {
 	// Act
 	result := codestack.NameOf.Method()
 
@@ -581,7 +581,7 @@ func Test_Cov13_NameOf_Method(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_Package(t *testing.T) {
+func Test_NameOf_Package(t *testing.T) {
 	// Act
 	result := codestack.NameOf.Package()
 
@@ -591,7 +591,7 @@ func Test_Cov13_NameOf_Package(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_All_Empty(t *testing.T) {
+func Test_NameOf_All_Empty(t *testing.T) {
 	// Act
 	full, pkg, method := codestack.NameOf.All("")
 
@@ -603,7 +603,7 @@ func Test_Cov13_NameOf_All_Empty(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_MethodByFullName(t *testing.T) {
+func Test_NameOf_MethodByFullName(t *testing.T) {
 	// Act
 	result := codestack.NameOf.MethodByFullName("github.com/pkg.Method")
 
@@ -613,7 +613,7 @@ func Test_Cov13_NameOf_MethodByFullName(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_PackageByFullName(t *testing.T) {
+func Test_NameOf_PackageByFullName(t *testing.T) {
 	// Act
 	result := codestack.NameOf.PackageByFullName("github.com/pkg.Method")
 
@@ -623,7 +623,7 @@ func Test_Cov13_NameOf_PackageByFullName(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_CurrentFuncFullPath(t *testing.T) {
+func Test_NameOf_CurrentFuncFullPath(t *testing.T) {
 	// Act
 	result := codestack.NameOf.CurrentFuncFullPath("github.com/pkg.Method")
 
@@ -633,7 +633,7 @@ func Test_Cov13_NameOf_CurrentFuncFullPath(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_JoinPackageNameWithRelative(t *testing.T) {
+func Test_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	// Act
 	result := codestack.NameOf.JoinPackageNameWithRelative(
 		"github.com/pkg.Method",
@@ -646,7 +646,7 @@ func Test_Cov13_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_MethodStackSkip(t *testing.T) {
+func Test_NameOf_MethodStackSkip(t *testing.T) {
 	// Act
 	result := codestack.NameOf.MethodStackSkip(0)
 
@@ -656,7 +656,7 @@ func Test_Cov13_NameOf_MethodStackSkip(t *testing.T) {
 	})
 }
 
-func Test_Cov13_NameOf_PackageStackSkip(t *testing.T) {
+func Test_NameOf_PackageStackSkip(t *testing.T) {
 	// Act
 	result := codestack.NameOf.PackageStackSkip(0)
 
@@ -668,7 +668,7 @@ func Test_Cov13_NameOf_PackageStackSkip(t *testing.T) {
 
 // --- dirGetter methods ---
 
-func Test_Cov13_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Act
 	result := codestack.Dir.CurDir()
 
@@ -678,7 +678,7 @@ func Test_Cov13_Dir_CurDir(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Act
 	result := codestack.Dir.CurDirJoin("sub", "path")
 
@@ -688,7 +688,7 @@ func Test_Cov13_Dir_CurDirJoin(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir(t *testing.T) {
 	// Act
 	result := codestack.Dir.RepoDir()
 
@@ -698,7 +698,7 @@ func Test_Cov13_Dir_RepoDir(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Dir_RepoDirJoin(t *testing.T) {
+func Test_Dir_RepoDirJoin(t *testing.T) {
 	// Act
 	result := codestack.Dir.RepoDirJoin("sub")
 
@@ -708,7 +708,7 @@ func Test_Cov13_Dir_RepoDirJoin(t *testing.T) {
 	})
 }
 
-func Test_Cov13_Dir_Get(t *testing.T) {
+func Test_Dir_Get(t *testing.T) {
 	// Act
 	result := codestack.Dir.Get(0)
 
@@ -720,7 +720,7 @@ func Test_Cov13_Dir_Get(t *testing.T) {
 
 // --- fileGetter methods ---
 
-func Test_Cov13_File_Name(t *testing.T) {
+func Test_File_Name(t *testing.T) {
 	// Act
 	result := codestack.File.Name(0)
 
@@ -730,7 +730,7 @@ func Test_Cov13_File_Name(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_Path(t *testing.T) {
+func Test_File_Path(t *testing.T) {
 	// Act
 	result := codestack.File.Path(0)
 
@@ -740,7 +740,7 @@ func Test_Cov13_File_Path(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_PathLineSep(t *testing.T) {
+func Test_File_PathLineSep(t *testing.T) {
 	// Act
 	filePath, lineNumber := codestack.File.PathLineSep(0)
 
@@ -751,7 +751,7 @@ func Test_Cov13_File_PathLineSep(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_PathLineSepDefault(t *testing.T) {
+func Test_File_PathLineSepDefault(t *testing.T) {
 	// Act
 	filePath, lineNumber := codestack.File.PathLineSepDefault()
 
@@ -762,7 +762,7 @@ func Test_Cov13_File_PathLineSepDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_FilePathWithLineString(t *testing.T) {
+func Test_File_FilePathWithLineString(t *testing.T) {
 	// Act
 	result := codestack.File.FilePathWithLineString(0)
 
@@ -772,7 +772,7 @@ func Test_Cov13_File_FilePathWithLineString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_PathLineStringDefault(t *testing.T) {
+func Test_File_PathLineStringDefault(t *testing.T) {
 	// Act
 	result := codestack.File.PathLineStringDefault()
 
@@ -782,7 +782,7 @@ func Test_Cov13_File_PathLineStringDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov13_File_CurrentFilePath(t *testing.T) {
+func Test_File_CurrentFilePath(t *testing.T) {
 	// Act
 	result := codestack.File.CurrentFilePath()
 
@@ -794,7 +794,7 @@ func Test_Cov13_File_CurrentFilePath(t *testing.T) {
 
 // --- stacksTo methods ---
 
-func Test_Cov13_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.Bytes(0)
 
@@ -804,7 +804,7 @@ func Test_Cov13_StacksTo_Bytes(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.BytesDefault()
 
@@ -814,7 +814,7 @@ func Test_Cov13_StacksTo_BytesDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.String(0, 5)
 
@@ -824,7 +824,7 @@ func Test_Cov13_StacksTo_String(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_StringUsingFmt(t *testing.T) {
+func Test_StacksTo_StringUsingFmt(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.StringUsingFmt(
 		func(trace *codestack.Trace) string {
@@ -839,7 +839,7 @@ func Test_Cov13_StacksTo_StringUsingFmt(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.JsonString(0)
 
@@ -849,7 +849,7 @@ func Test_Cov13_StacksTo_JsonString(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.JsonStringDefault()
 
@@ -859,7 +859,7 @@ func Test_Cov13_StacksTo_JsonStringDefault(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.StringNoCount(0)
 
@@ -869,7 +869,7 @@ func Test_Cov13_StacksTo_StringNoCount(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.StringDefault()
 
@@ -881,7 +881,7 @@ func Test_Cov13_StacksTo_StringDefault(t *testing.T) {
 
 // --- newCreator methods ---
 
-func Test_Cov13_New_Default(t *testing.T) {
+func Test_New_Default(t *testing.T) {
 	// Act
 	result := codestack.New.Default()
 
@@ -891,7 +891,7 @@ func Test_Cov13_New_Default(t *testing.T) {
 	})
 }
 
-func Test_Cov13_New_SkipOne(t *testing.T) {
+func Test_New_SkipOne(t *testing.T) {
 	// Act
 	result := codestack.New.SkipOne()
 
@@ -901,7 +901,7 @@ func Test_Cov13_New_SkipOne(t *testing.T) {
 	})
 }
 
-func Test_Cov13_New_Ptr(t *testing.T) {
+func Test_New_Ptr(t *testing.T) {
 	// Act
 	result := codestack.New.Ptr(0)
 
@@ -914,7 +914,7 @@ func Test_Cov13_New_Ptr(t *testing.T) {
 
 // --- newStacksCreator methods ---
 
-func Test_Cov13_StackTrace_Default(t *testing.T) {
+func Test_StackTrace_Default(t *testing.T) {
 	// Act
 	result := codestack.New.StackTrace.Default(0, 5)
 
@@ -924,7 +924,7 @@ func Test_Cov13_StackTrace_Default(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StackTrace_SkipOne(t *testing.T) {
+func Test_StackTrace_SkipOne(t *testing.T) {
 	// Act — guard against sandbox stack depth issues
 	defer func() {
 		if r := recover(); r != nil {
@@ -939,7 +939,7 @@ func Test_Cov13_StackTrace_SkipOne(t *testing.T) {
 	})
 }
 
-func Test_Cov13_StackTrace_SkipNone(t *testing.T) {
+func Test_StackTrace_SkipNone(t *testing.T) {
 	// Act
 	result := codestack.New.StackTrace.SkipNone()
 
@@ -951,7 +951,7 @@ func Test_Cov13_StackTrace_SkipNone(t *testing.T) {
 
 // --- TraceCollection filter by name methods ---
 
-func Test_Cov13_TraceCollection_FilterPackageName(t *testing.T) {
+func Test_TraceCollection_FilterPackageName(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -964,7 +964,7 @@ func Test_Cov13_TraceCollection_FilterPackageName(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_SkipFilterPackageName(t *testing.T) {
+func Test_TraceCollection_SkipFilterPackageName(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -979,7 +979,7 @@ func Test_Cov13_TraceCollection_SkipFilterPackageName(t *testing.T) {
 
 // --- TraceCollection GetSinglePageCollection negative index ---
 
-func Test_Cov13_TraceCollection_GetSinglePageCollection_NegativeIndex(t *testing.T) {
+func Test_TraceCollection_GetSinglePageCollection_NegativeIndex(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	for i := 0; i < 20; i++ {
@@ -994,7 +994,7 @@ func Test_Cov13_TraceCollection_GetSinglePageCollection_NegativeIndex(t *testing
 	})
 }
 
-func Test_Cov13_TraceCollection_GetSinglePageCollection_LastPage(t *testing.T) {
+func Test_TraceCollection_GetSinglePageCollection_LastPage(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	for i := 0; i < 25; i++ {
@@ -1012,7 +1012,7 @@ func Test_Cov13_TraceCollection_GetSinglePageCollection_LastPage(t *testing.T) {
 
 // --- TraceCollection ConcatNewUsingSkipPlusCount ---
 
-func Test_Cov13_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
+func Test_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -1025,7 +1025,7 @@ func Test_Cov13_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
+func Test_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -1040,7 +1040,7 @@ func Test_Cov13_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
 
 // --- TraceCollection AddsUsingSkipDefault ---
 
-func Test_Cov13_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
+func Test_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -1055,7 +1055,7 @@ func Test_Cov13_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
 
 // --- TraceCollection AddsUsingSkipUsingFilter ---
 
-func Test_Cov13_TraceCollection_AddsUsingSkipUsingFilter(t *testing.T) {
+func Test_TraceCollection_AddsUsingSkipUsingFilter(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 
@@ -1076,7 +1076,7 @@ func Test_Cov13_TraceCollection_AddsUsingSkipUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_Cov13_TraceCollection_AddsUsingSkipUsingFilter_Break(t *testing.T) {
+func Test_TraceCollection_AddsUsingSkipUsingFilter_Break(t *testing.T) {
 	// Arrange
 	stacks := codestack.New.StackTrace.SkipNone()
 	initialLen := stacks.Length()

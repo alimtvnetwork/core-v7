@@ -10,7 +10,7 @@ import (
 
 // ─── Map basic methods ──────────────────────────────────────────────────────
 
-func Test_I6_01_Map_Length_ArgsCount(t *testing.T) {
+func Test_01_Map_Length_ArgsCount(t *testing.T) {
 	convey.Convey("Map Length and ArgsCount", t, func() {
 		m := args.Map{
 			"first": 1,
@@ -22,14 +22,14 @@ func Test_I6_01_Map_Length_ArgsCount(t *testing.T) {
 	})
 }
 
-func Test_I6_02_Map_Expected(t *testing.T) {
+func Test_02_Map_Expected(t *testing.T) {
 	convey.Convey("Map Expected", t, func() {
 		m := args.Map{"expected": "val"}
 		convey.So(m.Expected(), convey.ShouldEqual, "val")
 	})
 }
 
-func Test_I6_03_Map_HasFirst_HasExpect(t *testing.T) {
+func Test_03_Map_HasFirst_HasExpect(t *testing.T) {
 	convey.Convey("Map HasFirst and HasExpect", t, func() {
 		m := args.Map{
 			"first": "a",
@@ -44,7 +44,7 @@ func Test_I6_03_Map_HasFirst_HasExpect(t *testing.T) {
 	})
 }
 
-func Test_I6_04_Map_GetByIndex(t *testing.T) {
+func Test_04_Map_GetByIndex(t *testing.T) {
 	convey.Convey("Map GetByIndex", t, func() {
 		m := args.Map{
 			"a": 1,
@@ -57,7 +57,7 @@ func Test_I6_04_Map_GetByIndex(t *testing.T) {
 	})
 }
 
-func Test_I6_05_Map_HasDefined_Has(t *testing.T) {
+func Test_05_Map_HasDefined_Has(t *testing.T) {
 	convey.Convey("Map HasDefined and Has", t, func() {
 		m := args.Map{
 			"key": "val",
@@ -74,7 +74,7 @@ func Test_I6_05_Map_HasDefined_Has(t *testing.T) {
 	})
 }
 
-func Test_I6_06_Map_HasDefinedAll(t *testing.T) {
+func Test_06_Map_HasDefinedAll(t *testing.T) {
 	convey.Convey("Map HasDefinedAll", t, func() {
 		m := args.Map{
 			"a": 1,
@@ -89,7 +89,7 @@ func Test_I6_06_Map_HasDefinedAll(t *testing.T) {
 	})
 }
 
-func Test_I6_07_Map_IsKeyInvalid_IsKeyMissing(t *testing.T) {
+func Test_07_Map_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 	convey.Convey("Map IsKeyInvalid and IsKeyMissing", t, func() {
 		m := args.Map{
 			"key": "val",
@@ -107,7 +107,7 @@ func Test_I6_07_Map_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 	})
 }
 
-func Test_I6_08_Map_SortedKeys(t *testing.T) {
+func Test_08_Map_SortedKeys(t *testing.T) {
 	convey.Convey("Map SortedKeys", t, func() {
 		m := args.Map{
 			"b": 2,
@@ -124,7 +124,7 @@ func Test_I6_08_Map_SortedKeys(t *testing.T) {
 	})
 }
 
-func Test_I6_09_Map_When_Title(t *testing.T) {
+func Test_09_Map_When_Title(t *testing.T) {
 	convey.Convey("Map When and Title", t, func() {
 		m := args.Map{
 			"when": "w",
@@ -135,7 +135,7 @@ func Test_I6_09_Map_When_Title(t *testing.T) {
 	})
 }
 
-func Test_I6_10_Map_Get(t *testing.T) {
+func Test_10_Map_Get(t *testing.T) {
 	convey.Convey("Map Get", t, func() {
 		m := args.Map{"key": "val"}
 		item, valid := m.Get("key")
@@ -153,7 +153,7 @@ func Test_I6_10_Map_Get(t *testing.T) {
 	})
 }
 
-func Test_I6_11_Map_GetLowerCase_GetDirectLower(t *testing.T) {
+func Test_11_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 	convey.Convey("Map GetLowerCase and GetDirectLower", t, func() {
 		m := args.Map{"key": "val"}
 		item, valid := m.GetLowerCase("KEY")
@@ -168,7 +168,7 @@ func Test_I6_11_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 	})
 }
 
-func Test_I6_12_Map_Expect_Actual_Arrange(t *testing.T) {
+func Test_12_Map_Expect_Actual_Arrange(t *testing.T) {
 	convey.Convey("Map Expect, Actual, Arrange", t, func() {
 		m := args.Map{
 			"expect": "e",
@@ -181,7 +181,7 @@ func Test_I6_12_Map_Expect_Actual_Arrange(t *testing.T) {
 	})
 }
 
-func Test_I6_13_Map_ItemGetters(t *testing.T) {
+func Test_13_Map_ItemGetters(t *testing.T) {
 	convey.Convey("Map FirstItem through Seventh", t, func() {
 		m := args.Map{
 			"first": 1, "second": 2, "third": 3,
@@ -197,7 +197,7 @@ func Test_I6_13_Map_ItemGetters(t *testing.T) {
 	})
 }
 
-func Test_I6_14_Map_SetActual(t *testing.T) {
+func Test_14_Map_SetActual(t *testing.T) {
 	convey.Convey("Map SetActual", t, func() {
 		m := args.Map{}
 		m.SetActual("result")
@@ -205,7 +205,7 @@ func Test_I6_14_Map_SetActual(t *testing.T) {
 	})
 }
 
-func Test_I6_15_Map_GetFirstOfNames(t *testing.T) {
+func Test_15_Map_GetFirstOfNames(t *testing.T) {
 	convey.Convey("Map GetFirstOfNames", t, func() {
 		m := args.Map{"b": "val"}
 		result := m.GetFirstOfNames("a", "b", "c")
@@ -216,7 +216,7 @@ func Test_I6_15_Map_GetFirstOfNames(t *testing.T) {
 	})
 }
 
-func Test_I6_16_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+func Test_16_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	convey.Convey("Map GetAsStringSliceFirstOfNames", t, func() {
 		m := args.Map{"items": []string{"a", "b"}}
 		result := m.GetAsStringSliceFirstOfNames("items")
@@ -230,7 +230,7 @@ func Test_I6_16_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	})
 }
 
-func Test_I6_17_Map_GetAsInt(t *testing.T) {
+func Test_17_Map_GetAsInt(t *testing.T) {
 	convey.Convey("Map GetAsInt and GetAsIntDefault", t, func() {
 		m := args.Map{
 			"num": 42,
@@ -254,7 +254,7 @@ func Test_I6_17_Map_GetAsInt(t *testing.T) {
 	})
 }
 
-func Test_I6_18_Map_GetAsBool(t *testing.T) {
+func Test_18_Map_GetAsBool(t *testing.T) {
 	convey.Convey("Map GetAsBool and GetAsBoolDefault", t, func() {
 		m := args.Map{
 			"flag": true,
@@ -275,7 +275,7 @@ func Test_I6_18_Map_GetAsBool(t *testing.T) {
 	})
 }
 
-func Test_I6_19_Map_GetAsString(t *testing.T) {
+func Test_19_Map_GetAsString(t *testing.T) {
 	convey.Convey("Map GetAsString and GetAsStringDefault", t, func() {
 		m := args.Map{
 			"name": "hello",
@@ -296,7 +296,7 @@ func Test_I6_19_Map_GetAsString(t *testing.T) {
 	})
 }
 
-func Test_I6_20_Map_GetAsStrings(t *testing.T) {
+func Test_20_Map_GetAsStrings(t *testing.T) {
 	convey.Convey("Map GetAsStrings", t, func() {
 		m := args.Map{"items": []string{"a", "b"}}
 		v, ok := m.GetAsStrings("items")
@@ -308,7 +308,7 @@ func Test_I6_20_Map_GetAsStrings(t *testing.T) {
 	})
 }
 
-func Test_I6_21_Map_GetAsAnyItems(t *testing.T) {
+func Test_21_Map_GetAsAnyItems(t *testing.T) {
 	convey.Convey("Map GetAsAnyItems", t, func() {
 		m := args.Map{"items": []any{1, "two"}}
 		v, ok := m.GetAsAnyItems("items")
@@ -320,7 +320,7 @@ func Test_I6_21_Map_GetAsAnyItems(t *testing.T) {
 	})
 }
 
-func Test_I6_22_Map_ValidArgs(t *testing.T) {
+func Test_22_Map_ValidArgs(t *testing.T) {
 	convey.Convey("Map ValidArgs", t, func() {
 		m := args.Map{
 			"a": 1,
@@ -332,7 +332,7 @@ func Test_I6_22_Map_ValidArgs(t *testing.T) {
 	})
 }
 
-func Test_I6_23_Map_Args(t *testing.T) {
+func Test_23_Map_Args(t *testing.T) {
 	convey.Convey("Map Args", t, func() {
 		m := args.Map{
 			"a": 1,
@@ -343,7 +343,7 @@ func Test_I6_23_Map_Args(t *testing.T) {
 	})
 }
 
-func Test_I6_24_Map_Slice(t *testing.T) {
+func Test_24_Map_Slice(t *testing.T) {
 	convey.Convey("Map Slice", t, func() {
 		m := args.Map{"a": 1}
 		s := m.Slice()
@@ -351,7 +351,7 @@ func Test_I6_24_Map_Slice(t *testing.T) {
 	})
 }
 
-func Test_I6_25_Map_String(t *testing.T) {
+func Test_25_Map_String(t *testing.T) {
 	convey.Convey("Map String", t, func() {
 		m := args.Map{"a": 1}
 		s := m.String()
@@ -359,7 +359,7 @@ func Test_I6_25_Map_String(t *testing.T) {
 	})
 }
 
-func Test_I6_26_Map_Raw(t *testing.T) {
+func Test_26_Map_Raw(t *testing.T) {
 	convey.Convey("Map Raw", t, func() {
 		m := args.Map{"a": 1}
 		raw := m.Raw()
@@ -367,7 +367,7 @@ func Test_I6_26_Map_Raw(t *testing.T) {
 	})
 }
 
-func Test_I6_27_Map_GetFirstFuncNameOf(t *testing.T) {
+func Test_27_Map_GetFirstFuncNameOf(t *testing.T) {
 	convey.Convey("Map GetFirstFuncNameOf", t, func() {
 		m := args.Map{"func": strings.ToUpper}
 		name := m.GetFirstFuncNameOf("func")
@@ -377,7 +377,7 @@ func Test_I6_27_Map_GetFirstFuncNameOf(t *testing.T) {
 
 // ─── Map CompileToStrings / GoLiteral ────────────────────────────────────────
 
-func Test_I6_28_Map_CompileToStrings(t *testing.T) {
+func Test_28_Map_CompileToStrings(t *testing.T) {
 	convey.Convey("Map CompileToStrings", t, func() {
 		m := args.Map{
 			"b": 2,
@@ -392,7 +392,7 @@ func Test_I6_28_Map_CompileToStrings(t *testing.T) {
 	})
 }
 
-func Test_I6_29_Map_CompileToString(t *testing.T) {
+func Test_29_Map_CompileToString(t *testing.T) {
 	convey.Convey("Map CompileToString", t, func() {
 		m := args.Map{"a": 1}
 		s := m.CompileToString()
@@ -400,7 +400,7 @@ func Test_I6_29_Map_CompileToString(t *testing.T) {
 	})
 }
 
-func Test_I6_30_Map_GoLiteralLines(t *testing.T) {
+func Test_30_Map_GoLiteralLines(t *testing.T) {
 	convey.Convey("Map GoLiteralLines", t, func() {
 		m := args.Map{
 			"name": "hello",
@@ -414,7 +414,7 @@ func Test_I6_30_Map_GoLiteralLines(t *testing.T) {
 	})
 }
 
-func Test_I6_31_Map_GoLiteralString(t *testing.T) {
+func Test_31_Map_GoLiteralString(t *testing.T) {
 	convey.Convey("Map GoLiteralString", t, func() {
 		m := args.Map{"a": 1}
 		s := m.GoLiteralString()
@@ -424,7 +424,7 @@ func Test_I6_31_Map_GoLiteralString(t *testing.T) {
 
 // ─── One ─────────────────────────────────────────────────────────────────────
 
-func Test_I6_32_One(t *testing.T) {
+func Test_32_One(t *testing.T) {
 	convey.Convey("One all methods", t, func() {
 		o := &args.OneAny{First: "hello", Expect: "world"}
 		convey.So(o.FirstItem(), convey.ShouldEqual, "hello")
@@ -452,7 +452,7 @@ func Test_I6_32_One(t *testing.T) {
 
 // ─── Two ─────────────────────────────────────────────────────────────────────
 
-func Test_I6_33_Two(t *testing.T) {
+func Test_33_Two(t *testing.T) {
 	convey.Convey("Two all methods", t, func() {
 		tw := &args.TwoAny{First: "a", Second: "b", Expect: "c"}
 		convey.So(tw.FirstItem(), convey.ShouldEqual, "a")
@@ -481,7 +481,7 @@ func Test_I6_33_Two(t *testing.T) {
 
 // ─── Three ───────────────────────────────────────────────────────────────────
 
-func Test_I6_34_Three(t *testing.T) {
+func Test_34_Three(t *testing.T) {
 	convey.Convey("Three all methods", t, func() {
 		th := &args.ThreeAny{First: "a", Second: "b", Third: "c", Expect: "d"}
 		convey.So(th.FirstItem(), convey.ShouldEqual, "a")
@@ -514,7 +514,7 @@ func Test_I6_34_Three(t *testing.T) {
 
 // ─── Four ────────────────────────────────────────────────────────────────────
 
-func Test_I6_35_Four(t *testing.T) {
+func Test_35_Four(t *testing.T) {
 	convey.Convey("Four all methods", t, func() {
 		f := &args.FourAny{First: 1, Second: 2, Third: 3, Fourth: 4, Expect: 5}
 		convey.So(f.FirstItem(), convey.ShouldEqual, 1)
@@ -545,7 +545,7 @@ func Test_I6_35_Four(t *testing.T) {
 
 // ─── Five ────────────────────────────────────────────────────────────────────
 
-func Test_I6_36_Five(t *testing.T) {
+func Test_36_Five(t *testing.T) {
 	convey.Convey("Five all methods", t, func() {
 		f := &args.FiveAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Expect: 6}
 		convey.So(f.FirstItem(), convey.ShouldEqual, 1)
@@ -580,7 +580,7 @@ func Test_I6_36_Five(t *testing.T) {
 
 // ─── Six ─────────────────────────────────────────────────────────────────────
 
-func Test_I6_37_Six(t *testing.T) {
+func Test_37_Six(t *testing.T) {
 	convey.Convey("Six all methods", t, func() {
 		s := &args.SixAny{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, Expect: 7}
 		convey.So(s.FirstItem(), convey.ShouldEqual, 1)
@@ -619,7 +619,7 @@ func Test_I6_37_Six(t *testing.T) {
 
 // ─── LeftRight ───────────────────────────────────────────────────────────────
 
-func Test_I6_38_LeftRight(t *testing.T) {
+func Test_38_LeftRight(t *testing.T) {
 	convey.Convey("LeftRight all methods", t, func() {
 		lr := &args.LeftRightAny{Left: "L", Right: "R", Expect: "E"}
 		convey.So(lr.FirstItem(), convey.ShouldEqual, "L")
@@ -650,7 +650,7 @@ func Test_I6_38_LeftRight(t *testing.T) {
 
 // ─── Dynamic ─────────────────────────────────────────────────────────────────
 
-func Test_I6_39_Dynamic(t *testing.T) {
+func Test_39_Dynamic(t *testing.T) {
 	convey.Convey("Dynamic all methods", t, func() {
 		d := &args.DynamicAny{
 			Params: args.Map{
@@ -694,7 +694,7 @@ func Test_I6_39_Dynamic(t *testing.T) {
 	})
 }
 
-func Test_I6_40_Dynamic_NilReceiver(t *testing.T) {
+func Test_40_Dynamic_NilReceiver(t *testing.T) {
 	convey.Convey("Dynamic nil receiver", t, func() {
 		var d *args.DynamicAny
 		convey.So(d.ArgsCount(), convey.ShouldEqual, 0)
@@ -713,7 +713,7 @@ func Test_I6_40_Dynamic_NilReceiver(t *testing.T) {
 	})
 }
 
-func Test_I6_41_Dynamic_TypedGetters(t *testing.T) {
+func Test_41_Dynamic_TypedGetters(t *testing.T) {
 	convey.Convey("Dynamic typed getters", t, func() {
 		d := &args.DynamicAny{
 			Params: args.Map{
@@ -753,7 +753,7 @@ func Test_I6_41_Dynamic_TypedGetters(t *testing.T) {
 
 // ─── DynamicFunc ─────────────────────────────────────────────────────────────
 
-func Test_I6_42_DynamicFunc(t *testing.T) {
+func Test_42_DynamicFunc(t *testing.T) {
 	convey.Convey("DynamicFunc all methods", t, func() {
 		df := &args.DynamicFuncAny{
 			Params:   args.Map{
@@ -805,7 +805,7 @@ func Test_I6_42_DynamicFunc(t *testing.T) {
 	})
 }
 
-func Test_I6_43_DynamicFunc_NilReceiver(t *testing.T) {
+func Test_43_DynamicFunc_NilReceiver(t *testing.T) {
 	convey.Convey("DynamicFunc nil receiver", t, func() {
 		var df *args.DynamicFuncAny
 		convey.So(df.ArgsCount(), convey.ShouldEqual, 0)
@@ -824,7 +824,7 @@ func Test_I6_43_DynamicFunc_NilReceiver(t *testing.T) {
 	})
 }
 
-func Test_I6_44_DynamicFunc_TypedGetters(t *testing.T) {
+func Test_44_DynamicFunc_TypedGetters(t *testing.T) {
 	convey.Convey("DynamicFunc typed getters", t, func() {
 		df := &args.DynamicFuncAny{
 			Params: args.Map{
@@ -854,7 +854,7 @@ func Test_I6_44_DynamicFunc_TypedGetters(t *testing.T) {
 
 // ─── Holder ──────────────────────────────────────────────────────────────────
 
-func Test_I6_45_Holder(t *testing.T) {
+func Test_45_Holder(t *testing.T) {
 	convey.Convey("Holder all methods", t, func() {
 		h := &args.HolderAny{
 			First:  "a",
@@ -906,7 +906,7 @@ func Test_I6_45_Holder(t *testing.T) {
 
 // ─── OneFunc ─────────────────────────────────────────────────────────────────
 
-func Test_I6_46_OneFunc(t *testing.T) {
+func Test_46_OneFunc(t *testing.T) {
 	convey.Convey("OneFunc all methods", t, func() {
 		of := &args.OneFuncAny{
 			First:    "hello",
@@ -945,7 +945,7 @@ func Test_I6_46_OneFunc(t *testing.T) {
 
 // ─── TwoFunc ─────────────────────────────────────────────────────────────────
 
-func Test_I6_47_TwoFunc(t *testing.T) {
+func Test_47_TwoFunc(t *testing.T) {
 	convey.Convey("TwoFunc all methods", t, func() {
 		addFunc := func(a, b int) int { return a + b }
 		tf := &args.TwoFunc[int, int]{
@@ -986,7 +986,7 @@ func Test_I6_47_TwoFunc(t *testing.T) {
 
 // ─── FuncWrap ────────────────────────────────────────────────────────────────
 
-func Test_I6_48_FuncWrap_Nil(t *testing.T) {
+func Test_48_FuncWrap_Nil(t *testing.T) {
 	convey.Convey("FuncWrap nil receiver", t, func() {
 		var fw *args.FuncWrapAny
 		convey.So(fw.GetFuncName(), convey.ShouldEqual, "")
@@ -995,7 +995,7 @@ func Test_I6_48_FuncWrap_Nil(t *testing.T) {
 	})
 }
 
-func Test_I6_49_FuncWrap_Invalid(t *testing.T) {
+func Test_49_FuncWrap_Invalid(t *testing.T) {
 	convey.Convey("FuncWrap invalid", t, func() {
 		fw := args.NewFuncWrap.Invalid()
 		convey.So(fw.IsInvalid(), convey.ShouldBeTrue)
@@ -1018,7 +1018,7 @@ func Test_I6_49_FuncWrap_Invalid(t *testing.T) {
 	})
 }
 
-func Test_I6_50_FuncWrap_Valid(t *testing.T) {
+func Test_50_FuncWrap_Valid(t *testing.T) {
 	convey.Convey("FuncWrap valid", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		convey.So(fw.IsValid(), convey.ShouldBeTrue)
@@ -1058,7 +1058,7 @@ func Test_I6_50_FuncWrap_Valid(t *testing.T) {
 	})
 }
 
-func Test_I6_51_FuncWrap_Invoke(t *testing.T) {
+func Test_51_FuncWrap_Invoke(t *testing.T) {
 	convey.Convey("FuncWrap Invoke", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		results, err := fw.Invoke("hello")
@@ -1067,7 +1067,7 @@ func Test_I6_51_FuncWrap_Invoke(t *testing.T) {
 	})
 }
 
-func Test_I6_52_FuncWrap_InvokeMust(t *testing.T) {
+func Test_52_FuncWrap_InvokeMust(t *testing.T) {
 	convey.Convey("FuncWrap InvokeMust", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		results := fw.InvokeMust("hello")
@@ -1075,7 +1075,7 @@ func Test_I6_52_FuncWrap_InvokeMust(t *testing.T) {
 	})
 }
 
-func Test_I6_53_FuncWrap_VoidCall(t *testing.T) {
+func Test_53_FuncWrap_VoidCall(t *testing.T) {
 	convey.Convey("FuncWrap VoidCall", t, func() {
 		called := false
 		fn := func() { called = true }
@@ -1086,7 +1086,7 @@ func Test_I6_53_FuncWrap_VoidCall(t *testing.T) {
 	})
 }
 
-func Test_I6_54_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
+func Test_54_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
 	convey.Convey("FuncWrap GetFirstResponseOfInvoke", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		first, err := fw.GetFirstResponseOfInvoke("hello")
@@ -1095,7 +1095,7 @@ func Test_I6_54_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
 	})
 }
 
-func Test_I6_55_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_55_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	convey.Convey("FuncWrap InvokeResultOfIndex", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		result, err := fw.InvokeResultOfIndex(0, "hello")
@@ -1104,7 +1104,7 @@ func Test_I6_55_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	})
 }
 
-func Test_I6_56_FuncWrap_InvokeAsBool(t *testing.T) {
+func Test_56_FuncWrap_InvokeAsBool(t *testing.T) {
 	convey.Convey("FuncWrap InvokeAsBool", t, func() {
 		fn := func(s string) bool { return s == "yes" }
 		fw := args.NewFuncWrap.Default(fn)
@@ -1114,7 +1114,7 @@ func Test_I6_56_FuncWrap_InvokeAsBool(t *testing.T) {
 	})
 }
 
-func Test_I6_57_FuncWrap_InvokeAsString(t *testing.T) {
+func Test_57_FuncWrap_InvokeAsString(t *testing.T) {
 	convey.Convey("FuncWrap InvokeAsString", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		v, err := fw.InvokeAsString("hello")
@@ -1123,7 +1123,7 @@ func Test_I6_57_FuncWrap_InvokeAsString(t *testing.T) {
 	})
 }
 
-func Test_I6_58_FuncWrap_InvokeAsAny(t *testing.T) {
+func Test_58_FuncWrap_InvokeAsAny(t *testing.T) {
 	convey.Convey("FuncWrap InvokeAsAny", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		v, err := fw.InvokeAsAny("hello")
@@ -1132,7 +1132,7 @@ func Test_I6_58_FuncWrap_InvokeAsAny(t *testing.T) {
 	})
 }
 
-func Test_I6_59_FuncWrap_InvokeAsError(t *testing.T) {
+func Test_59_FuncWrap_InvokeAsError(t *testing.T) {
 	convey.Convey("FuncWrap InvokeAsError", t, func() {
 		fn := func() error { return nil }
 		fw := args.NewFuncWrap.Default(fn)
@@ -1142,7 +1142,7 @@ func Test_I6_59_FuncWrap_InvokeAsError(t *testing.T) {
 	})
 }
 
-func Test_I6_60_FuncWrap_InvokeAsAnyError(t *testing.T) {
+func Test_60_FuncWrap_InvokeAsAnyError(t *testing.T) {
 	convey.Convey("FuncWrap InvokeAsAnyError", t, func() {
 		fn := func(s string) (string, error) { return strings.ToUpper(s), nil }
 		fw := args.NewFuncWrap.Default(fn)
@@ -1153,7 +1153,7 @@ func Test_I6_60_FuncWrap_InvokeAsAnyError(t *testing.T) {
 	})
 }
 
-func Test_I6_61_FuncWrap_IsEqual(t *testing.T) {
+func Test_61_FuncWrap_IsEqual(t *testing.T) {
 	convey.Convey("FuncWrap IsEqual", t, func() {
 		fw1 := args.NewFuncWrap.Default(strings.ToUpper)
 		fw2 := args.NewFuncWrap.Default(strings.ToUpper)
@@ -1172,7 +1172,7 @@ func Test_I6_61_FuncWrap_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_I6_62_FuncWrap_IsPublicMethod_IsPrivateMethod(t *testing.T) {
+func Test_62_FuncWrap_IsPublicMethod_IsPrivateMethod(t *testing.T) {
 	convey.Convey("FuncWrap IsPublicMethod and IsPrivateMethod", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		// Package-level functions have empty PkgPath
@@ -1181,7 +1181,7 @@ func Test_I6_62_FuncWrap_IsPublicMethod_IsPrivateMethod(t *testing.T) {
 	})
 }
 
-func Test_I6_63_FuncWrap_InArgNamesEachLine(t *testing.T) {
+func Test_63_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	convey.Convey("FuncWrap InArgNamesEachLine and OutArgNamesEachLine", t, func() {
 		fn := func(a, b string) (string, error) { return a + b, nil }
 		fw := args.NewFuncWrap.Default(fn)
@@ -1193,7 +1193,7 @@ func Test_I6_63_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	})
 }
 
-func Test_I6_64_FuncWrap_ValidateMethodArgs(t *testing.T) {
+func Test_64_FuncWrap_ValidateMethodArgs(t *testing.T) {
 	convey.Convey("FuncWrap ValidateMethodArgs", t, func() {
 		fw := args.NewFuncWrap.Default(strings.ToUpper)
 		err := fw.ValidateMethodArgs([]any{"hello"})
@@ -1204,7 +1204,7 @@ func Test_I6_64_FuncWrap_ValidateMethodArgs(t *testing.T) {
 	})
 }
 
-func Test_I6_65_FuncWrap_MustBeValid_Panic(t *testing.T) {
+func Test_65_FuncWrap_MustBeValid_Panic(t *testing.T) {
 	convey.Convey("FuncWrap MustBeValid panics on nil", t, func() {
 		convey.So(func() {
 			var fw *args.FuncWrapAny
@@ -1213,7 +1213,7 @@ func Test_I6_65_FuncWrap_MustBeValid_Panic(t *testing.T) {
 	})
 }
 
-func Test_I6_66_FuncWrap_IsBoolFunc_IsErrorFunc_IsVoidFunc(t *testing.T) {
+func Test_66_FuncWrap_IsBoolFunc_IsErrorFunc_IsVoidFunc(t *testing.T) {
 	convey.Convey("FuncWrap signature checkers", t, func() {
 		boolFn := func() bool { return true }
 		fwBool := args.NewFuncWrap.Default(boolFn)
@@ -1234,14 +1234,14 @@ func Test_I6_66_FuncWrap_IsBoolFunc_IsErrorFunc_IsVoidFunc(t *testing.T) {
 	})
 }
 
-func Test_I6_67_FuncWrap_NonFunc(t *testing.T) {
+func Test_67_FuncWrap_NonFunc(t *testing.T) {
 	convey.Convey("FuncWrap from non-func", t, func() {
 		fw := args.NewFuncWrap.Default("not a func")
 		convey.So(fw.IsInvalid(), convey.ShouldBeTrue)
 	})
 }
 
-func Test_I6_68_FuncWrap_Nil(t *testing.T) {
+func Test_68_FuncWrap_Nil(t *testing.T) {
 	convey.Convey("FuncWrap from nil", t, func() {
 		fw := args.NewFuncWrap.Default(nil)
 		convey.So(fw.IsInvalid(), convey.ShouldBeTrue)
@@ -1250,7 +1250,7 @@ func Test_I6_68_FuncWrap_Nil(t *testing.T) {
 
 // ─── NewTypedFuncWrap ────────────────────────────────────────────────────────
 
-func Test_I6_69_NewTypedFuncWrap(t *testing.T) {
+func Test_69_NewTypedFuncWrap(t *testing.T) {
 	convey.Convey("NewTypedFuncWrap", t, func() {
 		fw := args.NewTypedFuncWrap(strings.ToUpper)
 		convey.So(fw.IsValid(), convey.ShouldBeTrue)
@@ -1258,7 +1258,7 @@ func Test_I6_69_NewTypedFuncWrap(t *testing.T) {
 	})
 }
 
-func Test_I6_70_NewTypedFuncWrap_NonFunc(t *testing.T) {
+func Test_70_NewTypedFuncWrap_NonFunc(t *testing.T) {
 	convey.Convey("NewTypedFuncWrap non-func", t, func() {
 		fw := args.NewTypedFuncWrap("not a func")
 		convey.So(fw.IsInvalid(), convey.ShouldBeTrue)
@@ -1267,7 +1267,7 @@ func Test_I6_70_NewTypedFuncWrap_NonFunc(t *testing.T) {
 
 // ─── FuncMap ─────────────────────────────────────────────────────────────────
 
-func Test_I6_71_FuncMap(t *testing.T) {
+func Test_71_FuncMap(t *testing.T) {
 	convey.Convey("FuncMap basic methods", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper, strings.ToLower)
 		convey.So(fm.IsEmpty(), convey.ShouldBeFalse)
@@ -1299,7 +1299,7 @@ func Test_I6_71_FuncMap(t *testing.T) {
 	})
 }
 
-func Test_I6_72_FuncMap_Invoke(t *testing.T) {
+func Test_72_FuncMap_Invoke(t *testing.T) {
 	convey.Convey("FuncMap Invoke", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		results, err := fm.Invoke("ToUpper", "hello")
@@ -1315,7 +1315,7 @@ func Test_I6_72_FuncMap_Invoke(t *testing.T) {
 	})
 }
 
-func Test_I6_73_FuncMap_Empty(t *testing.T) {
+func Test_73_FuncMap_Empty(t *testing.T) {
 	convey.Convey("FuncMap empty", t, func() {
 		fm := args.FuncMap{}
 		convey.So(fm.IsEmpty(), convey.ShouldBeTrue)
@@ -1329,7 +1329,7 @@ func Test_I6_73_FuncMap_Empty(t *testing.T) {
 	})
 }
 
-func Test_I6_74_FuncMap_NotFound(t *testing.T) {
+func Test_74_FuncMap_NotFound(t *testing.T) {
 	convey.Convey("FuncMap not found errors", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		_, err := fm.Invoke("NonExistent", "hello")
@@ -1344,7 +1344,7 @@ func Test_I6_74_FuncMap_NotFound(t *testing.T) {
 	})
 }
 
-func Test_I6_75_FuncMap_Add_Adds(t *testing.T) {
+func Test_75_FuncMap_Add_Adds(t *testing.T) {
 	convey.Convey("FuncMap Add and Adds", t, func() {
 		fm := args.FuncMap{}
 		fm.Add(strings.ToUpper)
@@ -1355,7 +1355,7 @@ func Test_I6_75_FuncMap_Add_Adds(t *testing.T) {
 	})
 }
 
-func Test_I6_76_FuncMap_Many(t *testing.T) {
+func Test_76_FuncMap_Many(t *testing.T) {
 	convey.Convey("NewFuncWrap Many", t, func() {
 		fws := args.NewFuncWrap.Many(strings.ToUpper, strings.ToLower)
 		convey.So(len(fws), convey.ShouldEqual, 2)
@@ -1365,7 +1365,7 @@ func Test_I6_76_FuncMap_Many(t *testing.T) {
 	})
 }
 
-func Test_I6_77_FuncMap_Single(t *testing.T) {
+func Test_77_FuncMap_Single(t *testing.T) {
 	convey.Convey("NewFuncWrap Single", t, func() {
 		fw := args.NewFuncWrap.Single(strings.ToUpper)
 		convey.So(fw.IsValid(), convey.ShouldBeTrue)
@@ -1374,7 +1374,7 @@ func Test_I6_77_FuncMap_Single(t *testing.T) {
 
 // ─── emptyCreator ────────────────────────────────────────────────────────────
 
-func Test_I6_78_EmptyCreator(t *testing.T) {
+func Test_78_EmptyCreator(t *testing.T) {
 	convey.Convey("Empty creator", t, func() {
 		m := args.Empty.Map()
 		convey.So(len(m), convey.ShouldEqual, 0)
@@ -1392,7 +1392,7 @@ func Test_I6_78_EmptyCreator(t *testing.T) {
 
 // ─── funcDetector ────────────────────────────────────────────────────────────
 
-func Test_I6_79_FuncDetector(t *testing.T) {
+func Test_79_FuncDetector(t *testing.T) {
 	convey.Convey("FuncDetector GetFuncWrap", t, func() {
 		// from Map
 		m := args.Map{"func": strings.ToUpper}
@@ -1412,7 +1412,7 @@ func Test_I6_79_FuncDetector(t *testing.T) {
 
 // ─── String type ─────────────────────────────────────────────────────────────
 
-func Test_I6_80_String(t *testing.T) {
+func Test_80_String(t *testing.T) {
 	convey.Convey("args.String all methods", t, func() {
 		s := args.String("hello")
 		convey.So(s.String(), convey.ShouldEqual, "hello")
@@ -1469,7 +1469,7 @@ func Test_I6_80_String(t *testing.T) {
 
 // ─── Map WorkFunc and Invoke ─────────────────────────────────────────────────
 
-func Test_I6_81_Map_WorkFunc_Invoke(t *testing.T) {
+func Test_81_Map_WorkFunc_Invoke(t *testing.T) {
 	convey.Convey("Map WorkFunc and Invoke", t, func() {
 		m := args.Map{"func": strings.ToUpper}
 		convey.So(m.WorkFunc(), convey.ShouldNotBeNil)
@@ -1490,7 +1490,7 @@ func Test_I6_81_Map_WorkFunc_Invoke(t *testing.T) {
 	})
 }
 
-func Test_I6_82_Map_InvokeArgs(t *testing.T) {
+func Test_82_Map_InvokeArgs(t *testing.T) {
 	convey.Convey("Map InvokeArgs", t, func() {
 		addFunc := func(a, b string) string { return a + b }
 		m := args.Map{
@@ -1506,7 +1506,7 @@ func Test_I6_82_Map_InvokeArgs(t *testing.T) {
 
 // ─── FuncMap VoidCallNoReturn, VoidCall ──────────────────────────────────────
 
-func Test_I6_83_FuncMap_VoidCallNoReturn(t *testing.T) {
+func Test_83_FuncMap_VoidCallNoReturn(t *testing.T) {
 	convey.Convey("FuncMap VoidCallNoReturn", t, func() {
 		fn := func() {}
 		fm := args.NewFuncWrap.Map(fn)
@@ -1519,7 +1519,7 @@ func Test_I6_83_FuncMap_VoidCallNoReturn(t *testing.T) {
 	})
 }
 
-func Test_I6_84_FuncMap_VoidCall(t *testing.T) {
+func Test_84_FuncMap_VoidCall(t *testing.T) {
 	convey.Convey("FuncMap VoidCall", t, func() {
 		fn := func() string { return "ok" }
 		fm := args.NewFuncWrap.Map(fn)
@@ -1530,7 +1530,7 @@ func Test_I6_84_FuncMap_VoidCall(t *testing.T) {
 	})
 }
 
-func Test_I6_85_FuncMap_MustBeValid_NotFound(t *testing.T) {
+func Test_85_FuncMap_MustBeValid_NotFound(t *testing.T) {
 	convey.Convey("FuncMap MustBeValid panics on not found", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		convey.So(func() {
@@ -1539,7 +1539,7 @@ func Test_I6_85_FuncMap_MustBeValid_NotFound(t *testing.T) {
 	})
 }
 
-func Test_I6_86_FuncMap_ValidateMethodArgs(t *testing.T) {
+func Test_86_FuncMap_ValidateMethodArgs(t *testing.T) {
 	convey.Convey("FuncMap ValidateMethodArgs", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		err := fm.ValidateMethodArgs("ToUpper", []any{"hello"})
@@ -1550,7 +1550,7 @@ func Test_I6_86_FuncMap_ValidateMethodArgs(t *testing.T) {
 	})
 }
 
-func Test_I6_87_FuncMap_VerifyInOutArgs(t *testing.T) {
+func Test_87_FuncMap_VerifyInOutArgs(t *testing.T) {
 	convey.Convey("FuncMap VerifyInArgs and VerifyOutArgs", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		ok, err := fm.VerifyInArgs("ToUpper", []any{"hello"})
@@ -1569,7 +1569,7 @@ func Test_I6_87_FuncMap_VerifyInOutArgs(t *testing.T) {
 	})
 }
 
-func Test_I6_88_FuncMap_InOutArgsVerifyRv(t *testing.T) {
+func Test_88_FuncMap_InOutArgsVerifyRv(t *testing.T) {
 	convey.Convey("FuncMap InArgsVerifyRv and OutArgsVerifyRv", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 
@@ -1581,7 +1581,7 @@ func Test_I6_88_FuncMap_InOutArgsVerifyRv(t *testing.T) {
 	})
 }
 
-func Test_I6_89_FuncMap_GetInOutArgsTypes(t *testing.T) {
+func Test_89_FuncMap_GetInOutArgsTypes(t *testing.T) {
 	convey.Convey("FuncMap GetInArgsTypes and GetOutArgsTypes", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		inTypes := fm.GetInArgsTypes("ToUpper")
@@ -1595,7 +1595,7 @@ func Test_I6_89_FuncMap_GetInOutArgsTypes(t *testing.T) {
 	})
 }
 
-func Test_I6_90_FuncMap_InvalidErrorByName_ValidFunc(t *testing.T) {
+func Test_90_FuncMap_InvalidErrorByName_ValidFunc(t *testing.T) {
 	convey.Convey("FuncMap InvalidErrorByName valid func", t, func() {
 		fm := args.NewFuncWrap.Map(strings.ToUpper)
 		err := fm.InvalidErrorByName("ToUpper")

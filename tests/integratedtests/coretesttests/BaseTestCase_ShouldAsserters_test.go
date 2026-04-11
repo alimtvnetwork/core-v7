@@ -35,7 +35,7 @@ func (it coverage2TestCaseMessenger) Actual() any {
 	return it.actual
 }
 
-func Test_Cov2_BaseTestCase_ShouldAsserters(t *testing.T) {
+func Test_BaseTestCase_ShouldAsserters(t *testing.T) {
 	// Arrange
 	base := &coretests.BaseTestCase{
 		Title:         "base should asserter",
@@ -68,7 +68,7 @@ func Test_Cov2_BaseTestCase_ShouldAsserters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- should asserters", actual)
 }
 
-func Test_Cov2_BaseTestCase_TypeValidation(t *testing.T) {
+func Test_BaseTestCase_TypeValidation(t *testing.T) {
 	// Arrange
 	mismatch := &coretests.BaseTestCase{
 		Title:         "mismatch",
@@ -103,7 +103,7 @@ func Test_Cov2_BaseTestCase_TypeValidation(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns non-empty -- type validation", actual)
 }
 
-func Test_Cov2_Compare_IsMatch(t *testing.T) {
+func Test_Compare_IsMatch(t *testing.T) {
 	// Arrange
 	instruction := &coretests.ComparingInstruction{}
 	instruction.SetActual("alpha beta gamma")
@@ -132,7 +132,7 @@ func Test_Cov2_Compare_IsMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Compare returns correct value -- IsMatch", actual)
 }
 
-func Test_Cov2_ComparingInstruction_IsMatch(t *testing.T) {
+func Test_ComparingInstruction_IsMatch(t *testing.T) {
 	// Arrange
 	instruction := &coretests.ComparingInstruction{
 		FunName:                    "matcher",
@@ -169,7 +169,7 @@ func Test_Cov2_ComparingInstruction_IsMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ComparingInstruction returns correct value -- IsMatch", actual)
 }
 
-func Test_Cov2_SimpleTestCase_ShouldAsserters(t *testing.T) {
+func Test_SimpleTestCase_ShouldAsserters(t *testing.T) {
 	// Arrange
 	testCase := coretests.SimpleTestCase{
 		Title:         "simple should",
@@ -194,7 +194,7 @@ func Test_Cov2_SimpleTestCase_ShouldAsserters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleTestCase returns correct value -- should asserters", actual)
 }
 
-func Test_Cov2_SkipHelpers(t *testing.T) {
+func Test_SkipHelpers(t *testing.T) {
 	// Arrange
 	runCount := 0
 
@@ -216,7 +216,7 @@ func Test_Cov2_SkipHelpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Skip returns correct value -- helpers invoked", actual)
 }
 
-func Test_Cov2_IsCompare_And_GetAssertHelpers(t *testing.T) {
+func Test_IsCompare_And_GetAssertHelpers(t *testing.T) {
 	// Arrange
 	messenger := coverage2TestCaseMessenger{
 		funcName: "CompareFn",

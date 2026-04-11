@@ -10,7 +10,7 @@ import (
 
 // ── TextValidators: AllVerifyErrorMany ──
 
-func Test_Cov13_TextValidators_AllVerifyErrorMany_Match(t *testing.T) {
+func Test_TextValidators_AllVerifyErrorMany_Match(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(2)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -28,7 +28,7 @@ func Test_Cov13_TextValidators_AllVerifyErrorMany_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorMany returns nil -- all match", actual)
 }
 
-func Test_Cov13_TextValidators_AllVerifyErrorMany_NoMatch(t *testing.T) {
+func Test_TextValidators_AllVerifyErrorMany_NoMatch(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("missing", stringcompareas.Contains)
@@ -48,7 +48,7 @@ func Test_Cov13_TextValidators_AllVerifyErrorMany_NoMatch(t *testing.T) {
 
 // ── TextValidators: VerifyErrorMany ──
 
-func Test_Cov13_TextValidators_VerifyErrorMany_ContinueOnError(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_ContinueOnError(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -66,7 +66,7 @@ func Test_Cov13_TextValidators_VerifyErrorMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- continue mode match", actual)
 }
 
-func Test_Cov13_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -84,7 +84,7 @@ func Test_Cov13_TextValidators_VerifyErrorMany_FirstOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- first only match", actual)
 }
 
-func Test_Cov13_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
 	// Arrange
 	var tv *corevalidator.TextValidators
 
@@ -99,7 +99,7 @@ func Test_Cov13_TextValidators_VerifyErrorMany_Nil(t *testing.T) {
 
 // ── TextValidators: AddSimpleAllTrue ──
 
-func Test_Cov13_TextValidators_AddSimpleAllTrue(t *testing.T) {
+func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 
@@ -114,7 +114,7 @@ func Test_Cov13_TextValidators_AddSimpleAllTrue(t *testing.T) {
 
 // ── TextValidators: HasAnyItem / HasIndex / Count ──
 
-func Test_Cov13_TextValidators_Accessors(t *testing.T) {
+func Test_TextValidators_Accessors(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(2)
 	tv.AddSimple("a", stringcompareas.Contains)
@@ -142,7 +142,7 @@ func Test_Cov13_TextValidators_Accessors(t *testing.T) {
 
 // ── TextValidators: Dispose ──
 
-func Test_Cov13_TextValidators_Dispose(t *testing.T) {
+func Test_TextValidators_Dispose(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("a", stringcompareas.Contains)
@@ -158,7 +158,7 @@ func Test_Cov13_TextValidators_Dispose(t *testing.T) {
 
 // ── TextValidators: String ──
 
-func Test_Cov13_TextValidators_String(t *testing.T) {
+func Test_TextValidators_String(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("test", stringcompareas.Contains)
@@ -174,7 +174,7 @@ func Test_Cov13_TextValidators_String(t *testing.T) {
 
 // ── TextValidators: IsMatchMany ──
 
-func Test_Cov13_TextValidators_IsMatchMany(t *testing.T) {
+func Test_TextValidators_IsMatchMany(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("hello", stringcompareas.Contains)
@@ -188,7 +188,7 @@ func Test_Cov13_TextValidators_IsMatchMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- all contain hello", actual)
 }
 
-func Test_Cov13_TextValidators_IsMatchMany_NoMatch(t *testing.T) {
+func Test_TextValidators_IsMatchMany_NoMatch(t *testing.T) {
 	// Arrange
 	tv := corevalidator.NewTextValidators(1)
 	tv.AddSimple("missing", stringcompareas.Contains)
@@ -204,7 +204,7 @@ func Test_Cov13_TextValidators_IsMatchMany_NoMatch(t *testing.T) {
 
 // ── TextValidator: VerifyMany ──
 
-func Test_Cov13_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -224,7 +224,7 @@ func Test_Cov13_TextValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns nil -- continue+match", actual)
 }
 
-func Test_Cov13_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
+func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -246,7 +246,7 @@ func Test_Cov13_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
 
 // ── TextValidator: IsMatchMany ──
 
-func Test_Cov13_TextValidator_IsMatchMany_SkipOnEmpty(t *testing.T) {
+func Test_TextValidator_IsMatchMany_SkipOnEmpty(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -264,7 +264,7 @@ func Test_Cov13_TextValidator_IsMatchMany_SkipOnEmpty(t *testing.T) {
 
 // ── TextValidator: ToString multiline ──
 
-func Test_Cov13_TextValidator_ToString_MultiLine(t *testing.T) {
+func Test_TextValidator_ToString_MultiLine(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "test",
@@ -282,7 +282,7 @@ func Test_Cov13_TextValidator_ToString_MultiLine(t *testing.T) {
 
 // ── TextValidator: MethodName ──
 
-func Test_Cov13_TextValidator_MethodName(t *testing.T) {
+func Test_TextValidator_MethodName(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "test",
@@ -300,7 +300,7 @@ func Test_Cov13_TextValidator_MethodName(t *testing.T) {
 
 // ── TextValidator: AllVerifyError ──
 
-func Test_Cov13_TextValidator_AllVerifyError_Match(t *testing.T) {
+func Test_TextValidator_AllVerifyError_Match(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
@@ -320,7 +320,7 @@ func Test_Cov13_TextValidator_AllVerifyError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- all match", actual)
 }
 
-func Test_Cov13_TextValidator_AllVerifyError_NoMatch(t *testing.T) {
+func Test_TextValidator_AllVerifyError_NoMatch(t *testing.T) {
 	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "missing",
@@ -342,7 +342,7 @@ func Test_Cov13_TextValidator_AllVerifyError_NoMatch(t *testing.T) {
 
 // ── SliceValidator: AllVerifyErrorExceptLast ──
 
-func Test_Cov13_SliceValidator_AllVerifyErrorExceptLast(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorExceptLast(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"a", "b", "DIFFERENT"},
@@ -365,7 +365,7 @@ func Test_Cov13_SliceValidator_AllVerifyErrorExceptLast(t *testing.T) {
 
 // ── SliceValidator: AllVerifyErrorTestCase ──
 
-func Test_Cov13_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"hello"},
@@ -384,7 +384,7 @@ func Test_Cov13_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 
 // ── LinesValidators: Accessors ──
 
-func Test_Cov13_LinesValidators_Accessors(t *testing.T) {
+func Test_LinesValidators_Accessors(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 
@@ -406,7 +406,7 @@ func Test_Cov13_LinesValidators_Accessors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinesValidators empty accessors -- correct defaults", actual)
 }
 
-func Test_Cov13_LinesValidators_String(t *testing.T) {
+func Test_LinesValidators_String(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
 

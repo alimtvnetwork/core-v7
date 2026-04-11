@@ -9,7 +9,7 @@ import (
 
 // ── TraceCollection additional coverage ──
 
-func Test_Cov3_TraceCollection_NilLength(t *testing.T) {
+func Test_TraceCollection_NilLength(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 
@@ -27,7 +27,7 @@ func Test_Cov3_TraceCollection_NilLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.Length returns nil -- nil receiver", actual)
 }
 
-func Test_Cov3_TraceCollection_Adds_Empty(t *testing.T) {
+func Test_TraceCollection_Adds_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -41,7 +41,7 @@ func Test_Cov3_TraceCollection_Adds_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.Adds returns empty -- empty does nothing", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsIf_False(t *testing.T) {
+func Test_TraceCollection_AddsIf_False(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -55,7 +55,7 @@ func Test_Cov3_TraceCollection_AddsIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsIf returns non-empty -- false does nothing", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsIf_True(t *testing.T) {
+func Test_TraceCollection_AddsIf_True(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -69,7 +69,7 @@ func Test_Cov3_TraceCollection_AddsIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsIf returns non-empty -- true adds", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsPtr_Empty(t *testing.T) {
+func Test_TraceCollection_AddsPtr_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -83,7 +83,7 @@ func Test_Cov3_TraceCollection_AddsPtr_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsPtr returns empty -- empty does nothing", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsPtr_NilTrace(t *testing.T) {
+func Test_TraceCollection_AddsPtr_NilTrace(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -97,7 +97,7 @@ func Test_Cov3_TraceCollection_AddsPtr_NilTrace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsPtr returns nil -- nil trace skipped", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
+func Test_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -112,7 +112,7 @@ func Test_Cov3_TraceCollection_AddsPtr_SkipIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsPtr returns correct value -- skips issues", actual)
 }
 
-func Test_Cov3_TraceCollection_AddsPtr_NoSkip(t *testing.T) {
+func Test_TraceCollection_AddsPtr_NoSkip(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	before := tc.Length()
@@ -127,7 +127,7 @@ func Test_Cov3_TraceCollection_AddsPtr_NoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.AddsPtr returns empty -- no skip adds", actual)
 }
 
-func Test_Cov3_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 
@@ -139,7 +139,7 @@ func Test_Cov3_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.FirstOrDefault returns empty -- empty", actual)
 }
 
-func Test_Cov3_TraceCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_LastOrDefault_Empty(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 
@@ -151,7 +151,7 @@ func Test_Cov3_TraceCollection_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.LastOrDefault returns empty -- empty", actual)
 }
 
-func Test_Cov3_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -169,7 +169,7 @@ func Test_Cov3_TraceCollection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.HasIndex returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_GetPagesSize(t *testing.T) {
+func Test_TraceCollection_GetPagesSize(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.Default(1, 10)
 
@@ -189,7 +189,7 @@ func Test_Cov3_TraceCollection_GetPagesSize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.GetPagesSize returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_Filter(t *testing.T) {
+func Test_TraceCollection_Filter(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	filtered := tc.Filter(func(tr *codestack.Trace) (bool, bool) {
@@ -204,7 +204,7 @@ func Test_Cov3_TraceCollection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.Filter returns correct value -- takes all", actual)
 }
 
-func Test_Cov3_TraceCollection_Filter_BreakEarly(t *testing.T) {
+func Test_TraceCollection_Filter_BreakEarly(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	filtered := tc.Filter(func(tr *codestack.Trace) (bool, bool) {
@@ -219,7 +219,7 @@ func Test_Cov3_TraceCollection_Filter_BreakEarly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.Filter returns correct value -- break early", actual)
 }
 
-func Test_Cov3_TraceCollection_SafeLimitCollection(t *testing.T) {
+func Test_TraceCollection_SafeLimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	limited := tc.SafeLimitCollection(999)
@@ -232,7 +232,7 @@ func Test_Cov3_TraceCollection_SafeLimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.SafeLimitCollection returns correct value -- exceeds length", actual)
 }
 
-func Test_Cov3_TraceCollection_ConcatNew(t *testing.T) {
+func Test_TraceCollection_ConcatNew(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	origLen := tc.Length()
@@ -252,7 +252,7 @@ func Test_Cov3_TraceCollection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.ConcatNew returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_ConcatNewPtr(t *testing.T) {
+func Test_TraceCollection_ConcatNewPtr(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	origLen := tc.Length()
@@ -273,7 +273,7 @@ func Test_Cov3_TraceCollection_ConcatNewPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.ConcatNewPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_StackTraces(t *testing.T) {
+func Test_TraceCollection_StackTraces(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -285,7 +285,7 @@ func Test_Cov3_TraceCollection_StackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.StackTraces returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_StackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -297,7 +297,7 @@ func Test_Cov3_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.StackTracesJsonResult returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_NewStackTraces(t *testing.T) {
+func Test_TraceCollection_NewStackTraces(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -309,7 +309,7 @@ func Test_Cov3_TraceCollection_NewStackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.NewStackTraces returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_NewDefaultStackTraces(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -321,7 +321,7 @@ func Test_Cov3_TraceCollection_NewDefaultStackTraces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.NewDefaultStackTraces returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -333,7 +333,7 @@ func Test_Cov3_TraceCollection_NewStackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.NewStackTracesJsonResult returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
+func Test_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -345,7 +345,7 @@ func Test_Cov3_TraceCollection_NewDefaultStackTracesJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.NewDefaultStackTracesJsonResult returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_SkipDynamic(t *testing.T) {
+func Test_TraceCollection_SkipDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -357,7 +357,7 @@ func Test_Cov3_TraceCollection_SkipDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.SkipDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_TakeDynamic(t *testing.T) {
+func Test_TraceCollection_TakeDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -369,7 +369,7 @@ func Test_Cov3_TraceCollection_TakeDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.TakeDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_TakeCollection(t *testing.T) {
+func Test_TraceCollection_TakeCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	taken := tc.TakeCollection(1)
@@ -382,7 +382,7 @@ func Test_Cov3_TraceCollection_TakeCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.TakeCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_LimitCollection(t *testing.T) {
+func Test_TraceCollection_LimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	limited := tc.LimitCollection(1)
@@ -395,7 +395,7 @@ func Test_Cov3_TraceCollection_LimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.LimitCollection returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_LimitDynamic(t *testing.T) {
+func Test_TraceCollection_LimitDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -407,7 +407,7 @@ func Test_Cov3_TraceCollection_LimitDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.LimitDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
+func Test_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -419,7 +419,7 @@ func Test_Cov3_TraceCollection_FirstOrDefaultDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.FirstOrDefaultDynamic returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
+func Test_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -433,7 +433,7 @@ func Test_Cov3_TraceCollection_LastOrDefaultDynamic(t *testing.T) {
 
 // ── newTraceCollection factory coverage ──
 
-func Test_Cov3_NewTraces_Cap(t *testing.T) {
+func Test_NewTraces_Cap(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	if tc.Length() == 0 {
@@ -450,7 +450,7 @@ func Test_Cov3_NewTraces_Cap(t *testing.T) {
 
 // ── NameOf with real func names ──
 
-func Test_Cov3_NameOf_All_WithDot(t *testing.T) {
+func Test_NameOf_All_WithDot(t *testing.T) {
 	// Arrange
 	full, pkg, method := codestack.NameOf.All("github.com/pkg/errors.New")
 
@@ -470,7 +470,7 @@ func Test_Cov3_NameOf_All_WithDot(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns non-empty -- with dotted path", actual)
 }
 
-func Test_Cov3_NameOf_MethodByFullName(t *testing.T) {
+func Test_NameOf_MethodByFullName(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.MethodByFullName("github.com/pkg.Method")
 
@@ -482,7 +482,7 @@ func Test_Cov3_NameOf_MethodByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.MethodByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov3_NameOf_PackageByFullName(t *testing.T) {
+func Test_NameOf_PackageByFullName(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.PackageByFullName("github.com/pkg.Method")
 
@@ -494,7 +494,7 @@ func Test_Cov3_NameOf_PackageByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.PackageByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov3_NameOf_CurrentFuncFullPath(t *testing.T) {
+func Test_NameOf_CurrentFuncFullPath(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.CurrentFuncFullPath("github.com/pkg.Method")
 
@@ -506,7 +506,7 @@ func Test_Cov3_NameOf_CurrentFuncFullPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.CurrentFuncFullPath returns correct value -- with args", actual)
 }
 
-func Test_Cov3_NameOf_JoinPackageNameWithRelative(t *testing.T) {
+func Test_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	// Arrange
 	result := codestack.NameOf.JoinPackageNameWithRelative("github.com/pkg.Method", "SubMethod")
 
@@ -520,7 +520,7 @@ func Test_Cov3_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 
 // ── File getter additional coverage ──
 
-func Test_Cov3_File_PathLineSep(t *testing.T) {
+func Test_File_PathLineSep(t *testing.T) {
 	// Arrange
 	fp, ln := codestack.File.PathLineSep(0)
 
@@ -538,7 +538,7 @@ func Test_Cov3_File_PathLineSep(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSep returns correct value -- with args", actual)
 }
 
-func Test_Cov3_File_PathLineSepDefault(t *testing.T) {
+func Test_File_PathLineSepDefault(t *testing.T) {
 	// Arrange
 	fp, ln := codestack.File.PathLineSepDefault()
 
@@ -556,7 +556,7 @@ func Test_Cov3_File_PathLineSepDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSepDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov3_File_FilePathWithLineString(t *testing.T) {
+func Test_File_FilePathWithLineString(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.FilePathWithLineString(0) != ""}
 
@@ -565,7 +565,7 @@ func Test_Cov3_File_FilePathWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.FilePathWithLineString returns non-empty -- with args", actual)
 }
 
-func Test_Cov3_File_PathLineStringDefault(t *testing.T) {
+func Test_File_PathLineStringDefault(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.PathLineStringDefault() != ""}
 
@@ -574,7 +574,7 @@ func Test_Cov3_File_PathLineStringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineStringDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov3_File_CurrentFilePath(t *testing.T) {
+func Test_File_CurrentFilePath(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.File.CurrentFilePath() != ""}
 
@@ -585,7 +585,7 @@ func Test_Cov3_File_CurrentFilePath(t *testing.T) {
 
 // ── Dir additional coverage ──
 
-func Test_Cov3_Dir_Get(t *testing.T) {
+func Test_Dir_Get(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.Get(0) != ""}
 
@@ -594,7 +594,7 @@ func Test_Cov3_Dir_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.Get returns correct value -- with args", actual)
 }
 
-func Test_Cov3_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.RepoDir() != ""}
 
@@ -603,7 +603,7 @@ func Test_Cov3_Dir_RepoDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.RepoDir returns correct value -- with args", actual)
 }
 
-func Test_Cov3_Dir_RepoDirJoin(t *testing.T) {
+func Test_Dir_RepoDirJoin(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": codestack.Dir.RepoDirJoin("sub") != ""}
 
@@ -614,7 +614,7 @@ func Test_Cov3_Dir_RepoDirJoin(t *testing.T) {
 
 // ── isSkippablePackage ──
 
-func Test_Cov3_SkippablePackage_ViaTrace(t *testing.T) {
+func Test_SkippablePackage_ViaTrace(t *testing.T) {
 	// Arrange
 	// Create a trace; application code should NOT be skippable
 	trace := codestack.New.Default()
@@ -629,7 +629,7 @@ func Test_Cov3_SkippablePackage_ViaTrace(t *testing.T) {
 
 // ── TraceCollection.AddsUsingSkipDefault ──
 
-func Test_Cov3_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
+func Test_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
 	// Arrange
 	tc := &codestack.TraceCollection{}
 	tc.AddsUsingSkipDefault(0)
@@ -644,7 +644,7 @@ func Test_Cov3_TraceCollection_AddsUsingSkipDefault(t *testing.T) {
 
 // ── TraceCollection.ConcatNewUsingSkip ──
 
-func Test_Cov3_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
+func Test_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	newTc := tc.ConcatNewUsingSkip(0)
@@ -657,7 +657,7 @@ func Test_Cov3_TraceCollection_ConcatNewUsingSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection.ConcatNewUsingSkip returns correct value -- with args", actual)
 }
 
-func Test_Cov3_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
+func Test_TraceCollection_ConcatNewUsingSkipPlusCount(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	newTc := tc.ConcatNewUsingSkipPlusCount(0, 5)

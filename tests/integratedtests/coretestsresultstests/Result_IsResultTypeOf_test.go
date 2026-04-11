@@ -11,7 +11,7 @@ import (
 
 // ── Result edge cases ──
 
-func Test_Cov_Result_IsResultTypeOf_Nil(t *testing.T) {
+func Test_Result_IsResultTypeOf_Nil(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Value: nil}
 
@@ -23,7 +23,7 @@ func Test_Cov_Result_IsResultTypeOf_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsResultTypeOf returns nil -- nil", actual)
 }
 
-func Test_Cov_Result_String_Panicked(t *testing.T) {
+func Test_Result_String_Panicked(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Panicked: true, PanicValue: "boom"}
 
@@ -35,7 +35,7 @@ func Test_Cov_Result_String_Panicked(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String panics -- panicked", actual)
 }
 
-func Test_Cov_Result_String_Error(t *testing.T) {
+func Test_Result_String_Error(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Error: errors.New("fail"), ReturnCount: 1}
 
@@ -47,7 +47,7 @@ func Test_Cov_Result_String_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String returns error -- error", actual)
 }
 
-func Test_Cov_Result_String_Normal(t *testing.T) {
+func Test_Result_String_Normal(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{Value: "ok", ReturnCount: 1}
 
@@ -61,7 +61,7 @@ func Test_Cov_Result_String_Normal(t *testing.T) {
 
 // ── ResultsAny methods ──
 
-func Test_Cov_ResultsAny_String_Panicked(t *testing.T) {
+func Test_ResultsAny_String_Panicked(t *testing.T) {
 	// Arrange
 	r := results.ResultsAny{Result: results.ResultAny{Panicked: true, PanicValue: "p"}}
 
@@ -73,7 +73,7 @@ func Test_Cov_ResultsAny_String_Panicked(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsAny panics -- panicked", actual)
 }
 
-func Test_Cov_ResultsAny_String_Error(t *testing.T) {
+func Test_ResultsAny_String_Error(t *testing.T) {
 	// Arrange
 	r := results.ResultsAny{
 		Result:  results.ResultAny{Value: "v", Error: errors.New("e")},
@@ -88,7 +88,7 @@ func Test_Cov_ResultsAny_String_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsAny returns error -- error", actual)
 }
 
-func Test_Cov_ResultsAny_String_Normal(t *testing.T) {
+func Test_ResultsAny_String_Normal(t *testing.T) {
 	// Arrange
 	r := results.ResultsAny{
 		Result:  results.ResultAny{Value: "v"},
@@ -103,7 +103,7 @@ func Test_Cov_ResultsAny_String_Normal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsAny returns correct value -- normal", actual)
 }
 
-func Test_Cov_ResultsAny_IsResult2(t *testing.T) {
+func Test_ResultsAny_IsResult2(t *testing.T) {
 	// Arrange
 	r := results.ResultsAny{Result2: "hello"}
 
@@ -121,7 +121,7 @@ func Test_Cov_ResultsAny_IsResult2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ResultsAny returns correct value -- IsResult2", actual)
 }
 
-func Test_Cov_ResultsAny_Result2String(t *testing.T) {
+func Test_ResultsAny_Result2String(t *testing.T) {
 	// Arrange
 	r := results.ResultsAny{Result2: 99}
 
@@ -135,7 +135,7 @@ func Test_Cov_ResultsAny_Result2String(t *testing.T) {
 
 // ── FromResultAny edge ──
 
-func Test_Cov_FromResultAny_Empty(t *testing.T) {
+func Test_FromResultAny_Empty(t *testing.T) {
 	// Arrange
 	ra := results.ResultAny{AllResults: []any{}}
 	r := results.FromResultAny[string, string](ra)
@@ -160,7 +160,7 @@ type extCovTestStruct struct{}
 
 func (s *extCovTestStruct) Hello() string { return "hi" }
 
-func Test_Cov_Invoke_NilReceiver_Ext(t *testing.T) {
+func Test_Invoke_NilReceiver_Ext(t *testing.T) {
 	// Arrange
 	r := results.InvokeWithPanicRecovery((*extCovTestStruct).Hello, nil)
 	// Hello() doesn't dereference receiver, so nil receiver works fine
@@ -179,7 +179,7 @@ func Test_Cov_Invoke_NilReceiver_Ext(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invoke panics -- nil receiver panics", actual)
 }
 
-func Test_Cov_Invoke_ValidCall_Ext(t *testing.T) {
+func Test_Invoke_ValidCall_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovTestStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovTestStruct).Hello, s)
@@ -205,7 +205,7 @@ type extCovErrStruct struct{}
 func (s *extCovErrStruct) Fail() error { return errors.New("fail") }
 func (s *extCovErrStruct) Ok() error   { return nil }
 
-func Test_Cov_Invoke_ErrorReturn_Ext(t *testing.T) {
+func Test_Invoke_ErrorReturn_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovErrStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovErrStruct).Fail, s)
@@ -224,7 +224,7 @@ func Test_Cov_Invoke_ErrorReturn_Ext(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invoke returns error -- error return", actual)
 }
 
-func Test_Cov_Invoke_NilErrorReturn_Ext(t *testing.T) {
+func Test_Invoke_NilErrorReturn_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovErrStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovErrStruct).Ok, s)
@@ -247,7 +247,7 @@ type extCovVoidStruct struct{}
 
 func (s *extCovVoidStruct) DoNothing() {}
 
-func Test_Cov_Invoke_VoidReturn_Ext(t *testing.T) {
+func Test_Invoke_VoidReturn_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovVoidStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovVoidStruct).DoNothing, s)
@@ -270,7 +270,7 @@ type extCovMultiStruct struct{}
 
 func (s *extCovMultiStruct) TwoVals() (string, int) { return "a", 1 }
 
-func Test_Cov_Invoke_MultiReturn_Ext(t *testing.T) {
+func Test_Invoke_MultiReturn_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovMultiStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovMultiStruct).TwoVals, s)
@@ -301,7 +301,7 @@ func (s *extCovArgStruct) WithArg(v any) string {
 	return fmt.Sprintf("%v", v)
 }
 
-func Test_Cov_Invoke_NilArg_Ext(t *testing.T) {
+func Test_Invoke_NilArg_Ext(t *testing.T) {
 	// Arrange
 	s := &extCovArgStruct{}
 	r := results.InvokeWithPanicRecovery((*extCovArgStruct).WithArg, s, nil)
@@ -322,7 +322,7 @@ func Test_Cov_Invoke_NilArg_Ext(t *testing.T) {
 
 // ── ExpectAnyError sentinel ──
 
-func Test_Cov_ExpectAnyError_Ext(t *testing.T) {
+func Test_ExpectAnyError_Ext(t *testing.T) {
 	// Act
 	actual := args.Map{"notNil": results.ExpectAnyError != nil}
 
@@ -333,7 +333,7 @@ func Test_Cov_ExpectAnyError_Ext(t *testing.T) {
 
 // ── FilterByFields via ToMap ──
 
-func Test_Cov_FilterByFields_MissingKey_Ext(t *testing.T) {
+func Test_FilterByFields_MissingKey_Ext(t *testing.T) {
 	// Arrange
 	r := results.ResultAny{}
 	m := r.ToMap()
@@ -354,7 +354,7 @@ func Test_Cov_FilterByFields_MissingKey_Ext(t *testing.T) {
 
 // ── MethodName combined ──
 
-func Test_Cov_MethodName_Combined_Ext(t *testing.T) {
+func Test_MethodName_Combined_Ext(t *testing.T) {
 	// Arrange
 	name := results.MethodName((*extCovTestStruct).Hello)
 	nilName := results.MethodName(nil)

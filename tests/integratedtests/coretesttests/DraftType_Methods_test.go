@@ -9,7 +9,7 @@ import (
 
 // ── DraftType ──
 
-func Test_Cov_DraftType_Methods(t *testing.T) {
+func Test_DraftType_Methods(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "a", SampleString2: "b", SampleInteger: 1, Lines: []string{"l"}, RawBytes: []byte{1}}
 	d.SetF2Integer(5)
@@ -35,7 +35,7 @@ func Test_Cov_DraftType_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- Methods", actual)
 }
 
-func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
+func Test_DraftType_PtrOrNonPtr(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "a"}
 
@@ -56,7 +56,7 @@ func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- PtrOrNonPtr", actual)
 }
 
-func Test_Cov_DraftType_Clone(t *testing.T) {
+func Test_DraftType_Clone(t *testing.T) {
 	// Arrange
 	d := &coretests.DraftType{SampleString1: "a", Lines: []string{"l"}, RawBytes: []byte{1}}
 	c := d.Clone()
@@ -79,7 +79,7 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- Clone", actual)
 }
 
-func Test_Cov_DraftType_IsEqual(t *testing.T) {
+func Test_DraftType_IsEqual(t *testing.T) {
 	// Arrange
 	d1 := &coretests.DraftType{SampleString1: "a", SampleInteger: 1}
 	d2 := &coretests.DraftType{SampleString1: "a", SampleInteger: 1}
@@ -106,7 +106,7 @@ func Test_Cov_DraftType_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- IsEqual", actual)
 }
 
-func Test_Cov_DraftType_VerifyNotEqual(t *testing.T) {
+func Test_DraftType_VerifyNotEqual(t *testing.T) {
 	// Arrange
 	d1 := &coretests.DraftType{SampleString1: "a"}
 	d2 := &coretests.DraftType{SampleString1: "a"}
@@ -132,7 +132,7 @@ func Test_Cov_DraftType_VerifyNotEqual(t *testing.T) {
 
 // ── AnyToBytes / AnyToBytesPtr / AnyToDraftType ──
 
-func Test_Cov_AnyToBytes(t *testing.T) {
+func Test_AnyToBytes(t *testing.T) {
 	// Arrange
 	bytesResult := coretests.AnyToBytes([]byte{1, 2})
 	strResult := coretests.AnyToBytes("hello")
@@ -152,7 +152,7 @@ func Test_Cov_AnyToBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToBytes returns correct value -- with args", actual)
 }
 
-func Test_Cov_AnyToBytesPtr(t *testing.T) {
+func Test_AnyToBytesPtr(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytesPtr("hello")
 
@@ -164,7 +164,7 @@ func Test_Cov_AnyToBytesPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToBytesPtr returns correct value -- with args", actual)
 }
 
-func Test_Cov_AnyToDraftType(t *testing.T) {
+func Test_AnyToDraftType(t *testing.T) {
 	// Arrange
 	d := coretests.DraftType{SampleString1: "a"}
 	dp := &coretests.DraftType{SampleString1: "b"}
@@ -187,7 +187,7 @@ func Test_Cov_AnyToDraftType(t *testing.T) {
 
 // ── CaseIndexPlusIsPrint ──
 
-func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
+func Test_CaseIndexPlusIsPrint(t *testing.T) {
 	// Arrange
 	c := &coretests.CaseIndexPlusIsPrint{IsPrint: true, CaseIndex: 5}
 
@@ -207,7 +207,7 @@ func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
 
 // ── SomeString ──
 
-func Test_Cov_SomeString(t *testing.T) {
+func Test_SomeString(t *testing.T) {
 	// Arrange
 	s := coretests.SomeString{Value: "hello"}
 
@@ -227,7 +227,7 @@ func Test_Cov_SomeString(t *testing.T) {
 
 // ── TestFuncName ──
 
-func Test_Cov_TestFuncName(t *testing.T) {
+func Test_TestFuncName(t *testing.T) {
 	// Arrange
 	fn := coretests.TestFuncName("myFunc")
 
@@ -241,7 +241,7 @@ func Test_Cov_TestFuncName(t *testing.T) {
 
 // ── Compare ──
 
-func Test_Cov_Compare_SortedStrings(t *testing.T) {
+func Test_Compare_SortedStrings(t *testing.T) {
 	// Arrange
 	c := &coretests.Compare{StringContains: "hello world"}
 	sorted := c.SortedStrings()
@@ -261,7 +261,7 @@ func Test_Cov_Compare_SortedStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Compare returns correct value -- SortedStrings", actual)
 }
 
-func Test_Cov_Compare_GetPrintMessage(t *testing.T) {
+func Test_Compare_GetPrintMessage(t *testing.T) {
 	// Arrange
 	c := &coretests.Compare{StringContains: "test"}
 	msg := c.GetPrintMessage(0)
@@ -276,7 +276,7 @@ func Test_Cov_Compare_GetPrintMessage(t *testing.T) {
 
 // ── ComparingInstruction ──
 
-func Test_Cov_ComparingInstruction(t *testing.T) {
+func Test_ComparingInstruction(t *testing.T) {
 	// Arrange
 	ci := &coretests.ComparingInstruction{
 		FunName:      "fn",
@@ -301,7 +301,7 @@ func Test_Cov_ComparingInstruction(t *testing.T) {
 
 // ── BaseTestCase getters ──
 
-func Test_Cov_BaseTestCase_Getters(t *testing.T) {
+func Test_BaseTestCase_Getters(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{
 		Title:         "test",
@@ -337,7 +337,7 @@ func Test_Cov_BaseTestCase_Getters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- Getters", actual)
 }
 
-func Test_Cov_BaseTestCase_Params(t *testing.T) {
+func Test_BaseTestCase_Params(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{
 		Parameters: &args.HolderAny{
@@ -362,7 +362,7 @@ func Test_Cov_BaseTestCase_Params(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- Params", actual)
 }
 
-func Test_Cov_BaseTestCase_NilParams(t *testing.T) {
+func Test_BaseTestCase_NilParams(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{}
 
@@ -382,7 +382,7 @@ func Test_Cov_BaseTestCase_NilParams(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns nil -- NilParams", actual)
 }
 
-func Test_Cov_BaseTestCase_HashmapParam(t *testing.T) {
+func Test_BaseTestCase_HashmapParam(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{
 		Parameters: &args.HolderAny{Hashmap: map[string]any{"k": "v"}},
@@ -407,7 +407,7 @@ func Test_Cov_BaseTestCase_HashmapParam(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- HashmapParam", actual)
 }
 
-func Test_Cov_BaseTestCase_SetActual(t *testing.T) {
+func Test_BaseTestCase_SetActual(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{}
 	bt.SetActual("test")
@@ -420,7 +420,7 @@ func Test_Cov_BaseTestCase_SetActual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- SetActual", actual)
 }
 
-func Test_Cov_BaseTestCase_FormTitle(t *testing.T) {
+func Test_BaseTestCase_FormTitle(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{Title: "test"}
 
@@ -438,7 +438,7 @@ func Test_Cov_BaseTestCase_FormTitle(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- FormTitle", actual)
 }
 
-func Test_Cov_BaseTestCase_Contracts(t *testing.T) {
+func Test_BaseTestCase_Contracts(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{}
 
@@ -456,7 +456,7 @@ func Test_Cov_BaseTestCase_Contracts(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- Contracts", actual)
 }
 
-func Test_Cov_BaseTestCase_ActualExpectedLines(t *testing.T) {
+func Test_BaseTestCase_ActualExpectedLines(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{ActualInput: "line1\nline2", ExpectedInput: "e1\ne2"}
 

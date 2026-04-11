@@ -10,7 +10,7 @@ import (
 // ── Map: GetFuncName returns empty when no FuncWrap ──
 // Covers Map.go L107
 
-func Test_Cov9_Map_GetFuncName_Empty(t *testing.T) {
+func Test_Map_GetFuncName_Empty(t *testing.T) {
 	// Arrange
 	m := args.Map{"key": "value"}
 
@@ -27,7 +27,7 @@ func Test_Cov9_Map_GetFuncName_Empty(t *testing.T) {
 // ── Map: InvokeMust panics on invalid func ──
 // Covers Map.go L422-423
 
-func Test_Cov9_Map_InvokeMust_Panic(t *testing.T) {
+func Test_Map_InvokeMust_Panic(t *testing.T) {
 	// Arrange
 	m := args.Map{"workFunc": "not-a-func"}
 
@@ -52,7 +52,7 @@ func Test_Cov9_Map_InvokeMust_Panic(t *testing.T) {
 // ── Map: InvokeWithValidArgs ──
 // Covers Map.go L434-439
 
-func Test_Cov9_Map_InvokeWithValidArgs(t *testing.T) {
+func Test_Map_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s + "!" }
 	m := args.Map{
@@ -79,7 +79,7 @@ func Test_Cov9_Map_InvokeWithValidArgs(t *testing.T) {
 // ── FuncWrap: IsEqual various comparison paths ──
 // Covers FuncWrap.go L215-245
 
-func Test_Cov9_FuncWrap_IsEqual_Different(t *testing.T) {
+func Test_FuncWrap_IsEqual_Different(t *testing.T) {
 	// Arrange
 	fn1 := func(s string) string { return s }
 	fn2 := func(s string, i int) string { return s }
@@ -97,7 +97,7 @@ func Test_Cov9_FuncWrap_IsEqual_Different(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqual returns false -- different arg counts", actual)
 }
 
-func Test_Cov9_FuncWrap_IsEqual_Nil(t *testing.T) {
+func Test_FuncWrap_IsEqual_Nil(t *testing.T) {
 	// Arrange
 	fn1 := func() {}
 	fw1 := args.NewFuncWrap.Default(fn1)
@@ -115,7 +115,7 @@ func Test_Cov9_FuncWrap_IsEqual_Nil(t *testing.T) {
 // ── FuncWrap: InvokeFirstAndError ──
 // Covers FuncWrapInvoke.go L121-137
 
-func Test_Cov9_FuncWrap_InvokeFirstAndError(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError(t *testing.T) {
 	// Arrange
 	fn := func(s string) (string, error) { return s + "!", fmt.Errorf("test-err") }
 	fw := args.NewFuncWrap.Default(fn)
@@ -141,7 +141,7 @@ func Test_Cov9_FuncWrap_InvokeFirstAndError(t *testing.T) {
 // ── FuncWrap: InvokeError ──
 // Covers FuncWrapInvoke.go L107-114
 
-func Test_Cov9_FuncWrap_InvokeError(t *testing.T) {
+func Test_FuncWrap_InvokeError(t *testing.T) {
 	// Arrange
 	fn := func() error { return nil }
 	fw := args.NewFuncWrap.Default(fn)
@@ -172,7 +172,7 @@ func Test_Cov9_FuncWrap_InvokeError(t *testing.T) {
 // ── FuncWrap: GetResponseOfInvoke with index ──
 // Covers FuncWrapInvoke.go L85-101
 
-func Test_Cov9_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	// Arrange
 	fn := func() (string, int) { return "a", 42 }
 	fw := args.NewFuncWrap.Default(fn)
@@ -196,7 +196,7 @@ func Test_Cov9_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 // ── FuncWrap: InvokeSkip with panic ──
 // Covers FuncWrapInvoke.go L61-71
 
-func Test_Cov9_FuncWrap_InvokeSkip_Panic(t *testing.T) {
+func Test_FuncWrap_InvokeSkip_Panic(t *testing.T) {
 	// Arrange
 	fn := func() { panic("test panic") }
 	fw := args.NewFuncWrap.Default(fn)
@@ -214,7 +214,7 @@ func Test_Cov9_FuncWrap_InvokeSkip_Panic(t *testing.T) {
 // ── funcDetector: GetFuncWrap with FuncWrapAny directly ──
 // Covers funcDetector.go L16-17
 
-func Test_Cov9_FuncDetector_DirectFuncWrap(t *testing.T) {
+func Test_FuncDetector_DirectFuncWrap(t *testing.T) {
 	// Arrange
 	fn := func() {}
 	fw := args.NewFuncWrap.Default(fn)
@@ -238,7 +238,7 @@ func Test_Cov9_FuncDetector_DirectFuncWrap(t *testing.T) {
 // ── funcDetector: GetFuncWrap with raw function ──
 // Covers funcDetector.go L18-22 (default)
 
-func Test_Cov9_FuncDetector_RawFunc(t *testing.T) {
+func Test_FuncDetector_RawFunc(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s }
 
@@ -261,7 +261,7 @@ func Test_Cov9_FuncDetector_RawFunc(t *testing.T) {
 // ── newFuncWrapCreator: MethodToFunc nil method ──
 // Covers newFuncWrapCreator.go L101-106
 
-func Test_Cov9_NewFuncWrap_MethodToFunc_Nil(t *testing.T) {
+func Test_NewFuncWrap_MethodToFunc_Nil(t *testing.T) {
 	// Arrange
 	fw, err := args.NewFuncWrap.MethodToFunc(nil)
 
@@ -287,7 +287,7 @@ type cov9TestStruct struct{}
 func (s *cov9TestStruct) Hello() string { return "hello" }
 func (s *cov9TestStruct) World() string { return "world" }
 
-func Test_Cov9_NewFuncWrap_StructToMap(t *testing.T) {
+func Test_NewFuncWrap_StructToMap(t *testing.T) {
 	// Arrange
 	s := &cov9TestStruct{}
 	fm, err := args.NewFuncWrap.StructToMap(s)
@@ -309,7 +309,7 @@ func Test_Cov9_NewFuncWrap_StructToMap(t *testing.T) {
 // ── OneFunc: InvokeMust / InvokeWithValidArgs / InvokeArgs ──
 // Covers OneFunc.go L84-105
 
-func Test_Cov9_OneFunc_InvokeMust(t *testing.T) {
+func Test_OneFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	of := &args.OneFunc[string]{
 		First:    "hi",
@@ -326,7 +326,7 @@ func Test_Cov9_OneFunc_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OneFunc InvokeMust returns result -- valid call", actual)
 }
 
-func Test_Cov9_OneFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_OneFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	of := &args.OneFunc[string]{
 		First:    "hi",
@@ -349,7 +349,7 @@ func Test_Cov9_OneFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OneFunc InvokeWithValidArgs returns result", actual)
 }
 
-func Test_Cov9_OneFunc_InvokeArgs(t *testing.T) {
+func Test_OneFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	of := &args.OneFunc[string]{
 		First:    "hi",
@@ -375,7 +375,7 @@ func Test_Cov9_OneFunc_InvokeArgs(t *testing.T) {
 // ── Holder: InvokeMust / InvokeWithValidArgs / InvokeArgs ──
 // Covers Holder.go L188-204
 
-func Test_Cov9_Holder_InvokeMust(t *testing.T) {
+func Test_Holder_InvokeMust(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{
 		WorkFunc: func() string { return "test" },
@@ -391,7 +391,7 @@ func Test_Cov9_Holder_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder InvokeMust returns result", actual)
 }
 
-func Test_Cov9_Holder_InvokeWithValidArgs(t *testing.T) {
+func Test_Holder_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{
 		WorkFunc: func() string { return "test" },
@@ -413,7 +413,7 @@ func Test_Cov9_Holder_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Holder InvokeWithValidArgs returns result", actual)
 }
 
-func Test_Cov9_Holder_InvokeArgs(t *testing.T) {
+func Test_Holder_InvokeArgs(t *testing.T) {
 	// Arrange
 	h := &args.Holder[any]{
 		WorkFunc: func() string { return "test" },
@@ -438,7 +438,7 @@ func Test_Cov9_Holder_InvokeArgs(t *testing.T) {
 // ── Dynamic: Invoke / InvokeMust / InvokeWithValidArgs ──
 // Covers Dynamic.go L51,76-94
 
-func Test_Cov9_Dynamic_Invoke(t *testing.T) {
+func Test_Dynamic_Invoke(t *testing.T) {
 	// Arrange
 	fn := func() string { return "dynamic" }
 	d := &args.Dynamic[string]{
@@ -461,7 +461,7 @@ func Test_Cov9_Dynamic_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Invoke returns result", actual)
 }
 
-func Test_Cov9_Dynamic_InvokeMust(t *testing.T) {
+func Test_Dynamic_InvokeMust(t *testing.T) {
 	// Arrange
 	fn := func() string { return "dynamic" }
 	d := &args.Dynamic[string]{
@@ -478,7 +478,7 @@ func Test_Cov9_Dynamic_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic InvokeMust returns result", actual)
 }
 
-func Test_Cov9_Dynamic_InvokeWithValidArgs(t *testing.T) {
+func Test_Dynamic_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	fn := func() string { return "dynamic" }
 	d := &args.Dynamic[string]{

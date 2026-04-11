@@ -9,7 +9,7 @@ import (
 
 // ── FileWithLine nil-safety ──
 
-func Test_Cov_FileWithLine_NilSafe(t *testing.T) {
+func Test_FileWithLine_NilSafe(t *testing.T) {
 	for caseIndex, tc := range coverageFileWithLineNilSafeCases {
 		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
@@ -18,7 +18,7 @@ func Test_Cov_FileWithLine_NilSafe(t *testing.T) {
 
 // ── Trace nil-safety ──
 
-func Test_Cov_Trace_NilSafe(t *testing.T) {
+func Test_Trace_NilSafe(t *testing.T) {
 	for caseIndex, tc := range coverageTraceNilSafeCases {
 		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
@@ -27,7 +27,7 @@ func Test_Cov_Trace_NilSafe(t *testing.T) {
 
 // ── FileWithLine value tests ──
 
-func Test_Cov_FileWithLine_Value(t *testing.T) {
+func Test_FileWithLine_Value(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/tmp/test.go",
@@ -104,7 +104,7 @@ func Test_Cov_FileWithLine_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
-func Test_Cov_FileWithLine_ParseJson(t *testing.T) {
+func Test_FileWithLine_ParseJson(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/tmp/test.go",
@@ -127,7 +127,7 @@ func Test_Cov_FileWithLine_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "parsed FilePath mismatch", actual)
 }
 
-func Test_Cov_FileWithLine_ParseJsonMust(t *testing.T) {
+func Test_FileWithLine_ParseJsonMust(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/tmp/test.go",
@@ -146,7 +146,7 @@ func Test_Cov_FileWithLine_ParseJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust FilePath mismatch", actual)
 }
 
-func Test_Cov_FileWithLine_JsonParseSelfInject(t *testing.T) {
+func Test_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	fwl := &codestack.FileWithLine{
 		FilePath: "/tmp/test.go",
@@ -167,7 +167,7 @@ func Test_Cov_FileWithLine_JsonParseSelfInject(t *testing.T) {
 
 // ── Trace value tests ──
 
-func Test_Cov_Trace_Value(t *testing.T) {
+func Test_Trace_Value(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -218,7 +218,7 @@ func Test_Cov_Trace_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
-func Test_Cov_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -233,7 +233,7 @@ func Test_Cov_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringUsingFmt should not be empty", actual)
 }
 
-func Test_Cov_Trace_Clone(t *testing.T) {
+func Test_Trace_Clone(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -251,7 +251,7 @@ func Test_Cov_Trace_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
-func Test_Cov_Trace_Json(t *testing.T) {
+func Test_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -287,7 +287,7 @@ func Test_Cov_Trace_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
-func Test_Cov_Trace_ParseJson(t *testing.T) {
+func Test_Trace_ParseJson(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.Json()
@@ -307,7 +307,7 @@ func Test_Cov_Trace_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "parsed PackageName should not be empty", actual)
 }
 
-func Test_Cov_Trace_ParseJsonMust(t *testing.T) {
+func Test_Trace_ParseJsonMust(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.Json()
@@ -323,7 +323,7 @@ func Test_Cov_Trace_ParseJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust PackageName mismatch", actual)
 }
 
-func Test_Cov_Trace_JsonParseSelfInject(t *testing.T) {
+func Test_Trace_JsonParseSelfInject(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	jsonResult := trace.Json()
@@ -339,7 +339,7 @@ func Test_Cov_Trace_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
-func Test_Cov_Trace_Dispose(t *testing.T) {
+func Test_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 
@@ -356,7 +356,7 @@ func Test_Cov_Trace_Dispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsOkay should be false after Dispose", actual)
 }
 
-func Test_Cov_Trace_HasIssues(t *testing.T) {
+func Test_Trace_HasIssues(t *testing.T) {
 	// Arrange
 	trace := codestack.Trace{}
 
@@ -371,7 +371,7 @@ func Test_Cov_Trace_HasIssues(t *testing.T) {
 
 // ── TraceCollection tests (unique coverage methods) ──
 
-func Test_Cov_TraceCollection_NewAndBasic(t *testing.T) {
+func Test_TraceCollection_NewAndBasic(t *testing.T) {
 	// Arrange — use NewStacks.DefaultCount to avoid double-skip in New.StackTrace.Default
 	tc := codestack.New.StackTrace.DefaultCount(1)
 
@@ -407,7 +407,7 @@ func Test_Cov_TraceCollection_NewAndBasic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LastOrDefault should have PackageName", actual)
 }
 
-func Test_Cov_TraceCollection_Strings(t *testing.T) {
+func Test_TraceCollection_Strings(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 
@@ -446,7 +446,7 @@ func Test_Cov_TraceCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection Strings -- all methods", actual)
 }
 
-func Test_Cov_TraceCollection_SkipTake(t *testing.T) {
+func Test_TraceCollection_SkipTake(t *testing.T) {
 	// Arrange
 	tc := codestack.New.StackTrace.SkipNone()
 	length := tc.Length()
@@ -498,7 +498,7 @@ func Test_Cov_TraceCollection_SkipTake(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeLimitCollection should return 1", actual)
 }
 
-func Test_Cov_TraceCollection_FileWithLines(t *testing.T) {
+func Test_TraceCollection_FileWithLines(t *testing.T) {
 	// Arrange
 	// Use manually-constructed trace to avoid skip-count issues
 	tc := codestack.TraceCollection{}
@@ -529,7 +529,7 @@ func Test_Cov_TraceCollection_FileWithLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinFileWithLinesStrings should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_Json(t *testing.T) {
+func Test_TraceCollection_Json(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.Func", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -574,7 +574,7 @@ func Test_Cov_TraceCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CsvStrings should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_Reverse(t *testing.T) {
+func Test_TraceCollection_Reverse(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -588,7 +588,7 @@ func Test_Cov_TraceCollection_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Reverse should preserve length", actual)
 }
 
-func Test_Cov_TraceCollection_IsEqual(t *testing.T) {
+func Test_TraceCollection_IsEqual(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -601,7 +601,7 @@ func Test_Cov_TraceCollection_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "collection should be equal to itself", actual)
 }
 
-func Test_Cov_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -619,7 +619,7 @@ func Test_Cov_TraceCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
-func Test_Cov_TraceCollection_ClearDispose(t *testing.T) {
+func Test_TraceCollection_ClearDispose(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -633,7 +633,7 @@ func Test_Cov_TraceCollection_ClearDispose(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be empty after Clear", actual)
 }
 
-func Test_Cov_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()
@@ -647,7 +647,7 @@ func Test_Cov_TraceCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not be empty after Add", actual)
 }
 
-func Test_Cov_TraceCollection_Paging(t *testing.T) {
+func Test_TraceCollection_Paging(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	for i := 0; i < 10; i++ {
@@ -663,7 +663,7 @@ func Test_Cov_TraceCollection_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPagesSize should return at least 1", actual)
 }
 
-func Test_Cov_TraceCollection_CodeStacksString(t *testing.T) {
+func Test_TraceCollection_CodeStacksString(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -681,7 +681,7 @@ func Test_Cov_TraceCollection_CodeStacksString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CodeStacksStringLimit should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_StringsUsingFmt(t *testing.T) {
+func Test_TraceCollection_StringsUsingFmt(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -703,7 +703,7 @@ func Test_Cov_TraceCollection_StringsUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinUsingFmt should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_JoinShortStrings(t *testing.T) {
+func Test_TraceCollection_JoinShortStrings(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -717,7 +717,7 @@ func Test_Cov_TraceCollection_JoinShortStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinShortStrings should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_JoinCsvLine(t *testing.T) {
+func Test_TraceCollection_JoinCsvLine(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -731,7 +731,7 @@ func Test_Cov_TraceCollection_JoinCsvLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JoinCsvLine should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -747,7 +747,7 @@ func Test_Cov_TraceCollection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasIndex 9999 should be false", actual)
 }
 
-func Test_Cov_TraceCollection_Serializer(t *testing.T) {
+func Test_TraceCollection_Serializer(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -764,7 +764,7 @@ func Test_Cov_TraceCollection_Serializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serializer should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_StackTracesBytes(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -778,7 +778,7 @@ func Test_Cov_TraceCollection_StackTracesBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StackTracesBytes should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_ParseJson(t *testing.T) {
+func Test_TraceCollection_ParseJson(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -795,7 +795,7 @@ func Test_Cov_TraceCollection_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
-func Test_Cov_TraceCollection_Dispose(t *testing.T) {
+func Test_TraceCollection_Dispose(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -811,7 +811,7 @@ func Test_Cov_TraceCollection_Dispose(t *testing.T) {
 
 // ── NameOf tests ──
 
-func Test_Cov_NameOf_Method(t *testing.T) {
+func Test_NameOf_Method(t *testing.T) {
 	// Act
 	name := codestack.NameOf.MethodByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Method_Cov")
 
@@ -821,7 +821,7 @@ func Test_Cov_NameOf_Method(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Method should not be empty", actual)
 }
 
-func Test_Cov_NameOf_Package(t *testing.T) {
+func Test_NameOf_Package(t *testing.T) {
 	// Act
 	name := codestack.NameOf.PackageByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Package_Cov")
 
@@ -831,7 +831,7 @@ func Test_Cov_NameOf_Package(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Package should not be empty", actual)
 }
 
-func Test_Cov_NameOf_All(t *testing.T) {
+func Test_NameOf_All(t *testing.T) {
 	// Act
 	full, pkg, method := codestack.NameOf.All("github.com/alimtvnetwork/core/codestack.Test_NameOf_All_Cov")
 
@@ -851,7 +851,7 @@ func Test_Cov_NameOf_All(t *testing.T) {
 
 // ── newCreator tests ──
 
-func Test_Cov_NewCreator_SkipOne(t *testing.T) {
+func Test_NewCreator_SkipOne(t *testing.T) {
 	// Act
 	trace := codestack.New.SkipOne()
 
@@ -861,7 +861,7 @@ func Test_Cov_NewCreator_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SkipOne PackageName should not be empty", actual)
 }
 
-func Test_Cov_NewCreator_Ptr(t *testing.T) {
+func Test_NewCreator_Ptr(t *testing.T) {
 	// Act
 	trace := codestack.New.Ptr(0)
 
@@ -873,66 +873,66 @@ func Test_Cov_NewCreator_Ptr(t *testing.T) {
 
 // ── StackTrace tests ──
 
-func Test_Cov_StackTrace_DefaultCount(t *testing.T) {
+func Test_StackTrace_DefaultCount(t *testing.T) {
 	// Exercise the code path — result may be empty due to integrated test call depth
 	tc := codestack.New.StackTrace.DefaultCount(1)
 	_ = tc.Length()
 }
 
-func Test_Cov_StackTrace_SkipOne(t *testing.T) {
+func Test_StackTrace_SkipOne(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipOne()
 	_ = tc.Length()
 }
 
-func Test_Cov_StackTrace_SkipNone(t *testing.T) {
+func Test_StackTrace_SkipNone(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipNone()
 	_ = tc.Length()
 }
 
 // ── StacksTo tests ──
 
-func Test_Cov_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Exercise code path; result may be empty from integrated test
 	result := codestack.StacksTo.String(0, 5)
 	_ = result
 }
 
-func Test_Cov_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault(t *testing.T) {
 	result := codestack.StacksTo.StringDefault()
 	_ = result
 }
 
-func Test_Cov_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes(t *testing.T) {
 	result := codestack.StacksTo.Bytes(0)
 	_ = result
 }
 
-func Test_Cov_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault(t *testing.T) {
 	result := codestack.StacksTo.BytesDefault()
 	_ = result
 }
 
-func Test_Cov_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString(t *testing.T) {
 	// JsonString can panic if stack is empty due to HandleError; recover defensively
 	defer func() { recover() }()
 	result := codestack.StacksTo.JsonString(0)
 	_ = result
 }
 
-func Test_Cov_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	defer func() { recover() }()
 	result := codestack.StacksTo.JsonStringDefault()
 	_ = result
 }
 
-func Test_Cov_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount(t *testing.T) {
 	result := codestack.StacksTo.StringNoCount(0)
 	_ = result
 }
 
 // ── File getter tests ──
 
-func Test_Cov_File_Name(t *testing.T) {
+func Test_File_Name(t *testing.T) {
 	// Act
 	name := codestack.File.Name(0)
 
@@ -942,7 +942,7 @@ func Test_Cov_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name should not be empty", actual)
 }
 
-func Test_Cov_File_Path(t *testing.T) {
+func Test_File_Path(t *testing.T) {
 	// Act
 	path := codestack.File.Path(0)
 
@@ -954,7 +954,7 @@ func Test_Cov_File_Path(t *testing.T) {
 
 // ── Dir getter tests ──
 
-func Test_Cov_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Act
 	dir := codestack.Dir.CurDir()
 
@@ -964,7 +964,7 @@ func Test_Cov_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir should not be empty", actual)
 }
 
-func Test_Cov_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Act
 	dir := codestack.Dir.CurDirJoin("subdir")
 
@@ -974,7 +974,7 @@ func Test_Cov_Dir_CurDirJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDirJoin should not be empty", actual)
 }
 
-func Test_Cov_TraceCollection_Concat(t *testing.T) {
+func Test_TraceCollection_Concat(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -993,7 +993,7 @@ func Test_Cov_TraceCollection_Concat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConcatNewPtr should not be nil", actual)
 }
 
-func Test_Cov_TraceCollection_Filters(t *testing.T) {
+func Test_TraceCollection_Filters(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -1015,7 +1015,7 @@ func Test_Cov_TraceCollection_Filters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FilterWithLimit should return 1 item", actual)
 }
 
-func Test_Cov_TraceCollection_AsBindings(t *testing.T) {
+func Test_TraceCollection_AsBindings(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})

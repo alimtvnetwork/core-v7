@@ -9,7 +9,7 @@ import (
 
 // ── Trace methods ──
 
-func Test_Cov7_Trace_Message(t *testing.T) {
+func Test_Trace_Message(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -27,7 +27,7 @@ func Test_Cov7_Trace_Message(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Message and ShortString", actual)
 }
 
-func Test_Cov7_Trace_MessageCached(t *testing.T) {
+func Test_Trace_MessageCached(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act — call twice to hit cache
@@ -47,7 +47,7 @@ func Test_Cov7_Trace_MessageCached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- cached Message", actual)
 }
 
-func Test_Cov7_Trace_NilChecks(t *testing.T) {
+func Test_Trace_NilChecks(t *testing.T) {
 	// Arrange
 	var nilTrace *codestack.Trace
 	trace := codestack.New.Default()
@@ -65,7 +65,7 @@ func Test_Cov7_Trace_NilChecks(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- nil checks", actual)
 }
 
-func Test_Cov7_Trace_FileInfo(t *testing.T) {
+func Test_Trace_FileInfo(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -89,7 +89,7 @@ func Test_Cov7_Trace_FileInfo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- file info", actual)
 }
 
-func Test_Cov7_Trace_StringUsingFmt(t *testing.T) {
+func Test_Trace_StringUsingFmt(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -100,7 +100,7 @@ func Test_Cov7_Trace_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- StringUsingFmt", actual)
 }
 
-func Test_Cov7_Trace_CloneDispose(t *testing.T) {
+func Test_Trace_CloneDispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -121,7 +121,7 @@ func Test_Cov7_Trace_CloneDispose(t *testing.T) {
 	clonedPtr.Dispose()
 }
 
-func Test_Cov7_Trace_ClonePtr_Nil(t *testing.T) {
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	// Arrange
 	var nilTrace *codestack.Trace
 	// Act
@@ -132,7 +132,7 @@ func Test_Cov7_Trace_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
 }
 
-func Test_Cov7_Trace_Json(t *testing.T) {
+func Test_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -151,7 +151,7 @@ func Test_Cov7_Trace_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Json", actual)
 }
 
-func Test_Cov7_Trace_AsFileLiner(t *testing.T) {
+func Test_Trace_AsFileLiner(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act
@@ -164,7 +164,7 @@ func Test_Cov7_Trace_AsFileLiner(t *testing.T) {
 
 // ── FileWithLine ──
 
-func Test_Cov7_FileWithLine_Methods(t *testing.T) {
+func Test_FileWithLine_Methods(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/test.go", Line: 42}
 	// Act & Assert
@@ -184,7 +184,7 @@ func Test_Cov7_FileWithLine_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- methods", actual)
 }
 
-func Test_Cov7_FileWithLine_Nil(t *testing.T) {
+func Test_FileWithLine_Nil(t *testing.T) {
 	// Arrange
 	var fwl *codestack.FileWithLine
 	// Act & Assert
@@ -201,7 +201,7 @@ func Test_Cov7_FileWithLine_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- nil", actual)
 }
 
-func Test_Cov7_FileWithLine_StringUsingFmt(t *testing.T) {
+func Test_FileWithLine_StringUsingFmt(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/test.go", Line: 1}
 	// Act
@@ -212,7 +212,7 @@ func Test_Cov7_FileWithLine_StringUsingFmt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- StringUsingFmt", actual)
 }
 
-func Test_Cov7_FileWithLine_Json(t *testing.T) {
+func Test_FileWithLine_Json(t *testing.T) {
 	// Arrange
 	fwl := codestack.FileWithLine{FilePath: "/test.go", Line: 1}
 	// Act
@@ -236,7 +236,7 @@ func Test_Cov7_FileWithLine_Json(t *testing.T) {
 
 // ── TraceCollection basic methods ──
 
-func Test_Cov7_TraceCollection_Empty(t *testing.T) {
+func Test_TraceCollection_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	// Assert
@@ -253,7 +253,7 @@ func Test_Cov7_TraceCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- empty", actual)
 }
 
-func Test_Cov7_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	trace := codestack.New.Default()
@@ -271,7 +271,7 @@ func Test_Cov7_TraceCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Add", actual)
 }
 
-func Test_Cov7_TraceCollection_Adds(t *testing.T) {
+func Test_TraceCollection_Adds(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	t1 := codestack.New.Default()
@@ -284,7 +284,7 @@ func Test_Cov7_TraceCollection_Adds(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Adds", actual)
 }
 
-func Test_Cov7_TraceCollection_Adds_Empty(t *testing.T) {
+func Test_TraceCollection_Adds_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	// Act
@@ -295,7 +295,7 @@ func Test_Cov7_TraceCollection_Adds_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- Adds empty", actual)
 }
 
-func Test_Cov7_TraceCollection_AddsIf(t *testing.T) {
+func Test_TraceCollection_AddsIf(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	t1 := codestack.New.Default()
@@ -316,7 +316,7 @@ func Test_Cov7_TraceCollection_AddsIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- AddsIf", actual)
 }
 
-func Test_Cov7_TraceCollection_FirstLast(t *testing.T) {
+func Test_TraceCollection_FirstLast(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	t1 := codestack.Trace{PackageName: "first"}
@@ -336,7 +336,7 @@ func Test_Cov7_TraceCollection_FirstLast(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- First/Last", actual)
 }
 
-func Test_Cov7_TraceCollection_FirstLastOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_FirstLastOrDefault_Empty(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	// Assert
@@ -351,7 +351,7 @@ func Test_Cov7_TraceCollection_FirstLastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- FirstLast empty", actual)
 }
 
-func Test_Cov7_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{})
@@ -367,7 +367,7 @@ func Test_Cov7_TraceCollection_HasIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- HasIndex", actual)
 }
 
-func Test_Cov7_TraceCollection_Strings(t *testing.T) {
+func Test_TraceCollection_Strings(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.Method", FilePath: "/f.go", Line: 1, IsOkay: true})
@@ -385,7 +385,7 @@ func Test_Cov7_TraceCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Strings", actual)
 }
 
-func Test_Cov7_TraceCollection_Nil(t *testing.T) {
+func Test_TraceCollection_Nil(t *testing.T) {
 	// Arrange
 	var tc *codestack.TraceCollection
 	// Assert
@@ -394,7 +394,7 @@ func Test_Cov7_TraceCollection_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- nil Length", actual)
 }
 
-func Test_Cov7_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
@@ -412,7 +412,7 @@ func Test_Cov7_TraceCollection_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Clone", actual)
 }
 
-func Test_Cov7_TraceCollection_ConcatNew(t *testing.T) {
+func Test_TraceCollection_ConcatNew(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -431,7 +431,7 @@ func Test_Cov7_TraceCollection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ConcatNew", actual)
 }
 
-func Test_Cov7_TraceCollection_Skip(t *testing.T) {
+func Test_TraceCollection_Skip(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -449,7 +449,7 @@ func Test_Cov7_TraceCollection_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Skip", actual)
 }
 
-func Test_Cov7_TraceCollection_Take(t *testing.T) {
+func Test_TraceCollection_Take(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -461,7 +461,7 @@ func Test_Cov7_TraceCollection_Take(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Take", actual)
 }
 
-func Test_Cov7_TraceCollection_Filter(t *testing.T) {
+func Test_TraceCollection_Filter(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(
@@ -478,7 +478,7 @@ func Test_Cov7_TraceCollection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Filter", actual)
 }
 
-func Test_Cov7_TraceCollection_GetPagesSize(t *testing.T) {
+func Test_TraceCollection_GetPagesSize(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	for i := 0; i < 15; i++ {
@@ -500,7 +500,7 @@ func Test_Cov7_TraceCollection_GetPagesSize(t *testing.T) {
 
 // ── currentNameOf ──
 
-func Test_Cov7_NameOf_All(t *testing.T) {
+func Test_NameOf_All(t *testing.T) {
 	// Act
 	full, pkg, method := codestack.NameOf.All("github.com/user/repo/pkg.Method")
 	emptyFull, emptyPkg, emptyMethod := codestack.NameOf.All("")
@@ -516,7 +516,7 @@ func Test_Cov7_NameOf_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NameOf_Method(t *testing.T) {
+func Test_NameOf_Method(t *testing.T) {
 	// Act
 	method := codestack.NameOf.Method()
 	// Assert
@@ -525,7 +525,7 @@ func Test_Cov7_NameOf_Method(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Method returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NameOf_Package(t *testing.T) {
+func Test_NameOf_Package(t *testing.T) {
 	// Act
 	pkg := codestack.NameOf.Package()
 	// Assert
@@ -534,7 +534,7 @@ func Test_Cov7_NameOf_Package(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.Package returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NameOf_MethodByFullName(t *testing.T) {
+func Test_NameOf_MethodByFullName(t *testing.T) {
 	// Act
 	result := codestack.NameOf.MethodByFullName("github.com/user/repo/pkg.MyFunc")
 	// Assert
@@ -543,7 +543,7 @@ func Test_Cov7_NameOf_MethodByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.MethodByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NameOf_PackageByFullName(t *testing.T) {
+func Test_NameOf_PackageByFullName(t *testing.T) {
 	// Act
 	result := codestack.NameOf.PackageByFullName("github.com/user/repo/pkg.MyFunc")
 	// Assert
@@ -552,7 +552,7 @@ func Test_Cov7_NameOf_PackageByFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.PackageByFullName returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NameOf_JoinPackageNameWithRelative(t *testing.T) {
+func Test_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	// Act
 	result := codestack.NameOf.JoinPackageNameWithRelative("github.com/user/repo/pkg.X", "SubPkg.Method")
 	// Assert
@@ -561,7 +561,7 @@ func Test_Cov7_NameOf_JoinPackageNameWithRelative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NameOf.JoinPackageNameWithRelative returns non-empty -- with args", actual)
 }
 
-func Test_Cov7_NameOf_CurrentFuncFullPath(t *testing.T) {
+func Test_NameOf_CurrentFuncFullPath(t *testing.T) {
 	// Act
 	result := codestack.NameOf.CurrentFuncFullPath("github.com/user/repo/pkg.Func")
 	// Assert
@@ -572,7 +572,7 @@ func Test_Cov7_NameOf_CurrentFuncFullPath(t *testing.T) {
 
 // ── Dir / File ──
 
-func Test_Cov7_Dir_CurDir(t *testing.T) {
+func Test_Dir_CurDir(t *testing.T) {
 	// Act
 	dir := codestack.Dir.CurDir()
 	// Assert
@@ -581,7 +581,7 @@ func Test_Cov7_Dir_CurDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDir returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Dir_RepoDir(t *testing.T) {
+func Test_Dir_RepoDir(t *testing.T) {
 	// Act
 	repo := codestack.Dir.RepoDir()
 	// Assert
@@ -590,7 +590,7 @@ func Test_Cov7_Dir_RepoDir(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.RepoDir returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Dir_RepoDirJoin(t *testing.T) {
+func Test_Dir_RepoDirJoin(t *testing.T) {
 	// Act
 	joined := codestack.Dir.RepoDirJoin("sub", "path")
 	// Assert
@@ -599,7 +599,7 @@ func Test_Cov7_Dir_RepoDirJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.RepoDirJoin returns correct value -- with args", actual)
 }
 
-func Test_Cov7_Dir_CurDirJoin(t *testing.T) {
+func Test_Dir_CurDirJoin(t *testing.T) {
 	// Act
 	joined := codestack.Dir.CurDirJoin("sub")
 	// Assert
@@ -608,7 +608,7 @@ func Test_Cov7_Dir_CurDirJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dir.CurDirJoin returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_CurrentFilePath(t *testing.T) {
+func Test_File_CurrentFilePath(t *testing.T) {
 	// Act
 	fp := codestack.File.CurrentFilePath()
 	// Assert
@@ -617,7 +617,7 @@ func Test_Cov7_File_CurrentFilePath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.CurrentFilePath returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_Name(t *testing.T) {
+func Test_File_Name(t *testing.T) {
 	// Act
 	name := codestack.File.Name(0)
 	// Assert
@@ -626,7 +626,7 @@ func Test_Cov7_File_Name(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Name returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_Path(t *testing.T) {
+func Test_File_Path(t *testing.T) {
 	// Act
 	fp := codestack.File.Path(0)
 	// Assert
@@ -635,7 +635,7 @@ func Test_Cov7_File_Path(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.Path returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_PathLineSep(t *testing.T) {
+func Test_File_PathLineSep(t *testing.T) {
 	// Act
 	fp, line := codestack.File.PathLineSep(0)
 	// Assert
@@ -650,7 +650,7 @@ func Test_Cov7_File_PathLineSep(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSep returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_PathLineSepDefault(t *testing.T) {
+func Test_File_PathLineSepDefault(t *testing.T) {
 	// Act
 	fp, line := codestack.File.PathLineSepDefault()
 	// Assert
@@ -665,7 +665,7 @@ func Test_Cov7_File_PathLineSepDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.PathLineSepDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov7_File_FilePathWithLineString(t *testing.T) {
+func Test_File_FilePathWithLineString(t *testing.T) {
 	// Act
 	result := codestack.File.FilePathWithLineString(0)
 	// Assert
@@ -674,7 +674,7 @@ func Test_Cov7_File_FilePathWithLineString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "File.FilePathWithLineString returns non-empty -- with args", actual)
 }
 
-func Test_Cov7_File_PathLineStringDefault(t *testing.T) {
+func Test_File_PathLineStringDefault(t *testing.T) {
 	// Act
 	result := codestack.File.PathLineStringDefault()
 	// Assert
@@ -685,7 +685,7 @@ func Test_Cov7_File_PathLineStringDefault(t *testing.T) {
 
 // ── StacksTo ──
 
-func Test_Cov7_StacksTo_String(t *testing.T) {
+func Test_StacksTo_String(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.String(0, 3)
 	// Assert
@@ -694,7 +694,7 @@ func Test_Cov7_StacksTo_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.String returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_StringDefault(t *testing.T) {
+func Test_StacksTo_StringDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.StringDefault()
 	// Assert
@@ -703,7 +703,7 @@ func Test_Cov7_StacksTo_StringDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_StringNoCount(t *testing.T) {
+func Test_StacksTo_StringNoCount(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.StringNoCount(0)
 	// Assert
@@ -712,7 +712,7 @@ func Test_Cov7_StacksTo_StringNoCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.StringNoCount returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_Bytes(t *testing.T) {
+func Test_StacksTo_Bytes(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.Bytes(0)
 	// Assert
@@ -721,7 +721,7 @@ func Test_Cov7_StacksTo_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.Bytes returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_BytesDefault(t *testing.T) {
+func Test_StacksTo_BytesDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.BytesDefault()
 	// Assert
@@ -730,7 +730,7 @@ func Test_Cov7_StacksTo_BytesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.BytesDefault returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_JsonString(t *testing.T) {
+func Test_StacksTo_JsonString(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.JsonString(0)
 	// Assert
@@ -739,7 +739,7 @@ func Test_Cov7_StacksTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StacksTo.JsonString returns correct value -- with args", actual)
 }
 
-func Test_Cov7_StacksTo_JsonStringDefault(t *testing.T) {
+func Test_StacksTo_JsonStringDefault(t *testing.T) {
 	// Act
 	result := codestack.StacksTo.JsonStringDefault()
 	// Assert
@@ -750,7 +750,7 @@ func Test_Cov7_StacksTo_JsonStringDefault(t *testing.T) {
 
 // ── New.StackTrace ──
 
-func Test_Cov7_NewStackTrace_SkipNone(t *testing.T) {
+func Test_NewStackTrace_SkipNone(t *testing.T) {
 	// Act
 	tc := codestack.New.StackTrace.SkipNone()
 	// Assert
@@ -759,7 +759,7 @@ func Test_Cov7_NewStackTrace_SkipNone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.StackTrace.SkipNone returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NewStackTrace_SkipOne(t *testing.T) {
+func Test_NewStackTrace_SkipOne(t *testing.T) {
 	// Act
 	tc := codestack.New.StackTrace.SkipOne()
 	// Assert
@@ -768,7 +768,7 @@ func Test_Cov7_NewStackTrace_SkipOne(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New.StackTrace.SkipOne returns correct value -- with args", actual)
 }
 
-func Test_Cov7_NewStackTrace_DefaultCount(t *testing.T) {
+func Test_NewStackTrace_DefaultCount(t *testing.T) {
 	// Act
 	tc := codestack.New.StackTrace.DefaultCount(0)
 	// Assert
@@ -779,7 +779,7 @@ func Test_Cov7_NewStackTrace_DefaultCount(t *testing.T) {
 
 // ── newTraceCollection ──
 
-func Test_Cov7_TraceCollection_SkipCollection(t *testing.T) {
+func Test_TraceCollection_SkipCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -791,7 +791,7 @@ func Test_Cov7_TraceCollection_SkipCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SkipCollection", actual)
 }
 
-func Test_Cov7_TraceCollection_TakeCollection(t *testing.T) {
+func Test_TraceCollection_TakeCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -803,7 +803,7 @@ func Test_Cov7_TraceCollection_TakeCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- TakeCollection", actual)
 }
 
-func Test_Cov7_TraceCollection_LimitCollection(t *testing.T) {
+func Test_TraceCollection_LimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -815,7 +815,7 @@ func Test_Cov7_TraceCollection_LimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- LimitCollection", actual)
 }
 
-func Test_Cov7_TraceCollection_SafeLimitCollection(t *testing.T) {
+func Test_TraceCollection_SafeLimitCollection(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
@@ -827,7 +827,7 @@ func Test_Cov7_TraceCollection_SafeLimitCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- SafeLimitCollection", actual)
 }
 
-func Test_Cov7_TraceCollection_Dynamics(t *testing.T) {
+func Test_TraceCollection_Dynamics(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
@@ -851,7 +851,7 @@ func Test_Cov7_TraceCollection_Dynamics(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- dynamics", actual)
 }
 
-func Test_Cov7_TraceCollection_SkipDynamic_AllSkipped(t *testing.T) {
+func Test_TraceCollection_SkipDynamic_AllSkipped(t *testing.T) {
 	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{})

@@ -24,7 +24,7 @@ func helperVoid()                           {}
 
 // ── FuncWrap.IsEquals branches ──
 
-func Test_Cov4_FuncWrap_IsEquals_DiffName(t *testing.T) {
+func Test_FuncWrap_IsEquals_DiffName(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(helperAdd)
 	fw2 := args.NewFuncWrap.Default(helperRetBool)
@@ -38,7 +38,7 @@ func Test_Cov4_FuncWrap_IsEquals_DiffName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEquals returns false -- different names", actual)
 }
 
-func Test_Cov4_FuncWrap_IsEquals_DiffValidity(t *testing.T) {
+func Test_FuncWrap_IsEquals_DiffValidity(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(helperAdd)
 	fw2 := args.NewFuncWrap.Invalid()
@@ -52,7 +52,7 @@ func Test_Cov4_FuncWrap_IsEquals_DiffValidity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEquals returns false -- different validity", actual)
 }
 
-func Test_Cov4_FuncWrap_IsEquals_DiffArgsCount(t *testing.T) {
+func Test_FuncWrap_IsEquals_DiffArgsCount(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(helperAdd)
 	fw2 := args.NewFuncWrap.Default(helperRetBool)
@@ -66,7 +66,7 @@ func Test_Cov4_FuncWrap_IsEquals_DiffArgsCount(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEquals returns false -- different args count", actual)
 }
 
-func Test_Cov4_FuncWrap_IsEquals_DiffReturnLen(t *testing.T) {
+func Test_FuncWrap_IsEquals_DiffReturnLen(t *testing.T) {
 	// Arrange
 	fw1 := args.NewFuncWrap.Default(helperRetBool)
 	fw2 := args.NewFuncWrap.Default(helperRetAnyErr)
@@ -82,7 +82,7 @@ func Test_Cov4_FuncWrap_IsEquals_DiffReturnLen(t *testing.T) {
 
 // ── FuncWrap: InvokeMust, InvokeFirstAndError, GetFirstResponseOfInvoke, InvokeResultOfIndex ──
 
-func Test_Cov4_FuncWrap_InvokeMust_Valid(t *testing.T) {
+func Test_FuncWrap_InvokeMust_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperAdd)
 
@@ -95,7 +95,7 @@ func Test_Cov4_FuncWrap_InvokeMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeMust returns correct -- valid func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeFirstAndError_Valid(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAnyErr)
 
@@ -116,7 +116,7 @@ func Test_Cov4_FuncWrap_InvokeFirstAndError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeFirstAndError returns correct -- valid func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeFirstAndError_SingleReturn(t *testing.T) {
+func Test_FuncWrap_InvokeFirstAndError_SingleReturn(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetBool)
 
@@ -129,7 +129,7 @@ func Test_Cov4_FuncWrap_InvokeFirstAndError_SingleReturn(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeFirstAndError returns error -- single return func", actual)
 }
 
-func Test_Cov4_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
+func Test_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetString)
 
@@ -148,7 +148,7 @@ func Test_Cov4_FuncWrap_GetFirstResponseOfInvoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetFirstResponseOfInvoke returns correct -- string func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeResultOfIndex(t *testing.T) {
+func Test_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAnyErr)
 
@@ -167,7 +167,7 @@ func Test_Cov4_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex returns correct -- index 1 of (any,error)", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeError(t *testing.T) {
+func Test_FuncWrap_InvokeError(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetErr)
 
@@ -188,7 +188,7 @@ func Test_Cov4_FuncWrap_InvokeError(t *testing.T) {
 
 // ── FuncWrap: Typed Invoke Helpers ──
 
-func Test_Cov4_FuncWrap_InvokeAsBool(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetBool)
 
@@ -207,7 +207,7 @@ func Test_Cov4_FuncWrap_InvokeAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns correct -- bool func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsBool_WrongType(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_WrongType(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetString)
 
@@ -226,7 +226,7 @@ func Test_Cov4_FuncWrap_InvokeAsBool_WrongType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns false -- wrong type", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsBool_NoResults(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_NoResults(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperVoid)
 
@@ -245,7 +245,7 @@ func Test_Cov4_FuncWrap_InvokeAsBool_NoResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns false -- void func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsError_Valid(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetErr)
 
@@ -264,7 +264,7 @@ func Test_Cov4_FuncWrap_InvokeAsError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns correct -- error func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetNilErr)
 
@@ -283,7 +283,7 @@ func Test_Cov4_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns nil -- nil error func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsError_NoResults(t *testing.T) {
+func Test_FuncWrap_InvokeAsError_NoResults(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperVoid)
 
@@ -302,7 +302,7 @@ func Test_Cov4_FuncWrap_InvokeAsError_NoResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns nil -- void func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsString(t *testing.T) {
+func Test_FuncWrap_InvokeAsString(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetString)
 
@@ -321,7 +321,7 @@ func Test_Cov4_FuncWrap_InvokeAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsString returns correct -- string func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsString_WrongType(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_WrongType(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetBool)
 
@@ -340,7 +340,7 @@ func Test_Cov4_FuncWrap_InvokeAsString_WrongType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsString returns empty -- wrong type", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsAny(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAny)
 
@@ -359,7 +359,7 @@ func Test_Cov4_FuncWrap_InvokeAsAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsAny returns correct -- any func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsAny_NoResults(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny_NoResults(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperVoid)
 
@@ -378,7 +378,7 @@ func Test_Cov4_FuncWrap_InvokeAsAny_NoResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsAny returns nil -- void func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsAnyError_Valid(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_Valid(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAnyErr)
 
@@ -399,7 +399,7 @@ func Test_Cov4_FuncWrap_InvokeAsAnyError_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsAnyError returns correct -- valid func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsAnyError_WithError(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_WithError(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAnyErrFail)
 
@@ -420,7 +420,7 @@ func Test_Cov4_FuncWrap_InvokeAsAnyError_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsAnyError returns error -- failing func", actual)
 }
 
-func Test_Cov4_FuncWrap_InvokeAsAnyError_NoResults(t *testing.T) {
+func Test_FuncWrap_InvokeAsAnyError_NoResults(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperVoid)
 
@@ -443,7 +443,7 @@ func Test_Cov4_FuncWrap_InvokeAsAnyError_NoResults(t *testing.T) {
 
 // ── FuncWrap: InvalidError, FuncWrapValidation ──
 
-func Test_Cov4_FuncWrap_InvalidError_NilRv(t *testing.T) {
+func Test_FuncWrap_InvalidError_NilRv(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default("not-a-func")
 
@@ -458,7 +458,7 @@ func Test_Cov4_FuncWrap_InvalidError_NilRv(t *testing.T) {
 
 // ── FuncWrap: InArgNames, InArgNamesEachLine, OutArgNames, OutArgNamesEachLine ──
 
-func Test_Cov4_FuncWrap_InArgNamesEachLine(t *testing.T) {
+func Test_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperAdd)
 
@@ -471,7 +471,7 @@ func Test_Cov4_FuncWrap_InArgNamesEachLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InArgNamesEachLine returns lines -- multi-arg func", actual)
 }
 
-func Test_Cov4_FuncWrap_OutArgNamesEachLine(t *testing.T) {
+func Test_FuncWrap_OutArgNamesEachLine(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperRetAnyErr)
 
@@ -486,7 +486,7 @@ func Test_Cov4_FuncWrap_OutArgNamesEachLine(t *testing.T) {
 
 // ── FuncMap: InArgsVerifyRv, OutArgsVerifyRv, VoidCallNoReturn, MustBeValid, ValidationError ──
 
-func Test_Cov4_FuncMap_InArgsVerifyRv(t *testing.T) {
+func Test_FuncMap_InArgsVerifyRv(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 	name := args.NewFuncWrap.Default(helperAdd).Name
@@ -509,7 +509,7 @@ func Test_Cov4_FuncMap_InArgsVerifyRv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InArgsVerifyRv returns ok -- matching types", actual)
 }
 
-func Test_Cov4_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
+func Test_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -528,7 +528,7 @@ func Test_Cov4_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InArgsVerifyRv returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_OutArgsVerifyRv(t *testing.T) {
+func Test_FuncMap_OutArgsVerifyRv(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 	name := args.NewFuncWrap.Default(helperAdd).Name
@@ -548,7 +548,7 @@ func Test_Cov4_FuncMap_OutArgsVerifyRv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OutArgsVerifyRv returns ok -- matching types", actual)
 }
 
-func Test_Cov4_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
+func Test_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -567,7 +567,7 @@ func Test_Cov4_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OutArgsVerifyRv returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_VoidCallNoReturn(t *testing.T) {
+func Test_FuncMap_VoidCallNoReturn(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperVoid)
 	name := args.NewFuncWrap.Default(helperVoid).Name
@@ -581,7 +581,7 @@ func Test_Cov4_FuncMap_VoidCallNoReturn(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidCallNoReturn returns nil -- valid void func", actual)
 }
 
-func Test_Cov4_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
+func Test_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperVoid)
 
@@ -594,7 +594,7 @@ func Test_Cov4_FuncMap_VoidCallNoReturn_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VoidCallNoReturn returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_MustBeValid_NotFound(t *testing.T) {
+func Test_FuncMap_MustBeValid_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperVoid)
 
@@ -607,7 +607,7 @@ func Test_Cov4_FuncMap_MustBeValid_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MustBeValid panics -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_ValidationError(t *testing.T) {
+func Test_FuncMap_ValidationError(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 	name := args.NewFuncWrap.Default(helperAdd).Name
@@ -621,7 +621,7 @@ func Test_Cov4_FuncMap_ValidationError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValidationError returns nil -- valid func", actual)
 }
 
-func Test_Cov4_FuncMap_ValidationError_NotFound(t *testing.T) {
+func Test_FuncMap_ValidationError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -634,7 +634,7 @@ func Test_Cov4_FuncMap_ValidationError_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValidationError returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeMust_Valid(t *testing.T) {
+func Test_FuncMap_InvokeMust_Valid(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 	name := args.NewFuncWrap.Default(helperAdd).Name
@@ -648,7 +648,7 @@ func Test_Cov4_FuncMap_InvokeMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeMust returns correct -- valid func", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeMust_Panic(t *testing.T) {
+func Test_FuncMap_InvokeMust_Panic(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -661,7 +661,7 @@ func Test_Cov4_FuncMap_InvokeMust_Panic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeMust panics -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeError(t *testing.T) {
+func Test_FuncMap_InvokeError(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperRetErr)
 	name := args.NewFuncWrap.Default(helperRetErr).Name
@@ -681,7 +681,7 @@ func Test_Cov4_FuncMap_InvokeError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeError returns correct -- error func", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeError_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperRetErr)
 
@@ -694,7 +694,7 @@ func Test_Cov4_FuncMap_InvokeError_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeError returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeFirstAndError(t *testing.T) {
+func Test_FuncMap_InvokeFirstAndError(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperRetAnyErr)
 	name := args.NewFuncWrap.Default(helperRetAnyErr).Name
@@ -716,7 +716,7 @@ func Test_Cov4_FuncMap_InvokeFirstAndError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeFirstAndError returns correct -- valid func", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperRetAnyErr)
 
@@ -729,7 +729,7 @@ func Test_Cov4_FuncMap_InvokeFirstAndError_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeFirstAndError returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
+func Test_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -742,7 +742,7 @@ func Test_Cov4_FuncMap_InvokeResultOfIndex_NotFound(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex returns error -- not found", actual)
 }
 
-func Test_Cov4_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
+func Test_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(helperAdd)
 
@@ -757,7 +757,7 @@ func Test_Cov4_FuncMap_ValidateMethodArgs_NotFound(t *testing.T) {
 
 // ── DynamicFunc: Typed getters, Invoke, InvokeMust, InvokeWithValidArgs, InvokeArgs ──
 
-func Test_Cov4_DynamicFunc_GetAsInt(t *testing.T) {
+func Test_DynamicFunc_GetAsInt(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{"count": 5},
@@ -778,7 +778,7 @@ func Test_Cov4_DynamicFunc_GetAsInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns correct -- valid key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsInt_Missing(t *testing.T) {
+func Test_DynamicFunc_GetAsInt_Missing(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{},
@@ -799,7 +799,7 @@ func Test_Cov4_DynamicFunc_GetAsInt_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns zero -- missing key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsString(t *testing.T) {
+func Test_DynamicFunc_GetAsString(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{"name": "test"},
@@ -820,7 +820,7 @@ func Test_Cov4_DynamicFunc_GetAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsString returns correct -- valid key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsString_Missing(t *testing.T) {
+func Test_DynamicFunc_GetAsString_Missing(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{},
@@ -841,7 +841,7 @@ func Test_Cov4_DynamicFunc_GetAsString_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsString returns empty -- missing key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsStrings(t *testing.T) {
+func Test_DynamicFunc_GetAsStrings(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{"items": []string{"a", "b"}},
@@ -862,7 +862,7 @@ func Test_Cov4_DynamicFunc_GetAsStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsStrings returns correct -- valid key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsStrings_Missing(t *testing.T) {
+func Test_DynamicFunc_GetAsStrings_Missing(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{},
@@ -883,7 +883,7 @@ func Test_Cov4_DynamicFunc_GetAsStrings_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsStrings returns empty -- missing key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsAnyItems(t *testing.T) {
+func Test_DynamicFunc_GetAsAnyItems(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{"items": []any{1, 2, 3}},
@@ -904,7 +904,7 @@ func Test_Cov4_DynamicFunc_GetAsAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsAnyItems returns correct -- valid key", actual)
 }
 
-func Test_Cov4_DynamicFunc_GetAsAnyItems_Missing(t *testing.T) {
+func Test_DynamicFunc_GetAsAnyItems_Missing(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		Params: args.Map{},
@@ -925,7 +925,7 @@ func Test_Cov4_DynamicFunc_GetAsAnyItems_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAsAnyItems returns empty -- missing key", actual)
 }
 
-func Test_Cov4_DynamicFunc_Invoke(t *testing.T) {
+func Test_DynamicFunc_Invoke(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		WorkFunc: helperAdd,
@@ -947,7 +947,7 @@ func Test_Cov4_DynamicFunc_Invoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct -- DynamicFunc with add", actual)
 }
 
-func Test_Cov4_DynamicFunc_InvokeMust(t *testing.T) {
+func Test_DynamicFunc_InvokeMust(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		WorkFunc: helperAdd,
@@ -962,7 +962,7 @@ func Test_Cov4_DynamicFunc_InvokeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeMust returns correct -- DynamicFunc", actual)
 }
 
-func Test_Cov4_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
+func Test_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		WorkFunc: helperAdd,
@@ -987,7 +987,7 @@ func Test_Cov4_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- DynamicFunc", actual)
 }
 
-func Test_Cov4_DynamicFunc_InvokeArgs(t *testing.T) {
+func Test_DynamicFunc_InvokeArgs(t *testing.T) {
 	// Arrange
 	df := args.DynamicFuncAny{
 		WorkFunc: helperAdd,
@@ -1014,7 +1014,7 @@ func Test_Cov4_DynamicFunc_InvokeArgs(t *testing.T) {
 
 // ── Dynamic: GetWorkFunc, InvokeArgs ──
 
-func Test_Cov4_Dynamic_GetWorkFunc_Nil(t *testing.T) {
+func Test_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 	// Arrange
 	var d *args.DynamicAny
 
@@ -1027,7 +1027,7 @@ func Test_Cov4_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetWorkFunc returns nil -- nil receiver", actual)
 }
 
-func Test_Cov4_Dynamic_InvokeArgs(t *testing.T) {
+func Test_Dynamic_InvokeArgs(t *testing.T) {
 	// Arrange
 	d := args.DynamicAny{
 		Params: args.Map{
@@ -1054,7 +1054,7 @@ func Test_Cov4_Dynamic_InvokeArgs(t *testing.T) {
 
 // ── Map.GetFuncName empty path ──
 
-func Test_Cov4_Map_GetFuncName_NoFunc(t *testing.T) {
+func Test_Map_GetFuncName_NoFunc(t *testing.T) {
 	// Arrange
 	m := args.Map{"key": "val"}
 
@@ -1069,7 +1069,7 @@ func Test_Cov4_Map_GetFuncName_NoFunc(t *testing.T) {
 
 // ── funcDetector: GetFuncWrap branches ──
 
-func Test_Cov4_FuncDetector_GetFuncWrap_Map(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_Map(t *testing.T) {
 	// Arrange
 	m := args.Map{"func": helperAdd}
 
@@ -1082,7 +1082,7 @@ func Test_Cov4_FuncDetector_GetFuncWrap_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetFuncWrap returns valid -- Map input", actual)
 }
 
-func Test_Cov4_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
+func Test_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(helperAdd)
 
@@ -1097,7 +1097,7 @@ func Test_Cov4_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
 
 // ── newFuncWrapCreator.StructToMap error path ──
 
-func Test_Cov4_NewFuncWrap_StructToMap_Error(t *testing.T) {
+func Test_NewFuncWrap_StructToMap_Error(t *testing.T) {
 	// Arrange & Act — passing nil should trigger error
 	_, err := args.NewFuncWrap.StructToMap(nil)
 

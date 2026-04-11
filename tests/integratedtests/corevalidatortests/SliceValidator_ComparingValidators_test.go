@@ -12,7 +12,7 @@ import (
 
 // ── SliceValidator — uncovered non-nil paths ──
 
-func Test_Cov5_SliceValidator_ComparingValidators_Cached(t *testing.T) {
+func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -35,7 +35,7 @@ func Test_Cov5_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns cached -- second call", actual)
 }
 
-func Test_Cov5_SliceValidator_Dispose_WithValidators(t *testing.T) {
+func Test_SliceValidator_Dispose_WithValidators(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -59,7 +59,7 @@ func Test_Cov5_SliceValidator_Dispose_WithValidators(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dispose clears all fields -- with cached validators", actual)
 }
 
-func Test_Cov5_SliceValidator_IsValid_BothNilLines(t *testing.T) {
+func Test_SliceValidator_IsValid_BothNilLines(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 
@@ -69,7 +69,7 @@ func Test_Cov5_SliceValidator_IsValid_BothNilLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns true -- both nil lines", actual)
 }
 
-func Test_Cov5_SliceValidator_IsValid_ActualNil_ExpectedNotNil(t *testing.T) {
+func Test_SliceValidator_IsValid_ActualNil_ExpectedNotNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -82,7 +82,7 @@ func Test_Cov5_SliceValidator_IsValid_ActualNil_ExpectedNotNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns false -- actual nil expected not nil", actual)
 }
 
-func Test_Cov5_SliceValidator_IsValid_LengthMismatch(t *testing.T) {
+func Test_SliceValidator_IsValid_LengthMismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -96,7 +96,7 @@ func Test_Cov5_SliceValidator_IsValid_LengthMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValid returns false -- length mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_IsValidOtherLines_NilExpected(t *testing.T) {
+func Test_SliceValidator_IsValidOtherLines_NilExpected(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 
@@ -106,7 +106,7 @@ func Test_Cov5_SliceValidator_IsValidOtherLines_NilExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValidOtherLines returns true -- both nil", actual)
 }
 
-func Test_Cov5_SliceValidator_IsValidOtherLines_OnlyOneNil(t *testing.T) {
+func Test_SliceValidator_IsValidOtherLines_OnlyOneNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -119,7 +119,7 @@ func Test_Cov5_SliceValidator_IsValidOtherLines_OnlyOneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsValidOtherLines returns false -- one nil one not", actual)
 }
 
-func Test_Cov5_SliceValidator_SetActual_ReturnsChain(t *testing.T) {
+func Test_SliceValidator_SetActual_ReturnsChain(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 
@@ -140,7 +140,7 @@ func Test_Cov5_SliceValidator_SetActual_ReturnsChain(t *testing.T) {
 
 // ── SliceValidatorVerify — error paths ──
 
-func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_EmptyIgnoreCase(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorUptoLength_EmptyIgnoreCase(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -158,7 +158,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_EmptyIgnoreCase(t *testin
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorUptoLength returns nil -- empty actual skip", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyError_Mismatch(t *testing.T) {
+func Test_SliceValidator_AllVerifyError_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -176,7 +176,7 @@ func Test_Cov5_SliceValidator_AllVerifyError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- content mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
+func Test_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -194,7 +194,7 @@ func Test_Cov5_SliceValidator_VerifyFirstError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns error -- content mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -210,7 +210,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorQuick_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorQuick returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -227,7 +227,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorTestCase_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorTestCase returns nil -- match", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -244,7 +244,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorTestCase_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorTestCase returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -262,7 +262,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorExceptLast_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorExceptLast returns nil -- first matches", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_Match(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorUptoLength_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -280,7 +280,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorUptoLength returns nil -- first two match", actual)
 }
 
-func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_IsFirstOnly(t *testing.T) {
+func Test_SliceValidator_AllVerifyErrorUptoLength_IsFirstOnly(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -298,7 +298,7 @@ func Test_Cov5_SliceValidator_AllVerifyErrorUptoLength_IsFirstOnly(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorUptoLength returns error -- isFirstOnly breaks early", actual)
 }
 
-func Test_Cov5_SliceValidator_InitialVerify_AnyNilCase(t *testing.T) {
+func Test_SliceValidator_InitialVerify_AnyNilCase(t *testing.T) {
 	// Arrange — actual nil, expected not nil
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -315,7 +315,7 @@ func Test_Cov5_SliceValidator_InitialVerify_AnyNilCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- actual nil expected not nil", actual)
 }
 
-func Test_Cov5_SliceValidator_InitialVerify_LengthMismatch(t *testing.T) {
+func Test_SliceValidator_InitialVerify_LengthMismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -333,7 +333,7 @@ func Test_Cov5_SliceValidator_InitialVerify_LengthMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- length mismatch", actual)
 }
 
-func Test_Cov5_SliceValidator_InitialVerify_BothNil(t *testing.T) {
+func Test_SliceValidator_InitialVerify_BothNil(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -349,7 +349,7 @@ func Test_Cov5_SliceValidator_InitialVerify_BothNil(t *testing.T) {
 
 // ── SliceValidatorMessages — uncovered paths ──
 
-func Test_Cov5_SliceValidator_ActualInputWithExpectingMessage(t *testing.T) {
+func Test_SliceValidator_ActualInputWithExpectingMessage(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -366,7 +366,7 @@ func Test_Cov5_SliceValidator_ActualInputWithExpectingMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ActualInputWithExpectingMessage returns non-empty -- valid inputs", actual)
 }
 
-func Test_Cov5_SliceValidator_UserInputsMergeWithError_WithError(t *testing.T) {
+func Test_SliceValidator_UserInputsMergeWithError_WithError(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -385,7 +385,7 @@ func Test_Cov5_SliceValidator_UserInputsMergeWithError_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "UserInputsMergeWithError returns merged error -- with error", actual)
 }
 
-func Test_Cov5_SliceValidator_UserInputsMergeWithError_NilErrorAttach(t *testing.T) {
+func Test_SliceValidator_UserInputsMergeWithError_NilErrorAttach(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
 		CompareAs:     stringcompareas.Equal,
@@ -405,7 +405,7 @@ func Test_Cov5_SliceValidator_UserInputsMergeWithError_NilErrorAttach(t *testing
 
 // ── SliceValidatorConstructors — NewSliceValidatorUsingErr ──
 
-func Test_Cov5_NewSliceValidatorUsingErr_Match(t *testing.T) {
+func Test_NewSliceValidatorUsingErr_Match(t *testing.T) {
 	// Arrange
 	testErr := errors.New("line1\nline2")
 
@@ -423,7 +423,7 @@ func Test_Cov5_NewSliceValidatorUsingErr_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr returns valid -- matching error lines", actual)
 }
 
-func Test_Cov5_NewSliceValidatorUsingErr_Mismatch(t *testing.T) {
+func Test_NewSliceValidatorUsingErr_Mismatch(t *testing.T) {
 	// Arrange
 	testErr := errors.New("actual-line")
 
@@ -441,7 +441,7 @@ func Test_Cov5_NewSliceValidatorUsingErr_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr returns invalid -- mismatching error lines", actual)
 }
 
-func Test_Cov5_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
+func Test_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
 	// Arrange
 	testErr := errors.New("  hello  world  ")
 
@@ -461,7 +461,7 @@ func Test_Cov5_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
 
 // ── SimpleSliceValidator — verify paths ──
 
-func Test_Cov5_SimpleSliceValidator_VerifyAll_Match(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyAll_Match(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"a", "b"}),
@@ -479,7 +479,7 @@ func Test_Cov5_SimpleSliceValidator_VerifyAll_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleSliceValidator VerifyAll returns nil -- match", actual)
 }
 
-func Test_Cov5_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"a"}),
@@ -497,7 +497,7 @@ func Test_Cov5_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleSliceValidator VerifyAll returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SimpleSliceValidator_VerifyFirst_Match(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyFirst_Match(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"a"}),
@@ -515,7 +515,7 @@ func Test_Cov5_SimpleSliceValidator_VerifyFirst_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleSliceValidator VerifyFirst returns nil -- match", actual)
 }
 
-func Test_Cov5_SimpleSliceValidator_VerifyUpto_Match(t *testing.T) {
+func Test_SimpleSliceValidator_VerifyUpto_Match(t *testing.T) {
 	// Arrange
 	ssv := &corevalidator.SimpleSliceValidator{
 		Expected:  corestr.New.SimpleSlice.Direct(false, []string{"a", "b"}),
@@ -535,7 +535,7 @@ func Test_Cov5_SimpleSliceValidator_VerifyUpto_Match(t *testing.T) {
 
 // ── TextValidator — uncovered branches ──
 
-func Test_Cov5_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
+func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 
@@ -555,7 +555,7 @@ func Test_Cov5_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SearchTextFinalized returns cached -- second call", actual)
 }
 
-func Test_Cov5_TextValidator_GetCompiledTerm_TrimCompare(t *testing.T) {
+func Test_TextValidator_GetCompiledTerm_TrimCompare(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -574,7 +574,7 @@ func Test_Cov5_TextValidator_GetCompiledTerm_TrimCompare(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetCompiledTermBasedOnConditions returns trimmed -- trim enabled", actual)
 }
 
-func Test_Cov5_TextValidator_GetCompiledTerm_SplitByWhitespace(t *testing.T) {
+func Test_TextValidator_GetCompiledTerm_SplitByWhitespace(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{
 		Search:   "hello",
@@ -593,7 +593,7 @@ func Test_Cov5_TextValidator_GetCompiledTerm_SplitByWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetCompiledTermBasedOnConditions returns processed -- split whitespace", actual)
 }
 
-func Test_Cov5_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "expected", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true, Header: "h"}
@@ -607,7 +607,7 @@ func Test_Cov5_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyDetailError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "expected", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -621,7 +621,7 @@ func Test_Cov5_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifySimpleError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
+func Test_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "expected", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -635,7 +635,7 @@ func Test_Cov5_TextValidator_AllVerifyError_WithErrors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- multiple mismatches", actual)
 }
 
-func Test_Cov5_TextValidator_VerifyFirstError_WithContent(t *testing.T) {
+func Test_TextValidator_VerifyFirstError_WithContent(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -649,7 +649,7 @@ func Test_Cov5_TextValidator_VerifyFirstError_WithContent(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns nil -- all match", actual)
 }
 
-func Test_Cov5_TextValidator_VerifyFirstError_FirstMismatch(t *testing.T) {
+func Test_TextValidator_VerifyFirstError_FirstMismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -663,7 +663,7 @@ func Test_Cov5_TextValidator_VerifyFirstError_FirstMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns error -- first mismatch", actual)
 }
 
-func Test_Cov5_TextValidator_VerifyMany_ContinueOnError_WithErrors(t *testing.T) {
+func Test_TextValidator_VerifyMany_ContinueOnError_WithErrors(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "x", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -677,7 +677,7 @@ func Test_Cov5_TextValidator_VerifyMany_ContinueOnError_WithErrors(t *testing.T)
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns error -- continue on error with mismatches", actual)
 }
 
-func Test_Cov5_TextValidator_VerifyMany_FirstOnly_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifyMany_FirstOnly_Mismatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "x", SearchAs: stringcompareas.Equal}
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -691,7 +691,7 @@ func Test_Cov5_TextValidator_VerifyMany_FirstOnly_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns error -- first only mismatch", actual)
 }
 
-func Test_Cov5_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
+func Test_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 
@@ -701,7 +701,7 @@ func Test_Cov5_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- all match", actual)
 }
 
-func Test_Cov5_TextValidator_IsMatchMany_EmptyNoSkip(t *testing.T) {
+func Test_TextValidator_IsMatchMany_EmptyNoSkip(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}
 
@@ -711,7 +711,7 @@ func Test_Cov5_TextValidator_IsMatchMany_EmptyNoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- empty contents no skip", actual)
 }
 
-func Test_Cov5_TextValidator_String_Method(t *testing.T) {
+func Test_TextValidator_String_Method(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "test", SearchAs: stringcompareas.Equal}
 
@@ -723,7 +723,7 @@ func Test_Cov5_TextValidator_String_Method(t *testing.T) {
 
 // ── TextValidators — uncovered paths ──
 
-func Test_Cov5_TextValidators_IsMatchMany_WithItems_Fail(t *testing.T) {
+func Test_TextValidators_IsMatchMany_WithItems_Fail(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -734,7 +734,7 @@ func Test_Cov5_TextValidators_IsMatchMany_WithItems_Fail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns false -- item mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_IsMatchMany_WithItems_Match(t *testing.T) {
+func Test_TextValidators_IsMatchMany_WithItems_Match(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -745,7 +745,7 @@ func Test_Cov5_TextValidators_IsMatchMany_WithItems_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- item match", actual)
 }
 
-func Test_Cov5_TextValidators_VerifyErrorMany_WithItems_Match(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_WithItems_Match(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -760,7 +760,7 @@ func Test_Cov5_TextValidators_VerifyErrorMany_WithItems_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- match continue", actual)
 }
 
-func Test_Cov5_TextValidators_VerifyErrorMany_FirstOnly_WithItems(t *testing.T) {
+func Test_TextValidators_VerifyErrorMany_FirstOnly_WithItems(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -775,7 +775,7 @@ func Test_Cov5_TextValidators_VerifyErrorMany_FirstOnly_WithItems(t *testing.T) 
 	expected.ShouldBeEqual(t, 0, "VerifyErrorMany returns nil -- first only match", actual)
 }
 
-func Test_Cov5_TextValidators_VerifyFirstErrorMany_WithError(t *testing.T) {
+func Test_TextValidators_VerifyFirstErrorMany_WithError(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -790,7 +790,7 @@ func Test_Cov5_TextValidators_VerifyFirstErrorMany_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstErrorMany returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_AllVerifyErrorMany_WithError(t *testing.T) {
+func Test_TextValidators_AllVerifyErrorMany_WithError(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -805,7 +805,7 @@ func Test_Cov5_TextValidators_AllVerifyErrorMany_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyErrorMany returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
+func Test_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -819,7 +819,7 @@ func Test_Cov5_TextValidators_VerifyFirstError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
+func Test_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -833,7 +833,7 @@ func Test_Cov5_TextValidators_AllVerifyError_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_IsMatch_Mismatch(t *testing.T) {
+func Test_TextValidators_IsMatch_Mismatch(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 	tvs.AddSimple("x", stringcompareas.Equal)
@@ -844,7 +844,7 @@ func Test_Cov5_TextValidators_IsMatch_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- mismatch", actual)
 }
 
-func Test_Cov5_TextValidators_Adds_WithItems(t *testing.T) {
+func Test_TextValidators_Adds_WithItems(t *testing.T) {
 	// Arrange
 	tvs := corevalidator.NewTextValidators(2)
 
@@ -862,7 +862,7 @@ func Test_Cov5_TextValidators_Adds_WithItems(t *testing.T) {
 
 // ── LineValidator — uncovered branches ──
 
-func Test_Cov5_LineValidator_IsMatch_LineNumberMismatch(t *testing.T) {
+func Test_LineValidator_IsMatch_LineNumberMismatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -875,7 +875,7 @@ func Test_Cov5_LineValidator_IsMatch_LineNumberMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- line number mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_IsMatch_TextMismatch(t *testing.T) {
+func Test_LineValidator_IsMatch_TextMismatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -888,7 +888,7 @@ func Test_Cov5_LineValidator_IsMatch_TextMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- text mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_IsMatch_AllMatch(t *testing.T) {
+func Test_LineValidator_IsMatch_AllMatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -901,7 +901,7 @@ func Test_Cov5_LineValidator_IsMatch_AllMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- line and text match", actual)
 }
 
-func Test_Cov5_LineValidator_IsMatchMany_WithContents(t *testing.T) {
+func Test_LineValidator_IsMatchMany_WithContents(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -918,7 +918,7 @@ func Test_Cov5_LineValidator_IsMatchMany_WithContents(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- all match", actual)
 }
 
-func Test_Cov5_LineValidator_IsMatchMany_Mismatch(t *testing.T) {
+func Test_LineValidator_IsMatchMany_Mismatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -935,7 +935,7 @@ func Test_Cov5_LineValidator_IsMatchMany_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns false -- second mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
+func Test_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -948,7 +948,7 @@ func Test_Cov5_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchMany returns true -- empty skip", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyError_LineNumberMismatch(t *testing.T) {
+func Test_LineValidator_VerifyError_LineNumberMismatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -965,7 +965,7 @@ func Test_Cov5_LineValidator_VerifyError_LineNumberMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyError returns error -- line number mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyError_TextMismatch(t *testing.T) {
+func Test_LineValidator_VerifyError_TextMismatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: 5},
@@ -982,7 +982,7 @@ func Test_Cov5_LineValidator_VerifyError_TextMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyError returns error -- text mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyError_AllMatch(t *testing.T) {
+func Test_LineValidator_VerifyError_AllMatch(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -999,7 +999,7 @@ func Test_Cov5_LineValidator_VerifyError_AllMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyError returns nil -- all match", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_LineValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1017,7 +1017,7 @@ func Test_Cov5_LineValidator_VerifyMany_ContinueOnError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns nil -- continue on error match", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyMany_FirstOnly(t *testing.T) {
+func Test_LineValidator_VerifyMany_FirstOnly(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1035,7 +1035,7 @@ func Test_Cov5_LineValidator_VerifyMany_FirstOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyMany returns error -- first only mismatch", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyFirstError_WithItems(t *testing.T) {
+func Test_LineValidator_VerifyFirstError_WithItems(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1053,7 +1053,7 @@ func Test_Cov5_LineValidator_VerifyFirstError_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns nil -- match", actual)
 }
 
-func Test_Cov5_LineValidator_VerifyFirstError_EmptySkip(t *testing.T) {
+func Test_LineValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1070,7 +1070,7 @@ func Test_Cov5_LineValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirstError returns nil -- empty skip", actual)
 }
 
-func Test_Cov5_LineValidator_AllVerifyError_WithItems(t *testing.T) {
+func Test_LineValidator_AllVerifyError_WithItems(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1091,7 +1091,7 @@ func Test_Cov5_LineValidator_AllVerifyError_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- mismatches", actual)
 }
 
-func Test_Cov5_LineValidator_AllVerifyError_EmptySkip(t *testing.T) {
+func Test_LineValidator_AllVerifyError_EmptySkip(t *testing.T) {
 	// Arrange
 	lv := &corevalidator.LineValidator{
 		LineNumber:    corevalidator.LineNumber{LineNumber: -1},
@@ -1108,7 +1108,7 @@ func Test_Cov5_LineValidator_AllVerifyError_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- empty skip", actual)
 }
 
-func Test_Cov5_LineValidator_Nil_AllVerifyError(t *testing.T) {
+func Test_LineValidator_Nil_AllVerifyError(t *testing.T) {
 	// Arrange
 	var lv *corevalidator.LineValidator
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -1122,7 +1122,7 @@ func Test_Cov5_LineValidator_Nil_AllVerifyError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- nil receiver", actual)
 }
 
-func Test_Cov5_LineValidator_Nil_VerifyFirstError(t *testing.T) {
+func Test_LineValidator_Nil_VerifyFirstError(t *testing.T) {
 	// Arrange
 	var lv *corevalidator.LineValidator
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
@@ -1138,7 +1138,7 @@ func Test_Cov5_LineValidator_Nil_VerifyFirstError(t *testing.T) {
 
 // ── LinesValidators — uncovered non-empty paths ──
 
-func Test_Cov5_LinesValidators_IsMatchText_WithItems(t *testing.T) {
+func Test_LinesValidators_IsMatchText_WithItems(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1158,7 +1158,7 @@ func Test_Cov5_LinesValidators_IsMatchText_WithItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatchText returns correct -- with items", actual)
 }
 
-func Test_Cov5_LinesValidators_IsMatch_WithContents_Match(t *testing.T) {
+func Test_LinesValidators_IsMatch_WithContents_Match(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1173,7 +1173,7 @@ func Test_Cov5_LinesValidators_IsMatch_WithContents_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- contents match", actual)
 }
 
-func Test_Cov5_LinesValidators_IsMatch_WithContents_Mismatch(t *testing.T) {
+func Test_LinesValidators_IsMatch_WithContents_Mismatch(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1188,7 +1188,7 @@ func Test_Cov5_LinesValidators_IsMatch_WithContents_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- contents mismatch", actual)
 }
 
-func Test_Cov5_LinesValidators_IsMatch_EmptyContents_NoSkip(t *testing.T) {
+func Test_LinesValidators_IsMatch_EmptyContents_NoSkip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1201,7 +1201,7 @@ func Test_Cov5_LinesValidators_IsMatch_EmptyContents_NoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- empty no skip", actual)
 }
 
-func Test_Cov5_LinesValidators_IsMatch_EmptyContents_Skip(t *testing.T) {
+func Test_LinesValidators_IsMatch_EmptyContents_Skip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1214,7 +1214,7 @@ func Test_Cov5_LinesValidators_IsMatch_EmptyContents_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- empty skip", actual)
 }
 
-func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_WithMatch(t *testing.T) {
+func Test_LinesValidators_VerifyFirstDefaultLineNumberError_WithMatch(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1233,7 +1233,7 @@ func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_WithMatch(t *te
 	expected.ShouldBeEqual(t, 0, "VerifyFirstDefaultLineNumberError returns nil -- match", actual)
 }
 
-func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_EmptyNoSkip(t *testing.T) {
+func Test_LinesValidators_VerifyFirstDefaultLineNumberError_EmptyNoSkip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1250,7 +1250,7 @@ func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_EmptyNoSkip(t *
 	expected.ShouldBeEqual(t, 0, "VerifyFirstDefaultLineNumberError returns error -- empty no skip", actual)
 }
 
-func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_EmptySkip(t *testing.T) {
+func Test_LinesValidators_VerifyFirstDefaultLineNumberError_EmptySkip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1267,7 +1267,7 @@ func Test_Cov5_LinesValidators_VerifyFirstDefaultLineNumberError_EmptySkip(t *te
 	expected.ShouldBeEqual(t, 0, "VerifyFirstDefaultLineNumberError returns nil -- empty skip", actual)
 }
 
-func Test_Cov5_LinesValidators_AllVerifyError_WithMatch(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_WithMatch(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1286,7 +1286,7 @@ func Test_Cov5_LinesValidators_AllVerifyError_WithMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- match", actual)
 }
 
-func Test_Cov5_LinesValidators_AllVerifyError_WithMismatch(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_WithMismatch(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1305,7 +1305,7 @@ func Test_Cov5_LinesValidators_AllVerifyError_WithMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_LinesValidators_AllVerifyError_EmptyNoSkip(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_EmptyNoSkip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1322,7 +1322,7 @@ func Test_Cov5_LinesValidators_AllVerifyError_EmptyNoSkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns error -- empty no skip", actual)
 }
 
-func Test_Cov5_LinesValidators_AllVerifyError_EmptySkip(t *testing.T) {
+func Test_LinesValidators_AllVerifyError_EmptySkip(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
@@ -1339,7 +1339,7 @@ func Test_Cov5_LinesValidators_AllVerifyError_EmptySkip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError returns nil -- empty skip", actual)
 }
 
-func Test_Cov5_LinesValidators_AddPtr_WithItem(t *testing.T) {
+func Test_LinesValidators_AddPtr_WithItem(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	item := &corevalidator.LineValidator{
@@ -1355,7 +1355,7 @@ func Test_Cov5_LinesValidators_AddPtr_WithItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddPtr adds item -- non-nil pointer", actual)
 }
 
-func Test_Cov5_LinesValidators_Adds_WithItems(t *testing.T) {
+func Test_LinesValidators_Adds_WithItems(t *testing.T) {
 	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 
@@ -1373,7 +1373,7 @@ func Test_Cov5_LinesValidators_Adds_WithItems(t *testing.T) {
 
 // ── SliceValidators / HeaderSliceValidators — non-empty error paths ──
 
-func Test_Cov5_SliceValidators_IsMatch_WithMismatch(t *testing.T) {
+func Test_SliceValidators_IsMatch_WithMismatch(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1391,7 +1391,7 @@ func Test_Cov5_SliceValidators_IsMatch_WithMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- validator mismatch", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyAll_WithError(t *testing.T) {
+func Test_SliceValidators_VerifyAll_WithError(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1413,7 +1413,7 @@ func Test_Cov5_SliceValidators_VerifyAll_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyAll_Match(t *testing.T) {
+func Test_SliceValidators_VerifyAll_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1435,7 +1435,7 @@ func Test_Cov5_SliceValidators_VerifyAll_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns nil -- match", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyAllError_WithError(t *testing.T) {
+func Test_SliceValidators_VerifyAllError_WithError(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1457,7 +1457,7 @@ func Test_Cov5_SliceValidators_VerifyAllError_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyFirst_WithError(t *testing.T) {
+func Test_SliceValidators_VerifyFirst_WithError(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1479,7 +1479,7 @@ func Test_Cov5_SliceValidators_VerifyFirst_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyFirst_Match(t *testing.T) {
+func Test_SliceValidators_VerifyFirst_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1501,7 +1501,7 @@ func Test_Cov5_SliceValidators_VerifyFirst_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- match", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyUpto_WithError(t *testing.T) {
+func Test_SliceValidators_VerifyUpto_WithError(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1523,7 +1523,7 @@ func Test_Cov5_SliceValidators_VerifyUpto_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns error -- mismatch", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyUpto_Match(t *testing.T) {
+func Test_SliceValidators_VerifyUpto_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1545,7 +1545,7 @@ func Test_Cov5_SliceValidators_VerifyUpto_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- match", actual)
 }
 
-func Test_Cov5_SliceValidators_VerifyAllErrorUsingActual_Match(t *testing.T) {
+func Test_SliceValidators_VerifyAllErrorUsingActual_Match(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1568,7 +1568,7 @@ func Test_Cov5_SliceValidators_VerifyAllErrorUsingActual_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllErrorUsingActual does not panic -- with items", actual)
 }
 
-func Test_Cov5_SliceValidators_SetActualOnAll_WithItems(t *testing.T) {
+func Test_SliceValidators_SetActualOnAll_WithItems(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -1587,7 +1587,7 @@ func Test_Cov5_SliceValidators_SetActualOnAll_WithItems(t *testing.T) {
 
 // ── HeaderSliceValidators — non-empty error paths ──
 
-func Test_Cov5_HeaderSliceValidators_IsMatch_WithMismatch(t *testing.T) {
+func Test_HeaderSliceValidators_IsMatch_WithMismatch(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1606,7 +1606,7 @@ func Test_Cov5_HeaderSliceValidators_IsMatch_WithMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns false -- validator mismatch", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyAll_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAll_WithError(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1629,7 +1629,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyAll_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns error -- mismatch", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyAll_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAll_Match(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1652,7 +1652,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyAll_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAll returns nil -- match", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyAllError_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllError_WithError(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1675,7 +1675,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyAllError_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyAllError returns error -- mismatch", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyFirst_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyFirst_WithError(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1698,7 +1698,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyFirst_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns error -- mismatch", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyFirst_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyFirst_Match(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1721,7 +1721,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyFirst_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- match", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyUpto_WithError(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_WithError(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1744,7 +1744,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyUpto_WithError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns error -- mismatch", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyUpto_Match(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyUpto_Match(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1767,7 +1767,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyUpto_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyUpto returns nil -- match", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_VerifyAllErrorUsingActual_WithItems(t *testing.T) {
+func Test_HeaderSliceValidators_VerifyAllErrorUsingActual_WithItems(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1790,7 +1790,7 @@ func Test_Cov5_HeaderSliceValidators_VerifyAllErrorUsingActual_WithItems(t *test
 	expected.ShouldBeEqual(t, 0, "VerifyAllErrorUsingActual does not panic -- with items", actual)
 }
 
-func Test_Cov5_HeaderSliceValidators_SetActualOnAll_WithItems(t *testing.T) {
+func Test_HeaderSliceValidators_SetActualOnAll_WithItems(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
 		{
@@ -1813,7 +1813,7 @@ func Test_Cov5_HeaderSliceValidators_SetActualOnAll_WithItems(t *testing.T) {
 
 // ── RangeSegmentsValidator — uncovered paths ──
 
-func Test_Cov5_RangeSegmentsValidator_SetActual(t *testing.T) {
+func Test_RangeSegmentsValidator_SetActual(t *testing.T) {
 	// Arrange
 	rsv := &corevalidator.RangeSegmentsValidator{Title: "test"}
 
@@ -1828,7 +1828,7 @@ func Test_Cov5_RangeSegmentsValidator_SetActual(t *testing.T) {
 
 // ── Condition — IsTrimCompare branch ──
 
-func Test_Cov5_Condition_IsTrimCompare(t *testing.T) {
+func Test_Condition_IsTrimCompare(t *testing.T) {
 	// Arrange
 	c := corevalidator.Condition{IsTrimCompare: true}
 
@@ -1846,7 +1846,7 @@ func Test_Cov5_Condition_IsTrimCompare(t *testing.T) {
 
 // ── vars.go — DefaultConditions ──
 
-func Test_Cov5_DefaultConditions(t *testing.T) {
+func Test_DefaultConditions(t *testing.T) {
 	// Assert
 	actual := args.Map{
 		"disabledSplit":     corevalidator.DefaultDisabledCoreCondition.IsSplitByWhitespace(),
@@ -1867,7 +1867,7 @@ func Test_Cov5_DefaultConditions(t *testing.T) {
 
 // ── TextValidator — case-insensitive branches ──
 
-func Test_Cov5_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "Hello", SearchAs: stringcompareas.Equal}
 
@@ -1883,7 +1883,7 @@ func Test_Cov5_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns correct -- case sensitivity", actual)
 }
 
-func Test_Cov5_TextValidator_IsMatch_Contains_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_Contains_CaseInsensitive(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "ELL", SearchAs: stringcompareas.Contains}
 
@@ -1893,7 +1893,7 @@ func Test_Cov5_TextValidator_IsMatch_Contains_CaseInsensitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- contains case insensitive", actual)
 }
 
-func Test_Cov5_TextValidator_IsMatch_StartsWith_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_StartsWith_CaseInsensitive(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "HEL", SearchAs: stringcompareas.StartsWith}
 
@@ -1903,7 +1903,7 @@ func Test_Cov5_TextValidator_IsMatch_StartsWith_CaseInsensitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsMatch returns true -- startsWith case insensitive", actual)
 }
 
-func Test_Cov5_TextValidator_IsMatch_EndsWith_CaseInsensitive(t *testing.T) {
+func Test_TextValidator_IsMatch_EndsWith_CaseInsensitive(t *testing.T) {
 	// Arrange
 	tv := &corevalidator.TextValidator{Search: "LLO", SearchAs: stringcompareas.EndsWith}
 

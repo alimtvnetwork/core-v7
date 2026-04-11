@@ -16,7 +16,7 @@ import (
 // Target 4: SkipOnUnix.go:12-14 — platform-dependent (Unix only)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_DraftType_IsEqual_WithInnerFields_Same(t *testing.T) {
+func Test_DraftType_IsEqual_WithInnerFields_Same(t *testing.T) {
 	// Arrange — exported fields match, inner fields are zero-valued and equal
 	left := &coretests.DraftType{
 		SampleString1: "sample1",
