@@ -81,7 +81,7 @@ func Test_MinMaxByte_Ranges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte_Ranges returns correct value -- with args", actual)
 }
 
-func Test_MinMaxByte_Clone(t *testing.T) {
+func Test_MinMaxByte_Clone_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -103,7 +103,7 @@ func Test_MinMaxByte_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte_Clone returns correct value -- with args", actual)
 }
 
-func Test_MinMaxByte_CreateMinMaxInt(t *testing.T) {
+func Test_MinMaxByte_CreateMinMaxInt_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxByte{Min: 3, Max: 7}
 
@@ -202,7 +202,7 @@ func Test_MinMaxInt_Ranges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt_Ranges returns correct value -- with args", actual)
 }
 
-func Test_MinMaxInt_CreateRanges(t *testing.T) {
+func Test_MinMaxInt_CreateRanges_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 3}
 	extra := corerange.MinMaxInt{Min: 10, Max: 12}
@@ -223,7 +223,7 @@ func Test_MinMaxInt_CreateRanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt_CreateRanges returns correct value -- with args", actual)
 }
 
-func Test_MinMaxInt_RangesExcept(t *testing.T) {
+func Test_MinMaxInt_RangesExcept_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 5}
 
@@ -380,7 +380,7 @@ func Test_RangeInt_Conversions(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt_Conversions returns correct value -- with args", actual)
 }
 
-func Test_RangeInt_RangesExcept(t *testing.T) {
+func Test_RangeInt_RangesExcept_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("1:5", ":", 0, 10)
 
@@ -397,7 +397,7 @@ func Test_RangeInt_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt_RangesExcept returns correct value -- with args", actual)
 }
 
-func Test_RangeInt_CreateRanges(t *testing.T) {
+func Test_RangeInt_CreateRanges_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntMinMax("1:3", ":", 0, 20)
 	extra := corerange.MinMaxInt{Min: 10, Max: 12}
@@ -637,7 +637,7 @@ func Test_Within_StringRangeInteger(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_StringRangeInteger returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeIntegerDefault(t *testing.T) {
+func Test_Within_StringRangeIntegerDefault_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	val, ok := corerange.Within.StringRangeIntegerDefault(1, 100, "50")
 	valLow, okLow := corerange.Within.StringRangeIntegerDefault(1, 100, "0")
@@ -751,7 +751,7 @@ func Test_Within_RangeUint16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_RangeUint16 returns non-empty -- with args", actual)
 }
 
-func Test_Within_RangeFloat(t *testing.T) {
+func Test_Within_RangeFloat_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	val, ok := corerange.Within.RangeFloat(true, 1.0, 10.0, 5.0)
 	valBelow, okBelow := corerange.Within.RangeFloat(true, 1.0, 10.0, 0.5)
@@ -803,7 +803,7 @@ func Test_Within_RangeFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_RangeFloat64 returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeFloat(t *testing.T) {
+func Test_Within_StringRangeFloat_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	val, ok := corerange.Within.StringRangeFloat(true, 0.0, 100.0, "50.5")
 	valBad, okBad := corerange.Within.StringRangeFloat(true, 0.0, 100.0, "abc")
@@ -824,7 +824,7 @@ func Test_Within_StringRangeFloat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_StringRangeFloat returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeFloat64(t *testing.T) {
+func Test_Within_StringRangeFloat64_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	val, ok := corerange.Within.StringRangeFloat64(true, 0.0, 100.0, "50.5")
 	valBad, okBad := corerange.Within.StringRangeFloat64(true, 0.0, 100.0, "abc")
@@ -845,7 +845,7 @@ func Test_Within_StringRangeFloat64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_StringRangeFloat64 returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeFloatDefault(t *testing.T) {
+func Test_Within_StringRangeFloatDefault_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	_, ok := corerange.Within.StringRangeFloatDefault("50.0")
 	_, okBad := corerange.Within.StringRangeFloatDefault("abc")
@@ -862,7 +862,7 @@ func Test_Within_StringRangeFloatDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_StringRangeFloatDefault returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeFloat64Default(t *testing.T) {
+func Test_Within_StringRangeFloat64Default_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	_, ok := corerange.Within.StringRangeFloat64Default("50.0")
 	_, okBad := corerange.Within.StringRangeFloat64Default("abc")
@@ -879,7 +879,7 @@ func Test_Within_StringRangeFloat64Default(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within_StringRangeFloat64Default returns non-empty -- with args", actual)
 }
 
-func Test_Within_StringRangeUint32(t *testing.T) {
+func Test_Within_StringRangeUint32_FromMinMaxByteVerificati(t *testing.T) {
 	// Arrange & Act
 	val, ok := corerange.Within.StringRangeUint32("100")
 	_, okBad := corerange.Within.StringRangeUint32("abc")

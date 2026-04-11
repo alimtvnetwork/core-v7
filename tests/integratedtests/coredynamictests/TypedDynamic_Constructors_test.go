@@ -13,7 +13,7 @@ import (
 // TypedDynamic — comprehensive coverage
 // ==========================================================================
 
-func Test_TypedDynamic_Constructors(t *testing.T) {
+func Test_TypedDynamic_Constructors_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewTypedDynamic[string]("hello", true)
 	d2 := coredynamic.NewTypedDynamicValid[string]("world")
@@ -72,7 +72,7 @@ func Test_TypedDynamic_StringAndJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic string and JSON methods -- string value", actual)
 }
 
-func Test_TypedDynamic_GetAs(t *testing.T) {
+func Test_TypedDynamic_GetAs_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	dStr := coredynamic.NewTypedDynamicValid[any]("hello")
 	dInt := coredynamic.NewTypedDynamicValid[any](42)
@@ -138,7 +138,7 @@ func Test_TypedDynamic_ValueMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Value* methods return expected -- various", actual)
 }
 
-func Test_TypedDynamic_Clone(t *testing.T) {
+func Test_TypedDynamic_Clone_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid[string]("hello")
 	cloned := d.Clone()
@@ -166,7 +166,7 @@ func Test_TypedDynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Clone methods return expected -- all paths", actual)
 }
 
-func Test_TypedDynamic_ToDynamic(t *testing.T) {
+func Test_TypedDynamic_ToDynamic_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid[string]("hello")
 	dyn := d.ToDynamic()
@@ -185,7 +185,7 @@ func Test_TypedDynamic_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ToDynamic returns expected -- valid", actual)
 }
 
-func Test_TypedDynamic_Deserialize(t *testing.T) {
+func Test_TypedDynamic_Deserialize_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr[string]("", false)
 	err := d.Deserialize([]byte(`"hello"`))
@@ -206,7 +206,7 @@ func Test_TypedDynamic_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize sets data -- valid JSON", actual)
 }
 
-func Test_TypedDynamic_UnmarshalJSON(t *testing.T) {
+func Test_TypedDynamic_UnmarshalJSON_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr[string]("", false)
 	err := d.UnmarshalJSON([]byte(`"world"`))
@@ -225,7 +225,7 @@ func Test_TypedDynamic_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic UnmarshalJSON sets data -- valid JSON", actual)
 }
 
-func Test_TypedDynamic_JsonResult(t *testing.T) {
+func Test_TypedDynamic_JsonResult_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid[string]("test")
 	jr := d.JsonResult()
@@ -271,7 +271,7 @@ func Test_TypedDynamic_BytesNonByteType(t *testing.T) {
 // TypedSimpleResult — comprehensive coverage
 // ==========================================================================
 
-func Test_TypedSimpleResult_Constructors(t *testing.T) {
+func Test_TypedSimpleResult_Constructors_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.NewTypedSimpleResult[string]("hello", true, "")
 	r2 := coredynamic.NewTypedSimpleResultValid[string]("world")
@@ -296,7 +296,7 @@ func Test_TypedSimpleResult_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult constructors return expected -- all", actual)
 }
 
-func Test_TypedSimpleResult_InvalidError(t *testing.T) {
+func Test_TypedSimpleResult_InvalidError_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.NewTypedSimpleResultValid[string]("ok")
 	r2 := coredynamic.InvalidTypedSimpleResult[string]("err")
@@ -322,7 +322,7 @@ func Test_TypedSimpleResult_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult InvalidError returns expected -- all paths", actual)
 }
 
-func Test_TypedSimpleResult_Json(t *testing.T) {
+func Test_TypedSimpleResult_Json_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid[string]("test")
 	jb, jbErr := r.JsonBytes()
@@ -348,7 +348,7 @@ func Test_TypedSimpleResult_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult JSON methods return expected -- valid", actual)
 }
 
-func Test_TypedSimpleResult_GetAs(t *testing.T) {
+func Test_TypedSimpleResult_GetAs_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleResultValid[any]("hello")
 	s, sOk := r.GetAsString()
@@ -412,7 +412,7 @@ func Test_TypedSimpleResult_CloneAndConvert(t *testing.T) {
 // TypedSimpleRequest — comprehensive coverage
 // ==========================================================================
 
-func Test_TypedSimpleRequest_Constructors(t *testing.T) {
+func Test_TypedSimpleRequest_Constructors_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.NewTypedSimpleRequest[string]("hello", true, "")
 	r2 := coredynamic.NewTypedSimpleRequestValid[string]("world")
@@ -437,7 +437,7 @@ func Test_TypedSimpleRequest_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest constructors return expected -- all", actual)
 }
 
-func Test_TypedSimpleRequest_InvalidError(t *testing.T) {
+func Test_TypedSimpleRequest_InvalidError_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r1 := coredynamic.NewTypedSimpleRequestValid[string]("ok")
 	r2 := coredynamic.InvalidTypedSimpleRequest[string]("err")
@@ -460,7 +460,7 @@ func Test_TypedSimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest InvalidError returns expected -- all paths", actual)
 }
 
-func Test_TypedSimpleRequest_Json(t *testing.T) {
+func Test_TypedSimpleRequest_Json_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid[string]("test")
 	jb, _ := r.JsonBytes()
@@ -483,7 +483,7 @@ func Test_TypedSimpleRequest_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest JSON methods return expected -- valid", actual)
 }
 
-func Test_TypedSimpleRequest_GetAs(t *testing.T) {
+func Test_TypedSimpleRequest_GetAs_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	r := coredynamic.NewTypedSimpleRequestValid[any]("hello")
 	s, sOk := r.GetAsString()
@@ -545,7 +545,7 @@ func Test_TypedSimpleRequest_CloneAndConvert(t *testing.T) {
 // SafeTypeName
 // ==========================================================================
 
-func Test_SafeTypeName(t *testing.T) {
+func Test_SafeTypeName_FromTypedDynamicConstruc(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"string": coredynamic.SafeTypeName("hello"),
@@ -564,7 +564,7 @@ func Test_SafeTypeName(t *testing.T) {
 // PointerOrNonPointer
 // ==========================================================================
 
-func Test_PointerOrNonPointer(t *testing.T) {
+func Test_PointerOrNonPointer_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	val := "hello"
 	outPtr, _ := coredynamic.PointerOrNonPointer(true, &val)
@@ -587,7 +587,7 @@ func Test_PointerOrNonPointer(t *testing.T) {
 // LengthOfReflect
 // ==========================================================================
 
-func Test_LengthOfReflect(t *testing.T) {
+func Test_LengthOfReflect_FromTypedDynamicConstruc(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"slice": coredynamic.LengthOfReflect(reflect.ValueOf([]int{1, 2, 3})),
@@ -610,7 +610,7 @@ func Test_LengthOfReflect(t *testing.T) {
 // BytesConverter
 // ==========================================================================
 
-func Test_BytesConverter_SafeCastString(t *testing.T) {
+func Test_BytesConverter_SafeCastString_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("hello"))
 	bcEmpty := coredynamic.NewBytesConverter([]byte{})
@@ -629,7 +629,7 @@ func Test_BytesConverter_SafeCastString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter SafeCastString returns expected -- valid and empty", actual)
 }
 
-func Test_BytesConverter_CastString(t *testing.T) {
+func Test_BytesConverter_CastString_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("hello"))
 	bcEmpty := coredynamic.NewBytesConverter([]byte{})
@@ -650,7 +650,7 @@ func Test_BytesConverter_CastString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString returns expected -- valid and empty", actual)
 }
 
-func Test_BytesConverter_ToBool(t *testing.T) {
+func Test_BytesConverter_ToBool_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("true"))
 	val, err := bc.ToBool()
@@ -669,7 +669,7 @@ func Test_BytesConverter_ToBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool returns true -- valid", actual)
 }
 
-func Test_BytesConverter_ToBoolMust(t *testing.T) {
+func Test_BytesConverter_ToBoolMust_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("false"))
 
@@ -681,7 +681,7 @@ func Test_BytesConverter_ToBoolMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBoolMust returns false -- valid", actual)
 }
 
-func Test_BytesConverter_ToString(t *testing.T) {
+func Test_BytesConverter_ToString_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	val, err := bc.ToString()
@@ -700,7 +700,7 @@ func Test_BytesConverter_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString returns expected -- valid JSON string", actual)
 }
 
-func Test_BytesConverter_ToStringMust(t *testing.T) {
+func Test_BytesConverter_ToStringMust_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"world"`))
 
@@ -712,7 +712,7 @@ func Test_BytesConverter_ToStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringMust returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_ToStrings(t *testing.T) {
+func Test_BytesConverter_ToStrings_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	val, err := bc.ToStrings()
@@ -731,7 +731,7 @@ func Test_BytesConverter_ToStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_ToStringsMust(t *testing.T) {
+func Test_BytesConverter_ToStringsMust_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["x"]`))
 	val := bc.ToStringsMust()
@@ -744,7 +744,7 @@ func Test_BytesConverter_ToStringsMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringsMust returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_ToInt64(t *testing.T) {
+func Test_BytesConverter_ToInt64_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("42"))
 	val, err := bc.ToInt64()
@@ -763,7 +763,7 @@ func Test_BytesConverter_ToInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64 returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_ToInt64Must(t *testing.T) {
+func Test_BytesConverter_ToInt64Must_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("99"))
 
@@ -775,7 +775,7 @@ func Test_BytesConverter_ToInt64Must(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64Must returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_Deserialize(t *testing.T) {
+func Test_BytesConverter_Deserialize_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	var result string
@@ -795,7 +795,7 @@ func Test_BytesConverter_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize returns expected -- valid", actual)
 }
 
-func Test_BytesConverter_DeserializeMust(t *testing.T) {
+func Test_BytesConverter_DeserializeMust_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"world"`))
 	var result string
@@ -813,7 +813,7 @@ func Test_BytesConverter_DeserializeMust(t *testing.T) {
 // Dynamic — additional uncovered methods
 // ==========================================================================
 
-func Test_Dynamic_MapToKeyVal(t *testing.T) {
+func Test_Dynamic_MapToKeyVal_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(map[string]int{"a": 1})
 	kv, err := d.MapToKeyVal()
@@ -912,7 +912,7 @@ func Test_Dynamic_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic UnmarshalJSON returns expected -- valid and nil", actual)
 }
 
-func Test_Dynamic_ValueMarshal_Nil(t *testing.T) {
+func Test_Dynamic_ValueMarshal_Nil_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.ValueMarshal()
@@ -925,7 +925,7 @@ func Test_Dynamic_ValueMarshal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueMarshal returns error -- nil receiver", actual)
 }
 
-func Test_Dynamic_JsonPtr(t *testing.T) {
+func Test_Dynamic_JsonPtr_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	jp := d.JsonPtr()
@@ -998,7 +998,7 @@ func Test_Dynamic_LoopMapBreak(t *testing.T) {
 // IsAnyTypesOf
 // ==========================================================================
 
-func Test_IsAnyTypesOf(t *testing.T) {
+func Test_IsAnyTypesOf_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -1021,7 +1021,7 @@ func Test_IsAnyTypesOf(t *testing.T) {
 // Dynamic — ConvertUsingFunc
 // ==========================================================================
 
-func Test_Dynamic_ConvertUsingFunc(t *testing.T) {
+func Test_Dynamic_ConvertUsingFunc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("42")
 	converter := func(data any, expectedType reflect.Type) *coredynamic.SimpleResult {

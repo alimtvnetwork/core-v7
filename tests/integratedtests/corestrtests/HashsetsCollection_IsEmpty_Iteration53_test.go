@@ -14,7 +14,7 @@ import (
 // HashsetsCollection
 // =============================================================================
 
-func Test_HashsetsCollection_IsEmpty(t *testing.T) {
+func Test_HashsetsCollection_IsEmpty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_IsEmpty", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		tc := coretestcases.CaseV1{
@@ -27,7 +27,7 @@ func Test_HashsetsCollection_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_HasItems(t *testing.T) {
+func Test_HashsetsCollection_HasItems_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_HasItems", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hs := corestr.New.Hashset.Strings([]string{"a"})
@@ -55,7 +55,7 @@ func Test_HashsetsCollection_Length(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Add(t *testing.T) {
+func Test_HashsetsCollection_Add_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_Add", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hs := corestr.New.Hashset.Strings([]string{"a"})
@@ -70,7 +70,7 @@ func Test_HashsetsCollection_Add(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_AddNonNil(t *testing.T) {
+func Test_HashsetsCollection_AddNonNil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_AddNonNil", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.AddNonNil(nil)
@@ -86,7 +86,7 @@ func Test_HashsetsCollection_AddNonNil(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_AddNonEmpty(t *testing.T) {
+func Test_HashsetsCollection_AddNonEmpty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_AddNonEmpty", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.AddNonEmpty(corestr.New.Hashset.Empty())
@@ -101,7 +101,7 @@ func Test_HashsetsCollection_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Adds(t *testing.T) {
+func Test_HashsetsCollection_Adds_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_Adds", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hs1 := corestr.New.Hashset.Strings([]string{"a"})
@@ -131,7 +131,7 @@ func Test_HashsetsCollection_Adds_Nil(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_StringsList(t *testing.T) {
+func Test_HashsetsCollection_StringsList_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_StringsList", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -146,7 +146,7 @@ func Test_HashsetsCollection_StringsList(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_StringsList_Empty(t *testing.T) {
+func Test_HashsetsCollection_StringsList_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_StringsList_Empty", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		result := hc.StringsList()
@@ -175,7 +175,7 @@ func Test_HashsetsCollection_HasAll_True(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_HasAll_Empty(t *testing.T) {
+func Test_HashsetsCollection_HasAll_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_HasAll_Empty", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		result := hc.HasAll("a")
@@ -189,7 +189,7 @@ func Test_HashsetsCollection_HasAll_Empty(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_ListDirectPtr(t *testing.T) {
+func Test_HashsetsCollection_ListDirectPtr_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_ListDirectPtr", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -201,7 +201,7 @@ func Test_HashsetsCollection_ListDirectPtr(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_AddHashsetsCollection(t *testing.T) {
+func Test_HashsetsCollection_AddHashsetsCollection_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_AddHashsetsCollection", func() {
 		hc1 := corestr.New.HashsetsCollection.Empty()
 		hc1.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -218,7 +218,7 @@ func Test_HashsetsCollection_AddHashsetsCollection(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_AddHashsetsCollection_Nil(t *testing.T) {
+func Test_HashsetsCollection_AddHashsetsCollection_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_AddHashsetsCollection_Nil", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.AddHashsetsCollection(nil)
@@ -232,7 +232,7 @@ func Test_HashsetsCollection_AddHashsetsCollection_Nil(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_ConcatNew(t *testing.T) {
+func Test_HashsetsCollection_ConcatNew_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_ConcatNew", func() {
 		hc1 := corestr.New.HashsetsCollection.Empty()
 		hc1.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -249,7 +249,7 @@ func Test_HashsetsCollection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_ConcatNew_NoArgs(t *testing.T) {
+func Test_HashsetsCollection_ConcatNew_NoArgs_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_ConcatNew_NoArgs", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -264,7 +264,7 @@ func Test_HashsetsCollection_ConcatNew_NoArgs(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_LastIndex(t *testing.T) {
+func Test_HashsetsCollection_LastIndex_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_LastIndex", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -278,7 +278,7 @@ func Test_HashsetsCollection_LastIndex(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_IsEqual(t *testing.T) {
+func Test_HashsetsCollection_IsEqual_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_IsEqual", func() {
 		hc1 := corestr.New.HashsetsCollection.Empty()
 		hc1.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -366,7 +366,7 @@ func Test_HashsetsCollection_Json(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_String(t *testing.T) {
+func Test_HashsetsCollection_String_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_String", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		convey.Convey("String empty", t, func() {
@@ -385,7 +385,7 @@ func Test_HashsetsCollection_String_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Join(t *testing.T) {
+func Test_HashsetsCollection_Join_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_Join", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -395,7 +395,7 @@ func Test_HashsetsCollection_Join(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Serialize(t *testing.T) {
+func Test_HashsetsCollection_Serialize_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_Serialize", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
@@ -441,7 +441,7 @@ func Test_HashsetsCollection_IndexOf(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_ListPtr(t *testing.T) {
+func Test_HashsetsCollection_ListPtr_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_HashsetsCollection_ListPtr", func() {
 		hc := corestr.New.HashsetsCollection.Empty()
 		convey.Convey("ListPtr", t, func() {
@@ -455,7 +455,7 @@ func Test_HashsetsCollection_ListPtr(t *testing.T) {
 // KeyValuePair
 // =============================================================================
 
-func Test_KeyValuePair_Basics(t *testing.T) {
+func Test_KeyValuePair_Basics_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Basics", func() {
 		kv := corestr.KeyValuePair{Key: "name", Value: "test"}
 		tc := coretestcases.CaseV1{
@@ -511,7 +511,7 @@ func Test_KeyValuePair_ValueConversions(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueBool(t *testing.T) {
+func Test_KeyValuePair_ValueBool_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_ValueBool", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "true"}
 		tc := coretestcases.CaseV1{
@@ -524,7 +524,7 @@ func Test_KeyValuePair_ValueBool(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueBool_Empty(t *testing.T) {
+func Test_KeyValuePair_ValueBool_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_ValueBool_Empty", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: ""}
 		tc := coretestcases.CaseV1{
@@ -537,7 +537,7 @@ func Test_KeyValuePair_ValueBool_Empty(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Is(t *testing.T) {
+func Test_KeyValuePair_Is_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Is", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		tc := coretestcases.CaseV1{
@@ -575,7 +575,7 @@ func Test_KeyValuePair_Trim(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueByte(t *testing.T) {
+func Test_KeyValuePair_ValueByte_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_ValueByte", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "100"}
 		tc := coretestcases.CaseV1{
@@ -588,7 +588,7 @@ func Test_KeyValuePair_ValueByte(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_FormatString(t *testing.T) {
+func Test_KeyValuePair_FormatString_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_FormatString", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		result := kv.FormatString("%s=%s")
@@ -602,7 +602,7 @@ func Test_KeyValuePair_FormatString(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_String(t *testing.T) {
+func Test_KeyValuePair_String_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_String", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		convey.Convey("KVP String", t, func() {
@@ -611,7 +611,7 @@ func Test_KeyValuePair_String(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Clear(t *testing.T) {
+func Test_KeyValuePair_Clear_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Clear", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		kv.Clear()
@@ -625,7 +625,7 @@ func Test_KeyValuePair_Clear(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Dispose(t *testing.T) {
+func Test_KeyValuePair_Dispose_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Dispose", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		kv.Dispose()
@@ -639,7 +639,7 @@ func Test_KeyValuePair_Dispose(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_ValueValid", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		vv := kv.ValueValid()
@@ -741,7 +741,7 @@ func Test_KeyValuePair_SerializeMust(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Compile(t *testing.T) {
+func Test_KeyValuePair_Compile_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Compile", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		convey.Convey("KVP Compile", t, func() {
@@ -836,7 +836,7 @@ func Test_KeyValueCollection_FirstOrDefault_Empty(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Find(t *testing.T) {
+func Test_KeyValueCollection_Find_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValueCollection_Find", func() {
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1").Add("b", "2")
@@ -888,7 +888,7 @@ func Test_KeyValueCollection_SafeValuesAtIndexes(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_StringsUsingFormat(t *testing.T) {
+func Test_KeyValueCollection_StringsUsingFormat_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValueCollection_StringsUsingFormat", func() {
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("k", "v")
@@ -1145,7 +1145,7 @@ func Test_KeyValueCollection_IsContains(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Get(t *testing.T) {
+func Test_KeyValueCollection_Get_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValueCollection_Get", func() {
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("k", "v")
@@ -1200,7 +1200,7 @@ func Test_KeyValueCollection_HasIndex(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Adds(t *testing.T) {
+func Test_KeyValueCollection_Adds_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValueCollection_Adds", func() {
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Adds(
@@ -1231,7 +1231,7 @@ func Test_KeyValueCollection_Adds_Empty(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_AddStringBySplit(t *testing.T) {
+func Test_KeyValueCollection_AddStringBySplit_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValueCollection_AddStringBySplit", func() {
 		kvc := &corestr.KeyValueCollection{}
 		kvc.AddStringBySplit("=", "key=value")
@@ -1326,7 +1326,7 @@ func Test_LeftRight_Invalid(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftRight_InvalidNoMessage_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_InvalidNoMessage", func() {
 		lr := corestr.InvalidLeftRightNoMessage()
 		tc := coretestcases.CaseV1{
@@ -1441,7 +1441,7 @@ func Test_LeftRight_ValidNonWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Is(t *testing.T) {
+func Test_LeftRight_Is_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_Is", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := coretestcases.CaseV1{
@@ -1458,7 +1458,7 @@ func Test_LeftRight_Is(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsEqual(t *testing.T) {
+func Test_LeftRight_IsEqual_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_IsEqual", func() {
 		lr1 := corestr.NewLeftRight("a", "b")
 		lr2 := corestr.NewLeftRight("a", "b")
@@ -1472,7 +1472,7 @@ func Test_LeftRight_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_Clone", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		cloned := lr.Clone()
@@ -1496,7 +1496,7 @@ func Test_LeftRight_NonPtr(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_RegexMatch(t *testing.T) {
+func Test_LeftRight_RegexMatch_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_RegexMatch", func() {
 		lr := corestr.NewLeftRight("abc123", "xyz")
 		re := regexp.MustCompile(`\d+`)
@@ -1533,7 +1533,7 @@ func Test_LeftRight_RegexMatch_Nil(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_ClearDispose(t *testing.T) {
+func Test_LeftRight_ClearDispose_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_ClearDispose", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		lr.Clear()
@@ -1547,7 +1547,7 @@ func Test_LeftRight_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_FromSplit(t *testing.T) {
+func Test_LeftRight_FromSplit_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_FromSplit", func() {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 		tc := coretestcases.CaseV1{
@@ -1617,7 +1617,7 @@ func Test_LeftRight_FromSplitFullTrimmed(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice(t *testing.T) {
+func Test_LeftRight_UsingSlice_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_UsingSlice", func() {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
 		tc := coretestcases.CaseV1{
@@ -1655,7 +1655,7 @@ func Test_LeftRight_UsingSlice_Single(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice_Empty(t *testing.T) {
+func Test_LeftRight_UsingSlice_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_UsingSlice_Empty", func() {
 		lr := corestr.LeftRightUsingSlice([]string{})
 		tc := coretestcases.CaseV1{
@@ -1681,7 +1681,7 @@ func Test_LeftRight_UsingSlicePtr(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_TrimmedUsingSlice(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_TrimmedUsingSlice", func() {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 		tc := coretestcases.CaseV1{
@@ -1700,7 +1700,7 @@ func Test_LeftRight_TrimmedUsingSlice(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_TrimmedUsingSlice_Nil(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftRight_TrimmedUsingSlice_Nil", func() {
 		lr := corestr.LeftRightTrimmedUsingSlice(nil)
 		tc := coretestcases.CaseV1{
@@ -1736,7 +1736,7 @@ func Test_LeftRight_TrimmedUsingSlice_Single(t *testing.T) {
 // LeftMiddleRight
 // =============================================================================
 
-func Test_LeftMiddleRight_New(t *testing.T) {
+func Test_LeftMiddleRight_New_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_New", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := coretestcases.CaseV1{
@@ -1770,7 +1770,7 @@ func Test_LeftMiddleRight_Invalid(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftMiddleRight_InvalidNoMessage_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_InvalidNoMessage", func() {
 		lmr := corestr.InvalidLeftMiddleRightNoMessage()
 		tc := coretestcases.CaseV1{
@@ -1887,7 +1887,7 @@ func Test_LeftMiddleRight_ValidNonWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_IsAll(t *testing.T) {
+func Test_LeftMiddleRight_IsAll_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_IsAll", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := coretestcases.CaseV1{
@@ -1906,7 +1906,7 @@ func Test_LeftMiddleRight_IsAll(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_Clone(t *testing.T) {
+func Test_LeftMiddleRight_Clone_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_Clone", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		cloned := lmr.Clone()
@@ -1920,7 +1920,7 @@ func Test_LeftMiddleRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_ToLeftRight(t *testing.T) {
+func Test_LeftMiddleRight_ToLeftRight_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_ToLeftRight", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		lr := lmr.ToLeftRight()
@@ -1940,7 +1940,7 @@ func Test_LeftMiddleRight_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_ClearDispose(t *testing.T) {
+func Test_LeftMiddleRight_ClearDispose_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_ClearDispose", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		lmr.Dispose()
@@ -1954,7 +1954,7 @@ func Test_LeftMiddleRight_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_FromSplit(t *testing.T) {
+func Test_LeftMiddleRight_FromSplit_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_LeftMiddleRight_FromSplit", func() {
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
 		tc := coretestcases.CaseV1{
@@ -2040,7 +2040,7 @@ func Test_LeftMiddleRight_FromSplitNTrimmed(t *testing.T) {
 // ValidValue
 // =============================================================================
 
-func Test_ValidValue_New(t *testing.T) {
+func Test_ValidValue_New_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_New", func() {
 		vv := corestr.NewValidValue("hello")
 		tc := coretestcases.CaseV1{
@@ -2059,7 +2059,7 @@ func Test_ValidValue_New(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Empty(t *testing.T) {
+func Test_ValidValue_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_Empty", func() {
 		vv := corestr.NewValidValueEmpty()
 		tc := coretestcases.CaseV1{
@@ -2078,7 +2078,7 @@ func Test_ValidValue_Empty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Invalid(t *testing.T) {
+func Test_ValidValue_Invalid_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_Invalid", func() {
 		vv := corestr.InvalidValidValue("err")
 		tc := coretestcases.CaseV1{
@@ -2097,7 +2097,7 @@ func Test_ValidValue_Invalid(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_InvalidNoMessage(t *testing.T) {
+func Test_ValidValue_InvalidNoMessage_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_InvalidNoMessage", func() {
 		vv := corestr.InvalidValidValueNoMessage()
 		tc := coretestcases.CaseV1{
@@ -2171,7 +2171,7 @@ func Test_ValidValue_WhitespaceChecks(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_HasValidNonEmpty(t *testing.T) {
+func Test_ValidValue_HasValidNonEmpty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_HasValidNonEmpty", func() {
 		vv := corestr.NewValidValue("a")
 		tc := coretestcases.CaseV1{
@@ -2209,7 +2209,7 @@ func Test_ValidValue_Is(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_IsAnyOf", func() {
 		vv := corestr.NewValidValue("b")
 		tc := coretestcases.CaseV1{
@@ -2228,7 +2228,7 @@ func Test_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsContains(t *testing.T) {
+func Test_ValidValue_IsContains_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_IsContains", func() {
 		vv := corestr.NewValidValue("hello world")
 		tc := coretestcases.CaseV1{
@@ -2241,7 +2241,7 @@ func Test_ValidValue_IsContains(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyContains(t *testing.T) {
+func Test_ValidValue_IsAnyContains_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_IsAnyContains", func() {
 		vv := corestr.NewValidValue("hello world")
 		tc := coretestcases.CaseV1{
@@ -2258,7 +2258,7 @@ func Test_ValidValue_IsAnyContains(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsEqualNonSensitive(t *testing.T) {
+func Test_ValidValue_IsEqualNonSensitive_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_IsEqualNonSensitive", func() {
 		vv := corestr.NewValidValue("Hello")
 		tc := coretestcases.CaseV1{
@@ -2322,7 +2322,7 @@ func Test_ValidValue_RegexFindAllStrings(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_RegexFindAllStrings_Nil(t *testing.T) {
+func Test_ValidValue_RegexFindAllStrings_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_RegexFindAllStrings_Nil", func() {
 		vv := corestr.NewValidValue("abc")
 		result := vv.RegexFindAllStrings(nil, -1)
@@ -2357,7 +2357,7 @@ func Test_ValidValue_RegexFindAllStringsWithFlag(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_RegexFindAllStringsWithFlag_Nil(t *testing.T) {
+func Test_ValidValue_RegexFindAllStringsWithFlag_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_RegexFindAllStringsWithFlag_Nil", func() {
 		vv := corestr.NewValidValue("abc")
 		_, hasAny := vv.RegexFindAllStringsWithFlag(nil, -1)
@@ -2371,7 +2371,7 @@ func Test_ValidValue_RegexFindAllStringsWithFlag_Nil(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_Split", func() {
 		vv := corestr.NewValidValue("a,b,c")
 		result := vv.Split(",")
@@ -2385,7 +2385,7 @@ func Test_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_Clone", func() {
 		vv := corestr.NewValidValue("a")
 		cloned := vv.Clone()
@@ -2399,7 +2399,7 @@ func Test_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_String(t *testing.T) {
+func Test_ValidValue_String_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_String", func() {
 		vv := corestr.NewValidValue("a")
 		tc := coretestcases.CaseV1{
@@ -2421,7 +2421,7 @@ func Test_ValidValue_FullString(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_ClearDispose", func() {
 		vv := corestr.NewValidValue("a")
 		vv.Dispose()
@@ -2441,7 +2441,7 @@ func Test_ValidValue_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueBytesOnce(t *testing.T) {
+func Test_ValidValue_ValueBytesOnce_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_ValueBytesOnce", func() {
 		vv := corestr.NewValidValue("abc")
 		bytes1 := vv.ValueBytesOnce()
@@ -2512,7 +2512,7 @@ func Test_ValidValue_DefFloat(t *testing.T) {
 // ValidValues
 // =============================================================================
 
-func Test_ValidValues_Basics(t *testing.T) {
+func Test_ValidValues_Basics_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_Basics", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a").Add("b")
@@ -2530,7 +2530,7 @@ func Test_ValidValues_Basics(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_AddFull(t *testing.T) {
+func Test_ValidValues_AddFull_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_AddFull", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.AddFull(false, "val", "msg")
@@ -2544,7 +2544,7 @@ func Test_ValidValues_AddFull(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_SafeValueAt", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
@@ -2578,7 +2578,7 @@ func Test_ValidValues_SafeValidValueAt(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_SafeValuesAtIndexes(t *testing.T) {
+func Test_ValidValues_SafeValuesAtIndexes_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_SafeValuesAtIndexes", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
@@ -2608,7 +2608,7 @@ func Test_ValidValues_SafeValidValuesAtIndexes(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_Strings", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
@@ -2642,7 +2642,7 @@ func Test_ValidValues_String(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Find(t *testing.T) {
+func Test_ValidValues_Find_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_Find", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a").Add("b")
@@ -2659,7 +2659,7 @@ func Test_ValidValues_Find(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_ConcatNew(t *testing.T) {
+func Test_ValidValues_ConcatNew_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_ConcatNew", func() {
 		vvs1 := corestr.EmptyValidValues()
 		vvs1.Add("a")
@@ -2759,7 +2759,7 @@ func Test_ValidValues_AddHashset_Nil(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Hashmap(t *testing.T) {
+func Test_ValidValues_Hashmap_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValues_Hashmap", func() {
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
@@ -2872,7 +2872,7 @@ func Test_ValidValues_AddValidValues_Nil(t *testing.T) {
 // ValueStatus
 // =============================================================================
 
-func Test_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValueStatus_Invalid", func() {
 		vs := corestr.InvalidValueStatus("err")
 		convey.Convey("VS Invalid", t, func() {
@@ -2881,7 +2881,7 @@ func Test_ValueStatus_Invalid(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValueStatus_InvalidNoMessage", func() {
 		vs := corestr.InvalidValueStatusNoMessage()
 		convey.Convey("VS InvalidNoMessage", t, func() {
@@ -2890,7 +2890,7 @@ func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus_Clone(t *testing.T) {
+func Test_ValueStatus_Clone_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValueStatus_Clone", func() {
 		vs := corestr.InvalidValueStatus("err")
 		cloned := vs.Clone()
@@ -2904,7 +2904,7 @@ func Test_ValueStatus_Clone(t *testing.T) {
 // TextWithLineNumber
 // =============================================================================
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_TextWithLineNumber", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: 1, Text: "hello"}
 		tc := coretestcases.CaseV1{
@@ -2943,7 +2943,7 @@ func Test_TextWithLineNumber_Empty(t *testing.T) {
 // NonChainedLinkedListNodes
 // =============================================================================
 
-func Test_NonChainedLinkedListNodes(t *testing.T) {
+func Test_NonChainedLinkedListNodes_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_NonChainedLinkedListNodes", func() {
 		nodes := corestr.NewNonChainedLinkedListNodes(2)
 		tc := coretestcases.CaseV1{
@@ -3034,7 +3034,7 @@ func Test_NonChainedLinkedListNodes_Items(t *testing.T) {
 // NonChainedLinkedCollectionNodes
 // =============================================================================
 
-func Test_NonChainedLinkedCollectionNodes(t *testing.T) {
+func Test_NonChainedLinkedCollectionNodes_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_NonChainedLinkedCollectionNodes", func() {
 		nodes := corestr.NewNonChainedLinkedCollectionNodes(2)
 		tc := coretestcases.CaseV1{
@@ -3074,7 +3074,7 @@ func Test_NonChainedLinkedCollectionNodes_Items(t *testing.T) {
 // CloneSlice / CloneSliceIf
 // =============================================================================
 
-func Test_CloneSlice(t *testing.T) {
+func Test_CloneSlice_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_CloneSlice", func() {
 		result := corestr.CloneSlice([]string{"a", "b"})
 		tc := coretestcases.CaseV1{
@@ -3087,7 +3087,7 @@ func Test_CloneSlice(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice_Empty(t *testing.T) {
+func Test_CloneSlice_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_CloneSlice_Empty", func() {
 		result := corestr.CloneSlice(nil)
 		tc := coretestcases.CaseV1{
@@ -3100,7 +3100,7 @@ func Test_CloneSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_True(t *testing.T) {
+func Test_CloneSliceIf_True_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_CloneSliceIf_True", func() {
 		result := corestr.CloneSliceIf(true, "a", "b")
 		tc := coretestcases.CaseV1{
@@ -3113,7 +3113,7 @@ func Test_CloneSliceIf_True(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_False(t *testing.T) {
+func Test_CloneSliceIf_False_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_CloneSliceIf_False", func() {
 		result := corestr.CloneSliceIf(false, "a", "b")
 		tc := coretestcases.CaseV1{
@@ -3126,7 +3126,7 @@ func Test_CloneSliceIf_False(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_Empty(t *testing.T) {
+func Test_CloneSliceIf_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_CloneSliceIf_Empty", func() {
 		result := corestr.CloneSliceIf(true)
 		tc := coretestcases.CaseV1{
@@ -3143,7 +3143,7 @@ func Test_CloneSliceIf_Empty(t *testing.T) {
 // AnyToString
 // =============================================================================
 
-func Test_AnyToString(t *testing.T) {
+func Test_AnyToString_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AnyToString", func() {
 		result := corestr.AnyToString(false, "hello")
 		convey.Convey("AnyToString", t, func() {
@@ -3152,7 +3152,7 @@ func Test_AnyToString(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AnyToString_WithFieldName", func() {
 		result := corestr.AnyToString(true, "hello")
 		convey.Convey("AnyToString with field name", t, func() {
@@ -3161,7 +3161,7 @@ func Test_AnyToString_WithFieldName(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_Empty(t *testing.T) {
+func Test_AnyToString_Empty_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AnyToString_Empty", func() {
 		result := corestr.AnyToString(false, "")
 		tc := coretestcases.CaseV1{
@@ -3178,7 +3178,7 @@ func Test_AnyToString_Empty(t *testing.T) {
 // AllIndividualStringsOfStringsLength
 // =============================================================================
 
-func Test_AllIndividualStringsOfStringsLength(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AllIndividualStringsOfStringsLength", func() {
 		items := [][]string{{"a", "b"}, {"c"}}
 		result := corestr.AllIndividualStringsOfStringsLength(&items)
@@ -3192,7 +3192,7 @@ func Test_AllIndividualStringsOfStringsLength(t *testing.T) {
 	})
 }
 
-func Test_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AllIndividualStringsOfStringsLength_Nil", func() {
 		result := corestr.AllIndividualStringsOfStringsLength(nil)
 		tc := coretestcases.CaseV1{
@@ -3209,7 +3209,7 @@ func Test_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 // AllIndividualsLengthOfSimpleSlices
 // =============================================================================
 
-func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AllIndividualsLengthOfSimpleSlices", func() {
 		ss1 := corestr.New.SimpleSlice.Strings([]string{"a"})
 		ss2 := corestr.New.SimpleSlice.Strings([]string{"b", "c"})
@@ -3224,7 +3224,7 @@ func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 	})
 }
 
-func Test_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_Nil_FromHashsetsCollectionIs(t *testing.T) {
 	safeTest(t, "Test_Cov57_AllIndividualsLengthOfSimpleSlices_Nil", func() {
 		result := corestr.AllIndividualsLengthOfSimpleSlices()
 		tc := coretestcases.CaseV1{

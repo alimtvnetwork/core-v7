@@ -543,7 +543,7 @@ func Test_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 
 // ── SimpleSlice: IsEqualByFuncLinesSplit empty both sides (line 1173) ──
 
-func Test_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
+func Test_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty_FromCharCollectionMapAdd(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{})
 

@@ -59,7 +59,7 @@ func Test_KVC_New(t *testing.T) {
 // Add / AddPtr / AddMany / AddManyPtr
 // =============================================================================
 
-func Test_KVC_Add(t *testing.T) {
+func Test_KVC_Add_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -187,7 +187,7 @@ func Test_KVC_Items_Valid(t *testing.T) {
 // MapAnyItems
 // =============================================================================
 
-func Test_KVC_MapAnyItems_Empty(t *testing.T) {
+func Test_KVC_MapAnyItems_Empty_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	m := kvc.MapAnyItems()
@@ -218,7 +218,7 @@ func Test_KVC_MapAnyItems_Valid(t *testing.T) {
 // AllKeys / AllKeysSorted / AllValues
 // =============================================================================
 
-func Test_KVC_AllKeys_Empty(t *testing.T) {
+func Test_KVC_AllKeys_Empty_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 
@@ -284,7 +284,7 @@ func Test_KVC_AllKeysSorted_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC AllKeysSorted valid", actual)
 }
 
-func Test_KVC_AllValues_Empty(t *testing.T) {
+func Test_KVC_AllValues_Empty_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 
@@ -341,7 +341,7 @@ func Test_KVC_GetPagesSize_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC GetPagesSize valid", actual)
 }
 
-func Test_KVC_GetPagedCollection_SmallSet(t *testing.T) {
+func Test_KVC_GetPagedCollection_SmallSet_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -405,7 +405,7 @@ func Test_KVC_GetSinglePageCollection_Page1(t *testing.T) {
 // String / JsonModel / Json / JsonPtr
 // =============================================================================
 
-func Test_KVC_String_Nil(t *testing.T) {
+func Test_KVC_String_Nil_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	var kvc *coredynamic.KeyValCollection
 
@@ -431,7 +431,7 @@ func Test_KVC_String_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC String valid", actual)
 }
 
-func Test_KVC_JsonModel(t *testing.T) {
+func Test_KVC_JsonModel_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 
@@ -443,7 +443,7 @@ func Test_KVC_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC JsonModel", actual)
 }
 
-func Test_KVC_Json(t *testing.T) {
+func Test_KVC_Json_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	r := kvc.Json()
@@ -456,7 +456,7 @@ func Test_KVC_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC Json", actual)
 }
 
-func Test_KVC_JsonPtr(t *testing.T) {
+func Test_KVC_JsonPtr_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 
@@ -472,7 +472,7 @@ func Test_KVC_JsonPtr(t *testing.T) {
 // JSON round-trip / Serialize / JsonString / JsonStringMust
 // =============================================================================
 
-func Test_KVC_Serialize(t *testing.T) {
+func Test_KVC_Serialize_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -492,7 +492,7 @@ func Test_KVC_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC Serialize", actual)
 }
 
-func Test_KVC_JsonString(t *testing.T) {
+func Test_KVC_JsonString_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -512,7 +512,7 @@ func Test_KVC_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC JsonString", actual)
 }
 
-func Test_KVC_JsonStringMust(t *testing.T) {
+func Test_KVC_JsonStringMust_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -526,7 +526,7 @@ func Test_KVC_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC JsonStringMust", actual)
 }
 
-func Test_KVC_ParseInjectUsingJson(t *testing.T) {
+func Test_KVC_ParseInjectUsingJson_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -548,7 +548,7 @@ func Test_KVC_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC ParseInjectUsingJson", actual)
 }
 
-func Test_KVC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_KVC_ParseInjectUsingJsonMust_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -564,7 +564,7 @@ func Test_KVC_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC ParseInjectUsingJsonMust", actual)
 }
 
-func Test_KVC_JsonParseSelfInject(t *testing.T) {
+func Test_KVC_JsonParseSelfInject_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -584,7 +584,7 @@ func Test_KVC_JsonParseSelfInject(t *testing.T) {
 // JsonMapResults / JsonResultsCollection / JsonResultsPtrCollection
 // =============================================================================
 
-func Test_KVC_JsonMapResults_Empty(t *testing.T) {
+func Test_KVC_JsonMapResults_Empty_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	mr, err := kvc.JsonMapResults()
@@ -681,7 +681,7 @@ func Test_KVC_JsonResultsPtrCollection_Valid(t *testing.T) {
 // Clone / ClonePtr / NonPtr / Ptr
 // =============================================================================
 
-func Test_KVC_Clone(t *testing.T) {
+func Test_KVC_Clone_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -695,7 +695,7 @@ func Test_KVC_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC Clone", actual)
 }
 
-func Test_KVC_ClonePtr_Nil(t *testing.T) {
+func Test_KVC_ClonePtr_Nil_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	var kvc *coredynamic.KeyValCollection
 
@@ -727,7 +727,7 @@ func Test_KVC_ClonePtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC ClonePtr valid", actual)
 }
 
-func Test_KVC_NonPtr(t *testing.T) {
+func Test_KVC_NonPtr_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 	np := kvc.NonPtr()
@@ -740,7 +740,7 @@ func Test_KVC_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KVC NonPtr", actual)
 }
 
-func Test_KVC_Ptr(t *testing.T) {
+func Test_KVC_Ptr_FromKVCEmptyKeyValCollec(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.EmptyKeyValCollection()
 

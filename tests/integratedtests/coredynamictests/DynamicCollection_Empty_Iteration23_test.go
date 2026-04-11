@@ -652,7 +652,7 @@ func Test_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnErr(t *testi
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation continue", actual)
 }
 
-func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
+func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Empty_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	err := dc.AddAnyItemsWithTypeValidation(false, false, reflect.TypeOf(""))
@@ -665,7 +665,7 @@ func Test_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- AddAnyItemsWithTypeValidation empty", actual)
 }
 
-func Test_DynamicCollection_AddAnySliceFromSingleItem(t *testing.T) {
+func Test_DynamicCollection_AddAnySliceFromSingleItem_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnySliceFromSingleItem(true, []string{"a", "b"})
@@ -678,7 +678,7 @@ func Test_DynamicCollection_AddAnySliceFromSingleItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddAnySliceFromSingleItem", actual)
 }
 
-func Test_DynamicCollection_AddAnySliceFromSingleItem_Nil(t *testing.T) {
+func Test_DynamicCollection_AddAnySliceFromSingleItem_Nil_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnySliceFromSingleItem(true, nil)

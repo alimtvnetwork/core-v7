@@ -742,7 +742,7 @@ func Test_CollectionsOfCollectionModel_Fields(t *testing.T) {
 // AnyToString
 // ═══════════════════════════════════════════════════════════════
 
-func Test_AnyToString_EmptyString(t *testing.T) {
+func Test_AnyToString_EmptyString_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_AnyToString_EmptyString", func() {
 		result := corestr.AnyToString(false, "")
 		tc := caseV1Compat{Name: "AnyToString empty", Expected: "", Actual: result}
@@ -752,7 +752,7 @@ func Test_AnyToString_EmptyString(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_AnyToString_WithFieldName", func() {
 		result := corestr.AnyToString(true, "hello")
 		tc := caseV1Compat{Name: "AnyToString with field name", Expected: true, Actual: len(result) > 0}
@@ -762,7 +762,7 @@ func Test_AnyToString_WithFieldName(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_WithoutFieldName(t *testing.T) {
+func Test_AnyToString_WithoutFieldName_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_AnyToString_WithoutFieldName", func() {
 		result := corestr.AnyToString(false, 42)
 		tc := caseV1Compat{Name: "AnyToString without field name", Expected: true, Actual: len(result) > 0}
@@ -772,7 +772,7 @@ func Test_AnyToString_WithoutFieldName(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_Pointer(t *testing.T) {
+func Test_AnyToString_Pointer_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_AnyToString_Pointer", func() {
 		v := "ptr"
 		result := corestr.AnyToString(false, &v)
@@ -807,7 +807,7 @@ func Test_InvalidValueStatus(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus_Clone(t *testing.T) {
+func Test_ValueStatus_Clone_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_ValueStatus_Clone", func() {
 		vs := corestr.InvalidValueStatus("msg")
 		cloned := vs.Clone()
@@ -842,7 +842,7 @@ func Test_TextWithLineNumber_HasLineNumber_Nil(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber_IsInvalidLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_IsInvalidLineNumber_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_TextWithLineNumber_IsInvalidLineNumber", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: -1, Text: "hi"}
 		tc := caseV1Compat{Name: "IsInvalidLineNumber", Expected: true, Actual: twl.IsInvalidLineNumber()}
@@ -862,7 +862,7 @@ func Test_TextWithLineNumber_IsInvalidLineNumber_Nil(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber_Length(t *testing.T) {
+func Test_TextWithLineNumber_Length_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_TextWithLineNumber_Length", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: 1, Text: "abc"}
 		tc := caseV1Compat{Name: "Length", Expected: 3, Actual: twl.Length()}
@@ -912,7 +912,7 @@ func Test_TextWithLineNumber_IsEmpty_Nil(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber_IsEmptyText(t *testing.T) {
+func Test_TextWithLineNumber_IsEmptyText_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_TextWithLineNumber_IsEmptyText", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: 1, Text: ""}
 		tc := caseV1Compat{Name: "IsEmptyText", Expected: true, Actual: twl.IsEmptyText()}
@@ -932,7 +932,7 @@ func Test_TextWithLineNumber_IsEmptyText_Nil(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
+func Test_TextWithLineNumber_IsEmptyTextLineBoth_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_TextWithLineNumber_IsEmptyTextLineBoth", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: -1, Text: ""}
 		tc := caseV1Compat{Name: "IsEmptyTextLineBoth", Expected: true, Actual: twl.IsEmptyTextLineBoth()}
@@ -946,7 +946,7 @@ func Test_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
 // CloneSlice / CloneSliceIf
 // ═══════════════════════════════════════════════════════════════
 
-func Test_CloneSlice_Valid(t *testing.T) {
+func Test_CloneSlice_Valid_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_CloneSlice_Valid", func() {
 		input := []string{"a", "b", "c"}
 		result := corestr.CloneSlice(input)
@@ -957,7 +957,7 @@ func Test_CloneSlice_Valid(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice_Nil(t *testing.T) {
+func Test_CloneSlice_Nil_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_CloneSlice_Nil", func() {
 		result := corestr.CloneSlice(nil)
 		tc := caseV1Compat{Name: "CloneSlice nil", Expected: 0, Actual: len(result)}
@@ -967,7 +967,7 @@ func Test_CloneSlice_Nil(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_Clone(t *testing.T) {
+func Test_CloneSliceIf_Clone_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_CloneSliceIf_Clone", func() {
 		input := []string{"a", "b"}
 		result := corestr.CloneSliceIf(true, input...)
@@ -978,7 +978,7 @@ func Test_CloneSliceIf_Clone(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_NoClone(t *testing.T) {
+func Test_CloneSliceIf_NoClone_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_CloneSliceIf_NoClone", func() {
 		input := []string{"a", "b"}
 		result := corestr.CloneSliceIf(false, input...)
@@ -993,7 +993,7 @@ func Test_CloneSliceIf_NoClone(t *testing.T) {
 // AllIndividualStringsOfStringsLength / AllIndividualsLengthOfSimpleSlices
 // ═══════════════════════════════════════════════════════════════
 
-func Test_AllIndividualStringsOfStringsLength_Valid(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_Valid_FromNewHashmapCreatorEmp(t *testing.T) {
 	safeTest(t, "Test_Cov43_AllIndividualStringsOfStringsLength_Valid", func() {
 		input := [][]string{{"a", "b"}, {"c"}}
 		result := corestr.AllIndividualStringsOfStringsLength(&input)

@@ -88,7 +88,7 @@ func Test_TypeSameStatus_Pointers(t *testing.T) {
 // TypeNotEqualErr
 // ==========================================================================
 
-func Test_TypeNotEqualErr_Same(t *testing.T) {
+func Test_TypeNotEqualErr_Same_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.TypeNotEqualErr("a", "b")
 
@@ -116,7 +116,7 @@ func Test_TypeNotEqualErr_Diff(t *testing.T) {
 // TypesIndexOf
 // ==========================================================================
 
-func Test_TypesIndexOf_Found(t *testing.T) {
+func Test_TypesIndexOf_Found_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -129,7 +129,7 @@ func Test_TypesIndexOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypesIndexOf finds at index 1 -- int in [str,int]", actual)
 }
 
-func Test_TypesIndexOf_NotFound(t *testing.T) {
+func Test_TypesIndexOf_NotFound_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	boolType := reflect.TypeOf(true)
@@ -146,7 +146,7 @@ func Test_TypesIndexOf_NotFound(t *testing.T) {
 // NotAcceptedTypesErr
 // ==========================================================================
 
-func Test_NotAcceptedTypesErr_Match(t *testing.T) {
+func Test_NotAcceptedTypesErr_Match_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.NotAcceptedTypesErr("hello", reflect.TypeOf(""))
 
@@ -158,7 +158,7 @@ func Test_NotAcceptedTypesErr_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NotAcceptedTypesErr match -- string", actual)
 }
 
-func Test_NotAcceptedTypesErr_NoMatch(t *testing.T) {
+func Test_NotAcceptedTypesErr_NoMatch_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.NotAcceptedTypesErr("hello", reflect.TypeOf(0))
 
@@ -174,7 +174,7 @@ func Test_NotAcceptedTypesErr_NoMatch(t *testing.T) {
 // ReflectKindValidation
 // ==========================================================================
 
-func Test_ReflectKindValidation_Match(t *testing.T) {
+func Test_ReflectKindValidation_Match_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectKindValidation(reflect.String, "hello")
 
@@ -202,7 +202,7 @@ func Test_ReflectKindValidation_NoMatch(t *testing.T) {
 // ReflectTypeValidation
 // ==========================================================================
 
-func Test_ReflectTypeValidation_Match(t *testing.T) {
+func Test_ReflectTypeValidation_Match_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(""), "hello")
 
@@ -226,7 +226,7 @@ func Test_ReflectTypeValidation_NoMatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation no match -- string vs int", actual)
 }
 
-func Test_ReflectTypeValidation_NilNotExpected(t *testing.T) {
+func Test_ReflectTypeValidation_NilNotExpected_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(""), nil)
 
@@ -238,7 +238,7 @@ func Test_ReflectTypeValidation_NilNotExpected(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation nil not expected -- nil", actual)
 }
 
-func Test_ReflectTypeValidation_NilAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilAllowed_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(false, reflect.TypeOf(""), nil)
 
@@ -254,7 +254,7 @@ func Test_ReflectTypeValidation_NilAllowed(t *testing.T) {
 // ReflectInterfaceVal
 // ==========================================================================
 
-func Test_ReflectInterfaceVal_Value(t *testing.T) {
+func Test_ReflectInterfaceVal_Value_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	result := coredynamic.ReflectInterfaceVal("hello")
 
@@ -266,7 +266,7 @@ func Test_ReflectInterfaceVal_Value(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectInterfaceVal value type -- string", actual)
 }
 
-func Test_ReflectInterfaceVal_Pointer(t *testing.T) {
+func Test_ReflectInterfaceVal_Pointer_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	s := "hello"
 	result := coredynamic.ReflectInterfaceVal(&s)
@@ -283,7 +283,7 @@ func Test_ReflectInterfaceVal_Pointer(t *testing.T) {
 // ZeroSetAny
 // ==========================================================================
 
-func Test_ZeroSetAny_Nil(t *testing.T) {
+func Test_ZeroSetAny_Nil_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	// should not panic
 	coredynamic.ZeroSetAny(nil)
@@ -314,7 +314,7 @@ func Test_ZeroSetAny_Pointer(t *testing.T) {
 // ZeroSet
 // ==========================================================================
 
-func Test_ZeroSet(t *testing.T) {
+func Test_ZeroSet_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	type s struct{ A int }
 	val := &s{A: 42}
@@ -332,7 +332,7 @@ func Test_ZeroSet(t *testing.T) {
 // Type
 // ==========================================================================
 
-func Test_Type(t *testing.T) {
+func Test_Type_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rt := coredynamic.Type("hello")
 
@@ -348,7 +348,7 @@ func Test_Type(t *testing.T) {
 // AnyToReflectVal
 // ==========================================================================
 
-func Test_AnyToReflectVal(t *testing.T) {
+func Test_AnyToReflectVal_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rv := coredynamic.AnyToReflectVal(42)
 
@@ -554,7 +554,7 @@ func Test_KeyVal_ReflectSetMethods_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSet nil receiver returns errors -- nil", actual)
 }
 
-func Test_KeyVal_CastKeyVal_Nil(t *testing.T) {
+func Test_KeyVal_CastKeyVal_Nil_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.CastKeyVal(nil, nil)
@@ -567,7 +567,7 @@ func Test_KeyVal_CastKeyVal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal CastKeyVal nil receiver -- nil", actual)
 }
 
-func Test_KeyVal_Json(t *testing.T) {
+func Test_KeyVal_Json_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	j := kv.Json()
@@ -591,7 +591,7 @@ func Test_KeyVal_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Json methods -- valid kv", actual)
 }
 
-func Test_KeyVal_Serialize(t *testing.T) {
+func Test_KeyVal_Serialize_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	bytes, err := kv.Serialize()
@@ -610,7 +610,7 @@ func Test_KeyVal_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize returns bytes -- valid", actual)
 }
 
-func Test_KeyVal_ValueReflectValue(t *testing.T) {
+func Test_KeyVal_ValueReflectValue_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: 42}
 	rv := kv.ValueReflectValue()
@@ -708,7 +708,7 @@ func Test_SimpleRequest_IsPointer(t *testing.T) {
 // MapAsKeyValSlice — error path
 // ==========================================================================
 
-func Test_MapAsKeyValSlice_NotMap(t *testing.T) {
+func Test_MapAsKeyValSlice_NotMap_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rv := reflect.ValueOf("notAMap")
 	_, err := coredynamic.MapAsKeyValSlice(rv)
@@ -721,7 +721,7 @@ func Test_MapAsKeyValSlice_NotMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice not map returns error -- string", actual)
 }
 
-func Test_MapAsKeyValSlice_Valid(t *testing.T) {
+func Test_MapAsKeyValSlice_Valid_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rv := reflect.ValueOf(map[string]int{"a": 1, "b": 2})
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
@@ -806,7 +806,7 @@ func Test_TypeStatus_IsEqual_RightDiff(t *testing.T) {
 // CastTo — additional paths
 // ==========================================================================
 
-func Test_CastTo_MatchingType(t *testing.T) {
+func Test_CastTo_MatchingType_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(""))
 
@@ -826,7 +826,7 @@ func Test_CastTo_MatchingType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CastTo matching type -- string", actual)
 }
 
-func Test_CastTo_NotMatching(t *testing.T) {
+func Test_CastTo_NotMatching_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(0))
 
@@ -877,7 +877,7 @@ func Test_CastedResult_Methods(t *testing.T) {
 // Dynamic — Clone, NonPtr, Ptr
 // ==========================================================================
 
-func Test_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	cloned := d.Clone()
@@ -906,7 +906,7 @@ func Test_Dynamic_Clone(t *testing.T) {
 // Dynamic — InvalidDynamic constructor
 // ==========================================================================
 
-func Test_Dynamic_InvalidDynamic(t *testing.T) {
+func Test_Dynamic_InvalidDynamic_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -924,7 +924,7 @@ func Test_Dynamic_InvalidDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns invalid -- no data", actual)
 }
 
-func Test_Dynamic_InvalidDynamicPtr(t *testing.T) {
+func Test_Dynamic_InvalidDynamicPtr_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 

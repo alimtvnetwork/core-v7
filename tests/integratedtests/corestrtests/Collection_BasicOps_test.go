@@ -14,7 +14,7 @@ import (
 // Collection — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Collection_BasicOps(t *testing.T) {
+func Test_Collection_BasicOps_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_BasicOps", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -72,7 +72,7 @@ func Test_Collection_EmptyDefaults(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddVariants(t *testing.T) {
+func Test_Collection_AddVariants_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddVariants", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(20)
@@ -98,7 +98,7 @@ func Test_Collection_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddFuncErr(t *testing.T) {
+func Test_Collection_AddFuncErr_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddFuncErr", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -121,7 +121,7 @@ func Test_Collection_AddFuncErr(t *testing.T) {
 	})
 }
 
-func Test_Collection_Adds(t *testing.T) {
+func Test_Collection_Adds_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_Adds", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -137,7 +137,7 @@ func Test_Collection_Adds(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddCollection(t *testing.T) {
+func Test_Collection_AddCollection_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddCollection", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -160,7 +160,7 @@ func Test_Collection_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddCollections(t *testing.T) {
+func Test_Collection_AddCollections_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddCollections", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -178,7 +178,7 @@ func Test_Collection_AddCollections(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_ConcatNew", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -199,7 +199,7 @@ func Test_Collection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Collection_AsError(t *testing.T) {
+func Test_Collection_AsError_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AsError", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"err1", "err2"})
@@ -221,7 +221,7 @@ func Test_Collection_AsError(t *testing.T) {
 	})
 }
 
-func Test_Collection_ToError(t *testing.T) {
+func Test_Collection_ToError_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_ToError", func() {
 		c := corestr.New.Collection.Strings([]string{"e1"})
 		_ = c.ToError(",")
@@ -229,7 +229,7 @@ func Test_Collection_ToError(t *testing.T) {
 	})
 }
 
-func Test_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_RemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -252,7 +252,7 @@ func Test_Collection_RemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_EachItemSplitBy", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a.b", "c.d"})
@@ -267,7 +267,7 @@ func Test_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEquals(t *testing.T) {
+func Test_Collection_IsEquals_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_IsEquals", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -348,7 +348,7 @@ func Test_Collection_Take_Skip(t *testing.T) {
 	})
 }
 
-func Test_Collection_Reverse(t *testing.T) {
+func Test_Collection_Reverse_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_Reverse", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -397,7 +397,7 @@ func Test_Collection_GetPagesSize(t *testing.T) {
 	})
 }
 
-func Test_Collection_Has(t *testing.T) {
+func Test_Collection_Has_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_Has", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"hello", "world"})
@@ -432,7 +432,7 @@ func Test_Collection_Has(t *testing.T) {
 	})
 }
 
-func Test_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_Filter", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"ab", "cd", "ef"})
@@ -501,7 +501,7 @@ func Test_Collection_HashsetAsIs(t *testing.T) {
 	})
 }
 
-func Test_Collection_NonEmptyList(t *testing.T) {
+func Test_Collection_NonEmptyList_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_NonEmptyList", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"", "a", "", "b"})
@@ -538,7 +538,7 @@ func Test_Collection_IsContainsAll(t *testing.T) {
 	})
 }
 
-func Test_Collection_GetAllExcept(t *testing.T) {
+func Test_Collection_GetAllExcept_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_GetAllExcept", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -582,7 +582,7 @@ func Test_Collection_Join(t *testing.T) {
 	})
 }
 
-func Test_Collection_String(t *testing.T) {
+func Test_Collection_String_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_String", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -635,7 +635,7 @@ func Test_Collection_JSON(t *testing.T) {
 	})
 }
 
-func Test_Collection_Serialize(t *testing.T) {
+func Test_Collection_Serialize_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_Serialize", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -679,7 +679,7 @@ func Test_Collection_Clear_Dispose(t *testing.T) {
 	})
 }
 
-func Test_Collection_AppendAnys(t *testing.T) {
+func Test_Collection_AppendAnys_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AppendAnys", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -747,7 +747,7 @@ func Test_Collection_Joins(t *testing.T) {
 	})
 }
 
-func Test_Collection_New(t *testing.T) {
+func Test_Collection_New_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_New", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -762,7 +762,7 @@ func Test_Collection_New(t *testing.T) {
 	})
 }
 
-func Test_Collection_IndexAt(t *testing.T) {
+func Test_Collection_IndexAt_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_IndexAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -776,7 +776,7 @@ func Test_Collection_IndexAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_SafeIndexAtUsingLength(t *testing.T) {
+func Test_Collection_SafeIndexAtUsingLength_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_SafeIndexAtUsingLength", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -794,14 +794,14 @@ func Test_Collection_SafeIndexAtUsingLength(t *testing.T) {
 	})
 }
 
-func Test_Collection_InsertAt(t *testing.T) {
+func Test_Collection_InsertAt_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_InsertAt", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "c"})
 		c.InsertAt(1, "b")
 	})
 }
 
-func Test_Collection_ChainRemoveAt(t *testing.T) {
+func Test_Collection_ChainRemoveAt_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_ChainRemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -816,7 +816,7 @@ func Test_Collection_ChainRemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_AppendCollectionPtr(t *testing.T) {
+func Test_Collection_AppendCollectionPtr_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AppendCollectionPtr", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -832,7 +832,7 @@ func Test_Collection_AppendCollectionPtr(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddFuncResult(t *testing.T) {
+func Test_Collection_AddFuncResult_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddFuncResult", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -847,7 +847,7 @@ func Test_Collection_AddFuncResult(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddStringsByFuncChecking(t *testing.T) {
+func Test_Collection_AddStringsByFuncChecking_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddStringsByFuncChecking", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -886,7 +886,7 @@ func Test_Collection_GetAllExceptCollection(t *testing.T) {
 	})
 }
 
-func Test_Collection_SummaryString(t *testing.T) {
+func Test_Collection_SummaryString_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_SummaryString", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -901,7 +901,7 @@ func Test_Collection_SummaryString(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddHashmapsValues(t *testing.T) {
+func Test_Collection_AddHashmapsValues_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddHashmapsValues", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -922,7 +922,7 @@ func Test_Collection_AddHashmapsValues(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddHashmapsKeys(t *testing.T) {
+func Test_Collection_AddHashmapsKeys_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_AddHashmapsKeys", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(10)
@@ -958,7 +958,7 @@ func Test_Collection_AddHashmapsKeysValues(t *testing.T) {
 	})
 }
 
-func Test_Collection_GetHashsetPlusHasAll(t *testing.T) {
+func Test_Collection_GetHashsetPlusHasAll_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_GetHashsetPlusHasAll", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -978,7 +978,7 @@ func Test_Collection_GetHashsetPlusHasAll(t *testing.T) {
 	})
 }
 
-func Test_Collection_GetPagedCollection(t *testing.T) {
+func Test_Collection_GetPagedCollection_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_GetPagedCollection", func() {
 		// Arrange
 		items := make([]string, 25)
@@ -998,7 +998,7 @@ func Test_Collection_GetPagedCollection(t *testing.T) {
 	})
 }
 
-func Test_Collection_GetSinglePageCollection(t *testing.T) {
+func Test_Collection_GetSinglePageCollection_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_Collection_GetSinglePageCollection", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c", "d", "e"})
@@ -1053,7 +1053,7 @@ func Test_CollectionCreator_All(t *testing.T) {
 // SimpleSlice — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_SimpleSlice_BasicOps(t *testing.T) {
+func Test_SimpleSlice_BasicOps_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_BasicOps", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "b", "c")
@@ -1124,7 +1124,7 @@ func Test_SimpleSlice_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_AddStruct(t *testing.T) {
+func Test_SimpleSlice_AddStruct_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_AddStruct", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Cap(5)
@@ -1176,7 +1176,7 @@ func Test_SimpleSlice_Append_AppendFmt(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_AddAsTitleValue(t *testing.T) {
+func Test_SimpleSlice_AddAsTitleValue_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_AddAsTitleValue", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Cap(5)
@@ -1196,7 +1196,7 @@ func Test_SimpleSlice_AddAsTitleValue(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_InsertAt(t *testing.T) {
+func Test_SimpleSlice_InsertAt_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_InsertAt", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "c")
@@ -1253,7 +1253,7 @@ func Test_SimpleSlice_Skip_Take(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_AsError(t *testing.T) {
+func Test_SimpleSlice_AsError_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_AsError", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("e1", "e2")
@@ -1275,7 +1275,7 @@ func Test_SimpleSlice_AsError(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_Join(t *testing.T) {
+func Test_SimpleSlice_Join_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_Join", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "b")
@@ -1298,7 +1298,7 @@ func Test_SimpleSlice_Join(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_IsContains(t *testing.T) {
+func Test_SimpleSlice_IsContains_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_IsContains", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("hello", "world")
@@ -1320,7 +1320,7 @@ func Test_SimpleSlice_IsContains(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_IsContainsFunc(t *testing.T) {
+func Test_SimpleSlice_IsContainsFunc_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_IsContainsFunc", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("hello", "world")
@@ -1338,7 +1338,7 @@ func Test_SimpleSlice_IsContainsFunc(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_IndexOfFunc(t *testing.T) {
+func Test_SimpleSlice_IndexOfFunc_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_IndexOfFunc", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("hello", "world")
@@ -1356,7 +1356,7 @@ func Test_SimpleSlice_IndexOfFunc(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_CountFunc(t *testing.T) {
+func Test_SimpleSlice_CountFunc_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_CountFunc", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "bb", "c")
@@ -1374,7 +1374,7 @@ func Test_SimpleSlice_CountFunc(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_WrapQuotes(t *testing.T) {
+func Test_SimpleSlice_WrapQuotes_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_WrapQuotes", func() {
 		s := corestr.New.SimpleSlice.Lines("a", "b")
 
@@ -1386,7 +1386,7 @@ func Test_SimpleSlice_WrapQuotes(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_Transpile(t *testing.T) {
+func Test_SimpleSlice_Transpile_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_Transpile", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "b")
@@ -1700,7 +1700,7 @@ func Test_SimpleSlice_Collection(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_Hashset(t *testing.T) {
+func Test_SimpleSlice_Hashset_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_Hashset", func() {
 		// Arrange
 		s := corestr.New.SimpleSlice.Lines("a", "b")
@@ -1786,7 +1786,7 @@ func Test_SimpleSlice_Creators(t *testing.T) {
 // ValidValue — comprehensive coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ValidValue_Constructors(t *testing.T) {
+func Test_ValidValue_Constructors_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_ValidValue_Constructors", func() {
 		_ = corestr.NewValidValue("hello")
 		_ = corestr.NewValidValueEmpty()
@@ -1928,7 +1928,7 @@ func Test_ValidValues_AllMethods(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_ConcatNew(t *testing.T) {
+func Test_ValidValues_ConcatNew_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_ValidValues_ConcatNew", func() {
 		// Arrange
 		vv := corestr.NewValidValues(2)
@@ -2108,7 +2108,7 @@ func Test_KeyAnyValuePair_AllMethods(t *testing.T) {
 // TextWithLineNumber — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_TextWithLineNumber", func() {
 		// Arrange
 		tl := &corestr.TextWithLineNumber{LineNumber: 5, Text: "hello"}
@@ -2136,7 +2136,7 @@ func Test_TextWithLineNumber(t *testing.T) {
 // CloneSlice / CloneSliceIf — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_CloneSlice(t *testing.T) {
+func Test_CloneSlice_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_CloneSlice", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{"a", "b"})
@@ -2155,7 +2155,7 @@ func Test_CloneSlice(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf(t *testing.T) {
+func Test_CloneSliceIf_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_CloneSliceIf", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true, "a", "b")
@@ -2235,7 +2235,7 @@ func Test_Utils_WrapMethods(t *testing.T) {
 // AnyToString / reflectInterfaceVal — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_AnyToString(t *testing.T) {
+func Test_AnyToString_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_AnyToString", func() {
 		// Arrange
 		r := corestr.AnyToString(true, 42)
@@ -2264,7 +2264,7 @@ func Test_AnyToString(t *testing.T) {
 // AllIndividualsLengthOfSimpleSlices — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_AllIndividualsLengthOfSimpleSlices", func() {
 		// Arrange
 		s1 := corestr.New.SimpleSlice.Lines("a", "b")
@@ -2289,7 +2289,7 @@ func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 // AllIndividualStringsOfStringsLength — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_AllIndividualStringsOfStringsLength(t *testing.T) {
+func Test_AllIndividualStringsOfStringsLength_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_AllIndividualStringsOfStringsLength", func() {
 		// Arrange
 		items := [][]string{{"a", "b"}, {"c"}}
@@ -2489,7 +2489,7 @@ func Test_LeftMiddleRight_FromSplit(t *testing.T) {
 // Empty creators — coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_EmptyCreators(t *testing.T) {
+func Test_EmptyCreators_FromCollectionBasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov13_EmptyCreators", func() {
 		_ = corestr.Empty.Collection()
 		_ = corestr.Empty.LinkedList()

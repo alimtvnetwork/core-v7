@@ -31,7 +31,7 @@ func Test_CloneSlice_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice_Empty(t *testing.T) {
+func Test_CloneSlice_Empty_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_CloneSlice_Empty", func() {
 		// Arrange
 		result := corestr.CloneSlice([]string{})
@@ -49,7 +49,7 @@ func Test_CloneSlice_Empty(t *testing.T) {
 // ValidValue
 // ==========================================================================
 
-func Test_ValidValue_Constructors(t *testing.T) {
+func Test_ValidValue_Constructors_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Constructors", func() {
 		// Arrange
 		v1 := corestr.NewValidValue("hello")
@@ -155,7 +155,7 @@ func Test_ValidValue_TypeConversions_Invalid(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_IsAnyOf", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -177,7 +177,7 @@ func Test_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyContains(t *testing.T) {
+func Test_ValidValue_IsAnyContains_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_IsAnyContains", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello world")
@@ -199,7 +199,7 @@ func Test_ValidValue_IsAnyContains(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Split", func() {
 		// Arrange
 		v := corestr.NewValidValue("a,b,c")
@@ -214,7 +214,7 @@ func Test_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_Clone", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -260,7 +260,7 @@ func Test_ValidValue_String(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueBytesOnce(t *testing.T) {
+func Test_ValidValue_ValueBytesOnce_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_ValueBytesOnce", func() {
 		// Arrange
 		v := corestr.NewValidValue("hi")
@@ -285,7 +285,7 @@ func Test_ValidValue_ValueBytesOnce(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_ClearDispose", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -350,7 +350,7 @@ func Test_ValidValues_Basics(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_SafeValueAt", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -371,7 +371,7 @@ func Test_ValidValues_SafeValueAt(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValues_Strings", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -499,7 +499,7 @@ func Test_KeyValuePair_Is(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid_FromCloneSliceNonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov5_KeyValuePair_ValueValid", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}

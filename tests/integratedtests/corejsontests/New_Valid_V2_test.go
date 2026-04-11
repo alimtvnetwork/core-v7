@@ -11,7 +11,7 @@ type cov9Mini struct {
 	Name string `json:"name"`
 }
 
-func Test_New_Valid(t *testing.T) {
+func Test_New_Valid_FromNewValidV2(t *testing.T) {
 	// Arrange
 	r := corejson.New(map[string]string{"k": "v"})
 
@@ -29,7 +29,7 @@ func Test_New_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid", actual)
 }
 
-func Test_NewPtr_Nil(t *testing.T) {
+func Test_NewPtr_Nil_FromNewValidV2(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(nil)
 
@@ -47,7 +47,7 @@ func Test_NewPtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr returns nil -- nil", actual)
 }
 
-func Test_BytesCloneIf_True(t *testing.T) {
+func Test_BytesCloneIf_True_FromNewValidV2(t *testing.T) {
 	// Arrange
 	original := []byte(`"hello"`)
 	cloned := corejson.BytesCloneIf(true, original)
@@ -144,7 +144,7 @@ func Test_Serialize_Raw_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Serialize.Raw returns non-empty -- valid", actual)
 }
 
-func Test_Empty_Result(t *testing.T) {
+func Test_Empty_Result_FromNewValidV2(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.Result()
 
@@ -169,7 +169,7 @@ func Test_Result_Clone_NilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
-func Test_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault_FromNewValidV2(t *testing.T) {
 	// Arrange
 	// CastAny.FromToDefault serializes source then deserializes into target
 	var casted map[string]string
@@ -213,7 +213,7 @@ func Test_Pretty_String_SafeDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Pretty.String.SafeDefault returns correct value -- with args", actual)
 }
 
-func Test_AnyTo_JsonString(t *testing.T) {
+func Test_AnyTo_JsonString_FromNewValidV2(t *testing.T) {
 	// Arrange
 	jsonString := corejson.AnyTo.JsonString(cov9Mini{Name: "alice"})
 
@@ -225,7 +225,7 @@ func Test_AnyTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonString returns correct value -- with args", actual)
 }
 
-func Test_AnyTo_PrettyStringWithError(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_FromNewValidV2(t *testing.T) {
 	// Arrange
 	pretty, err := corejson.AnyTo.PrettyStringWithError(map[string]string{"k": "v"})
 

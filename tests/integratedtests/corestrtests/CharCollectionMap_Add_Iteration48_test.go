@@ -541,7 +541,7 @@ func Test_CharCollectionMap_AddHashmapsValues(t *testing.T) {
 	})
 }
 
-func Test_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
+func Test_CharCollectionMap_AddHashmapsValues_Nil_FromCharCollectionMapAdd(t *testing.T) {
 	safeTest(t, "Test_Cov52_CharCollectionMap_AddHashmapsValues_Nil", func() {
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(5, 5)
 		ccm.AddHashmapsValues(nil)

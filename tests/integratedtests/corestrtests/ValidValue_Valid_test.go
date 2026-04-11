@@ -29,7 +29,7 @@ func Test_ValidValue_Valid(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Empty(t *testing.T) {
+func Test_ValidValue_Empty_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_ValidValue_Empty", func() {
 		// Arrange
 		// NewValidValue("") sets IsValid: true per implementation
@@ -50,7 +50,7 @@ func Test_ValidValue_Empty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Invalid(t *testing.T) {
+func Test_ValidValue_Invalid_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_ValidValue_Invalid", func() {
 		// Arrange
 		vv := corestr.InvalidValidValue("bad input")
@@ -72,7 +72,7 @@ func Test_ValidValue_Invalid(t *testing.T) {
 
 // ── LeftRight ──
 
-func Test_LeftRight(t *testing.T) {
+func Test_LeftRight_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_LeftRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("l", "r")
@@ -94,7 +94,7 @@ func Test_LeftRight(t *testing.T) {
 
 // ── LeftMiddleRight ──
 
-func Test_LeftMiddleRight(t *testing.T) {
+func Test_LeftMiddleRight_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_LeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
@@ -118,7 +118,7 @@ func Test_LeftMiddleRight(t *testing.T) {
 
 // ── LeftRightFromSplit ──
 
-func Test_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_LeftRightFromSplit", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("key=value", "=")
@@ -138,7 +138,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplit_NoSep(t *testing.T) {
+func Test_LeftRightFromSplit_NoSep_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_LeftRightFromSplit_NoSep", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("nosep", "=")
@@ -160,7 +160,7 @@ func Test_LeftRightFromSplit_NoSep(t *testing.T) {
 
 // ── LeftMiddleRightFromSplit ──
 
-func Test_LeftMiddleRightFromSplit(t *testing.T) {
+func Test_LeftMiddleRightFromSplit_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_LeftMiddleRightFromSplit", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a:b:c", ":")
@@ -184,7 +184,7 @@ func Test_LeftMiddleRightFromSplit(t *testing.T) {
 
 // ── ValueStatus ──
 
-func Test_ValueStatus(t *testing.T) {
+func Test_ValueStatus_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_ValueStatus", func() {
 		// Arrange
 		vs := corestr.ValueStatus{
@@ -209,7 +209,7 @@ func Test_ValueStatus(t *testing.T) {
 
 // ── TextWithLineNumber ──
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_TextWithLineNumber", func() {
 		// Arrange
 		tln := corestr.TextWithLineNumber{
@@ -234,7 +234,7 @@ func Test_TextWithLineNumber(t *testing.T) {
 
 // ── KeyValuePair ──
 
-func Test_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_KeyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -258,7 +258,7 @@ func Test_KeyValuePair(t *testing.T) {
 
 // ── CloneSlice ──
 
-func Test_CloneSlice(t *testing.T) {
+func Test_CloneSlice_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_CloneSlice", func() {
 		// Arrange
 		original := []string{"a", "b", "c"}
@@ -279,7 +279,7 @@ func Test_CloneSlice(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice_Nil(t *testing.T) {
+func Test_CloneSlice_Nil_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_CloneSlice_Nil", func() {
 		// Arrange
 		// CloneSlice(nil) returns []string{} not nil
@@ -296,7 +296,7 @@ func Test_CloneSlice_Nil(t *testing.T) {
 
 // ── CloneSliceIf ──
 
-func Test_CloneSliceIf_True(t *testing.T) {
+func Test_CloneSliceIf_True_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_CloneSliceIf_True", func() {
 		// Arrange
 		original := []string{"a", "b"}
@@ -311,7 +311,7 @@ func Test_CloneSliceIf_True(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_False(t *testing.T) {
+func Test_CloneSliceIf_False_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_CloneSliceIf_False", func() {
 		// Arrange
 		original := []string{"a", "b"}
@@ -328,7 +328,7 @@ func Test_CloneSliceIf_False(t *testing.T) {
 
 // ── SimpleStringOnce via New.SimpleStringOnce.Init ──
 
-func Test_SimpleStringOnce(t *testing.T) {
+func Test_SimpleStringOnce_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_SimpleStringOnce", func() {
 		// Arrange
 		so := corestr.New.SimpleStringOnce.Init("hello")
@@ -369,7 +369,7 @@ func Test_SimpleStringOnce_Uninitialized(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnce_Empty(t *testing.T) {
+func Test_SimpleStringOnce_Empty_FromValidValueValid(t *testing.T) {
 	safeTest(t, "Test_Cov8_SimpleStringOnce_Empty", func() {
 		// Arrange
 		so := corestr.New.SimpleStringOnce.Empty()

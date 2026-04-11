@@ -96,7 +96,7 @@ func Test_Collection_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_Collection_Adds(t *testing.T) {
+func Test_Collection_Adds_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Adds", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -118,7 +118,7 @@ func Test_Collection_Adds(t *testing.T) {
 	})
 }
 
-func Test_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_RemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -141,7 +141,7 @@ func Test_Collection_RemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_ChainRemoveAt(t *testing.T) {
+func Test_Collection_ChainRemoveAt_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ChainRemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -156,7 +156,7 @@ func Test_Collection_ChainRemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_InsertAt(t *testing.T) {
+func Test_Collection_InsertAt_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_InsertAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "c"})
@@ -171,7 +171,7 @@ func Test_Collection_InsertAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_RemoveItemsIndexes(t *testing.T) {
+func Test_Collection_RemoveItemsIndexes_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_RemoveItemsIndexes", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c", "d"})
 		c.RemoveItemsIndexes(false, 0, 2)
@@ -258,7 +258,7 @@ func Test_Collection_IndexAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEquals(t *testing.T) {
+func Test_Collection_IsEquals_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_IsEquals", func() {
 		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -282,7 +282,7 @@ func Test_Collection_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_LengthLock", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -314,7 +314,7 @@ func Test_Collection_AsyncOps(t *testing.T) {
 	})
 }
 
-func Test_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Filter", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"aa", "b", "cc"})
@@ -474,7 +474,7 @@ func Test_Collection_CsvJoin(t *testing.T) {
 	})
 }
 
-func Test_Collection_Json(t *testing.T) {
+func Test_Collection_Json_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Json", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		_ = c.Json()
@@ -494,7 +494,7 @@ func Test_Collection_Json(t *testing.T) {
 	})
 }
 
-func Test_Collection_Serialize(t *testing.T) {
+func Test_Collection_Serialize_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Serialize", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -524,7 +524,7 @@ func Test_Collection_Error(t *testing.T) {
 	})
 }
 
-func Test_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_EachItemSplitBy", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a,b", "c,d"})
@@ -539,7 +539,7 @@ func Test_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ConcatNew", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -563,7 +563,7 @@ func Test_Collection_AppendCollections(t *testing.T) {
 	})
 }
 
-func Test_Collection_AppendAnys(t *testing.T) {
+func Test_Collection_AppendAnys_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AppendAnys", func() {
 		c := corestr.New.Collection.Empty()
 		c.AppendAnys("a", 1, nil)
@@ -574,7 +574,7 @@ func Test_Collection_AppendAnys(t *testing.T) {
 	})
 }
 
-func Test_Collection_GetAllExcept(t *testing.T) {
+func Test_Collection_GetAllExcept_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_GetAllExcept", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -629,7 +629,7 @@ func Test_Collection_New(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddNonEmptyStrings(t *testing.T) {
+func Test_Collection_AddNonEmptyStrings_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AddNonEmptyStrings", func() {
 		c := corestr.New.Collection.Empty()
 		c.AddNonEmptyStrings("", "a", "", "b")
@@ -637,7 +637,7 @@ func Test_Collection_AddNonEmptyStrings(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddStringsByFuncChecking(t *testing.T) {
+func Test_Collection_AddStringsByFuncChecking_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AddStringsByFuncChecking", func() {
 		c := corestr.New.Collection.Empty()
 		c.AddStringsByFuncChecking([]string{"aa", "b"}, func(s string) bool {
@@ -646,7 +646,7 @@ func Test_Collection_AddStringsByFuncChecking(t *testing.T) {
 	})
 }
 
-func Test_Collection_ExpandSlicePlusAdd(t *testing.T) {
+func Test_Collection_ExpandSlicePlusAdd_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ExpandSlicePlusAdd", func() {
 		c := corestr.New.Collection.Empty()
 		c.ExpandSlicePlusAdd([]string{"a", "b"}, func(s string) []string {
@@ -655,14 +655,14 @@ func Test_Collection_ExpandSlicePlusAdd(t *testing.T) {
 	})
 }
 
-func Test_Collection_MergeSlicesOfSlice(t *testing.T) {
+func Test_Collection_MergeSlicesOfSlice_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_MergeSlicesOfSlice", func() {
 		c := corestr.New.Collection.Empty()
 		c.MergeSlicesOfSlice([]string{"a"}, []string{"b", "c"})
 	})
 }
 
-func Test_Collection_CharCollectionMap(t *testing.T) {
+func Test_Collection_CharCollectionMap_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_CharCollectionMap", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"apple", "avocado", "banana"})
@@ -685,7 +685,7 @@ func Test_Collection_Resize(t *testing.T) {
 	})
 }
 
-func Test_Collection_ClearDispose(t *testing.T) {
+func Test_Collection_ClearDispose_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ClearDispose", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -718,7 +718,7 @@ func Test_Collection_ListCopyPtrLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddHashmapsValues(t *testing.T) {
+func Test_Collection_AddHashmapsValues_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AddHashmapsValues", func() {
 		c := corestr.New.Collection.Empty()
 		h := corestr.New.Hashmap.Empty()
@@ -730,7 +730,7 @@ func Test_Collection_AddHashmapsValues(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddPointerCollectionsLock(t *testing.T) {
+func Test_Collection_AddPointerCollectionsLock_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AddPointerCollectionsLock", func() {
 		c := corestr.New.Collection.Empty()
 		other := corestr.New.Collection.Strings([]string{"a"})
@@ -839,7 +839,7 @@ func Test_Hashmap_AddCollectionMaps(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Has(t *testing.T) {
+func Test_Hashmap_Has_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_Has", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Empty()
@@ -875,7 +875,7 @@ func Test_Hashmap_Has(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_Get", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Empty()
@@ -1064,7 +1064,7 @@ func Test_Hashmap_Error(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_SetBySplitter(t *testing.T) {
+func Test_Hashmap_SetBySplitter_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_SetBySplitter", func() {
 		h := corestr.New.Hashmap.Empty()
 		h.SetBySplitter("key=val", "=")
@@ -1083,7 +1083,7 @@ func Test_Hashmap_Diff(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ConcatNew(t *testing.T) {
+func Test_Hashmap_ConcatNew_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_ConcatNew", func() {
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
@@ -1298,7 +1298,7 @@ func Test_Hashset_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Resize(t *testing.T) {
+func Test_Hashset_Resize_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_Hashset_Resize", func() {
 		h := corestr.New.Hashset.Empty()
 		h.Resize(100)
@@ -1615,7 +1615,7 @@ func Test_LinkedList_AddVariants(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_IsEquals(t *testing.T) {
+func Test_LinkedList_IsEquals_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_IsEquals", func() {
 		// Arrange
 		a := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1775,7 +1775,7 @@ func Test_LeftMiddleRight(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus(t *testing.T) {
+func Test_ValueStatus_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_ValueStatus", func() {
 		vs := corestr.ValueStatus{ValueValid: corestr.NewValidValue("x"), Index: 0}
 		_ = vs.ValueValid
@@ -1783,7 +1783,7 @@ func Test_ValueStatus(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_KeyValuePair", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		_ = kv.Key
@@ -1791,7 +1791,7 @@ func Test_KeyValuePair(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair(t *testing.T) {
+func Test_KeyAnyValuePair_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_KeyAnyValuePair", func() {
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: 42}
 		_ = kav.Key
@@ -1815,7 +1815,7 @@ func Test_KeyValueCollection(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_TextWithLineNumber", func() {
 		tln := corestr.TextWithLineNumber{LineNumber: 1, Text: "hello"}
 		_ = tln.LineNumber
@@ -1827,7 +1827,7 @@ func Test_TextWithLineNumber(t *testing.T) {
 // Creators
 // ==========================================================================
 
-func Test_NewCreators(t *testing.T) {
+func Test_NewCreators_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_NewCreators", func() {
 		_ = corestr.New.Collection.Empty()
 		_ = corestr.New.Collection.Cap(10)
@@ -1854,7 +1854,7 @@ func Test_NewCreators(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice(t *testing.T) {
+func Test_CloneSlice_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_CloneSlice", func() {
 		// Arrange
 		orig := []string{"a", "b"}
@@ -1919,7 +1919,7 @@ func Test_AllIndividualStringsOfStringsLength(t *testing.T) {
 	})
 }
 
-func Test_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
+func Test_AllIndividualsLengthOfSimpleSlices_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_AllIndividualsLengthOfSimpleSlices", func() {
 		// Arrange
 		s1 := corestr.New.SimpleSlice.SpreadStrings("a", "bb")
@@ -2012,7 +2012,7 @@ func Test_CharCollectionMap_Ops(t *testing.T) {
 	})
 }
 
-func Test_CharCollectionMap_Add(t *testing.T) {
+func Test_CharCollectionMap_Add_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_CharCollectionMap_Add", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.Add("test")
@@ -2065,7 +2065,7 @@ func Test_CharHashsetMap_Ops(t *testing.T) {
 // LeftRightFromSplit / LeftMiddleRightFromSplit
 // ==========================================================================
 
-func Test_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_LeftRightFromSplit", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("a=b", "=")
@@ -2084,7 +2084,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRightFromSplit(t *testing.T) {
+func Test_LeftMiddleRightFromSplit_FromCollectionBasicOpsIt(t *testing.T) {
 	safeTest(t, "Test_I8_LeftMiddleRightFromSplit", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a:b:c", ":")

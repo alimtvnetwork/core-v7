@@ -49,7 +49,7 @@ func Test_Result_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr returns correct value -- with args", actual)
 }
 
-func Test_Result_SafeBytes(t *testing.T) {
+func Test_Result_SafeBytes_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 
@@ -61,7 +61,7 @@ func Test_Result_SafeBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeBytes returns correct value -- with args", actual)
 }
 
-func Test_Result_Unmarshal(t *testing.T) {
+func Test_Result_Unmarshal_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -81,7 +81,7 @@ func Test_Result_Unmarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns correct value -- with args", actual)
 }
 
-func Test_Result_Deserialize(t *testing.T) {
+func Test_Result_Deserialize_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"b": 2})
 	var target map[string]int
@@ -167,7 +167,7 @@ func Test_Deserialize_UsingBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingBytes returns correct value -- with args", actual)
 }
 
-func Test_Deserialize_UsingBytes_Invalid(t *testing.T) {
+func Test_Deserialize_UsingBytes_Invalid_FromResultBasic(t *testing.T) {
 	// Arrange
 	var target map[string]int
 	err := corejson.Deserialize.UsingBytes([]byte("invalid"), &target)
@@ -180,7 +180,7 @@ func Test_Deserialize_UsingBytes_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingBytes returns error -- invalid", actual)
 }
 
-func Test_Deserialize_UsingResult(t *testing.T) {
+func Test_Deserialize_UsingResult_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -200,7 +200,7 @@ func Test_Deserialize_UsingResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingResult returns correct value -- with args", actual)
 }
 
-func Test_Deserialize_Apply(t *testing.T) {
+func Test_Deserialize_Apply_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.New(map[string]int{"a": 1})
 	var target map[string]int
@@ -216,7 +216,7 @@ func Test_Deserialize_Apply(t *testing.T) {
 
 // ── BytesDeepClone ──
 
-func Test_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone_FromResultBasic(t *testing.T) {
 	// Arrange
 	original := []byte("hello")
 	cloned := corejson.BytesDeepClone(original)
@@ -244,7 +244,7 @@ func Test_BytesDeepClone_Nil(t *testing.T) {
 
 // ── BytesToString ──
 
-func Test_BytesToString(t *testing.T) {
+func Test_BytesToString_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToString([]byte("hello"))
 
@@ -256,7 +256,7 @@ func Test_BytesToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesToString returns correct value -- with args", actual)
 }
 
-func Test_BytesToPrettyString(t *testing.T) {
+func Test_BytesToPrettyString_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.BytesToPrettyString([]byte(`{"a":1}`))
 
@@ -270,7 +270,7 @@ func Test_BytesToPrettyString(t *testing.T) {
 
 // ── Empty ──
 
-func Test_Empty_ResultPtr(t *testing.T) {
+func Test_Empty_ResultPtr_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.Empty.ResultPtr()
 
@@ -288,7 +288,7 @@ func Test_Empty_ResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr returns empty -- with args", actual)
 }
 
-func Test_Empty_Result(t *testing.T) {
+func Test_Empty_Result_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.Empty.Result()
 
@@ -322,7 +322,7 @@ func Test_NewResult_UsingTypeBytesPtr(t *testing.T) {
 
 // ── BytesCloneIf ──
 
-func Test_BytesCloneIf_True(t *testing.T) {
+func Test_BytesCloneIf_True_FromResultBasic(t *testing.T) {
 	// Arrange
 	original := []byte("data")
 	cloned := corejson.BytesCloneIf(true, original)
@@ -336,7 +336,7 @@ func Test_BytesCloneIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns non-empty -- true", actual)
 }
 
-func Test_BytesCloneIf_False(t *testing.T) {
+func Test_BytesCloneIf_False_FromResultBasic(t *testing.T) {
 	// Arrange
 	cloned := corejson.BytesCloneIf(false, []byte("data"))
 
@@ -350,7 +350,7 @@ func Test_BytesCloneIf_False(t *testing.T) {
 
 // ── AnyTo ──
 
-func Test_AnyTo_SerializedJsonResult(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult(map[string]int{"a": 1})
 
@@ -362,7 +362,7 @@ func Test_AnyTo_SerializedJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns correct value -- with args", actual)
 }
 
-func Test_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Bytes_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult([]byte(`{"a":1}`))
 
@@ -374,7 +374,7 @@ func Test_AnyTo_SerializedJsonResult_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns correct value -- bytes", actual)
 }
 
-func Test_AnyTo_SerializedJsonResult_String(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_String_FromResultBasic(t *testing.T) {
 	// Arrange
 	result := corejson.AnyTo.SerializedJsonResult(`{"a":1}`)
 
@@ -388,7 +388,7 @@ func Test_AnyTo_SerializedJsonResult_String(t *testing.T) {
 
 // ── CastAny ──
 
-func Test_CastAny_FromToDefault(t *testing.T) {
+func Test_CastAny_FromToDefault_FromResultBasic(t *testing.T) {
 	// Arrange
 	source := map[string]int{"a": 1}
 	var target map[string]int
@@ -478,7 +478,7 @@ func Test_ResultCollection_Add(t *testing.T) {
 
 // ── JsonString / JsonStringer ──
 
-func Test_JsonString(t *testing.T) {
+func Test_JsonString_FromResultBasic(t *testing.T) {
 	// Arrange
 	js, err := corejson.JsonString(`{"a":1}`)
 
@@ -510,7 +510,7 @@ func Test_MapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapResults returns empty -- empty", actual)
 }
 
-func Test_MapResults_Add(t *testing.T) {
+func Test_MapResults_Add_FromResultBasic(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	result := corejson.New("hello")

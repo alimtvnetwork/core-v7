@@ -107,7 +107,7 @@ func Test_Within_StringRangeUint16_Invalid(t *testing.T) {
 
 // ── MinMaxInt.go — uncovered branches ──
 
-func Test_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt_DifferenceAbsolute_Negative_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange — Min > Max → negative diff
 	mm := &corerange.MinMaxInt{Min: 10, Max: 3}
 
@@ -123,7 +123,7 @@ func Test_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt DifferenceAbsolute returns positive -- negative diff", actual)
 }
 
-func Test_MinMaxInt_IsInvalidValue(t *testing.T) {
+func Test_MinMaxInt_IsInvalidValue_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 10}
 
@@ -153,7 +153,7 @@ func Test_MinMaxInt_CreateRangeInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt CreateRangeInt returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxInt_CreateRangeInt8_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 0, Max: 10}
 
@@ -165,7 +165,7 @@ func Test_MinMaxInt_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxInt_CreateRangeInt16_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 0, Max: 10}
 
@@ -219,7 +219,7 @@ func Test_MinMaxInt_NilComparisons(t *testing.T) {
 
 // ── MinMaxInt16.go — uncovered branches ──
 
-func Test_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt16_DifferenceAbsolute_Negative_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt16{Min: 10, Max: 3}
 
@@ -423,7 +423,7 @@ func Test_MinMaxByte_NilComparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte nil comparisons return false -- nil receiver", actual)
 }
 
-func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt8_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -435,7 +435,7 @@ func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt16_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -447,7 +447,7 @@ func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxByte CreateRangeInt16 returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxByte_CreateRangeInt(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 
@@ -461,7 +461,7 @@ func Test_MinMaxByte_CreateRangeInt(t *testing.T) {
 
 // ── RangeByte.go — uncovered branches ──
 
-func Test_RangeByte_Ranges_Invalid(t *testing.T) {
+func Test_RangeByte_Ranges_Invalid_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange — create invalid RangeByte
 	rb := corerange.NewRangeByteMinMax("abc", "|", 0, 255)
 
@@ -623,7 +623,7 @@ func Test_RangeInt16_Ranges_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeInt16 Ranges returns empty -- invalid input", actual)
 }
 
-func Test_RangeInt16_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_RangeInt16_DifferenceAbsolute_Negative_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	ri16 := &corerange.RangeInt16{
 		BaseRange: &corerange.BaseRange{IsValid: true},
@@ -793,7 +793,7 @@ func Test_StartEndInt_RangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndInt RangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_StartEndInt_RangeInt(t *testing.T) {
+func Test_StartEndInt_RangeInt_FromWithinStringRangeUin(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 3, End: 7}
 	mm := &corerange.MinMaxInt{Min: 0, Max: 100}

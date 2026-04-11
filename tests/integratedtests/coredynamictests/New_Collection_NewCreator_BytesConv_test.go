@@ -276,7 +276,7 @@ func Test_BytesConverter_ToBool_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool valid", actual)
 }
 
-func Test_BytesConverter_ToBoolMust(t *testing.T) {
+func Test_BytesConverter_ToBoolMust_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("false"))
 
@@ -288,7 +288,7 @@ func Test_BytesConverter_ToBoolMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBoolMust", actual)
 }
 
-func Test_BytesConverter_SafeCastString_Empty(t *testing.T) {
+func Test_BytesConverter_SafeCastString_Empty_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte{})
 
@@ -312,7 +312,7 @@ func Test_BytesConverter_SafeCastString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter SafeCastString valid", actual)
 }
 
-func Test_BytesConverter_CastString_Empty(t *testing.T) {
+func Test_BytesConverter_CastString_Empty_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte{})
 	_, err := bc.CastString()
@@ -344,7 +344,7 @@ func Test_BytesConverter_CastString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString valid", actual)
 }
 
-func Test_BytesConverter_ToString(t *testing.T) {
+func Test_BytesConverter_ToString_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	s, err := bc.ToString()
@@ -363,7 +363,7 @@ func Test_BytesConverter_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString", actual)
 }
 
-func Test_BytesConverter_ToStringMust(t *testing.T) {
+func Test_BytesConverter_ToStringMust_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"world"`))
 
@@ -375,7 +375,7 @@ func Test_BytesConverter_ToStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringMust", actual)
 }
 
-func Test_BytesConverter_ToStrings(t *testing.T) {
+func Test_BytesConverter_ToStrings_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	ss, err := bc.ToStrings()
@@ -394,7 +394,7 @@ func Test_BytesConverter_ToStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings", actual)
 }
 
-func Test_BytesConverter_ToStringsMust(t *testing.T) {
+func Test_BytesConverter_ToStringsMust_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["x"]`))
 	ss := bc.ToStringsMust()
@@ -407,7 +407,7 @@ func Test_BytesConverter_ToStringsMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStringsMust", actual)
 }
 
-func Test_BytesConverter_ToInt64(t *testing.T) {
+func Test_BytesConverter_ToInt64_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("42"))
 	v, err := bc.ToInt64()
@@ -426,7 +426,7 @@ func Test_BytesConverter_ToInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64", actual)
 }
 
-func Test_BytesConverter_ToInt64Must(t *testing.T) {
+func Test_BytesConverter_ToInt64Must_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("99"))
 
@@ -457,7 +457,7 @@ func Test_BytesConverter_ToHashmap_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashmap valid", actual)
 }
 
-func Test_BytesConverter_ToHashmap_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashmap_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToHashmap()
@@ -490,7 +490,7 @@ func Test_BytesConverter_ToHashset_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashset valid", actual)
 }
 
-func Test_BytesConverter_ToHashset_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashset_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToHashset()
@@ -523,7 +523,7 @@ func Test_BytesConverter_ToCollection_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToCollection valid", actual)
 }
 
-func Test_BytesConverter_ToCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToCollection()
@@ -556,7 +556,7 @@ func Test_BytesConverter_ToSimpleSlice_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToSimpleSlice valid", actual)
 }
 
-func Test_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
+func Test_BytesConverter_ToSimpleSlice_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToSimpleSlice()
@@ -589,7 +589,7 @@ func Test_BytesConverter_ToKeyValCollection_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToKeyValCollection valid", actual)
 }
 
-func Test_BytesConverter_ToKeyValCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToKeyValCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToKeyValCollection()
@@ -602,7 +602,7 @@ func Test_BytesConverter_ToKeyValCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToKeyValCollection invalid", actual)
 }
 
-func Test_BytesConverter_ToAnyCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToAnyCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToAnyCollection()
@@ -615,7 +615,7 @@ func Test_BytesConverter_ToAnyCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToAnyCollection invalid", actual)
 }
 
-func Test_BytesConverter_ToMapAnyItems_Invalid(t *testing.T) {
+func Test_BytesConverter_ToMapAnyItems_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToMapAnyItems()
@@ -628,7 +628,7 @@ func Test_BytesConverter_ToMapAnyItems_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToMapAnyItems invalid", actual)
 }
 
-func Test_BytesConverter_ToDynamicCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToDynamicCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToDynamicCollection()
@@ -641,7 +641,7 @@ func Test_BytesConverter_ToDynamicCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToDynamicCollection invalid", actual)
 }
 
-func Test_BytesConverter_ToJsonResultCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToJsonResultCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToJsonResultCollection()
@@ -654,7 +654,7 @@ func Test_BytesConverter_ToJsonResultCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToJsonResultCollection invalid", actual)
 }
 
-func Test_BytesConverter_ToJsonMapResults_Invalid(t *testing.T) {
+func Test_BytesConverter_ToJsonMapResults_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToJsonMapResults()
@@ -667,7 +667,7 @@ func Test_BytesConverter_ToJsonMapResults_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToJsonMapResults invalid", actual)
 }
 
-func Test_BytesConverter_ToBytesCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToBytesCollection_Invalid_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`bad`))
 	_, err := bc.ToBytesCollection()
@@ -680,7 +680,7 @@ func Test_BytesConverter_ToBytesCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBytesCollection invalid", actual)
 }
 
-func Test_BytesConverter_Deserialize(t *testing.T) {
+func Test_BytesConverter_Deserialize_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	var s string
@@ -700,7 +700,7 @@ func Test_BytesConverter_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize", actual)
 }
 
-func Test_BytesConverter_DeserializeMust(t *testing.T) {
+func Test_BytesConverter_DeserializeMust_FromNewCollectionNewCrea(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"world"`))
 	var s string

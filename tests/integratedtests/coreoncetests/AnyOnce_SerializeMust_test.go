@@ -27,7 +27,7 @@ func Test_AnyOnce_SerializeMust_Panic(t *testing.T) {
 }
 
 // Deserialize when Serialize fails (value is func → Marshal error → early return)
-func Test_AnyOnce_Deserialize_SerializeError(t *testing.T) {
+func Test_AnyOnce_Deserialize_SerializeError_FromAnyOnceSerializeMust(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return func() {} })
 	var result string
@@ -119,7 +119,7 @@ func Test_AnyErrorOnce_ValueOnly_AlreadyInitialized(t *testing.T) {
 }
 
 // Deserialize when value has existing error — covers early return at Serialize
-func Test_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_ExistingError_FromAnyOnceSerializeMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return nil, errors.New("pre") })
 	var result string
@@ -134,7 +134,7 @@ func Test_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 }
 
 // Deserialize with marshal error (value is func)
-func Test_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
+func Test_AnyErrorOnce_Deserialize_MarshalError_FromAnyOnceSerializeMust(t *testing.T) {
 	// Arrange
 	aeo := coreonce.NewAnyErrorOncePtr(func() (any, error) { return func() {}, nil })
 	var result string

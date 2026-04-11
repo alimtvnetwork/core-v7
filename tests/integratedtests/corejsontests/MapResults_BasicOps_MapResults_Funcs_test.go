@@ -403,7 +403,7 @@ func Test_BytesCloneIf_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_BytesDeepClone(t *testing.T) {
+func Test_BytesDeepClone_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	c := corejson.BytesDeepClone([]byte("hello"))
 
@@ -419,7 +419,7 @@ func Test_BytesDeepClone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_BytesToString(t *testing.T) {
+func Test_BytesToString_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	s := corejson.BytesToString([]byte("hello"))
 
@@ -463,7 +463,7 @@ func Test_JsonString_Func(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
-func Test_JsonStringOrErrMsg_Valid(t *testing.T) {
+func Test_JsonStringOrErrMsg_Valid_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	s := corejson.JsonStringOrErrMsg("hello")
 
@@ -663,13 +663,13 @@ func Test_AnyTo_UsingSerializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for nil serializer", actual)
 }
 
-func Test_AnyTo_SerializedFieldsMap(t *testing.T) {
+func Test_AnyTo_SerializedFieldsMap_FromMapResultsBasicOpsMa(t *testing.T) {
 	fm, err := corejson.AnyTo.SerializedFieldsMap(map[string]int{"a": 1})
 	_ = fm
 	_ = err
 }
 
-func Test_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Nil_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
 
@@ -694,7 +694,7 @@ func Test_AnyTo_SerializedJsonResult_Jsoner(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_AnyTo_SerializedJsonResult_Error(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Error_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(errors.New("hello"))
 
@@ -898,7 +898,7 @@ func Test_CastAny_FromToOption_Jsoner(t *testing.T) {
 	_ = err
 }
 
-func Test_CastAny_FromToOption_SerializerFunc(t *testing.T) {
+func Test_CastAny_FromToOption_SerializerFunc_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	fn := func() ([]byte, error) { return []byte(`"hello"`), nil }
 	var out string
@@ -919,14 +919,14 @@ func Test_CastAny_FromToOption_Serializer(t *testing.T) {
 	_ = err
 }
 
-func Test_CastAny_FromToOption_ResultPtr(t *testing.T) {
+func Test_CastAny_FromToOption_ResultPtr_FromMapResultsBasicOpsMa(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("hello")
 	var out string
 	err := corejson.CastAny.FromToOption(false, r, &out)
 	_ = err
 }
 
-func Test_CastAny_FromToOption_String(t *testing.T) {
+func Test_CastAny_FromToOption_String_FromMapResultsBasicOpsMa(t *testing.T) {
 	// Arrange
 	var out string
 	err := corejson.CastAny.FromToOption(false, `"hello"`, &out)

@@ -64,7 +64,7 @@ func Test_SimpleSlice_AddsIf_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not add when false", actual)
 }
 
-func Test_SimpleSlice_AddFunc(t *testing.T) {
+func Test_SimpleSlice_AddFunc_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.EmptySimpleSlice[string]()
 	s.AddFunc(func() string { return "hello" })
@@ -250,7 +250,7 @@ func Test_SimpleSlice_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should filter to 2 items", actual)
 }
 
-func Test_SimpleSlice_CountFunc(t *testing.T) {
+func Test_SimpleSlice_CountFunc_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.SimpleSliceFrom([]int{1, 2, 3, 4})
 	count := s.CountFunc(func(i int, v int) bool { return v > 2 })
@@ -263,7 +263,7 @@ func Test_SimpleSlice_CountFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should count 2 items > 2", actual)
 }
 
-func Test_SimpleSlice_Clone(t *testing.T) {
+func Test_SimpleSlice_Clone_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.SimpleSliceFrom([]int{1, 2, 3})
 	c := s.Clone()
@@ -289,7 +289,7 @@ func Test_SimpleSlice_Clone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "clone of empty should be empty", actual)
 }
 
-func Test_SimpleSlice_String(t *testing.T) {
+func Test_SimpleSlice_String_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.SimpleSliceFrom([]int{1, 2})
 	str := s.String()
@@ -526,7 +526,7 @@ func Test_LinkedList_AppendNode_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should append", actual)
 }
 
-func Test_LinkedList_AppendChainOfNodes_Empty(t *testing.T) {
+func Test_LinkedList_AppendChainOfNodes_Empty_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	chain := coregeneric.LinkedListFrom([]int{1, 2, 3})
@@ -554,7 +554,7 @@ func Test_LinkedList_AppendChainOfNodes_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should append chain", actual)
 }
 
-func Test_LinkedList_FirstOrDefault_Empty(t *testing.T) {
+func Test_LinkedList_FirstOrDefault_Empty_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[string]()
 
@@ -566,7 +566,7 @@ func Test_LinkedList_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty should return zero", actual)
 }
 
-func Test_LinkedList_LastOrDefault_Empty(t *testing.T) {
+func Test_LinkedList_LastOrDefault_Empty_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[string]()
 
@@ -760,7 +760,7 @@ func Test_LinkedListNode_String(t *testing.T) {
 // Hashmap — uncovered branches
 // =============================================================================
 
-func Test_Hashmap_IsEmptyLock(t *testing.T) {
+func Test_Hashmap_IsEmptyLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 
@@ -772,7 +772,7 @@ func Test_Hashmap_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
-func Test_Hashmap_LengthLock(t *testing.T) {
+func Test_Hashmap_LengthLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.NewHashmap[string, int](0)
 	hm.Set("a", 1)
@@ -785,7 +785,7 @@ func Test_Hashmap_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be 1", actual)
 }
 
-func Test_Hashmap_SetLock(t *testing.T) {
+func Test_Hashmap_SetLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.SetLock("a", 1)
@@ -799,7 +799,7 @@ func Test_Hashmap_SetLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SetLock should set", actual)
 }
 
-func Test_Hashmap_GetOrDefault(t *testing.T) {
+func Test_Hashmap_GetOrDefault_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 
@@ -815,7 +815,7 @@ func Test_Hashmap_GetOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "found key should return value", actual)
 }
 
-func Test_Hashmap_GetLock(t *testing.T) {
+func Test_Hashmap_GetLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -842,7 +842,7 @@ func Test_Hashmap_Contains(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should contain", actual)
 }
 
-func Test_Hashmap_ContainsLock(t *testing.T) {
+func Test_Hashmap_ContainsLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -879,7 +879,7 @@ func Test_Hashmap_Remove_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return false for missing key", actual)
 }
 
-func Test_Hashmap_RemoveLock(t *testing.T) {
+func Test_Hashmap_RemoveLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -963,7 +963,7 @@ func Test_Hashmap_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should have 2 entries", actual)
 }
 
-func Test_Hashmap_Clone(t *testing.T) {
+func Test_Hashmap_Clone_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})
 	c := hm.Clone()
@@ -1068,7 +1068,7 @@ func Test_Hashmap_Set_Overwrite(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "second set should not be new", actual)
 }
 
-func Test_Hashmap_HasItems(t *testing.T) {
+func Test_Hashmap_HasItems_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})
 
@@ -1147,7 +1147,7 @@ func Test_Hashset_AddBool_New(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "new item should return false", actual)
 }
 
-func Test_Hashset_AddLock(t *testing.T) {
+func Test_Hashset_AddLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddLock("a")
@@ -1160,7 +1160,7 @@ func Test_Hashset_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should add", actual)
 }
 
-func Test_Hashset_AddSliceLock(t *testing.T) {
+func Test_Hashset_AddSliceLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddSliceLock([]string{"a", "b"})
@@ -1186,7 +1186,7 @@ func Test_Hashset_AddIf_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not add", actual)
 }
 
-func Test_Hashset_AddIfMany_Skip(t *testing.T) {
+func Test_Hashset_AddIfMany_Skip_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddIfMany(false, "a", "b")
@@ -1199,7 +1199,7 @@ func Test_Hashset_AddIfMany_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not add", actual)
 }
 
-func Test_Hashset_AddHashsetItems_Nil(t *testing.T) {
+func Test_Hashset_AddHashsetItems_Nil_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddHashsetItems(nil)
@@ -1212,7 +1212,7 @@ func Test_Hashset_AddHashsetItems_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should remain empty", actual)
 }
 
-func Test_Hashset_AddItemsMap_FalseValue(t *testing.T) {
+func Test_Hashset_AddItemsMap_FalseValue_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	hs.AddItemsMap(map[string]bool{"a": true, "b": false})
@@ -1225,7 +1225,7 @@ func Test_Hashset_AddItemsMap_FalseValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should only add true values", actual)
 }
 
-func Test_Hashset_ContainsLock(t *testing.T) {
+func Test_Hashset_ContainsLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
@@ -1273,7 +1273,7 @@ func Test_Hashset_Remove_NotExist(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return false", actual)
 }
 
-func Test_Hashset_RemoveLock(t *testing.T) {
+func Test_Hashset_RemoveLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
@@ -1285,7 +1285,7 @@ func Test_Hashset_RemoveLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return true", actual)
 }
 
-func Test_Hashset_ListPtr(t *testing.T) {
+func Test_Hashset_ListPtr_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 	p := hs.ListPtr()
@@ -1311,7 +1311,7 @@ func Test_Hashset_Resize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should preserve items", actual)
 }
 
-func Test_Hashset_Resize_TooSmall(t *testing.T) {
+func Test_Hashset_Resize_TooSmall_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a", "b", "c"})
 	hs.Resize(1)
@@ -1324,7 +1324,7 @@ func Test_Hashset_Resize_TooSmall(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not resize when capacity < length", actual)
 }
 
-func Test_Hashset_Collection(t *testing.T) {
+func Test_Hashset_Collection_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 	col := hs.Collection()
@@ -1400,7 +1400,7 @@ func Test_Hashset_IsEquals_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "different keys should not be equal", actual)
 }
 
-func Test_Hashset_IsEmptyLock(t *testing.T) {
+func Test_Hashset_IsEmptyLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 
@@ -1412,7 +1412,7 @@ func Test_Hashset_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
-func Test_Hashset_LengthLock(t *testing.T) {
+func Test_Hashset_LengthLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
@@ -1424,7 +1424,7 @@ func Test_Hashset_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be 1", actual)
 }
 
-func Test_Hashset_String(t *testing.T) {
+func Test_Hashset_String_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
@@ -1436,7 +1436,7 @@ func Test_Hashset_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
-func Test_Hashset_Map(t *testing.T) {
+func Test_Hashset_Map_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
@@ -1452,7 +1452,7 @@ func Test_Hashset_Map(t *testing.T) {
 // Collection — uncovered branches
 // =============================================================================
 
-func Test_Collection_AddIfMany_Skip(t *testing.T) {
+func Test_Collection_AddIfMany_Skip_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddIfMany(false, 1, 2)
@@ -1492,7 +1492,7 @@ func Test_Collection_AddCollection_Empty_Cov(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should remain empty", actual)
 }
 
-func Test_Collection_AddCollections(t *testing.T) {
+func Test_Collection_AddCollections_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	c1 := coregeneric.CollectionFrom([]int{1})
@@ -1546,7 +1546,7 @@ func Test_Collection_SafeAt_Empty_Cov(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty should return zero", actual)
 }
 
-func Test_Collection_ForEachBreak(t *testing.T) {
+func Test_Collection_ForEachBreak_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 	count := 0
@@ -1563,7 +1563,7 @@ func Test_Collection_ForEachBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should break after second", actual)
 }
 
-func Test_Collection_CountFunc(t *testing.T) {
+func Test_Collection_CountFunc_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3, 4})
 	count := col.CountFunc(func(v int) bool { return v > 2 })
@@ -1576,7 +1576,7 @@ func Test_Collection_CountFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should count 2", actual)
 }
 
-func Test_Collection_SortFunc(t *testing.T) {
+func Test_Collection_SortFunc_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{3, 1, 2})
 	col.SortFunc(func(a, b int) bool { return a < b })
@@ -1589,7 +1589,7 @@ func Test_Collection_SortFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "first should be 1 after sort", actual)
 }
 
-func Test_Collection_Reverse(t *testing.T) {
+func Test_Collection_Reverse_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 	col.Reverse()
@@ -1602,7 +1602,7 @@ func Test_Collection_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should reverse", actual)
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1})
 	result := col.ConcatNew(2, 3)
@@ -1646,7 +1646,7 @@ func Test_Collection_ItemsPtr_Cov(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return pointer to items", actual)
 }
 
-func Test_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2})
 
@@ -1658,7 +1658,7 @@ func Test_Collection_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be 2", actual)
 }
 
-func Test_Collection_IsEmptyLock(t *testing.T) {
+func Test_Collection_IsEmptyLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 
@@ -1670,7 +1670,7 @@ func Test_Collection_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
-func Test_Collection_AddLock(t *testing.T) {
+func Test_Collection_AddLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddLock(1)
@@ -1683,7 +1683,7 @@ func Test_Collection_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should add", actual)
 }
 
-func Test_Collection_AddsLock(t *testing.T) {
+func Test_Collection_AddsLock_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddsLock(1, 2)
@@ -1696,7 +1696,7 @@ func Test_Collection_AddsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should add 2", actual)
 }
 
-func Test_Collection_CollectionLenCap(t *testing.T) {
+func Test_Collection_CollectionLenCap_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionLenCap[int](5, 10)
 
@@ -1708,7 +1708,7 @@ func Test_Collection_CollectionLenCap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should have length 5, cap >= 10", actual)
 }
 
-func Test_Collection_HasItems(t *testing.T) {
+func Test_Collection_HasItems_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1})
 
@@ -1720,7 +1720,7 @@ func Test_Collection_HasItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
-func Test_Collection_String(t *testing.T) {
+func Test_Collection_String_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1})
 
@@ -2350,7 +2350,7 @@ func Test_ToHashset_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
-func Test_DistinctSimpleSlice_Nil(t *testing.T) {
+func Test_DistinctSimpleSlice_Nil_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	result := coregeneric.DistinctSimpleSlice[int](nil)
 
@@ -2362,7 +2362,7 @@ func Test_DistinctSimpleSlice_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
-func Test_ContainsSimpleSliceItem_Nil(t *testing.T) {
+func Test_ContainsSimpleSliceItem_Nil_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.ContainsSimpleSliceItem[int](nil, 1)}
 
@@ -2381,7 +2381,7 @@ func Test_SortCollection_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
-func Test_SortCollectionDesc_Nil(t *testing.T) {
+func Test_SortCollectionDesc_Nil_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.SortCollectionDesc[int](nil) != nil}
 
@@ -2527,7 +2527,7 @@ func Test_SortSimpleSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should sort ascending", actual)
 }
 
-func Test_SortSimpleSliceDesc(t *testing.T) {
+func Test_SortSimpleSliceDesc_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.SimpleSliceFrom([]int{1, 3, 2})
 	coregeneric.SortSimpleSliceDesc(s)
@@ -2564,7 +2564,7 @@ func Test_MaxSimpleSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return max", actual)
 }
 
-func Test_SumSimpleSlice(t *testing.T) {
+func Test_SumSimpleSlice_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	s := coregeneric.SimpleSliceFrom([]int{1, 2, 3})
 
@@ -2589,7 +2589,7 @@ func Test_SortedListHashset(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be sorted", actual)
 }
 
-func Test_SortedListDescHashset(t *testing.T) {
+func Test_SortedListDescHashset_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]int{3, 1, 2})
 	sorted := coregeneric.SortedListDescHashset(hs)
@@ -2626,7 +2626,7 @@ func Test_MaxHashset(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return max", actual)
 }
 
-func Test_SortedCollectionHashset(t *testing.T) {
+func Test_SortedCollectionHashset_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hs := coregeneric.HashsetFrom([]int{3, 1, 2})
 	col := coregeneric.SortedCollectionHashset(hs)
@@ -2652,7 +2652,7 @@ func Test_SortedKeysHashmap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be sorted", actual)
 }
 
-func Test_SortedKeysDescHashmap(t *testing.T) {
+func Test_SortedKeysDescHashmap_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.HashmapFrom(map[string]int{"c": 3, "a": 1, "b": 2})
 	keys := coregeneric.SortedKeysDescHashmap(hm)
@@ -2689,7 +2689,7 @@ func Test_MaxKeyHashmap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return max key", actual)
 }
 
-func Test_SortedValuesHashmap(t *testing.T) {
+func Test_SortedValuesHashmap_FromSimpleSliceAddIf(t *testing.T) {
 	// Arrange
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 3, "b": 1, "c": 2})
 	vals := coregeneric.SortedValuesHashmap(hm)
@@ -2777,7 +2777,7 @@ func Test_IsGreaterOrEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "2 >= 2", actual)
 }
 
-func Test_IsNumericEqual(t *testing.T) {
+func Test_IsNumericEqual_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNumericEqual(2, 2)}
 
@@ -2786,7 +2786,7 @@ func Test_IsNumericEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "2 == 2", actual)
 }
 
-func Test_IsNotEqual(t *testing.T) {
+func Test_IsNotEqual_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNotEqual(1, 2)}
 
@@ -2795,7 +2795,7 @@ func Test_IsNotEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "1 != 2", actual)
 }
 
-func Test_Clamp(t *testing.T) {
+func Test_Clamp_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Clamp(-1, 0, 10) != 0}
 
@@ -2846,7 +2846,7 @@ func Test_InRange(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should not be in range", actual)
 }
 
-func Test_InRangeExclusive(t *testing.T) {
+func Test_InRangeExclusive_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.InRangeExclusive(0, 0, 10)}
 
@@ -2858,7 +2858,7 @@ func Test_InRangeExclusive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be in range exclusive", actual)
 }
 
-func Test_Abs(t *testing.T) {
+func Test_Abs_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Abs(-5) != 5}
 
@@ -2870,7 +2870,7 @@ func Test_Abs(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "abs(5) should be 5", actual)
 }
 
-func Test_AbsDiff(t *testing.T) {
+func Test_AbsDiff_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.AbsDiff(3, 5) != 2}
 
@@ -2909,7 +2909,7 @@ func Test_MaxOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return 5", actual)
 }
 
-func Test_MinOfSlice(t *testing.T) {
+func Test_MinOfSlice_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.MinOfSlice([]int{3, 1, 2}) != 1}
 
@@ -2918,7 +2918,7 @@ func Test_MinOfSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return 1", actual)
 }
 
-func Test_MaxOfSlice(t *testing.T) {
+func Test_MaxOfSlice_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.MaxOfSlice([]int{3, 1, 2}) != 3}
 
@@ -2945,7 +2945,7 @@ func Test_IsPositive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "1 should be positive", actual)
 }
 
-func Test_IsNegative(t *testing.T) {
+func Test_IsNegative_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNegative(-1)}
 
@@ -2954,7 +2954,7 @@ func Test_IsNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "-1 should be negative", actual)
 }
 
-func Test_IsNonNegative(t *testing.T) {
+func Test_IsNonNegative_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.IsNonNegative(0)}
 
@@ -2963,7 +2963,7 @@ func Test_IsNonNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "0 should be non-negative", actual)
 }
 
-func Test_Sign(t *testing.T) {
+func Test_Sign_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.Sign(-5) != -1}
 
@@ -2978,7 +2978,7 @@ func Test_Sign(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "positive should be 1", actual)
 }
 
-func Test_SafeDiv(t *testing.T) {
+func Test_SafeDiv_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.SafeDiv(10, 0) != 0}
 
@@ -2990,7 +2990,7 @@ func Test_SafeDiv(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "10/2 should be 5", actual)
 }
 
-func Test_SafeDivOrDefault(t *testing.T) {
+func Test_SafeDivOrDefault_FromSimpleSliceAddIf(t *testing.T) {
 	// Act
 	actual := args.Map{"result": coregeneric.SafeDivOrDefault(10, 0, -1) != -1}
 

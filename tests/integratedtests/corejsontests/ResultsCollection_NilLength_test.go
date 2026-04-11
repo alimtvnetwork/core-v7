@@ -12,7 +12,7 @@ import (
 // ResultsCollection — Length / IsEmpty / HasAnyItem
 // =============================================================================
 
-func Test_ResultsCollection_NilLength(t *testing.T) {
+func Test_ResultsCollection_NilLength_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionNilLengthTestCase
 
 	// Arrange
@@ -62,7 +62,7 @@ func Test_ResultsCollection_HasAnyItem(t *testing.T) {
 // ResultsCollection — FirstOrDefault / LastOrDefault
 // =============================================================================
 
-func Test_ResultsCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_ResultsCollection_FirstOrDefault_Empty_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionFirstOrDefaultEmptyTestCase
 
 	// Arrange
@@ -93,7 +93,7 @@ func Test_ResultsCollection_FirstOrDefault_HasItem(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_ResultsCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_ResultsCollection_LastOrDefault_Empty_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionLastOrDefaultEmptyTestCase
 
 	// Arrange
@@ -389,7 +389,7 @@ func Test_ResultsCollection_GetAtSafe_OutOfRange(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_ResultsCollection_UnmarshalAt(t *testing.T) {
+func Test_ResultsCollection_UnmarshalAt_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionUnmarshalAtTestCase
 
 	// Arrange
@@ -476,7 +476,7 @@ func Test_ResultsCollection_Clear_Nil(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_ResultsCollection_Dispose(t *testing.T) {
+func Test_ResultsCollection_Dispose_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionDisposeTestCase
 
 	// Arrange
@@ -510,7 +510,7 @@ func Test_ResultsCollection_Clone_Deep(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_ResultsCollection_ClonePtr_Nil(t *testing.T) {
+func Test_ResultsCollection_ClonePtr_Nil_FromResultsCollectionNil(t *testing.T) {
 	tc := resultsCollectionClonePtrNilTestCase
 
 	// Arrange

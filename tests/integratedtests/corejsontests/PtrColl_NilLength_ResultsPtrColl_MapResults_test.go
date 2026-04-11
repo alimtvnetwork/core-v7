@@ -843,7 +843,7 @@ func Test_MapResults_AddAny_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_MapResults_AddAnySkipOnNil_Nil(t *testing.T) {
+func Test_MapResults_AddAnySkipOnNil_Nil_FromPtrCollNilLengthResu(t *testing.T) {
 	tc := mapResultsAddAnySkipOnNilNilTestCase
 
 	// Arrange

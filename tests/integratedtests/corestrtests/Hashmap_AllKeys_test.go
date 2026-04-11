@@ -9,7 +9,7 @@ import (
 
 // ── Hashmap — additional methods ──
 
-func Test_Hashmap_AllKeys(t *testing.T) {
+func Test_Hashmap_AllKeys_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashmap_AllKeys", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(
@@ -31,7 +31,7 @@ func Test_Hashmap_AllKeys(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Remove(t *testing.T) {
+func Test_Hashmap_Remove_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashmap_Remove", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -56,7 +56,7 @@ func Test_Hashmap_Remove(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_String(t *testing.T) {
+func Test_Hashmap_String_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashmap_String", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -71,7 +71,7 @@ func Test_Hashmap_String(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashmap_Get", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -98,7 +98,7 @@ func Test_Hashmap_Get(t *testing.T) {
 
 // ── Collection — serialization and iteration ──
 
-func Test_Collection_ListStrings(t *testing.T) {
+func Test_Collection_ListStrings_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Collection_ListStrings", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"x", "y"})
@@ -119,7 +119,7 @@ func Test_Collection_ListStrings(t *testing.T) {
 	})
 }
 
-func Test_Collection_IndexAt(t *testing.T) {
+func Test_Collection_IndexAt_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Collection_IndexAt", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -135,7 +135,7 @@ func Test_Collection_IndexAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_First_Last(t *testing.T) {
+func Test_Collection_First_Last_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Collection_First_Last", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -155,7 +155,7 @@ func Test_Collection_First_Last(t *testing.T) {
 	})
 }
 
-func Test_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Collection_Filter", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"ab", "cd", "abc"})
@@ -302,7 +302,7 @@ func Test_CharCollectionMap_AddAndGet(t *testing.T) {
 
 // ── HashsetsCollection ──
 
-func Test_HashsetsCollection_Add(t *testing.T) {
+func Test_HashsetsCollection_Add_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_HashsetsCollection_Add", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Cap(5)
@@ -326,7 +326,7 @@ func Test_HashsetsCollection_Add(t *testing.T) {
 
 // ── CollectionsOfCollection ──
 
-func Test_CollectionsOfCollection_Add(t *testing.T) {
+func Test_CollectionsOfCollection_Add_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_CollectionsOfCollection_Add", func() {
 		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Cap(5)
@@ -350,7 +350,7 @@ func Test_CollectionsOfCollection_Add(t *testing.T) {
 
 // ── LeftRight — HasSafeNonEmpty full coverage ──
 
-func Test_LeftRight_HasSafeNonEmpty(t *testing.T) {
+func Test_LeftRight_HasSafeNonEmpty_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_LeftRight_HasSafeNonEmpty", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("l", "r")
@@ -412,7 +412,7 @@ func Test_Hashset_HasAny(t *testing.T) {
 
 // ── Hashmap — HasAny and HasAll ──
 
-func Test_Hashmap_HasAny(t *testing.T) {
+func Test_Hashmap_HasAny_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashmap_HasAny", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(
@@ -439,7 +439,7 @@ func Test_Hashmap_HasAny(t *testing.T) {
 
 // ── Hashset — String ──
 
-func Test_Hashset_String(t *testing.T) {
+func Test_Hashset_String_FromHashmapAllKeys(t *testing.T) {
 	safeTest(t, "Test_Cov4_Hashset_String", func() {
 		// Arrange
 		hs := corestr.New.Hashset.Strings([]string{"a"})

@@ -84,7 +84,7 @@ func Test_Collection_AddMethods(t *testing.T) {
 	})
 }
 
-func Test_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_RemoveAt", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -110,7 +110,7 @@ func Test_Collection_RemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEquals(t *testing.T) {
+func Test_Collection_IsEquals_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_IsEquals", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -156,7 +156,7 @@ func Test_Collection_JoinAndString(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddError(t *testing.T) {
+func Test_Collection_AddError_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_AddError", func() {
 		// Arrange
 		col := corestr.New.Collection.Empty()
@@ -178,7 +178,7 @@ func Test_Collection_AddError(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_ConcatNew", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -199,7 +199,7 @@ func Test_Collection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_EachItemSplitBy", func() {
 		// Arrange
 		col := corestr.New.Collection.Strings([]string{"a:b", "c:d"})
@@ -217,7 +217,7 @@ func Test_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddCollections(t *testing.T) {
+func Test_Collection_AddCollections_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_AddCollections", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a"})
@@ -237,7 +237,7 @@ func Test_Collection_AddCollections(t *testing.T) {
 	})
 }
 
-func Test_Collection_AsError(t *testing.T) {
+func Test_Collection_AsError_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Collection_AsError", func() {
 		// Arrange
 		empty := corestr.New.Collection.Empty()
@@ -428,7 +428,7 @@ func Test_Hashmap_GetValue(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_SetBySplitter(t *testing.T) {
+func Test_Hashmap_SetBySplitter_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_Hashmap_SetBySplitter", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -522,7 +522,7 @@ func Test_SimpleSlice_AddMethods(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_SkipTake(t *testing.T) {
+func Test_SimpleSlice_SkipTake_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_SimpleSlice_SkipTake", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c", "d", "e")
@@ -569,7 +569,7 @@ func Test_SimpleSlice_FirstLastOrDefault(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_IsContains(t *testing.T) {
+func Test_SimpleSlice_IsContains_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_SimpleSlice_IsContains", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("hello", "world")
@@ -591,7 +591,7 @@ func Test_SimpleSlice_IsContains(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_InsertAt(t *testing.T) {
+func Test_SimpleSlice_InsertAt_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_SimpleSlice_InsertAt", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "c")
@@ -661,7 +661,7 @@ func Test_LeftRight_BasicMethods(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice(t *testing.T) {
+func Test_LeftRight_UsingSlice_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_LeftRight_UsingSlice", func() {
 		// Arrange & Act
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
@@ -693,7 +693,7 @@ func Test_LeftRight_UsingSlice(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsEqual(t *testing.T) {
+func Test_LeftRight_IsEqual_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_LeftRight_IsEqual", func() {
 		// Arrange
 		lr1 := corestr.NewLeftRight("a", "b")
@@ -773,7 +773,7 @@ func Test_ValidValue_InvalidAndEmpty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_ValidValue_Clone", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -795,7 +795,7 @@ func Test_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf_FromCollectionBasicMetho(t *testing.T) {
 	safeTest(t, "Test_ValidValue_IsAnyOf", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")

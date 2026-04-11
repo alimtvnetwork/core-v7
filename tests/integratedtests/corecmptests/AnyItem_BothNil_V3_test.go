@@ -11,7 +11,7 @@ import (
 
 // ── AnyItem ──
 
-func Test_AnyItem_BothNil(t *testing.T) {
+func Test_AnyItem_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.AnyItem(nil, nil) == corecomparator.Equal}
 
@@ -58,7 +58,7 @@ func Test_AnyItem_Inconclusive(t *testing.T) {
 
 // ── Byte / BytePtr ──
 
-func Test_Byte_Equal(t *testing.T) {
+func Test_Byte_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Byte(1, 1) == corecomparator.Equal}
 
@@ -85,7 +85,7 @@ func Test_Byte_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns correct value -- left greater", actual)
 }
 
-func Test_BytePtr_BothNil(t *testing.T) {
+func Test_BytePtr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.BytePtr(nil, nil) == corecomparator.Equal}
 
@@ -94,7 +94,7 @@ func Test_BytePtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- both nil", actual)
 }
 
-func Test_BytePtr_LeftNil(t *testing.T) {
+func Test_BytePtr_LeftNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	b := byte(1)
 
@@ -106,7 +106,7 @@ func Test_BytePtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns nil -- left nil", actual)
 }
 
-func Test_BytePtr_RightNil(t *testing.T) {
+func Test_BytePtr_RightNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	b := byte(1)
 
@@ -132,7 +132,7 @@ func Test_BytePtr_Equal(t *testing.T) {
 
 // ── Integer / IntegerPtr ──
 
-func Test_Integer_Equal(t *testing.T) {
+func Test_Integer_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer(5, 5) == corecomparator.Equal}
 
@@ -159,7 +159,7 @@ func Test_Integer_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer returns correct value -- left greater", actual)
 }
 
-func Test_IntegerPtr_BothNil(t *testing.T) {
+func Test_IntegerPtr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IntegerPtr(nil, nil) == corecomparator.Equal}
 
@@ -168,7 +168,7 @@ func Test_IntegerPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- both nil", actual)
 }
 
-func Test_IntegerPtr_LeftNil(t *testing.T) {
+func Test_IntegerPtr_LeftNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	v := 5
 
@@ -180,7 +180,7 @@ func Test_IntegerPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns nil -- left nil", actual)
 }
 
-func Test_IntegerPtr_RightNil(t *testing.T) {
+func Test_IntegerPtr_RightNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	v := 5
 
@@ -194,7 +194,7 @@ func Test_IntegerPtr_RightNil(t *testing.T) {
 
 // ── Integer8 / Integer8Ptr ──
 
-func Test_Integer8_Equal(t *testing.T) {
+func Test_Integer8_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer8(5, 5) == corecomparator.Equal}
 
@@ -221,7 +221,7 @@ func Test_Integer8_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- left greater", actual)
 }
 
-func Test_Integer8Ptr_BothNil(t *testing.T) {
+func Test_Integer8Ptr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer8Ptr(nil, nil) == corecomparator.Equal}
 
@@ -244,7 +244,7 @@ func Test_Integer8Ptr_OneNil(t *testing.T) {
 
 // ── Integer16 / Integer16Ptr ──
 
-func Test_Integer16_Equal(t *testing.T) {
+func Test_Integer16_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer16(5, 5) == corecomparator.Equal}
 
@@ -271,7 +271,7 @@ func Test_Integer16_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer16 returns correct value -- left greater", actual)
 }
 
-func Test_Integer16Ptr_BothNil(t *testing.T) {
+func Test_Integer16Ptr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer16Ptr(nil, nil) == corecomparator.Equal}
 
@@ -294,7 +294,7 @@ func Test_Integer16Ptr_OneNil(t *testing.T) {
 
 // ── Integer32 / Integer32Ptr ──
 
-func Test_Integer32_Equal(t *testing.T) {
+func Test_Integer32_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer32(5, 5) == corecomparator.Equal}
 
@@ -321,7 +321,7 @@ func Test_Integer32_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer32 returns correct value -- left greater", actual)
 }
 
-func Test_Integer32Ptr_BothNil(t *testing.T) {
+func Test_Integer32Ptr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer32Ptr(nil, nil) == corecomparator.Equal}
 
@@ -344,7 +344,7 @@ func Test_Integer32Ptr_OneNil(t *testing.T) {
 
 // ── Integer64 / Integer64Ptr ──
 
-func Test_Integer64_Equal(t *testing.T) {
+func Test_Integer64_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer64(5, 5) == corecomparator.Equal}
 
@@ -371,7 +371,7 @@ func Test_Integer64_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- left greater", actual)
 }
 
-func Test_Integer64Ptr_BothNil(t *testing.T) {
+func Test_Integer64Ptr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer64Ptr(nil, nil) == corecomparator.Equal}
 
@@ -394,7 +394,7 @@ func Test_Integer64Ptr_OneNil(t *testing.T) {
 
 // ── Time / TimePtr ──
 
-func Test_Time_Equal(t *testing.T) {
+func Test_Time_Equal_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -432,7 +432,7 @@ func Test_Time_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Time returns correct value -- left greater", actual)
 }
 
-func Test_TimePtr_BothNil(t *testing.T) {
+func Test_TimePtr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.TimePtr(nil, nil) == corecomparator.Equal}
 
@@ -467,7 +467,7 @@ func Test_TimePtr_Equal(t *testing.T) {
 
 // ── IsStringsEqual / IsStringsEqualPtr / IsStringsEqualWithoutOrder ──
 
-func Test_IsStringsEqual_BothNil(t *testing.T) {
+func Test_IsStringsEqual_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqual(nil, nil)}
 
@@ -512,7 +512,7 @@ func Test_IsStringsEqual_NotEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- not equal", actual)
 }
 
-func Test_IsStringsEqualPtr_BothNil(t *testing.T) {
+func Test_IsStringsEqualPtr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualPtr(nil, nil)}
 
@@ -530,7 +530,7 @@ func Test_IsStringsEqualPtr_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns nil -- one nil", actual)
 }
 
-func Test_IsStringsEqualPtr_DiffLen(t *testing.T) {
+func Test_IsStringsEqualPtr_DiffLen_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualPtr([]string{"a"}, []string{"a", "b"})}
 
@@ -548,7 +548,7 @@ func Test_IsStringsEqualWithoutOrder_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualWithoutOrder returns non-empty -- equal", actual)
 }
 
-func Test_IsStringsEqualWithoutOrder_BothNil(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder(nil, nil)}
 
@@ -566,7 +566,7 @@ func Test_IsStringsEqualWithoutOrder_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualWithoutOrder returns nil -- one nil", actual)
 }
 
-func Test_IsStringsEqualWithoutOrder_DiffLen(t *testing.T) {
+func Test_IsStringsEqualWithoutOrder_DiffLen_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder([]string{"a"}, []string{"a", "b"})}
 
@@ -586,7 +586,7 @@ func Test_IsStringsEqualWithoutOrder_NotEqual(t *testing.T) {
 
 // ── IsIntegersEqual / IsIntegersEqualPtr ──
 
-func Test_IsIntegersEqual_BothNil(t *testing.T) {
+func Test_IsIntegersEqual_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqual(nil, nil)}
 
@@ -613,7 +613,7 @@ func Test_IsIntegersEqual_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns correct value -- equal", actual)
 }
 
-func Test_IsIntegersEqualPtr_BothNil(t *testing.T) {
+func Test_IsIntegersEqualPtr_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqualPtr(nil, nil)}
 
@@ -634,7 +634,7 @@ func Test_IsIntegersEqualPtr_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqualPtr returns nil -- one nil", actual)
 }
 
-func Test_IsIntegersEqualPtr_DiffLen(t *testing.T) {
+func Test_IsIntegersEqualPtr_DiffLen_FromAnyItemBothNilV3(t *testing.T) {
 	// Arrange
 	a := []int{1}
 	b := []int{1, 2}
@@ -676,7 +676,7 @@ func Test_VersionSliceByte_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VersionSliceByte returns correct value -- left greater", actual)
 }
 
-func Test_VersionSliceByte_BothNil(t *testing.T) {
+func Test_VersionSliceByte_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.VersionSliceByte(nil, nil) == corecomparator.Equal}
 
@@ -694,7 +694,7 @@ func Test_VersionSliceByte_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VersionSliceByte returns nil -- one nil", actual)
 }
 
-func Test_VersionSliceByte_ShorterLeft(t *testing.T) {
+func Test_VersionSliceByte_ShorterLeft_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.VersionSliceByte([]byte{1}, []byte{1, 2}) == corecomparator.LeftLess}
 
@@ -741,7 +741,7 @@ func Test_VersionSliceInteger_LeftGreater(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VersionSliceInteger returns correct value -- left greater", actual)
 }
 
-func Test_VersionSliceInteger_BothNil(t *testing.T) {
+func Test_VersionSliceInteger_BothNil_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.VersionSliceInteger(nil, nil) == corecomparator.Equal}
 
@@ -759,7 +759,7 @@ func Test_VersionSliceInteger_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VersionSliceInteger returns nil -- one nil", actual)
 }
 
-func Test_VersionSliceInteger_ShorterLeft(t *testing.T) {
+func Test_VersionSliceInteger_ShorterLeft_FromAnyItemBothNilV3(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.VersionSliceInteger([]int{1}, []int{1, 2}) == corecomparator.LeftLess}
 

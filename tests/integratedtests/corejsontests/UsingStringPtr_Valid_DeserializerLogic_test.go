@@ -419,7 +419,7 @@ type simpleStringer struct{ val string }
 
 func (s simpleStringer) String() string { return s.val }
 
-func Test_Serialize_ToBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToBytesSwallowErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToBytesSwallowErr("test")
 
@@ -429,7 +429,7 @@ func Test_Serialize_ToBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToBytesSwallowErr returns bytes -- valid", actual)
 }
 
-func Test_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
+func Test_Serialize_ToSafeBytesSwallowErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToSafeBytesSwallowErr("test")
 
@@ -439,7 +439,7 @@ func Test_Serialize_ToSafeBytesSwallowErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSafeBytesSwallowErr returns bytes -- valid", actual)
 }
 
-func Test_Serialize_ToBytesErr(t *testing.T) {
+func Test_Serialize_ToBytesErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result, err := corejson.Serialize.ToBytesErr("test")
 
@@ -455,7 +455,7 @@ func Test_Serialize_ToBytesErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToBytesErr returns bytes -- valid", actual)
 }
 
-func Test_Serialize_ToStringErr(t *testing.T) {
+func Test_Serialize_ToStringErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result, err := corejson.Serialize.ToStringErr("test")
 
@@ -471,7 +471,7 @@ func Test_Serialize_ToStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToStringErr returns string -- valid", actual)
 }
 
-func Test_Serialize_ToPrettyStringErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange
 	m := map[string]string{"a": "b"}
 
@@ -490,7 +490,7 @@ func Test_Serialize_ToPrettyStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToPrettyStringErr returns string -- valid", actual)
 }
 
-func Test_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serialize_ToPrettyStringIncludingErr_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.ToPrettyStringIncludingErr(map[string]string{"a": "b"})
 
@@ -500,7 +500,7 @@ func Test_Serialize_ToPrettyStringIncludingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToPrettyStringIncludingErr returns string -- valid", actual)
 }
 
-func Test_Serialize_Pretty(t *testing.T) {
+func Test_Serialize_Pretty_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.Pretty(map[string]string{"a": "b"})
 
@@ -510,7 +510,7 @@ func Test_Serialize_Pretty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Pretty returns formatted string -- valid", actual)
 }
 
-func Test_Serialize_FromInteger64(t *testing.T) {
+func Test_Serialize_FromInteger64_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromInteger64(42)
 
@@ -526,7 +526,7 @@ func Test_Serialize_FromInteger64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromInteger64 returns result -- valid int", actual)
 }
 
-func Test_Serialize_FromBool(t *testing.T) {
+func Test_Serialize_FromBool_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromBool(true)
 
@@ -536,7 +536,7 @@ func Test_Serialize_FromBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromBool returns result -- true", actual)
 }
 
-func Test_Serialize_FromIntegers(t *testing.T) {
+func Test_Serialize_FromIntegers_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromIntegers([]int{1, 2, 3})
 
@@ -546,7 +546,7 @@ func Test_Serialize_FromIntegers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromIntegers returns result -- slice", actual)
 }
 
-func Test_Serialize_FromBytes(t *testing.T) {
+func Test_Serialize_FromBytes_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromBytes([]byte("test"))
 
@@ -556,7 +556,7 @@ func Test_Serialize_FromBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FromBytes returns result -- bytes", actual)
 }
 
-func Test_Serialize_FromStringsSpread(t *testing.T) {
+func Test_Serialize_FromStringsSpread_FromUsingStringPtrValidD(t *testing.T) {
 	// Arrange & Act
 	result := corejson.Serialize.FromStringsSpread("a", "b")
 

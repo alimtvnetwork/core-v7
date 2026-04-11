@@ -9,7 +9,7 @@ import (
 
 // ── DynamicCollection basic ops ──
 
-func Test_DynamicCollection_Empty(t *testing.T) {
+func Test_DynamicCollection_Empty_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 
@@ -29,7 +29,7 @@ func Test_DynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyDynamicCollection returns empty -- new", actual)
 }
 
-func Test_DynamicCollection_AddAny(t *testing.T) {
+func Test_DynamicCollection_AddAny_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("hello", true)
@@ -104,7 +104,7 @@ func Test_DynamicCollection_SkipTakeLimit(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection Skip/Take/Limit correct -- 3 items", actual)
 }
 
-func Test_DynamicCollection_ListStrings(t *testing.T) {
+func Test_DynamicCollection_ListStrings_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("hello", true)
@@ -119,7 +119,7 @@ func Test_DynamicCollection_ListStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection.ListStrings returns 2 -- two items", actual)
 }
 
-func Test_DynamicCollection_RemoveAt(t *testing.T) {
+func Test_DynamicCollection_RemoveAt_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("a", true)
@@ -135,7 +135,7 @@ func Test_DynamicCollection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection.RemoveAt removes middle -- 3 to 2", actual)
 }
 
-func Test_DynamicCollection_String(t *testing.T) {
+func Test_DynamicCollection_String_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAny("hello", true)
@@ -149,7 +149,7 @@ func Test_DynamicCollection_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection.String returns non-empty -- single item", actual)
 }
 
-func Test_DynamicCollection_AddAnyNonNull(t *testing.T) {
+func Test_DynamicCollection_AddAnyNonNull_FromDynamicCollectionEmp(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	dc.AddAnyNonNull(nil, false)

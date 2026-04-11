@@ -11,7 +11,7 @@ import (
 // Collection — deeper methods
 // ═══════════════════════════════════════════════════════════════
 
-func Test_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_LengthLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		tc := caseV1Compat{Name: "LengthLock", Expected: 2, Actual: c.LengthLock(), Args: args.Map{}}
@@ -21,7 +21,7 @@ func Test_Collection_LengthLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEquals_Same(t *testing.T) {
+func Test_Collection_IsEquals_Same_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_IsEquals_Same", func() {
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
 		c2 := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -43,7 +43,7 @@ func Test_Collection_IsEquals_Different(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
+func Test_Collection_IsEqualsWithSensitive_CaseInsensitive_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_IsEqualsWithSensitive_CaseInsensitive", func() {
 		c1 := corestr.New.Collection.Strings([]string{"ABC"})
 		c2 := corestr.New.Collection.Strings([]string{"abc"})
@@ -86,7 +86,7 @@ func Test_Collection_IsEqualsWithSensitive_DiffLength(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEmptyLock(t *testing.T) {
+func Test_Collection_IsEmptyLock_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_IsEmptyLock", func() {
 		c := corestr.New.Collection.Cap(0)
 		tc := caseV1Compat{Name: "IsEmptyLock", Expected: true, Actual: c.IsEmptyLock(), Args: args.Map{}}
@@ -96,7 +96,7 @@ func Test_Collection_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_HasItems(t *testing.T) {
+func Test_Collection_HasItems_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_HasItems", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		tc := caseV1Compat{Name: "HasItems", Expected: true, Actual: c.HasItems(), Args: args.Map{}}
@@ -106,7 +106,7 @@ func Test_Collection_HasItems(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddLock(t *testing.T) {
+func Test_Collection_AddLock_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddLock", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddLock("hello")
@@ -117,7 +117,7 @@ func Test_Collection_AddLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddNonEmpty(t *testing.T) {
+func Test_Collection_AddNonEmpty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddNonEmpty", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddNonEmpty("")
@@ -129,7 +129,7 @@ func Test_Collection_AddNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddNonEmptyWhitespace(t *testing.T) {
+func Test_Collection_AddNonEmptyWhitespace_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddNonEmptyWhitespace", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddNonEmptyWhitespace("  ")
@@ -141,7 +141,7 @@ func Test_Collection_AddNonEmptyWhitespace(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddError(t *testing.T) {
+func Test_Collection_AddError_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddError", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddError(nil)
@@ -217,7 +217,7 @@ func Test_Collection_AddIfMany_False(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddFunc(t *testing.T) {
+func Test_Collection_AddFunc_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddFunc", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddFunc(func() string { return "hello" })
@@ -239,7 +239,7 @@ func Test_Collection_AddFuncErr_NoError(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddsLock(t *testing.T) {
+func Test_Collection_AddsLock_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_AddsLock", func() {
 		c := corestr.New.Collection.Cap(2)
 		c.AddsLock("a", "b")
@@ -250,7 +250,7 @@ func Test_Collection_AddsLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_EachItemSplitBy", func() {
 		c := corestr.New.Collection.Strings([]string{"a,b", "c,d"})
 		result := c.EachItemSplitBy(",")
@@ -261,7 +261,7 @@ func Test_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew_NoAdding(t *testing.T) {
+func Test_Collection_ConcatNew_NoAdding_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_ConcatNew_NoAdding", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		result := c.ConcatNew(0)
@@ -293,7 +293,7 @@ func Test_Collection_ToError_Empty(t *testing.T) {
 	})
 }
 
-func Test_Collection_ToDefaultError(t *testing.T) {
+func Test_Collection_ToDefaultError_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_Collection_ToDefaultError", func() {
 		c := corestr.New.Collection.Strings([]string{"err"})
 		tc := caseV1Compat{Name: "ToDefaultError", Expected: true, Actual: c.ToDefaultError() != nil, Args: args.Map{}}
@@ -328,7 +328,7 @@ func Test_HashsetsCollection_HasItems(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Add(t *testing.T) {
+func Test_HashsetsCollection_Add_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_HashsetsCollection_Add", func() {
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
@@ -397,7 +397,7 @@ func Test_HashsetsCollection_LastIndex(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_StringsList(t *testing.T) {
+func Test_HashsetsCollection_StringsList_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_HashsetsCollection_StringsList", func() {
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
@@ -557,7 +557,7 @@ func Test_HashsetsCollection_IsEqualPtr_OneNil(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_String(t *testing.T) {
+func Test_HashsetsCollection_String_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_HashsetsCollection_String", func() {
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
@@ -578,7 +578,7 @@ func Test_HashsetsCollection_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollection_Join(t *testing.T) {
+func Test_HashsetsCollection_Join_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_HashsetsCollection_Join", func() {
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
@@ -758,7 +758,7 @@ func Test_CollectionsOfCollection_AddStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_CollectionsOfCollection_AddsStringsOfStrings(t *testing.T) {
+func Test_CollectionsOfCollection_AddsStringsOfStrings_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CollectionsOfCollection_AddsStringsOfStrings", func() {
 		coc := corestr.Empty.CollectionsOfCollection()
 		coc.AddsStringsOfStrings(false, []string{"a"}, []string{"b"})
@@ -857,7 +857,7 @@ func Test_CharHashsetMap_GetChar(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_GetChar_Empty(t *testing.T) {
+func Test_CharHashsetMap_GetChar_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_GetChar_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		tc := caseV1Compat{Name: "CHM GetChar empty", Expected: byte(0), Actual: chm.GetChar(""), Args: args.Map{}}
@@ -877,7 +877,7 @@ func Test_CharHashsetMap_GetCharOf(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_Add(t *testing.T) {
+func Test_CharHashsetMap_Add_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_Add", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -924,7 +924,7 @@ func Test_CharHashsetMap_HasWithHashset_Found(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
+func Test_CharHashsetMap_HasWithHashset_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_HasWithHashset_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		found, _ := chm.HasWithHashset("x")
@@ -935,7 +935,7 @@ func Test_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_LengthOf(t *testing.T) {
+func Test_CharHashsetMap_LengthOf_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_LengthOf", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -947,7 +947,7 @@ func Test_CharHashsetMap_LengthOf(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_LengthOf_Empty(t *testing.T) {
+func Test_CharHashsetMap_LengthOf_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_LengthOf_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		tc := caseV1Compat{Name: "CHM LengthOf empty", Expected: 0, Actual: chm.LengthOf('x'), Args: args.Map{}}
@@ -957,7 +957,7 @@ func Test_CharHashsetMap_LengthOf_Empty(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_AllLengthsSum(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSum_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_AllLengthsSum", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -969,7 +969,7 @@ func Test_CharHashsetMap_AllLengthsSum(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_AllLengthsSum_Empty(t *testing.T) {
+func Test_CharHashsetMap_AllLengthsSum_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_AllLengthsSum_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		tc := caseV1Compat{Name: "CHM AllLengthsSum empty", Expected: 0, Actual: chm.AllLengthsSum(), Args: args.Map{}}
@@ -979,7 +979,7 @@ func Test_CharHashsetMap_AllLengthsSum_Empty(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_List(t *testing.T) {
+func Test_CharHashsetMap_List_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_List", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -992,7 +992,7 @@ func Test_CharHashsetMap_List(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_SortedListAsc(t *testing.T) {
+func Test_CharHashsetMap_SortedListAsc_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_SortedListAsc", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("banana")
@@ -1005,7 +1005,7 @@ func Test_CharHashsetMap_SortedListAsc(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_SortedListDsc(t *testing.T) {
+func Test_CharHashsetMap_SortedListDsc_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_SortedListDsc", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("banana")
@@ -1018,7 +1018,7 @@ func Test_CharHashsetMap_SortedListDsc(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_IsEquals_Same(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_Same_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_IsEquals_Same", func() {
 		chm1 := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm1.Add("hello")
@@ -1031,7 +1031,7 @@ func Test_CharHashsetMap_IsEquals_Same(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_IsEquals_Nil(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_Nil_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_IsEquals_Nil", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		tc := caseV1Compat{Name: "CHM IsEquals nil", Expected: false, Actual: chm.IsEquals(nil), Args: args.Map{}}
@@ -1041,7 +1041,7 @@ func Test_CharHashsetMap_IsEquals_Nil(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_IsEquals_BothEmpty(t *testing.T) {
+func Test_CharHashsetMap_IsEquals_BothEmpty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_IsEquals_BothEmpty", func() {
 		chm1 := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm2 := corestr.New.CharHashsetMap.Cap(10, 5)
@@ -1066,7 +1066,7 @@ func Test_CharHashsetMap_IsEquals_DiffLength(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_GetMap(t *testing.T) {
+func Test_CharHashsetMap_GetMap_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_GetMap", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1078,7 +1078,7 @@ func Test_CharHashsetMap_GetMap(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_String(t *testing.T) {
+func Test_CharHashsetMap_String_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_String", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1089,7 +1089,7 @@ func Test_CharHashsetMap_String(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_SummaryString(t *testing.T) {
+func Test_CharHashsetMap_SummaryString_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_SummaryString", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1100,7 +1100,7 @@ func Test_CharHashsetMap_SummaryString(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_Print_False(t *testing.T) {
+func Test_CharHashsetMap_Print_False_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_Print_False", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Print(false) // should not panic
@@ -1111,7 +1111,7 @@ func Test_CharHashsetMap_Print_False(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
+func Test_CharHashsetMap_LengthOfHashsetFromFirstChar_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_LengthOfHashsetFromFirstChar", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1123,7 +1123,7 @@ func Test_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
+func Test_CharHashsetMap_AddSameStartingCharItems_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_AddSameStartingCharItems", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.AddSameStartingCharItems('a', []string{"abc", "axy"})
@@ -1134,7 +1134,7 @@ func Test_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_AddSameStartingCharItems_Empty(t *testing.T) {
+func Test_CharHashsetMap_AddSameStartingCharItems_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_AddSameStartingCharItems_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.AddSameStartingCharItems('a', []string{})
@@ -1145,7 +1145,7 @@ func Test_CharHashsetMap_AddSameStartingCharItems_Empty(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_HashsetsCollection(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollection_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_HashsetsCollection", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1157,7 +1157,7 @@ func Test_CharHashsetMap_HashsetsCollection(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollection_Empty_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_HashsetsCollection_Empty", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		hc := chm.HashsetsCollection()
@@ -1168,7 +1168,7 @@ func Test_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByChars_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_HashsetsCollectionByChars", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")
@@ -1181,7 +1181,7 @@ func Test_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetMap_HashsetsCollectionByStringsFirstChar(t *testing.T) {
+func Test_CharHashsetMap_HashsetsCollectionByStringsFirstChar_FromCollectionLengthLock(t *testing.T) {
 	safeTest(t, "Test_Cov46_CharHashsetMap_HashsetsCollectionByStringsFirstChar", func() {
 		chm := corestr.New.CharHashsetMap.Cap(10, 5)
 		chm.Add("hello")

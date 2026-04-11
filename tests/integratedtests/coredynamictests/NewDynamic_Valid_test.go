@@ -85,7 +85,7 @@ func Test_InvalidDynamicPtr(t *testing.T) {
 
 // ── Dynamic Clone ──
 
-func Test_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	c := d.Clone()
@@ -105,7 +105,7 @@ func Test_Dynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Clone returns same data -- string", actual)
 }
 
-func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
+func Test_Dynamic_ClonePtr_Nil_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -117,7 +117,7 @@ func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr nil -- returns nil", actual)
 }
 
-func Test_Dynamic_NonPtr_Ptr(t *testing.T) {
+func Test_Dynamic_NonPtr_Ptr_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -259,7 +259,7 @@ func Test_Dynamic_TypeChecks_Number(t *testing.T) {
 
 // ── Dynamic value extraction ──
 
-func Test_Dynamic_ValueInt(t *testing.T) {
+func Test_Dynamic_ValueInt_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(42)
 
@@ -271,7 +271,7 @@ func Test_Dynamic_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueInt -- 42", actual)
 }
 
-func Test_Dynamic_IntDefault(t *testing.T) {
+func Test_Dynamic_IntDefault_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	val, ok := d.IntDefault(99)
@@ -292,7 +292,7 @@ func Test_Dynamic_IntDefault(t *testing.T) {
 
 // ── Dynamic JSON ──
 
-func Test_Dynamic_Json(t *testing.T) {
+func Test_Dynamic_Json_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	r := d.Json()
@@ -330,7 +330,7 @@ func Test_Dynamic_JsonParseSelfInject(t *testing.T) {
 
 // ── MapAnyItems ──
 
-func Test_MapAnyItems_Basic(t *testing.T) {
+func Test_MapAnyItems_Basic_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("key1", "val1")
@@ -356,7 +356,7 @@ func Test_MapAnyItems_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems basic -- 2 items", actual)
 }
 
-func Test_MapAnyItems_GetValue(t *testing.T) {
+func Test_MapAnyItems_GetValue_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -374,7 +374,7 @@ func Test_MapAnyItems_GetValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetValue -- found and missing", actual)
 }
 
-func Test_MapAnyItems_Get(t *testing.T) {
+func Test_MapAnyItems_Get_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	val, has := m.Get("a")
@@ -396,7 +396,7 @@ func Test_MapAnyItems_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Get -- found and missing", actual)
 }
 
-func Test_MapAnyItems_Deserialize(t *testing.T) {
+func Test_MapAnyItems_Deserialize_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "hello"})
 	var s string
@@ -416,7 +416,7 @@ func Test_MapAnyItems_Deserialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Deserialize -- valid", actual)
 }
 
-func Test_MapAnyItems_Deserialize_Missing(t *testing.T) {
+func Test_MapAnyItems_Deserialize_Missing_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var s string
@@ -430,7 +430,7 @@ func Test_MapAnyItems_Deserialize_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Deserialize missing -- error", actual)
 }
 
-func Test_MapAnyItems_AllKeysSorted(t *testing.T) {
+func Test_MapAnyItems_AllKeysSorted_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeysSorted()
@@ -449,7 +449,7 @@ func Test_MapAnyItems_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AllKeysSorted -- sorted", actual)
 }
 
-func Test_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	r := m.Json()
@@ -471,7 +471,7 @@ func Test_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Json -- valid", actual)
 }
 
-func Test_MapAnyItems_Nil(t *testing.T) {
+func Test_MapAnyItems_Nil_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 
@@ -491,7 +491,7 @@ func Test_MapAnyItems_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Nil -- safe defaults", actual)
 }
 
-func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
+func Test_MapAnyItems_JsonParseSelfInject_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	r := m.JsonPtr()
@@ -602,7 +602,7 @@ func Test_Collection_AddNonNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection AddNonNil -- skip nil", actual)
 }
 
-func Test_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	ok := c.RemoveAt(1)
@@ -644,7 +644,7 @@ func Test_Collection_Skip_Take(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Skip/Take/Limit -- correct", actual)
 }
 
-func Test_Collection_Filter(t *testing.T) {
+func Test_Collection_Filter_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3, 4, 5})
 	filtered := c.Filter(func(i int) bool { return i > 3 })
@@ -657,7 +657,7 @@ func Test_Collection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection Filter -- gt 3", actual)
 }
 
-func Test_Collection_Loop(t *testing.T) {
+func Test_Collection_Loop_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	c := coredynamic.CollectionFrom([]int{1, 2, 3})
 	sum := 0
@@ -859,7 +859,7 @@ func Test_SimpleRequest(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest -- valid", actual)
 }
 
-func Test_SimpleResult(t *testing.T) {
+func Test_SimpleResult_FromNewDynamicValid(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 

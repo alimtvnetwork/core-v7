@@ -481,7 +481,7 @@ func Test_Dynamic_Json_JsonModel(t *testing.T) {
 // DynamicStatus coverage
 // ==========================================================================
 
-func Test_DynamicStatus_InvalidNoMessage(t *testing.T) {
+func Test_DynamicStatus_InvalidNoMessage_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
@@ -517,7 +517,7 @@ func Test_DynamicStatus_InvalidWithMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidWithMessage returns invalid -- with message", actual)
 }
 
-func Test_DynamicStatus_Clone(t *testing.T) {
+func Test_DynamicStatus_Clone_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("error")
 	cloned := ds.Clone()
@@ -536,7 +536,7 @@ func Test_DynamicStatus_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone returns copy -- with message", actual)
 }
 
-func Test_DynamicStatus_ClonePtr(t *testing.T) {
+func Test_DynamicStatus_ClonePtr_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("error")
 	clonedPtr := ds.ClonePtr()
@@ -560,7 +560,7 @@ func Test_DynamicStatus_ClonePtr(t *testing.T) {
 // ValueStatus coverage
 // ==========================================================================
 
-func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
@@ -764,7 +764,7 @@ func Test_SimpleResult_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Valid returns valid -- with data", actual)
 }
 
-func Test_SimpleResult_Clone(t *testing.T) {
+func Test_SimpleResult_Clone_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResult("data", true, "")
 	cloned := sr.Clone()
@@ -783,7 +783,7 @@ func Test_SimpleResult_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone returns copy -- valid", actual)
 }
 
-func Test_SimpleResult_ClonePtr(t *testing.T) {
+func Test_SimpleResult_ClonePtr_FromDynamicGetters(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResult("data", true, "")
 	cloned := sr.ClonePtr()

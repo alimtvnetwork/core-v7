@@ -13,7 +13,7 @@ import (
 // TypeSameStatus
 // ═══════════════════════════════════════════
 
-func Test_TypeSameStatus_SameTypes(t *testing.T) {
+func Test_TypeSameStatus_SameTypes_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", "world")
 
@@ -34,7 +34,7 @@ func Test_TypeSameStatus_SameTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- same types", actual)
 }
 
-func Test_TypeSameStatus_DiffTypes(t *testing.T) {
+func Test_TypeSameStatus_DiffTypes_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", 42)
 
@@ -54,7 +54,7 @@ func Test_TypeSameStatus_DiffTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- diff types", actual)
 }
 
-func Test_TypeSameStatus_Pointers(t *testing.T) {
+func Test_TypeSameStatus_Pointers_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "world")
@@ -99,7 +99,7 @@ func Test_TypeSameStatus_NilInput(t *testing.T) {
 // TypeStatus — methods
 // ═══════════════════════════════════════════
 
-func Test_TypeStatus_Methods(t *testing.T) {
+func Test_TypeStatus_Methods_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("hello", "world")
 
@@ -124,7 +124,7 @@ func Test_TypeStatus_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- methods", actual)
 }
 
-func Test_TypeStatus_NilReceiver(t *testing.T) {
+func Test_TypeStatus_NilReceiver_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	var nilTS *coredynamic.TypeStatus
 
@@ -239,7 +239,7 @@ func Test_TypeStatus_MustBeSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- must be same", actual)
 }
 
-func Test_TypeStatus_IsEqual(t *testing.T) {
+func Test_TypeStatus_IsEqual_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	ts1 := coredynamic.TypeSameStatus("a", "b")
 	ts2 := coredynamic.TypeSameStatus("a", "b")
@@ -282,7 +282,7 @@ func Test_TypeStatus_NonPointerLeftRight(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- non-pointer left/right", actual)
 }
 
-func Test_TypeStatus_NullNames(t *testing.T) {
+func Test_TypeStatus_NullNames_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, nil)
 
@@ -640,7 +640,7 @@ func Test_SimpleResult_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- type mismatch", actual)
 }
 
-func Test_SimpleResult_Clone(t *testing.T) {
+func Test_SimpleResult_Clone_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleResultValid("hello")
 	cloned := sr.Clone()
@@ -666,7 +666,7 @@ func Test_SimpleResult_Clone(t *testing.T) {
 // SimpleRequest
 // ═══════════════════════════════════════════
 
-func Test_SimpleRequest_Constructors(t *testing.T) {
+func Test_SimpleRequest_Constructors_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	srInv := coredynamic.InvalidSimpleRequest("err-msg")
@@ -694,7 +694,7 @@ func Test_SimpleRequest_Constructors(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- constructors", actual)
 }
 
-func Test_SimpleRequest_InvalidError(t *testing.T) {
+func Test_SimpleRequest_InvalidError_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	srInv := coredynamic.InvalidSimpleRequest("err-msg")
@@ -735,7 +735,7 @@ func Test_SimpleRequest_TypeMismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- type mismatch", actual)
 }
 
-func Test_SimpleRequest_IsPointer(t *testing.T) {
+func Test_SimpleRequest_IsPointer_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	s := "hello"
 	sr := coredynamic.NewSimpleRequestValid(&s)
@@ -786,7 +786,7 @@ func Test_ValueStatus_Basic(t *testing.T) {
 // ZeroSet / SafeZeroSet
 // ═══════════════════════════════════════════
 
-func Test_ZeroSet(t *testing.T) {
+func Test_ZeroSet_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	type testStruct struct{ Name string }
 	ts := testStruct{Name: "hello"}
@@ -801,7 +801,7 @@ func Test_ZeroSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ZeroSet returns correct value -- with args", actual)
 }
 
-func Test_SafeZeroSet(t *testing.T) {
+func Test_SafeZeroSet_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	type testStruct struct{ Name string }
 	ts := testStruct{Name: "hello"}
@@ -930,7 +930,7 @@ func Test_BytesConverter_Int64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- int64", actual)
 }
 
-func Test_BytesConverter_Deserialize(t *testing.T) {
+func Test_BytesConverter_Deserialize_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	var target string
@@ -954,7 +954,7 @@ func Test_BytesConverter_Deserialize(t *testing.T) {
 // Type function
 // ═══════════════════════════════════════════
 
-func Test_Type(t *testing.T) {
+func Test_Type_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rt := coredynamic.Type("hello")
 

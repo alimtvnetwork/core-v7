@@ -12,7 +12,7 @@ import (
 // Dynamic — constructors and core
 // ═══════════════════════════════════════════
 
-func Test_Dynamic_InvalidDynamic(t *testing.T) {
+func Test_Dynamic_InvalidDynamic_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -30,7 +30,7 @@ func Test_Dynamic_InvalidDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns error -- with args", actual)
 }
 
-func Test_Dynamic_InvalidDynamicPtr(t *testing.T) {
+func Test_Dynamic_InvalidDynamicPtr_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamicPtr()
 
@@ -50,7 +50,7 @@ func Test_Dynamic_InvalidDynamicPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvalidDynamicPtr returns error -- with args", actual)
 }
 
-func Test_Dynamic_NewDynamicValid(t *testing.T) {
+func Test_Dynamic_NewDynamicValid_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -72,7 +72,7 @@ func Test_Dynamic_NewDynamicValid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewDynamicValid returns non-empty -- with args", actual)
 }
 
-func Test_Dynamic_NewDynamic(t *testing.T) {
+func Test_Dynamic_NewDynamic_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic(42, false)
 
@@ -109,7 +109,7 @@ func Test_Dynamic_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Clone", actual)
 }
 
-func Test_Dynamic_ClonePtr(t *testing.T) {
+func Test_Dynamic_ClonePtr_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	cp := d.ClonePtr()
@@ -156,7 +156,7 @@ func Test_Dynamic_NonPtrPtr(t *testing.T) {
 // DynamicGetters — all methods
 // ═══════════════════════════════════════════
 
-func Test_Dynamic_Length_Slice(t *testing.T) {
+func Test_Dynamic_Length_Slice_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 
@@ -168,7 +168,7 @@ func Test_Dynamic_Length_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Length returns correct value -- slice", actual)
 }
 
-func Test_Dynamic_Length_Nil(t *testing.T) {
+func Test_Dynamic_Length_Nil_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 
@@ -229,7 +229,7 @@ func Test_Dynamic_StructString_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StructString returns correct value -- cached", actual)
 }
 
-func Test_Dynamic_IsPointer(t *testing.T) {
+func Test_Dynamic_IsPointer_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	s := "hello"
 	dPtr := coredynamic.NewDynamicPtr(&s, true)
@@ -276,7 +276,7 @@ func Test_Dynamic_IsStructStringNull(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmpty returns nil -- nil", actual)
 }
 
-func Test_Dynamic_IsStructStringNullOrEmptyOrWhitespace(t *testing.T) {
+func Test_Dynamic_IsStructStringNullOrEmptyOrWhitespace_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 
@@ -288,7 +288,7 @@ func Test_Dynamic_IsStructStringNullOrEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmptyOrWhitespace returns nil -- nil", actual)
 }
 
-func Test_Dynamic_IsPrimitive(t *testing.T) {
+func Test_Dynamic_IsPrimitive_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	di := coredynamic.NewDynamicPtr(42, true)
@@ -307,7 +307,7 @@ func Test_Dynamic_IsPrimitive(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsPrimitive returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsNumber(t *testing.T) {
+func Test_Dynamic_IsNumber_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	di := coredynamic.NewDynamicPtr(42, true)
 	ds := coredynamic.NewDynamicPtr("hello", true)
@@ -326,7 +326,7 @@ func Test_Dynamic_IsNumber(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNumber returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsStringType(t *testing.T) {
+func Test_Dynamic_IsStringType_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -338,7 +338,7 @@ func Test_Dynamic_IsStringType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringType returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsStruct(t *testing.T) {
+func Test_Dynamic_IsStruct_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	type ts struct{ X int }
 	d := coredynamic.NewDynamicPtr(ts{X: 1}, true)
@@ -351,7 +351,7 @@ func Test_Dynamic_IsStruct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStruct returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsFunc(t *testing.T) {
+func Test_Dynamic_IsFunc_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(func() {}, true)
 
@@ -363,7 +363,7 @@ func Test_Dynamic_IsFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsFunc returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsSliceOrArray(t *testing.T) {
+func Test_Dynamic_IsSliceOrArray_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1}, true)
 
@@ -375,7 +375,7 @@ func Test_Dynamic_IsSliceOrArray(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArray returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsSliceOrArrayOrMap(t *testing.T) {
+func Test_Dynamic_IsSliceOrArrayOrMap_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	dm := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 
@@ -387,7 +387,7 @@ func Test_Dynamic_IsSliceOrArrayOrMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArrayOrMap returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsMap(t *testing.T) {
+func Test_Dynamic_IsMap_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	dm := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 
@@ -456,7 +456,7 @@ func Test_Dynamic_IntDefault_ParseFail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntDefault returns correct value -- parse fail", actual)
 }
 
-func Test_Dynamic_Float64_Nil(t *testing.T) {
+func Test_Dynamic_Float64_Nil_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	_, err := d.Float64()
@@ -501,7 +501,7 @@ func Test_Dynamic_Float64_ParseFail(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Float64 returns correct value -- parse fail", actual)
 }
 
-func Test_Dynamic_ValueInt(t *testing.T) {
+func Test_Dynamic_ValueInt_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(42)
 	ds := coredynamic.NewDynamicValid("hello")
@@ -520,7 +520,7 @@ func Test_Dynamic_ValueInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueUInt(t *testing.T) {
+func Test_Dynamic_ValueUInt_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(uint(42))
 	ds := coredynamic.NewDynamicValid("hello")
@@ -539,7 +539,7 @@ func Test_Dynamic_ValueUInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueUInt returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueStrings(t *testing.T) {
+func Test_Dynamic_ValueStrings_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid([]string{"a", "b"})
 	ds := coredynamic.NewDynamicValid("hello")
@@ -558,7 +558,7 @@ func Test_Dynamic_ValueStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStrings returns non-empty -- with args", actual)
 }
 
-func Test_Dynamic_ValueBool(t *testing.T) {
+func Test_Dynamic_ValueBool_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(true)
 	ds := coredynamic.NewDynamicValid("hello")
@@ -577,7 +577,7 @@ func Test_Dynamic_ValueBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueBool returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueInt64(t *testing.T) {
+func Test_Dynamic_ValueInt64_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(int64(99))
 	ds := coredynamic.NewDynamicValid("hello")
@@ -596,7 +596,7 @@ func Test_Dynamic_ValueInt64(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueInt64 returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueNullErr(t *testing.T) {
+func Test_Dynamic_ValueNullErr_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	var nilD *coredynamic.Dynamic
 	errNil := nilD.ValueNullErr()
@@ -621,7 +621,7 @@ func Test_Dynamic_ValueNullErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueNullErr returns error -- with args", actual)
 }
 
-func Test_Dynamic_ValueString(t *testing.T) {
+func Test_Dynamic_ValueString_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	var nilD *coredynamic.Dynamic
 	vs1 := nilD.ValueString()
@@ -646,7 +646,7 @@ func Test_Dynamic_ValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns non-empty -- with args", actual)
 }
 
-func Test_Dynamic_Bytes(t *testing.T) {
+func Test_Dynamic_Bytes_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	var nilD *coredynamic.Dynamic
 	b1, ok1 := nilD.Bytes()
@@ -698,7 +698,7 @@ func Test_Dynamic_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonBytes returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_JsonBytesPtr_Null(t *testing.T) {
+func Test_Dynamic_JsonBytesPtr_Null_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(nil, false)
 	jb, err := d.JsonBytesPtr()
@@ -717,7 +717,7 @@ func Test_Dynamic_JsonBytesPtr_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonBytesPtr returns correct value -- null", actual)
 }
 
-func Test_Dynamic_JsonString(t *testing.T) {
+func Test_Dynamic_JsonString_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	js, err := d.JsonString()
@@ -736,7 +736,7 @@ func Test_Dynamic_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonString returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_JsonStringMust(t *testing.T) {
+func Test_Dynamic_JsonStringMust_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	js := d.JsonStringMust()
@@ -749,7 +749,7 @@ func Test_Dynamic_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonStringMust returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_MarshalJSON(t *testing.T) {
+func Test_Dynamic_MarshalJSON_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b, err := d.MarshalJSON()
@@ -768,7 +768,7 @@ func Test_Dynamic_MarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueMarshal(t *testing.T) {
+func Test_Dynamic_ValueMarshal_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b, err := d.ValueMarshal()
@@ -787,7 +787,7 @@ func Test_Dynamic_ValueMarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueMarshal returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ValueMarshal_Nil(t *testing.T) {
+func Test_Dynamic_ValueMarshal_Nil_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	_, err := d.ValueMarshal()
@@ -800,7 +800,7 @@ func Test_Dynamic_ValueMarshal_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueMarshal returns nil -- nil", actual)
 }
 
-func Test_Dynamic_JsonPayloadMust(t *testing.T) {
+func Test_Dynamic_JsonPayloadMust_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	b := d.JsonPayloadMust()
@@ -813,7 +813,7 @@ func Test_Dynamic_JsonPayloadMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonPayloadMust returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_JsonModelAny(t *testing.T) {
+func Test_Dynamic_JsonModelAny_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -831,7 +831,7 @@ func Test_Dynamic_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonModel returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_Json(t *testing.T) {
+func Test_Dynamic_Json_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	j := d.Json()
@@ -881,7 +881,7 @@ func Test_Dynamic_UnmarshalJSON_Nil(t *testing.T) {
 // DynamicReflect — all methods
 // ═══════════════════════════════════════════
 
-func Test_Dynamic_ReflectValue(t *testing.T) {
+func Test_Dynamic_ReflectValue_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	rv := d.ReflectValue()
@@ -901,7 +901,7 @@ func Test_Dynamic_ReflectValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectValue returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ReflectKind(t *testing.T) {
+func Test_Dynamic_ReflectKind_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -925,7 +925,7 @@ func Test_Dynamic_ReflectTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeName returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ReflectType(t *testing.T) {
+func Test_Dynamic_ReflectType_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	rt := d.ReflectType()
@@ -945,7 +945,7 @@ func Test_Dynamic_ReflectType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectType returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsReflectTypeOf(t *testing.T) {
+func Test_Dynamic_IsReflectTypeOf_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -957,7 +957,7 @@ func Test_Dynamic_IsReflectTypeOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsReflectTypeOf returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_IsReflectKind(t *testing.T) {
+func Test_Dynamic_IsReflectKind_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 
@@ -969,7 +969,7 @@ func Test_Dynamic_IsReflectKind(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsReflectKind returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ItemUsingIndex(t *testing.T) {
+func Test_Dynamic_ItemUsingIndex_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]string{"a", "b", "c"}, true)
 	rv := d.ItemReflectValueUsingIndex(1)
@@ -989,7 +989,7 @@ func Test_Dynamic_ItemUsingIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemUsingIndex returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ItemUsingKey(t *testing.T) {
+func Test_Dynamic_ItemUsingKey_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"x": 42}, true)
 	rv := d.ItemReflectValueUsingKey("x")
@@ -1009,7 +1009,7 @@ func Test_Dynamic_ItemUsingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ItemUsingKey returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ReflectSetTo(t *testing.T) {
+func Test_Dynamic_ReflectSetTo_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	var target string
@@ -1029,7 +1029,7 @@ func Test_Dynamic_ReflectSetTo(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetTo returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_ReflectSetTo_Nil(t *testing.T) {
+func Test_Dynamic_ReflectSetTo_Nil_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 	err := d.ReflectSetTo(nil)
@@ -1042,7 +1042,7 @@ func Test_Dynamic_ReflectSetTo_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetTo returns nil -- nil", actual)
 }
 
-func Test_Dynamic_MapToKeyVal(t *testing.T) {
+func Test_Dynamic_MapToKeyVal_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1, "b": 2}, true)
 	kvc, err := d.MapToKeyVal()
@@ -1061,7 +1061,7 @@ func Test_Dynamic_MapToKeyVal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapToKeyVal returns correct value -- with args", actual)
 }
 
-func Test_Dynamic_Loop(t *testing.T) {
+func Test_Dynamic_Loop_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{10, 20, 30}, true)
 	sum := 0
@@ -1097,7 +1097,7 @@ func Test_Dynamic_Loop_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns empty -- empty", actual)
 }
 
-func Test_Dynamic_Loop_Break(t *testing.T) {
+func Test_Dynamic_Loop_Break_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3}, true)
 	count := 0
@@ -1120,7 +1120,7 @@ func Test_Dynamic_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- break", actual)
 }
 
-func Test_Dynamic_FilterAsDynamicCollection(t *testing.T) {
+func Test_Dynamic_FilterAsDynamicCollection_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3, 4}, true)
 	result := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -1150,7 +1150,7 @@ func Test_Dynamic_FilterAsDynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns empty -- empty", actual)
 }
 
-func Test_Dynamic_FilterAsDynamicCollection_Break(t *testing.T) {
+func Test_Dynamic_FilterAsDynamicCollection_Break_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr([]int{1, 2, 3, 4}, true)
 	result := d.FilterAsDynamicCollection(func(index int, item coredynamic.Dynamic) (bool, bool) {
@@ -1165,7 +1165,7 @@ func Test_Dynamic_FilterAsDynamicCollection_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns correct value -- break", actual)
 }
 
-func Test_Dynamic_LoopMap(t *testing.T) {
+func Test_Dynamic_LoopMap_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(map[string]int{"a": 1}, true)
 	count := 0
@@ -1218,7 +1218,7 @@ func Test_Dynamic_LoopMap_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- break", actual)
 }
 
-func Test_Dynamic_ConvertUsingFunc(t *testing.T) {
+func Test_Dynamic_ConvertUsingFunc_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("hello", true)
 	converter := func(in any, typeMust reflect.Type) *coredynamic.SimpleResult {
@@ -1244,7 +1244,7 @@ func Test_Dynamic_ConvertUsingFunc(t *testing.T) {
 // DynamicStatus — all methods
 // ═══════════════════════════════════════════
 
-func Test_DynamicStatus_Invalid(t *testing.T) {
+func Test_DynamicStatus_Invalid_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 	ds2 := coredynamic.InvalidDynamicStatus("err")
@@ -1265,7 +1265,7 @@ func Test_DynamicStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns error -- invalid", actual)
 }
 
-func Test_DynamicStatus_Clone(t *testing.T) {
+func Test_DynamicStatus_Clone_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("err")
 	cloned := ds.Clone()
@@ -1369,7 +1369,7 @@ func Test_SafeTypeName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeTypeName returns correct value -- with args", actual)
 }
 
-func Test_ZeroSetAny(t *testing.T) {
+func Test_ZeroSetAny_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	type ts struct{ Name string }
 	v := &ts{Name: "hello"}
@@ -1383,7 +1383,7 @@ func Test_ZeroSetAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ZeroSetAny returns correct value -- with args", actual)
 }
 
-func Test_ZeroSetAny_Nil(t *testing.T) {
+func Test_ZeroSetAny_Nil_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	coredynamic.ZeroSetAny(nil) // should not panic
 
@@ -1395,7 +1395,7 @@ func Test_ZeroSetAny_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ZeroSetAny returns nil -- nil", actual)
 }
 
-func Test_AnyToReflectVal(t *testing.T) {
+func Test_AnyToReflectVal_FromDynamicInvalidDynami(t *testing.T) {
 	// Arrange
 	rv := coredynamic.AnyToReflectVal("hello")
 

@@ -50,7 +50,7 @@ func Test_MapStringStringOnce_IsEqual_NilReceiver(t *testing.T) {
 }
 
 // Test_Cov12_MapStringStringOnce_JsonStringMust_Success tests JsonStringMust on valid data.
-func Test_MapStringStringOnce_JsonStringMust_Success(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust_Success_FromIntegersOnceIsEqualI(t *testing.T) {
 	// Arrange
 	once := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"key": "value"}
@@ -81,7 +81,7 @@ func Test_StringsOnce_IsEqual_NilReceiver(t *testing.T) {
 }
 
 // Test_Cov12_StringsOnce_JsonStringMust_Success tests JsonStringMust on valid data.
-func Test_StringsOnce_JsonStringMust_Success(t *testing.T) {
+func Test_StringsOnce_JsonStringMust_Success_FromIntegersOnceIsEqualI(t *testing.T) {
 	// Arrange
 	once := coreonce.NewStringsOnce(func() []string {
 		return []string{"a", "b"}

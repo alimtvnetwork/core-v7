@@ -48,7 +48,7 @@ func Test_CloneSlice_WithItems(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_Empty(t *testing.T) {
+func Test_CloneSliceIf_Empty_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_Empty", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true)
@@ -62,7 +62,7 @@ func Test_CloneSliceIf_Empty(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_NoClone(t *testing.T) {
+func Test_CloneSliceIf_NoClone_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_NoClone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(false, "a", "b")
@@ -76,7 +76,7 @@ func Test_CloneSliceIf_NoClone(t *testing.T) {
 	})
 }
 
-func Test_CloneSliceIf_Clone(t *testing.T) {
+func Test_CloneSliceIf_Clone_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_CloneSliceIf_Clone", func() {
 		// Arrange
 		result := corestr.CloneSliceIf(true, "a", "b")
@@ -90,7 +90,7 @@ func Test_CloneSliceIf_Clone(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_Empty(t *testing.T) {
+func Test_AnyToString_Empty_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_Empty", func() {
 		// Arrange
 		s := corestr.AnyToString(false, "")
@@ -104,7 +104,7 @@ func Test_AnyToString_Empty(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_WithFieldName(t *testing.T) {
+func Test_AnyToString_WithFieldName_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_WithFieldName", func() {
 		// Arrange
 		s := corestr.AnyToString(true, "hello")
@@ -118,7 +118,7 @@ func Test_AnyToString_WithFieldName(t *testing.T) {
 	})
 }
 
-func Test_AnyToString_WithoutFieldName(t *testing.T) {
+func Test_AnyToString_WithoutFieldName_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_AnyToString_WithoutFieldName", func() {
 		// Arrange
 		s := corestr.AnyToString(false, "hello")
@@ -375,7 +375,7 @@ func Test_CharHashsetDataModel(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnceModel(t *testing.T) {
+func Test_SimpleStringOnceModel_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_SimpleStringOnceModel", func() {
 		// Arrange
 		m := corestr.SimpleStringOnceModel{Value: "hello", IsInitialize: true}
@@ -407,7 +407,7 @@ func Test_CollectionsOfCollectionModel(t *testing.T) {
 // Collection comprehensive
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Collection_Basic(t *testing.T) {
+func Test_Collection_Basic_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Basic", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -427,7 +427,7 @@ func Test_Collection_Basic(t *testing.T) {
 	})
 }
 
-func Test_Collection_NilReceiver(t *testing.T) {
+func Test_Collection_NilReceiver_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_NilReceiver", func() {
 		// Arrange
 		var c *corestr.Collection
@@ -542,7 +542,7 @@ func Test_Collection_AddIfMany(t *testing.T) {
 	})
 }
 
-func Test_Collection_Adds(t *testing.T) {
+func Test_Collection_Adds_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_Adds", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -660,7 +660,7 @@ func Test_Collection_AddsLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddCollection(t *testing.T) {
+func Test_Collection_AddCollection_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddCollection", func() {
 		// Arrange
 		c1 := corestr.New.Collection.Strings([]string{"a"})
@@ -677,7 +677,7 @@ func Test_Collection_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddCollections(t *testing.T) {
+func Test_Collection_AddCollections_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AddCollections", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -696,7 +696,7 @@ func Test_Collection_AddCollections(t *testing.T) {
 	})
 }
 
-func Test_Collection_RemoveAt(t *testing.T) {
+func Test_Collection_RemoveAt_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_RemoveAt", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -721,7 +721,7 @@ func Test_Collection_RemoveAt(t *testing.T) {
 	})
 }
 
-func Test_Collection_ListStrings(t *testing.T) {
+func Test_Collection_ListStrings_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ListStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -769,7 +769,7 @@ func Test_Collection_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_Collection_AsError(t *testing.T) {
+func Test_Collection_AsError_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_AsError", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -795,7 +795,7 @@ func Test_Collection_AsError(t *testing.T) {
 	})
 }
 
-func Test_Collection_ToError(t *testing.T) {
+func Test_Collection_ToError_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ToError", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()
@@ -821,7 +821,7 @@ func Test_Collection_ToError(t *testing.T) {
 	})
 }
 
-func Test_Collection_EachItemSplitBy(t *testing.T) {
+func Test_Collection_EachItemSplitBy_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_EachItemSplitBy", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a,b", "c"})
@@ -836,7 +836,7 @@ func Test_Collection_EachItemSplitBy(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_ConcatNew", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -851,7 +851,7 @@ func Test_Collection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Collection_IsEquals(t *testing.T) {
+func Test_Collection_IsEquals_FromCloneSliceNilHelpers(t *testing.T) {
 	safeTest(t, "Test_Cov16_Collection_IsEquals", func() {
 		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a", "b"})

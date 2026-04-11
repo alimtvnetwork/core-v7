@@ -668,7 +668,7 @@ func Test_IntegerOutOfRange_ToInt32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOutOfRange returns correct value -- ToInt32", actual)
 }
 
-func Test_IntegerOutOfRange_ToInt(t *testing.T) {
+func Test_IntegerOutOfRange_ToInt_FromMaxByteLeftGreaterV2(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"inRange": coremath.IsOutOfRange.Integer.ToInt(1000),

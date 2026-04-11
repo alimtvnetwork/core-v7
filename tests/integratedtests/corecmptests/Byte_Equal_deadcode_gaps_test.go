@@ -32,7 +32,7 @@ import (
 
 // ---------- Byte ----------
 
-func Test_Byte_Equal(t *testing.T) {
+func Test_Byte_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	var a, b byte = 5, 5
 
@@ -45,7 +45,7 @@ func Test_Byte_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Byte_LeftLess(t *testing.T) {
+func Test_Byte_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	var a, b byte = 3, 7
 
@@ -58,7 +58,7 @@ func Test_Byte_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Byte_LeftGreater(t *testing.T) {
+func Test_Byte_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	var a, b byte = 9, 2
 
@@ -73,7 +73,7 @@ func Test_Byte_LeftGreater(t *testing.T) {
 
 // ---------- Integer ----------
 
-func Test_Integer_Equal(t *testing.T) {
+func Test_Integer_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer(10, 10)
 
@@ -83,7 +83,7 @@ func Test_Integer_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Integer_LeftLess(t *testing.T) {
+func Test_Integer_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer(1, 10)
 
@@ -93,7 +93,7 @@ func Test_Integer_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Integer_LeftGreater(t *testing.T) {
+func Test_Integer_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer(10, 1)
 
@@ -105,7 +105,7 @@ func Test_Integer_LeftGreater(t *testing.T) {
 
 // ---------- Integer8 ----------
 
-func Test_Integer8_Equal(t *testing.T) {
+func Test_Integer8_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer8(5, 5)
 
@@ -115,7 +115,7 @@ func Test_Integer8_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Integer8_LeftLess(t *testing.T) {
+func Test_Integer8_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer8(1, 5)
 
@@ -125,7 +125,7 @@ func Test_Integer8_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Integer8_LeftGreater(t *testing.T) {
+func Test_Integer8_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer8(5, 1)
 
@@ -137,7 +137,7 @@ func Test_Integer8_LeftGreater(t *testing.T) {
 
 // ---------- Integer16 ----------
 
-func Test_Integer16_Equal(t *testing.T) {
+func Test_Integer16_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer16(100, 100)
 
@@ -147,7 +147,7 @@ func Test_Integer16_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Integer16_LeftLess(t *testing.T) {
+func Test_Integer16_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer16(10, 100)
 
@@ -157,7 +157,7 @@ func Test_Integer16_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Integer16_LeftGreater(t *testing.T) {
+func Test_Integer16_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer16(100, 10)
 
@@ -169,7 +169,7 @@ func Test_Integer16_LeftGreater(t *testing.T) {
 
 // ---------- Integer32 ----------
 
-func Test_Integer32_Equal(t *testing.T) {
+func Test_Integer32_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer32(1000, 1000)
 
@@ -179,7 +179,7 @@ func Test_Integer32_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Integer32_LeftLess(t *testing.T) {
+func Test_Integer32_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer32(100, 1000)
 
@@ -189,7 +189,7 @@ func Test_Integer32_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Integer32_LeftGreater(t *testing.T) {
+func Test_Integer32_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer32(1000, 100)
 
@@ -201,7 +201,7 @@ func Test_Integer32_LeftGreater(t *testing.T) {
 
 // ---------- Integer64 ----------
 
-func Test_Integer64_Equal(t *testing.T) {
+func Test_Integer64_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer64(10000, 10000)
 
@@ -211,7 +211,7 @@ func Test_Integer64_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Integer64_LeftLess(t *testing.T) {
+func Test_Integer64_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer64(1000, 10000)
 
@@ -221,7 +221,7 @@ func Test_Integer64_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Integer64_LeftGreater(t *testing.T) {
+func Test_Integer64_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.Integer64(10000, 1000)
 
@@ -233,7 +233,7 @@ func Test_Integer64_LeftGreater(t *testing.T) {
 
 // ---------- Time ----------
 
-func Test_Time_Equal(t *testing.T) {
+func Test_Time_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	now := time.Now()
 
@@ -246,7 +246,7 @@ func Test_Time_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_Time_LeftLess(t *testing.T) {
+func Test_Time_LeftLess_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	earlier := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
 	later := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -260,7 +260,7 @@ func Test_Time_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
-func Test_Time_LeftGreater(t *testing.T) {
+func Test_Time_LeftGreater_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange
 	earlier := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
 	later := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -276,7 +276,7 @@ func Test_Time_LeftGreater(t *testing.T) {
 
 // ---------- VersionSliceByte ----------
 
-func Test_VersionSliceByte_BothNil(t *testing.T) {
+func Test_VersionSliceByte_BothNil_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.VersionSliceByte(nil, nil)
 
@@ -286,7 +286,7 @@ func Test_VersionSliceByte_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_VersionSliceByte_Equal(t *testing.T) {
+func Test_VersionSliceByte_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2, 3})
 
@@ -338,7 +338,7 @@ func Test_VersionSliceByte_LeftGreater_ByLength(t *testing.T) {
 
 // ---------- VersionSliceInteger ----------
 
-func Test_VersionSliceInteger_BothNil(t *testing.T) {
+func Test_VersionSliceInteger_BothNil_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.VersionSliceInteger(nil, nil)
 
@@ -348,7 +348,7 @@ func Test_VersionSliceInteger_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
-func Test_VersionSliceInteger_Equal(t *testing.T) {
+func Test_VersionSliceInteger_Equal_FromByteEqualdeadcodegap(t *testing.T) {
 	// Arrange & Act
 	result := corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2, 3})
 

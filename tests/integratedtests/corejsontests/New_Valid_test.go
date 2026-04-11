@@ -12,7 +12,7 @@ import (
 // New / NewPtr
 // ═══════════════════════════════════════════
 
-func Test_New_Valid(t *testing.T) {
+func Test_New_Valid_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.New("hello")
 
@@ -32,7 +32,7 @@ func Test_New_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid", actual)
 }
 
-func Test_NewPtr_Valid(t *testing.T) {
+func Test_NewPtr_Valid_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr("hello")
 
@@ -52,7 +52,7 @@ func Test_NewPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewPtr returns non-empty -- valid", actual)
 }
 
-func Test_New_Nil(t *testing.T) {
+func Test_New_Nil_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.New(nil)
 
@@ -225,7 +225,7 @@ func Test_Result_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- JsonString", actual)
 }
 
-func Test_Result_PrettyJsonString(t *testing.T) {
+func Test_Result_PrettyJsonString_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(map[string]any{"a": 1})
 	var nilR *corejson.Result
@@ -569,7 +569,7 @@ func Test_Result_Serialize(t *testing.T) {
 // Result — Clone
 // ═══════════════════════════════════════════
 
-func Test_Result_Clone(t *testing.T) {
+func Test_Result_Clone_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr("hello")
 	cloned := r.Clone(true)
@@ -871,7 +871,7 @@ func Test_Result_DeserializedFieldsToMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- DeserializedFieldsToMap", actual)
 }
 
-func Test_Result_FieldsNames(t *testing.T) {
+func Test_Result_FieldsNames_FromNewValid(t *testing.T) {
 	// Arrange
 	r := corejson.NewPtr(map[string]any{"name": "test"})
 	names, err := r.FieldsNames()

@@ -2474,7 +2474,7 @@ func Test_NCLLN_ToChainedNodes_Empty(t *testing.T) {
 
 // ── newLinkedListCreator factory methods ──
 
-func Test_Creator_Create(t *testing.T) {
+func Test_Creator_Create_FromLLAddIteration34(t *testing.T) {
 	safeTest(t, "Test_Cov38_Creator_Create", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -2488,7 +2488,7 @@ func Test_Creator_Create(t *testing.T) {
 	})
 }
 
-func Test_Creator_Empty(t *testing.T) {
+func Test_Creator_Empty_FromLLAddIteration34(t *testing.T) {
 	safeTest(t, "Test_Cov38_Creator_Empty", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Empty()
@@ -2502,7 +2502,7 @@ func Test_Creator_Empty(t *testing.T) {
 	})
 }
 
-func Test_Creator_Strings(t *testing.T) {
+func Test_Creator_Strings_FromLLAddIteration34(t *testing.T) {
 	safeTest(t, "Test_Cov38_Creator_Strings", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -2516,7 +2516,7 @@ func Test_Creator_Strings(t *testing.T) {
 	})
 }
 
-func Test_Creator_SpreadStrings(t *testing.T) {
+func Test_Creator_SpreadStrings_FromLLAddIteration34(t *testing.T) {
 	safeTest(t, "Test_Cov38_Creator_SpreadStrings", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.SpreadStrings("a", "b", "c")

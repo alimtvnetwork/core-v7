@@ -23,7 +23,7 @@ func Test_AnyOnce_ValueString_NilValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueString returns nil bracket -- nil initializer", actual)
 }
 
-func Test_AnyOnce_ValueString_Cached(t *testing.T) {
+func Test_AnyOnce_ValueString_Cached_FromAnyOnceValueString(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return "hello" })
 	_ = ao.ValueString() // first call compiles
@@ -169,7 +169,7 @@ func Test_AnyOnce_IsStringEmptyOrWhitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsStringEmptyOrWhitespace returns true -- whitespace value", actual)
 }
 
-func Test_AnyOnce_Deserialize_Success(t *testing.T) {
+func Test_AnyOnce_Deserialize_Success_FromAnyOnceValueString(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOncePtr(func() any { return map[string]any{"key": "val"} })
 	var result map[string]any
@@ -1095,7 +1095,7 @@ func Test_MapStringStringOnce_AllValuesSorted_Cached(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllValuesSorted returns cached sorted -- second call", actual)
 }
 
-func Test_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_MissingKey_FromAnyOnceValueString(t *testing.T) {
 	// Arrange
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1", "b": "2"} })
 

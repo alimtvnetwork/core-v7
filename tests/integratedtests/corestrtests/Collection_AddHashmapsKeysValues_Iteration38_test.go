@@ -99,7 +99,7 @@ func Test_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
 
 // ─── Collection: AddPointerCollectionsLock ──────
 
-func Test_Collection_AddPointerCollectionsLock(t *testing.T) {
+func Test_Collection_AddPointerCollectionsLock_FromCollectionAddHashmap(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_AddPointerCollectionsLock", func() {
 		col := corestr.New.Collection.Empty()
 		other := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -352,7 +352,7 @@ func Test_Collection_ExpandSlicePlusAdd(t *testing.T) {
 
 // ─── Collection: MergeSlicesOfSlice ──────
 
-func Test_Collection_MergeSlicesOfSlice(t *testing.T) {
+func Test_Collection_MergeSlicesOfSlice_FromCollectionAddHashmap(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_MergeSlicesOfSlice", func() {
 		col := corestr.New.Collection.Empty()
 		col.MergeSlicesOfSlice([]string{"a", "b"}, []string{"c"})

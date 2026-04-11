@@ -28,7 +28,7 @@ func Test_InRangeExclusive_OutOfRange(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InRangeExclusive returns correct value -- with args", actual)
 }
 
-func Test_SafeDivOrDefault(t *testing.T) {
+func Test_SafeDivOrDefault_FromInRangeExclusiveOutO(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"normal": coregeneric.SafeDivOrDefault(10, 3, -1),
@@ -43,7 +43,7 @@ func Test_SafeDivOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeDivOrDefault returns correct value -- with args", actual)
 }
 
-func Test_IsNonNegative(t *testing.T) {
+func Test_IsNonNegative_FromInRangeExclusiveOutO(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"positive": coregeneric.IsNonNegative(5),
@@ -60,7 +60,7 @@ func Test_IsNonNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsNonNegative returns correct value -- with args", actual)
 }
 
-func Test_Sign(t *testing.T) {
+func Test_Sign_FromInRangeExclusiveOutO(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"negative": coregeneric.Sign(-5),
@@ -146,7 +146,7 @@ func Test_Collection_AddIfMany_Skip(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddIfMany returns correct value -- skip", actual)
 }
 
-func Test_Collection_AddFunc(t *testing.T) {
+func Test_Collection_AddFunc_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddFunc(func() int { return 42 })
@@ -159,7 +159,7 @@ func Test_Collection_AddFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddFunc returns correct value -- with args", actual)
 }
 
-func Test_Collection_CountFunc(t *testing.T) {
+func Test_Collection_CountFunc_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3, 4, 5})
 	count := col.CountFunc(func(v int) bool { return v > 3 })
@@ -172,7 +172,7 @@ func Test_Collection_CountFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CountFunc returns correct value -- with args", actual)
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2})
 	result := col.ConcatNew(3, 4)
@@ -185,7 +185,7 @@ func Test_Collection_ConcatNew(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ConcatNew returns correct value -- with args", actual)
 }
 
-func Test_Collection_Reverse(t *testing.T) {
+func Test_Collection_Reverse_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 	col.Reverse()
@@ -227,7 +227,7 @@ func Test_Hashmap_Set_ReturnsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Set return", actual)
 }
 
-func Test_Hashmap_ForEachBreak(t *testing.T) {
+func Test_Hashmap_ForEachBreak_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	hm := coregeneric.EmptyHashmap[string, int]()
 	hm.Set("a", 1)
@@ -262,7 +262,7 @@ func Test_Hashmap_ConcatNew_NilOther(t *testing.T) {
 
 // ── Hashset uncovered branches ──
 
-func Test_Hashset_AddBool(t *testing.T) {
+func Test_Hashset_AddBool_FromInRangeExclusiveOutO(t *testing.T) {
 	// Arrange
 	hs := coregeneric.EmptyHashset[string]()
 	existed1 := hs.AddBool("a")

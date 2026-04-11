@@ -123,7 +123,7 @@ func Test_Within_StringRangeUint16_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeUint16 returns value -- valid input", actual)
 }
 
-func Test_Within_StringRangeUint32_Valid(t *testing.T) {
+func Test_Within_StringRangeUint32_Valid_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.StringRangeUint32("5000")
 
@@ -345,7 +345,7 @@ func Test_Within_StringRangeFloat64Default_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within StringRangeFloat64Default returns false -- invalid", actual)
 }
 
-func Test_Within_RangeDefaultInteger(t *testing.T) {
+func Test_Within_RangeDefaultInteger_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.RangeDefaultInteger(1, 10, 5)
 
@@ -417,7 +417,7 @@ func Test_Within_RangeInteger_AboveMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within RangeInteger returns max -- above max", actual)
 }
 
-func Test_Within_RangeByteDefault(t *testing.T) {
+func Test_Within_RangeByteDefault_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.RangeByteDefault(100)
 
@@ -483,7 +483,7 @@ func Test_Within_RangeByte_AboveMax(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Within RangeByte returns 255 -- above max", actual)
 }
 
-func Test_Within_RangeUint16Default(t *testing.T) {
+func Test_Within_RangeUint16Default_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.RangeUint16Default(1000)
 
@@ -708,7 +708,7 @@ func Test_MinMaxInt16_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt16 RangesExcept returns 4 -- excluding 3", actual)
 }
 
-func Test_MinMaxInt16_Clone(t *testing.T) {
+func Test_MinMaxInt16_Clone_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt16{Min: 1, Max: 10}
 	cloned := mm.Clone()
@@ -857,7 +857,7 @@ func Test_MinMaxInt8_Ranges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 Ranges returns 5 -- range 3 to 7", actual)
 }
 
-func Test_MinMaxInt8_CreateRanges(t *testing.T) {
+func Test_MinMaxInt8_CreateRanges_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 1, Max: 3}
 	extra := corerange.MinMaxInt8{Min: 10, Max: 12}
@@ -876,7 +876,7 @@ func Test_MinMaxInt8_CreateRanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 CreateRanges returns combined -- with extra", actual)
 }
 
-func Test_MinMaxInt8_RangesExcept(t *testing.T) {
+func Test_MinMaxInt8_RangesExcept_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 1, Max: 5}
 
@@ -888,7 +888,7 @@ func Test_MinMaxInt8_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 RangesExcept returns 4 -- excluding 3", actual)
 }
 
-func Test_MinMaxInt8_Clone(t *testing.T) {
+func Test_MinMaxInt8_Clone_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 1, Max: 10}
 	cloned := mm.Clone()
@@ -910,7 +910,7 @@ func Test_MinMaxInt8_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 Clone returns copy -- valid input", actual)
 }
 
-func Test_MinMaxInt8_IsEqual(t *testing.T) {
+func Test_MinMaxInt8_IsEqual_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm1 := &corerange.MinMaxInt8{Min: 1, Max: 10}
 	mm2 := &corerange.MinMaxInt8{Min: 1, Max: 10}
@@ -928,7 +928,7 @@ func Test_MinMaxInt8_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 IsEqual returns true -- same values", actual)
 }
 
-func Test_MinMaxInt8_String(t *testing.T) {
+func Test_MinMaxInt8_String_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 2, Max: 8}
 
@@ -940,7 +940,7 @@ func Test_MinMaxInt8_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 String returns non-empty -- valid input", actual)
 }
 
-func Test_MinMaxInt8_CreateMinMaxInt(t *testing.T) {
+func Test_MinMaxInt8_CreateMinMaxInt_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 2, Max: 8}
 
@@ -952,7 +952,7 @@ func Test_MinMaxInt8_CreateMinMaxInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 CreateMinMaxInt returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt8_CreateRangeInt(t *testing.T) {
+func Test_MinMaxInt8_CreateRangeInt_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 2, Max: 8}
 
@@ -964,7 +964,7 @@ func Test_MinMaxInt8_CreateRangeInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 CreateRangeInt returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt8_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxInt8_CreateRangeInt8_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 2, Max: 8}
 
@@ -976,7 +976,7 @@ func Test_MinMaxInt8_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt8_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxInt8_CreateRangeInt16_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt8{Min: 2, Max: 8}
 
@@ -990,7 +990,7 @@ func Test_MinMaxInt8_CreateRangeInt16(t *testing.T) {
 
 // ── MinMaxInt64 — uncovered branches ──
 
-func Test_MinMaxInt64_Comparisons(t *testing.T) {
+func Test_MinMaxInt64_Comparisons_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 2, Max: 8}
 
@@ -1013,7 +1013,7 @@ func Test_MinMaxInt64_Comparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Comparisons returns true -- matching values", actual)
 }
 
-func Test_MinMaxInt64_Ranges(t *testing.T) {
+func Test_MinMaxInt64_Ranges_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 3, Max: 7}
 
@@ -1032,7 +1032,7 @@ func Test_MinMaxInt64_Ranges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Ranges returns 5 -- range 3 to 7", actual)
 }
 
-func Test_MinMaxInt64_CreateRanges(t *testing.T) {
+func Test_MinMaxInt64_CreateRanges_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 1, Max: 3}
 	extra := corerange.MinMaxInt64{Min: 10, Max: 12}
@@ -1051,7 +1051,7 @@ func Test_MinMaxInt64_CreateRanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 CreateRanges returns combined -- with extra", actual)
 }
 
-func Test_MinMaxInt64_RangesExcept(t *testing.T) {
+func Test_MinMaxInt64_RangesExcept_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 1, Max: 5}
 
@@ -1063,7 +1063,7 @@ func Test_MinMaxInt64_RangesExcept(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 RangesExcept returns 4 -- excluding 3", actual)
 }
 
-func Test_MinMaxInt64_Clone(t *testing.T) {
+func Test_MinMaxInt64_Clone_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt64{Min: 1, Max: 10}
 	cloned := mm.Clone()
@@ -1085,7 +1085,7 @@ func Test_MinMaxInt64_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Clone returns copy -- valid input", actual)
 }
 
-func Test_MinMaxInt64_IsEqual(t *testing.T) {
+func Test_MinMaxInt64_IsEqual_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm1 := &corerange.MinMaxInt64{Min: 1, Max: 10}
 	mm2 := &corerange.MinMaxInt64{Min: 1, Max: 10}
@@ -1103,7 +1103,7 @@ func Test_MinMaxInt64_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 IsEqual returns true -- same values", actual)
 }
 
-func Test_MinMaxInt64_String(t *testing.T) {
+func Test_MinMaxInt64_String_FromWithinStringRangeInt(t *testing.T) {
 	// Act
 	actual := args.Map{"notEmpty": (&corerange.MinMaxInt64{Min: 2, Max: 8}).String() != ""}
 
@@ -1112,7 +1112,7 @@ func Test_MinMaxInt64_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 String returns non-empty -- valid", actual)
 }
 
-func Test_MinMaxInt64_CreateMinMaxInt(t *testing.T) {
+func Test_MinMaxInt64_CreateMinMaxInt_FromWithinStringRangeInt(t *testing.T) {
 	// Act
 	actual := args.Map{"notNil": (&corerange.MinMaxInt64{Min: 2, Max: 8}).CreateMinMaxInt() != nil}
 
@@ -1121,7 +1121,7 @@ func Test_MinMaxInt64_CreateMinMaxInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 CreateMinMaxInt returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt64_CreateRangeInt(t *testing.T) {
+func Test_MinMaxInt64_CreateRangeInt_FromWithinStringRangeInt(t *testing.T) {
 	// Act
 	actual := args.Map{"notNil": (&corerange.MinMaxInt64{Min: 2, Max: 8}).CreateRangeInt("3:5", ":") != nil}
 
@@ -1130,7 +1130,7 @@ func Test_MinMaxInt64_CreateRangeInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 CreateRangeInt returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt64_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxInt64_CreateRangeInt8_FromWithinStringRangeInt(t *testing.T) {
 	// Act
 	actual := args.Map{"notNil": (&corerange.MinMaxInt64{Min: 2, Max: 8}).CreateRangeInt8("3:5", ":") != nil}
 
@@ -1139,7 +1139,7 @@ func Test_MinMaxInt64_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 CreateRangeInt8 returns non-nil -- valid", actual)
 }
 
-func Test_MinMaxInt64_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxInt64_CreateRangeInt16_FromWithinStringRangeInt(t *testing.T) {
 	// Act
 	actual := args.Map{"notNil": (&corerange.MinMaxInt64{Min: 2, Max: 8}).CreateRangeInt16("3:5", ":") != nil}
 
@@ -1207,7 +1207,7 @@ func Test_StartEndSimpleString_AllMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString methods return expected -- valid input", actual)
 }
 
-func Test_StartEndSimpleString_StringUsingFormat(t *testing.T) {
+func Test_StartEndSimpleString_StringUsingFormat_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndSimpleString{Start: "a", End: "b"}
 
@@ -1494,7 +1494,7 @@ func Test_RangeByte_DifferenceStartGtEnd(t *testing.T) {
 
 // ── RangeAny — uncovered branches ──
 
-func Test_RangeAny_Methods(t *testing.T) {
+func Test_RangeAny_Methods_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
@@ -1529,7 +1529,7 @@ func Test_RangeAny_Methods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeAny methods return expected -- valid input", actual)
 }
 
-func Test_RangeAny_CreateRangeIntMinMax(t *testing.T) {
+func Test_RangeAny_CreateRangeIntMinMax_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
@@ -1555,7 +1555,7 @@ func Test_RangeAny_CreateRangeIntMinMax(t *testing.T) {
 
 // ── StartEndString — uncovered branches ──
 
-func Test_StartEndString_UsingLines(t *testing.T) {
+func Test_StartEndString_UsingLines_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	se := corerange.NewStartEndStringUsingLines([]string{"first", "middle", "last"})
 
@@ -1597,7 +1597,7 @@ func Test_StartEndString_UsingLines_SingleElement(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewStartEndStringUsingLines returns first -- single element", actual)
 }
 
-func Test_StartEndString_CreateRangeString(t *testing.T) {
+func Test_StartEndString_CreateRangeString_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	se := corerange.NewStartEndString("a:b", ":")
 
@@ -1611,7 +1611,7 @@ func Test_StartEndString_CreateRangeString(t *testing.T) {
 
 // ── MinMaxInt — uncovered branches ──
 
-func Test_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
+func Test_MinMaxInt_DifferenceAbsolute_Negative_FromWithinStringRangeInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxInt{Min: 8, Max: 3}
 

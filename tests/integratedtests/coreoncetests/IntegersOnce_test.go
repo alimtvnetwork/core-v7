@@ -25,7 +25,7 @@ func Test_IntegersOnce_Core(t *testing.T) {
 	}
 }
 
-func Test_IntegersOnce_Sorted(t *testing.T) {
+func Test_IntegersOnce_Sorted_FromIntegersOnce(t *testing.T) {
 	for caseIndex, tc := range integersOnceSortedTestCases {
 		// Arrange
 		initVal := make([]int, len(tc.InitValue))
@@ -70,7 +70,7 @@ func Test_IntegersOnce_Ranges(t *testing.T) {
 	}
 }
 
-func Test_IntegersOnce_IsEqual(t *testing.T) {
+func Test_IntegersOnce_IsEqual_FromIntegersOnce(t *testing.T) {
 	for caseIndex, tc := range integersOnceIsEqualTestCases {
 		// Arrange
 		initVal := tc.InitValue

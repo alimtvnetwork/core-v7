@@ -143,7 +143,7 @@ func Test_LeftMiddleRightFromSplit_Basic(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRightFromSplit_TwoParts(t *testing.T) {
+func Test_LeftMiddleRightFromSplit_TwoParts_FromLeftRightFromSplitBa(t *testing.T) {
 	safeTest(t, "Test_Cov71_LeftMiddleRightFromSplit_TwoParts", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a.b", ".")

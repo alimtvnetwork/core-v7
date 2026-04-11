@@ -28,7 +28,7 @@ func Test_TypeStatus_IsValid_WithTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- IsValid", actual)
 }
 
-func Test_TypeStatus_IsValid_Nil(t *testing.T) {
+func Test_TypeStatus_IsValid_Nil_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	var ts *coredynamic.TypeStatus
 
@@ -100,7 +100,7 @@ func Test_TypeStatus_IsBothPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsBothPointer", actual)
 }
 
-func Test_TypeStatus_NonPointerLeft(t *testing.T) {
+func Test_TypeStatus_NonPointerLeft_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{
 		Left:          reflect.TypeOf((*int)(nil)),
@@ -117,7 +117,7 @@ func Test_TypeStatus_NonPointerLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NonPointerLeft", actual)
 }
 
-func Test_TypeStatus_NonPointerRight(t *testing.T) {
+func Test_TypeStatus_NonPointerRight_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{
 		Left:           reflect.TypeOf(0),
@@ -147,7 +147,7 @@ func Test_TypeStatus_NonPointerLeft_NonPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns non-empty -- NonPointerLeft non-ptr", actual)
 }
 
-func Test_TypeStatus_IsSameRegardlessPointer_Same(t *testing.T) {
+func Test_TypeStatus_IsSameRegardlessPointer_Same_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(0), Right: reflect.TypeOf(0)}
 
@@ -212,7 +212,7 @@ func Test_TypeStatus_LeftFullName(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- LeftFullName/RightFullName", actual)
 }
 
-func Test_TypeStatus_NotMatchMessage_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchMessage_Same_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 
@@ -237,7 +237,7 @@ func Test_TypeStatus_NotMatchMessage_NotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NotMatchMessage not same", actual)
 }
 
-func Test_TypeStatus_NotMatchErr_Same(t *testing.T) {
+func Test_TypeStatus_NotMatchErr_Same_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 
@@ -261,7 +261,7 @@ func Test_TypeStatus_NotMatchErr_NotSame(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NotMatchErr not same", actual)
 }
 
-func Test_TypeStatus_ValidationError_Same(t *testing.T) {
+func Test_TypeStatus_ValidationError_Same_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: true}
 
@@ -343,7 +343,7 @@ func Test_TypeStatus_SrcDestinationMustBeSame_Panic(t *testing.T) {
 	ts.SrcDestinationMustBeSame()
 }
 
-func Test_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationMessage_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 	msg := ts.NotEqualSrcDestinationMessage()
@@ -356,7 +356,7 @@ func Test_TypeStatus_NotEqualSrcDestinationMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- NotEqualSrcDestinationMessage", actual)
 }
 
-func Test_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
+func Test_TypeStatus_NotEqualSrcDestinationErr_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeStatus{IsSame: false, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
@@ -368,7 +368,7 @@ func Test_TypeStatus_NotEqualSrcDestinationErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- NotEqualSrcDestinationErr", actual)
 }
 
-func Test_TypeStatus_IsEqual_BothNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_BothNil_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	var a, b *coredynamic.TypeStatus
 
@@ -380,7 +380,7 @@ func Test_TypeStatus_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsEqual both nil", actual)
 }
 
-func Test_TypeStatus_IsEqual_OneNil(t *testing.T) {
+func Test_TypeStatus_IsEqual_OneNil_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 
@@ -392,7 +392,7 @@ func Test_TypeStatus_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- IsEqual one nil", actual)
 }
 
-func Test_TypeStatus_IsEqual_Same(t *testing.T) {
+func Test_TypeStatus_IsEqual_Same_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
@@ -431,7 +431,7 @@ func Test_TypeStatus_IsEqual_DiffLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsEqual diff Left", actual)
 }
 
-func Test_TypeStatus_IsEqual_DiffRight(t *testing.T) {
+func Test_TypeStatus_IsEqual_DiffRight_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	a := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf("")}
 	b := &coredynamic.TypeStatus{IsSame: true, Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
@@ -754,7 +754,7 @@ func Test_TypedDynamic_ToDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ToDynamic", actual)
 }
 
-func Test_TypedDynamic_Deserialize(t *testing.T) {
+func Test_TypedDynamic_Deserialize_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamicPtr("", true)
 	err := td.Deserialize([]byte(`"world"`))
@@ -1411,7 +1411,7 @@ func Test_TypedDynamic_JsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonResult", actual)
 }
 
-func Test_TypedDynamic_JsonString(t *testing.T) {
+func Test_TypedDynamic_JsonString_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	s, err := td.JsonString()
@@ -1430,7 +1430,7 @@ func Test_TypedDynamic_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonString", actual)
 }
 
-func Test_TypedDynamic_Json(t *testing.T) {
+func Test_TypedDynamic_Json_FromTypeStatusIsValidIte(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic("x", true)
 	jr := td.Json()

@@ -163,7 +163,7 @@ func Test_AnyTo_SerializedJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult returns valid -- map input", actual)
 }
 
-func Test_AnyTo_SerializedRaw(t *testing.T) {
+func Test_AnyTo_SerializedRaw_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	rawBytes, err := corejson.AnyTo.SerializedRaw(map[string]string{"k": "v"})
 
@@ -181,7 +181,7 @@ func Test_AnyTo_SerializedRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedRaw returns bytes -- map input", actual)
 }
 
-func Test_AnyTo_SerializedString(t *testing.T) {
+func Test_AnyTo_SerializedString_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.SerializedString(map[string]int{"a": 1})
 
@@ -199,7 +199,7 @@ func Test_AnyTo_SerializedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedString returns json string -- map input", actual)
 }
 
-func Test_AnyTo_SafeJsonString(t *testing.T) {
+func Test_AnyTo_SafeJsonString_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonString(map[string]int{"a": 1})
 
@@ -211,7 +211,7 @@ func Test_AnyTo_SafeJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SafeJsonString returns non-empty -- map input", actual)
 }
 
-func Test_AnyTo_SafeJsonPrettyString(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString(map[string]int{"a": 1})
 
@@ -223,7 +223,7 @@ func Test_AnyTo_SafeJsonPrettyString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.SafeJsonPrettyString returns non-empty -- map input", actual)
 }
 
-func Test_AnyTo_JsonString(t *testing.T) {
+func Test_AnyTo_JsonString_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString(map[string]int{"a": 1})
 
@@ -235,7 +235,7 @@ func Test_AnyTo_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonString returns non-empty -- map input", actual)
 }
 
-func Test_AnyTo_JsonStringMust(t *testing.T) {
+func Test_AnyTo_JsonStringMust_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonStringMust(map[string]int{"a": 1})
 
@@ -247,7 +247,7 @@ func Test_AnyTo_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyTo.JsonStringMust returns non-empty -- map input", actual)
 }
 
-func Test_AnyTo_PrettyStringMust(t *testing.T) {
+func Test_AnyTo_PrettyStringMust_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.PrettyStringMust(map[string]int{"a": 1})
 
@@ -397,7 +397,7 @@ func Test_DeserializeFromBytes_Integers(t *testing.T) {
 
 // ── Empty creators ──
 
-func Test_Empty_Result(t *testing.T) {
+func Test_Empty_Result_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.Result()
 
@@ -409,7 +409,7 @@ func Test_Empty_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Result returns empty -- no data", actual)
 }
 
-func Test_Empty_ResultPtr(t *testing.T) {
+func Test_Empty_ResultPtr_FromNewResultSerialize(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultPtr()
 

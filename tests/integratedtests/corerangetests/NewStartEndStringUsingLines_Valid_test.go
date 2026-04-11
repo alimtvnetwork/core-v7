@@ -138,7 +138,7 @@ func Test_RangeAny_CreateRangeInt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RangeAny CreateRangeInt returns non-nil -- valid", actual)
 }
 
-func Test_RangeAny_CreateRangeIntMinMax(t *testing.T) {
+func Test_RangeAny_CreateRangeIntMinMax_FromNewStartEndStringUsi(t *testing.T) {
 	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{RawInput: "3|7", Separator: "|", IsValid: true, HasStart: true, HasEnd: true},

@@ -12,7 +12,7 @@ import (
 // Test: New - valid
 // ==========================================================================
 
-func Test_New_Valid(t *testing.T) {
+func Test_New_Valid_FromNewNewPtr(t *testing.T) {
 	tc := newValidTestCase
 	result := corejson.New(struct {
 		Name string
@@ -68,7 +68,7 @@ func Test_New_Channel(t *testing.T) {
 // Test: NewPtr - valid
 // ==========================================================================
 
-func Test_NewPtr_Valid(t *testing.T) {
+func Test_NewPtr_Valid_FromNewNewPtr(t *testing.T) {
 	tc := newPtrValidTestCase
 	result := corejson.NewPtr(struct {
 		Name string

@@ -247,7 +247,7 @@ func Test_MapAnyItemDiff_LastIndex(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- LastIndex", actual)
 }
 
-func Test_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
+func Test_MapAnyItemDiff_AllKeysSorted_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"b": 2, "a": 1}
 	keys := m.AllKeysSorted()
@@ -266,7 +266,7 @@ func Test_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- AllKeysSorted", actual)
 }
 
-func Test_MapAnyItemDiff_Raw(t *testing.T) {
+func Test_MapAnyItemDiff_Raw_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	raw := m.Raw()
@@ -292,7 +292,7 @@ func Test_MapAnyItemDiff_Raw_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns nil -- Raw nil", actual)
 }
 
-func Test_MapAnyItemDiff_Clear(t *testing.T) {
+func Test_MapAnyItemDiff_Clear_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	cleared := m.Clear()
@@ -342,7 +342,7 @@ func Test_MapAnyItemDiff_IsRawEqual_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- IsRawEqual diff", actual)
 }
 
-func Test_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
+func Test_MapAnyItemDiff_HasAnyChanges_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 
@@ -354,7 +354,7 @@ func Test_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- HasAnyChanges", actual)
 }
 
-func Test_MapAnyItemDiff_DiffRaw(t *testing.T) {
+func Test_MapAnyItemDiff_DiffRaw_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1, "b": 2}
 	diff := m.DiffRaw(false, map[string]any{"a": 1, "b": 99})
@@ -393,7 +393,7 @@ func Test_MapAnyItemDiff_HashmapDiffUsingRaw_HasDiff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- HashmapDiffUsingRaw has diff", actual)
 }
 
-func Test_MapAnyItemDiff_MapAnyItems(t *testing.T) {
+func Test_MapAnyItemDiff_MapAnyItems_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	mai := m.MapAnyItems()
@@ -406,7 +406,7 @@ func Test_MapAnyItemDiff_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- MapAnyItems", actual)
 }
 
-func Test_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
+func Test_MapAnyItemDiff_RawMapDiffer_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	d := m.RawMapDiffer()
@@ -419,7 +419,7 @@ func Test_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- RawMapDiffer", actual)
 }
 
-func Test_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
+func Test_MapAnyItemDiff_DiffJsonMessage_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	msg := m.DiffJsonMessage(false, map[string]any{"a": 2})
@@ -432,7 +432,7 @@ func Test_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- DiffJsonMessage", actual)
 }
 
-func Test_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItemDiff_ShouldDiffMessage_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	msg := m.ShouldDiffMessage(false, "test", map[string]any{"a": 2})
@@ -445,7 +445,7 @@ func Test_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- ShouldDiffMessage", actual)
 }
 
-func Test_MapAnyItemDiff_LogShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItemDiff_LogShouldDiffMessage_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	msg := m.LogShouldDiffMessage(false, "test", map[string]any{"a": 2})
@@ -458,7 +458,7 @@ func Test_MapAnyItemDiff_LogShouldDiffMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- LogShouldDiffMessage", actual)
 }
 
-func Test_MapAnyItemDiff_ToStringsSliceOfDiffMap(t *testing.T) {
+func Test_MapAnyItemDiff_ToStringsSliceOfDiffMap_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	diff := m.DiffRaw(false, map[string]any{"a": 2})
@@ -472,7 +472,7 @@ func Test_MapAnyItemDiff_ToStringsSliceOfDiffMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- ToStringsSliceOfDiffMap", actual)
 }
 
-func Test_MapAnyItemDiff_Json(t *testing.T) {
+func Test_MapAnyItemDiff_Json_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	jr := m.Json()
@@ -750,7 +750,7 @@ func Test_ReflectTypeValidation_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation returns non-empty -- mismatch", actual)
 }
 
-func Test_ReflectTypeValidation_NilNotAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilNotAllowed_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(true, reflect.TypeOf(""), nil)
 
@@ -762,7 +762,7 @@ func Test_ReflectTypeValidation_NilNotAllowed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectTypeValidation returns nil -- nil not allowed", actual)
 }
 
-func Test_ReflectTypeValidation_NilAllowed(t *testing.T) {
+func Test_ReflectTypeValidation_NilAllowed_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectTypeValidation(false, reflect.TypeOf(""), nil)
 
@@ -1081,7 +1081,7 @@ func Test_SafeTypeName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeTypeName returns nil -- nil", actual)
 }
 
-func Test_ReflectInterfaceVal_NonPointer(t *testing.T) {
+func Test_ReflectInterfaceVal_NonPointer_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	val := coredynamic.ReflectInterfaceVal("hello")
 
@@ -1093,7 +1093,7 @@ func Test_ReflectInterfaceVal_NonPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectInterfaceVal returns non-empty -- non-ptr", actual)
 }
 
-func Test_ReflectInterfaceVal_Pointer(t *testing.T) {
+func Test_ReflectInterfaceVal_Pointer_FromCastToMatchingTypeIt(t *testing.T) {
 	// Arrange
 	s := "hello"
 	val := coredynamic.ReflectInterfaceVal(&s)

@@ -164,7 +164,7 @@ func Test_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetItemRef not pointer", actual)
 }
 
-func Test_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
+func Test_MapAnyItems_GetManyItemsRefs_Empty_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.GetManyItemsRefs()
@@ -283,7 +283,7 @@ func Test_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns non-empty -- AddKeyAnyWithValidation mismatch", actual)
 }
 
-func Test_MapAnyItems_AddJsonResultPtr(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := corejson.NewPtr("val")
@@ -337,7 +337,7 @@ func Test_MapAnyItems_AddMapResultOption_NoOverride(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- AddMapResultOption no override", actual)
 }
 
-func Test_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResultsUsingOption_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.AddManyMapResultsUsingOption(true, map[string]any{"a": 1}, map[string]any{"b": 2})
@@ -350,7 +350,7 @@ func Test_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddManyMapResultsUsingOption", actual)
 }
 
-func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.AddManyMapResultsUsingOption(true)
@@ -383,7 +383,7 @@ func Test_MapAnyItems_ReflectSetTo_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ReflectSetTo", actual)
 }
 
-func Test_MapAnyItems_ReflectSetTo_Missing(t *testing.T) {
+func Test_MapAnyItems_ReflectSetTo_Missing_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var target string
@@ -459,7 +459,7 @@ func Test_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKey missing", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKeys(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	mr := m.JsonResultOfKeys("a", "b")
@@ -485,7 +485,7 @@ func Test_MapAnyItems_JsonResultOfKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonResultOfKeys empty", actual)
 }
 
-func Test_MapAnyItems_JsonMapResults(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	mr, err := m.JsonMapResults()
@@ -504,7 +504,7 @@ func Test_MapAnyItems_JsonMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonMapResults", actual)
 }
 
-func Test_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_Empty_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	mr, err := m.JsonMapResults()
@@ -523,7 +523,7 @@ func Test_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonMapResults empty", actual)
 }
 
-func Test_MapAnyItems_JsonResultsCollection(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollection_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	rc := m.JsonResultsCollection()
@@ -536,7 +536,7 @@ func Test_MapAnyItems_JsonResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultsCollection", actual)
 }
 
-func Test_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollection_Empty_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	rc := m.JsonResultsCollection()
@@ -587,7 +587,7 @@ func Test_MapAnyItems_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonModelAny", actual)
 }
 
-func Test_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jr := m.Json()
@@ -633,7 +633,7 @@ func Test_MapAnyItems_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
+func Test_MapAnyItems_JsonParseSelfInject_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := corejson.NewPtr(map[string]any{"x": 2})
@@ -647,7 +647,7 @@ func Test_MapAnyItems_JsonParseSelfInject(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonParseSelfInject", actual)
 }
 
-func Test_MapAnyItems_Strings(t *testing.T) {
+func Test_MapAnyItems_Strings_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	strs := m.Strings()
@@ -660,7 +660,7 @@ func Test_MapAnyItems_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Strings", actual)
 }
 
-func Test_MapAnyItems_String(t *testing.T) {
+func Test_MapAnyItems_String_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -746,7 +746,7 @@ func Test_MapAnyItems_IsEqualRaw_MissingKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqualRaw missing key", actual)
 }
 
-func Test_MapAnyItems_IsEqual(t *testing.T) {
+func Test_MapAnyItems_IsEqual_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m1 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
@@ -759,7 +759,7 @@ func Test_MapAnyItems_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqual", actual)
 }
 
-func Test_MapAnyItems_IsEqual_BothNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_BothNil_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	var m1, m2 *coredynamic.MapAnyItems
 
@@ -783,7 +783,7 @@ func Test_MapAnyItems_IsEqual_OneNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- IsEqual one nil", actual)
 }
 
-func Test_MapAnyItems_ClonePtr(t *testing.T) {
+func Test_MapAnyItems_ClonePtr_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	cloned, err := m.ClonePtr()
@@ -815,7 +815,7 @@ func Test_MapAnyItems_ClonePtr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- ClonePtr nil", actual)
 }
 
-func Test_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
+func Test_MapAnyItems_RawMapStringAnyDiff_Nil_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 	diff := m.RawMapStringAnyDiff()
@@ -828,7 +828,7 @@ func Test_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- RawMapStringAnyDiff nil", actual)
 }
 
-func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
+func Test_MapAnyItems_MapAnyItemsSelf_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -900,7 +900,7 @@ func Test_CollectionMethods_AddIf_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns non-empty -- AddIf false", actual)
 }
 
-func Test_CollectionMethods_AddManyIf(t *testing.T) {
+func Test_CollectionMethods_AddManyIf_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddManyIf(true, "a", "b")
@@ -914,7 +914,7 @@ func Test_CollectionMethods_AddManyIf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddManyIf", actual)
 }
 
-func Test_CollectionMethods_AddCollection(t *testing.T) {
+func Test_CollectionMethods_AddCollection_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c1 := coredynamic.New.Collection.String.From([]string{"a"})
 	c2 := coredynamic.New.Collection.String.From([]string{"b", "c"})
@@ -928,7 +928,7 @@ func Test_CollectionMethods_AddCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCollection", actual)
 }
 
-func Test_CollectionMethods_AddCollections(t *testing.T) {
+func Test_CollectionMethods_AddCollections_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c1 := coredynamic.New.Collection.String.From([]string{"a"})
@@ -943,7 +943,7 @@ func Test_CollectionMethods_AddCollections(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCollections", actual)
 }
 
-func Test_CollectionMethods_ConcatNew(t *testing.T) {
+func Test_CollectionMethods_ConcatNew_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a"})
 	c2 := c.ConcatNew("b", "c")
@@ -975,7 +975,7 @@ func Test_CollectionMethods_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Clone", actual)
 }
 
-func Test_CollectionMethods_Clone_Nil(t *testing.T) {
+func Test_CollectionMethods_Clone_Nil_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	var c *coredynamic.Collection[string]
 	cloned := c.Clone()
@@ -988,7 +988,7 @@ func Test_CollectionMethods_Clone_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns nil -- Clone nil", actual)
 }
 
-func Test_CollectionMethods_Capacity(t *testing.T) {
+func Test_CollectionMethods_Capacity_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Cap(10)
 
@@ -1000,7 +1000,7 @@ func Test_CollectionMethods_Capacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Capacity", actual)
 }
 
-func Test_CollectionMethods_AddCapacity(t *testing.T) {
+func Test_CollectionMethods_AddCapacity_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.AddCapacity(5)
@@ -1013,7 +1013,7 @@ func Test_CollectionMethods_AddCapacity(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- AddCapacity", actual)
 }
 
-func Test_CollectionMethods_Resize(t *testing.T) {
+func Test_CollectionMethods_Resize_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
 	c.Resize(20)
@@ -1026,7 +1026,7 @@ func Test_CollectionMethods_Resize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Resize", actual)
 }
 
-func Test_CollectionMethods_Reverse(t *testing.T) {
+func Test_CollectionMethods_Reverse_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b", "c"})
 	c.Reverse()
@@ -1045,7 +1045,7 @@ func Test_CollectionMethods_Reverse(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Reverse", actual)
 }
 
-func Test_CollectionMethods_InsertAt(t *testing.T) {
+func Test_CollectionMethods_InsertAt_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "c"})
 	c.InsertAt(1, "b")
@@ -1065,7 +1065,7 @@ func Test_CollectionMethods_InsertAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- InsertAt", actual)
 }
 
-func Test_CollectionMethods_IndexOfFunc(t *testing.T) {
+func Test_CollectionMethods_IndexOfFunc_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b", "c"})
 	idx := c.IndexOfFunc(func(s string) bool { return s == "b" })
@@ -1121,7 +1121,7 @@ func Test_CollectionMethods_SafeAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- SafeAt", actual)
 }
 
-func Test_CollectionMethods_SprintItems(t *testing.T) {
+func Test_CollectionMethods_SprintItems_FromMapAnyItemsDeseriali(t *testing.T) {
 	// Arrange
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 	strs := c.SprintItems("[%s]")

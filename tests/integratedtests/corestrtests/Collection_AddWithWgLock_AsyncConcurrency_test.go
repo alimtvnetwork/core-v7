@@ -49,7 +49,7 @@ func Test_Collection_AddStringsAsync(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddStringsAsync_Empty(t *testing.T) {
+func Test_Collection_AddStringsAsync_Empty_FromCollectionAddWithWgL(t *testing.T) {
 	safeTest(t, "Test_Cov20_Collection_AddStringsAsync_Empty", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -311,7 +311,7 @@ func Test_Collection_AddHashmapsKeysValuesUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValuesUsingFilter_Nil_FromCollectionAddWithWgL(t *testing.T) {
 	safeTest(t, "Test_Cov20_Collection_AddHashmapsKeysValuesUsingFilter_Nil", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -326,7 +326,7 @@ func Test_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddHashmapsKeysValuesUsingFilter_Break(t *testing.T) {
+func Test_Collection_AddHashmapsKeysValuesUsingFilter_Break_FromCollectionAddWithWgL(t *testing.T) {
 	safeTest(t, "Test_Cov20_Collection_AddHashmapsKeysValuesUsingFilter_Break", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(

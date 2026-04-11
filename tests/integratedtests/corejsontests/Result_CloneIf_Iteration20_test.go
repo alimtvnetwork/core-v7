@@ -217,7 +217,7 @@ func Test_Result_SafeDeserializedFieldsToMap(t *testing.T) {
 	_ = m
 }
 
-func Test_Result_BytesError(t *testing.T) {
+func Test_Result_BytesError_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	be := r.BytesError()
@@ -243,7 +243,7 @@ func Test_Result_BytesError_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
-func Test_Result_Dispose(t *testing.T) {
+func Test_Result_Dispose_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("test")
 	r.Dispose()
@@ -287,7 +287,7 @@ func Test_Result_NonPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_Result_CombineErrorWithRefError_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefError_NoError_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	err := r.CombineErrorWithRefError("ref")
@@ -313,7 +313,7 @@ func Test_Result_CombineErrorWithRefError_HasError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Result_CombineErrorWithRefString_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefString_NoError_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	s := r.CombineErrorWithRefString("ref")
@@ -446,7 +446,7 @@ func Test_Result_IsEqualPtr_DiffType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
-func Test_Result_IsEqual(t *testing.T) {
+func Test_Result_IsEqual_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.Any("hello")
 	b := corejson.NewResult.Any("hello")
@@ -459,7 +459,7 @@ func Test_Result_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
-func Test_Result_IsErrorEqual(t *testing.T) {
+func Test_Result_IsErrorEqual_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	a := corejson.NewResult.ErrorPtr(errors.New("same"))
 
@@ -623,7 +623,7 @@ func Test_Result_UnmarshalSkipExistingIssues_Error(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error", actual)
 }
 
-func Test_Result_UnmarshalResult(t *testing.T) {
+func Test_Result_UnmarshalResult_FromResultCloneIfIterati(t *testing.T) {
 	inner := corejson.NewResult.Any("test")
 	outerBytes, _ := inner.Serialize()
 	outer := &corejson.Result{Bytes: outerBytes}
@@ -746,7 +746,7 @@ func Test_Result_JsonParseSelfInject(t *testing.T) {
 
 // ===== Result other methods =====
 
-func Test_Result_RawMust(t *testing.T) {
+func Test_Result_RawMust_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	b := r.RawMust()
@@ -787,7 +787,7 @@ func Test_Result_RawStringMust_Panic(t *testing.T) {
 	r.RawStringMust()
 }
 
-func Test_Result_RawErrString(t *testing.T) {
+func Test_Result_RawErrString_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	b, msg := r.RawErrString()
@@ -801,7 +801,7 @@ func Test_Result_RawErrString(t *testing.T) {
 	_ = msg
 }
 
-func Test_Result_RawPrettyString(t *testing.T) {
+func Test_Result_RawPrettyString_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 	s, err := r.RawPrettyString()
@@ -847,7 +847,7 @@ func Test_Result_MustBeSafe_Panic(t *testing.T) {
 	r.MustBeSafe()
 }
 
-func Test_Result_SafeNonIssueBytes(t *testing.T) {
+func Test_Result_SafeNonIssueBytes_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("ok")
 
@@ -989,7 +989,7 @@ func Test_Result_BytesTypeName_Nil(t *testing.T) {
 
 // ===== anyTo coverage =====
 
-func Test_AnyTo_SerializedRaw(t *testing.T) {
+func Test_AnyTo_SerializedRaw_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	b, err := corejson.AnyTo.SerializedRaw("hello")
 
@@ -1001,7 +1001,7 @@ func Test_AnyTo_SerializedRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_AnyTo_SerializedString(t *testing.T) {
+func Test_AnyTo_SerializedString_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.SerializedString("hello")
 
@@ -1013,7 +1013,7 @@ func Test_AnyTo_SerializedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SerializedSafeString(t *testing.T) {
+func Test_AnyTo_SerializedSafeString_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedSafeString("hello")
 
@@ -1025,7 +1025,7 @@ func Test_AnyTo_SerializedSafeString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SerializedStringMust(t *testing.T) {
+func Test_AnyTo_SerializedStringMust_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SerializedStringMust("hello")
 
@@ -1037,7 +1037,7 @@ func Test_AnyTo_SerializedStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SafeJsonString(t *testing.T) {
+func Test_AnyTo_SafeJsonString_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonString("hello")
 
@@ -1049,7 +1049,7 @@ func Test_AnyTo_SafeJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_PrettyStringWithError_String(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_String_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
 
@@ -1061,7 +1061,7 @@ func Test_AnyTo_PrettyStringWithError_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
+func Test_AnyTo_PrettyStringWithError_Bytes_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":"b"}`))
 
@@ -1137,7 +1137,7 @@ func Test_AnyTo_PrettyStringWithError_AnyItem(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_String_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString("hi")
 
@@ -1149,7 +1149,7 @@ func Test_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_Bytes_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString([]byte(`{"a":"b"}`))
 
@@ -1161,7 +1161,7 @@ func Test_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SafeJsonPrettyString_Result(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_Result_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s := corejson.AnyTo.SafeJsonPrettyString(r)
@@ -1174,7 +1174,7 @@ func Test_AnyTo_SafeJsonPrettyString_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_SafeJsonPrettyString_ResultPtr(t *testing.T) {
+func Test_AnyTo_SafeJsonPrettyString_ResultPtr_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s := corejson.AnyTo.SafeJsonPrettyString(r)
@@ -1199,7 +1199,7 @@ func Test_AnyTo_SafeJsonPrettyString_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_JsonString_String(t *testing.T) {
+func Test_AnyTo_JsonString_String_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString("hi")
 
@@ -1211,7 +1211,7 @@ func Test_AnyTo_JsonString_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected passthrough", actual)
 }
 
-func Test_AnyTo_JsonString_Bytes(t *testing.T) {
+func Test_AnyTo_JsonString_Bytes_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonString([]byte(`{"a":"b"}`))
 
@@ -1223,7 +1223,7 @@ func Test_AnyTo_JsonString_Bytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_JsonString_Result(t *testing.T) {
+func Test_AnyTo_JsonString_Result_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.Any("hello")
 	s := corejson.AnyTo.JsonString(r)
@@ -1236,7 +1236,7 @@ func Test_AnyTo_JsonString_Result(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_JsonString_ResultPtr(t *testing.T) {
+func Test_AnyTo_JsonString_ResultPtr_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.NewResult.AnyPtr("hello")
 	s := corejson.AnyTo.JsonString(r)
@@ -1349,7 +1349,7 @@ func Test_AnyTo_JsonStringWithErr_Any(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_JsonStringMust(t *testing.T) {
+func Test_AnyTo_JsonStringMust_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.JsonStringMust("hi")
 
@@ -1361,7 +1361,7 @@ func Test_AnyTo_JsonStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_AnyTo_PrettyStringMust(t *testing.T) {
+func Test_AnyTo_PrettyStringMust_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.AnyTo.PrettyStringMust("hi")
 
@@ -1373,7 +1373,7 @@ func Test_AnyTo_PrettyStringMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_AnyTo_UsingSerializer(t *testing.T) {
+func Test_AnyTo_UsingSerializer_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.UsingSerializer(nil)
 
@@ -1385,13 +1385,13 @@ func Test_AnyTo_UsingSerializer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for nil serializer", actual)
 }
 
-func Test_AnyTo_SerializedFieldsMap(t *testing.T) {
+func Test_AnyTo_SerializedFieldsMap_FromResultCloneIfIterati(t *testing.T) {
 	m, err := corejson.AnyTo.SerializedFieldsMap(map[string]string{"k": "v"})
 	_ = m
 	_ = err
 }
 
-func Test_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+func Test_AnyTo_SerializedJsonResult_Nil_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
 
@@ -2298,7 +2298,7 @@ func Test_CastAny_FromToDefault_NilFrom(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected no error — nil serializes to null", actual)
 }
 
-func Test_CastAny_FromToReflection(t *testing.T) {
+func Test_CastAny_FromToReflection_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.CastAny.FromToReflection(`"hello"`, &s)
@@ -2311,7 +2311,7 @@ func Test_CastAny_FromToReflection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
-func Test_CastAny_OrDeserializeTo(t *testing.T) {
+func Test_CastAny_OrDeserializeTo_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	var s string
 	err := corejson.CastAny.OrDeserializeTo(`"hello"`, &s)
@@ -2326,7 +2326,7 @@ func Test_CastAny_OrDeserializeTo(t *testing.T) {
 
 // ===== Empty creator coverage =====
 
-func Test_Empty_ResultWithErr(t *testing.T) {
+func Test_Empty_ResultWithErr_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	r := corejson.Empty.ResultWithErr("T", errors.New("e"))
 
@@ -2338,7 +2338,7 @@ func Test_Empty_ResultWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
-func Test_Empty_BytesCollection(t *testing.T) {
+func Test_Empty_BytesCollection_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollection()
 
@@ -2350,7 +2350,7 @@ func Test_Empty_BytesCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_Empty_BytesCollectionPtr(t *testing.T) {
+func Test_Empty_BytesCollectionPtr_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	bc := corejson.Empty.BytesCollectionPtr()
 
@@ -2362,7 +2362,7 @@ func Test_Empty_BytesCollectionPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Empty_MapResults(t *testing.T) {
+func Test_Empty_MapResults_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	mr := corejson.Empty.MapResults()
 
@@ -2376,7 +2376,7 @@ func Test_Empty_MapResults(t *testing.T) {
 
 // ===== BytesToString / BytesToPrettyString =====
 
-func Test_BytesToString_Empty(t *testing.T) {
+func Test_BytesToString_Empty_FromResultCloneIfIterati(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToString(nil) != ""}
 
@@ -2385,7 +2385,7 @@ func Test_BytesToString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_BytesToString_Valid(t *testing.T) {
+func Test_BytesToString_Valid_FromResultCloneIfIterati(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToString([]byte("hi")) != "hi"}
 
@@ -2394,7 +2394,7 @@ func Test_BytesToString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_BytesToPrettyString_Empty(t *testing.T) {
+func Test_BytesToPrettyString_Empty_FromResultCloneIfIterati(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corejson.BytesToPrettyString(nil) != ""}
 
@@ -2403,7 +2403,7 @@ func Test_BytesToPrettyString_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_BytesToPrettyString_Valid(t *testing.T) {
+func Test_BytesToPrettyString_Valid_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	s := corejson.BytesToPrettyString([]byte(`{"a":"b"}`))
 
@@ -2417,7 +2417,7 @@ func Test_BytesToPrettyString_Valid(t *testing.T) {
 
 // ===== BytesDeepClone / BytesCloneIf =====
 
-func Test_BytesDeepClone_Empty(t *testing.T) {
+func Test_BytesDeepClone_Empty_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	b := corejson.BytesDeepClone(nil)
 
@@ -2429,7 +2429,7 @@ func Test_BytesDeepClone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
-func Test_BytesDeepClone_Valid(t *testing.T) {
+func Test_BytesDeepClone_Valid_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	b := corejson.BytesDeepClone([]byte("hi"))
 
@@ -2441,7 +2441,7 @@ func Test_BytesDeepClone_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi'", actual)
 }
 
-func Test_BytesCloneIf_NoClone(t *testing.T) {
+func Test_BytesCloneIf_NoClone_FromResultCloneIfIterati(t *testing.T) {
 	// Arrange
 	b := corejson.BytesCloneIf(false, []byte("hi"))
 

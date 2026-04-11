@@ -9,7 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Result_Unmarshal_Valid(t *testing.T) {
+func Test_Result_Unmarshal_Valid_FromResultUnmarshal(t *testing.T) {
 	tc := resultUnmarshalValidTestCase
 
 	// Arrange

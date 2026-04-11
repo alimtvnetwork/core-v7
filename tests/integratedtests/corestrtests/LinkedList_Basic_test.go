@@ -11,7 +11,7 @@ import (
 // LinkedList — comprehensive
 // ═══════════════════════════════════════════
 
-func Test_LinkedList_Basic(t *testing.T) {
+func Test_LinkedList_Basic_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_Basic", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -61,7 +61,7 @@ func Test_LinkedList_AddVariations(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_AddFront(t *testing.T) {
+func Test_LinkedList_AddFront_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_AddFront", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -84,7 +84,7 @@ func Test_LinkedList_AddFront(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_AddLock", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -105,7 +105,7 @@ func Test_LinkedList_AddLock(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_IsEquals(t *testing.T) {
+func Test_LinkedList_IsEquals_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_IsEquals", func() {
 		// Arrange
 		ll1 := corestr.New.LinkedList.Create()
@@ -135,7 +135,7 @@ func Test_LinkedList_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_InsertAt(t *testing.T) {
+func Test_LinkedList_InsertAt_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_InsertAt", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -151,7 +151,7 @@ func Test_LinkedList_InsertAt(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_Loop(t *testing.T) {
+func Test_LinkedList_Loop_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_Loop", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -171,7 +171,7 @@ func Test_LinkedList_Loop(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_Loop_Break(t *testing.T) {
+func Test_LinkedList_Loop_Break_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_Loop_Break", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -210,7 +210,7 @@ func Test_LinkedList_Loop_Empty(t *testing.T) {
 	})
 }
 
-func Test_LinkedList_AddItemsMap(t *testing.T) {
+func Test_LinkedList_AddItemsMap_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LinkedList_AddItemsMap", func() {
 		// Arrange
 		ll := corestr.New.LinkedList.Create()
@@ -230,7 +230,7 @@ func Test_LinkedList_AddItemsMap(t *testing.T) {
 // ValidValue — comprehensive
 // ═══════════════════════════════════════════
 
-func Test_ValidValue_Constructors(t *testing.T) {
+func Test_ValidValue_Constructors_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_Constructors", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -289,7 +289,7 @@ func Test_ValidValue_Checks(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_IsAnyOf", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -311,7 +311,7 @@ func Test_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyContains(t *testing.T) {
+func Test_ValidValue_IsAnyContains_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_IsAnyContains", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello world")
@@ -333,7 +333,7 @@ func Test_ValidValue_IsAnyContains(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_TypeConversions(t *testing.T) {
+func Test_ValidValue_TypeConversions_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_TypeConversions", func() {
 		// Arrange
 		vvBool := corestr.NewValidValue("true")
@@ -392,7 +392,7 @@ func Test_ValidValue_BytesOnce(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_Split", func() {
 		// Arrange
 		vv := corestr.NewValidValue("a,b,c")
@@ -417,7 +417,7 @@ func Test_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_Clone", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -439,7 +439,7 @@ func Test_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_String(t *testing.T) {
+func Test_ValidValue_String_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_String", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -464,7 +464,7 @@ func Test_ValidValue_String(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_ClearDispose", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -513,7 +513,7 @@ func Test_ValidValue_JSON(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Regex(t *testing.T) {
+func Test_ValidValue_Regex_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_Regex", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello123")
@@ -539,7 +539,7 @@ func Test_ValidValue_Regex(t *testing.T) {
 // KeyValuePair — comprehensive
 // ═══════════════════════════════════════════
 
-func Test_KeyValuePair_Basic(t *testing.T) {
+func Test_KeyValuePair_Basic_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_Basic", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "name", Value: "alice"}
@@ -578,7 +578,7 @@ func Test_KeyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_TypeConversions(t *testing.T) {
+func Test_KeyValuePair_TypeConversions_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_TypeConversions", func() {
 		// Arrange
 		kvBool := &corestr.KeyValuePair{Key: "k", Value: "true"}
@@ -612,7 +612,7 @@ func Test_KeyValuePair_TypeConversions(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ValueValid(t *testing.T) {
+func Test_KeyValuePair_ValueValid_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_ValueValid", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -635,7 +635,7 @@ func Test_KeyValuePair_ValueValid(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_FormatString(t *testing.T) {
+func Test_KeyValuePair_FormatString_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_FormatString", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "name", Value: "alice"}
@@ -675,7 +675,7 @@ func Test_KeyValuePair_JSON(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ClearDispose(t *testing.T) {
+func Test_KeyValuePair_ClearDispose_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_ClearDispose", func() {
 		// Arrange
 		kv := &corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -699,7 +699,7 @@ func Test_KeyValuePair_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_NilChecks(t *testing.T) {
+func Test_KeyValuePair_NilChecks_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_KeyValuePair_NilChecks", func() {
 		// Arrange
 		var nilKV *corestr.KeyValuePair
@@ -719,7 +719,7 @@ func Test_KeyValuePair_NilChecks(t *testing.T) {
 // LeftMiddleRight
 // ═══════════════════════════════════════════
 
-func Test_LeftMiddleRight(t *testing.T) {
+func Test_LeftMiddleRight_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -739,7 +739,7 @@ func Test_LeftMiddleRight(t *testing.T) {
 // LeftRight (corestr)
 // ═══════════════════════════════════════════
 
-func Test_LeftRight(t *testing.T) {
+func Test_LeftRight_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_LeftRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -763,7 +763,7 @@ func Test_LeftRight(t *testing.T) {
 // ValueStatus
 // ═══════════════════════════════════════════
 
-func Test_ValueStatus(t *testing.T) {
+func Test_ValueStatus_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValueStatus", func() {
 		// Arrange
 		vs := corestr.ValueStatus{
@@ -790,7 +790,7 @@ func Test_ValueStatus(t *testing.T) {
 // TextWithLineNumber
 // ═══════════════════════════════════════════
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_TextWithLineNumber", func() {
 		// Arrange
 		tln := corestr.TextWithLineNumber{Text: "hello", LineNumber: 1}
@@ -837,7 +837,7 @@ func Test_SimpleSlice_HasIndex(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_FirstLastOrDefault(t *testing.T) {
+func Test_SimpleSlice_FirstLastOrDefault_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_SimpleSlice_FirstLastOrDefault", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(3)
@@ -864,7 +864,7 @@ func Test_SimpleSlice_FirstLastOrDefault(t *testing.T) {
 // Hashset — additional methods
 // ═══════════════════════════════════════════
 
-func Test_Hashset_SortedList(t *testing.T) {
+func Test_Hashset_SortedList_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_Hashset_SortedList", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -886,7 +886,7 @@ func Test_Hashset_SortedList(t *testing.T) {
 	})
 }
 
-func Test_Hashset_IsEqual(t *testing.T) {
+func Test_Hashset_IsEqual_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_Hashset_IsEqual", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Cap(3)
@@ -915,7 +915,7 @@ func Test_Hashset_IsEqual(t *testing.T) {
 // Hashmap — additional methods
 // ═══════════════════════════════════════════
 
-func Test_Hashmap_Keys(t *testing.T) {
+func Test_Hashmap_Keys_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_Hashmap_Keys", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(3)
@@ -932,7 +932,7 @@ func Test_Hashmap_Keys(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetValue(t *testing.T) {
+func Test_Hashmap_GetValue_FromLinkedListBasic(t *testing.T) {
 	safeTest(t, "Test_Cov10_Hashmap_GetValue", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(3)

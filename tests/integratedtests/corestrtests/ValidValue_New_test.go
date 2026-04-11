@@ -12,7 +12,7 @@ import (
 // ValidValue — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_ValidValue_New(t *testing.T) {
+func Test_ValidValue_New_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_New", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -95,7 +95,7 @@ func Test_ValidValue_State(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Conversions(t *testing.T) {
+func Test_ValidValue_Conversions_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Conversions", func() {
 		// Arrange
 		vvBool := corestr.NewValidValue("true")
@@ -215,7 +215,7 @@ func Test_ValidValue_RegexFindAll(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Split", func() {
 		// Arrange
 		vv := corestr.NewValidValue("a,b,,c")
@@ -264,7 +264,7 @@ func Test_ValidValue_Bytes(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Clone", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -314,7 +314,7 @@ func Test_ValidValue_StringMethods(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_ClearDispose", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -338,7 +338,7 @@ func Test_ValidValue_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Json(t *testing.T) {
+func Test_ValidValue_Json_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Json", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -360,7 +360,7 @@ func Test_ValidValue_Json(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Serialize(t *testing.T) {
+func Test_ValidValue_Serialize_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Serialize", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -385,7 +385,7 @@ func Test_ValidValue_Serialize(t *testing.T) {
 // ValidValues
 // ═══════════════════════════════════════════
 
-func Test_ValidValues_Basic(t *testing.T) {
+func Test_ValidValues_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_Basic", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -414,7 +414,7 @@ func Test_ValidValues_Basic(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_UsingValues(t *testing.T) {
+func Test_ValidValues_UsingValues_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_UsingValues", func() {
 		// Arrange
 		v1 := corestr.ValidValue{Value: "x", IsValid: true}
@@ -436,7 +436,7 @@ func Test_ValidValues_UsingValues(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_SafeValueAt", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -488,7 +488,7 @@ func Test_ValidValues_Indexes(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_Strings", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -514,7 +514,7 @@ func Test_ValidValues_Strings(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Find(t *testing.T) {
+func Test_ValidValues_Find_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_Find", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -551,7 +551,7 @@ func Test_ValidValues_Adds(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_ConcatNew(t *testing.T) {
+func Test_ValidValues_ConcatNew_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_ConcatNew", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -579,7 +579,7 @@ func Test_ValidValues_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_AddValidValues(t *testing.T) {
+func Test_ValidValues_AddValidValues_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_AddValidValues", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -598,7 +598,7 @@ func Test_ValidValues_AddValidValues(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_AddHashset(t *testing.T) {
+func Test_ValidValues_AddHashset_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValues_AddHashset", func() {
 		// Arrange
 		vvs := corestr.NewValidValues(5)
@@ -672,7 +672,7 @@ func Test_ValueStatus_Basic(t *testing.T) {
 // KeyValuePair — comprehensive
 // ═══════════════════════════════════════════
 
-func Test_KeyValuePair_Basic(t *testing.T) {
+func Test_KeyValuePair_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValuePair_Basic", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "name", Value: "test"}
@@ -705,7 +705,7 @@ func Test_KeyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Conversions(t *testing.T) {
+func Test_KeyValuePair_Conversions_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValuePair_Conversions", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "42"}
@@ -740,7 +740,7 @@ func Test_KeyValuePair_Conversions(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Is(t *testing.T) {
+func Test_KeyValuePair_Is_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValuePair_Is", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -787,7 +787,7 @@ func Test_KeyValuePair_ValValid(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_ClearDispose(t *testing.T) {
+func Test_KeyValuePair_ClearDispose_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValuePair_ClearDispose", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -811,7 +811,7 @@ func Test_KeyValuePair_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_KeyValuePair_Json(t *testing.T) {
+func Test_KeyValuePair_Json_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValuePair_Json", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -865,7 +865,7 @@ func Test_KeyValuePair_HighByte(t *testing.T) {
 // KeyAnyValuePair
 // ═══════════════════════════════════════════
 
-func Test_KeyAnyValuePair_Basic(t *testing.T) {
+func Test_KeyAnyValuePair_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyAnyValuePair_Basic", func() {
 		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "name", Value: 42}
@@ -893,7 +893,7 @@ func Test_KeyAnyValuePair_Basic(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_NilValue(t *testing.T) {
+func Test_KeyAnyValuePair_NilValue_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyAnyValuePair_NilValue", func() {
 		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: nil}
@@ -914,7 +914,7 @@ func Test_KeyAnyValuePair_NilValue(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_ClearDispose(t *testing.T) {
+func Test_KeyAnyValuePair_ClearDispose_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyAnyValuePair_ClearDispose", func() {
 		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: 42}
@@ -938,7 +938,7 @@ func Test_KeyAnyValuePair_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_Json(t *testing.T) {
+func Test_KeyAnyValuePair_Json_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyAnyValuePair_Json", func() {
 		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: "v"}
@@ -1011,7 +1011,7 @@ func Test_TextWithLineNumber_Basic(t *testing.T) {
 // HashmapDiff
 // ═══════════════════════════════════════════
 
-func Test_HashmapDiff_Basic(t *testing.T) {
+func Test_HashmapDiff_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_HashmapDiff_Basic", func() {
 		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"a": "1", "b": "2"})
@@ -1065,7 +1065,7 @@ func Test_HashmapDiff_Compare(t *testing.T) {
 	})
 }
 
-func Test_HashmapDiff_Diff(t *testing.T) {
+func Test_HashmapDiff_Diff_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_HashmapDiff_Diff", func() {
 		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"a": "1", "b": "2"})
@@ -1116,7 +1116,7 @@ func Test_HashmapDiff_NoDiff(t *testing.T) {
 	})
 }
 
-func Test_HashmapDiff_Serialize(t *testing.T) {
+func Test_HashmapDiff_Serialize_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_HashmapDiff_Serialize", func() {
 		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"a": "1"})
@@ -1141,7 +1141,7 @@ func Test_HashmapDiff_Serialize(t *testing.T) {
 // LeftRight — string specific
 // ═══════════════════════════════════════════
 
-func Test_LeftRight_Constructors(t *testing.T) {
+func Test_LeftRight_Constructors_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftRight_Constructors", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("left", "right")
@@ -1192,7 +1192,7 @@ func Test_LeftRight_Constructors(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Methods(t *testing.T) {
+func Test_LeftRight_Methods_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftRight_Methods", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("left", "right")
@@ -1286,7 +1286,7 @@ func Test_LeftRight_ClonePtrNonPtr(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_ClearDispose(t *testing.T) {
+func Test_LeftRight_ClearDispose_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftRight_ClearDispose", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
@@ -1314,7 +1314,7 @@ func Test_LeftRight_ClearDispose(t *testing.T) {
 // LeftMiddleRight — string specific
 // ═══════════════════════════════════════════
 
-func Test_LeftMiddleRight_Constructors(t *testing.T) {
+func Test_LeftMiddleRight_Constructors_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftMiddleRight_Constructors", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
@@ -1340,7 +1340,7 @@ func Test_LeftMiddleRight_Constructors(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_Methods(t *testing.T) {
+func Test_LeftMiddleRight_Methods_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftMiddleRight_Methods", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("left", "mid", "right")
@@ -1384,7 +1384,7 @@ func Test_LeftMiddleRight_Methods(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_Clone(t *testing.T) {
+func Test_LeftMiddleRight_Clone_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftMiddleRight_Clone", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
@@ -1408,7 +1408,7 @@ func Test_LeftMiddleRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_ClearDispose(t *testing.T) {
+func Test_LeftMiddleRight_ClearDispose_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_LeftMiddleRight_ClearDispose", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
@@ -1436,7 +1436,7 @@ func Test_LeftMiddleRight_ClearDispose(t *testing.T) {
 // CollectionsOfCollection
 // ═══════════════════════════════════════════
 
-func Test_CollectionsOfCollection_Basic(t *testing.T) {
+func Test_CollectionsOfCollection_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_CollectionsOfCollection_Basic", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.LenCap(0, 5)
@@ -1469,7 +1469,7 @@ func Test_CollectionsOfCollection_Basic(t *testing.T) {
 // HashsetsCollection
 // ═══════════════════════════════════════════
 
-func Test_HashsetsCollection_Basic(t *testing.T) {
+func Test_HashsetsCollection_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_HashsetsCollection_Basic", func() {
 		// Arrange
 		hs1 := corestr.New.Hashset.Strings([]string{"a", "b"})
@@ -1499,7 +1499,7 @@ func Test_HashsetsCollection_Basic(t *testing.T) {
 // KeyValueCollection
 // ═══════════════════════════════════════════
 
-func Test_KeyValueCollection_Basic(t *testing.T) {
+func Test_KeyValueCollection_Basic_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_Basic", func() {
 		// Arrange
 		kvc := &corestr.KeyValueCollection{}
@@ -1585,7 +1585,7 @@ func Test_KeyValueCollection_EmptyAccess(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Adds(t *testing.T) {
+func Test_KeyValueCollection_Adds_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_Adds", func() {
 		// Arrange
 		kvc := &corestr.KeyValueCollection{}
@@ -1616,7 +1616,7 @@ func Test_KeyValueCollection_Adds(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Strings(t *testing.T) {
+func Test_KeyValueCollection_Strings_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_Strings", func() {
 		// Arrange
 		kvc := &corestr.KeyValueCollection{}
@@ -1654,7 +1654,7 @@ func Test_KeyValueCollection_Strings(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_Find(t *testing.T) {
+func Test_KeyValueCollection_Find_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_Find", func() {
 		// Arrange
 		kvc := &corestr.KeyValueCollection{}
@@ -1672,7 +1672,7 @@ func Test_KeyValueCollection_Find(t *testing.T) {
 	})
 }
 
-func Test_KeyValueCollection_SafeValueAt(t *testing.T) {
+func Test_KeyValueCollection_SafeValueAt_FromValidValueNew(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_SafeValueAt", func() {
 		// Arrange
 		kvc := &corestr.KeyValueCollection{}

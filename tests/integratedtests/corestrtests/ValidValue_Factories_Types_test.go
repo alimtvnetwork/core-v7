@@ -42,7 +42,7 @@ func Test_ValidValue_Factories(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Methods(t *testing.T) {
+func Test_ValidValue_Methods_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Methods", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -74,7 +74,7 @@ func Test_ValidValue_Methods(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Conversions(t *testing.T) {
+func Test_ValidValue_Conversions_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Conversions", func() {
 		// Arrange
 		v := &corestr.ValidValue{Value: "42", IsValid: true}
@@ -110,7 +110,7 @@ func Test_ValidValue_Conversions(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_BytesOnce(t *testing.T) {
+func Test_ValidValue_BytesOnce_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_BytesOnce", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -133,7 +133,7 @@ func Test_ValidValue_BytesOnce(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Regex(t *testing.T) {
+func Test_ValidValue_Regex_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Regex", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello123")
@@ -155,7 +155,7 @@ func Test_ValidValue_Regex(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Split", func() {
 		// Arrange
 		v := corestr.NewValidValue("a,b,c")
@@ -171,7 +171,7 @@ func Test_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Clone", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -221,7 +221,7 @@ func Test_ValidValue_StringAndJson(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ClearDispose(t *testing.T) {
+func Test_ValidValue_ClearDispose_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_ClearDispose", func() {
 		// Arrange
 		v := corestr.NewValidValue("hello")
@@ -245,7 +245,7 @@ func Test_ValidValue_ClearDispose(t *testing.T) {
 // ValidValues
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ValidValues(t *testing.T) {
+func Test_ValidValues_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValues", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -268,7 +268,7 @@ func Test_ValidValues(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_NilReceiver(t *testing.T) {
+func Test_ValidValues_NilReceiver_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValues_NilReceiver", func() {
 		// Arrange
 		var vv *corestr.ValidValues
@@ -331,7 +331,7 @@ func Test_ValidValues_SafeValues(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValues_Strings", func() {
 		// Arrange
 		vv := corestr.EmptyValidValues()
@@ -358,7 +358,7 @@ func Test_ValidValues_Strings(t *testing.T) {
 // ValueStatus
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ValueStatus(t *testing.T) {
+func Test_ValueStatus_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValueStatus", func() {
 		// Arrange
 		vs := corestr.InvalidValueStatusNoMessage()
@@ -384,7 +384,7 @@ func Test_ValueStatus(t *testing.T) {
 // TextWithLineNumber
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_TextWithLineNumber", func() {
 		// Arrange
 		tw := &corestr.TextWithLineNumber{LineNumber: 1, Text: "hello"}
@@ -418,7 +418,7 @@ func Test_TextWithLineNumber(t *testing.T) {
 // KeyValuePair
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_KeyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -494,7 +494,7 @@ func Test_KeyValuePair_Conversions(t *testing.T) {
 // KeyAnyValuePair
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_KeyAnyValuePair(t *testing.T) {
+func Test_KeyAnyValuePair_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_KeyAnyValuePair", func() {
 		// Arrange
 		kv := &corestr.KeyAnyValuePair{Key: "k", Value: 42}
@@ -541,7 +541,7 @@ func Test_KeyAnyValuePair(t *testing.T) {
 // HashmapDiff
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_HashmapDiff(t *testing.T) {
+func Test_HashmapDiff_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_HashmapDiff", func() {
 		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"a": "1"})
@@ -685,7 +685,7 @@ func Test_LeftRight_FromSlice(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_FromSplit(t *testing.T) {
+func Test_LeftRight_FromSplit_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_LeftRight_FromSplit", func() {
 		// Arrange
 		lr := corestr.LeftRightFromSplit("key=val", "=")
@@ -714,7 +714,7 @@ func Test_LeftRight_FromSplit(t *testing.T) {
 // LeftMiddleRight
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_LeftMiddleRight(t *testing.T) {
+func Test_LeftMiddleRight_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_LeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -765,7 +765,7 @@ func Test_LeftMiddleRight(t *testing.T) {
 	})
 }
 
-func Test_LeftMiddleRight_FromSplit(t *testing.T) {
+func Test_LeftMiddleRight_FromSplit_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_LeftMiddleRight_FromSplit", func() {
 		// Arrange
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
@@ -854,7 +854,7 @@ func Test_SimpleStringOnce_Set(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnce_GetSetOnce(t *testing.T) {
+func Test_SimpleStringOnce_GetSetOnce_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_SimpleStringOnce_GetSetOnce", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -876,7 +876,7 @@ func Test_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnce_GetOnceFunc(t *testing.T) {
+func Test_SimpleStringOnce_GetOnceFunc_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_SimpleStringOnce_GetOnceFunc", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
@@ -898,7 +898,7 @@ func Test_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnce_Conversions(t *testing.T) {
+func Test_SimpleStringOnce_Conversions_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_SimpleStringOnce_Conversions", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("42")
@@ -938,7 +938,7 @@ func Test_SimpleStringOnce_Conversions(t *testing.T) {
 	})
 }
 
-func Test_SimpleStringOnce_WithinRange(t *testing.T) {
+func Test_SimpleStringOnce_WithinRange_FromValidValueFactoriesT(t *testing.T) {
 	safeTest(t, "Test_Cov17_SimpleStringOnce_WithinRange", func() {
 		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("50")

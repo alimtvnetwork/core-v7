@@ -9,7 +9,7 @@ import (
 
 // ── Collection — additional methods ──
 
-func Test_Collection_Add(t *testing.T) {
+func Test_Collection_Add_FromCollectionAdd(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_Add", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -30,7 +30,7 @@ func Test_Collection_Add(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddStrings(t *testing.T) {
+func Test_Collection_AddStrings_FromCollectionAdd(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_AddStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -45,7 +45,7 @@ func Test_Collection_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddIf(t *testing.T) {
+func Test_Collection_AddIf_FromCollectionAdd(t *testing.T) {
 	safeTest(t, "Test_Cov3_Collection_AddIf", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -215,7 +215,7 @@ func Test_LeftMiddleRight_Empty(t *testing.T) {
 
 // ── KeyValuePair ──
 
-func Test_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair_FromCollectionAdd(t *testing.T) {
 	safeTest(t, "Test_Cov3_KeyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -237,7 +237,7 @@ func Test_KeyValuePair(t *testing.T) {
 
 // ── KeyAnyValuePair ──
 
-func Test_KeyAnyValuePair(t *testing.T) {
+func Test_KeyAnyValuePair_FromCollectionAdd(t *testing.T) {
 	safeTest(t, "Test_Cov3_KeyAnyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}

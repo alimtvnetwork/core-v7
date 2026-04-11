@@ -71,7 +71,7 @@ func Test_Hashmap_IsEmpty_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Collection(t *testing.T) {
+func Test_Hashmap_Collection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Collection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -103,7 +103,7 @@ func Test_Hashmap_IsEmptyLock(t *testing.T) {
 
 // ── AddOrUpdate variants ──
 
-func Test_Hashmap_AddOrUpdateWithWgLock(t *testing.T) {
+func Test_Hashmap_AddOrUpdateWithWgLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateWithWgLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -137,7 +137,7 @@ func Test_Hashmap_AddOrUpdateKeyStrValInt(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyStrValFloat_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyStrValFloat", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -153,7 +153,7 @@ func Test_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyStrValFloat64(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyStrValFloat64_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyStrValFloat64", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -169,7 +169,7 @@ func Test_Hashmap_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyStrValAny(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyStrValAny_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyStrValAny", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -185,7 +185,7 @@ func Test_Hashmap_AddOrUpdateKeyStrValAny(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyValueAny(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyValueAny_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyValueAny", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -216,7 +216,7 @@ func Test_Hashmap_AddOrUpdateKeyVal_New(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyVal_Existing(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyVal_Existing_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyVal_Existing", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -263,7 +263,7 @@ func Test_Hashmap_AddOrUpdate_Existing(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Set(t *testing.T) {
+func Test_Hashmap_Set_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Set", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -278,7 +278,7 @@ func Test_Hashmap_Set(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_SetTrim(t *testing.T) {
+func Test_Hashmap_SetTrim_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_SetTrim", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -332,7 +332,7 @@ func Test_Hashmap_SetBySplitter_OnePart(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateStringsPtrWgLock(t *testing.T) {
+func Test_Hashmap_AddOrUpdateStringsPtrWgLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateStringsPtrWgLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -350,7 +350,7 @@ func Test_Hashmap_AddOrUpdateStringsPtrWgLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateStringsPtrWgLock_Empty(t *testing.T) {
+func Test_Hashmap_AddOrUpdateStringsPtrWgLock_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateStringsPtrWgLock_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -368,7 +368,7 @@ func Test_Hashmap_AddOrUpdateStringsPtrWgLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateHashmap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateHashmap_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateHashmap", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -386,7 +386,7 @@ func Test_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateHashmap_Nil(t *testing.T) {
+func Test_Hashmap_AddOrUpdateHashmap_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateHashmap_Nil", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -402,7 +402,7 @@ func Test_Hashmap_AddOrUpdateHashmap_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateMap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateMap_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateMap", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -417,7 +417,7 @@ func Test_Hashmap_AddOrUpdateMap(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateMap_Empty(t *testing.T) {
+func Test_Hashmap_AddOrUpdateMap_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateMap_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -432,7 +432,7 @@ func Test_Hashmap_AddOrUpdateMap_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddsOrUpdates(t *testing.T) {
+func Test_Hashmap_AddsOrUpdates_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdates", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -450,7 +450,7 @@ func Test_Hashmap_AddsOrUpdates(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddsOrUpdates_Nil(t *testing.T) {
+func Test_Hashmap_AddsOrUpdates_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdates_Nil", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -466,7 +466,7 @@ func Test_Hashmap_AddsOrUpdates_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyAnyValues(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyAnyValues_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyAnyValues", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -499,7 +499,7 @@ func Test_Hashmap_AddOrUpdateKeyAnyValues_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateKeyValues(t *testing.T) {
+func Test_Hashmap_AddOrUpdateKeyValues_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateKeyValues", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -532,7 +532,7 @@ func Test_Hashmap_AddOrUpdateKeyValues_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateCollection(t *testing.T) {
+func Test_Hashmap_AddOrUpdateCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -549,7 +549,7 @@ func Test_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateCollection_NilKeys(t *testing.T) {
+func Test_Hashmap_AddOrUpdateCollection_NilKeys_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateCollection_NilKeys", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -584,7 +584,7 @@ func Test_Hashmap_AddOrUpdateCollection_MismatchLen(t *testing.T) {
 
 // ── Filter methods ──
 
-func Test_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesAnyUsingFilter_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdatesAnyUsingFilter", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -603,7 +603,7 @@ func Test_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddsOrUpdatesAnyUsingFilter_Break(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesAnyUsingFilter_Break_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdatesAnyUsingFilter_Break", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -661,7 +661,7 @@ func Test_Hashmap_AddsOrUpdatesAnyUsingFilter_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddsOrUpdatesAnyUsingFilterLock(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesAnyUsingFilterLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdatesAnyUsingFilterLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -719,7 +719,7 @@ func Test_Hashmap_AddsOrUpdatesAnyUsingFilterLock_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddsOrUpdatesUsingFilter(t *testing.T) {
+func Test_Hashmap_AddsOrUpdatesUsingFilter_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddsOrUpdatesUsingFilter", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -759,7 +759,7 @@ func Test_Hashmap_AddsOrUpdatesUsingFilter_Nil(t *testing.T) {
 
 // ── ConcatNew ──
 
-func Test_Hashmap_ConcatNew(t *testing.T) {
+func Test_Hashmap_ConcatNew_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ConcatNew", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -783,7 +783,7 @@ func Test_Hashmap_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ConcatNew_Empty(t *testing.T) {
+func Test_Hashmap_ConcatNew_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ConcatNew_Empty", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -815,7 +815,7 @@ func Test_Hashmap_ConcatNew_NilHashmap(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ConcatNewUsingMaps(t *testing.T) {
+func Test_Hashmap_ConcatNewUsingMaps_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ConcatNewUsingMaps", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -863,7 +863,7 @@ func Test_Hashmap_ConcatNewUsingMaps_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateLock(t *testing.T) {
+func Test_Hashmap_AddOrUpdateLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AddOrUpdateLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -880,7 +880,7 @@ func Test_Hashmap_AddOrUpdateLock(t *testing.T) {
 
 // ── Has / Contains / Missing ──
 
-func Test_Hashmap_Has(t *testing.T) {
+func Test_Hashmap_Has_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Has", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -901,7 +901,7 @@ func Test_Hashmap_Has(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Contains(t *testing.T) {
+func Test_Hashmap_Contains_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Contains", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -916,7 +916,7 @@ func Test_Hashmap_Contains(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ContainsLock(t *testing.T) {
+func Test_Hashmap_ContainsLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ContainsLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -931,7 +931,7 @@ func Test_Hashmap_ContainsLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_IsKeyMissing(t *testing.T) {
+func Test_Hashmap_IsKeyMissing_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_IsKeyMissing", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -952,7 +952,7 @@ func Test_Hashmap_IsKeyMissing(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_IsKeyMissingLock(t *testing.T) {
+func Test_Hashmap_IsKeyMissingLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_IsKeyMissingLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -982,7 +982,7 @@ func Test_Hashmap_HasLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_HasAllStrings(t *testing.T) {
+func Test_Hashmap_HasAllStrings_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_HasAllStrings", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1004,7 +1004,7 @@ func Test_Hashmap_HasAllStrings(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_HasAllCollectionItems(t *testing.T) {
+func Test_Hashmap_HasAllCollectionItems_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_HasAllCollectionItems", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1062,7 +1062,7 @@ func Test_Hashmap_HasAnyItem(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_HasAny(t *testing.T) {
+func Test_Hashmap_HasAny_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_HasAny", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1083,7 +1083,7 @@ func Test_Hashmap_HasAny(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_HasWithLock(t *testing.T) {
+func Test_Hashmap_HasWithLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_HasWithLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1100,7 +1100,7 @@ func Test_Hashmap_HasWithLock(t *testing.T) {
 
 // ── Diff ──
 
-func Test_Hashmap_DiffRaw(t *testing.T) {
+func Test_Hashmap_DiffRaw_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_DiffRaw", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1117,7 +1117,7 @@ func Test_Hashmap_DiffRaw(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Diff(t *testing.T) {
+func Test_Hashmap_Diff_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Diff", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -1137,7 +1137,7 @@ func Test_Hashmap_Diff(t *testing.T) {
 
 // ── Filter methods ──
 
-func Test_Hashmap_GetKeysFilteredItems(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredItems_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredItems", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1156,7 +1156,7 @@ func Test_Hashmap_GetKeysFilteredItems(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetKeysFilteredItems_Empty(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredItems_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredItems_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1173,7 +1173,7 @@ func Test_Hashmap_GetKeysFilteredItems_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetKeysFilteredItems_Break(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredItems_Break_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredItems_Break", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1192,7 +1192,7 @@ func Test_Hashmap_GetKeysFilteredItems_Break(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetKeysFilteredCollection(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1211,7 +1211,7 @@ func Test_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetKeysFilteredCollection_Empty(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredCollection_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredCollection_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1228,7 +1228,7 @@ func Test_Hashmap_GetKeysFilteredCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetKeysFilteredCollection_Break(t *testing.T) {
+func Test_Hashmap_GetKeysFilteredCollection_Break_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetKeysFilteredCollection_Break", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1264,7 +1264,7 @@ func Test_Hashmap_Items(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_SafeItems(t *testing.T) {
+func Test_Hashmap_SafeItems_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_SafeItems", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1278,7 +1278,7 @@ func Test_Hashmap_SafeItems(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_SafeItems_Nil(t *testing.T) {
+func Test_Hashmap_SafeItems_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_SafeItems_Nil", func() {
 		// Arrange
 		var hm *corestr.Hashmap
@@ -1292,7 +1292,7 @@ func Test_Hashmap_SafeItems_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ItemsCopyLock(t *testing.T) {
+func Test_Hashmap_ItemsCopyLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ItemsCopyLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1308,7 +1308,7 @@ func Test_Hashmap_ItemsCopyLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesCollection(t *testing.T) {
+func Test_Hashmap_ValuesCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1323,7 +1323,7 @@ func Test_Hashmap_ValuesCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesHashset(t *testing.T) {
+func Test_Hashmap_ValuesHashset_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesHashset", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1338,7 +1338,7 @@ func Test_Hashmap_ValuesHashset(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesCollectionLock(t *testing.T) {
+func Test_Hashmap_ValuesCollectionLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesCollectionLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1353,7 +1353,7 @@ func Test_Hashmap_ValuesCollectionLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesHashsetLock(t *testing.T) {
+func Test_Hashmap_ValuesHashsetLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesHashsetLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1368,7 +1368,7 @@ func Test_Hashmap_ValuesHashsetLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesList(t *testing.T) {
+func Test_Hashmap_ValuesList_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesList", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1383,7 +1383,7 @@ func Test_Hashmap_ValuesList(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysValuesCollection(t *testing.T) {
+func Test_Hashmap_KeysValuesCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysValuesCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1405,7 +1405,7 @@ func Test_Hashmap_KeysValuesCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysValuesList(t *testing.T) {
+func Test_Hashmap_KeysValuesList_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysValuesList", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1427,7 +1427,7 @@ func Test_Hashmap_KeysValuesList(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysValuePairs(t *testing.T) {
+func Test_Hashmap_KeysValuePairs_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysValuePairs", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1443,7 +1443,7 @@ func Test_Hashmap_KeysValuePairs(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysValuePairsCollection(t *testing.T) {
+func Test_Hashmap_KeysValuePairsCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysValuePairsCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1459,7 +1459,7 @@ func Test_Hashmap_KeysValuePairsCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysValuesListLock(t *testing.T) {
+func Test_Hashmap_KeysValuesListLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysValuesListLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1481,7 +1481,7 @@ func Test_Hashmap_KeysValuesListLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AllKeys(t *testing.T) {
+func Test_Hashmap_AllKeys_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_AllKeys", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1510,7 +1510,7 @@ func Test_Hashmap_AllKeys_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Keys(t *testing.T) {
+func Test_Hashmap_Keys_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Keys", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1525,7 +1525,7 @@ func Test_Hashmap_Keys(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysCollection(t *testing.T) {
+func Test_Hashmap_KeysCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1540,7 +1540,7 @@ func Test_Hashmap_KeysCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeysLock(t *testing.T) {
+func Test_Hashmap_KeysLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1586,7 +1586,7 @@ func Test_Hashmap_ValuesListCopyLock(t *testing.T) {
 
 // ── KeysToLower / ValuesToLower ──
 
-func Test_Hashmap_KeysToLower(t *testing.T) {
+func Test_Hashmap_KeysToLower_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysToLower", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1602,7 +1602,7 @@ func Test_Hashmap_KeysToLower(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ValuesToLower(t *testing.T) {
+func Test_Hashmap_ValuesToLower_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ValuesToLower", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1665,7 +1665,7 @@ func Test_Hashmap_LengthLock(t *testing.T) {
 
 // ── IsEqual ──
 
-func Test_Hashmap_IsEqual(t *testing.T) {
+func Test_Hashmap_IsEqual_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_IsEqual", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -1807,7 +1807,7 @@ func Test_Hashmap_IsEqualPtr_MissingKey(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_IsEqualPtrLock(t *testing.T) {
+func Test_Hashmap_IsEqualPtrLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_IsEqualPtrLock", func() {
 		// Arrange
 		a := corestr.New.Hashmap.Empty()
@@ -1826,7 +1826,7 @@ func Test_Hashmap_IsEqualPtrLock(t *testing.T) {
 
 // ── Remove ──
 
-func Test_Hashmap_Remove(t *testing.T) {
+func Test_Hashmap_Remove_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Remove", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1842,7 +1842,7 @@ func Test_Hashmap_Remove(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_RemoveWithLock(t *testing.T) {
+func Test_Hashmap_RemoveWithLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_RemoveWithLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1860,7 +1860,7 @@ func Test_Hashmap_RemoveWithLock(t *testing.T) {
 
 // ── String ──
 
-func Test_Hashmap_String(t *testing.T) {
+func Test_Hashmap_String_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_String", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1889,7 +1889,7 @@ func Test_Hashmap_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_StringLock(t *testing.T) {
+func Test_Hashmap_StringLock_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_StringLock", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1904,7 +1904,7 @@ func Test_Hashmap_StringLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_StringLock_Empty(t *testing.T) {
+func Test_Hashmap_StringLock_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_StringLock_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1920,7 +1920,7 @@ func Test_Hashmap_StringLock_Empty(t *testing.T) {
 
 // ── GetValues Except ──
 
-func Test_Hashmap_GetValuesExceptKeysInHashset(t *testing.T) {
+func Test_Hashmap_GetValuesExceptKeysInHashset_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetValuesExceptKeysInHashset", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1938,7 +1938,7 @@ func Test_Hashmap_GetValuesExceptKeysInHashset(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetValuesExceptKeysInHashset_Nil(t *testing.T) {
+func Test_Hashmap_GetValuesExceptKeysInHashset_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetValuesExceptKeysInHashset_Nil", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1954,7 +1954,7 @@ func Test_Hashmap_GetValuesExceptKeysInHashset_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetValuesKeysExcept(t *testing.T) {
+func Test_Hashmap_GetValuesKeysExcept_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetValuesKeysExcept", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1971,7 +1971,7 @@ func Test_Hashmap_GetValuesKeysExcept(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetValuesKeysExcept_Nil(t *testing.T) {
+func Test_Hashmap_GetValuesKeysExcept_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetValuesKeysExcept_Nil", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -1987,7 +1987,7 @@ func Test_Hashmap_GetValuesKeysExcept_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetAllExceptCollection(t *testing.T) {
+func Test_Hashmap_GetAllExceptCollection_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetAllExceptCollection", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2005,7 +2005,7 @@ func Test_Hashmap_GetAllExceptCollection(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetAllExceptCollection_Nil(t *testing.T) {
+func Test_Hashmap_GetAllExceptCollection_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetAllExceptCollection_Nil", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2023,7 +2023,7 @@ func Test_Hashmap_GetAllExceptCollection_Nil(t *testing.T) {
 
 // ── Join ──
 
-func Test_Hashmap_Join(t *testing.T) {
+func Test_Hashmap_Join_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Join", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2142,7 +2142,7 @@ func Test_Hashmap_UnmarshalJSON_Error(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Json(t *testing.T) {
+func Test_Hashmap_Json_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Json", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2174,7 +2174,7 @@ func Test_Hashmap_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ParseInjectUsingJson(t *testing.T) {
+func Test_Hashmap_ParseInjectUsingJson_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ParseInjectUsingJson", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2212,7 +2212,7 @@ func Test_Hashmap_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_Hashmap_ParseInjectUsingJsonMust_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2254,7 +2254,7 @@ func Test_Hashmap_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 
 // ── Error ──
 
-func Test_Hashmap_ToError(t *testing.T) {
+func Test_Hashmap_ToError_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ToError", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2270,7 +2270,7 @@ func Test_Hashmap_ToError(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ToDefaultError(t *testing.T) {
+func Test_Hashmap_ToDefaultError_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ToDefaultError", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2286,7 +2286,7 @@ func Test_Hashmap_ToDefaultError(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_KeyValStringLines(t *testing.T) {
+func Test_Hashmap_KeyValStringLines_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeyValStringLines", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2304,7 +2304,7 @@ func Test_Hashmap_KeyValStringLines(t *testing.T) {
 
 // ── Clear / Dispose ──
 
-func Test_Hashmap_Clear(t *testing.T) {
+func Test_Hashmap_Clear_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Clear", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2368,7 +2368,7 @@ func Test_Hashmap_Dispose_Nil(t *testing.T) {
 
 // ── ToStringsUsingCompiler ──
 
-func Test_Hashmap_ToStringsUsingCompiler(t *testing.T) {
+func Test_Hashmap_ToStringsUsingCompiler_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ToStringsUsingCompiler", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2384,7 +2384,7 @@ func Test_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ToStringsUsingCompiler_Empty(t *testing.T) {
+func Test_Hashmap_ToStringsUsingCompiler_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ToStringsUsingCompiler_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2475,7 +2475,7 @@ func Test_Hashmap_AsJsonMarshaller(t *testing.T) {
 
 // ── Clone ──
 
-func Test_Hashmap_Clone(t *testing.T) {
+func Test_Hashmap_Clone_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Clone", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2491,7 +2491,7 @@ func Test_Hashmap_Clone(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Clone_Empty(t *testing.T) {
+func Test_Hashmap_Clone_Empty_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Clone_Empty", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2528,7 +2528,7 @@ func Test_Hashmap_ClonePtr(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ClonePtr_Nil(t *testing.T) {
+func Test_Hashmap_ClonePtr_Nil_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_ClonePtr_Nil", func() {
 		// Arrange
 		var hm *corestr.Hashmap
@@ -2545,7 +2545,7 @@ func Test_Hashmap_ClonePtr_Nil(t *testing.T) {
 
 // ── Get / GetValue ──
 
-func Test_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Get", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2582,7 +2582,7 @@ func Test_Hashmap_Get_Missing(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_GetValue(t *testing.T) {
+func Test_Hashmap_GetValue_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_GetValue", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()
@@ -2606,7 +2606,7 @@ func Test_Hashmap_GetValue(t *testing.T) {
 
 // ── Serialize / Deserialize ──
 
-func Test_Hashmap_Serialize(t *testing.T) {
+func Test_Hashmap_Serialize_FromHashmapIsEmptyHashma(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Serialize", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Empty()

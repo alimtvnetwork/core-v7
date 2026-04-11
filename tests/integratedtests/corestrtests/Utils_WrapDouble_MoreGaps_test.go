@@ -116,7 +116,7 @@ func Test_Utils_WrapSingleIfMissing_Empty(t *testing.T) {
 // LeftMiddleRight — 15 uncovered methods
 // =============================================================================
 
-func Test_LMR_LeftBytes(t *testing.T) {
+func Test_LMR_LeftBytes_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_LeftBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -130,7 +130,7 @@ func Test_LMR_LeftBytes(t *testing.T) {
 	})
 }
 
-func Test_LMR_RightBytes(t *testing.T) {
+func Test_LMR_RightBytes_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_RightBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -144,7 +144,7 @@ func Test_LMR_RightBytes(t *testing.T) {
 	})
 }
 
-func Test_LMR_MiddleBytes(t *testing.T) {
+func Test_LMR_MiddleBytes_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_MiddleBytes", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -158,7 +158,7 @@ func Test_LMR_MiddleBytes(t *testing.T) {
 	})
 }
 
-func Test_LMR_LeftTrim(t *testing.T) {
+func Test_LMR_LeftTrim_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_LeftTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("  abc  ", "mid", "xyz")
@@ -172,7 +172,7 @@ func Test_LMR_LeftTrim(t *testing.T) {
 	})
 }
 
-func Test_LMR_RightTrim(t *testing.T) {
+func Test_LMR_RightTrim_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_RightTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "  xyz  ")
@@ -186,7 +186,7 @@ func Test_LMR_RightTrim(t *testing.T) {
 	})
 }
 
-func Test_LMR_MiddleTrim(t *testing.T) {
+func Test_LMR_MiddleTrim_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_MiddleTrim", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "  mid  ", "xyz")
@@ -200,7 +200,7 @@ func Test_LMR_MiddleTrim(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsLeftEmpty(t *testing.T) {
+func Test_LMR_IsLeftEmpty_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsLeftEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("", "mid", "xyz")
@@ -214,7 +214,7 @@ func Test_LMR_IsLeftEmpty(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsRightEmpty(t *testing.T) {
+func Test_LMR_IsRightEmpty_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsRightEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "")
@@ -228,7 +228,7 @@ func Test_LMR_IsRightEmpty(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsMiddleEmpty(t *testing.T) {
+func Test_LMR_IsMiddleEmpty_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsMiddleEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "", "xyz")
@@ -242,7 +242,7 @@ func Test_LMR_IsMiddleEmpty(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsMiddleWhitespace(t *testing.T) {
+func Test_LMR_IsMiddleWhitespace_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsMiddleWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "   ", "xyz")
@@ -256,7 +256,7 @@ func Test_LMR_IsMiddleWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsLeftWhitespace(t *testing.T) {
+func Test_LMR_IsLeftWhitespace_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsLeftWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("   ", "mid", "xyz")
@@ -270,7 +270,7 @@ func Test_LMR_IsLeftWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsRightWhitespace(t *testing.T) {
+func Test_LMR_IsRightWhitespace_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsRightWhitespace", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "   ")
@@ -284,7 +284,7 @@ func Test_LMR_IsRightWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonEmptyLeft(t *testing.T) {
+func Test_LMR_HasValidNonEmptyLeft_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonEmptyLeft", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -298,7 +298,7 @@ func Test_LMR_HasValidNonEmptyLeft(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonEmptyRight(t *testing.T) {
+func Test_LMR_HasValidNonEmptyRight_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonEmptyRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -312,7 +312,7 @@ func Test_LMR_HasValidNonEmptyRight(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonEmptyMiddle(t *testing.T) {
+func Test_LMR_HasValidNonEmptyMiddle_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonEmptyMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -326,7 +326,7 @@ func Test_LMR_HasValidNonEmptyMiddle(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonWhitespaceLeft(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceLeft_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonWhitespaceLeft", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -340,7 +340,7 @@ func Test_LMR_HasValidNonWhitespaceLeft(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonWhitespaceRight(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceRight_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonWhitespaceRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -354,7 +354,7 @@ func Test_LMR_HasValidNonWhitespaceRight(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasValidNonWhitespaceMiddle(t *testing.T) {
+func Test_LMR_HasValidNonWhitespaceMiddle_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasValidNonWhitespaceMiddle", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -368,7 +368,7 @@ func Test_LMR_HasValidNonWhitespaceMiddle(t *testing.T) {
 	})
 }
 
-func Test_LMR_HasSafeNonEmpty(t *testing.T) {
+func Test_LMR_HasSafeNonEmpty_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_HasSafeNonEmpty", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("abc", "mid", "xyz")
@@ -396,7 +396,7 @@ func Test_LMR_HasSafeNonEmpty_False(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsAll(t *testing.T) {
+func Test_LMR_IsAll_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_IsAll", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -410,7 +410,7 @@ func Test_LMR_IsAll(t *testing.T) {
 	})
 }
 
-func Test_LMR_Is(t *testing.T) {
+func Test_LMR_Is_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_Is", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -424,7 +424,7 @@ func Test_LMR_Is(t *testing.T) {
 	})
 }
 
-func Test_LMR_Clone(t *testing.T) {
+func Test_LMR_Clone_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_Clone", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -447,7 +447,7 @@ func Test_LMR_Clone(t *testing.T) {
 	})
 }
 
-func Test_LMR_ToLeftRight(t *testing.T) {
+func Test_LMR_ToLeftRight_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_ToLeftRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -468,7 +468,7 @@ func Test_LMR_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_LMR_Clear(t *testing.T) {
+func Test_LMR_Clear_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_Clear", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -491,7 +491,7 @@ func Test_LMR_Clear(t *testing.T) {
 	})
 }
 
-func Test_LMR_Dispose(t *testing.T) {
+func Test_LMR_Dispose_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_LMR_Dispose", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
@@ -736,7 +736,7 @@ func Test_COC_Json(t *testing.T) {
 	})
 }
 
-func Test_COC_JsonModel(t *testing.T) {
+func Test_COC_JsonModel_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_COC_JsonModel", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -788,7 +788,7 @@ func Test_COC_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_COC_UnmarshalJSON(t *testing.T) {
+func Test_COC_UnmarshalJSON_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_COC_UnmarshalJSON", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -806,7 +806,7 @@ func Test_COC_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_COC_ParseInjectUsingJson(t *testing.T) {
+func Test_COC_ParseInjectUsingJson_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_COC_ParseInjectUsingJson", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -846,7 +846,7 @@ func Test_COC_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_COC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_COC_ParseInjectUsingJsonMust_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_COC_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -864,7 +864,7 @@ func Test_COC_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_COC_JsonParseSelfInject(t *testing.T) {
+func Test_COC_JsonParseSelfInject_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_COC_JsonParseSelfInject", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
@@ -886,7 +886,7 @@ func Test_COC_JsonParseSelfInject(t *testing.T) {
 // HashsetsCollection — JSON methods (8 uncovered)
 // =============================================================================
 
-func Test_HC_JsonModel(t *testing.T) {
+func Test_HC_JsonModel_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_HC_JsonModel", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()
@@ -938,7 +938,7 @@ func Test_HC_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_HC_UnmarshalJSON(t *testing.T) {
+func Test_HC_UnmarshalJSON_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_HC_UnmarshalJSON", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()
@@ -956,7 +956,7 @@ func Test_HC_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_HC_ParseInjectUsingJson(t *testing.T) {
+func Test_HC_ParseInjectUsingJson_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_HC_ParseInjectUsingJson", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()
@@ -980,7 +980,7 @@ func Test_HC_ParseInjectUsingJson(t *testing.T) {
 	})
 }
 
-func Test_HC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_HC_ParseInjectUsingJsonMust_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_HC_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()
@@ -998,7 +998,7 @@ func Test_HC_ParseInjectUsingJsonMust(t *testing.T) {
 	})
 }
 
-func Test_HC_JsonParseSelfInject(t *testing.T) {
+func Test_HC_JsonParseSelfInject_FromUtilsWrapDoubleMoreG(t *testing.T) {
 	safeTest(t, "Test_Cov66_HC_JsonParseSelfInject", func() {
 		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()

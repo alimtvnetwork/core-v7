@@ -11,7 +11,7 @@ import (
 // KeyVal — Dynamic accessors
 // =============================================================================
 
-func Test_KeyVal_KeyDynamic(t *testing.T) {
+func Test_KeyVal_KeyDynamic_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "mykey", Value: 42}
 	d := kv.KeyDynamic()
@@ -24,7 +24,7 @@ func Test_KeyVal_KeyDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyDynamic", actual)
 }
 
-func Test_KeyVal_ValueDynamic(t *testing.T) {
+func Test_KeyVal_ValueDynamic_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	d := kv.ValueDynamic()
@@ -37,7 +37,7 @@ func Test_KeyVal_ValueDynamic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueDynamic", actual)
 }
 
-func Test_KeyVal_KeyDynamicPtr_Nil(t *testing.T) {
+func Test_KeyVal_KeyDynamicPtr_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -68,7 +68,7 @@ func Test_KeyVal_KeyDynamicPtr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyDynamicPtr valid", actual)
 }
 
-func Test_KeyVal_ValueDynamicPtr_Nil(t *testing.T) {
+func Test_KeyVal_ValueDynamicPtr_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -191,7 +191,7 @@ func Test_KeyVal_IsValueNull_False(t *testing.T) {
 // KeyVal — String, KeyString, ValueString
 // =============================================================================
 
-func Test_KeyVal_String_Nil(t *testing.T) {
+func Test_KeyVal_String_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -216,7 +216,7 @@ func Test_KeyVal_String_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal String valid", actual)
 }
 
-func Test_KeyVal_KeyString_Nil(t *testing.T) {
+func Test_KeyVal_KeyString_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -252,7 +252,7 @@ func Test_KeyVal_KeyString_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyString valid", actual)
 }
 
-func Test_KeyVal_ValueString_Nil(t *testing.T) {
+func Test_KeyVal_ValueString_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -292,7 +292,7 @@ func Test_KeyVal_ValueString_Valid(t *testing.T) {
 // KeyVal — Value typed accessors
 // =============================================================================
 
-func Test_KeyVal_ValueInt_Valid(t *testing.T) {
+func Test_KeyVal_ValueInt_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
 
@@ -316,7 +316,7 @@ func Test_KeyVal_ValueInt_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt invalid", actual)
 }
 
-func Test_KeyVal_ValueUInt_Valid(t *testing.T) {
+func Test_KeyVal_ValueUInt_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: uint(10)}
 
@@ -340,7 +340,7 @@ func Test_KeyVal_ValueUInt_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueUInt invalid", actual)
 }
 
-func Test_KeyVal_ValueBool_Valid(t *testing.T) {
+func Test_KeyVal_ValueBool_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: true}
 
@@ -364,7 +364,7 @@ func Test_KeyVal_ValueBool_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueBool invalid", actual)
 }
 
-func Test_KeyVal_ValueInt64_Valid(t *testing.T) {
+func Test_KeyVal_ValueInt64_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: int64(999)}
 
@@ -388,7 +388,7 @@ func Test_KeyVal_ValueInt64_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueInt64 invalid", actual)
 }
 
-func Test_KeyVal_ValueStrings_Valid(t *testing.T) {
+func Test_KeyVal_ValueStrings_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: []string{"a", "b"}}
 
@@ -416,7 +416,7 @@ func Test_KeyVal_ValueStrings_Invalid(t *testing.T) {
 // KeyVal — Null error methods
 // =============================================================================
 
-func Test_KeyVal_ValueNullErr_Nil(t *testing.T) {
+func Test_KeyVal_ValueNullErr_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.ValueNullErr()
@@ -429,7 +429,7 @@ func Test_KeyVal_ValueNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueNullErr nil", actual)
 }
 
-func Test_KeyVal_ValueNullErr_NullValue(t *testing.T) {
+func Test_KeyVal_ValueNullErr_NullValue_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: nil}
 	err := kv.ValueNullErr()
@@ -442,7 +442,7 @@ func Test_KeyVal_ValueNullErr_NullValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueNullErr null value", actual)
 }
 
-func Test_KeyVal_ValueNullErr_Valid(t *testing.T) {
+func Test_KeyVal_ValueNullErr_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: 42}
 
@@ -454,7 +454,7 @@ func Test_KeyVal_ValueNullErr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueNullErr valid", actual)
 }
 
-func Test_KeyVal_KeyNullErr_Nil(t *testing.T) {
+func Test_KeyVal_KeyNullErr_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	err := kv.KeyNullErr()
@@ -467,7 +467,7 @@ func Test_KeyVal_KeyNullErr_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyNullErr nil", actual)
 }
 
-func Test_KeyVal_KeyNullErr_NullKey(t *testing.T) {
+func Test_KeyVal_KeyNullErr_NullKey_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: nil, Value: 42}
 	err := kv.KeyNullErr()
@@ -480,7 +480,7 @@ func Test_KeyVal_KeyNullErr_NullKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyNullErr null key", actual)
 }
 
-func Test_KeyVal_KeyNullErr_Valid(t *testing.T) {
+func Test_KeyVal_KeyNullErr_Valid_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: 42}
 
@@ -496,7 +496,7 @@ func Test_KeyVal_KeyNullErr_Valid(t *testing.T) {
 // KeyVal — CastKeyVal
 // =============================================================================
 
-func Test_KeyVal_CastKeyVal_Nil(t *testing.T) {
+func Test_KeyVal_CastKeyVal_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	var k, v string
@@ -534,7 +534,7 @@ func Test_KeyVal_CastKeyVal_Valid(t *testing.T) {
 // KeyVal — ReflectSet methods
 // =============================================================================
 
-func Test_KeyVal_ReflectSetKey_Nil(t *testing.T) {
+func Test_KeyVal_ReflectSetKey_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	var k string
@@ -548,7 +548,7 @@ func Test_KeyVal_ReflectSetKey_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSetKey nil", actual)
 }
 
-func Test_KeyVal_KeyReflectSet_Nil(t *testing.T) {
+func Test_KeyVal_KeyReflectSet_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	var k string
@@ -562,7 +562,7 @@ func Test_KeyVal_KeyReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyReflectSet nil", actual)
 }
 
-func Test_KeyVal_ValueReflectSet_Nil(t *testing.T) {
+func Test_KeyVal_ValueReflectSet_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	var v string
@@ -576,7 +576,7 @@ func Test_KeyVal_ValueReflectSet_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueReflectSet nil", actual)
 }
 
-func Test_KeyVal_ReflectSetTo_Nil(t *testing.T) {
+func Test_KeyVal_ReflectSetTo_Nil_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 	var v string
@@ -624,7 +624,7 @@ func Test_KeyVal_ReflectSetToMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSetToMust valid", actual)
 }
 
-func Test_KeyVal_ValueReflectValue(t *testing.T) {
+func Test_KeyVal_ValueReflectValue_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
 	rv := kv.ValueReflectValue()
@@ -641,7 +641,7 @@ func Test_KeyVal_ValueReflectValue(t *testing.T) {
 // KeyVal — JSON methods
 // =============================================================================
 
-func Test_KeyVal_JsonModel(t *testing.T) {
+func Test_KeyVal_JsonModel_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 
@@ -653,7 +653,7 @@ func Test_KeyVal_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal JsonModel", actual)
 }
 
-func Test_KeyVal_JsonModelAny(t *testing.T) {
+func Test_KeyVal_JsonModelAny_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 
@@ -665,7 +665,7 @@ func Test_KeyVal_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal JsonModelAny", actual)
 }
 
-func Test_KeyVal_Json(t *testing.T) {
+func Test_KeyVal_Json_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	r := kv.Json()
@@ -678,7 +678,7 @@ func Test_KeyVal_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Json", actual)
 }
 
-func Test_KeyVal_JsonPtr(t *testing.T) {
+func Test_KeyVal_JsonPtr_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 
@@ -690,7 +690,7 @@ func Test_KeyVal_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal JsonPtr", actual)
 }
 
-func Test_KeyVal_Serialize(t *testing.T) {
+func Test_KeyVal_Serialize_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	b, err := kv.Serialize()
@@ -709,7 +709,7 @@ func Test_KeyVal_Serialize(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize", actual)
 }
 
-func Test_KeyVal_ParseInjectUsingJson(t *testing.T) {
+func Test_KeyVal_ParseInjectUsingJson_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	jr := kv.Json()
@@ -730,7 +730,7 @@ func Test_KeyVal_ParseInjectUsingJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ParseInjectUsingJson", actual)
 }
 
-func Test_KeyVal_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_KeyVal_ParseInjectUsingJsonMust_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	jr := kv.Json()
@@ -745,7 +745,7 @@ func Test_KeyVal_ParseInjectUsingJsonMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyVal ParseInjectUsingJsonMust", actual)
 }
 
-func Test_KeyVal_JsonParseSelfInject(t *testing.T) {
+func Test_KeyVal_JsonParseSelfInject_FromKeyValKeyDynamicKeyV(t *testing.T) {
 	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	jr := kv.Json()

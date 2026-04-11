@@ -35,7 +35,7 @@ func newLC(items ...[]string) *corestr.LinkedCollections {
 	return lc
 }
 
-func Test_LC_Head_Tail(t *testing.T) {
+func Test_LC_Head_Tail_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Head_Tail", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -61,7 +61,7 @@ func Test_LC_Head_Tail(t *testing.T) {
 	})
 }
 
-func Test_LC_Single(t *testing.T) {
+func Test_LC_Single_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Single", func() {
 		// Arrange
 		lc := newLC([]string{"x"})
@@ -89,7 +89,7 @@ func Test_LC_LastOrDefault_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_LastOrDefault_Empty(t *testing.T) {
+func Test_LC_LastOrDefault_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_LastOrDefault_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -117,7 +117,7 @@ func Test_LC_FirstOrDefault_NonEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_FirstOrDefault_Empty(t *testing.T) {
+func Test_LC_FirstOrDefault_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_FirstOrDefault_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -145,7 +145,7 @@ func Test_LC_Length(t *testing.T) {
 	})
 }
 
-func Test_LC_AllIndividualItemsLength(t *testing.T) {
+func Test_LC_AllIndividualItemsLength_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AllIndividualItemsLength", func() {
 		// Arrange
 		lc := newLC([]string{"a", "b"}, []string{"c"})
@@ -159,7 +159,7 @@ func Test_LC_AllIndividualItemsLength(t *testing.T) {
 	})
 }
 
-func Test_LC_LengthLock(t *testing.T) {
+func Test_LC_LengthLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_LengthLock", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -173,7 +173,7 @@ func Test_LC_LengthLock(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEqualsPtr_Same(t *testing.T) {
+func Test_LC_IsEqualsPtr_Same_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEqualsPtr_Same", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -187,7 +187,7 @@ func Test_LC_IsEqualsPtr_Same(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEqualsPtr_Nil(t *testing.T) {
+func Test_LC_IsEqualsPtr_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEqualsPtr_Nil", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -201,7 +201,7 @@ func Test_LC_IsEqualsPtr_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEqualsPtr_BothEmpty(t *testing.T) {
+func Test_LC_IsEqualsPtr_BothEmpty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEqualsPtr_BothEmpty", func() {
 		// Arrange
 		a := corestr.New.LinkedCollection.Create()
@@ -216,7 +216,7 @@ func Test_LC_IsEqualsPtr_BothEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEqualsPtr_OneEmpty(t *testing.T) {
+func Test_LC_IsEqualsPtr_OneEmpty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEqualsPtr_OneEmpty", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -231,7 +231,7 @@ func Test_LC_IsEqualsPtr_OneEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEqualsPtr_DiffLen(t *testing.T) {
+func Test_LC_IsEqualsPtr_DiffLen_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEqualsPtr_DiffLen", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -246,7 +246,7 @@ func Test_LC_IsEqualsPtr_DiffLen(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEmptyLock(t *testing.T) {
+func Test_LC_IsEmptyLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEmptyLock", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -260,7 +260,7 @@ func Test_LC_IsEmptyLock(t *testing.T) {
 	})
 }
 
-func Test_LC_IsEmpty(t *testing.T) {
+func Test_LC_IsEmpty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IsEmpty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -294,7 +294,7 @@ func Test_LC_HasItems(t *testing.T) {
 	})
 }
 
-func Test_LC_InsertAt_Front(t *testing.T) {
+func Test_LC_InsertAt_Front_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_InsertAt_Front", func() {
 		// Arrange
 		lc := newLC([]string{"b"})
@@ -316,7 +316,7 @@ func Test_LC_InsertAt_Front(t *testing.T) {
 	})
 }
 
-func Test_LC_InsertAt_Middle(t *testing.T) {
+func Test_LC_InsertAt_Middle_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_InsertAt_Middle", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"c"})
@@ -332,7 +332,7 @@ func Test_LC_InsertAt_Middle(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAsync(t *testing.T) {
+func Test_LC_AddAsync_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAsync", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -461,7 +461,7 @@ func Test_LC_AddsUsingProcessorAsync_NilSkip(t *testing.T) {
 	})
 }
 
-func Test_LC_AddLock(t *testing.T) {
+func Test_LC_AddLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddLock", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -520,7 +520,7 @@ func Test_LC_Add_ToExisting(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStringsLock(t *testing.T) {
+func Test_LC_AddStringsLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStringsLock", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -535,7 +535,7 @@ func Test_LC_AddStringsLock(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStringsLock_Empty(t *testing.T) {
+func Test_LC_AddStringsLock_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStringsLock_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -550,7 +550,7 @@ func Test_LC_AddStringsLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStrings(t *testing.T) {
+func Test_LC_AddStrings_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStrings", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -565,7 +565,7 @@ func Test_LC_AddStrings(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStrings_Empty(t *testing.T) {
+func Test_LC_AddStrings_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStrings_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -580,7 +580,7 @@ func Test_LC_AddStrings_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_AddBackNode(t *testing.T) {
+func Test_LC_AddBackNode_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddBackNode", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -618,7 +618,7 @@ func Test_LC_AppendNode_ToEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_AppendChainOfNodesAsync(t *testing.T) {
+func Test_LC_AppendChainOfNodesAsync_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AppendChainOfNodesAsync", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -637,7 +637,7 @@ func Test_LC_AppendChainOfNodesAsync(t *testing.T) {
 	})
 }
 
-func Test_LC_PushBackLock(t *testing.T) {
+func Test_LC_PushBackLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_PushBackLock", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -653,7 +653,7 @@ func Test_LC_PushBackLock(t *testing.T) {
 	})
 }
 
-func Test_LC_PushBack(t *testing.T) {
+func Test_LC_PushBack_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_PushBack", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -668,7 +668,7 @@ func Test_LC_PushBack(t *testing.T) {
 	})
 }
 
-func Test_LC_Push(t *testing.T) {
+func Test_LC_Push_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Push", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -683,7 +683,7 @@ func Test_LC_Push(t *testing.T) {
 	})
 }
 
-func Test_LC_PushFront(t *testing.T) {
+func Test_LC_PushFront_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_PushFront", func() {
 		// Arrange
 		lc := newLC([]string{"b"})
@@ -704,7 +704,7 @@ func Test_LC_PushFront(t *testing.T) {
 	})
 }
 
-func Test_LC_AddFrontLock(t *testing.T) {
+func Test_LC_AddFrontLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddFrontLock", func() {
 		// Arrange
 		lc := newLC([]string{"b"})
@@ -740,7 +740,7 @@ func Test_LC_AddFront_ToEmpty(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAnother(t *testing.T) {
+func Test_LC_AddAnother_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAnother", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -756,7 +756,7 @@ func Test_LC_AddAnother(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAnother_Nil(t *testing.T) {
+func Test_LC_AddAnother_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAnother_Nil", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -771,7 +771,7 @@ func Test_LC_AddAnother_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAnother_Empty(t *testing.T) {
+func Test_LC_AddAnother_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAnother_Empty", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -786,7 +786,7 @@ func Test_LC_AddAnother_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_GetNextNodes(t *testing.T) {
+func Test_LC_GetNextNodes_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_GetNextNodes", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"}, []string{"c"})
@@ -801,7 +801,7 @@ func Test_LC_GetNextNodes(t *testing.T) {
 	})
 }
 
-func Test_LC_GetAllLinkedNodes(t *testing.T) {
+func Test_LC_GetAllLinkedNodes_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_GetAllLinkedNodes", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -816,7 +816,7 @@ func Test_LC_GetAllLinkedNodes(t *testing.T) {
 	})
 }
 
-func Test_LC_Loop_Empty(t *testing.T) {
+func Test_LC_Loop_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Loop_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -835,7 +835,7 @@ func Test_LC_Loop_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_Loop_Break(t *testing.T) {
+func Test_LC_Loop_Break_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Loop_Break", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"}, []string{"c"})
@@ -873,7 +873,7 @@ func Test_LC_Loop_BreakSecond(t *testing.T) {
 	})
 }
 
-func Test_LC_Filter_Empty(t *testing.T) {
+func Test_LC_Filter_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Filter_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -907,7 +907,7 @@ func Test_LC_Filter_KeepAll(t *testing.T) {
 	})
 }
 
-func Test_LC_Filter_BreakFirst(t *testing.T) {
+func Test_LC_Filter_BreakFirst_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Filter_BreakFirst", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -958,7 +958,7 @@ func Test_LC_Filter_Skip(t *testing.T) {
 	})
 }
 
-func Test_LC_FilterAsCollection(t *testing.T) {
+func Test_LC_FilterAsCollection_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_FilterAsCollection", func() {
 		// Arrange
 		lc := newLC([]string{"a", "b"}, []string{"c"})
@@ -975,7 +975,7 @@ func Test_LC_FilterAsCollection(t *testing.T) {
 	})
 }
 
-func Test_LC_FilterAsCollection_Empty(t *testing.T) {
+func Test_LC_FilterAsCollection_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_FilterAsCollection_Empty", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -992,7 +992,7 @@ func Test_LC_FilterAsCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_FilterAsCollections(t *testing.T) {
+func Test_LC_FilterAsCollections_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_FilterAsCollections", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -1168,7 +1168,7 @@ func Test_LC_RemoveNode_Second(t *testing.T) {
 	})
 }
 
-func Test_LC_AppendCollections_SkipNil(t *testing.T) {
+func Test_LC_AppendCollections_SkipNil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AppendCollections_SkipNil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1200,7 +1200,7 @@ func Test_LC_AppendCollections_NilArg(t *testing.T) {
 	})
 }
 
-func Test_LC_AppendCollectionsPointersLock(t *testing.T) {
+func Test_LC_AppendCollectionsPointersLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AppendCollectionsPointersLock", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1232,7 +1232,7 @@ func Test_LC_AppendCollectionsPointersLock_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_AppendCollectionsPointers(t *testing.T) {
+func Test_LC_AppendCollectionsPointers_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AppendCollectionsPointers", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1280,7 +1280,7 @@ func Test_LC_AttachWithNode_NilPanics(t *testing.T) {
 	})
 }
 
-func Test_LC_AttachWithNode_NextNotNil(t *testing.T) {
+func Test_LC_AttachWithNode_NextNotNil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AttachWithNode_NextNotNil", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -1333,7 +1333,7 @@ func Test_LC_AddCollectionsToNodeAsync_NilSkip(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollectionsToNode(t *testing.T) {
+func Test_LC_AddCollectionsToNode_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollectionsToNode", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1366,7 +1366,7 @@ func Test_LC_AddCollectionsToNode_NilSkip(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollectionsPointerToNode_NilItems(t *testing.T) {
+func Test_LC_AddCollectionsPointerToNode_NilItems_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollectionsPointerToNode_NilItems", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1528,7 +1528,7 @@ func Test_LC_AddAfterNodeAsync(t *testing.T) {
 //         AsJsoner, AsJsonParseSelfInjector, AsJsonMarshaller
 // =============================================================================
 
-func Test_LC_ConcatNew_EmptyClone(t *testing.T) {
+func Test_LC_ConcatNew_EmptyClone_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ConcatNew_EmptyClone", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1543,7 +1543,7 @@ func Test_LC_ConcatNew_EmptyClone(t *testing.T) {
 	})
 }
 
-func Test_LC_ConcatNew_EmptyNoClone(t *testing.T) {
+func Test_LC_ConcatNew_EmptyNoClone_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ConcatNew_EmptyNoClone", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1574,7 +1574,7 @@ func Test_LC_ConcatNew_WithOthers(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAsyncFuncItems(t *testing.T) {
+func Test_LC_AddAsyncFuncItems_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAsyncFuncItems", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1591,7 +1591,7 @@ func Test_LC_AddAsyncFuncItems(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAsyncFuncItems_Nil(t *testing.T) {
+func Test_LC_AddAsyncFuncItems_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAsyncFuncItems_Nil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1623,7 +1623,7 @@ func Test_LC_AddAsyncFuncItems_EmptyResult(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAsyncFuncItemsPointer(t *testing.T) {
+func Test_LC_AddAsyncFuncItemsPointer_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAsyncFuncItemsPointer", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1640,7 +1640,7 @@ func Test_LC_AddAsyncFuncItemsPointer(t *testing.T) {
 	})
 }
 
-func Test_LC_AddAsyncFuncItemsPointer_Nil(t *testing.T) {
+func Test_LC_AddAsyncFuncItemsPointer_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddAsyncFuncItemsPointer_Nil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1672,7 +1672,7 @@ func Test_LC_AddAsyncFuncItemsPointer_EmptyResult(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStringsOfStrings(t *testing.T) {
+func Test_LC_AddStringsOfStrings_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStringsOfStrings", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1687,7 +1687,7 @@ func Test_LC_AddStringsOfStrings(t *testing.T) {
 	})
 }
 
-func Test_LC_AddStringsOfStrings_Empty(t *testing.T) {
+func Test_LC_AddStringsOfStrings_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddStringsOfStrings_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1717,7 +1717,7 @@ func Test_LC_AddStringsOfStrings_NilSlice(t *testing.T) {
 	})
 }
 
-func Test_LC_IndexAt_Zero(t *testing.T) {
+func Test_LC_IndexAt_Zero_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IndexAt_Zero", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -1747,7 +1747,7 @@ func Test_LC_IndexAt_Last(t *testing.T) {
 	})
 }
 
-func Test_LC_IndexAt_Negative(t *testing.T) {
+func Test_LC_IndexAt_Negative_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_IndexAt_Negative", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1785,7 +1785,7 @@ func Test_LC_IndexAt_OutOfRange_Panics(t *testing.T) {
 	})
 }
 
-func Test_LC_SafePointerIndexAt(t *testing.T) {
+func Test_LC_SafePointerIndexAt_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_SafePointerIndexAt", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1800,7 +1800,7 @@ func Test_LC_SafePointerIndexAt(t *testing.T) {
 	})
 }
 
-func Test_LC_SafePointerIndexAt_Nil(t *testing.T) {
+func Test_LC_SafePointerIndexAt_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_SafePointerIndexAt_Nil", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1815,7 +1815,7 @@ func Test_LC_SafePointerIndexAt_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_SafeIndexAt(t *testing.T) {
+func Test_LC_SafeIndexAt_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_SafeIndexAt", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -1830,7 +1830,7 @@ func Test_LC_SafeIndexAt(t *testing.T) {
 	})
 }
 
-func Test_LC_SafeIndexAt_OutOfRange(t *testing.T) {
+func Test_LC_SafeIndexAt_OutOfRange_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_SafeIndexAt_OutOfRange", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -1908,7 +1908,7 @@ func Test_LC_AddStringsAsync_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollection(t *testing.T) {
+func Test_LC_AddCollection_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollection", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1923,7 +1923,7 @@ func Test_LC_AddCollection(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollection_Nil(t *testing.T) {
+func Test_LC_AddCollection_Nil_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollection_Nil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1938,7 +1938,7 @@ func Test_LC_AddCollection_Nil(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollectionsPtr(t *testing.T) {
+func Test_LC_AddCollectionsPtr_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollectionsPtr", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1954,7 +1954,7 @@ func Test_LC_AddCollectionsPtr(t *testing.T) {
 	})
 }
 
-func Test_LC_AddCollectionsPtr_Empty(t *testing.T) {
+func Test_LC_AddCollectionsPtr_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AddCollectionsPtr_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -1985,7 +1985,7 @@ func Test_LC_AddCollections_SkipNil(t *testing.T) {
 	})
 }
 
-func Test_LC_ToStringsPtr(t *testing.T) {
+func Test_LC_ToStringsPtr_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToStringsPtr", func() {
 		// Arrange
 		lc := newLC([]string{"a", "b"})
@@ -2000,7 +2000,7 @@ func Test_LC_ToStringsPtr(t *testing.T) {
 	})
 }
 
-func Test_LC_ToStrings(t *testing.T) {
+func Test_LC_ToStrings_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToStrings", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2015,7 +2015,7 @@ func Test_LC_ToStrings(t *testing.T) {
 	})
 }
 
-func Test_LC_ToCollectionSimple(t *testing.T) {
+func Test_LC_ToCollectionSimple_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToCollectionSimple", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2030,7 +2030,7 @@ func Test_LC_ToCollectionSimple(t *testing.T) {
 	})
 }
 
-func Test_LC_ToCollection_Empty(t *testing.T) {
+func Test_LC_ToCollection_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToCollection_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2045,7 +2045,7 @@ func Test_LC_ToCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_ToCollectionsOfCollection(t *testing.T) {
+func Test_LC_ToCollectionsOfCollection_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToCollectionsOfCollection", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2060,7 +2060,7 @@ func Test_LC_ToCollectionsOfCollection(t *testing.T) {
 	})
 }
 
-func Test_LC_ToCollectionsOfCollection_Empty(t *testing.T) {
+func Test_LC_ToCollectionsOfCollection_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToCollectionsOfCollection_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2075,7 +2075,7 @@ func Test_LC_ToCollectionsOfCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_ItemsOfItems(t *testing.T) {
+func Test_LC_ItemsOfItems_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ItemsOfItems", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2090,7 +2090,7 @@ func Test_LC_ItemsOfItems(t *testing.T) {
 	})
 }
 
-func Test_LC_ItemsOfItems_Empty(t *testing.T) {
+func Test_LC_ItemsOfItems_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ItemsOfItems_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2105,7 +2105,7 @@ func Test_LC_ItemsOfItems_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_ItemsOfItemsCollection(t *testing.T) {
+func Test_LC_ItemsOfItemsCollection_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ItemsOfItemsCollection", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2135,7 +2135,7 @@ func Test_LC_ItemsOfItemsCollection_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_SimpleSlice(t *testing.T) {
+func Test_LC_SimpleSlice_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_SimpleSlice", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2150,7 +2150,7 @@ func Test_LC_SimpleSlice(t *testing.T) {
 	})
 }
 
-func Test_LC_ListPtr(t *testing.T) {
+func Test_LC_ListPtr_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ListPtr", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2165,7 +2165,7 @@ func Test_LC_ListPtr(t *testing.T) {
 	})
 }
 
-func Test_LC_List(t *testing.T) {
+func Test_LC_List_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_List", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2180,7 +2180,7 @@ func Test_LC_List(t *testing.T) {
 	})
 }
 
-func Test_LC_List_Empty(t *testing.T) {
+func Test_LC_List_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_List_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2195,7 +2195,7 @@ func Test_LC_List_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_String(t *testing.T) {
+func Test_LC_String_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_String", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2210,7 +2210,7 @@ func Test_LC_String(t *testing.T) {
 	})
 }
 
-func Test_LC_String_Empty(t *testing.T) {
+func Test_LC_String_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_String_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2225,7 +2225,7 @@ func Test_LC_String_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_StringLock(t *testing.T) {
+func Test_LC_StringLock_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_StringLock", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2240,7 +2240,7 @@ func Test_LC_StringLock(t *testing.T) {
 	})
 }
 
-func Test_LC_StringLock_Empty(t *testing.T) {
+func Test_LC_StringLock_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_StringLock_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2255,7 +2255,7 @@ func Test_LC_StringLock_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_Join(t *testing.T) {
+func Test_LC_Join_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Join", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2270,7 +2270,7 @@ func Test_LC_Join(t *testing.T) {
 	})
 }
 
-func Test_LC_Joins(t *testing.T) {
+func Test_LC_Joins_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Joins", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2285,7 +2285,7 @@ func Test_LC_Joins(t *testing.T) {
 	})
 }
 
-func Test_LC_Joins_NilItems(t *testing.T) {
+func Test_LC_Joins_NilItems_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Joins_NilItems", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2300,7 +2300,7 @@ func Test_LC_Joins_NilItems(t *testing.T) {
 	})
 }
 
-func Test_LC_JsonModel(t *testing.T) {
+func Test_LC_JsonModel_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_JsonModel", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2315,7 +2315,7 @@ func Test_LC_JsonModel(t *testing.T) {
 	})
 }
 
-func Test_LC_JsonModelAny(t *testing.T) {
+func Test_LC_JsonModelAny_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_JsonModelAny", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2330,7 +2330,7 @@ func Test_LC_JsonModelAny(t *testing.T) {
 	})
 }
 
-func Test_LC_MarshalJSON(t *testing.T) {
+func Test_LC_MarshalJSON_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_MarshalJSON", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2351,7 +2351,7 @@ func Test_LC_MarshalJSON(t *testing.T) {
 	})
 }
 
-func Test_LC_UnmarshalJSON(t *testing.T) {
+func Test_LC_UnmarshalJSON_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_UnmarshalJSON", func() {
 		// Arrange
 		lc := &corestr.LinkedCollections{}
@@ -2387,7 +2387,7 @@ func Test_LC_UnmarshalJSON_Error(t *testing.T) {
 	})
 }
 
-func Test_LC_RemoveAll(t *testing.T) {
+func Test_LC_RemoveAll_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_RemoveAll", func() {
 		// Arrange
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -2402,7 +2402,7 @@ func Test_LC_RemoveAll(t *testing.T) {
 	})
 }
 
-func Test_LC_Clear(t *testing.T) {
+func Test_LC_Clear_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Clear", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2417,7 +2417,7 @@ func Test_LC_Clear(t *testing.T) {
 	})
 }
 
-func Test_LC_Clear_Empty(t *testing.T) {
+func Test_LC_Clear_Empty_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Clear_Empty", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -2432,7 +2432,7 @@ func Test_LC_Clear_Empty(t *testing.T) {
 	})
 }
 
-func Test_LC_Json(t *testing.T) {
+func Test_LC_Json_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_Json", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2447,7 +2447,7 @@ func Test_LC_Json(t *testing.T) {
 	})
 }
 
-func Test_LC_JsonPtr(t *testing.T) {
+func Test_LC_JsonPtr_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_JsonPtr", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2462,7 +2462,7 @@ func Test_LC_JsonPtr(t *testing.T) {
 	})
 }
 
-func Test_LC_ParseInjectUsingJson(t *testing.T) {
+func Test_LC_ParseInjectUsingJson_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ParseInjectUsingJson", func() {
 		// Arrange
 		lc := &corestr.LinkedCollections{}
@@ -2502,7 +2502,7 @@ func Test_LC_ParseInjectUsingJson_Error(t *testing.T) {
 	})
 }
 
-func Test_LC_ParseInjectUsingJsonMust(t *testing.T) {
+func Test_LC_ParseInjectUsingJsonMust_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ParseInjectUsingJsonMust", func() {
 		// Arrange
 		lc := &corestr.LinkedCollections{}
@@ -2542,7 +2542,7 @@ func Test_LC_ParseInjectUsingJsonMust_Panics(t *testing.T) {
 	})
 }
 
-func Test_LC_GetCompareSummary(t *testing.T) {
+func Test_LC_GetCompareSummary_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_GetCompareSummary", func() {
 		// Arrange
 		a := newLC([]string{"a"})
@@ -2558,7 +2558,7 @@ func Test_LC_GetCompareSummary(t *testing.T) {
 	})
 }
 
-func Test_LC_JsonParseSelfInject(t *testing.T) {
+func Test_LC_JsonParseSelfInject_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_JsonParseSelfInject", func() {
 		// Arrange
 		lc := &corestr.LinkedCollections{}
@@ -2574,7 +2574,7 @@ func Test_LC_JsonParseSelfInject(t *testing.T) {
 	})
 }
 
-func Test_LC_AsJsonContractsBinder(t *testing.T) {
+func Test_LC_AsJsonContractsBinder_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AsJsonContractsBinder", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2588,7 +2588,7 @@ func Test_LC_AsJsonContractsBinder(t *testing.T) {
 	})
 }
 
-func Test_LC_AsJsoner(t *testing.T) {
+func Test_LC_AsJsoner_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AsJsoner", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2602,7 +2602,7 @@ func Test_LC_AsJsoner(t *testing.T) {
 	})
 }
 
-func Test_LC_AsJsonParseSelfInjector(t *testing.T) {
+func Test_LC_AsJsonParseSelfInjector_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AsJsonParseSelfInjector", func() {
 		// Arrange
 		lc := newLC([]string{"a"})
@@ -2616,7 +2616,7 @@ func Test_LC_AsJsonParseSelfInjector(t *testing.T) {
 	})
 }
 
-func Test_LC_AsJsonMarshaller(t *testing.T) {
+func Test_LC_AsJsonMarshaller_FromLCHeadLinkedCollSeg1(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_AsJsonMarshaller", func() {
 		// Arrange
 		lc := newLC([]string{"a"})

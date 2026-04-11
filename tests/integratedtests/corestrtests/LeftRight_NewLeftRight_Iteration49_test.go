@@ -12,7 +12,7 @@ import (
 // LeftRight
 // ═══════════════════════════════════════════════════════════════
 
-func Test_LeftRight_NewLeftRight(t *testing.T) {
+func Test_LeftRight_NewLeftRight_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_NewLeftRight", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR New", Expected: true, Actual: lr.IsValid && lr.Left == "a" && lr.Right == "b", Args: args.Map{}}
@@ -32,7 +32,7 @@ func Test_LeftRight_InvalidLeftRight(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_InvalidNoMessage(t *testing.T) {
+func Test_LeftRight_InvalidNoMessage_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_InvalidNoMessage", func() {
 		lr := corestr.InvalidLeftRightNoMessage()
 		tc := caseV1Compat{Name: "LR InvalidNoMsg", Expected: false, Actual: lr.IsValid, Args: args.Map{}}
@@ -42,7 +42,7 @@ func Test_LeftRight_InvalidNoMessage(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_LeftBytes(t *testing.T) {
+func Test_LeftRight_LeftBytes_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_LeftBytes", func() {
 		lr := corestr.NewLeftRight("ab", "cd")
 		tc := caseV1Compat{Name: "LR LeftBytes", Expected: 2, Actual: len(lr.LeftBytes()), Args: args.Map{}}
@@ -82,7 +82,7 @@ func Test_LeftRight_RightTrim(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsLeftEmpty(t *testing.T) {
+func Test_LeftRight_IsLeftEmpty_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_IsLeftEmpty", func() {
 		lr := corestr.NewLeftRight("", "b")
 		tc := caseV1Compat{Name: "LR IsLeftEmpty", Expected: true, Actual: lr.IsLeftEmpty(), Args: args.Map{}}
@@ -112,7 +112,7 @@ func Test_LeftRight_IsLeftWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsRightWhitespace(t *testing.T) {
+func Test_LeftRight_IsRightWhitespace_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_IsRightWhitespace", func() {
 		lr := corestr.NewLeftRight("a", "  ")
 		tc := caseV1Compat{Name: "LR IsRightWhitespace", Expected: true, Actual: lr.IsRightWhitespace(), Args: args.Map{}}
@@ -122,7 +122,7 @@ func Test_LeftRight_IsRightWhitespace(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_HasValidNonEmptyLeft(t *testing.T) {
+func Test_LeftRight_HasValidNonEmptyLeft_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_HasValidNonEmptyLeft", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR HasValidNonEmptyLeft", Expected: true, Actual: lr.HasValidNonEmptyLeft(), Args: args.Map{}}
@@ -152,7 +152,7 @@ func Test_LeftRight_HasValidNonWhitespaceLeft(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_HasValidNonWhitespaceRight(t *testing.T) {
+func Test_LeftRight_HasValidNonWhitespaceRight_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_HasValidNonWhitespaceRight", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR HasValidNonWSRight", Expected: true, Actual: lr.HasValidNonWhitespaceRight(), Args: args.Map{}}
@@ -162,7 +162,7 @@ func Test_LeftRight_HasValidNonWhitespaceRight(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_HasSafeNonEmpty(t *testing.T) {
+func Test_LeftRight_HasSafeNonEmpty_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_HasSafeNonEmpty", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR HasSafeNonEmpty", Expected: true, Actual: lr.HasSafeNonEmpty(), Args: args.Map{}}
@@ -172,7 +172,7 @@ func Test_LeftRight_HasSafeNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Is(t *testing.T) {
+func Test_LeftRight_Is_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_Is", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR Is", Expected: true, Actual: lr.Is("a", "b"), Args: args.Map{}}
@@ -202,7 +202,7 @@ func Test_LeftRight_IsRight(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsEqual(t *testing.T) {
+func Test_LeftRight_IsEqual_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_IsEqual", func() {
 		lr1 := corestr.NewLeftRight("a", "b")
 		lr2 := corestr.NewLeftRight("a", "b")
@@ -223,7 +223,7 @@ func Test_LeftRight_IsEqual_Nil(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Clone(t *testing.T) {
+func Test_LeftRight_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_Clone", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		c := lr.Clone()
@@ -234,7 +234,7 @@ func Test_LeftRight_Clone(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_NonPtr(t *testing.T) {
+func Test_LeftRight_NonPtr_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_NonPtr", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		np := lr.NonPtr()
@@ -298,7 +298,7 @@ func Test_LeftRight_Clear(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Dispose(t *testing.T) {
+func Test_LeftRight_Dispose_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_Dispose", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		lr.Dispose()
@@ -309,7 +309,7 @@ func Test_LeftRight_Dispose(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice(t *testing.T) {
+func Test_LeftRight_UsingSlice_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_UsingSlice", func() {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
 		tc := caseV1Compat{Name: "LR UsingSlice", Expected: true, Actual: lr.IsValid, Args: args.Map{}}
@@ -319,7 +319,7 @@ func Test_LeftRight_UsingSlice(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice_Single(t *testing.T) {
+func Test_LeftRight_UsingSlice_Single_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_UsingSlice_Single", func() {
 		lr := corestr.LeftRightUsingSlice([]string{"a"})
 		tc := caseV1Compat{Name: "LR UsingSlice single", Expected: false, Actual: lr.IsValid, Args: args.Map{}}
@@ -329,7 +329,7 @@ func Test_LeftRight_UsingSlice_Single(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice_Empty(t *testing.T) {
+func Test_LeftRight_UsingSlice_Empty_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_UsingSlice_Empty", func() {
 		lr := corestr.LeftRightUsingSlice([]string{})
 		tc := caseV1Compat{Name: "LR UsingSlice empty", Expected: false, Actual: lr.IsValid, Args: args.Map{}}
@@ -339,7 +339,7 @@ func Test_LeftRight_UsingSlice_Empty(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_TrimmedUsingSlice(t *testing.T) {
+func Test_LeftRight_TrimmedUsingSlice_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_TrimmedUsingSlice", func() {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 		tc := caseV1Compat{Name: "LR TrimmedUsingSlice", Expected: "a", Actual: lr.Left, Args: args.Map{}}
@@ -353,7 +353,7 @@ func Test_LeftRight_TrimmedUsingSlice(t *testing.T) {
 // LeftRightFromSplit
 // ═══════════════════════════════════════════════════════════════
 
-func Test_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplit", func() {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 		tc := caseV1Compat{Name: "LRFromSplit", Expected: "key", Actual: lr.Left, Args: args.Map{}}
@@ -363,7 +363,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitTrimmed_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitTrimmed", func() {
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
 		tc := caseV1Compat{Name: "LRFromSplitTrimmed", Expected: "key", Actual: lr.Left, Args: args.Map{}}
@@ -373,7 +373,7 @@ func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitFull(t *testing.T) {
+func Test_LeftRightFromSplitFull_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitFull", func() {
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
 		tc := caseV1Compat{Name: "LRFromSplitFull", Expected: "b:c:d", Actual: lr.Right, Args: args.Map{}}
@@ -383,7 +383,7 @@ func Test_LeftRightFromSplitFull(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitFullTrimmed_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitFullTrimmed", func() {
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
 		tc := caseV1Compat{Name: "LRFromSplitFullTrimmed", Expected: "a", Actual: lr.Left, Args: args.Map{}}
@@ -427,7 +427,7 @@ func Test_LMR_InvalidNoMsg(t *testing.T) {
 	})
 }
 
-func Test_LMR_LeftBytes(t *testing.T) {
+func Test_LMR_LeftBytes_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_LeftBytes", func() {
 		lmr := corestr.NewLeftMiddleRight("ab", "cd", "ef")
 		tc := caseV1Compat{Name: "LMR LeftBytes", Expected: 2, Actual: len(lmr.LeftBytes()), Args: args.Map{}}
@@ -437,7 +437,7 @@ func Test_LMR_LeftBytes(t *testing.T) {
 	})
 }
 
-func Test_LMR_MiddleBytes(t *testing.T) {
+func Test_LMR_MiddleBytes_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_MiddleBytes", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "bc", "d")
 		tc := caseV1Compat{Name: "LMR MiddleBytes", Expected: 2, Actual: len(lmr.MiddleBytes()), Args: args.Map{}}
@@ -447,7 +447,7 @@ func Test_LMR_MiddleBytes(t *testing.T) {
 	})
 }
 
-func Test_LMR_RightBytes(t *testing.T) {
+func Test_LMR_RightBytes_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_RightBytes", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "cd")
 		tc := caseV1Compat{Name: "LMR RightBytes", Expected: 2, Actual: len(lmr.RightBytes()), Args: args.Map{}}
@@ -537,7 +537,7 @@ func Test_LMR_HasSafeNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_LMR_IsAll(t *testing.T) {
+func Test_LMR_IsAll_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_IsAll", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := caseV1Compat{Name: "LMR IsAll", Expected: true, Actual: lmr.IsAll("a", "b", "c"), Args: args.Map{}}
@@ -547,7 +547,7 @@ func Test_LMR_IsAll(t *testing.T) {
 	})
 }
 
-func Test_LMR_Is(t *testing.T) {
+func Test_LMR_Is_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_Is", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := caseV1Compat{Name: "LMR Is", Expected: true, Actual: lmr.Is("a", "c"), Args: args.Map{}}
@@ -557,7 +557,7 @@ func Test_LMR_Is(t *testing.T) {
 	})
 }
 
-func Test_LMR_Clone(t *testing.T) {
+func Test_LMR_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_Clone", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		c := lmr.Clone()
@@ -568,7 +568,7 @@ func Test_LMR_Clone(t *testing.T) {
 	})
 }
 
-func Test_LMR_ToLeftRight(t *testing.T) {
+func Test_LMR_ToLeftRight_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_ToLeftRight", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		lr := lmr.ToLeftRight()
@@ -579,7 +579,7 @@ func Test_LMR_ToLeftRight(t *testing.T) {
 	})
 }
 
-func Test_LMR_Clear(t *testing.T) {
+func Test_LMR_Clear_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_Clear", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		lmr.Clear()
@@ -590,7 +590,7 @@ func Test_LMR_Clear(t *testing.T) {
 	})
 }
 
-func Test_LMR_Dispose(t *testing.T) {
+func Test_LMR_Dispose_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LMR_Dispose", func() {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		lmr.Dispose()
@@ -649,7 +649,7 @@ func Test_LMRFromSplitNTrimmed(t *testing.T) {
 // ValidValue
 // ═══════════════════════════════════════════════════════════════
 
-func Test_ValidValue_New(t *testing.T) {
+func Test_ValidValue_New_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_New", func() {
 		vv := corestr.NewValidValue("hello")
 		tc := caseV1Compat{Name: "VV New", Expected: true, Actual: vv.IsValid && vv.Value == "hello", Args: args.Map{}}
@@ -669,7 +669,7 @@ func Test_ValidValue_NewEmpty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Invalid(t *testing.T) {
+func Test_ValidValue_Invalid_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Invalid", func() {
 		vv := corestr.InvalidValidValue("err")
 		tc := caseV1Compat{Name: "VV Invalid", Expected: false, Actual: vv.IsValid, Args: args.Map{}}
@@ -699,7 +699,7 @@ func Test_ValidValue_IsEmpty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsWhitespace(t *testing.T) {
+func Test_ValidValue_IsWhitespace_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_IsWhitespace", func() {
 		vv := corestr.NewValidValue("  ")
 		tc := caseV1Compat{Name: "VV IsWhitespace", Expected: true, Actual: vv.IsWhitespace(), Args: args.Map{}}
@@ -709,7 +709,7 @@ func Test_ValidValue_IsWhitespace(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Trim(t *testing.T) {
+func Test_ValidValue_Trim_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Trim", func() {
 		vv := corestr.NewValidValue(" abc ")
 		tc := caseV1Compat{Name: "VV Trim", Expected: "abc", Actual: vv.Trim(), Args: args.Map{}}
@@ -719,7 +719,7 @@ func Test_ValidValue_Trim(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_HasValidNonEmpty(t *testing.T) {
+func Test_ValidValue_HasValidNonEmpty_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_HasValidNonEmpty", func() {
 		vv := corestr.NewValidValue("x")
 		tc := caseV1Compat{Name: "VV HasValidNonEmpty", Expected: true, Actual: vv.HasValidNonEmpty(), Args: args.Map{}}
@@ -749,7 +749,7 @@ func Test_ValidValue_HasSafeNonEmpty(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueBool(t *testing.T) {
+func Test_ValidValue_ValueBool_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_ValueBool", func() {
 		vv := corestr.NewValidValue("true")
 		tc := caseV1Compat{Name: "VV ValueBool", Expected: true, Actual: vv.ValueBool(), Args: args.Map{}}
@@ -759,7 +759,7 @@ func Test_ValidValue_ValueBool(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueInt(t *testing.T) {
+func Test_ValidValue_ValueInt_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_ValueInt", func() {
 		vv := corestr.NewValidValue("42")
 		tc := caseV1Compat{Name: "VV ValueInt", Expected: 42, Actual: vv.ValueInt(0), Args: args.Map{}}
@@ -779,7 +779,7 @@ func Test_ValidValue_ValueDefInt(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueFloat64(t *testing.T) {
+func Test_ValidValue_ValueFloat64_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_ValueFloat64", func() {
 		vv := corestr.NewValidValue("3.14")
 		tc := caseV1Compat{Name: "VV ValueFloat64", Expected: 3.14, Actual: vv.ValueFloat64(0), Args: args.Map{}}
@@ -789,7 +789,7 @@ func Test_ValidValue_ValueFloat64(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Is(t *testing.T) {
+func Test_ValidValue_Is_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Is", func() {
 		vv := corestr.NewValidValue("x")
 		tc := caseV1Compat{Name: "VV Is", Expected: true, Actual: vv.Is("x"), Args: args.Map{}}
@@ -799,7 +799,7 @@ func Test_ValidValue_Is(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsAnyOf(t *testing.T) {
+func Test_ValidValue_IsAnyOf_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_IsAnyOf", func() {
 		vv := corestr.NewValidValue("b")
 		tc := caseV1Compat{Name: "VV IsAnyOf", Expected: true, Actual: vv.IsAnyOf("a", "b", "c"), Args: args.Map{}}
@@ -809,7 +809,7 @@ func Test_ValidValue_IsAnyOf(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsContains(t *testing.T) {
+func Test_ValidValue_IsContains_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_IsContains", func() {
 		vv := corestr.NewValidValue("hello world")
 		tc := caseV1Compat{Name: "VV IsContains", Expected: true, Actual: vv.IsContains("world"), Args: args.Map{}}
@@ -819,7 +819,7 @@ func Test_ValidValue_IsContains(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_IsEqualNonSensitive(t *testing.T) {
+func Test_ValidValue_IsEqualNonSensitive_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_IsEqualNonSensitive", func() {
 		vv := corestr.NewValidValue("Hello")
 		tc := caseV1Compat{Name: "VV IsEqualNonSensitive", Expected: true, Actual: vv.IsEqualNonSensitive("hello"), Args: args.Map{}}
@@ -840,7 +840,7 @@ func Test_ValidValue_IsRegexMatches(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Split(t *testing.T) {
+func Test_ValidValue_Split_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Split", func() {
 		vv := corestr.NewValidValue("a,b,c")
 		tc := caseV1Compat{Name: "VV Split", Expected: 3, Actual: len(vv.Split(",")), Args: args.Map{}}
@@ -850,7 +850,7 @@ func Test_ValidValue_Split(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Clone(t *testing.T) {
+func Test_ValidValue_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Clone", func() {
 		vv := corestr.NewValidValue("x")
 		c := vv.Clone()
@@ -861,7 +861,7 @@ func Test_ValidValue_Clone(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_String(t *testing.T) {
+func Test_ValidValue_String_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_String", func() {
 		vv := corestr.NewValidValue("x")
 		tc := caseV1Compat{Name: "VV String", Expected: "x", Actual: vv.String(), Args: args.Map{}}
@@ -871,7 +871,7 @@ func Test_ValidValue_String(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_FullString(t *testing.T) {
+func Test_ValidValue_FullString_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_FullString", func() {
 		vv := corestr.NewValidValue("x")
 		tc := caseV1Compat{Name: "VV FullString", Expected: true, Actual: len(vv.FullString()) > 0, Args: args.Map{}}
@@ -881,7 +881,7 @@ func Test_ValidValue_FullString(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueBytesOnce(t *testing.T) {
+func Test_ValidValue_ValueBytesOnce_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_ValueBytesOnce", func() {
 		vv := corestr.NewValidValue("ab")
 		tc := caseV1Compat{Name: "VV ValueBytesOnce", Expected: 2, Actual: len(vv.ValueBytesOnce()), Args: args.Map{}}
@@ -902,7 +902,7 @@ func Test_ValidValue_Clear(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Serialize(t *testing.T) {
+func Test_ValidValue_Serialize_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValue_Serialize", func() {
 		vv := corestr.NewValidValue("x")
 		data, err := vv.Serialize()
@@ -927,7 +927,7 @@ func Test_ValidValues_New(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Add(t *testing.T) {
+func Test_ValidValues_Add_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_Add", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.Add("x")
@@ -960,7 +960,7 @@ func Test_ValidValues_HasAnyItem(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_SafeValueAt(t *testing.T) {
+func Test_ValidValues_SafeValueAt_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_SafeValueAt", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.Add("x")
@@ -981,7 +981,7 @@ func Test_ValidValues_SafeValueAt_OOB(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Strings(t *testing.T) {
+func Test_ValidValues_Strings_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_Strings", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.Add("a").Add("b")
@@ -992,7 +992,7 @@ func Test_ValidValues_Strings(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_String(t *testing.T) {
+func Test_ValidValues_String_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_String", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.Add("x")
@@ -1003,7 +1003,7 @@ func Test_ValidValues_String(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Hashmap(t *testing.T) {
+func Test_ValidValues_Hashmap_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_Hashmap", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.AddFull(true, "k", "v")
@@ -1015,7 +1015,7 @@ func Test_ValidValues_Hashmap(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Map(t *testing.T) {
+func Test_ValidValues_Map_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_Map", func() {
 		vvs := corestr.NewValidValues(5)
 		vvs.AddFull(true, "k", "v")
@@ -1027,7 +1027,7 @@ func Test_ValidValues_Map(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Empty(t *testing.T) {
+func Test_ValidValues_Empty_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValidValues_Empty", func() {
 		vvs := corestr.EmptyValidValues()
 		tc := caseV1Compat{Name: "VVs Empty", Expected: true, Actual: vvs.IsEmpty(), Args: args.Map{}}
@@ -1041,7 +1041,7 @@ func Test_ValidValues_Empty(t *testing.T) {
 // ValueStatus
 // ═══════════════════════════════════════════════════════════════
 
-func Test_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValueStatus_Invalid", func() {
 		vs := corestr.InvalidValueStatus("err")
 		tc := caseV1Compat{Name: "VS Invalid", Expected: false, Actual: vs.ValueValid.IsValid, Args: args.Map{}}
@@ -1061,7 +1061,7 @@ func Test_ValueStatus_InvalidNoMsg(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus_Clone(t *testing.T) {
+func Test_ValueStatus_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValueStatus_Clone", func() {
 		vs := corestr.InvalidValueStatus("err")
 		c := vs.Clone()
@@ -1076,7 +1076,7 @@ func Test_ValueStatus_Clone(t *testing.T) {
 // TextWithLineNumber
 // ═══════════════════════════════════════════════════════════════
 
-func Test_TextWithLineNumber_HasLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_HasLineNumber_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_TextWithLineNumber_HasLineNumber", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: 1, Text: "hello"}
 		tc := caseV1Compat{Name: "TWL HasLineNumber", Expected: true, Actual: twl.HasLineNumber(), Args: args.Map{}}
@@ -1126,7 +1126,7 @@ func Test_TextWithLineNumber_IsEmptyText(t *testing.T) {
 	})
 }
 
-func Test_TextWithLineNumber_IsEmptyTextLineBoth(t *testing.T) {
+func Test_TextWithLineNumber_IsEmptyTextLineBoth_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_TextWithLineNumber_IsEmptyTextLineBoth", func() {
 		twl := &corestr.TextWithLineNumber{LineNumber: -1, Text: ""}
 		tc := caseV1Compat{Name: "TWL IsEmptyTextLineBoth", Expected: true, Actual: twl.IsEmptyTextLineBoth(), Args: args.Map{}}

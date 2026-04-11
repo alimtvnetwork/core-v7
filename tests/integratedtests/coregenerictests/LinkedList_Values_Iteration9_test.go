@@ -34,7 +34,7 @@ func Test_LinkedList_Values_MultiElement(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_LinkedList_Values_BreakEarly(t *testing.T) {
+func Test_LinkedList_Values_BreakEarly_FromLinkedListValuesIter(t *testing.T) {
 	// Arrange
 	tc := cov5ValuesIterBreakEarlyTestCase
 	ll := coregeneric.LinkedListFrom([]int{10, 20, 30})

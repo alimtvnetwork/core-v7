@@ -12,7 +12,7 @@ import (
 // TypeSameStatus
 // =============================================================================
 
-func Test_TypeSameStatus_Same(t *testing.T) {
+func Test_TypeSameStatus_Same_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", "b")
 
@@ -24,7 +24,7 @@ func Test_TypeSameStatus_Same(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus same type", actual)
 }
 
-func Test_TypeSameStatus_Different(t *testing.T) {
+func Test_TypeSameStatus_Different_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus("a", 42)
 
@@ -42,7 +42,7 @@ func Test_TypeSameStatus_Different(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus different", actual)
 }
 
-func Test_TypeSameStatus_NilLeft(t *testing.T) {
+func Test_TypeSameStatus_NilLeft_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	ts := coredynamic.TypeSameStatus(nil, "b")
 
@@ -60,7 +60,7 @@ func Test_TypeSameStatus_NilLeft(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus nil left", actual)
 }
 
-func Test_TypeSameStatus_Pointers(t *testing.T) {
+func Test_TypeSameStatus_Pointers_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	s := "hello"
 	ts := coredynamic.TypeSameStatus(&s, "b")
@@ -500,7 +500,7 @@ func Test_TypeStatus_IsEqual_DiffRight(t *testing.T) {
 // ValueStatus
 // =============================================================================
 
-func Test_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatus("bad")
 
@@ -520,7 +520,7 @@ func Test_ValueStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ValueStatus Invalid", actual)
 }
 
-func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
+func Test_ValueStatus_InvalidNoMessage_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
@@ -542,7 +542,7 @@ func Test_ValueStatus_InvalidNoMessage(t *testing.T) {
 // SafeTypeName
 // =============================================================================
 
-func Test_SafeTypeName_Nil(t *testing.T) {
+func Test_SafeTypeName_Nil_FromTypeSameStatusSameHe(t *testing.T) {
 	// Act
 	actual := args.Map{"r": coredynamic.SafeTypeName(nil)}
 
@@ -551,7 +551,7 @@ func Test_SafeTypeName_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "SafeTypeName nil", actual)
 }
 
-func Test_SafeTypeName_String(t *testing.T) {
+func Test_SafeTypeName_String_FromTypeSameStatusSameHe(t *testing.T) {
 	// Act
 	actual := args.Map{"r": coredynamic.SafeTypeName("hello")}
 
@@ -564,7 +564,7 @@ func Test_SafeTypeName_String(t *testing.T) {
 // LengthOfReflect
 // =============================================================================
 
-func Test_LengthOfReflect_Slice(t *testing.T) {
+func Test_LengthOfReflect_Slice_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf([]int{1, 2, 3})
 
@@ -576,7 +576,7 @@ func Test_LengthOfReflect_Slice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect slice", actual)
 }
 
-func Test_LengthOfReflect_Array(t *testing.T) {
+func Test_LengthOfReflect_Array_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf([2]int{1, 2})
 
@@ -588,7 +588,7 @@ func Test_LengthOfReflect_Array(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect array", actual)
 }
 
-func Test_LengthOfReflect_Map(t *testing.T) {
+func Test_LengthOfReflect_Map_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	v := reflect.ValueOf(map[string]int{"a": 1})
 
@@ -616,7 +616,7 @@ func Test_LengthOfReflect_Default(t *testing.T) {
 // IsAnyTypesOf
 // =============================================================================
 
-func Test_IsAnyTypesOf_Found(t *testing.T) {
+func Test_IsAnyTypesOf_Found_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)
@@ -629,7 +629,7 @@ func Test_IsAnyTypesOf_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsAnyTypesOf found", actual)
 }
 
-func Test_IsAnyTypesOf_NotFound(t *testing.T) {
+func Test_IsAnyTypesOf_NotFound_FromTypeSameStatusSameHe(t *testing.T) {
 	// Arrange
 	strType := reflect.TypeOf("")
 	intType := reflect.TypeOf(0)

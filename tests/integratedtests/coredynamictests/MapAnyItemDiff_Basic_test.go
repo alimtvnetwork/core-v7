@@ -11,7 +11,7 @@ import (
 // MapAnyItemDiff — all methods
 // ═══════════════════════════════════════════
 
-func Test_MapAnyItemDiff_Basic(t *testing.T) {
+func Test_MapAnyItemDiff_Basic_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1, "b": 2})
 	var nilM *coredynamic.MapAnyItemDiff
@@ -33,7 +33,7 @@ func Test_MapAnyItemDiff_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- basic", actual)
 }
 
-func Test_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
+func Test_MapAnyItemDiff_AllKeysSorted_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeysSorted()
@@ -46,7 +46,7 @@ func Test_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeysSorted returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_Raw(t *testing.T) {
+func Test_MapAnyItemDiff_Raw_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	var nilM *coredynamic.MapAnyItemDiff
@@ -67,7 +67,7 @@ func Test_MapAnyItemDiff_Raw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Raw returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_Clear(t *testing.T) {
+func Test_MapAnyItemDiff_Clear_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	cleared := m.Clear()
@@ -80,7 +80,7 @@ func Test_MapAnyItemDiff_Clear(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clear returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_Clear_Nil(t *testing.T) {
+func Test_MapAnyItemDiff_Clear_Nil_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItemDiff
 	cleared := m.Clear()
@@ -93,7 +93,7 @@ func Test_MapAnyItemDiff_Clear_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clear returns nil -- nil", actual)
 }
 
-func Test_MapAnyItemDiff_IsRawEqual(t *testing.T) {
+func Test_MapAnyItemDiff_IsRawEqual_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 
@@ -105,7 +105,7 @@ func Test_MapAnyItemDiff_IsRawEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsRawEqual returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
+func Test_MapAnyItemDiff_HasAnyChanges_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 
@@ -117,7 +117,7 @@ func Test_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAnyChanges returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_DiffRaw(t *testing.T) {
+func Test_MapAnyItemDiff_DiffRaw_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1, "b": 2})
 	diff := m.DiffRaw(false, map[string]any{"a": 1, "b": 3})
@@ -130,7 +130,7 @@ func Test_MapAnyItemDiff_DiffRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DiffRaw returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_HashmapDiffUsingRaw(t *testing.T) {
+func Test_MapAnyItemDiff_HashmapDiffUsingRaw_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	d := m.HashmapDiffUsingRaw(false, map[string]any{"a": 1})
@@ -143,7 +143,7 @@ func Test_MapAnyItemDiff_HashmapDiffUsingRaw(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HashmapDiffUsingRaw returns correct value -- same", actual)
 }
 
-func Test_MapAnyItemDiff_MapAnyItems(t *testing.T) {
+func Test_MapAnyItemDiff_MapAnyItems_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	mai := m.MapAnyItems()
@@ -156,7 +156,7 @@ func Test_MapAnyItemDiff_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
+func Test_MapAnyItemDiff_RawMapDiffer_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	d := m.RawMapDiffer()
@@ -169,7 +169,7 @@ func Test_MapAnyItemDiff_RawMapDiffer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RawMapDiffer returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_Json(t *testing.T) {
+func Test_MapAnyItemDiff_Json_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	j := m.Json()
@@ -192,7 +192,7 @@ func Test_MapAnyItemDiff_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Json", actual)
 }
 
-func Test_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
+func Test_MapAnyItemDiff_DiffJsonMessage_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	msg := m.DiffJsonMessage(false, map[string]any{"a": 2})
@@ -205,7 +205,7 @@ func Test_MapAnyItemDiff_DiffJsonMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DiffJsonMessage returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
+func Test_MapAnyItemDiff_ShouldDiffMessage_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.MapAnyItemDiff(map[string]any{"a": 1})
 	msg := m.ShouldDiffMessage(false, "test", map[string]any{"a": 2})
@@ -222,7 +222,7 @@ func Test_MapAnyItemDiff_ShouldDiffMessage(t *testing.T) {
 // MapAnyItems — core methods
 // ═══════════════════════════════════════════
 
-func Test_MapAnyItems_Basic(t *testing.T) {
+func Test_MapAnyItems_Basic_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 
@@ -242,7 +242,7 @@ func Test_MapAnyItems_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- basic", actual)
 }
 
-func Test_MapAnyItems_NewUsingItems(t *testing.T) {
+func Test_MapAnyItems_NewUsingItems_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	e := coredynamic.NewMapAnyItemsUsingItems(map[string]any{})
@@ -261,7 +261,7 @@ func Test_MapAnyItems_NewUsingItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewMapAnyItemsUsingItems returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_HasKey(t *testing.T) {
+func Test_MapAnyItems_HasKey_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	var nilM *coredynamic.MapAnyItems
@@ -282,7 +282,7 @@ func Test_MapAnyItems_HasKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasKey returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_AddSet(t *testing.T) {
+func Test_MapAnyItems_AddSet_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	new1 := m.Add("a", 1)
@@ -307,7 +307,7 @@ func Test_MapAnyItems_AddSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Add/Set returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_GetValue(t *testing.T) {
+func Test_MapAnyItems_GetValue_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	v := m.GetValue("a")
@@ -327,7 +327,7 @@ func Test_MapAnyItems_GetValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetValue returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_Get(t *testing.T) {
+func Test_MapAnyItems_Get_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	v, has := m.Get("a")
@@ -349,7 +349,7 @@ func Test_MapAnyItems_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Get returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_AllKeys(t *testing.T) {
+func Test_MapAnyItems_AllKeys_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeys()
@@ -392,7 +392,7 @@ func Test_MapAnyItems_AllKeys_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllKeys returns empty -- empty", actual)
 }
 
-func Test_MapAnyItems_IsEqual(t *testing.T) {
+func Test_MapAnyItems_IsEqual_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m1 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
@@ -465,7 +465,7 @@ func Test_MapAnyItems_IsEqualRaw_NilBoth(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualRaw returns nil -- nil both", actual)
 }
 
-func Test_MapAnyItems_ClearDisposeDeepClear(t *testing.T) {
+func Test_MapAnyItems_ClearDisposeDeepClear_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m.Clear()
@@ -503,7 +503,7 @@ func Test_MapAnyItems_ClearDispose_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clear/Dispose returns nil -- nil", actual)
 }
 
-func Test_MapAnyItems_AddMapResult(t *testing.T) {
+func Test_MapAnyItems_AddMapResult_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.AddMapResult(map[string]any{"a": 1})
@@ -569,7 +569,7 @@ func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddManyMapResultsUsingOption returns empty -- empty", actual)
 }
 
-func Test_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
+func Test_MapAnyItems_GetNewMapUsingKeys_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2, "c": 3})
 	sub := m.GetNewMapUsingKeys(false, "a", "c")
@@ -589,7 +589,7 @@ func Test_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetNewMapUsingKeys returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_JsonString(t *testing.T) {
+func Test_MapAnyItems_JsonString_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	js, err := m.JsonString()
@@ -631,7 +631,7 @@ func Test_MapAnyItems_Strings_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Strings/String returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_Paging(t *testing.T) {
+func Test_MapAnyItems_Paging_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(10)
 	for i := 0; i < 5; i++ {
@@ -660,7 +660,7 @@ func Test_MapAnyItems_Paging(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Paging", actual)
 }
 
-func Test_MapAnyItems_Diff(t *testing.T) {
+func Test_MapAnyItems_Diff_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 3})
@@ -674,7 +674,7 @@ func Test_MapAnyItems_Diff(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Diff returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_IsRawEqual(t *testing.T) {
+func Test_MapAnyItems_IsRawEqual_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -686,7 +686,7 @@ func Test_MapAnyItems_IsRawEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsRawEqual returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_HasAnyChanges(t *testing.T) {
+func Test_MapAnyItems_HasAnyChanges_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
@@ -698,7 +698,7 @@ func Test_MapAnyItems_HasAnyChanges(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HasAnyChanges returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_MapStringAnyDiff(t *testing.T) {
+func Test_MapAnyItems_MapStringAnyDiff_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	d := m.MapStringAnyDiff()
@@ -724,7 +724,7 @@ func Test_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RawMapStringAnyDiff returns nil -- nil", actual)
 }
 
-func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
+func Test_MapAnyItems_MapAnyItemsSelf_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	self := m.MapAnyItems()
@@ -737,7 +737,7 @@ func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- self", actual)
 }
 
-func Test_MapAnyItems_ClonePtr(t *testing.T) {
+func Test_MapAnyItems_ClonePtr_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	cloned, err := m.ClonePtr()
@@ -760,7 +760,7 @@ func Test_MapAnyItems_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	j := m.Json()
@@ -786,7 +786,7 @@ func Test_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Json", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKey(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	jr := m.JsonResultOfKey("a")
@@ -806,7 +806,7 @@ func Test_MapAnyItems_JsonResultOfKey(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonResultOfKey returns correct value -- with args", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKeys(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2})
 	mr := m.JsonResultOfKeys("a", "b")
@@ -898,7 +898,7 @@ func Test_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "JsonResultsCollection returns empty -- empty", actual)
 }
 
-func Test_MapAnyItems_Deserialize(t *testing.T) {
+func Test_MapAnyItems_Deserialize_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": float64(42)})
 	var target float64
@@ -966,7 +966,7 @@ func Test_MapAnyItems_ReflectSetTo_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetTo returns correct value -- missing", actual)
 }
 
-func Test_MapAnyItems_AddJsonResultPtr(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.AddJsonResultPtr("a", nil)
@@ -979,7 +979,7 @@ func Test_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AddJsonResultPtr returns nil -- nil", actual)
 }
 
-func Test_MapAnyItems_HashmapDiffUsingRaw(t *testing.T) {
+func Test_MapAnyItems_HashmapDiffUsingRaw_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	d := m.HashmapDiffUsingRaw(false, map[string]any{"a": 1})
@@ -996,7 +996,7 @@ func Test_MapAnyItems_HashmapDiffUsingRaw(t *testing.T) {
 // BytesConverter — additional methods
 // ═══════════════════════════════════════════
 
-func Test_BytesConverter_DeserializeMust(t *testing.T) {
+func Test_BytesConverter_DeserializeMust_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`"hello"`))
 	var target string
@@ -1010,7 +1010,7 @@ func Test_BytesConverter_DeserializeMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DeserializeMust returns correct value -- with args", actual)
 }
 
-func Test_BytesConverter_ToHashmap(t *testing.T) {
+func Test_BytesConverter_ToHashmap_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`{"a":"1"}`))
 	hm, err := bc.ToHashmap()
@@ -1029,7 +1029,7 @@ func Test_BytesConverter_ToHashmap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToHashmap returns correct value -- with args", actual)
 }
 
-func Test_BytesConverter_ToHashmap_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashmap_Invalid_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`invalid`))
 	_, err := bc.ToHashmap()
@@ -1042,7 +1042,7 @@ func Test_BytesConverter_ToHashmap_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToHashmap returns error -- invalid", actual)
 }
 
-func Test_BytesConverter_ToHashset(t *testing.T) {
+func Test_BytesConverter_ToHashset_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	// Hashset is a struct with unexported 'items map[string]bool' —
 	// JSON array ["a","b"] can't unmarshal into that struct, so error expected
@@ -1063,7 +1063,7 @@ func Test_BytesConverter_ToHashset(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToHashset returns correct value -- with args", actual)
 }
 
-func Test_BytesConverter_ToHashset_Invalid(t *testing.T) {
+func Test_BytesConverter_ToHashset_Invalid_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`invalid`))
 	_, err := bc.ToHashset()
@@ -1076,7 +1076,7 @@ func Test_BytesConverter_ToHashset_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToHashset returns error -- invalid", actual)
 }
 
-func Test_BytesConverter_ToCollection(t *testing.T) {
+func Test_BytesConverter_ToCollection_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	c, err := bc.ToCollection()
@@ -1095,7 +1095,7 @@ func Test_BytesConverter_ToCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToCollection returns correct value -- with args", actual)
 }
 
-func Test_BytesConverter_ToCollection_Invalid(t *testing.T) {
+func Test_BytesConverter_ToCollection_Invalid_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`invalid`))
 	_, err := bc.ToCollection()
@@ -1108,7 +1108,7 @@ func Test_BytesConverter_ToCollection_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToCollection returns error -- invalid", actual)
 }
 
-func Test_BytesConverter_ToSimpleSlice(t *testing.T) {
+func Test_BytesConverter_ToSimpleSlice_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`["a","b"]`))
 	ss, err := bc.ToSimpleSlice()
@@ -1127,7 +1127,7 @@ func Test_BytesConverter_ToSimpleSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToSimpleSlice returns correct value -- with args", actual)
 }
 
-func Test_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
+func Test_BytesConverter_ToSimpleSlice_Invalid_FromMapAnyItemDiffBasic(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte(`invalid`))
 	_, err := bc.ToSimpleSlice()

@@ -20,7 +20,7 @@ import (
 
 // However, we can verify the three reachable branches are all covered:
 
-func Test_Byte_AllBranches(t *testing.T) {
+func Test_Byte_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{
 		"equal":   corecmp.Byte(5, 5),
@@ -52,7 +52,7 @@ func Test_Integer_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Integer all branches", expected)
 }
 
-func Test_Integer16_AllBranches(t *testing.T) {
+func Test_Integer16_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer16(5, 5),
@@ -69,7 +69,7 @@ func Test_Integer16_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Integer16 all branches", expected)
 }
 
-func Test_Integer32_AllBranches(t *testing.T) {
+func Test_Integer32_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer32(5, 5),
@@ -86,7 +86,7 @@ func Test_Integer32_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Integer32 all branches", expected)
 }
 
-func Test_Integer64_AllBranches(t *testing.T) {
+func Test_Integer64_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer64(5, 5),
@@ -103,7 +103,7 @@ func Test_Integer64_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Integer64 all branches", expected)
 }
 
-func Test_Integer8_AllBranches(t *testing.T) {
+func Test_Integer8_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer8(5, 5),
@@ -120,7 +120,7 @@ func Test_Integer8_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Integer8 all branches", expected)
 }
 
-func Test_Time_AllBranches(t *testing.T) {
+func Test_Time_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Arrange
 	now := time.Now()
 	past := now.Add(-time.Hour)
@@ -140,7 +140,7 @@ func Test_Time_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Time all branches", expected)
 }
 
-func Test_VersionSliceByte_AllBranches(t *testing.T) {
+func Test_VersionSliceByte_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":      corecmp.VersionSliceByte([]byte{1, 2}, []byte{1, 2}),
@@ -157,7 +157,7 @@ func Test_VersionSliceByte_AllBranches(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "VersionSliceByte all branches", expected)
 }
 
-func Test_VersionSliceInteger_AllBranches(t *testing.T) {
+func Test_VersionSliceInteger_AllBranches_FromByteAllBranchesAllGa(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":      corecmp.VersionSliceInteger([]int{1, 2}, []int{1, 2}),

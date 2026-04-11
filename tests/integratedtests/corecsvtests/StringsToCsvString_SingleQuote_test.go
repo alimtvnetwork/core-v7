@@ -85,7 +85,7 @@ func Test_AnyItemsToCsvString_NoQuote(t *testing.T) {
 
 // ── AnyToTypesCsvStrings — no-quote branch ──
 
-func Test_AnyToTypesCsvStrings_NoQuote(t *testing.T) {
+func Test_AnyToTypesCsvStrings_NoQuote_FromStringsToCsvStringSi(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyToTypesCsvStrings(false, false, "a")
 
@@ -97,7 +97,7 @@ func Test_AnyToTypesCsvStrings_NoQuote(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToTypesCsvStrings returns empty -- no quote", actual)
 }
 
-func Test_AnyToTypesCsvStrings_Empty(t *testing.T) {
+func Test_AnyToTypesCsvStrings_Empty_FromStringsToCsvStringSi(t *testing.T) {
 	// Arrange
 	result := corecsv.AnyToTypesCsvStrings(false, false)
 

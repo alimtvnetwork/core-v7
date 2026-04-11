@@ -81,7 +81,7 @@ func Test_StringOnce_Helpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- helpers", actual)
 }
 
-func Test_StringOnce_SplitBy(t *testing.T) {
+func Test_StringOnce_SplitBy_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "a,b,c" })
 	result := so.SplitBy(",")
@@ -169,7 +169,7 @@ func Test_BoolOnce_Execute(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Execute", actual)
 }
 
-func Test_BoolOnce_Serialize(t *testing.T) {
+func Test_BoolOnce_Serialize_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 	data, err := bo.Serialize()
@@ -213,7 +213,7 @@ func Test_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
 
 // ── IntegerOnce ──
 
-func Test_IntegerOnce_Comparisons(t *testing.T) {
+func Test_IntegerOnce_Comparisons_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 5 })
 
@@ -253,7 +253,7 @@ func Test_IntegerOnce_Comparisons(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerOnce returns correct value -- Comparisons", actual)
 }
 
-func Test_IntegerOnce_Serialize(t *testing.T) {
+func Test_IntegerOnce_Serialize_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	data, err := io.Serialize()
@@ -302,7 +302,7 @@ func Test_ErrorOnce_NilError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorOnce returns nil -- nil error", actual)
 }
 
-func Test_ErrorOnce_IsMessageEqual(t *testing.T) {
+func Test_ErrorOnce_IsMessageEqual_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 
@@ -329,7 +329,7 @@ func Test_ErrorOnce_ConcatNew_NilError(t *testing.T) {
 
 // ── MapStringStringOnce ──
 
-func Test_MapStringStringOnce_AllKeys(t *testing.T) {
+func Test_MapStringStringOnce_AllKeys_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
@@ -364,7 +364,7 @@ func Test_MapStringStringOnce_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- AllKeys", actual)
 }
 
-func Test_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
+func Test_MapStringStringOnce_GetValueWithStatus_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"key": "val"}
@@ -386,7 +386,7 @@ func Test_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns non-empty -- GetValueWithStatus", actual)
 }
 
-func Test_MapStringStringOnce_IsEqual(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -408,7 +408,7 @@ func Test_MapStringStringOnce_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- IsEqual", actual)
 }
 
-func Test_MapStringStringOnce_String(t *testing.T) {
+func Test_MapStringStringOnce_String_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -422,7 +422,7 @@ func Test_MapStringStringOnce_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- String", actual)
 }
 
-func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
@@ -439,7 +439,7 @@ func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
 
 // ── AnyOnce ──
 
-func Test_AnyOnce_CastMethods(t *testing.T) {
+func Test_AnyOnce_CastMethods_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	aoStr := coreonce.NewAnyOnce(func() any { return "hello" })
 	aoStrings := coreonce.NewAnyOnce(func() any { return []string{"a", "b"} })
@@ -494,7 +494,7 @@ func Test_AnyOnce_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyOnce returns correct value -- null value", actual)
 }
 
-func Test_AnyOnce_SerializeMust(t *testing.T) {
+func Test_AnyOnce_SerializeMust_FromStringOnceSplitLeftR(t *testing.T) {
 	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "test" })
 	result := ao.SerializeMust()

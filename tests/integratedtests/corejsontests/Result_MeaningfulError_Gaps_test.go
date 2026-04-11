@@ -114,7 +114,7 @@ func Test_Result_IsEqual_TypeNameDiffers(t *testing.T) {
 	})
 }
 
-func Test_Result_CombineErrorWithRefString_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefString_NoError_FromResultMeaningfulErro(t *testing.T) {
 	// Arrange
 	result := corejson.New("valid")
 
@@ -127,7 +127,7 @@ func Test_Result_CombineErrorWithRefString_NoError(t *testing.T) {
 	})
 }
 
-func Test_Result_CombineErrorWithRefError_NoError(t *testing.T) {
+func Test_Result_CombineErrorWithRefError_NoError_FromResultMeaningfulErro(t *testing.T) {
 	// Arrange
 	result := corejson.New("valid")
 

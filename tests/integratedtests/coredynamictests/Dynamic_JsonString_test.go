@@ -9,7 +9,7 @@ import (
 
 // ── Dynamic — DynamicJson.go ──
 
-func Test_Dynamic_JsonString(t *testing.T) {
+func Test_Dynamic_JsonString_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	jsonStr, err := d.JsonString()
@@ -28,7 +28,7 @@ func Test_Dynamic_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonString", actual)
 }
 
-func Test_Dynamic_JsonBytes(t *testing.T) {
+func Test_Dynamic_JsonBytes_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(42)
 	jsonBytes, err := d.JsonBytes()
@@ -47,7 +47,7 @@ func Test_Dynamic_JsonBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytes", actual)
 }
 
-func Test_Dynamic_JsonBytesPtr_Null(t *testing.T) {
+func Test_Dynamic_JsonBytesPtr_Null_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(nil)
 	jsonBytes, err := d.JsonBytesPtr()
@@ -66,7 +66,7 @@ func Test_Dynamic_JsonBytesPtr_Null(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytesPtr null", actual)
 }
 
-func Test_Dynamic_ValueMarshal(t *testing.T) {
+func Test_Dynamic_ValueMarshal_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("test")
 	data, err := d.ValueMarshal()
@@ -85,7 +85,7 @@ func Test_Dynamic_ValueMarshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ValueMarshal", actual)
 }
 
-func Test_Dynamic_JsonModel(t *testing.T) {
+func Test_Dynamic_JsonModel_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("model")
 
@@ -102,7 +102,7 @@ func Test_Dynamic_JsonModel(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonModel", actual)
 }
 
-func Test_Dynamic_Json(t *testing.T) {
+func Test_Dynamic_Json_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	j := d.Json()
@@ -123,7 +123,7 @@ func Test_Dynamic_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Json/JsonPtr", actual)
 }
 
-func Test_Dynamic_MarshalJSON(t *testing.T) {
+func Test_Dynamic_MarshalJSON_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("test")
 	data, err := d.MarshalJSON()
@@ -144,7 +144,7 @@ func Test_Dynamic_MarshalJSON(t *testing.T) {
 
 // ── Dynamic — DynamicStatus.go ──
 
-func Test_DynamicStatus_Invalid(t *testing.T) {
+func Test_DynamicStatus_Invalid_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("err msg")
 	dsNoMsg := coredynamic.InvalidDynamicStatusNoMessage()
@@ -163,7 +163,7 @@ func Test_DynamicStatus_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns error -- Invalid", actual)
 }
 
-func Test_DynamicStatus_Clone(t *testing.T) {
+func Test_DynamicStatus_Clone_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	ds := coredynamic.InvalidDynamicStatus("msg")
 	cloned := ds.Clone()
@@ -186,7 +186,7 @@ func Test_DynamicStatus_Clone(t *testing.T) {
 
 // ── Dynamic — ValueStatus ──
 
-func Test_ValueStatus_Invalid(t *testing.T) {
+func Test_ValueStatus_Invalid_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	vs := coredynamic.InvalidValueStatus("err")
 	vsNoMsg := coredynamic.InvalidValueStatusNoMessage()
@@ -207,7 +207,7 @@ func Test_ValueStatus_Invalid(t *testing.T) {
 
 // ── Dynamic — SafeTypeName ──
 
-func Test_SafeTypeName(t *testing.T) {
+func Test_SafeTypeName_FromDynamicJsonString(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"stringType": coredynamic.SafeTypeName("hello"),
@@ -236,7 +236,7 @@ func Test_LengthOfReflect_Struct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect returns correct value -- struct", actual)
 }
 
-func Test_LengthOfReflect_Map(t *testing.T) {
+func Test_LengthOfReflect_Map_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(map[string]int{"a": 1, "b": 2})
 
@@ -250,7 +250,7 @@ func Test_LengthOfReflect_Map(t *testing.T) {
 
 // ── Dynamic — DynamicReflect.go ──
 
-func Test_Dynamic_ReflectType(t *testing.T) {
+func Test_Dynamic_ReflectType_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 
@@ -268,7 +268,7 @@ func Test_Dynamic_ReflectType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ReflectType", actual)
 }
 
-func Test_Dynamic_Loop(t *testing.T) {
+func Test_Dynamic_Loop_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid([]int{1, 2, 3})
 	count := 0
@@ -285,7 +285,7 @@ func Test_Dynamic_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Loop", actual)
 }
 
-func Test_Dynamic_Loop_Invalid(t *testing.T) {
+func Test_Dynamic_Loop_Invalid_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 	called := d.Loop(func(index int, item any) bool { return false })
@@ -298,7 +298,7 @@ func Test_Dynamic_Loop_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns error -- Loop invalid", actual)
 }
 
-func Test_Dynamic_LoopMap(t *testing.T) {
+func Test_Dynamic_LoopMap_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid(map[string]int{"a": 1})
 	count := 0
@@ -317,7 +317,7 @@ func Test_Dynamic_LoopMap(t *testing.T) {
 
 // ── Dynamic — Constructors ──
 
-func Test_Dynamic_InvalidDynamic(t *testing.T) {
+func Test_Dynamic_InvalidDynamic_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	d := coredynamic.InvalidDynamic()
 
@@ -355,7 +355,7 @@ func Test_Dynamic_NonPtr_Ptr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- NonPtr/Ptr", actual)
 }
 
-func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
+func Test_Dynamic_ClonePtr_Nil_FromDynamicJsonString(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 

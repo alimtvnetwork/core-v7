@@ -13,35 +13,35 @@ import (
 // AnyItem
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_AnyItem_BothNil(t *testing.T) {
+func Test_AnyItem_BothNil_FromAnyItemBothNilcorecm(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{"result": corecmp.AnyItem(nil, nil)}
 	expected := args.Map{"result": corecomparator.Equal}
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- both nil", actual)
 }
 
-func Test_AnyItem_LeftNil(t *testing.T) {
+func Test_AnyItem_LeftNil_FromAnyItemBothNilcorecm(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{"result": corecmp.AnyItem(nil, "a")}
 	expected := args.Map{"result": corecomparator.NotEqual}
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- left nil", actual)
 }
 
-func Test_AnyItem_RightNil(t *testing.T) {
+func Test_AnyItem_RightNil_FromAnyItemBothNilcorecm(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{"result": corecmp.AnyItem("a", nil)}
 	expected := args.Map{"result": corecomparator.NotEqual}
 	expected.ShouldBeEqual(t, 0, "AnyItem returns nil -- right nil", actual)
 }
 
-func Test_AnyItem_Equal(t *testing.T) {
+func Test_AnyItem_Equal_FromAnyItemBothNilcorecm(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{"result": corecmp.AnyItem("hello", "hello")}
 	expected := args.Map{"result": corecomparator.Equal}
 	expected.ShouldBeEqual(t, 0, "AnyItem returns correct value -- equal", actual)
 }
 
-func Test_AnyItem_Inconclusive(t *testing.T) {
+func Test_AnyItem_Inconclusive_FromAnyItemBothNilcorecm(t *testing.T) {
 	// Arrange / Act / Assert
 	actual := args.Map{"result": corecmp.AnyItem("a", "b")}
 	expected := args.Map{"result": corecomparator.Inconclusive}

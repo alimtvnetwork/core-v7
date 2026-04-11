@@ -123,7 +123,7 @@ func Test_SSO_SplitTrimNonWhitespace(t *testing.T) {
 // SimpleStringOnce — String/Match methods
 // ═══════════════════════════════════════════════════════════════
 
-func Test_SSO_Is(t *testing.T) {
+func Test_SSO_Is_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_Is", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hello")
 		tc := caseV1Compat{Name: "Is match", Expected: true, Actual: sso.Is("hello")}
@@ -163,7 +163,7 @@ func Test_SSO_IsAnyOf_Empty(t *testing.T) {
 	})
 }
 
-func Test_SSO_IsContains(t *testing.T) {
+func Test_SSO_IsContains_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_IsContains", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hello world")
 		tc := caseV1Compat{Name: "IsContains", Expected: true, Actual: sso.IsContains("world")}
@@ -383,7 +383,7 @@ func Test_SSO_Uint32_Valid(t *testing.T) {
 	})
 }
 
-func Test_SSO_WithinRange_InRange(t *testing.T) {
+func Test_SSO_WithinRange_InRange_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_WithinRange_InRange", func() {
 		sso := corestr.New.SimpleStringOnce.Init("5")
 		val, isInRange := sso.WithinRange(true, 0, 10)
@@ -703,7 +703,7 @@ func Test_SSO_SafeValue_Init(t *testing.T) {
 	})
 }
 
-func Test_SSO_SafeValue_Uninit(t *testing.T) {
+func Test_SSO_SafeValue_Uninit_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_SafeValue_Uninit", func() {
 		sso := corestr.New.SimpleStringOnce.Uninitialized("test")
 		tc := caseV1Compat{Name: "SafeValue uninit", Expected: "", Actual: sso.SafeValue()}
@@ -713,7 +713,7 @@ func Test_SSO_SafeValue_Uninit(t *testing.T) {
 	})
 }
 
-func Test_SSO_Json(t *testing.T) {
+func Test_SSO_Json_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_Json", func() {
 		sso := corestr.New.SimpleStringOnce.Init("jsonval")
 		jsonResult := sso.Json()
@@ -724,7 +724,7 @@ func Test_SSO_Json(t *testing.T) {
 	})
 }
 
-func Test_SSO_JsonPtr(t *testing.T) {
+func Test_SSO_JsonPtr_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_JsonPtr", func() {
 		sso := corestr.New.SimpleStringOnce.Init("jsonval")
 		ptr := sso.JsonPtr()
@@ -753,7 +753,7 @@ func Test_SSO_MarshalUnmarshal(t *testing.T) {
 	})
 }
 
-func Test_SSO_Serialize(t *testing.T) {
+func Test_SSO_Serialize_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_Serialize", func() {
 		sso := corestr.New.SimpleStringOnce.Init("serval")
 		data, err := sso.Serialize()
@@ -766,7 +766,7 @@ func Test_SSO_Serialize(t *testing.T) {
 	})
 }
 
-func Test_SSO_AsJsonContractsBinder(t *testing.T) {
+func Test_SSO_AsJsonContractsBinder_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_AsJsonContractsBinder", func() {
 		sso := corestr.New.SimpleStringOnce.InitPtr("v")
 		binder := sso.AsJsonContractsBinder()
@@ -777,7 +777,7 @@ func Test_SSO_AsJsonContractsBinder(t *testing.T) {
 	})
 }
 
-func Test_SSO_AsJsoner(t *testing.T) {
+func Test_SSO_AsJsoner_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_AsJsoner", func() {
 		sso := corestr.New.SimpleStringOnce.InitPtr("v")
 		j := sso.AsJsoner()
@@ -788,7 +788,7 @@ func Test_SSO_AsJsoner(t *testing.T) {
 	})
 }
 
-func Test_SSO_AsJsonParseSelfInjector(t *testing.T) {
+func Test_SSO_AsJsonParseSelfInjector_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_AsJsonParseSelfInjector", func() {
 		sso := corestr.New.SimpleStringOnce.InitPtr("v")
 		inj := sso.AsJsonParseSelfInjector()
@@ -799,7 +799,7 @@ func Test_SSO_AsJsonParseSelfInjector(t *testing.T) {
 	})
 }
 
-func Test_SSO_AsJsonMarshaller(t *testing.T) {
+func Test_SSO_AsJsonMarshaller_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_AsJsonMarshaller", func() {
 		sso := corestr.New.SimpleStringOnce.InitPtr("v")
 		m := sso.AsJsonMarshaller()
@@ -856,7 +856,7 @@ func Test_NewValidValueUsingAnyAutoValid_Empty(t *testing.T) {
 	})
 }
 
-func Test_NewValidValue(t *testing.T) {
+func Test_NewValidValue_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_NewValidValue", func() {
 		vv := corestr.NewValidValue("test")
 		tc := caseV1Compat{Name: "NewValidValue", Expected: "test", Actual: vv.Value}
@@ -890,7 +890,7 @@ func Test_InvalidValidValueNoMessage(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_ValueBytesOncePtr(t *testing.T) {
+func Test_ValidValue_ValueBytesOncePtr_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_ValidValue_ValueBytesOncePtr", func() {
 		vv := corestr.NewValidValue("bytes")
 		result := vv.ValueBytesOncePtr()
@@ -927,7 +927,7 @@ func Test_NewValidValuesUsingValues_Empty(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_Count(t *testing.T) {
+func Test_ValidValues_Count_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_ValidValues_Count", func() {
 		vv := corestr.NewValidValues(5)
 		tc := caseV1Compat{Name: "Count", Expected: 0, Actual: vv.Count()}
@@ -937,7 +937,7 @@ func Test_ValidValues_Count(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_HasAnyItem(t *testing.T) {
+func Test_ValidValues_HasAnyItem_FromSSOSplitLeftRightIte(t *testing.T) {
 	safeTest(t, "Test_Cov44_ValidValues_HasAnyItem", func() {
 		vv := corestr.EmptyValidValues()
 		tc := caseV1Compat{Name: "HasAnyItem empty", Expected: false, Actual: vv.HasAnyItem()}

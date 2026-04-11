@@ -63,7 +63,7 @@ func Test_MapAnyItems_HasAnyItem_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems HasAnyItem true", actual)
 }
 
-func Test_MapAnyItems_HasKey_Nil(t *testing.T) {
+func Test_MapAnyItems_HasKey_Nil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 
@@ -75,7 +75,7 @@ func Test_MapAnyItems_HasKey_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems HasKey nil", actual)
 }
 
-func Test_MapAnyItems_HasKey_Missing(t *testing.T) {
+func Test_MapAnyItems_HasKey_Missing_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -185,7 +185,7 @@ func Test_MapAnyItems_GetFieldsMap_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetFieldsMap missing", actual)
 }
 
-func Test_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
+func Test_MapAnyItems_GetFieldsMap_Found_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("k", map[string]any{"a": 1})
@@ -257,7 +257,7 @@ func Test_MapAnyItems_GetUsingUnmarshallAt_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetUsingUnmarshallAt valid", actual)
 }
 
-func Test_MapAnyItems_Deserialize_Missing(t *testing.T) {
+func Test_MapAnyItems_Deserialize_Missing_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var out int
@@ -271,7 +271,7 @@ func Test_MapAnyItems_Deserialize_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Deserialize missing", actual)
 }
 
-func Test_MapAnyItems_GetUsingUnmarshallManyAt_Error(t *testing.T) {
+func Test_MapAnyItems_GetUsingUnmarshallManyAt_Error_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var out string
@@ -317,7 +317,7 @@ func Test_MapAnyItems_GetUsingUnmarshallManyAt_Valid(t *testing.T) {
 // MapAnyItems — GetItemRef branches
 // =============================================================================
 
-func Test_MapAnyItems_GetItemRef_Missing(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_Missing_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	var out string
@@ -331,7 +331,7 @@ func Test_MapAnyItems_GetItemRef_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetItemRef missing", actual)
 }
 
-func Test_MapAnyItems_GetItemRef_NilRef(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NilRef_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("k", "v")
@@ -345,7 +345,7 @@ func Test_MapAnyItems_GetItemRef_NilRef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetItemRef nil ref", actual)
 }
 
-func Test_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
+func Test_MapAnyItems_GetItemRef_NotPointer_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("k", "v")
@@ -359,7 +359,7 @@ func Test_MapAnyItems_GetItemRef_NotPointer(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetItemRef not pointer", actual)
 }
 
-func Test_MapAnyItems_GetManyItemsRefs_Empty(t *testing.T) {
+func Test_MapAnyItems_GetManyItemsRefs_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.GetManyItemsRefs()
@@ -429,7 +429,7 @@ func Test_MapAnyItems_Set_New(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Set new", actual)
 }
 
-func Test_MapAnyItems_AddKeyAny(t *testing.T) {
+func Test_MapAnyItems_AddKeyAny_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	isNew := m.AddKeyAny(corejson.KeyAny{Key: "k", AnyInf: 1})
@@ -442,7 +442,7 @@ func Test_MapAnyItems_AddKeyAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddKeyAny", actual)
 }
 
-func Test_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
+func Test_MapAnyItems_AddKeyAnyWithValidation_Mismatch_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddKeyAnyWithValidation(
@@ -458,7 +458,7 @@ func Test_MapAnyItems_AddKeyAnyWithValidation_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddKeyAnyWithValidation mismatch", actual)
 }
 
-func Test_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
+func Test_MapAnyItems_AddKeyAnyWithValidation_Match_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddKeyAnyWithValidation(
@@ -480,7 +480,7 @@ func Test_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddKeyAnyWithValidation match", actual)
 }
 
-func Test_MapAnyItems_AddWithValidation_Mismatch(t *testing.T) {
+func Test_MapAnyItems_AddWithValidation_Mismatch_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddWithValidation(reflect.TypeOf(0), "k", "notint")
@@ -493,7 +493,7 @@ func Test_MapAnyItems_AddWithValidation_Mismatch(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddWithValidation mismatch", actual)
 }
 
-func Test_MapAnyItems_AddWithValidation_Match(t *testing.T) {
+func Test_MapAnyItems_AddWithValidation_Match_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	err := m.AddWithValidation(reflect.TypeOf(0), "k", 42)
@@ -510,7 +510,7 @@ func Test_MapAnyItems_AddWithValidation_Match(t *testing.T) {
 // MapAnyItems — AddJsonResultPtr branches
 // =============================================================================
 
-func Test_MapAnyItems_AddJsonResultPtr_Nil(t *testing.T) {
+func Test_MapAnyItems_AddJsonResultPtr_Nil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.AddJsonResultPtr("k", nil)
@@ -541,7 +541,7 @@ func Test_MapAnyItems_AddJsonResultPtr_Valid(t *testing.T) {
 // MapAnyItems — AddMapResult / AddMapResultOption / AddManyMapResultsUsingOption
 // =============================================================================
 
-func Test_MapAnyItems_AddMapResult_Empty(t *testing.T) {
+func Test_MapAnyItems_AddMapResult_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.AddMapResult(nil)
@@ -567,7 +567,7 @@ func Test_MapAnyItems_AddMapResult_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddMapResult valid", actual)
 }
 
-func Test_MapAnyItems_AddMapResultOption_Override(t *testing.T) {
+func Test_MapAnyItems_AddMapResultOption_Override_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("a", 1)
@@ -594,7 +594,7 @@ func Test_MapAnyItems_AddMapResultOption_NoOverride_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddMapResultOption no override empty", actual)
 }
 
-func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty(t *testing.T) {
+func Test_MapAnyItems_AddManyMapResultsUsingOption_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.AddManyMapResultsUsingOption(true)
@@ -627,7 +627,7 @@ func Test_MapAnyItems_AddManyMapResultsUsingOption_Valid(t *testing.T) {
 // MapAnyItems — Paging branches
 // =============================================================================
 
-func Test_MapAnyItems_GetPagesSize_Zero(t *testing.T) {
+func Test_MapAnyItems_GetPagesSize_Zero_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -680,7 +680,7 @@ func Test_MapAnyItems_GetPagedCollection_SmallData(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetPagedCollection small data", actual)
 }
 
-func Test_MapAnyItems_GetNewMapUsingKeys_Empty(t *testing.T) {
+func Test_MapAnyItems_GetNewMapUsingKeys_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.GetNewMapUsingKeys(false)
@@ -746,7 +746,7 @@ func Test_MapAnyItems_JsonStringMust_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonStringMust valid", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey_Found_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("k", "v")
@@ -760,7 +760,7 @@ func Test_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonResultOfKey found", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKey_Missing_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	jr := m.JsonResultOfKey("missing")
@@ -773,7 +773,7 @@ func Test_MapAnyItems_JsonResultOfKey_Missing(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonResultOfKey missing", actual)
 }
 
-func Test_MapAnyItems_JsonResultOfKeys_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonResultOfKeys_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.JsonResultOfKeys()
@@ -854,7 +854,7 @@ func Test_MapAnyItems_JsonParseSelfInject_Error(t *testing.T) {
 // MapAnyItems — AllKeys / AllKeysSorted / AllValues
 // =============================================================================
 
-func Test_MapAnyItems_AllKeys_Empty(t *testing.T) {
+func Test_MapAnyItems_AllKeys_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -942,7 +942,7 @@ func Test_MapAnyItems_AllValues_Valid(t *testing.T) {
 // MapAnyItems — IsEqual / IsEqualRaw branches
 // =============================================================================
 
-func Test_MapAnyItems_IsEqual_BothNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_BothNil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	var a *coredynamic.MapAnyItems
 	var b *coredynamic.MapAnyItems
@@ -955,7 +955,7 @@ func Test_MapAnyItems_IsEqual_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems IsEqual both nil", actual)
 }
 
-func Test_MapAnyItems_IsEqual_LeftNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_LeftNil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	var a *coredynamic.MapAnyItems
 	b := coredynamic.EmptyMapAnyItems()
@@ -968,7 +968,7 @@ func Test_MapAnyItems_IsEqual_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems IsEqual left nil", actual)
 }
 
-func Test_MapAnyItems_IsEqual_RightNil(t *testing.T) {
+func Test_MapAnyItems_IsEqual_RightNil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	a := coredynamic.EmptyMapAnyItems()
 
@@ -1046,7 +1046,7 @@ func Test_MapAnyItems_IsEqualRaw_DiffLength(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems IsEqualRaw diff length", actual)
 }
 
-func Test_MapAnyItems_IsEqualRaw_MissingKey(t *testing.T) {
+func Test_MapAnyItems_IsEqualRaw_MissingKey_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	a := coredynamic.EmptyMapAnyItems()
 	a.Add("a", 1)
@@ -1161,7 +1161,7 @@ func Test_MapAnyItems_Dispose_Valid(t *testing.T) {
 // MapAnyItems — ClonePtr
 // =============================================================================
 
-func Test_MapAnyItems_ClonePtr_Nil(t *testing.T) {
+func Test_MapAnyItems_ClonePtr_Nil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 	_, err := m.ClonePtr()
@@ -1198,7 +1198,7 @@ func Test_MapAnyItems_ClonePtr_Valid(t *testing.T) {
 // MapAnyItems — Misc
 // =============================================================================
 
-func Test_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
+func Test_MapAnyItems_RawMapStringAnyDiff_Nil_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	var m *coredynamic.MapAnyItems
 	r := m.RawMapStringAnyDiff()
@@ -1237,7 +1237,7 @@ func Test_MapAnyItems_Strings_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Strings valid", actual)
 }
 
-func Test_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
+func Test_MapAnyItems_MapAnyItemsSelf_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -1276,7 +1276,7 @@ func Test_MapAnyItems_JsonModel_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonModel valid", actual)
 }
 
-func Test_MapAnyItems_JsonModelAny(t *testing.T) {
+func Test_MapAnyItems_JsonModelAny_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 
@@ -1288,7 +1288,7 @@ func Test_MapAnyItems_JsonModelAny(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonModelAny", actual)
 }
 
-func Test_MapAnyItems_Json(t *testing.T) {
+func Test_MapAnyItems_Json_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("a", 1)
@@ -1302,7 +1302,7 @@ func Test_MapAnyItems_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Json", actual)
 }
 
-func Test_MapAnyItems_JsonPtr(t *testing.T) {
+func Test_MapAnyItems_JsonPtr_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("a", 1)
@@ -1316,7 +1316,7 @@ func Test_MapAnyItems_JsonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonPtr", actual)
 }
 
-func Test_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonMapResults_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r, err := m.JsonMapResults()
@@ -1355,7 +1355,7 @@ func Test_MapAnyItems_JsonMapResults_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonMapResults valid", actual)
 }
 
-func Test_MapAnyItems_JsonResultsCollection_Empty(t *testing.T) {
+func Test_MapAnyItems_JsonResultsCollection_Empty_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	r := m.JsonResultsCollection()
@@ -1510,7 +1510,7 @@ func Test_MapAnyItems_HasAnyChanges_False(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems HasAnyChanges false", actual)
 }
 
-func Test_MapAnyItems_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
+func Test_MapAnyItems_HashmapDiffUsingRaw_NoDiff_FromMapAnyItemsLengthMap(t *testing.T) {
 	// Arrange
 	m := coredynamic.EmptyMapAnyItems()
 	m.Add("a", 1)

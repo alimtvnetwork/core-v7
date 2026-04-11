@@ -2196,7 +2196,7 @@ func Test_FuncMap_Basic(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- basic", actual)
 }
 
-func Test_FuncMap_Has(t *testing.T) {
+func Test_FuncMap_Has_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(strings.ToUpper)
 
@@ -2216,7 +2216,7 @@ func Test_FuncMap_Has(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- Has", actual)
 }
 
-func Test_FuncMap_Get(t *testing.T) {
+func Test_FuncMap_Get_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(strings.ToUpper)
 	f := fm.Get("ToUpper")
@@ -2235,7 +2235,7 @@ func Test_FuncMap_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- Get", actual)
 }
 
-func Test_FuncMap_IsValidFuncOf(t *testing.T) {
+func Test_FuncMap_IsValidFuncOf_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(strings.ToUpper)
 
@@ -2253,7 +2253,7 @@ func Test_FuncMap_IsValidFuncOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncMap returns non-empty -- IsValidFuncOf", actual)
 }
 
-func Test_FuncMap_ArgsCount(t *testing.T) {
+func Test_FuncMap_ArgsCount_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map(strings.ToUpper)
 
@@ -2516,7 +2516,7 @@ func Test_FuncWrap_TypedHelpers(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- typed helpers", actual)
 }
 
-func Test_FuncWrap_InvokeAsBool(t *testing.T) {
+func Test_FuncWrap_InvokeAsBool_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func(s string) bool { return s == "yes" }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2536,7 +2536,7 @@ func Test_FuncWrap_InvokeAsBool(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_InvokeAsString(t *testing.T) {
+func Test_FuncWrap_InvokeAsString_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return strings.ToUpper(s) }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2556,7 +2556,7 @@ func Test_FuncWrap_InvokeAsString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsString returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_InvokeAsAny(t *testing.T) {
+func Test_FuncWrap_InvokeAsAny_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2618,7 +2618,7 @@ func Test_FuncWrap_InvokeAsError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns error -- with args", actual)
 }
 
-func Test_FuncWrap_InArgNames(t *testing.T) {
+func Test_FuncWrap_InArgNames_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2646,7 +2646,7 @@ func Test_FuncWrap_InArgNames_Multi(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "InArgNames returns correct value -- multi", actual)
 }
 
-func Test_FuncWrap_OutArgNames(t *testing.T) {
+func Test_FuncWrap_OutArgNames_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func() (string, error) { return "", nil }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2688,7 +2688,7 @@ func Test_FuncWrap_OutArgNamesEachLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "OutArgNamesEachLine returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_IsInTypeMatches(t *testing.T) {
+func Test_FuncWrap_IsInTypeMatches_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fn := func(s string) string { return s }
 	fw := args.NewTypedFuncWrap(fn)
@@ -2721,7 +2721,7 @@ func Test_FuncWrap_PascalCase(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetPascalCaseFuncName returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_PkgNameOnly(t *testing.T) {
+func Test_FuncWrap_PkgNameOnly_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fw := args.NewTypedFuncWrap(strings.ToUpper)
 	result := fw.PkgNameOnly()
@@ -2734,7 +2734,7 @@ func Test_FuncWrap_PkgNameOnly(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PkgNameOnly returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_FuncDirectInvokeName(t *testing.T) {
+func Test_FuncWrap_FuncDirectInvokeName_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fw := args.NewTypedFuncWrap(strings.ToUpper)
 	result := fw.FuncDirectInvokeName()
@@ -2786,7 +2786,7 @@ func Test_FuncWrap_IsEqualValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsEqualValue returns correct value -- with args", actual)
 }
 
-func Test_FuncWrap_ValidationError_Nil(t *testing.T) {
+func Test_FuncWrap_ValidationError_Nil_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	var fw *args.FuncWrapAny
 	err := fw.ValidationError()
@@ -2858,7 +2858,7 @@ func Test_FuncDetector_GetFuncWrap_FromRawFunc(t *testing.T) {
 // args.Empty / NewFuncWrap — coverage
 // ══════════════════════════════════════════════════════════════════
 
-func Test_Empty_Map(t *testing.T) {
+func Test_Empty_Map_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	m := args.Empty.Map()
 
@@ -2870,7 +2870,7 @@ func Test_Empty_Map(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Map returns empty -- with args", actual)
 }
 
-func Test_Empty_FuncWrap(t *testing.T) {
+func Test_Empty_FuncWrap_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fw := args.Empty.FuncWrap()
 
@@ -2882,7 +2882,7 @@ func Test_Empty_FuncWrap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.FuncWrap returns empty -- with args", actual)
 }
 
-func Test_Empty_FuncMap(t *testing.T) {
+func Test_Empty_FuncMap_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.Empty.FuncMap()
 
@@ -2894,7 +2894,7 @@ func Test_Empty_FuncMap(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.FuncMap returns empty -- with args", actual)
 }
 
-func Test_Empty_Holder(t *testing.T) {
+func Test_Empty_Holder_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	h := args.Empty.Holder()
 
@@ -2906,7 +2906,7 @@ func Test_Empty_Holder(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Empty.Holder returns empty -- with args", actual)
 }
 
-func Test_NewFuncWrap_Many(t *testing.T) {
+func Test_NewFuncWrap_Many_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fws := args.NewFuncWrap.Many(strings.ToUpper, strings.ToLower)
 
@@ -2918,7 +2918,7 @@ func Test_NewFuncWrap_Many(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFuncWrap.Many returns correct value -- with args", actual)
 }
 
-func Test_NewFuncWrap_Many_Empty(t *testing.T) {
+func Test_NewFuncWrap_Many_Empty_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fws := args.NewFuncWrap.Many()
 
@@ -2930,7 +2930,7 @@ func Test_NewFuncWrap_Many_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFuncWrap.Many returns empty -- empty", actual)
 }
 
-func Test_NewFuncWrap_Map_Empty(t *testing.T) {
+func Test_NewFuncWrap_Map_Empty_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fm := args.NewFuncWrap.Map()
 
@@ -2942,7 +2942,7 @@ func Test_NewFuncWrap_Map_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFuncWrap.Map returns empty -- empty", actual)
 }
 
-func Test_NewFuncWrap_Invalid(t *testing.T) {
+func Test_NewFuncWrap_Invalid_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Invalid()
 
@@ -2954,7 +2954,7 @@ func Test_NewFuncWrap_Invalid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFuncWrap.Invalid returns error -- with args", actual)
 }
 
-func Test_NewFuncWrap_Default_Nil(t *testing.T) {
+func Test_NewFuncWrap_Default_Nil_FromMapCompileToStringsa(t *testing.T) {
 	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
 

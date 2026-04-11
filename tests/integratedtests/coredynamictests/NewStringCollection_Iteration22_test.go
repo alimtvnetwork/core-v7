@@ -12,7 +12,7 @@ import (
 // CollectionTypes — factory shortcuts
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_NewStringCollection(t *testing.T) {
+func Test_NewStringCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewStringCollection(5)
 	col.Add("a").Add("b")
@@ -25,7 +25,7 @@ func Test_NewStringCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewStringCollection returns correct value -- with args", actual)
 }
 
-func Test_EmptyStringCollection(t *testing.T) {
+func Test_EmptyStringCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyStringCollection()
 
@@ -37,7 +37,7 @@ func Test_EmptyStringCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyStringCollection returns empty -- with args", actual)
 }
 
-func Test_NewIntCollection(t *testing.T) {
+func Test_NewIntCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewIntCollection(3)
 	col.Add(1).Add(2).Add(3)
@@ -50,7 +50,7 @@ func Test_NewIntCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewIntCollection returns correct value -- with args", actual)
 }
 
-func Test_EmptyIntCollection(t *testing.T) {
+func Test_EmptyIntCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.EmptyIntCollection()
 
@@ -62,7 +62,7 @@ func Test_EmptyIntCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "EmptyIntCollection returns empty -- with args", actual)
 }
 
-func Test_NewInt64Collection(t *testing.T) {
+func Test_NewInt64Collection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewInt64Collection(2)
 	col.Add(int64(99))
@@ -75,7 +75,7 @@ func Test_NewInt64Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewInt64Collection returns correct value -- with args", actual)
 }
 
-func Test_NewByteCollection(t *testing.T) {
+func Test_NewByteCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewByteCollection(2)
 	col.Add(byte(0x41))
@@ -88,7 +88,7 @@ func Test_NewByteCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewByteCollection returns correct value -- with args", actual)
 }
 
-func Test_NewBoolCollection(t *testing.T) {
+func Test_NewBoolCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewBoolCollection(2)
 	col.Add(true).Add(false)
@@ -101,7 +101,7 @@ func Test_NewBoolCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewBoolCollection returns correct value -- with args", actual)
 }
 
-func Test_NewFloat64Collection(t *testing.T) {
+func Test_NewFloat64Collection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewFloat64Collection(2)
 	col.Add(3.14)
@@ -114,7 +114,7 @@ func Test_NewFloat64Collection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewFloat64Collection returns correct value -- with args", actual)
 }
 
-func Test_NewAnyMapCollection(t *testing.T) {
+func Test_NewAnyMapCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewAnyMapCollection(2)
 	col.Add(map[string]any{"k": "v"})
@@ -127,7 +127,7 @@ func Test_NewAnyMapCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NewAnyMapCollection returns correct value -- with args", actual)
 }
 
-func Test_NewStringMapCollection(t *testing.T) {
+func Test_NewStringMapCollection_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	col := coredynamic.NewStringMapCollection(2)
 	col.Add(map[string]string{"k": "v"})
@@ -913,7 +913,7 @@ func Test_GroupByCount_Nil(t *testing.T) {
 // ReflectSetFromTo — deeper paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ReflectSetFromTo_BothNil(t *testing.T) {
+func Test_ReflectSetFromTo_BothNil_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	err := coredynamic.ReflectSetFromTo(nil, nil)
 
@@ -945,7 +945,7 @@ func Test_ReflectSetFromTo_SameType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same type", actual)
 }
 
-func Test_ReflectSetFromTo_SamePointerType(t *testing.T) {
+func Test_ReflectSetFromTo_SamePointerType_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	from := new(string)
 	*from = "hello"
@@ -1004,7 +1004,7 @@ func Test_ReflectSetFromTo_FromNilPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns nil -- from nil ptr", actual)
 }
 
-func Test_ReflectSetFromTo_BytesToStruct(t *testing.T) {
+func Test_ReflectSetFromTo_BytesToStruct_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	type Simple struct {
 		Name string `json:"name"`
@@ -1027,7 +1027,7 @@ func Test_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bytes to struct", actual)
 }
 
-func Test_ReflectSetFromTo_StructToBytes(t *testing.T) {
+func Test_ReflectSetFromTo_StructToBytes_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	type Simple struct {
 		Name string `json:"name"`
@@ -1050,7 +1050,7 @@ func Test_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- struct to bytes", actual)
 }
 
-func Test_ReflectSetFromTo_TypeMismatch(t *testing.T) {
+func Test_ReflectSetFromTo_TypeMismatch_FromNewStringCollectionI(t *testing.T) {
 	// Arrange
 	from := "hello"
 	var to int

@@ -71,7 +71,7 @@ func Test_HashmapDiff_Raw_Nil(t *testing.T) {
 	})
 }
 
-func Test_HashmapDiff_AllKeysSorted(t *testing.T) {
+func Test_HashmapDiff_AllKeysSorted_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_HashmapDiff_AllKeysSorted", func() {
 		hd := corestr.HashmapDiff(map[string]string{"b": "2", "a": "1"})
 		keys := hd.AllKeysSorted()
@@ -82,7 +82,7 @@ func Test_HashmapDiff_AllKeysSorted(t *testing.T) {
 	})
 }
 
-func Test_HashmapDiff_MapAnyItems(t *testing.T) {
+func Test_HashmapDiff_MapAnyItems_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_HashmapDiff_MapAnyItems", func() {
 		hd := corestr.HashmapDiff(map[string]string{"a": "1"})
 		m := hd.MapAnyItems()
@@ -93,7 +93,7 @@ func Test_HashmapDiff_MapAnyItems(t *testing.T) {
 	})
 }
 
-func Test_HashmapDiff_MapAnyItems_Nil(t *testing.T) {
+func Test_HashmapDiff_MapAnyItems_Nil_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_HashmapDiff_MapAnyItems_Nil", func() {
 		var hd *corestr.HashmapDiff
 		m := hd.MapAnyItems()
@@ -267,7 +267,7 @@ func Test_KeyAnyValuePair_IsVariableNameEqual(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_IsValueNull(t *testing.T) {
+func Test_KeyAnyValuePair_IsValueNull_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_KeyAnyValuePair_IsValueNull", func() {
 		kav := &corestr.KeyAnyValuePair{Key: "k", Value: nil}
 		tc := caseV1Compat{Name: "KAV IsValueNull", Expected: true, Actual: kav.IsValueNull(), Args: args.Map{}}
@@ -307,7 +307,7 @@ func Test_KeyAnyValuePair_IsValueEmptyString(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_ValueString(t *testing.T) {
+func Test_KeyAnyValuePair_ValueString_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_KeyAnyValuePair_ValueString", func() {
 		kav := &corestr.KeyAnyValuePair{Key: "k", Value: "hello"}
 		tc := caseV1Compat{Name: "KAV ValueString", Expected: "hello", Actual: kav.ValueString(), Args: args.Map{}}
@@ -327,7 +327,7 @@ func Test_KeyAnyValuePair_String(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_Compile(t *testing.T) {
+func Test_KeyAnyValuePair_Compile_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_KeyAnyValuePair_Compile", func() {
 		kav := &corestr.KeyAnyValuePair{Key: "k", Value: "v"}
 		tc := caseV1Compat{Name: "KAV Compile", Expected: true, Actual: len(kav.Compile()) > 0, Args: args.Map{}}
@@ -401,7 +401,7 @@ func Test_KeyAnyValuePair_Clear(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_Dispose(t *testing.T) {
+func Test_KeyAnyValuePair_Dispose_FromHashmapDiffLengthIte(t *testing.T) {
 	safeTest(t, "Test_Cov54_KeyAnyValuePair_Dispose", func() {
 		kav := &corestr.KeyAnyValuePair{Key: "k", Value: "v"}
 		kav.Dispose()

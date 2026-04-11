@@ -291,7 +291,7 @@ func Test_Dynamic_IntDefault_NonNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault non-numeric", actual)
 }
 
-func Test_Dynamic_IntDefault_Valid(t *testing.T) {
+func Test_Dynamic_IntDefault_Valid_FromDynamicLengthBranchG(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("123", true)
 	val, ok := d.IntDefault(0)
@@ -336,7 +336,7 @@ func Test_Dynamic_Float64_NonNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 non-numeric", actual)
 }
 
-func Test_Dynamic_Float64_Valid(t *testing.T) {
+func Test_Dynamic_Float64_Valid_FromDynamicLengthBranchG(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr("3.14", true)
 	val, err := d.Float64()
@@ -441,7 +441,7 @@ func Test_Dynamic_ValueNullErr_Valid(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueNullErr valid", actual)
 }
 
-func Test_Dynamic_ValueString_NonString(t *testing.T) {
+func Test_Dynamic_ValueString_NonString_FromDynamicLengthBranchG(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicPtr(42, true)
 	r := d.ValueString()

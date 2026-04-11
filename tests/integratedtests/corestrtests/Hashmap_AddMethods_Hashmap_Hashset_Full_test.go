@@ -38,7 +38,7 @@ func Test_Hashmap_AddMethods(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateHashmap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateHashmap_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateHashmap", func() {
 		// Arrange
 		h1 := corestr.New.Hashmap.Cap(2)
@@ -57,7 +57,7 @@ func Test_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateMap(t *testing.T) {
+func Test_Hashmap_AddOrUpdateMap_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateMap", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -130,7 +130,7 @@ func Test_Hashmap_Lookups(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Get", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -150,7 +150,7 @@ func Test_Hashmap_Get(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Remove(t *testing.T) {
+func Test_Hashmap_Remove_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Remove", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -216,7 +216,7 @@ func Test_Hashmap_FilterOps(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ConcatNew(t *testing.T) {
+func Test_Hashmap_ConcatNew_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ConcatNew", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -250,7 +250,7 @@ func Test_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_IsEqual(t *testing.T) {
+func Test_Hashmap_IsEqual_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_IsEqual", func() {
 		// Arrange
 		h1 := corestr.New.Hashmap.Cap(2)
@@ -270,7 +270,7 @@ func Test_Hashmap_IsEqual(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Diff(t *testing.T) {
+func Test_Hashmap_Diff_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Diff", func() {
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
@@ -314,7 +314,7 @@ func Test_Hashmap_GetExcept(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Join(t *testing.T) {
+func Test_Hashmap_Join_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Join", func() {
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
@@ -323,7 +323,7 @@ func Test_Hashmap_Join(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_String(t *testing.T) {
+func Test_Hashmap_String_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_String", func() {
 		h := corestr.New.Hashmap.Cap(2)
 		_ = h.String()
@@ -351,7 +351,7 @@ func Test_Hashmap_JsonOps(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Clone(t *testing.T) {
+func Test_Hashmap_Clone_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Clone", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -371,7 +371,7 @@ func Test_Hashmap_Clone(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ClearDispose(t *testing.T) {
+func Test_Hashmap_ClearDispose_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ClearDispose", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -437,7 +437,7 @@ func Test_Hashmap_AddOrUpdateWithWgLock(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdateStringsPtrWgLock(t *testing.T) {
+func Test_Hashmap_AddOrUpdateStringsPtrWgLock_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateStringsPtrWgLock", func() {
 		h := corestr.New.Hashmap.Cap(5)
 		wg := &sync.WaitGroup{}
@@ -473,7 +473,7 @@ func Test_Hashmap_HasAllCollectionItems(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_ToStringsUsingCompiler(t *testing.T) {
+func Test_Hashmap_ToStringsUsingCompiler_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ToStringsUsingCompiler", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -507,7 +507,7 @@ func Test_Hashmap_AddsOrUpdatesFilters(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Collection(t *testing.T) {
+func Test_Hashmap_Collection_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Collection", func() {
 		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
@@ -527,7 +527,7 @@ func Test_Hashmap_Collection(t *testing.T) {
 // Hashset — comprehensive coverage for remaining uncovered methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Hashset_AddMethods(t *testing.T) {
+func Test_Hashset_AddMethods_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddMethods", func() {
 		h := corestr.New.Hashset.Cap(10)
 		h.Add("a")
@@ -585,7 +585,7 @@ func Test_Hashset_Lookups(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Collection(t *testing.T) {
+func Test_Hashset_Collection_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Collection", func() {
 		h := corestr.New.Hashset.Cap(2)
 		h.Adds("a", "b")
@@ -604,7 +604,7 @@ func Test_Hashset_Collection(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Filter(t *testing.T) {
+func Test_Hashset_Filter_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Filter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -652,7 +652,7 @@ func Test_Hashset_GetAllExcept(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Concat(t *testing.T) {
+func Test_Hashset_Concat_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Concat", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(2)
@@ -671,7 +671,7 @@ func Test_Hashset_Concat(t *testing.T) {
 	})
 }
 
-func Test_Hashset_IsEquals(t *testing.T) {
+func Test_Hashset_IsEquals_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_IsEquals", func() {
 		// Arrange
 		h1 := corestr.New.Hashset.Cap(2)
@@ -694,7 +694,7 @@ func Test_Hashset_IsEquals(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Remove(t *testing.T) {
+func Test_Hashset_Remove_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Remove", func() {
 		h := corestr.New.Hashset.Cap(3)
 		h.Adds("a", "b")
@@ -706,7 +706,7 @@ func Test_Hashset_Remove(t *testing.T) {
 	})
 }
 
-func Test_Hashset_String(t *testing.T) {
+func Test_Hashset_String_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_String", func() {
 		h := corestr.New.Hashset.Cap(2)
 		_ = h.String()
@@ -716,7 +716,7 @@ func Test_Hashset_String(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Join(t *testing.T) {
+func Test_Hashset_Join_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Join", func() {
 		h := corestr.New.Hashset.Cap(2)
 		h.Adds("a", "b")
@@ -746,7 +746,7 @@ func Test_Hashset_JsonOps(t *testing.T) {
 	})
 }
 
-func Test_Hashset_ClearDispose(t *testing.T) {
+func Test_Hashset_ClearDispose_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_ClearDispose", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(2)
@@ -764,7 +764,7 @@ func Test_Hashset_ClearDispose(t *testing.T) {
 	})
 }
 
-func Test_Hashset_Resize(t *testing.T) {
+func Test_Hashset_Resize_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Resize", func() {
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
@@ -791,7 +791,7 @@ func Test_Hashset_ToLowerSet(t *testing.T) {
 	})
 }
 
-func Test_Hashset_DistinctDiff(t *testing.T) {
+func Test_Hashset_DistinctDiff_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_DistinctDiff", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(3)
@@ -891,7 +891,7 @@ func Test_Hashset_MapStringAny(t *testing.T) {
 	})
 }
 
-func Test_Hashset_AddCollection(t *testing.T) {
+func Test_Hashset_AddCollection_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddCollection", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -924,7 +924,7 @@ func Test_Hashset_AddSimpleSlice(t *testing.T) {
 	})
 }
 
-func Test_Hashset_AddHashsetItems(t *testing.T) {
+func Test_Hashset_AddHashsetItems_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddHashsetItems", func() {
 		h := corestr.New.Hashset.Cap(5)
 		h2 := corestr.New.Hashset.Cap(2)
@@ -934,7 +934,7 @@ func Test_Hashset_AddHashsetItems(t *testing.T) {
 	})
 }
 
-func Test_Hashset_AddItemsMap(t *testing.T) {
+func Test_Hashset_AddItemsMap_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddItemsMap", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)
@@ -968,7 +968,7 @@ func Test_Hashset_HasAllCollectionItems(t *testing.T) {
 	})
 }
 
-func Test_Hashset_AddFuncErr(t *testing.T) {
+func Test_Hashset_AddFuncErr_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddFuncErr", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(2)
@@ -986,7 +986,7 @@ func Test_Hashset_AddFuncErr(t *testing.T) {
 	})
 }
 
-func Test_Hashset_AddsUsingFilter(t *testing.T) {
+func Test_Hashset_AddsUsingFilter_FromHashmapAddMethodsHas(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddsUsingFilter", func() {
 		// Arrange
 		h := corestr.New.Hashset.Cap(5)

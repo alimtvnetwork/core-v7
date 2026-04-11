@@ -123,7 +123,7 @@ func Test_C37_Collection_Adds(t *testing.T) {
 	})
 }
 
-func Test_C37_Collection_AddStrings(t *testing.T) {
+func Test_C37_Collection_AddStrings_FromC37CollectionCollect(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_AddStrings", func() {
 		// Arrange
 		c := corestr.New.Collection.Empty()

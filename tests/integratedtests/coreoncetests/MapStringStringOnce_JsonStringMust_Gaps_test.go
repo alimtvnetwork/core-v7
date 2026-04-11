@@ -18,7 +18,7 @@ import (
 //   Same pattern — marshalling []string cannot fail. Dead code.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust_FromMapStringStringOnceJ(t *testing.T) {
 	// Arrange
 	once := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{
@@ -37,7 +37,7 @@ func Test_MapStringStringOnce_JsonStringMust(t *testing.T) {
 	})
 }
 
-func Test_StringsOnce_JsonStringMust(t *testing.T) {
+func Test_StringsOnce_JsonStringMust_FromMapStringStringOnceJ(t *testing.T) {
 	// Arrange
 	once := coreonce.NewStringsOnce(func() []string {
 		return []string{"a", "b", "c"}

@@ -11,7 +11,7 @@ import (
 
 // ── Integer ──
 
-func Test_Integer_Equal(t *testing.T) {
+func Test_Integer_Equal_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer(5, 5)}
 
@@ -20,7 +20,7 @@ func Test_Integer_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer returns Equal -- same values", actual)
 }
 
-func Test_Integer_LeftLess(t *testing.T) {
+func Test_Integer_LeftLess_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer(3, 5)}
 
@@ -29,7 +29,7 @@ func Test_Integer_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer returns LeftLess -- left smaller", actual)
 }
 
-func Test_Integer_LeftGreater(t *testing.T) {
+func Test_Integer_LeftGreater_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer(7, 5)}
 
@@ -40,7 +40,7 @@ func Test_Integer_LeftGreater(t *testing.T) {
 
 // ── IntegerPtr ──
 
-func Test_IntegerPtr_BothNil(t *testing.T) {
+func Test_IntegerPtr_BothNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.IntegerPtr(nil, nil)}
 
@@ -49,7 +49,7 @@ func Test_IntegerPtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns Equal -- both nil", actual)
 }
 
-func Test_IntegerPtr_LeftNil(t *testing.T) {
+func Test_IntegerPtr_LeftNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	r := 5
 
@@ -61,7 +61,7 @@ func Test_IntegerPtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns LeftLess -- left nil", actual)
 }
 
-func Test_IntegerPtr_RightNil(t *testing.T) {
+func Test_IntegerPtr_RightNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	l := 5
 
@@ -73,7 +73,7 @@ func Test_IntegerPtr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IntegerPtr returns LeftGreater -- right nil", actual)
 }
 
-func Test_IntegerPtr_Equal(t *testing.T) {
+func Test_IntegerPtr_Equal_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	l, r := 5, 5
 
@@ -87,7 +87,7 @@ func Test_IntegerPtr_Equal(t *testing.T) {
 
 // ── Byte ──
 
-func Test_Byte_Equal(t *testing.T) {
+func Test_Byte_Equal_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Byte(5, 5)}
 
@@ -96,7 +96,7 @@ func Test_Byte_Equal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns Equal -- same values", actual)
 }
 
-func Test_Byte_LeftLess(t *testing.T) {
+func Test_Byte_LeftLess_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Byte(3, 5)}
 
@@ -105,7 +105,7 @@ func Test_Byte_LeftLess(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Byte returns LeftLess -- left smaller", actual)
 }
 
-func Test_Byte_LeftGreater(t *testing.T) {
+func Test_Byte_LeftGreater_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Byte(7, 5)}
 
@@ -116,7 +116,7 @@ func Test_Byte_LeftGreater(t *testing.T) {
 
 // ── BytePtr ──
 
-func Test_BytePtr_BothNil(t *testing.T) {
+func Test_BytePtr_BothNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.BytePtr(nil, nil)}
 
@@ -125,7 +125,7 @@ func Test_BytePtr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns Equal -- both nil", actual)
 }
 
-func Test_BytePtr_LeftNil(t *testing.T) {
+func Test_BytePtr_LeftNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	r := byte(5)
 
@@ -137,7 +137,7 @@ func Test_BytePtr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytePtr returns LeftLess -- left nil", actual)
 }
 
-func Test_BytePtr_RightNil(t *testing.T) {
+func Test_BytePtr_RightNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	l := byte(5)
 
@@ -168,7 +168,7 @@ func Test_Integer8_All(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct -- all branches", actual)
 }
 
-func Test_Integer8Ptr_BothNil(t *testing.T) {
+func Test_Integer8Ptr_BothNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.Integer8Ptr(nil, nil)}
 
@@ -177,7 +177,7 @@ func Test_Integer8Ptr_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns Equal -- both nil", actual)
 }
 
-func Test_Integer8Ptr_LeftNil(t *testing.T) {
+func Test_Integer8Ptr_LeftNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	r := int8(5)
 
@@ -189,7 +189,7 @@ func Test_Integer8Ptr_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns LeftLess -- left nil", actual)
 }
 
-func Test_Integer8Ptr_RightNil(t *testing.T) {
+func Test_Integer8Ptr_RightNil_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	l := int8(5)
 
@@ -201,7 +201,7 @@ func Test_Integer8Ptr_RightNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Integer8Ptr returns LeftGreater -- right nil", actual)
 }
 
-func Test_Integer8Ptr_Equal(t *testing.T) {
+func Test_Integer8Ptr_Equal_FromIntegerEqual(t *testing.T) {
 	// Arrange
 	l, r := int8(5), int8(5)
 
@@ -338,7 +338,7 @@ func Test_Integer64Ptr_All(t *testing.T) {
 
 // ── AnyItem ──
 
-func Test_AnyItem_BothNil(t *testing.T) {
+func Test_AnyItem_BothNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.AnyItem(nil, nil)}
 
@@ -347,7 +347,7 @@ func Test_AnyItem_BothNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns Equal -- both nil", actual)
 }
 
-func Test_AnyItem_LeftNil(t *testing.T) {
+func Test_AnyItem_LeftNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.AnyItem(nil, "hello")}
 
@@ -356,7 +356,7 @@ func Test_AnyItem_LeftNil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyItem returns NotEqual -- left nil", actual)
 }
 
-func Test_AnyItem_RightNil(t *testing.T) {
+func Test_AnyItem_RightNil_FromIntegerEqual(t *testing.T) {
 	// Act
 	actual := args.Map{"result": corecmp.AnyItem("hello", nil)}
 

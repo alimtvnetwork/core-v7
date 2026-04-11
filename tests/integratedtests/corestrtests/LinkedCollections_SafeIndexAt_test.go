@@ -100,7 +100,7 @@ func Test_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 
 // ---------- LinkedCollection: ToCollection with items ----------
 
-func Test_LinkedCollections_ToCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollection_FromLinkedCollectionsSaf(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollection", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
@@ -119,7 +119,7 @@ func Test_LinkedCollections_ToCollection(t *testing.T) {
 
 // ---------- LinkedCollection: ToCollectionsOfCollection with items ----------
 
-func Test_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
+func Test_LinkedCollections_ToCollectionsOfCollection_FromLinkedCollectionsSaf(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollectionsOfCollection", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollection.Create()

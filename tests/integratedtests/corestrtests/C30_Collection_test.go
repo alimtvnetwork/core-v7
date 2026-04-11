@@ -446,7 +446,7 @@ func Test_C30_Collection_AddIf(t *testing.T) {
 	})
 }
 
-func Test_C30_Collection_EachItemSplitBy(t *testing.T) {
+func Test_C30_Collection_EachItemSplitBy_FromC30Collection(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_EachItemSplitBy", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a,b", "c"})

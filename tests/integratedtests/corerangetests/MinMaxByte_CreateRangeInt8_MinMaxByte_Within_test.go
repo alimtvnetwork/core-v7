@@ -7,7 +7,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt8_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 0, Max: 10}
 	r := mmb.CreateRangeInt8("0-10", "-")
@@ -20,7 +20,7 @@ func Test_MinMaxByte_CreateRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
+func Test_MinMaxByte_CreateRangeInt16_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	mmb := &corerange.MinMaxByte{Min: 0, Max: 10}
 	r := mmb.CreateRangeInt16("0-10", "-")
@@ -33,7 +33,7 @@ func Test_MinMaxByte_CreateRangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
-func Test_Within_StringRangeInt32(t *testing.T) {
+func Test_Within_StringRangeInt32_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.StringRangeInt32("100")
 
@@ -45,7 +45,7 @@ func Test_Within_StringRangeInt32(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 100", actual)
 }
 
-func Test_Within_StringRangeInt16(t *testing.T) {
+func Test_Within_StringRangeInt16_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.StringRangeInt16("100")
 
@@ -57,7 +57,7 @@ func Test_Within_StringRangeInt16(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 100", actual)
 }
 
-func Test_Within_StringRangeInt8(t *testing.T) {
+func Test_Within_StringRangeInt8_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.StringRangeInt8("50")
 
@@ -69,7 +69,7 @@ func Test_Within_StringRangeInt8(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 50", actual)
 }
 
-func Test_Within_StringRangeByte(t *testing.T) {
+func Test_Within_StringRangeByte_FromMinMaxByteCreateRang(t *testing.T) {
 	// Arrange
 	val, ok := corerange.Within.StringRangeByte("200")
 

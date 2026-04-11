@@ -122,7 +122,7 @@ func Test_KeyValCollection_Items(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Items", actual)
 }
 
-func Test_KeyValCollection_AllKeys(t *testing.T) {
+func Test_KeyValCollection_AllKeys_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "b", Value: 2})
@@ -147,7 +147,7 @@ func Test_KeyValCollection_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- AllKeys", actual)
 }
 
-func Test_KeyValCollection_AllValues(t *testing.T) {
+func Test_KeyValCollection_AllValues_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 42})
@@ -193,7 +193,7 @@ func Test_KeyValCollection_MapAnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- MapAnyItems", actual)
 }
 
-func Test_KeyValCollection_String(t *testing.T) {
+func Test_KeyValCollection_String_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	c := coredynamic.NewKeyValCollection(5)
 	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -464,7 +464,7 @@ func Test_KeyValCollection_NonPtrPtr(t *testing.T) {
 // DynamicCollection — constructors & basic
 // ═══════════════════════════════════════════
 
-func Test_DynamicCollection_Empty(t *testing.T) {
+func Test_DynamicCollection_Empty_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.EmptyDynamicCollection()
 	var nilDC *coredynamic.DynamicCollection
@@ -488,7 +488,7 @@ func Test_DynamicCollection_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- Empty", actual)
 }
 
-func Test_DynamicCollection_Add(t *testing.T) {
+func Test_DynamicCollection_Add_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.Add(coredynamic.NewDynamic("a", true))
@@ -514,7 +514,7 @@ func Test_DynamicCollection_Add(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Add", actual)
 }
 
-func Test_DynamicCollection_AddAnyMany(t *testing.T) {
+func Test_DynamicCollection_AddAnyMany_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -528,7 +528,7 @@ func Test_DynamicCollection_AddAnyMany(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddAnyMany", actual)
 }
 
-func Test_DynamicCollection_AddManyPtr(t *testing.T) {
+func Test_DynamicCollection_AddManyPtr_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddManyPtr(
@@ -578,7 +578,7 @@ func Test_DynamicCollection_FirstLastOrDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- FirstLast", actual)
 }
 
-func Test_DynamicCollection_At(t *testing.T) {
+func Test_DynamicCollection_At_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -592,7 +592,7 @@ func Test_DynamicCollection_At(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- At", actual)
 }
 
-func Test_DynamicCollection_Items(t *testing.T) {
+func Test_DynamicCollection_Items_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("a", true)
@@ -641,7 +641,7 @@ func Test_DynamicCollection_SkipTakeLimitSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Skip/Take/Limit", actual)
 }
 
-func Test_DynamicCollection_RemoveAt(t *testing.T) {
+func Test_DynamicCollection_RemoveAt_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -664,7 +664,7 @@ func Test_DynamicCollection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- RemoveAt", actual)
 }
 
-func Test_DynamicCollection_AnyItems(t *testing.T) {
+func Test_DynamicCollection_AnyItems_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -686,7 +686,7 @@ func Test_DynamicCollection_AnyItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AnyItems", actual)
 }
 
-func Test_DynamicCollection_AnyItemsCollection(t *testing.T) {
+func Test_DynamicCollection_AnyItemsCollection_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -708,7 +708,7 @@ func Test_DynamicCollection_AnyItemsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AnyItemsCollection", actual)
 }
 
-func Test_DynamicCollection_ListStrings(t *testing.T) {
+func Test_DynamicCollection_ListStrings_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("hello", "world")
@@ -729,7 +729,7 @@ func Test_DynamicCollection_ListStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- ListStrings", actual)
 }
 
-func Test_DynamicCollection_Strings(t *testing.T) {
+func Test_DynamicCollection_Strings_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b")
@@ -754,7 +754,7 @@ func Test_DynamicCollection_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Strings", actual)
 }
 
-func Test_DynamicCollection_Loop(t *testing.T) {
+func Test_DynamicCollection_Loop_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -784,7 +784,7 @@ func Test_DynamicCollection_Loop(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Loop", actual)
 }
 
-func Test_DynamicCollection_Loop_Break(t *testing.T) {
+func Test_DynamicCollection_Loop_Break_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAnyMany("a", "b", "c")
@@ -802,7 +802,7 @@ func Test_DynamicCollection_Loop_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Loop break", actual)
 }
 
-func Test_DynamicCollection_Json(t *testing.T) {
+func Test_DynamicCollection_Json_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -833,7 +833,7 @@ func Test_DynamicCollection_Json(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- Json", actual)
 }
 
-func Test_DynamicCollection_JsonResultsCollection(t *testing.T) {
+func Test_DynamicCollection_JsonResultsCollection_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -930,7 +930,7 @@ func Test_DynamicCollection_ParseJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
-func Test_DynamicCollection_JsonParseSelfInject(t *testing.T) {
+func Test_DynamicCollection_JsonParseSelfInject_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(5)
 	dc.AddAny("hello", true)
@@ -1002,7 +1002,7 @@ func Test_MapAnyItems_AddSet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Add/Set", actual)
 }
 
-func Test_MapAnyItems_Get(t *testing.T) {
+func Test_MapAnyItems_Get_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 42})
 	val, has := m.Get("a")
@@ -1024,7 +1024,7 @@ func Test_MapAnyItems_Get(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Get", actual)
 }
 
-func Test_MapAnyItems_AllKeys(t *testing.T) {
+func Test_MapAnyItems_AllKeys_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"b": 2, "a": 1})
 	keys := m.AllKeys()
@@ -1049,7 +1049,7 @@ func Test_MapAnyItems_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AllKeys", actual)
 }
 
-func Test_MapAnyItems_AddMapResult(t *testing.T) {
+func Test_MapAnyItems_AddMapResult_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(5)
 	m.Add("a", 1)
@@ -1078,7 +1078,7 @@ func Test_MapAnyItems_AddManyMapResults(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddManyMapResults", actual)
 }
 
-func Test_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
+func Test_MapAnyItems_GetNewMapUsingKeys_FromKeyValCollectionEmpt(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1, "b": 2, "c": 3})
 	sub := m.GetNewMapUsingKeys(false, "a", "c")

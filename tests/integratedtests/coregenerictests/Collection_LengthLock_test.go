@@ -10,7 +10,7 @@ import (
 
 // ── Collection — uncovered branches ──
 
-func Test_Collection_LengthLock(t *testing.T) {
+func Test_Collection_LengthLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2})
 
@@ -22,7 +22,7 @@ func Test_Collection_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- LengthLock", actual)
 }
 
-func Test_Collection_IsEmptyLock(t *testing.T) {
+func Test_Collection_IsEmptyLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 
@@ -53,7 +53,7 @@ func Test_Collection_HasItems(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasItems", actual)
 }
 
-func Test_Collection_AddLock(t *testing.T) {
+func Test_Collection_AddLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddLock(42)
@@ -66,7 +66,7 @@ func Test_Collection_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddLock", actual)
 }
 
-func Test_Collection_AddsLock(t *testing.T) {
+func Test_Collection_AddsLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddsLock(1, 2, 3)
@@ -79,7 +79,7 @@ func Test_Collection_AddsLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddsLock", actual)
 }
 
-func Test_Collection_AddIf_True(t *testing.T) {
+func Test_Collection_AddIf_True_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddIf(true, 42)
@@ -92,7 +92,7 @@ func Test_Collection_AddIf_True(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- AddIf true", actual)
 }
 
-func Test_Collection_AddIfMany_True(t *testing.T) {
+func Test_Collection_AddIfMany_True_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	col.AddIfMany(true, 1, 2)
@@ -163,7 +163,7 @@ func Test_Collection_RemoveAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- RemoveAt", actual)
 }
 
-func Test_Collection_FirstOrDefault_Empty(t *testing.T) {
+func Test_Collection_FirstOrDefault_Empty_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 
@@ -175,7 +175,7 @@ func Test_Collection_FirstOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns empty -- FirstOrDefault empty", actual)
 }
 
-func Test_Collection_LastOrDefault_Empty(t *testing.T) {
+func Test_Collection_LastOrDefault_Empty_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 
@@ -227,7 +227,7 @@ func Test_Collection_Skip_Take(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Skip/Take", actual)
 }
 
-func Test_Collection_ForEachBreak(t *testing.T) {
+func Test_Collection_ForEachBreak_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 	count := 0
@@ -257,7 +257,7 @@ func Test_Collection_Filter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Filter", actual)
 }
 
-func Test_Collection_Clone_Empty(t *testing.T) {
+func Test_Collection_Clone_Empty_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.EmptyCollection[int]()
 	cloned := col.Clone()
@@ -270,7 +270,7 @@ func Test_Collection_Clone_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Clone empty", actual)
 }
 
-func Test_Collection_SortFunc(t *testing.T) {
+func Test_Collection_SortFunc_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{3, 1, 2})
 	col.SortFunc(func(a, b int) bool { return a < b })
@@ -289,7 +289,7 @@ func Test_Collection_SortFunc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortFunc", actual)
 }
 
-func Test_Collection_String(t *testing.T) {
+func Test_Collection_String_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1, 2})
 
@@ -313,7 +313,7 @@ func Test_Collection_Count(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Count", actual)
 }
 
-func Test_Collection_ItemsPtr(t *testing.T) {
+func Test_Collection_ItemsPtr_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	col := coregeneric.CollectionFrom([]int{1})
 
@@ -801,7 +801,7 @@ func Test_Hashmap_String(t *testing.T) {
 
 // ── LinkedList — uncovered branches ──
 
-func Test_LinkedList_LengthLock(t *testing.T) {
+func Test_LinkedList_LengthLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 
@@ -813,7 +813,7 @@ func Test_LinkedList_LengthLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- LengthLock", actual)
 }
 
-func Test_LinkedList_IsEmptyLock(t *testing.T) {
+func Test_LinkedList_IsEmptyLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 
@@ -825,7 +825,7 @@ func Test_LinkedList_IsEmptyLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns empty -- IsEmptyLock", actual)
 }
 
-func Test_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddLock(42)
@@ -838,7 +838,7 @@ func Test_LinkedList_AddLock(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- AddLock", actual)
 }
 
-func Test_LinkedList_AddsIf(t *testing.T) {
+func Test_LinkedList_AddsIf_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddsIf(true, 1, 2)
@@ -932,7 +932,7 @@ func Test_LinkedList_LastOrDefault_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns empty -- LastOrDefault empty", actual)
 }
 
-func Test_LinkedList_ForEachBreak(t *testing.T) {
+func Test_LinkedList_ForEachBreak_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2, 3})
 	count := 0
@@ -949,7 +949,7 @@ func Test_LinkedList_ForEachBreak(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- ForEachBreak", actual)
 }
 
-func Test_LinkedList_IndexAt(t *testing.T) {
+func Test_LinkedList_IndexAt_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{10, 20, 30})
 	node := ll.IndexAt(1)
@@ -972,7 +972,7 @@ func Test_LinkedList_IndexAt(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- IndexAt", actual)
 }
 
-func Test_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1})
 
@@ -984,7 +984,7 @@ func Test_LinkedList_String(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- String", actual)
 }
 
-func Test_LinkedList_Collection(t *testing.T) {
+func Test_LinkedList_Collection_FromCollectionLengthLock(t *testing.T) {
 	// Arrange
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 	col := ll.Collection()
@@ -1477,7 +1477,7 @@ func Test_ToHashset(t *testing.T) {
 
 // ── numericfuncs — uncovered branches ──
 
-func Test_CompareNumeric(t *testing.T) {
+func Test_CompareNumeric_FromCollectionLengthLock(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"equal":   coregeneric.CompareNumeric(5, 5),
@@ -1494,7 +1494,7 @@ func Test_CompareNumeric(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CompareNumeric returns correct value -- with args", actual)
 }
 
-func Test_Clamp(t *testing.T) {
+func Test_Clamp_FromCollectionLengthLock(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"below":  coregeneric.Clamp(-1, 0, 10),
@@ -1587,7 +1587,7 @@ func Test_IsZero_IsPositive_IsNegative(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsZero/IsPositive/IsNegative returns correct value -- with args", actual)
 }
 
-func Test_SafeDiv(t *testing.T) {
+func Test_SafeDiv_FromCollectionLengthLock(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"normal": coregeneric.SafeDiv(10, 3),

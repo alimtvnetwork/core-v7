@@ -9,7 +9,7 @@ import (
 
 // ── Collection ──
 
-func Test_Collection_Basic(t *testing.T) {
+func Test_Collection_Basic_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Collection_Basic", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -32,7 +32,7 @@ func Test_Collection_Basic(t *testing.T) {
 	})
 }
 
-func Test_Collection_Add(t *testing.T) {
+func Test_Collection_Add_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Collection_Add", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -48,7 +48,7 @@ func Test_Collection_Add(t *testing.T) {
 	})
 }
 
-func Test_Collection_AddIf(t *testing.T) {
+func Test_Collection_AddIf_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Collection_AddIf", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -64,7 +64,7 @@ func Test_Collection_AddIf(t *testing.T) {
 	})
 }
 
-func Test_Collection_Adds(t *testing.T) {
+func Test_Collection_Adds_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Collection_Adds", func() {
 		// Arrange
 		c := corestr.New.Collection.Cap(5)
@@ -94,7 +94,7 @@ func Test_Collection_List(t *testing.T) {
 	})
 }
 
-func Test_Collection_String(t *testing.T) {
+func Test_Collection_String_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Collection_String", func() {
 		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -131,7 +131,7 @@ func Test_Collection_IsEmpty_Nil(t *testing.T) {
 
 // ── Hashmap ──
 
-func Test_Hashmap_Basic(t *testing.T) {
+func Test_Hashmap_Basic_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashmap_Basic", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -152,7 +152,7 @@ func Test_Hashmap_Basic(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Get(t *testing.T) {
+func Test_Hashmap_Get_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashmap_Get", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -194,7 +194,7 @@ func Test_Hashmap_Get_NotFound(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_AddOrUpdate(t *testing.T) {
+func Test_Hashmap_AddOrUpdate_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashmap_AddOrUpdate", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)
@@ -256,7 +256,7 @@ func Test_Hashmap_Nil(t *testing.T) {
 	})
 }
 
-func Test_Hashmap_Clone(t *testing.T) {
+func Test_Hashmap_Clone_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashmap_Clone", func() {
 		// Arrange
 		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
@@ -324,7 +324,7 @@ func Test_Hashmap_IsEqualPtr_Different(t *testing.T) {
 
 // ── Hashset ──
 
-func Test_Hashset_Basic(t *testing.T) {
+func Test_Hashset_Basic_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashset_Basic", func() {
 		// Arrange
 		hs := corestr.New.Hashset.Strings([]string{"a", "b", "c"})
@@ -384,7 +384,7 @@ func Test_Hashset_Nil(t *testing.T) {
 
 // ── SimpleSlice ──
 
-func Test_SimpleSlice_Basic(t *testing.T) {
+func Test_SimpleSlice_Basic_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_SimpleSlice_Basic", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.SpreadStrings("a", "b", "c")
@@ -404,7 +404,7 @@ func Test_SimpleSlice_Basic(t *testing.T) {
 	})
 }
 
-func Test_SimpleSlice_Nil(t *testing.T) {
+func Test_SimpleSlice_Nil_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_SimpleSlice_Nil", func() {
 		// Arrange
 		var ss *corestr.SimpleSlice
@@ -426,7 +426,7 @@ func Test_SimpleSlice_Nil(t *testing.T) {
 
 // ── LeftRight ──
 
-func Test_LeftRight(t *testing.T) {
+func Test_LeftRight_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_LeftRight", func() {
 		// Arrange
 		lr := corestr.NewLeftRight("left", "right")
@@ -448,7 +448,7 @@ func Test_LeftRight(t *testing.T) {
 
 // ── LeftMiddleRight ──
 
-func Test_LeftMiddleRight(t *testing.T) {
+func Test_LeftMiddleRight_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_LeftMiddleRight", func() {
 		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
@@ -472,7 +472,7 @@ func Test_LeftMiddleRight(t *testing.T) {
 
 // ── ValidValue ──
 
-func Test_ValidValue(t *testing.T) {
+func Test_ValidValue_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_ValidValue", func() {
 		// Arrange
 		vv := corestr.ValidValue{Value: "hello", IsValid: true}
@@ -492,7 +492,7 @@ func Test_ValidValue(t *testing.T) {
 	})
 }
 
-func Test_ValidValue_Invalid(t *testing.T) {
+func Test_ValidValue_Invalid_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_ValidValue_Invalid", func() {
 		// Arrange
 		vv := corestr.ValidValue{IsValid: false}
@@ -508,7 +508,7 @@ func Test_ValidValue_Invalid(t *testing.T) {
 
 // ── ValueStatus ──
 
-func Test_ValueStatus(t *testing.T) {
+func Test_ValueStatus_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_ValueStatus", func() {
 		// Arrange
 		vv := corestr.NewValidValue("hello")
@@ -531,7 +531,7 @@ func Test_ValueStatus(t *testing.T) {
 
 // ── KeyValuePair ──
 
-func Test_KeyValuePair(t *testing.T) {
+func Test_KeyValuePair_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_KeyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -553,7 +553,7 @@ func Test_KeyValuePair(t *testing.T) {
 
 // ── KeyAnyValuePair ──
 
-func Test_KeyAnyValuePair(t *testing.T) {
+func Test_KeyAnyValuePair_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_KeyAnyValuePair", func() {
 		// Arrange
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}
@@ -617,7 +617,7 @@ func Test_Empty_Hashset(t *testing.T) {
 
 // ── TextWithLineNumber ──
 
-func Test_TextWithLineNumber(t *testing.T) {
+func Test_TextWithLineNumber_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_TextWithLineNumber", func() {
 		// Arrange
 		tln := corestr.TextWithLineNumber{Text: "hello", LineNumber: 1}
@@ -639,7 +639,7 @@ func Test_TextWithLineNumber(t *testing.T) {
 
 // ── HashsetsCollection ──
 
-func Test_HashsetsCollection_Basic(t *testing.T) {
+func Test_HashsetsCollection_Basic_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_HashsetsCollection_Basic", func() {
 		// Arrange
 		hsc := corestr.New.HashsetsCollection.Cap(5)
@@ -807,7 +807,7 @@ func Test_KeyValueCollection_Nil(t *testing.T) {
 
 // ── SimpleStringOnce ──
 
-func Test_SimpleStringOnce(t *testing.T) {
+func Test_SimpleStringOnce_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_SimpleStringOnce", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
@@ -928,7 +928,7 @@ func Test_CharHashsetMap_Nil(t *testing.T) {
 
 // ── CloneSlice ──
 
-func Test_CloneSlice(t *testing.T) {
+func Test_CloneSlice_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_CloneSlice", func() {
 		// Arrange
 		original := []string{"a", "b", "c"}
@@ -950,7 +950,7 @@ func Test_CloneSlice(t *testing.T) {
 	})
 }
 
-func Test_CloneSlice_Nil(t *testing.T) {
+func Test_CloneSlice_Nil_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_CloneSlice_Nil", func() {
 		// Arrange
 		cloned := corestr.CloneSlice(nil)
@@ -1079,7 +1079,7 @@ func Test_LinkedCollections_Nil(t *testing.T) {
 
 // ── ValidValues ──
 
-func Test_ValidValues(t *testing.T) {
+func Test_ValidValues_FromCollectionBasic(t *testing.T) {
 	safeTest(t, "Test_Cov12_ValidValues", func() {
 		// Arrange
 		vvs := corestr.NewValidValuesUsingValues(
