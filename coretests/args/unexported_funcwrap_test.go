@@ -118,7 +118,7 @@ func Test_DynamicFunc_InvokeArgs(t *testing.T) {
 // Covers Dynamic.go L51, L76-78, L80-82, L86-88, L92-94
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Dynamic_GetWorkFunc(t *testing.T) {
+func Test_Dynamic_GetWorkFunc_Fromunexportedfuncwrap(t *testing.T) {
 	d := &Dynamic[func(string) string]{
 		Params: Map{"func": sampleGreet},
 	}
@@ -141,7 +141,7 @@ func Test_Dynamic_Invoke(t *testing.T) {
 	}
 }
 
-func Test_Dynamic_InvokeMust(t *testing.T) {
+func Test_Dynamic_InvokeMust_Fromunexportedfuncwrap(t *testing.T) {
 	d := &Dynamic[func(string) string]{
 		Params: Map{"func": sampleGreet},
 	}
@@ -562,7 +562,7 @@ func Test_Map_InvokeMust_Panic(t *testing.T) {
 	m.InvokeMust(123) // wrong arg type
 }
 
-func Test_Map_InvokeWithValidArgs(t *testing.T) {
+func Test_Map_InvokeWithValidArgs_Fromunexportedfuncwrap(t *testing.T) {
 	m := Map{
 		"func":          sampleGreet,
 		"input-String1": "ValidArg",
