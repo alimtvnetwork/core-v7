@@ -12,7 +12,7 @@ import (
 // Test: LeftRightFromSplit — edge cases
 // ==========================================================================
 
-func Test_LeftRightFromSplit(t *testing.T) {
+func Test_LeftRightFromSplit_FromLeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplit", func() {
 		// Arrange
 		// Case 0: Normal key=value split
@@ -97,7 +97,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 // Test: LeftRightFromSplitTrimmed — trimming edge cases
 // ==========================================================================
 
-func Test_LeftRightFromSplitTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitTrimmed_FromLeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitTrimmed", func() {
 		// Arrange
 		// Case 0: Trims whitespace
@@ -146,7 +146,7 @@ func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 // Test: LeftRightFromSplitFull — remainder handling
 // ==========================================================================
 
-func Test_LeftRightFromSplitFull(t *testing.T) {
+func Test_LeftRightFromSplitFull_FromLeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitFull", func() {
 		// Arrange
 		// Case 0: Remainder in right
@@ -195,7 +195,7 @@ func Test_LeftRightFromSplitFull(t *testing.T) {
 // Test: LeftRightFromSplitFullTrimmed — remainder + trimming
 // ==========================================================================
 
-func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
+func Test_LeftRightFromSplitFullTrimmed_FromLeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitFullTrimmed", func() {
 		// Arrange
 		// Case 0: Remainder trimmed

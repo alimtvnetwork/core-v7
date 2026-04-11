@@ -71,7 +71,7 @@ func Test_MapStringStringOnce_KeysValues(t *testing.T) {
 	}
 }
 
-func Test_MapStringStringOnce_IsEqual(t *testing.T) {
+func Test_MapStringStringOnce_IsEqual_FromMapStringStringOnce(t *testing.T) {
 	for caseIndex, tc := range mapSSOnceIsEqualTestCases {
 		// Arrange
 		initVal := tc.InitValue

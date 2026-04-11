@@ -364,7 +364,7 @@ func Test_MapSimpleSlice_Transforms(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_MapSimpleSlice_Nil(t *testing.T) {
+func Test_MapSimpleSlice_Nil_Fromfuncs(t *testing.T) {
 	// Arrange
 	tc := mapSimpleSliceNilTestCase
 	result := coregeneric.MapSimpleSlice[int, string](nil, func(i int) string { return "" })

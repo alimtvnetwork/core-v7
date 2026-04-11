@@ -206,7 +206,7 @@ func Test_LinkedList_AddIfFalse(t *testing.T) {
 // Test: AddsIf
 // ==========================================================================
 
-func Test_LinkedList_AddsIf(t *testing.T) {
+func Test_LinkedList_AddsIf_FromLinkedList(t *testing.T) {
 	tc := linkedListAddsIfFalseTestCase
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddsIf(false, 1, 2, 3)
@@ -221,7 +221,7 @@ func Test_LinkedList_AddsIf(t *testing.T) {
 // Test: AddFunc
 // ==========================================================================
 
-func Test_LinkedList_AddFunc(t *testing.T) {
+func Test_LinkedList_AddFunc_FromLinkedList(t *testing.T) {
 	tc := linkedListAddFuncTestCase
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddFunc(func() int { return 99 })
@@ -325,7 +325,7 @@ func Test_LinkedList_ItemsEmpty(t *testing.T) {
 // Test: Collection
 // ==========================================================================
 
-func Test_LinkedList_Collection(t *testing.T) {
+func Test_LinkedList_Collection_FromLinkedList(t *testing.T) {
 	tc := linkedListCollectionTestCase
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 
@@ -339,7 +339,7 @@ func Test_LinkedList_Collection(t *testing.T) {
 // Test: String
 // ==========================================================================
 
-func Test_LinkedList_String(t *testing.T) {
+func Test_LinkedList_String_FromLinkedList(t *testing.T) {
 	tc := linkedListStringTestCase
 	ll := coregeneric.LinkedListFrom([]int{1, 2, 3})
 
@@ -527,7 +527,7 @@ func Test_LinkedList_NodeNext(t *testing.T) {
 // Test: Lock variants
 // ==========================================================================
 
-func Test_LinkedList_LengthLock(t *testing.T) {
+func Test_LinkedList_LengthLock_FromLinkedList(t *testing.T) {
 	tc := linkedListLengthLockTestCase
 	ll := coregeneric.LinkedListFrom([]int{1, 2})
 
@@ -537,7 +537,7 @@ func Test_LinkedList_LengthLock(t *testing.T) {
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
-func Test_LinkedList_IsEmptyLock(t *testing.T) {
+func Test_LinkedList_IsEmptyLock_FromLinkedList(t *testing.T) {
 	tc := linkedListIsEmptyLockTestCase
 	ll := coregeneric.EmptyLinkedList[int]()
 
@@ -547,7 +547,7 @@ func Test_LinkedList_IsEmptyLock(t *testing.T) {
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
-func Test_LinkedList_AddLock(t *testing.T) {
+func Test_LinkedList_AddLock_FromLinkedList(t *testing.T) {
 	tc := linkedListAddLockTestCase
 	ll := coregeneric.EmptyLinkedList[int]()
 	ll.AddLock(1)

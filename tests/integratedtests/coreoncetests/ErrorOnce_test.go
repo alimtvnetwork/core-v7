@@ -103,7 +103,7 @@ func Test_ErrorOnce_MessageEqual(t *testing.T) {
 	}
 }
 
-func Test_ErrorOnce_ConcatNew(t *testing.T) {
+func Test_ErrorOnce_ConcatNew_FromErrorOnce(t *testing.T) {
 	for caseIndex, tc := range errorOnceConcatTestCases {
 		// Arrange
 		once := newErrorOnce(tc.InitError)

@@ -8,7 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-func Test_Result_IsEqual(t *testing.T) {
+func Test_Result_IsEqual_FromResultIsEqual(t *testing.T) {
 	for caseIndex, tc := range resultIsEqualTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -23,7 +23,7 @@ func Test_Result_IsEqual(t *testing.T) {
 	}
 }
 
-func Test_Result_IsEqualPtr(t *testing.T) {
+func Test_Result_IsEqualPtr_FromResultIsEqual(t *testing.T) {
 	for caseIndex, tc := range resultIsEqualPtrTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)

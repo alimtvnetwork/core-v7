@@ -48,7 +48,7 @@ Tasks:
 
 ---
 
-## Phase 3: Integrated Tests — Core Data Packages — ⬜ TODO
+## Phase 3: Integrated Tests — Core Data Packages — ✅ DONE
 
 **Scope:** ~15 packages, ~150+ files
 **Packages:** `corecmptests`, `coredynamictests`, `corestrtests`, `coregenerictests`, `corerangetests`, `coreindexestests`, `coreoncetests`, `corejsontests`, `corecsvtests`, `coreappendtests`, `coreconvertedtests`, `coremathtests`, `coreuniquetests`, `corefuncstests`, `coretaskinfotests`

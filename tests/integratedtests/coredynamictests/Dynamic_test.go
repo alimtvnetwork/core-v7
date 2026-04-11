@@ -110,7 +110,7 @@ func Test_Dynamic_Constructor_NewDynamicPtr(t *testing.T) {
 // Test: Clone
 // ==========================================================================
 
-func Test_Dynamic_Clone(t *testing.T) {
+func Test_Dynamic_Clone_FromDynamic(t *testing.T) {
 	// Arrange
 	tc := dynamicCloneTestCase
 	original := refNewDynamicValid("data")
@@ -223,7 +223,7 @@ func Test_Dynamic_TypeChecks_Verification(t *testing.T) {
 // Test: IsStruct
 // ==========================================================================
 
-func Test_Dynamic_IsStruct_True(t *testing.T) {
+func Test_Dynamic_IsStruct_True_FromDynamic(t *testing.T) {
 	type sample struct{ Name string }
 
 	tc := dynamicIsStructTrueTestCase
@@ -307,7 +307,7 @@ func Test_Dynamic_ValueString_Direct(t *testing.T) {
 	tc.ShouldBeEqual(t, 0, actLines...)
 }
 
-func Test_Dynamic_ValueString_NonString(t *testing.T) {
+func Test_Dynamic_ValueString_NonString_FromDynamic(t *testing.T) {
 	tc := dynamicValueStringNonStringTestCase
 	d := refNewDynamicValid(42)
 
@@ -394,7 +394,7 @@ func Test_Dynamic_ValueInt64_Verification(t *testing.T) {
 // Test: Bytes
 // ==========================================================================
 
-func Test_Dynamic_Bytes_Valid(t *testing.T) {
+func Test_Dynamic_Bytes_Valid_FromDynamic(t *testing.T) {
 	// Arrange
 	tc := dynamicBytesValidTestCase
 	d := refNewDynamicValid([]byte("raw"))
@@ -427,7 +427,7 @@ func Test_Dynamic_Bytes_NonBytes(t *testing.T) {
 // Test: IntDefault
 // ==========================================================================
 
-func Test_Dynamic_IntDefault_Valid(t *testing.T) {
+func Test_Dynamic_IntDefault_Valid_FromDynamic(t *testing.T) {
 	// Arrange
 	tc := dynamicIntDefaultValidTestCase
 	d := refNewDynamicValid(42)
@@ -443,7 +443,7 @@ func Test_Dynamic_IntDefault_Valid(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Dynamic_IntDefault_NilData(t *testing.T) {
+func Test_Dynamic_IntDefault_NilData_FromDynamic(t *testing.T) {
 	// Arrange
 	tc := dynamicIntDefaultNilTestCase
 	d := refNewDynamic(nil, true)
@@ -465,7 +465,7 @@ func Test_Dynamic_IntDefault_NilData(t *testing.T) {
 
 // Note: ValueNullErr nil receiver test migrated to NilReceiver_test.go using CaseNilSafe pattern.
 
-func Test_Dynamic_ValueNullErr_NullData(t *testing.T) {
+func Test_Dynamic_ValueNullErr_NullData_FromDynamic(t *testing.T) {
 	tc := dynamicValueNullErrNullDataTestCase
 	d := refNewDynamic(nil, true)
 
@@ -537,7 +537,7 @@ func Test_Dynamic_IsReflectKindMismatch(t *testing.T) {
 // Test: Reflect — ReflectTypeName
 // ==========================================================================
 
-func Test_Dynamic_ReflectTypeName(t *testing.T) {
+func Test_Dynamic_ReflectTypeName_FromDynamic(t *testing.T) {
 	tc := dynamicReflectTypeNameTestCase
 	d := refNewDynamicValid("text")
 
@@ -551,7 +551,7 @@ func Test_Dynamic_ReflectTypeName(t *testing.T) {
 // Test: Reflect — ReflectType
 // ==========================================================================
 
-func Test_Dynamic_ReflectType(t *testing.T) {
+func Test_Dynamic_ReflectType_FromDynamic(t *testing.T) {
 	tc := dynamicReflectTypeTestCase
 	d := refNewDynamicValid(42)
 
@@ -565,7 +565,7 @@ func Test_Dynamic_ReflectType(t *testing.T) {
 // Test: Reflect — IsReflectTypeOf
 // ==========================================================================
 
-func Test_Dynamic_IsReflectTypeOf(t *testing.T) {
+func Test_Dynamic_IsReflectTypeOf_FromDynamic(t *testing.T) {
 	tc := dynamicIsReflectTypeOfTestCase
 	d := refNewDynamicValid("hello")
 
@@ -628,7 +628,7 @@ func Test_Dynamic_Loop_Iterate(t *testing.T) {
 // Test: Loop — Invalid
 // ==========================================================================
 
-func Test_Dynamic_Loop_Invalid(t *testing.T) {
+func Test_Dynamic_Loop_Invalid_FromDynamic(t *testing.T) {
 	tc := dynamicLoopInvalidTestCase
 	d := refInvalidDynamicPtr()
 	called := d.Loop(func(index int, item any) bool { return false })
@@ -643,7 +643,7 @@ func Test_Dynamic_Loop_Invalid(t *testing.T) {
 // Test: Loop — Break
 // ==========================================================================
 
-func Test_Dynamic_Loop_Break(t *testing.T) {
+func Test_Dynamic_Loop_Break_FromDynamic(t *testing.T) {
 	tc := dynamicLoopBreakTestCase
 	d := refNewDynamicValid([]int{1, 2, 3, 4})
 	count := 0
@@ -663,7 +663,7 @@ func Test_Dynamic_Loop_Break(t *testing.T) {
 // Test: ItemAccess — ItemUsingIndex
 // ==========================================================================
 
-func Test_Dynamic_ItemUsingIndex(t *testing.T) {
+func Test_Dynamic_ItemUsingIndex_FromDynamic(t *testing.T) {
 	// Arrange
 	tc := dynamicItemUsingIndexTestCase
 	d := refNewDynamicValid([]string{"a", "b"})
@@ -682,7 +682,7 @@ func Test_Dynamic_ItemUsingIndex(t *testing.T) {
 // Test: ItemAccess — ItemUsingKey
 // ==========================================================================
 
-func Test_Dynamic_ItemUsingKey(t *testing.T) {
+func Test_Dynamic_ItemUsingKey_FromDynamic(t *testing.T) {
 	tc := dynamicItemUsingKeyTestCase
 	d := refNewDynamicValid(map[string]int{"k": 42})
 

@@ -207,7 +207,7 @@ func Test_Hashmap_Has(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Hashmap_IsKeyMissing(t *testing.T) {
+func Test_Hashmap_IsKeyMissing_FromHashmap(t *testing.T) {
 	// Arrange
 	tc := hashmapIsKeyMissingTestCase
 	hm := coregeneric.EmptyHashmap[string, int]()
@@ -534,7 +534,7 @@ func Test_Hashmap_ForEachBreak(t *testing.T) {
 // Test: String
 // ==========================================================================
 
-func Test_Hashmap_String(t *testing.T) {
+func Test_Hashmap_String_FromHashmap(t *testing.T) {
 	// Arrange
 	tc := hashmapStringTestCase
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})

@@ -205,7 +205,7 @@ func Test_PrependAppendToString_Joined(t *testing.T) {
 // PrependAppendAnyItemsToStringsUsingFunc
 // ==========================================
 
-func Test_PrependAppendUsingFunc_Basic(t *testing.T) {
+func Test_PrependAppendUsingFunc_Basic_FromMapAppend(t *testing.T) {
 	// Arrange
 	compiler := func(item any) string {
 		return fmt.Sprintf("[%v]", item)
@@ -246,7 +246,7 @@ func Test_PrependAppendUsingFunc_SkipEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2 (skip empties), got:", actual)
 }
 
-func Test_PrependAppendUsingFunc_NoSkipEmpty(t *testing.T) {
+func Test_PrependAppendUsingFunc_NoSkipEmpty_FromMapAppend(t *testing.T) {
 	// Arrange
 	compiler := func(item any) string {
 		if item == nil {

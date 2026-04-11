@@ -45,7 +45,7 @@ func Test_StringsOnce_Contains(t *testing.T) {
 	}
 }
 
-func Test_StringsOnce_Sorted(t *testing.T) {
+func Test_StringsOnce_Sorted_FromStringsOnce(t *testing.T) {
 	for caseIndex, tc := range stringsOnceSortedTestCases {
 		// Arrange
 		initVal := make([]string, len(tc.InitValue))
@@ -87,7 +87,7 @@ func Test_StringsOnce_Maps(t *testing.T) {
 	}
 }
 
-func Test_StringsOnce_IsEqual(t *testing.T) {
+func Test_StringsOnce_IsEqual_FromStringsOnce(t *testing.T) {
 	for caseIndex, tc := range stringsOnceIsEqualTestCases {
 		// Arrange
 		initVal := tc.InitValue
