@@ -1600,7 +1600,7 @@ func Test_PanicOnIndexOutOfRange_FromShouldBeStrEqMsgIter(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "PanicOnIndexOutOfRange panics -- index out of range", actual)
 }
 
-func Test_PanicOnIndexOutOfRange_Valid(t *testing.T) {
+func Test_PanicOnIndexOutOfRange_Valid_ShouldBeStrEqMsg(t *testing.T) {
 	// Arrange
 	errcore.PanicOnIndexOutOfRange(10, []int{0}) // no panic
 

@@ -86,7 +86,7 @@ func Test_DraftType_PtrOrNonPtr_NilReceiver(t *testing.T) {
 	})
 }
 
-func Test_DraftType_ClonePtr_Nil(t *testing.T) {
+func Test_DraftType_ClonePtr_Nil_DraftTypeMethods(t *testing.T) {
 	// Arrange
 	var d *coretests.DraftType
 

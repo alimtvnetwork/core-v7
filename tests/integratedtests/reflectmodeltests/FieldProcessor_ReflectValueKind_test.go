@@ -119,7 +119,7 @@ func Test_ReflectValueKind_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ReflectValueKind returns nil -- nil receiver", actual)
 }
 
-func Test_ReflectValueKind_Valid(t *testing.T) {
+func Test_ReflectValueKind_Valid_FieldProcessor(t *testing.T) {
 	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
@@ -301,7 +301,7 @@ func Test_MethodProcessor_Invoke_Success(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
-func Test_MethodProcessor_Invoke_ArgsMismatch(t *testing.T) {
+func Test_MethodProcessor_Invoke_ArgsMismatch_FieldProcessor(t *testing.T) {
 	// Arrange
 	mp := getMethodProcessorFull("Add")
 	_, err := mp.Invoke(testHelper{}, 2) // missing arg
@@ -327,7 +327,7 @@ func Test_MethodProcessor_Invoke_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil invoke", actual)
 }
 
-func Test_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
+func Test_MethodProcessor_GetFirstResponseOfInvoke_FieldProcessor(t *testing.T) {
 	// Arrange
 	mp := getMethodProcessorFull("Greet")
 	first, err := mp.GetFirstResponseOfInvoke(testHelper{}, "world")
@@ -343,7 +343,7 @@ func Test_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 'hi world'", actual)
 }
 
-func Test_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
+func Test_MethodProcessor_InvokeResultOfIndex_FieldProcessor(t *testing.T) {
 	// Arrange
 	mp := getMethodProcessorFull("Add")
 	result, err := mp.InvokeResultOfIndex(0, testHelper{}, 1, 2)

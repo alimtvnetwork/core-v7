@@ -272,7 +272,7 @@ func Test_Collection_JsonStrings_FromAppendsIfTrueV2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonStrings", actual)
 }
 
-func Test_Collection_Clear(t *testing.T) {
+func Test_Collection_Clear_AppendsIfV2(t *testing.T) {
 	// Arrange
 	c := namevalue.NewGenericCollectionDefault[string, string]()
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
@@ -299,7 +299,7 @@ func Test_Collection_Clear_Nil(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Collection returns nil -- Clear nil", actual)
 }
 
-func Test_Collection_Dispose(t *testing.T) {
+func Test_Collection_Dispose_AppendsIfV2(t *testing.T) {
 	// Arrange
 	c := namevalue.NewGenericCollectionDefault[string, string]()
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})

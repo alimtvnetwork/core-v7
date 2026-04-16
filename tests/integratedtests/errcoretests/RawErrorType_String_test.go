@@ -1262,7 +1262,7 @@ func Test_ToError_WithMsg(t *testing.T) {
 
 // ── ErrorToSplitLines / ErrorToSplitNonEmptyLines ──
 
-func Test_ErrorToSplitLines_NilErr(t *testing.T) {
+func Test_ErrorToSplitLines_NilErr_RawErrorType(t *testing.T) {
 	// Act
 	actual := args.Map{"len": len(errcore.ErrorToSplitLines(nil))}
 
@@ -1271,7 +1271,7 @@ func Test_ErrorToSplitLines_NilErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ErrorToSplitLines returns empty -- nil error", actual)
 }
 
-func Test_ErrorToSplitLines_WithErr(t *testing.T) {
+func Test_ErrorToSplitLines_WithErr_RawErrorType(t *testing.T) {
 	// Act
 	actual := args.Map{"len": len(errcore.ErrorToSplitLines(errors.New("a\nb")))}
 
@@ -1479,7 +1479,7 @@ func Test_RawErrCollection_HasAnyIssues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "RawErrCollection HasAnyIssues returns false -- empty", actual)
 }
 
-func Test_RawErrCollection_IsNull(t *testing.T) {
+func Test_RawErrCollection_IsNull_RawErrorType(t *testing.T) {
 	// Arrange
 	c := errcore.RawErrCollection{}
 

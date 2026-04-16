@@ -1345,7 +1345,7 @@ func Test_LeftRight_DeserializeLeft_Right(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- DeserializeLeft/Right", actual)
 }
 
-func Test_LeftRight_TypeStatus(t *testing.T) {
+func Test_LeftRight_TypeStatus_ZeroSetAny(t *testing.T) {
 	// Arrange
 	lr := &coredynamic.LeftRight{Left: "l", Right: "r"}
 	ts := lr.TypeStatus()
@@ -1370,7 +1370,7 @@ func Test_LeftRight_TypeStatus(t *testing.T) {
 // Dynamic Clone/NonPtr/Ptr
 // ==========================================================================
 
-func Test_Dynamic_ClonePtr(t *testing.T) {
+func Test_Dynamic_ClonePtr_ZeroSetAny(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	cp := d.ClonePtr()
@@ -1399,7 +1399,7 @@ func Test_Dynamic_ClonePtr(t *testing.T) {
 // Dynamic type check methods
 // ==========================================================================
 
-func Test_Dynamic_TypeChecks(t *testing.T) {
+func Test_Dynamic_TypeChecks_ZeroSetAny(t *testing.T) {
 	// Arrange
 	dStr := coredynamic.NewDynamicValid("hello")
 	dInt := coredynamic.NewDynamicValid(42)
@@ -1441,7 +1441,7 @@ func Test_Dynamic_TypeChecks(t *testing.T) {
 // Dynamic — ConvertUsingFunc
 // ==========================================================================
 
-func Test_Dynamic_ConvertUsingFunc(t *testing.T) {
+func Test_Dynamic_ConvertUsingFunc_ZeroSetAny(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamicValid("hello")
 	result := d.ConvertUsingFunc(func(input any, expectedType reflect.Type) *coredynamic.SimpleResult {
@@ -1460,7 +1460,7 @@ func Test_Dynamic_ConvertUsingFunc(t *testing.T) {
 // CastedResult uncovered methods
 // ==========================================================================
 
-func Test_CastedResult_Methods(t *testing.T) {
+func Test_CastedResult_Methods_ZeroSetAny(t *testing.T) {
 	// Arrange
 	cr := coredynamic.CastedResult{
 		Casted: "x", IsValid: true, IsNull: false,

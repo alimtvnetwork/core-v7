@@ -303,7 +303,7 @@ func Test_Collection_CompiledLazyString_Nil(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNew(t *testing.T) {
+func Test_Collection_ConcatNew_AppendsIfFinalGaps(t *testing.T) {
 	// Arrange
 	col := namevalue.NewCollection()
 	col.Add(namevalue.StringAny{Name: "a", Value: 1})
@@ -318,7 +318,7 @@ func Test_Collection_ConcatNew(t *testing.T) {
 	})
 }
 
-func Test_Collection_ConcatNewPtr(t *testing.T) {
+func Test_Collection_ConcatNewPtr_AppendsIfFinalGaps(t *testing.T) {
 	// Arrange
 	col := namevalue.NewCollection()
 	col.Add(namevalue.StringAny{Name: "a", Value: 1})
@@ -505,7 +505,7 @@ func Test_Collection_Error_Empty(t *testing.T) {
 	})
 }
 
-func Test_Collection_ErrorUsingMessage(t *testing.T) {
+func Test_Collection_ErrorUsingMessage_AppendsIfFinalGaps(t *testing.T) {
 	// Arrange
 	col := namevalue.NewCollection()
 	col.Add(namevalue.StringAny{Name: "a", Value: "fail"})

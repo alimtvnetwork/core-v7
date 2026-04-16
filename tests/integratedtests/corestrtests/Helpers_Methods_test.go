@@ -424,7 +424,7 @@ func Test_CharCollectionDataModel(t *testing.T) {
 	})
 }
 
-func Test_CharHashsetDataModel(t *testing.T) {
+func Test_CharHashsetDataModel_HelpersModel(t *testing.T) {
 	safeTest(t, "Test_CharHashsetDataModel", func() {
 		// Arrange
 		tc := dataModelTestCases[1]
@@ -444,7 +444,7 @@ func Test_CharHashsetDataModel(t *testing.T) {
 	})
 }
 
-func Test_HashmapDataModel(t *testing.T) {
+func Test_HashmapDataModel_HelpersModel(t *testing.T) {
 	safeTest(t, "Test_HashmapDataModel", func() {
 		// Arrange
 		tc := dataModelTestCases[2]
@@ -462,7 +462,7 @@ func Test_HashmapDataModel(t *testing.T) {
 	})
 }
 
-func Test_HashsetDataModel(t *testing.T) {
+func Test_HashsetDataModel_HelpersModel(t *testing.T) {
 	safeTest(t, "Test_HashsetDataModel", func() {
 		// Arrange
 		tc := dataModelTestCases[3]
@@ -480,7 +480,7 @@ func Test_HashsetDataModel(t *testing.T) {
 	})
 }
 
-func Test_HashsetsCollectionDataModel(t *testing.T) {
+func Test_HashsetsCollectionDataModel_HelpersModel(t *testing.T) {
 	safeTest(t, "Test_HashsetsCollectionDataModel", func() {
 		// Arrange
 		tc := dataModelTestCases[4]
@@ -516,7 +516,7 @@ func Test_SimpleStringOnceModel(t *testing.T) {
 
 // ── CollectionsOfCollectionModel ──
 
-func Test_CollectionsOfCollectionModel(t *testing.T) {
+func Test_CollectionsOfCollectionModel_HelpersModel(t *testing.T) {
 	safeTest(t, "Test_CollectionsOfCollectionModel", func() {
 		// Arrange
 		tc := collectionsOfCollectionModelTestCases[0]

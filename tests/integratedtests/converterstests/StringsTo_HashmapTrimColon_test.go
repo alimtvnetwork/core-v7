@@ -143,7 +143,7 @@ func Test_StringsTo_MapConverter_FromStringsToHashmapTrim(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MapConverter returns correct value -- with args", actual)
 }
 
-func Test_StringsTo_IntegersSkipMapAndDefaultValue(t *testing.T) {
+func Test_StringsTo_IntegersSkipMapAndDefaultValue_HashmapTrimColon(t *testing.T) {
 	// Arrange
 	skip := map[string]bool{"skip": true}
 	result := converters.StringsTo.IntegersSkipMapAndDefaultValue(-1, skip, "1", "skip", "abc")
@@ -182,7 +182,7 @@ func Test_StringsTo_IntegersSkipAndDefaultValue_FromStringsToHashmapTrim(t *test
 	expected.ShouldBeEqual(t, 0, "IntegersSkipAndDefaultValue returns correct value -- with args", actual)
 }
 
-func Test_StringsTo_BytesConditional(t *testing.T) {
+func Test_StringsTo_BytesConditional_HashmapTrimColon(t *testing.T) {
 	// Arrange
 	result := converters.StringsTo.BytesConditional(func(in string) (byte, bool, bool) {
 		return in[0], true, false
@@ -248,7 +248,7 @@ func Test_StringsTo_CsvUsingPtrStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CsvUsingPtrStrings returns correct value -- with args", actual)
 }
 
-func Test_StringsTo_CsvWithIndexes(t *testing.T) {
+func Test_StringsTo_CsvWithIndexes_HashmapTrimColon(t *testing.T) {
 	// Arrange
 	result := converters.StringsTo.CsvWithIndexes([]string{"a", "b"})
 
@@ -260,7 +260,7 @@ func Test_StringsTo_CsvWithIndexes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "CsvWithIndexes returns non-empty -- with args", actual)
 }
 
-func Test_StringsTo_Float64sMust(t *testing.T) {
+func Test_StringsTo_Float64sMust_HashmapTrimColon(t *testing.T) {
 	// Arrange
 	result := converters.StringsTo.Float64sMust("1.5", "2.5")
 
@@ -272,7 +272,7 @@ func Test_StringsTo_Float64sMust(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Float64sMust returns correct value -- with args", actual)
 }
 
-func Test_StringsTo_Float64sConditional(t *testing.T) {
+func Test_StringsTo_Float64sConditional_HashmapTrimColon(t *testing.T) {
 	// Arrange
 	result := converters.StringsTo.Float64sConditional(func(in string) (float64, bool, bool) {
 		return 1.0, true, false

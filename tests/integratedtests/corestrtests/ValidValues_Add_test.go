@@ -248,7 +248,7 @@ func Test_ValidValues_AddsPtr(t *testing.T) {
 	})
 }
 
-func Test_ValidValues_AddsPtr_Empty(t *testing.T) {
+func Test_ValidValues_AddsPtr_Empty_ValidValuesAdd(t *testing.T) {
 	safeTest(t, "Test_ValidValues_AddsPtr_Empty", func() {
 		vv := corestr.EmptyValidValues()
 		vv.AddsPtr()
@@ -857,7 +857,7 @@ func Test_KeyAnyValuePair_Compile_FromValidValuesAddIterat(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_IsValueNull_Nil(t *testing.T) {
+func Test_KeyAnyValuePair_IsValueNull_Nil_ValidValuesAdd(t *testing.T) {
 	safeTest(t, "Test_KeyAnyValuePair_IsValueNull_Nil", func() {
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: nil}
 		tc := caseV1Compat{Name: "IsValueNull nil", Expected: true, Actual: kv.IsValueNull()}
@@ -867,7 +867,7 @@ func Test_KeyAnyValuePair_IsValueNull_Nil(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_IsValueNull_NilReceiver(t *testing.T) {
+func Test_KeyAnyValuePair_IsValueNull_NilReceiver_ValidValuesAdd(t *testing.T) {
 	safeTest(t, "Test_KeyAnyValuePair_IsValueNull_NilReceiver", func() {
 		var kv *corestr.KeyAnyValuePair
 		tc := caseV1Compat{Name: "IsValueNull nil receiver", Expected: true, Actual: kv.IsValueNull()}
@@ -1015,7 +1015,7 @@ func Test_KeyAnyValuePair_AsJsoner_FromValidValuesAddIterat(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_AsJsonParseSelfInjector(t *testing.T) {
+func Test_KeyAnyValuePair_AsJsonParseSelfInjector_ValidValuesAdd(t *testing.T) {
 	safeTest(t, "Test_KeyAnyValuePair_AsJsonParseSelfInjector", func() {
 		kv := &corestr.KeyAnyValuePair{Key: "k", Value: "v"}
 		tc := caseV1Compat{Name: "AsJsonParseSelfInjector", Expected: true, Actual: kv.AsJsonParseSelfInjector() != nil}
@@ -1060,7 +1060,7 @@ func Test_KeyAnyValuePair_Dispose_FromValidValuesAddIterat(t *testing.T) {
 	})
 }
 
-func Test_KeyAnyValuePair_Dispose_Nil(t *testing.T) {
+func Test_KeyAnyValuePair_Dispose_Nil_ValidValuesAdd(t *testing.T) {
 	safeTest(t, "Test_KeyAnyValuePair_Dispose_Nil", func() {
 		var kv *corestr.KeyAnyValuePair
 		kv.Dispose() // should not panic

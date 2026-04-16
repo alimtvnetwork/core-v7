@@ -1574,7 +1574,7 @@ func Test_Serializer_Marshal(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
-func Test_Serializer_ApplyMust(t *testing.T) {
+func Test_Serializer_ApplyMust_ResultCloneIf(t *testing.T) {
 	// Arrange
 	r := corejson.Serialize.ApplyMust("test")
 
@@ -1694,7 +1694,7 @@ func Test_Serializer_ToPrettyStringErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_Serializer_ToPrettyStringIncludingErr(t *testing.T) {
+func Test_Serializer_ToPrettyStringIncludingErr_ResultCloneIf(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.ToPrettyStringIncludingErr("test")
 
@@ -1706,7 +1706,7 @@ func Test_Serializer_ToPrettyStringIncludingErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
-func Test_Serializer_Pretty(t *testing.T) {
+func Test_Serializer_Pretty_ResultCloneIf(t *testing.T) {
 	// Arrange
 	s := corejson.Serialize.Pretty("test")
 

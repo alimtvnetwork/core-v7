@@ -55,3 +55,25 @@ func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser
 
 	return corepayload.TypedPayloadCollectionFrom[testUser](wrappers)
 }
+
+// testUserCov23 is a sample struct for TypedPayloadWrapper_SetName tests.
+type testUserCov23 struct {
+	Name string `json:"Name"`
+	Age  int    `json:"Age"`
+}
+
+func makeTypedWrapperCov23(name, id string, data testUserCov23) *corepayload.TypedPayloadWrapper[testUserCov23] {
+	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUserCov23](name, id, "testUserCov23", data)
+	if err != nil {
+		panic(err)
+	}
+	return tw
+}
+
+func makeCollectionCov23() *corepayload.TypedPayloadCollection[testUserCov23] {
+	col := corepayload.NewTypedPayloadCollection[testUserCov23](3)
+	col.Add(makeTypedWrapperCov23("user", "1", testUserCov23{Name: "Alice"}))
+	col.Add(makeTypedWrapperCov23("user", "2", testUserCov23{Name: "Bob"}))
+	col.Add(makeTypedWrapperCov23("user", "3", testUserCov23{Name: "Carol"}))
+	return col
+}
