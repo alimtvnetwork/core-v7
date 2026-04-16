@@ -396,7 +396,7 @@ func Test_FromStringMust_Panics(t *testing.T) {
 
 // ── Serializer methods ──
 
-func Test_Serialize_FromStringer(t *testing.T) {
+func Test_Serialize_FromStringer_DeserializerLogic(t *testing.T) {
 	// Arrange
 	stringer := fmt.Stringer(simpleStringer{val: "hello"})
 
@@ -568,7 +568,7 @@ func Test_Serialize_FromStringsSpread_FromUsingStringPtrValidD(t *testing.T) {
 
 // ── JsonString function ──
 
-func Test_JsonString_Valid(t *testing.T) {
+func Test_JsonString_Valid_DeserializerLogic(t *testing.T) {
 	// Arrange
 	type simple struct {
 		Name string `json:"Name"`
