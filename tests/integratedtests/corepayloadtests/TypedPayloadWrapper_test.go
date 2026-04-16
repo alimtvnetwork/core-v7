@@ -17,7 +17,7 @@ type testUserCov15 struct {
 	Email string `json:"Email"`
 }
 
-func makeTypedWrapper(t *testing.T) *corepayload.TypedPayloadWrapper[testUser] {
+func makeTypedWrapperCov15(t *testing.T) *corepayload.TypedPayloadWrapper[testUser] {
 	t.Helper()
 	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUser](
 		"user-create", "usr-1", "User",
@@ -31,7 +31,7 @@ func makeTypedWrapper(t *testing.T) *corepayload.TypedPayloadWrapper[testUser] {
 
 func Test_TypedPayloadWrapper_Constructors(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 
 	// Act
 	actual := args.Map{
@@ -123,7 +123,7 @@ func Test_TypedPayloadWrapper_NilChecks(t *testing.T) {
 
 func Test_TypedPayloadWrapper_ErrorHandling(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 
 	// Act
 	actual := args.Map{
@@ -147,7 +147,7 @@ func Test_TypedPayloadWrapper_ErrorHandling(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Strings(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 
 	// Act
 	actual := args.Map{
@@ -167,7 +167,7 @@ func Test_TypedPayloadWrapper_Strings(t *testing.T) {
 
 func Test_TypedPayloadWrapper_JSON(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	j := tw.Json()
 	jp := tw.JsonPtr()
 	mb, mErr := tw.MarshalJSON()
@@ -215,7 +215,7 @@ func Test_TypedPayloadWrapper_MarshalJSON_Nil(t *testing.T) {
 
 func Test_TypedPayloadWrapper_UnmarshalJSON(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	b, _ := tw.MarshalJSON()
 	tw2 := &corepayload.TypedPayloadWrapper[testUser]{}
 	err := tw2.UnmarshalJSON(b)
@@ -236,7 +236,7 @@ func Test_TypedPayloadWrapper_UnmarshalJSON(t *testing.T) {
 
 func Test_TypedPayloadWrapper_SerializeMust(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	b := tw.SerializeMust()
 
 	// Act
@@ -310,7 +310,7 @@ func Test_TypedPayloadWrapper_ValueMethods(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Setters(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	tw.SetName("newName")
 	tw.SetIdentifier("newId")
 	tw.SetEntityType("newEntity")
@@ -336,7 +336,7 @@ func Test_TypedPayloadWrapper_Setters(t *testing.T) {
 
 func Test_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	err := tw.SetTypedData(testUser{Name: "Bob", Email: "bob@test.com"})
 
 	// Act
@@ -368,7 +368,7 @@ func Test_TypedPayloadWrapper_SetTypedData_Nil(t *testing.T) {
 
 func Test_TypedPayloadWrapper_SetTypedDataMust(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	tw.SetTypedDataMust(testUser{Name: "Charlie"})
 
 	// Act
@@ -381,7 +381,7 @@ func Test_TypedPayloadWrapper_SetTypedDataMust(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Clone(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	cloneP, err := tw.ClonePtr(true)
 	clone, err2 := tw.Clone(true)
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
@@ -411,7 +411,7 @@ func Test_TypedPayloadWrapper_Clone(t *testing.T) {
 
 func Test_TypedPayloadWrapper_ToPayloadWrapper(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	pw := tw.ToPayloadWrapper()
 	pwv := tw.PayloadWrapperValue()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
@@ -435,7 +435,7 @@ func Test_TypedPayloadWrapper_ToPayloadWrapper(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Reparse(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	err := tw.Reparse()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	errNil := nilTW.Reparse()
@@ -458,7 +458,7 @@ func Test_TypedPayloadWrapper_Reparse(t *testing.T) {
 
 func Test_TypedPayloadWrapper_ClearDispose(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	tw.Clear()
 
 	// Act
@@ -468,7 +468,7 @@ func Test_TypedPayloadWrapper_ClearDispose(t *testing.T) {
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- Clear", actual)
 
-	tw2 := makeTypedWrapper(t)
+	tw2 := makeTypedWrapperCov15(t)
 	tw2.Dispose()
 	actual2 := args.Map{"isNull": tw2.IsNull()}
 	expected2 := args.Map{"isNull": true}
@@ -481,7 +481,7 @@ func Test_TypedPayloadWrapper_ClearDispose(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Attributes(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	attr := tw.Attributes()
 	tw.InitializeAttributesOnNull()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
@@ -524,7 +524,7 @@ func Test_TypedPayloadWrapper_IdInteger(t *testing.T) {
 }
 
 func Test_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	tw.HandleError() // should not panic
 }
 
@@ -578,7 +578,7 @@ func Test_TypedPayloadWrapper_Must(t *testing.T) {
 
 func Test_TypedPayloadWrapper_Deserialize(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	b, _ := tw.Serialize()
 	tw2, err := corepayload.TypedPayloadWrapperDeserialize[testUser](b)
 
@@ -598,7 +598,7 @@ func Test_TypedPayloadWrapper_Deserialize(t *testing.T) {
 
 func Test_TypedPayloadWrapper_DeserializeUsingJsonResult(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	b, _ := tw.Serialize()
 	jr := corejson.NewResult.UsingTypeBytesPtr("test", b)
 	tw2, err := corepayload.TypedPayloadWrapperDeserializeUsingJsonResult[testUser](jr)
@@ -623,7 +623,7 @@ func Test_TypedPayloadWrapper_DeserializeUsingJsonResult(t *testing.T) {
 
 func makeTypedCollection(t *testing.T) *corepayload.TypedPayloadCollection[testUser] {
 	t.Helper()
-	tw1 := makeTypedWrapper(t)
+	tw1 := makeTypedWrapperCov15(t)
 	tw2, _ := corepayload.NewTypedPayloadWrapperFrom[testUser]("n2", "usr-2", "User", testUser{Name: "Bob", Email: "bob@test.com"})
 	col := corepayload.NewTypedPayloadCollection[testUser](2)
 	col.Add(tw1).Add(tw2)
@@ -730,7 +730,7 @@ func Test_TypedPayloadCollection_ElementAccess(t *testing.T) {
 func Test_TypedPayloadCollection_Mutation(t *testing.T) {
 	// Arrange
 	col := corepayload.NewTypedPayloadCollection[testUser](2)
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	col.Add(tw)
 	col.AddLock(tw)
 	col.Adds(tw, tw)
@@ -965,7 +965,7 @@ func Test_TypedPayloadCollection_Clone(t *testing.T) {
 func Test_TypedPayloadCollection_ConcatNew(t *testing.T) {
 	// Arrange
 	col := makeTypedCollection(t)
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	concat, err := col.ConcatNew(tw)
 
 	// Act
@@ -1101,7 +1101,7 @@ func Test_TypedPayloadCollection_EmptyValidation(t *testing.T) {
 
 func Test_TypedPayloadCollection_SingleAndFromData(t *testing.T) {
 	// Arrange
-	tw := makeTypedWrapper(t)
+	tw := makeTypedWrapperCov15(t)
 	single := corepayload.NewTypedPayloadCollectionSingle[testUser](tw)
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	nilSingle := corepayload.NewTypedPayloadCollectionSingle[testUser](nilTW)
